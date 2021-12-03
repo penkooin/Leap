@@ -1,0 +1,7 @@
+[2021-12-01 09:58:48:405][main] ERROR org.chaostocosmos.http.Context - Something wrong in Context initialize process: 
+java.io.FileNotFoundException: config.json not found. Please check your configuration.
+	at org.chaostocosmos.http.Context.<init>(Context.java:56)
+	at org.chaostocosmos.http.Context.getInstance(Context.java:80)
+	at org.chaostocosmos.http.HttpServer.<init>(HttpServer.java:71)
+	at org.chaostocosmos.http.HttpServer.<init>(HttpServer.java:58)
+	at org.chaostocosmos.bulker.http.HttpServerTest.main(HttpServerTest.java:28)
