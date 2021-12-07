@@ -4,29 +4,28 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
 
-import org.chaostocosmos.http.HttpServer;
-import org.chaostocosmos.http.WASException;
+import org.chaostocosmos.leap.http.LeapHttpServer;
+import org.chaostocosmos.leap.http.WASException;
 import org.junit.jupiter.api.Test;
 
 public class HttpServerTest {
 
-    HttpServer server;
+    LeapHttpServer server;
 
     @Test
     public void testHttpServer() throws WASException, URISyntaxException, IOException {
-        this.server = new HttpServer();
+        this.server = new LeapHttpServer();
         this.server.start();
     }
 
     @Test
     public void testHttpServer2() throws IOException, URISyntaxException, WASException {
-        this.server = new HttpServer(Paths.get("."));
+        this.server = new LeapHttpServer(Paths.get("."));
         this.server.start();
     }
 
     public static void main(String[] args) throws URISyntaxException, IOException, WASException {
-        HttpServer server = new HttpServer();
+        LeapHttpServer server = new LeapHttpServer();
         server.start();
-    }
-    
+    }    
 }

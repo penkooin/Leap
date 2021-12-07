@@ -1,10 +1,9 @@
 server:
-  name: Leap
+  name: Bulker
   version: 1.0.0
   http-version: HTTP/1.0
   host: 127.0.0.1
   port: 8080
-  doc-root: .
   backlog: 50
   threadpool:
     core: 50
@@ -13,11 +12,18 @@ server:
   charset: utf-8
   welcome: index.html
   virtual-host:
-  - host: 127.0.0.1
-    port: 8080
+  - serverName: www.bulker1.com
+    host: 127.0.0.1:8080
+    doc-root: .
+  - serverName: www.bulker2.com
+    host: 127.0.0.1:8080
     doc-root: .
   servlet:
   - servletName: TimeServlet
+    contextMapping: /time
+    method:
+    - methodName: getTime
+      contextMapping: /GetTime
     servletClass: org.chaostocosmos.leap.http.servlet.TimeServletImpl
     servletFilters:
     - org.chaostocosmos.leap.http.filter.HttpURLFilter
@@ -89,10 +95,6 @@ messages:
     error016: 'Not supported method type: {}'
     error017: 'Not supported method type: {}'
     error018: 'Not exist response resource with the code: {}'
-    error019: 'Not exist virtual host matching with given name: {}'
-    error020: rootDirectory must be a directory, not a file
-    error021: 'Servlet context can not have same key!!! servlet: {}  context: {}'
-    error022: 'Error in initial process: {}'
 static-resource:
   'index': index.html
   'respone': response.html
