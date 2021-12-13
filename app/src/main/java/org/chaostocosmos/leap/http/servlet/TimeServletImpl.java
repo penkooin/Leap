@@ -26,7 +26,7 @@ public class TimeServletImpl extends AbstractLeapServlet {
     /**
      * Constructor
      */
-    public TimeServletImpl() {}
+    public TimeServletImpl() {}  
 
     @MethodMappper(requestMethod = REQUEST_TYPE.GET, path = "/GetTime")
     public void getTime(HttpRequestDescriptor request, HttpResponseDescriptor response) {

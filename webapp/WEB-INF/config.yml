@@ -14,19 +14,19 @@ server:
   virtual-host:
   - serverName: www.bulker1.com
     host: 127.0.0.1:8080
-    doc-root: .
+    doc-root: ./webapp
   - serverName: www.bulker2.com
     host: 127.0.0.1:8080
-    doc-root: .
+    doc-root: ./webapp
   servlet:
   - servletName: TimeServlet
     contextMapping: /time
     method:
     - methodName: getTime
       contextMapping: /GetTime
-    servletClass: org.chaostocosmos.leap.http.servlet.TimeServletImpl
+    servletClass: org.chaostocosmos.bulker.http.servlet.TimeServletImpl
     servletFilters:
-    - org.chaostocosmos.leap.http.filter.HttpURLFilter
+    - org.chaostocosmos.bulker.http.filter.HttpURLFilter
 messages:
   http:
     '200': OK

@@ -6,17 +6,23 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import org.apache.commons.io.Charsets;
-import org.apache.commons.io.IOUtils;
 import org.chaostocosmos.leap.http.VirtualHostManager.VirtualHost;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import ch.qos.logback.classic.Logger;
 
 /**
  * Resource helper object
@@ -28,7 +34,7 @@ public class ResourceHelper {
     /**
      * logger
      */
-    Logger logger = LoggerFactory.getLogger(ResourceHelper.class);
+    Logger logger = (Logger)LoggerFactory.getLogger(Context.getInstance().getDefaultHost());
 
     /**
      * home path
@@ -214,39 +220,74 @@ public class ResourceHelper {
      * Extract environment resources
      * @param homePath
      * @throws IOException
+     * @throws URISyntaxException
      */
-    public static void buildEnv(Path homePath) throws IOException {
+    public static void buildEnv(Path homePath) throws IOException, URISyntaxException {
         Path WEBAPP = ResourceHelper.getWebAppPath();
-        if(!WEBAPP.toFile().exists()) {
-            Files.createDirectories(WEBAPP);
-        }
-        Path WEBINF = ResourceHelper.getWebInfPath();
-        if(!WEBINF.toFile().exists()) {
-            Files.createDirectories(WEBINF);
-        }
-        Path STATIC = ResourceHelper.getStaticPath();
-        if(!STATIC.toFile().exists()) {
-            Files.createDirectories(STATIC);
-        }
-        String[] filenames = {"trademark", "config.yml", "logback.xml"};
-        for(String filename : filenames) {
-            Path PATH = WEBINF.resolve(filename);
-            if(!PATH.toFile().exists()) {
-                String p = PATH.toString().substring(ResourceHelper.getHomePath().toString().length()).replace("\\", "/");
-                if(UtilBox.isFileSame(PATH.toFile().lastModified(), UtilBox.class.getResource(p).openConnection().getLastModified())) {
-                    Files.writeString(PATH, UtilBox.readAllString(UtilBox.class.getResourceAsStream(p)));
-                }
-            }                
-        }
-        String p = STATIC.toString().substring(ResourceHelper.getHomePath().toString().length()+1).replace("\\", "/");
-        List<String> files = IOUtils.readLines(UtilBox.class.getClassLoader().getResourceAsStream(p), Charsets.UTF_8);
-        for(String s : files) {
-            if(!homePath.resolve(STATIC.resolve(s)).toFile().exists()) {
-                p = "/" + p + "/" + s;
-                Files.writeString(homePath.resolve(STATIC.resolve(s)), UtilBox.readAllString(UtilBox.class.getResourceAsStream(p)));
-            }
-        }
+        // if(!WEBAPP.toFile().exists()) {
+        //     Files.createDirectories(WEBAPP);
+        // }
+        // Path WEBINF = ResourceHelper.getWebInfPath();
+        // if(!WEBINF.toFile().exists()) {
+        //     Files.createDirectories(WEBINF);
+        // }
+        // Path STATIC = ResourceHelper.getStaticPath();
+        // if(!STATIC.toFile().exists()) {
+        //     Files.createDirectories(STATIC);
+        // }
+        System.out.println(homePath);
+        extractResource("webapp", homePath.resolve("webapp"));
     }
+
+    /**
+     * Extract resurces from jar or file
+     * @param resourcePath
+     * @param targetPath
+     * @return
+     * @throws IOException
+     * @throws URISyntaxException
+     */
+    public static List<File> extractResource(String resourcePath, final Path targetPath) throws IOException, URISyntaxException {
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        URL res = classLoader.getResource(resourcePath);
+        String protocol = res.getProtocol();
+        System.out.println("Resource protocol: "+protocol+"   "+res);
+        if (res == null) {
+            throw new IllegalArgumentException("Resource is not found: "+resourcePath); 
+        }
+        Stream<Path> pStream;
+        if(protocol.equals("jar")) {
+            FileSystem fileSystem = FileSystems.newFileSystem(res.toURI(), new HashMap<>());
+            pStream = Files.walk(fileSystem.getPath(resourcePath));
+        } else if(protocol.equals("file")) {
+            pStream = Files.walk(Paths.get(res.toURI()));
+        } else {
+            throw new IllegalArgumentException("Resource protocol isn't supported!!! : "+res.getProtocol());
+        }
+        return pStream.map(p -> {
+            try {                    
+                long modMillis = Files.getLastModifiedTime(p).toMillis();
+                String ps = p.toString().replace("\\", "/");
+                Path path = protocol.equals("jar") 
+                            ? targetPath.resolve(ps) 
+                            : Paths.get(targetPath.toAbsolutePath().toString(), 
+                                        ps.toString().substring(ps.toString().indexOf(resourcePath)-1).replace("\\", "/"));
+                if(Files.isDirectory(p)) {
+                    path.toFile().mkdirs();
+                } else { 
+                    if(!path.toFile().exists() || path.toFile().lastModified() != modMillis) {                         
+                        //System.out.println("File created..........."+modMillis+"  "+path.toFile().lastModified()); 
+                        File file = Files.write(path, Files.readAllBytes(p), StandardOpenOption.CREATE).toFile();
+                        file.setLastModified(modMillis);
+                        return file;
+                    }
+                }                  
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }).filter(p1 -> p1 != null).collect(Collectors.toList());
+    }    
 
     /**
      * Get WAS Home path
@@ -269,7 +310,6 @@ public class ResourceHelper {
      * @return
      */
     public static Path getWebInfPath() {
-        System.out.println(getWebAppPath().resolve("WEB-INF").toString());
         return getWebAppPath().resolve("WEB-INF");
     }
 

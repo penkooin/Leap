@@ -1,6 +1,7 @@
 package org.chaostocosmos.leap.http;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -59,8 +60,9 @@ public class LoggerProvider {
      * @return
      * @throws IOException
      * @throws WASException
+     * @throws URISyntaxException
      */
-    public static Logger getLogger(String serverName) throws WASException, IOException {
+    public static Logger getLogger(String serverName) throws WASException, IOException, URISyntaxException {
         Logger logger = loggerMap.get(serverName);
         if(logger == null || System.currentTimeMillis() - loggerMillisMap.get(serverName) > DAY ){
             VirtualHostManager virtualHostManager = VirtualHostManager.getInstance();

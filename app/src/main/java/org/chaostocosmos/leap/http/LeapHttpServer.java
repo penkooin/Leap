@@ -8,12 +8,10 @@ import java.net.Socket;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import org.chaostocosmos.leap.http.servlet.ServletBean;
 import org.chaostocosmos.leap.http.servlet.ServletManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,20 +26,32 @@ public class LeapHttpServer {
     /**
      * logger
      */
-    private static final Logger logger = LoggerFactory.getLogger(LeapHttpServer.class);
+    Logger logger = LoggerFactory.getLogger(LeapHttpServer.class);
 
     /**
      * WAS home
      */
     public final static Path WAS_HOME = Paths.get(".");
-    private static String INDEX_FILE = "index.html";
-    private static Path rootPath;
-    private static int port;
+
+    /**
+     * Index file
+     */
+    public static String INDEX_FILE = "index.html";
+
+    /**
+     * Root path
+     */
+    public static Path rootPath;
+
+    /**
+     * Port path
+     */
+    public static int port;
 
     /**
      * servlet loading & managing
      */
-    private ServletManager servletManager;
+    ServletManager servletManager;
 
     /**
      * thread pool
@@ -51,7 +61,7 @@ public class LeapHttpServer {
     /**
      * WAS Context object
      */
-    private final Context context;
+    Context context;
 
     /**
      * Constructor 
@@ -60,7 +70,7 @@ public class LeapHttpServer {
      * @throws URISyntaxException
      * @throws IOException
      */
-    public LeapHttpServer() throws WASException, URISyntaxException, IOException {
+    public LeapHttpServer() {
         this(WAS_HOME);
     }
 
@@ -73,11 +83,10 @@ public class LeapHttpServer {
      * @throws IOException
      */
     public LeapHttpServer(Path docroot)  {
-        rootPath = docroot.toAbsolutePath();
-        this.context = Context.getInstance();
-        List<ServletBean> servletBeans = this.context.getServletBeanList();
         try {
-            this.servletManager = new ServletManager(servletBeans);
+            rootPath = docroot.toAbsolutePath();
+            this.context = Context.getInstance();
+            this.servletManager = new ServletManager(this.context.getServletBeanList());
         } catch (InstantiationException | 
                  IllegalAccessException | 
                  IllegalArgumentException | 
@@ -86,7 +95,7 @@ public class LeapHttpServer {
                  SecurityException | 
                  ClassNotFoundException | 
                  WASException e) {
-            logger.error( Context.getInstance().getErrorMsg("error022", new Object[]{e.getMessage()}) );
+                 logger.error( Context.getInstance().getErrorMsg("error022", new Object[]{e.getMessage()}) );
         }
     }
 
@@ -123,9 +132,9 @@ public class LeapHttpServer {
                                                  context.getThreadPoolMaxSize(), 
                                                  context.getThreadPoolKeepAlive(), 
                                                  TimeUnit.SECONDS, 
-                                                 new LinkedBlockingQueue<Runnable>());            
+                                                 new LinkedBlockingQueue<Runnable>());                                                 
 
-        InetAddress bindAddress = InetAddress.getByName(context.getBindAddress());
+        InetAddress bindAddress = InetAddress.getByName(context.getDefaultHost()+":"+context.getDefaultPort());
         int backlog = context.getBackLog();
         try (ServerSocket server = new ServerSocket(port, backlog, bindAddress)) {
             logger.info("Accepting connections on port " + server.getLocalPort());

@@ -4,8 +4,10 @@ server:
   http-version: HTTP/1.0
   host: 127.0.0.1
   port: 8080
-  doc-root: .
   backlog: 50
+  doc-root: .
+  logPath: ./logs/leap.log
+  logLevel: DEBUG
   threadpool:
     core: 50
     max: 50
@@ -15,7 +17,9 @@ server:
   virtual-host:
   - host: 127.0.0.1
     port: 8080
-    doc-root: .
+    doc-root: ./aaa
+    logPath: ./logs/leap_vhost_1.log
+    logLevel: DEBUG
   servlet:
   - servletName: TimeServlet
     servletClass: org.chaostocosmos.leap.http.servlet.TimeServletImpl

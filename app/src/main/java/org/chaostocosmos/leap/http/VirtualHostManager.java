@@ -2,6 +2,7 @@ package org.chaostocosmos.leap.http;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -43,19 +44,22 @@ public class VirtualHostManager {
      * 
      * @throws WASException
      * @throws IOException
+     * @throws URISyntaxException
      */
-    private VirtualHostManager() throws WASException, IOException {        
+    private VirtualHostManager() throws WASException, IOException, URISyntaxException {        
         List<Map<String, Object>> vList = (List<Map<String, Object>>)context.getConfigValue("server.virtual-host");
         for(Map<String, Object> m : vList) {
             String host = m.get("host").toString();
-            if(host.length() - host.replace(":", "").length() != 1) {
-                throw new WASException(MSG_TYPE.ERROR, "error015");
-            }
-            String[] hp = host.split("\\:");
-            InetSocketAddress addr = new InetSocketAddress(hp[0].trim(), Integer.parseInt(hp[1].trim()));
+            int port = Integer.parseInt(m.get("port").toString());
+            InetSocketAddress addr = new InetSocketAddress(host, port);
             Path vDocroot = Paths.get(m.get("doc-root").toString());
+
+            //build environment each virtual host 
             ResourceHelper.buildEnv(vDocroot);
-            this.virtualHosts.add(new VirtualHost(addr, vDocroot));
+
+            Path logPath = Paths.get(m.get("logPath").toString());
+            String logLevel = m.get("logLevel").toString();
+            this.virtualHosts.add(new VirtualHost(addr, vDocroot, logPath, logLevel));
         }
     }
 
@@ -65,8 +69,9 @@ public class VirtualHostManager {
      * @return
      * @throws IOException
      * @throws WASException
+     * @throws URISyntaxException
      */
-    public static VirtualHostManager getInstance() throws WASException, IOException {
+    public static VirtualHostManager getInstance() throws WASException, IOException, URISyntaxException {
         if(virtualHostManager == null) {
             virtualHostManager = new VirtualHostManager();
         }
@@ -108,11 +113,14 @@ public class VirtualHostManager {
     public class VirtualHost {
 
         InetSocketAddress host;
-        Path docroot;
+        Path docroot, logPath;
+        String logLevel;
     
-        public VirtualHost(InetSocketAddress host, Path docroot) {
+        public VirtualHost(InetSocketAddress host, Path docroot, Path logPath, String logLevel) {
             this.host = host;
             this.docroot = docroot;
+            this.logPath = logPath;
+            this.logLevel = logLevel;
         }
     
         public InetSocketAddress getHost() {
@@ -127,8 +135,12 @@ public class VirtualHostManager {
             return this.docroot;
         }
     
-        public void setDocroot(Path docroot) {
-            this.docroot = docroot;
+        public Path getLogPath() {
+            return this.logPath;
+        }
+
+        public String getLogLevel() {
+            return this.logLevel;
         }
     
         @Override
@@ -137,6 +149,8 @@ public class VirtualHostManager {
                 " host='" + getHost() + "'" +
                 ", getPort='" + getPort() + "'" +
                 ", docroot='" + getDocroot() + "'" +
+                ", logPath='" + getLogPath() + "'" +
+                ", logLevel='" + getLogLevel() + "'" +
                 "}";
         }
     }           

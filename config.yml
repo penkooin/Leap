@@ -17,7 +17,7 @@ server:
   virtual-host:
   - host: 127.0.0.1
     port: 8080
-    doc-root: ./aaa
+    doc-root: .
     logPath: ./logs/leap_vhost_1.log
     logLevel: DEBUG
   servlet:

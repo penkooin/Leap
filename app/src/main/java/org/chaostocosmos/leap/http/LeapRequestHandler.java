@@ -146,13 +146,10 @@ public class LeapRequestHandler implements Runnable {
                         body = ResourceHelper.getInstance().getResourceContents(context.getResponseResource(resCode));
                     }
                 }
-                System.out.println(resourcePath.toString()+"  &&&&&&&&&&&&&&&&&&&&&&&&&&&");                    
             }
-            //System.out.println("//////////////////////////////////////////////////////////////");
             response.setResponseCode(resCode);
             response.setBody(body);
 
-            ////////////////////////////// Send response to client
             sendResponse(out, response);
 
         } catch (IOException e) {

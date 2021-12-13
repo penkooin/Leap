@@ -9,7 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -31,7 +30,7 @@ public class Context {
     /**
      * Logger
      */
-    static Logger logger = LoggerFactory.getLogger(Context.class);
+    public static Logger logger = LoggerFactory.getLogger(Context.class);
 
     /**
      * Context
@@ -68,13 +67,17 @@ public class Context {
      * 
      * @param doc_root
      * @throws IOException
+     * @throws URISyntaxException
      */
-    private Context(Path doc_root) throws IOException {
+    private Context(Path doc_root) throws IOException, URISyntaxException {
         logger.debug(doc_root.toAbsolutePath().toString());
         if(!doc_root.toFile().isDirectory() || !doc_root.toFile().exists()) {
             throw new FileNotFoundException("Resource path must be directory and exist : "+doc_root.toAbsolutePath().toString());
         }
         this.doc_root = doc_root;
+        //build environment each virtual host 
+        ResourceHelper.buildEnv(this.doc_root);
+
         this.configPath = ResourceHelper.getWebInfPath().resolve("config.yml");
         if(!this.configPath.toFile().exists()) {
             throw new FileNotFoundException("config.yml not found. Please check your configuration : "+this.configPath.toAbsolutePath().toString());
@@ -133,16 +136,9 @@ public class Context {
         for(Object o : servletList) {
             Map<String, Object> m = (Map<String,Object>)o;
             String servletName = m.get("servletName").toString();
-            String contextMapping = m.get("contextMapping").toString();
             String servletClass = m.get("servletClass").toString();
             List<String> servletFilters = (List<String>) m.get("servletFilters");
-            List<Object> methods = (List<Object>) m.get("method");
-            Map<String, String> methodMappingMap = new HashMap<>();
-            for(Object method : methods) {
-                Map<String, Object> map = (Map<String, Object>)method;
-                methodMappingMap.put(map.get("contextMapping")+"", map.get("methodName")+"");
-            }
-            ServletBean bean = new ServletBean(servletName, contextMapping, servletClass, servletFilters, methodMappingMap);
+            ServletBean bean = new ServletBean(servletName, servletClass, servletFilters);
             beanList.add(bean);
         }
         return beanList;
@@ -170,14 +166,6 @@ public class Context {
      */
     public int getThreadPoolKeepAlive() {
         return (int)getConfigValue("server.threadpool.keep-alive");
-    }
-
-    /**
-     * Get main server bind address
-     * @return
-     */
-    public String getBindAddress() {
-        return getConfigValue("server.host").toString().split(":")[0];
     }
 
     /**
