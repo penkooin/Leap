@@ -16,7 +16,7 @@ import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import org.slf4j.LoggerFactory;
+import org.chaostocosmos.leap.http.commons.LoggerFactory;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
@@ -30,7 +30,7 @@ public class LeapWAS {
     /**
      * Logger
      */
-    public static Logger logger = (Logger)LoggerFactory.getLogger(LeapWAS.class);
+    public static Logger logger = (Logger)LoggerFactory.getLogger(Context.getInstance().getDefaultHost());
 
     /**
      * Standard IO
@@ -68,8 +68,8 @@ public class LeapWAS {
     public LeapWAS(String[] args) throws IOException, URISyntaxException, WASException, ParseException {
         //set commend line options
         applyOptions(args);
-        //build default environment
-        ResourceHelper.extractResource("webapp", HOME_PATH); 
+        //build config environment
+        ResourceHelper.extractResource("config", HOME_PATH); 
         //print trademark
         trademark();
         start(HOME_PATH);
@@ -112,8 +112,10 @@ public class LeapWAS {
      * @throws URISyntaxException
      */
     public void start(Path HomePath) throws WASException, IOException, URISyntaxException {
-        this.context = Context.getInstance();
+        this.context = Context.getInstance(HomePath);
         this.virtualHostManager = VirtualHostManager.getInstance();
+        System.out.println(LoggerFactory.getLogger("localhost").getName()+"*********"); 
+        LoggerFactory.getLogger("192.168.1.60").debug("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
     }
 
     /**
@@ -139,7 +141,7 @@ public class LeapWAS {
         System.out.println();
     }
     
-    public static void main(String[] args) throws ParseException, FileNotFoundException, IOException, URISyntaxException, WASException {      
+    public static void main(String[] args) throws ParseException, FileNotFoundException, IOException, URISyntaxException, WASException {
         new LeapWAS(args);  
     }
 }

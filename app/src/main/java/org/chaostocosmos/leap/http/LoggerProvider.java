@@ -65,7 +65,7 @@ public class LoggerProvider {
         Logger logger = loggerMap.get(serverName);
         if(logger == null || System.currentTimeMillis() - loggerMillisMap.get(serverName) > DAY ){
             VirtualHostManager virtualHostManager = VirtualHostManager.getInstance();
-            VirtualHost vhost = virtualHostManager.getVirtualHost(serverName);
+            Hosts vhost = virtualHostManager.getVirtualHost(serverName);
             if(vhost != null) {
                 loggerMap.put(serverName, createLogger(serverName, virtualHostManager.getVirtualHost(serverName).getDocroot().toString(), makeLogFilename(serverName)));
                 loggerMillisMap.put(serverName, System.currentTimeMillis());    

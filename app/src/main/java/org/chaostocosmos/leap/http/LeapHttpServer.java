@@ -7,6 +7,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -30,12 +31,7 @@ public class LeapHttpServer {
     /**
      * Index file
      */
-    public static String INDEX_FILE = "index.html";
-
-    /**
-     * Server hosts
-     */
-    public VirtualHost hosts;
+    public static String INDEX_FILE = Context.getInstance().getWelcome();
 
     /**
      * servlet loading & managing
@@ -53,21 +49,42 @@ public class LeapHttpServer {
     Context context;
 
     /**
+     * Mapping hosts
+     */
+    List<String> hosts;
+
+    /**
+     * port
+     */
+    int port;
+
+    /**
+     * server backlog
+     */
+    int backlog;
+
+    /**
      * Default constructor 
      */
     public LeapHttpServer() {
-        this(Context.getInstance().getDefaultHosts());
+        this(Context.getInstance().getHostsByPort(Context.getInstance().getDefaultPort()),
+             Context.getInstance().getDefaultPort(),
+             Context.getInstance().getBackLog());
     }
 
     /**
      * Constructor with configuration file Path
-     * @param host
+     * @param hosts
+     * @param port
+     * @param backlog
      * @throws WASException
      * @throws URISyntaxException
      * @throws IOException
      */
-    public LeapHttpServer(VirtualHost hosts) {
+    public LeapHttpServer(List<String> hosts, int port, int backlog) {
         this.hosts = hosts;
+        this.port = port;
+        this.backlog = backlog;
         try {
             this.context = Context.getInstance();
             this.servletManager = new ServletManager(this.context.getServletBeanList());
@@ -108,7 +125,7 @@ public class LeapHttpServer {
      */
     public void start() throws IOException, URISyntaxException, WASException {
         logger.info("WAS server starting... port: "
-                    +this.hosts.getPort()+" ThreadPool CORE: "
+                    +this.port+" ThreadPool CORE: "
                     +context.getThreadPoolCoreSize()+" MAX: "
                     +context.getThreadPoolMaxSize()+" KEEP-ALIVE WHEN IDLE(seconds): "
                     +context.getThreadPoolKeepAlive());
@@ -120,13 +137,14 @@ public class LeapHttpServer {
                                                  new LinkedBlockingQueue<Runnable>());
 
         InetAddress bindAddress = InetAddress.getByName(context.getDefaultHost()+":"+context.getDefaultPort());
-        try (ServerSocket server = new ServerSocket(this.hosts.getPort(), context.getBackLog(), bindAddress)) {
+        try (ServerSocket server = new ServerSocket(this.port, context.getBackLog(), bindAddress)) {
             logger.info("Accepting connections on port " + server.getLocalPort());
-            logger.info("Document Root: " + this.hosts.getDocroot().toFile().getAbsolutePath());
+            logger.info("Document Root: " + Context.getInstance().getDefaultDocroot().toFile().getAbsolutePath());
             while (true) {
                 try {
                     Socket request = server.accept();
-                    Runnable r = new LeapRequestHandler(this, this.hosts.getDocroot(), INDEX_FILE, request); 
+                    //List<String> hosts = ResourceHelper.get
+                    Runnable r = new LeapRequestHandler(this, Context.getInstance().getDefaultDocroot(), INDEX_FILE, request); 
                     logger.info("Client request accepted... : "+request.getLocalAddress().toString());
                     this.threadpool.submit(r);
                 } catch (IOException ex) {

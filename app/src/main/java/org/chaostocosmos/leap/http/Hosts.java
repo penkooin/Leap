@@ -4,12 +4,11 @@ import java.net.InetSocketAddress;
 import java.nio.file.Path;
 
 import ch.qos.logback.classic.Level;
-import ch.qos.logback.classic.Logger;
 
 /**
  * Host object
  */
-public class VirtualHost {
+public class Hosts {
     /**
      * Server name
      */
@@ -31,9 +30,9 @@ public class VirtualHost {
     private Path docroot;
 
     /**
-     * Logger
+     * log path
      */
-    private Logger logger;
+    private String logPath;
 
     /**
      * Logging level
@@ -46,15 +45,15 @@ public class VirtualHost {
      * @param host
      * @param port
      * @param docroot
-     * @param logger
+     * @param logPath
      * @param logLevel
      */
-    public VirtualHost(String serverName, String host, int port, Path docroot, Logger logger, Level logLevel)  {
+    public Hosts(String serverName, String host, int port, Path docroot, String logPath, Level logLevel)  {
         this.serverName = serverName;
         this.host = host;
         this.port = port;
         this.docroot = docroot;
-        this.logger = logger;
+        this.logPath = logPath;
         this.logLevel = logLevel;
     }
 
@@ -123,19 +122,19 @@ public class VirtualHost {
     }
 
     /**
-     * Get logger
+     * Get logPath
      * @return
      */
-    public Logger getLogger() {
-        return this.logger;
+    public String getLogPath() {
+        return this.logPath;
     }
 
     /**
-     * Set logger
-     * @param logger
+     * Set logPath
+     * @param logPath
      */
-    public void setLogger(Logger logger) {
-        this.logger = logger;
+    public void setLogger(String logPath) {
+        this.logPath = logPath;
     }
 
     /**
@@ -168,7 +167,7 @@ public class VirtualHost {
             ", host='" + getHost() + "'" +
             ", port='" + getPort() + "'" +
             ", docroot='" + getDocroot() + "'" +
-            ", logger='" + getLogger() + "'" +
+            ", logger='" + getLogPath() + "'" +
             ", logLevel='" + getLogLevel() + "'" +
             "}";
     }    

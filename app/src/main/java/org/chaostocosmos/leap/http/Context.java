@@ -14,9 +14,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.http.commons.LoggerUtils;
+import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.servlet.ServletBean;
-import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
 
 import ch.qos.logback.classic.Level;
@@ -32,7 +31,7 @@ public class Context {
     /**
      * Logger
      */
-    public static Logger logger = (Logger)LoggerFactory.getLogger(Context.class);
+    public static Logger logger = (Logger)LoggerFactory.getLogger(Context.getInstance().getDefaultHost());
 
     /**
      * Context
@@ -42,7 +41,7 @@ public class Context {
     /**
      * Document root path
      */
-    private final Path docroot;
+    private final Path HOME_PATH;
 
     /**
      * Config path
@@ -55,11 +54,6 @@ public class Context {
     private final Map<String, Object> configMap; 
 
     /**
-     * Gson object
-     */
-    //private Gson gson = new Gson();
-
-    /**
      * Servlet List
      */
     private List<ServletBean> servletBeanList;
@@ -67,7 +61,7 @@ public class Context {
     /**
      * Hosts map with port key
      */
-    private Map<Integer, List<VirtualHost>> hostsMap;
+    private Map<Integer, List<Hosts>> hostsMap;
 
     /**
      * Constructor
@@ -76,21 +70,25 @@ public class Context {
      * @throws URISyntaxException
      */
     private Context(Path homePath) throws IOException, URISyntaxException {
-        this.docroot = LeapWAS.HOME_PATH;
-        //logger.debug(docroot.toAbsolutePath().toString());
-        if(!this.docroot.toFile().isDirectory() || !this.docroot.toFile().exists()) {
-            throw new FileNotFoundException("Resource path must be directory and exist : "+docroot.toAbsolutePath().toString());
+        this.HOME_PATH = homePath;
+        if(!this.HOME_PATH.toFile().isDirectory() || !this.HOME_PATH.toFile().exists()) {
+            throw new FileNotFoundException("Resource path must be directory and exist : "+HOME_PATH.toAbsolutePath().toString());
         }
-        this.configPath = LeapWAS.HOME_PATH.resolve("webapp").resolve("WEB-INF").resolve("config.yml");
+        this.configPath = this.HOME_PATH.resolve("config").resolve("config.yml"); 
         if(!this.configPath.toFile().exists()) {
             throw new FileNotFoundException("config.yml not found. Please check your configuration : "+this.configPath.toAbsolutePath().toString());
         }
-        //from JSON
-        //this.configMap = gson.fromJson(Files.readString(this.configPath), Map.class);
-        //from YAML
         String allStr = Files.readAllLines(this.configPath).stream().collect(Collectors.joining(System.lineSeparator()));
         Yaml yaml = new Yaml(); 
         this.configMap = ((Map<?, ?>)yaml.load(allStr)).entrySet().stream().collect(Collectors.toMap(k -> k.getKey().toString(), v -> v.getValue()));
+        ResourceHelper.extractResource("webapp", getDefaultDocroot());
+        getVirtualHosts().entrySet().stream().forEach(e -> {
+            try {
+                ResourceHelper.extractResource("webapp", e.getValue().getDocroot());
+            } catch (IOException | URISyntaxException e1) {
+                logger.error(getErrorMsg("error018", e.getValue().getHost()), e1);
+            }
+        });
         this.servletBeanList = getServletBeanList();
     }
 
@@ -135,9 +133,9 @@ public class Context {
         List<?> servletList = (List<?>)getConfigValue("server.servlet");
         for(Object o : servletList) {
             Map<?, ?> m = (Map<?,?>)o;
-            String servletName = m.get("servletName").toString();
-            String servletClass = m.get("servletClass").toString();
-            List<String> servletFilters = ((List<?>) m.get("servletFilters")).stream().map(Object::toString).collect(Collectors.toList());
+            String servletName = m.get("servlet-name").toString();
+            String servletClass = m.get("servlet-class").toString();
+            List<String> servletFilters = ((List<?>) m.get("servlet-filters")).stream().map(Object::toString).collect(Collectors.toList());
             ServletBean bean = new ServletBean(servletName, servletClass, servletFilters);
             beanList.add(bean);
         }
@@ -148,12 +146,12 @@ public class Context {
      * Get virtual host Map by port key ordered 
      * @return
      */
-    public Map<String, VirtualHost> getVirtualHosts() {
+    public Map<String, Hosts> getVirtualHosts() {
         return ((List<?>)getConfigValue("server.virtual-host"))
                          .stream()
                          .map(m -> ((Map<?, ?>)m).get("host"))
                          .map(sn -> new Object[]{sn, getVirtualHosts((String)sn)})
-                         .collect(Collectors.toMap(k -> (String)k[0], v -> (VirtualHost)v[1]));
+                         .collect(Collectors.toMap(k -> (String)k[0], v -> (Hosts)v[1]));
     }
 
     /**
@@ -161,7 +159,7 @@ public class Context {
      * @param vhost
      * @return
      */
-    public VirtualHost getVirtualHosts(final String vhost) {
+    public Hosts getVirtualHosts(final String vhost) {
         return ((List<?>)getConfigValue("server.virtual-host"))
                         .stream()
                         .map(e -> (Map<String, Object>)e)
@@ -169,11 +167,11 @@ public class Context {
                             .stream()
                             .map(o -> (Map<?, ?>)o)
                             .filter(m -> m.get("host").equals(vhost))
-                            .map(m -> new VirtualHost((String)m.get("serverName"), 
+                            .map(m -> new Hosts((String)m.get("serverName"), 
                                                 (String)m.get("host"), 
-                                                Integer.parseInt((String)m.get("key")), 
+                                                Integer.parseInt(m.get("port")+""), 
                                                 Paths.get((String)m.get("doc-root")), 
-                                                LoggerUtils.getLogger((String)m.get("host")),
+                                                (String)m.get("host"),
                                                 Level.toLevel((String)m.get("log-level"))))
                             .findFirst().orElse(null);
     }
@@ -182,13 +180,37 @@ public class Context {
      * Get default Hosts
      * @return
      */
-    public VirtualHost getDefaultHosts() {
-        return new VirtualHost(getDefaultServerName(),
+    public Hosts getDefaultHosts() {
+        return new Hosts(getDefaultServerName(),
                           getDefaultHost(),
                           getDefaultPort(),
                           getDefaultDocroot(),
-                          getDefaultLogger(),
+                          getDefaultLogPath(),
                           getDefaultLogLevel());
+    }
+
+    /**
+     * Get host list matching with a port 
+     * @param port
+     * @return
+     */
+    public List<String> getHostsByPort(int port) {
+        List<String> hosts = new ArrayList<>();
+        getVirtualHosts().entrySet().stream().filter(h -> h.getValue().getPort() == port).map(h -> h.getValue().getHost()).forEach(h -> hosts.add(h));
+        if(getDefaultPort() == port) {
+            hosts.add(getDefaultHost());
+        }
+        return hosts;
+    }
+
+    
+
+    /**
+     * Get home path
+     * @return
+     */
+    public Path getHomePath() {
+        return this.HOME_PATH;
     }
 
     /**
@@ -228,7 +250,7 @@ public class Context {
      * @return
      */
     public String getWelcome() {
-        return getConfigValue("server.welcome").toString();
+        return (String)getConfigValue("server.welcome");
     }
 
     /**
@@ -236,7 +258,7 @@ public class Context {
      * @return
      */
     public String getVersion() {
-        return getConfigValue("server.version").toString();
+        return (String)getConfigValue("server.version");
     }
 
     /**
@@ -244,7 +266,7 @@ public class Context {
      * @return
      */
     public String getDefaultServerName() {
-        return getConfigValue("server.serverName").toString();
+        return (String)getConfigValue("server.serverName");
     }
 
     /**
@@ -252,7 +274,7 @@ public class Context {
      * @return
      */
     public String getDefaultHost() {
-        return getConfigValue("server.host").toString();
+        return (String)getConfigValue("server.host");
     }
 
     /**
@@ -268,7 +290,7 @@ public class Context {
      * @return
      */
     public Path getDefaultDocroot() {
-        return LeapWAS.HOME_PATH;
+        return Paths.get((String)getConfigValue("server.doc-root"));
     }
 
     /**
@@ -276,7 +298,15 @@ public class Context {
      * @return
      */
     public Logger getDefaultLogger() {
-        return LoggerUtils.getLogger(getDefaultHost());
+        return LoggerFactory.getLogger(getDefaultHost());
+    }
+
+    /**
+     * Get default log path
+     * @return
+     */
+    public String getDefaultLogPath() {
+        return (String)getConfigValue("server.logs");
     }
 
     /**
@@ -300,7 +330,7 @@ public class Context {
      * @return
      */
     public String getHttpVersion() {
-        return getConfigValue("server.http-version").toString();
+        return (String)getConfigValue("server.http-version");
     }
 
     /**
@@ -415,7 +445,7 @@ public class Context {
      * @param value
      */
     public void setValue(Object obj, Object[] keys, Object value) {
-        ((Map)findValue(obj, Arrays.copyOfRange(keys, 0, keys.length-1))).put(keys[keys.length-1], value);
+        ((Map)findValue(obj, Arrays.copyOfRange(keys, 0, keys.length-1))).put(keys[keys.length-1], value); 
     }
 
 	/**
@@ -426,7 +456,7 @@ public class Context {
 	 */
 	public Object findValue(Object obj, Object[] keys) {
 		if (obj instanceof List) {
-			List list = (List) obj;
+			List<?> list = (List<?>) obj;
 			if (keys.length == 1) {
 				if (keys[0] instanceof Integer && list.size() > (int) keys[0]) {
 					return list.get((int) keys[0]);
@@ -439,7 +469,7 @@ public class Context {
 				return findValue(list.get((int) keys[0]), subKeys);
 			}
 		} else if (obj instanceof Map) {
-			Map map = (Map) obj;
+			Map<?, ?> map = (Map<?, ?>) obj;
 			if (keys.length == 1 && map.containsKey(keys[0])) {
 				return map.get(keys[0]);
 			} else if (keys.length > 1 && map.containsKey(keys[0])) {

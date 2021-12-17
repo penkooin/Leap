@@ -49,7 +49,7 @@ public class LeapRequestHandler implements Runnable {
     /**
      * welcome index html
      */
-    private String indexFileName = context.getWelcome();
+    private String welcome = context.getWelcome();
 
     /**
      * Client socket
@@ -66,15 +66,15 @@ public class LeapRequestHandler implements Runnable {
      * 
      * @param httpServer
      * @param rootPath
-     * @param indexFileName
+     * @param welcome
      * @param connection
      * @throws WASException
      */
-    public LeapRequestHandler(LeapHttpServer httpServer, Path rootPath, String indexFileName, Socket connection) throws WASException {
+    public LeapRequestHandler(LeapHttpServer httpServer, Path rootPath, String welcome, Socket connection) throws WASException {
         this.servletManager = httpServer.getServletManager();
         this.rootPath = rootPath;
-        if (indexFileName != null) {
-            this.indexFileName = indexFileName;
+        if (welcome != null) {
+            this.welcome = welcome;
         }
         this.connection = connection;
     }

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.chaostocosmos.leap.http.commons.LoggerUtils;
 import org.slf4j.LoggerFactory;
 
 import ch.qos.logback.classic.Level;
@@ -34,7 +33,7 @@ public class VirtualHostManager {
     /**
      * Virtual hosts
      */
-    private List<VirtualHost> virtualHosts = new ArrayList<>();
+    private List<Hosts> virtualHosts = new ArrayList<>();
 
     /**
      * VirtualHostManager
@@ -54,12 +53,11 @@ public class VirtualHostManager {
             Map<?, ?> m = (Map<?, ?>)obj;
             String serverName = (String)m.get("server-name");
             String host = (String)m.get("host");
-            int port = Integer.parseInt((String)m.get("port"));
+            int port = Integer.parseInt(m.get("port")+"");
             Path vDocroot = Paths.get((String)m.get("doc-root"));
-            Logger logger = LoggerUtils.getLogger(host);
+            String logPath = (String)m.get("logs");
             Level logLevel = Level.toLevel((String)m.get("log-level"));
-            this.virtualHosts.add(new VirtualHost(serverName, host, port, vDocroot, logger, logLevel));
-            ResourceHelper.extractResource("webapp", vDocroot);
+            this.virtualHosts.add(new Hosts(serverName, host, port, vDocroot, logPath, logLevel));            
         }
     }
 
@@ -83,7 +81,7 @@ public class VirtualHostManager {
      * @param serverName
      * @return
      */
-    public VirtualHost getVirtualHost(String host) {
+    public Hosts getVirtualHost(String host) {
         return this.virtualHosts.stream().filter(v -> v.getHost().equals(host)).findAny().orElse(null);
     } 
 
@@ -103,7 +101,7 @@ public class VirtualHostManager {
      * Get virtual host list
      * @return
      */
-    public List<VirtualHost> getVirtualHosts() {
+    public List<Hosts> getVirtualHosts() {
         return this.virtualHosts; 
     }
 }

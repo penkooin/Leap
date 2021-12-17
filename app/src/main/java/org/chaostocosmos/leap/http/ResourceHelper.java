@@ -19,8 +19,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.chaostocosmos.leap.http.commons.LoggerUtils;
-import org.slf4j.LoggerFactory;
+import org.chaostocosmos.leap.http.commons.LoggerFactory;
 
 import ch.qos.logback.classic.Logger;
 
@@ -34,7 +33,7 @@ public class ResourceHelper {
     /**
      * logger
      */
-    Logger logger = (Logger)LoggerFactory.getLogger(Context.getInstance().getDefaultHost());
+    public static Logger logger = (Logger)LoggerFactory.getLogger(Context.getInstance().getDefaultHost());
 
     /**
      * home path
@@ -130,7 +129,7 @@ public class ResourceHelper {
         path = path.charAt(0) == '/' ? path.substring(1) : path;
         Path docroot = null;
         Path reqPath = null;
-        VirtualHost vhost = VirtualHostManager.getInstance().getVirtualHost(host);
+        Hosts vhost = VirtualHostManager.getInstance().getVirtualHost(host);
         if(vhost != null) {
             docroot = vhost.getDocroot().toAbsolutePath();
         } else {
@@ -212,8 +211,8 @@ public class ResourceHelper {
      * @throws IOException
      */
     public String getTrademark() throws FileNotFoundException, IOException {
-        File file = getWebInfPath(Context.getInstance().getDefaultHost()).resolve("trademark").toAbsolutePath().toFile(); 
-        return UtilBox.readAllString(new FileInputStream(file));
+        File file = Context.getInstance().getHomePath().resolve("config").resolve("trademark").toFile();
+        return UtilBox.readAllString(new FileInputStream(file)); 
     }
 
     /**
@@ -259,7 +258,7 @@ public class ResourceHelper {
                     }
                 }
             } catch (IOException e) {
-                LoggerUtils.getLogger(Context.getInstance().getDefaultHost()).error(e.getMessage(), e);
+                LoggerFactory.getLogger(Context.getInstance().getDefaultHost()).error(e.getMessage(), e);
             }
             return null;
         }).filter(p1 -> p1 != null)
