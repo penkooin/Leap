@@ -1,9 +1,11 @@
 server:
-  name: Bulker
   version: 1.0.0
   http-version: HTTP/1.0
+  server-name: leap
   host: 127.0.0.1
   port: 8080
+  logs: ./home/logs
+  log-level: DEBUG
   backlog: 50
   threadpool:
     core: 50
@@ -12,21 +14,23 @@ server:
   charset: utf-8
   welcome: index.html
   virtual-host:
-  - serverName: www.bulker1.com
-    host: 127.0.0.1:8080
-    doc-root: ./webapp
-  - serverName: www.bulker2.com
-    host: 127.0.0.1:8080
-    doc-root: ./webapp
+  - server-name: leap1
+    host: 127.0.0.1
+    port: 8081
+    doc-root: ./home1
+    logs: ./home1/logs
+    log-level: DEBUG
+  - server-name: leap2
+    host: 192.168.1.60
+    port: 8082
+    doc-root: ./home2
+    logs: ./home1/logs
+    log-level: DEBUG
   servlet:
-  - servletName: TimeServlet
-    contextMapping: /time
-    method:
-    - methodName: getTime
-      contextMapping: /GetTime
-    servletClass: org.chaostocosmos.bulker.http.servlet.TimeServletImpl
-    servletFilters:
-    - org.chaostocosmos.bulker.http.filter.HttpURLFilter
+  - servlet-name: TimeServlet
+    servlet-class: org.chaostocosmos.leap.http.servlet.TimeServletImpl
+    servlet-filters:
+    - org.chaostocosmos.leap.http.filter.HttpURLFilter
 messages:
   http:
     '200': OK
@@ -74,6 +78,8 @@ messages:
     debug001: ''
   info:
     info001: 'ServletDescriptor annotation not found in class: {}'
+    info002: ''
+    info003: ''
   warn:
     warn001: 'Forbidden resources requested: {}'
   error:
@@ -94,7 +100,9 @@ messages:
     error015: Some problem occurred in Servlet loading progress
     error016: 'Not supported method type: {}'
     error017: 'Not supported method type: {}'
-    error018: 'Not exist response resource with the code: {}'
 static-resource:
-  'index': index.html
-  'respone': response.html
+  '403': 403.html
+  '404': 404.html
+  '405': 405.html
+  '500': 500.html
+  '501': 501.html

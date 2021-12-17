@@ -1,4 +1,4 @@
-package org.chaostocosmos.http.server;
+package org.chaostocosmos.leap.http;
 
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
@@ -19,7 +19,7 @@ public class ConfigTest {
     Path path;
 
     public ConfigTest() {
-        this.path = Paths.get("D:\\0.github\\chaos-http-server\\app\\src\\main\\resources\\webapp\\config.json");
+        this.path = Paths.get("D:\\0.github\\leap\\app\\src\\main\\resources\\webapp\\WEB-INF\\config.json");
     }
 
     public void convertJsonToYaml() throws Exception {

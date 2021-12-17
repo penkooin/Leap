@@ -1,4 +1,4 @@
-package org.chaostocosmos.http.server;
+package org.chaostocosmos.leap.http;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -14,12 +14,15 @@ import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.servlet.ServletBean;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Context test
+ */
 public class ContextTest {
 
     Context context;
 
     public ContextTest() throws URISyntaxException, IOException {    
-        this.context = Context.getInstance(Paths.get("./webapp/WEB-INF/"));
+        this.context = Context.getInstance();
     }
 
     @Test

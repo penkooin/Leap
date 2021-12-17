@@ -1,7 +1,6 @@
 package org.chaostocosmos.leap.http;
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -9,8 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
+import org.chaostocosmos.leap.http.commons.LoggerUtils;
 import org.slf4j.LoggerFactory;
+
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
 
 /**
  * Virtual host manager object
@@ -22,7 +24,7 @@ public class VirtualHostManager {
     /**
      * Logger
      */
-    Logger logger = LoggerFactory.getLogger(VirtualHostManager.class);
+    Logger logger = (Logger)LoggerFactory.getLogger(VirtualHostManager.class);
 
     /**
      * Context
@@ -47,19 +49,17 @@ public class VirtualHostManager {
      * @throws URISyntaxException
      */
     private VirtualHostManager() throws WASException, IOException, URISyntaxException {        
-        List<Map<String, Object>> vList = (List<Map<String, Object>>)context.getConfigValue("server.virtual-host");
-        for(Map<String, Object> m : vList) {
-            String host = m.get("host").toString();
-            int port = Integer.parseInt(m.get("port").toString());
-            InetSocketAddress addr = new InetSocketAddress(host, port);
-            Path vDocroot = Paths.get(m.get("doc-root").toString());
-
-            //build environment each virtual host 
-            ResourceHelper.buildEnv(vDocroot);
-
-            Path logPath = Paths.get(m.get("logPath").toString());
-            String logLevel = m.get("logLevel").toString();
-            this.virtualHosts.add(new VirtualHost(addr, vDocroot, logPath, logLevel));
+        List<?> vList = (List<?>)context.getConfigValue("server.virtual-host");
+        for(Object obj : vList) {
+            Map<?, ?> m = (Map<?, ?>)obj;
+            String serverName = (String)m.get("server-name");
+            String host = (String)m.get("host");
+            int port = Integer.parseInt((String)m.get("port"));
+            Path vDocroot = Paths.get((String)m.get("doc-root"));
+            Logger logger = LoggerUtils.getLogger(host);
+            Level logLevel = Level.toLevel((String)m.get("log-level"));
+            this.virtualHosts.add(new VirtualHost(serverName, host, port, vDocroot, logger, logLevel));
+            ResourceHelper.extractResource("webapp", vDocroot);
         }
     }
 
@@ -84,7 +84,7 @@ public class VirtualHostManager {
      * @return
      */
     public VirtualHost getVirtualHost(String host) {
-        return this.virtualHosts.stream().filter(v -> v.getHost().getHostName().equals(host)).findAny().orElse(null);
+        return this.virtualHosts.stream().filter(v -> v.getHost().equals(host)).findAny().orElse(null);
     } 
 
     /**
@@ -104,54 +104,6 @@ public class VirtualHostManager {
      * @return
      */
     public List<VirtualHost> getVirtualHosts() {
-        return this.virtualHosts;
+        return this.virtualHosts; 
     }
-
-    /**
-     * Virtual host object
-     */
-    public class VirtualHost {
-
-        InetSocketAddress host;
-        Path docroot, logPath;
-        String logLevel;
-    
-        public VirtualHost(InetSocketAddress host, Path docroot, Path logPath, String logLevel) {
-            this.host = host;
-            this.docroot = docroot;
-            this.logPath = logPath;
-            this.logLevel = logLevel;
-        }
-    
-        public InetSocketAddress getHost() {
-            return this.host;
-        }
-    
-        public int getPort() {
-            return this.host.getPort();
-        }
-    
-        public Path getDocroot() {
-            return this.docroot;
-        }
-    
-        public Path getLogPath() {
-            return this.logPath;
-        }
-
-        public String getLogLevel() {
-            return this.logLevel;
-        }
-    
-        @Override
-        public String toString() {
-            return "{" +
-                " host='" + getHost() + "'" +
-                ", getPort='" + getPort() + "'" +
-                ", docroot='" + getDocroot() + "'" +
-                ", logPath='" + getLogPath() + "'" +
-                ", logLevel='" + getLogLevel() + "'" +
-                "}";
-        }
-    }           
 }

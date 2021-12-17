@@ -49,7 +49,7 @@ public class LeapRequestHandler implements Runnable {
     /**
      * welcome index html
      */
-    private String indexFileName = context.getWelcomFilename();
+    private String indexFileName = context.getWelcome();
 
     /**
      * Client socket
@@ -122,7 +122,7 @@ public class LeapRequestHandler implements Runnable {
                 }
             } else { // When client request static resources
                 if(request.getContextPath().equals("/")) {
-                    resourcePath = ResourceHelper.getInstance().getResourcePath(request.getUrl().getHost(), request.getContextPath()+context.getWelcomFilename());
+                    resourcePath = ResourceHelper.getInstance().getResourcePath(request.getUrl().getHost(), request.getContextPath()+context.getWelcome());
                     body = ResourceHelper.getInstance().getResourceContents(resourcePath);
                     resCode = 200;
                 } else {

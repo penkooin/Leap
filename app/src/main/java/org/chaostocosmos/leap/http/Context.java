@@ -7,18 +7,20 @@ import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import com.google.gson.Gson;
-
+import org.chaostocosmos.leap.http.commons.LoggerUtils;
 import org.chaostocosmos.leap.http.servlet.ServletBean;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
+
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
 
 /**
  * Context management object
@@ -30,7 +32,7 @@ public class Context {
     /**
      * Logger
      */
-    public static Logger logger = LoggerFactory.getLogger(Context.class);
+    public static Logger logger = (Logger)LoggerFactory.getLogger(Context.class);
 
     /**
      * Context
@@ -40,7 +42,7 @@ public class Context {
     /**
      * Document root path
      */
-    private final Path doc_root;
+    private final Path docroot;
 
     /**
      * Config path
@@ -50,12 +52,12 @@ public class Context {
     /**
      * Config map
      */
-    private final Map<String, Object> configMap;
+    private final Map<String, Object> configMap; 
 
     /**
      * Gson object
      */
-    private Gson gson = new Gson();
+    //private Gson gson = new Gson();
 
     /**
      * Servlet List
@@ -63,22 +65,23 @@ public class Context {
     private List<ServletBean> servletBeanList;
 
     /**
+     * Hosts map with port key
+     */
+    private Map<Integer, List<VirtualHost>> hostsMap;
+
+    /**
      * Constructor
-     * 
-     * @param doc_root
+     * @param homePath
      * @throws IOException
      * @throws URISyntaxException
      */
-    private Context(Path doc_root) throws IOException, URISyntaxException {
-        logger.debug(doc_root.toAbsolutePath().toString());
-        if(!doc_root.toFile().isDirectory() || !doc_root.toFile().exists()) {
-            throw new FileNotFoundException("Resource path must be directory and exist : "+doc_root.toAbsolutePath().toString());
+    private Context(Path homePath) throws IOException, URISyntaxException {
+        this.docroot = LeapWAS.HOME_PATH;
+        //logger.debug(docroot.toAbsolutePath().toString());
+        if(!this.docroot.toFile().isDirectory() || !this.docroot.toFile().exists()) {
+            throw new FileNotFoundException("Resource path must be directory and exist : "+docroot.toAbsolutePath().toString());
         }
-        this.doc_root = doc_root;
-        //build environment each virtual host 
-        ResourceHelper.buildEnv(this.doc_root);
-
-        this.configPath = ResourceHelper.getWebInfPath().resolve("config.yml");
+        this.configPath = LeapWAS.HOME_PATH.resolve("webapp").resolve("WEB-INF").resolve("config.yml");
         if(!this.configPath.toFile().exists()) {
             throw new FileNotFoundException("config.yml not found. Please check your configuration : "+this.configPath.toAbsolutePath().toString());
         }
@@ -86,31 +89,28 @@ public class Context {
         //this.configMap = gson.fromJson(Files.readString(this.configPath), Map.class);
         //from YAML
         String allStr = Files.readAllLines(this.configPath).stream().collect(Collectors.joining(System.lineSeparator()));
-        Yaml yaml = new Yaml();
-        this.configMap = (Map<String, Object>)yaml.load(allStr);
+        Yaml yaml = new Yaml(); 
+        this.configMap = ((Map<?, ?>)yaml.load(allStr)).entrySet().stream().collect(Collectors.toMap(k -> k.getKey().toString(), v -> v.getValue()));
         this.servletBeanList = getServletBeanList();
     }
 
     /**
-     * Get context instance without resource path
      * 
      * @return
      */
     public static Context getInstance() {
-        return getInstance(LeapHttpServer.WAS_HOME);
+        return getInstance(LeapWAS.HOME_PATH);
     }
 
     /**
-     * Get context instance with resource path
-     * 
-     * @param WAS_HOME
+     * Get context instance without resource path
      * @return
-     */   
-    public static Context getInstance(Path WAS_HOME) {
+     */
+    public static Context getInstance(Path homePath) {
         if(context == null) {
             try {
-                context = new Context(WAS_HOME);
-            } catch(Exception e) {
+                context = new Context(homePath);
+            } catch (IOException | URISyntaxException e) {
                 logger.error("Something wrong in Context initialize process: ", e);
             }
         }
@@ -132,16 +132,63 @@ public class Context {
      */
     public List<ServletBean> getServletBeanList() {
         List<ServletBean> beanList = new ArrayList<>();
-        List<Object> servletList = (List<Object>)getConfigValue("server.servlet");
+        List<?> servletList = (List<?>)getConfigValue("server.servlet");
         for(Object o : servletList) {
-            Map<String, Object> m = (Map<String,Object>)o;
+            Map<?, ?> m = (Map<?,?>)o;
             String servletName = m.get("servletName").toString();
             String servletClass = m.get("servletClass").toString();
-            List<String> servletFilters = (List<String>) m.get("servletFilters");
+            List<String> servletFilters = ((List<?>) m.get("servletFilters")).stream().map(Object::toString).collect(Collectors.toList());
             ServletBean bean = new ServletBean(servletName, servletClass, servletFilters);
             beanList.add(bean);
         }
         return beanList;
+    }
+
+    /**
+     * Get virtual host Map by port key ordered 
+     * @return
+     */
+    public Map<String, VirtualHost> getVirtualHosts() {
+        return ((List<?>)getConfigValue("server.virtual-host"))
+                         .stream()
+                         .map(m -> ((Map<?, ?>)m).get("host"))
+                         .map(sn -> new Object[]{sn, getVirtualHosts((String)sn)})
+                         .collect(Collectors.toMap(k -> (String)k[0], v -> (VirtualHost)v[1]));
+    }
+
+    /**
+     * Get virtual host for specified virtual host name
+     * @param vhost
+     * @return
+     */
+    public VirtualHost getVirtualHosts(final String vhost) {
+        return ((List<?>)getConfigValue("server.virtual-host"))
+                        .stream()
+                        .map(e -> (Map<String, Object>)e)
+                        .collect(Collectors.toList())
+                            .stream()
+                            .map(o -> (Map<?, ?>)o)
+                            .filter(m -> m.get("host").equals(vhost))
+                            .map(m -> new VirtualHost((String)m.get("serverName"), 
+                                                (String)m.get("host"), 
+                                                Integer.parseInt((String)m.get("key")), 
+                                                Paths.get((String)m.get("doc-root")), 
+                                                LoggerUtils.getLogger((String)m.get("host")),
+                                                Level.toLevel((String)m.get("log-level"))))
+                            .findFirst().orElse(null);
+    }
+
+    /**
+     * Get default Hosts
+     * @return
+     */
+    public VirtualHost getDefaultHosts() {
+        return new VirtualHost(getDefaultServerName(),
+                          getDefaultHost(),
+                          getDefaultPort(),
+                          getDefaultDocroot(),
+                          getDefaultLogger(),
+                          getDefaultLogLevel());
     }
 
     /**
@@ -180,20 +227,12 @@ public class Context {
      * Get welcome filename
      * @return
      */
-    public String getWelcomFilename() {
+    public String getWelcome() {
         return getConfigValue("server.welcome").toString();
     }
 
     /**
-     * Get server name
-     * @return
-     */
-    public String getDefaultHost() {
-        return getConfigValue("server.host").toString();
-    }
-
-    /**
-     * Get server version
+     * Get default server version
      * @return
      */
     public String getVersion() {
@@ -201,12 +240,61 @@ public class Context {
     }
 
     /**
-     * Get server port
+     * Get default server name
+     * @return
+     */
+    public String getDefaultServerName() {
+        return getConfigValue("server.serverName").toString();
+    }
+
+    /**
+     * Get default server name
+     * @return
+     */
+    public String getDefaultHost() {
+        return getConfigValue("server.host").toString();
+    }
+
+    /**
+     * Get default server port
      * @return
      */
     public int getDefaultPort() {
         return (int)getConfigValue("server.port");
     }
+
+    /**
+     * Get default docroot
+     * @return
+     */
+    public Path getDefaultDocroot() {
+        return LeapWAS.HOME_PATH;
+    }
+
+    /**
+     * Get default logger
+     * @return
+     */
+    public Logger getDefaultLogger() {
+        return LoggerUtils.getLogger(getDefaultHost());
+    }
+
+    /**
+     * Get default log level
+     * @return
+     */
+    public Level getDefaultLogLevel() {
+        return Level.toLevel((String)getConfigValue("server.log-level"));
+    }
+
+    /**
+     * Set document path
+     * @param docroot
+     */
+    public void setDefaultDocroot(String docroot) {
+        setConfigValue("server.doc-root", docroot);
+    }
+
     /**
      * Get http version(HTTP/1.0)
      * @return
@@ -220,9 +308,9 @@ public class Context {
      * @return
      */
     public Charset getServerCharset() {
-        return
-         Charset.forName(getConfigValue("server.charset")+"");
+        return Charset.forName(getConfigValue("server.charset")+"");
     }
+    
     /**
      * Get http message by specified code
      * @param code
@@ -310,7 +398,26 @@ public class Context {
     public Object getConfigValue(String path) {
         return findValue(this.configMap, path.split("\\."));
     }
-    
+
+    /**
+     * Set value to configuration
+     * @param path
+     * @param value
+     */
+    public void setConfigValue(String path, Object value) {
+        setValue(this.configMap, path.split("\\."), value);
+    }
+
+    /**
+     * Set value to configuration Map
+     * @param obj
+     * @param keys
+     * @param value
+     */
+    public void setValue(Object obj, Object[] keys, Object value) {
+        ((Map)findValue(obj, Arrays.copyOfRange(keys, 0, keys.length-1))).put(keys[keys.length-1], value);
+    }
+
 	/**
 	 * Find value of key on structural data
 	 * @param obj
@@ -343,4 +450,5 @@ public class Context {
 		}
 		return null;
 	}    
+
 }

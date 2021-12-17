@@ -1,29 +1,32 @@
 server:
-  name: Leap
   version: 1.0.0
   http-version: HTTP/1.0
+  server-name: leap
   host: 127.0.0.1
   port: 8080
+  log-level: DEBUG
+  charset: utf-8
+  welcome: index.html
   backlog: 50
-  doc-root: .
-  logPath: ./logs/leap.log
-  logLevel: DEBUG
   threadpool:
     core: 50
     max: 50
     keep-alive: 30
-  charset: utf-8
-  welcome: index.html
   virtual-host:
-  - host: 127.0.0.1
-    port: 8080
-    doc-root: ./aaa
-    logPath: ./logs/leap_vhost_1.log
-    logLevel: DEBUG
+  - server-name: leap1
+    host: 127.0.0.1
+    port: 8081
+    doc-root: ./home1
+    log-level: DEBUG
+  - server-name: leap2
+    host: 192.168.1.60
+    port: 8082
+    doc-root: ./home2
+    log-level: DEBUG
   servlet:
-  - servletName: TimeServlet
-    servletClass: org.chaostocosmos.leap.http.servlet.TimeServletImpl
-    servletFilters:
+  - servlet-name: TimeServlet
+    servlet-class: org.chaostocosmos.leap.http.servlet.TimeServletImpl
+    servlet-filters:
     - org.chaostocosmos.leap.http.filter.HttpURLFilter
 messages:
   http:
@@ -72,6 +75,8 @@ messages:
     debug001: ''
   info:
     info001: 'ServletDescriptor annotation not found in class: {}'
+    info002: ''
+    info003: ''
   warn:
     warn001: 'Forbidden resources requested: {}'
   error:
@@ -92,11 +97,9 @@ messages:
     error015: Some problem occurred in Servlet loading progress
     error016: 'Not supported method type: {}'
     error017: 'Not supported method type: {}'
-    error018: 'Not exist response resource with the code: {}'
-    error019: 'Not exist virtual host matching with given name: {}'
-    error020: rootDirectory must be a directory, not a file
-    error021: 'Servlet context can not have same key!!! servlet: {}  context: {}'
-    error022: 'Error in initial process: {}'
 static-resource:
-  'index': index.html
-  'respone': response.html
+  '403': 403.html
+  '404': 404.html
+  '405': 405.html
+  '500': 500.html
+  '501': 501.html

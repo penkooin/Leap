@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.chaostocosmos.leap.http.VirtualHostManager.VirtualHost;
+import org.chaostocosmos.leap.http.commons.LoggerUtils;
 import org.slf4j.LoggerFactory;
 
 import ch.qos.logback.classic.Logger;
@@ -57,7 +57,7 @@ public class ResourceHelper {
      * @throws IOException
      */
     private ResourceHelper(Path HOME_PATH) throws IOException {
-        this.HOME_PATH = HOME_PATH;        
+        this.HOME_PATH = HOME_PATH;
     }
 
     /**
@@ -66,7 +66,7 @@ public class ResourceHelper {
      * @throws IOException
      */
     public static ResourceHelper getInstance() throws IOException {
-        return getInstance(Paths.get("."));
+        return getInstance(Context.getInstance().getDefaultDocroot());
     }
 
     /**
@@ -115,7 +115,7 @@ public class ResourceHelper {
      */    
     public String getReaourceContents(HttpRequestDescriptor request) throws IOException, WASException, URISyntaxException {
         return getReaourceContents(request.getUrl().toURI().getHost(), request.getContextPath());
-    }   
+    }
 
     /**
      * Get resource Path
@@ -134,10 +134,10 @@ public class ResourceHelper {
         if(vhost != null) {
             docroot = vhost.getDocroot().toAbsolutePath();
         } else {
-            docroot = LeapHttpServer.WAS_HOME.toAbsolutePath(); 
+            docroot = Context.getInstance().getDefaultDocroot().toAbsolutePath(); 
         }
         logger.debug(docroot.toString());
-        reqPath = getStaticPath().resolve(path).toAbsolutePath();                
+        reqPath = getStaticPath(host).resolve(path).toAbsolutePath();
         if(!validatePath(docroot, reqPath)) {
             throw new WASException(MSG_TYPE.ERROR, "error019", new Object[]{host});
         }
@@ -212,31 +212,8 @@ public class ResourceHelper {
      * @throws IOException
      */
     public String getTrademark() throws FileNotFoundException, IOException {
-        File file = getWebInfPath().resolve("trademark").toAbsolutePath().toFile();
+        File file = getWebInfPath(Context.getInstance().getDefaultHost()).resolve("trademark").toAbsolutePath().toFile(); 
         return UtilBox.readAllString(new FileInputStream(file));
-    }
-
-    /**
-     * Extract environment resources
-     * @param homePath
-     * @throws IOException
-     * @throws URISyntaxException
-     */
-    public static void buildEnv(Path homePath) throws IOException, URISyntaxException {
-        Path WEBAPP = ResourceHelper.getWebAppPath();
-        // if(!WEBAPP.toFile().exists()) {
-        //     Files.createDirectories(WEBAPP);
-        // }
-        // Path WEBINF = ResourceHelper.getWebInfPath();
-        // if(!WEBINF.toFile().exists()) {
-        //     Files.createDirectories(WEBINF);
-        // }
-        // Path STATIC = ResourceHelper.getStaticPath();
-        // if(!STATIC.toFile().exists()) {
-        //     Files.createDirectories(STATIC);
-        // }
-        System.out.println(homePath);
-        extractResource("webapp", homePath.resolve("webapp"));
     }
 
     /**
@@ -251,9 +228,8 @@ public class ResourceHelper {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         URL res = classLoader.getResource(resourcePath);
         String protocol = res.getProtocol();
-        System.out.println("Resource protocol: "+protocol+"   "+res);
         if (res == null) {
-            throw new IllegalArgumentException("Resource is not found: "+resourcePath); 
+            throw new IllegalArgumentException("Resource is not found: "+resourcePath);
         }
         Stream<Path> pStream;
         if(protocol.equals("jar")) {
@@ -265,59 +241,69 @@ public class ResourceHelper {
             throw new IllegalArgumentException("Resource protocol isn't supported!!! : "+res.getProtocol());
         }
         return pStream.map(p -> {
-            try {                    
+            try {
                 long modMillis = Files.getLastModifiedTime(p).toMillis();
                 String ps = p.toString().replace("\\", "/");
                 Path path = protocol.equals("jar") 
                             ? targetPath.resolve(ps) 
                             : Paths.get(targetPath.toAbsolutePath().toString(), 
-                                        ps.toString().substring(ps.toString().indexOf(resourcePath)-1).replace("\\", "/"));
+                            ps.toString().substring(ps.toString().indexOf(resourcePath)-1).replace("\\", "/"));
                 if(Files.isDirectory(p)) {
                     path.toFile().mkdirs();
                 } else { 
-                    if(!path.toFile().exists() || path.toFile().lastModified() != modMillis) {                         
-                        //System.out.println("File created..........."+modMillis+"  "+path.toFile().lastModified()); 
+                    if(!path.toFile().exists() || path.toFile().lastModified() != modMillis) {
+                        //System.out.println("File created..........."+modMillis+"  "+path.toFile().lastModified());                         
                         File file = Files.write(path, Files.readAllBytes(p), StandardOpenOption.CREATE).toFile();
                         file.setLastModified(modMillis);
                         return file;
                     }
-                }                  
+                }
             } catch (IOException e) {
-                e.printStackTrace();
+                LoggerUtils.getLogger(Context.getInstance().getDefaultHost()).error(e.getMessage(), e);
             }
             return null;
-        }).filter(p1 -> p1 != null).collect(Collectors.toList());
-    }    
+        }).filter(p1 -> p1 != null)
+          .collect(Collectors.toList());
+    }
 
     /**
      * Get WAS Home path
+     * @param host
      * @return
      */
-    public static Path getHomePath() {
-        return LeapHttpServer.WAS_HOME;
+    public static Path getHomePath(String host) {
+        Context context = Context.getInstance();
+        if(context.getDefaultHost().equals(host)) {
+            return context.getDefaultDocroot();
+        } else {
+            return context.getVirtualHosts(host).getDocroot();
+        }
     }
 
     /**
      * Get webapp path
+     * @param host
      * @return
      */
-    public static Path getWebAppPath() {
-        return getHomePath().resolve("webapp");
+    public static Path getWebAppPath(String host) {
+        return getHomePath(host).resolve("webapp");
     }
 
     /**
      * Get webapp/WEB-INF path
+     * @param host
      * @return
      */
-    public static Path getWebInfPath() {
-        return getWebAppPath().resolve("WEB-INF");
+    public static Path getWebInfPath(String host) {
+        return getWebAppPath(host).resolve("WEB-INF");
     }
 
     /**
      * Get webapp/WEB-INF/static path
+     * @param host
      * @return
      */
-    public static Path getStaticPath() {
-        return getWebInfPath().resolve("static");
+    public static Path getStaticPath(String host) {
+        return getWebInfPath(host).resolve("static");
     }
 }

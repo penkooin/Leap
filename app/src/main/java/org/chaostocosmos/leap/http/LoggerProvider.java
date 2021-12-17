@@ -7,7 +7,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.chaostocosmos.leap.http.VirtualHostManager.VirtualHost;
 import org.slf4j.LoggerFactory;
 
 import ch.qos.logback.classic.Level;
@@ -51,7 +50,7 @@ public class LoggerProvider {
     /**
      * Mliiseconds of day
      */
-    public static final long DAY = 1000*60*60*24;
+    public static final long DAY = 1000 * 60 * 60 * 24;
 
     /**
      * Get logger for each vhost
@@ -96,7 +95,7 @@ public class LoggerProvider {
      * @param serverName
      * @return
      */
-    public static Logger createLogger(String serverName, String docroot, String filename) {
+    public static Logger createLogger(String serverName, String docroot, String filename) { 
         LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
 
         PatternLayoutEncoder ple = new PatternLayoutEncoder();

@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.chaostocosmos.leap.http.VirtualHost;
 import org.chaostocosmos.leap.http.VirtualHostManager;
-import org.chaostocosmos.leap.http.VirtualHostManager.VirtualHost;
 import org.chaostocosmos.leap.http.WASException;
 import org.slf4j.LoggerFactory;
 
@@ -39,12 +39,12 @@ public class LoggerUtils {
      * @throws URISyntaxException
      */
     private LoggerUtils() throws WASException, IOException, URISyntaxException {
-        this.loggerMap = new HashMap<>();
+        loggerMap = new HashMap<>();
         List<VirtualHost> vHosts = VirtualHostManager.getInstance().getVirtualHosts();
         for(VirtualHost vHost : vHosts) {
-            String loggerName = vHost.getHost().getHostName();
-            Level logLevel = Level.toLevel(vHost.getLogLevel().toUpperCase());
-            this.loggerMap.put(loggerName, createLoggerFor(loggerName, vHost.getLogPath().toFile().getAbsolutePath(), logLevel));
+            String loggerName = vHost.getHost();
+            Level logLevel = vHost.getLogLevel();
+            loggerMap.put(loggerName, createLoggerFor(loggerName, vHost.getDocroot().resolve("logs").toFile().getAbsolutePath(), logLevel));
         }
     }
 
@@ -56,9 +56,13 @@ public class LoggerUtils {
      * @throws IOException
      * @throws URISyntaxException
      */
-    public static Logger getLogger(String hostName) throws WASException, IOException, URISyntaxException {
+    public static Logger getLogger(String hostName) {
         if(loggerMap == null) {
-            new LoggerUtils();
+            try {
+                new LoggerUtils();
+            } catch (WASException | IOException | URISyntaxException e) {
+                e.printStackTrace();
+            }
         }
         return loggerMap.get(hostName);
     }
@@ -88,3 +92,4 @@ public class LoggerUtils {
         return logger;
     }   
 }
+ 

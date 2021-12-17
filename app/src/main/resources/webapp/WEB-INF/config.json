@@ -1,10 +1,12 @@
 {
     "server" : {
-        "name" : "Bulker",
+        "name" : "Leap",
         "version" : "1.0.0",
 		"http-version" : "HTTP/1.0",
         "host" : "127.0.0.1",
         "port" : 8080,
+        "doc-root" : "./home",
+        "logs" : "./home/logs",
         "backlog" : 50,
         "threadpool" : {
                 "core" : 50,
@@ -15,26 +17,23 @@
 		"welcome" : "index.html",
 		"virtual-host" : [
 			{
-                "serverName" : "www.bulker1.com",
-				"host" : "127.0.0.1:8080",
-				"doc-root" : "."
+                "serverName" : "leap1",
+				"host" : "127.0.0.1",
+                "port" : 8081,
+				"doc-root" : "./home1",
+                "logs" : "./home1/logs"
 			},
 			{
-                "serverName" : "www.bulker2.com",
-				"host" : "127.0.0.1:8080",
-				"doc-root" : "."
+                "serverName" : "leap2",
+				"host" : "192.168.1.60",
+                "port" : 8082,
+				"doc-root" : "./home2",
+                "logs" : "./home1/logs"
 			}
         ],
         "servlet" : [
             {
 				"servletName" : "TimeServlet",
-                "contextMapping" : "/time",
-                "method" : [
-                    { 
-                        "methodName" : "getTime",
-                        "contextMapping" : "/GetTime"
-                    }
-                ],
                 "servletClass" : "org.chaostocosmos.leap.http.servlet.TimeServletImpl",
                 "servletFilters" : [
 					"org.chaostocosmos.leap.http.filter.HttpURLFilter"
@@ -124,5 +123,4 @@
 		"500" : "500.html",
 		"501" : "501.html"
     }
-
 }

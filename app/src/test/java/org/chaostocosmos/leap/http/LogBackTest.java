@@ -1,4 +1,4 @@
-package org.chaostocosmos.http.server;
+package org.chaostocosmos.leap.http;
 
 import java.io.File;
 import java.io.IOException;

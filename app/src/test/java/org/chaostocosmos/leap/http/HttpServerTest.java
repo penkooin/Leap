@@ -1,8 +1,7 @@
-package org.chaostocosmos.http.server;
+package org.chaostocosmos.leap.http;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.file.Paths;
 
 import org.chaostocosmos.leap.http.LeapHttpServer;
 import org.chaostocosmos.leap.http.WASException;
@@ -15,12 +14,6 @@ public class HttpServerTest {
     @Test
     public void testHttpServer() throws WASException, URISyntaxException, IOException {
         this.server = new LeapHttpServer();
-        this.server.start();
-    }
-
-    @Test
-    public void testHttpServer2() throws IOException, URISyntaxException, WASException {
-        this.server = new LeapHttpServer(Paths.get("."));
         this.server.start();
     }
 
