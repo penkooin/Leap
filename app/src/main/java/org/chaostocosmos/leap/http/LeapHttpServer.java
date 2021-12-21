@@ -6,8 +6,8 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URISyntaxException;
+import java.net.UnknownHostException;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -31,7 +31,7 @@ public class LeapHttpServer {
     /**
      * Index file
      */
-    public static String INDEX_FILE = Context.getInstance().getWelcome();
+    public static String INDEX_FILE = Context.getWelcome();
 
     /**
      * servlet loading & managing
@@ -44,14 +44,9 @@ public class LeapHttpServer {
     ThreadPoolExecutor threadpool;
 
     /**
-     * WAS Context object
+     * InetAddress object
      */
-    Context context;
-
-    /**
-     * Mapping hosts
-     */
-    List<String> hosts;
+    InetAddress inetAddress;
 
     /**
      * port
@@ -65,29 +60,30 @@ public class LeapHttpServer {
 
     /**
      * Default constructor 
+     * @throws WASException
+     * @throws UnknownHostException
      */
-    public LeapHttpServer() {
-        this(Context.getInstance().getHostsByPort(Context.getInstance().getDefaultPort()),
-             Context.getInstance().getDefaultPort(),
-             Context.getInstance().getBackLog());
+    public LeapHttpServer() throws UnknownHostException, WASException {
+        this(InetAddress.getByName(Context.getDefaultHost()),
+             Context.getDefaultPort(),
+             Context.getBackLog());
     }
 
     /**
      * Constructor with configuration file Path
-     * @param hosts
+     * @param inetAddress
      * @param port
      * @param backlog
      * @throws WASException
      * @throws URISyntaxException
      * @throws IOException
      */
-    public LeapHttpServer(List<String> hosts, int port, int backlog) {
-        this.hosts = hosts;
+    public LeapHttpServer(InetAddress inetAddress, int port, int backlog) throws WASException {
+        this.inetAddress = inetAddress;
         this.port = port;
         this.backlog = backlog;
         try {
-            this.context = Context.getInstance();
-            this.servletManager = new ServletManager(this.context.getServletBeanList());
+            this.servletManager = new ServletManager(Context.getServletBeanList());
         } catch (
                 InstantiationException | 
                 IllegalAccessException | 
@@ -97,8 +93,9 @@ public class LeapHttpServer {
                 SecurityException | 
                 ClassNotFoundException | 
                 WASException e) {
-                logger.error( Context.getInstance().getErrorMsg("error022", new Object[]{e.getMessage()}) );
-        }
+                logger.error( Context.getErrorMsg("error022", new Object[]{e.getMessage()}) );
+        }        
+        start();
     }
 
     /**
@@ -119,38 +116,33 @@ public class LeapHttpServer {
 
     /**
      * Start server
-     * @throws IOException
-     * @throws URISyntaxException
      * @throws WASException
      */
-    public void start() throws IOException, URISyntaxException, WASException {
+    public void start() throws WASException {
         logger.info("WAS server starting... port: "
                     +this.port+" ThreadPool CORE: "
-                    +context.getThreadPoolCoreSize()+" MAX: "
-                    +context.getThreadPoolMaxSize()+" KEEP-ALIVE WHEN IDLE(seconds): "
-                    +context.getThreadPoolKeepAlive());
+                    +Context.getThreadPoolCoreSize()+" MAX: "
+                    +Context.getThreadPoolMaxSize()+" KEEP-ALIVE WHEN IDLE(seconds): "
+                    +Context.getThreadPoolKeepAlive());
                     
-        this.threadpool = new ThreadPoolExecutor(context.getThreadPoolCoreSize(), 
-                                                 context.getThreadPoolMaxSize(), 
-                                                 context.getThreadPoolKeepAlive(), 
+        this.threadpool = new ThreadPoolExecutor(Context.getThreadPoolCoreSize(), 
+                                                 Context.getThreadPoolMaxSize(),                                                  
+                                                 Context.getThreadPoolKeepAlive(), 
                                                  TimeUnit.SECONDS, 
                                                  new LinkedBlockingQueue<Runnable>());
 
-        InetAddress bindAddress = InetAddress.getByName(context.getDefaultHost()+":"+context.getDefaultPort());
-        try (ServerSocket server = new ServerSocket(this.port, context.getBackLog(), bindAddress)) {
+        try (ServerSocket server = new ServerSocket(this.port, this.backlog, this.inetAddress)) {
             logger.info("Accepting connections on port " + server.getLocalPort());
-            logger.info("Document Root: " + Context.getInstance().getDefaultDocroot().toFile().getAbsolutePath());
+            logger.info("Document Root: " + Context.getDefaultDocroot().toFile().getAbsolutePath());
             while (true) {
-                try {
-                    Socket request = server.accept();
-                    //List<String> hosts = ResourceHelper.get
-                    Runnable r = new LeapRequestHandler(this, Context.getInstance().getDefaultDocroot(), INDEX_FILE, request); 
-                    logger.info("Client request accepted... : "+request.getLocalAddress().toString());
-                    this.threadpool.submit(r);
-                } catch (IOException ex) {
-                    logger.info("Error accepting connection", ex);
-                }
+                Socket request = server.accept();
+                //List<String> hosts = ResourceHelper.get
+                Runnable r = new LeapRequestHandler(this, Context.getDefaultDocroot(), INDEX_FILE, request); 
+                logger.info("Client request accepted... : "+request.getLocalAddress().toString());
+                this.threadpool.submit(r);
             }
+        } catch(IOException e) {
+            throw new WASException(MSG_TYPE.ERROR, "error021");
         }
     }
 

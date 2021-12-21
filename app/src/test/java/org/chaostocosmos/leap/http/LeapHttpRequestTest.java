@@ -13,7 +13,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-public class HttpRequestTest {
+public class LeapHttpRequestTest {
 
     @Test
     public void testURI() throws MalformedURLException, URISyntaxException {

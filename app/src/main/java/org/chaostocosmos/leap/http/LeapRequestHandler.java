@@ -37,11 +37,6 @@ public class LeapRequestHandler implements Runnable {
     private final static Logger logger = LoggerFactory.getLogger(LeapRequestHandler.class);
 
     /**
-     * context
-     */
-    private final Context context = Context.getInstance();
-
-    /**
      * Path doc root
      */
     private Path rootPath;
@@ -49,7 +44,7 @@ public class LeapRequestHandler implements Runnable {
     /**
      * welcome index html
      */
-    private String welcome = context.getWelcome();
+    private String welcome = Context.getWelcome();
 
     /**
      * Client socket
@@ -84,7 +79,7 @@ public class LeapRequestHandler implements Runnable {
         try {
             OutputStream raw = new BufferedOutputStream(connection.getOutputStream());
             Writer out = new OutputStreamWriter(raw);
-            Reader in = new InputStreamReader(new BufferedInputStream(connection.getInputStream()), context.getServerCharset());
+            Reader in = new InputStreamReader(new BufferedInputStream(connection.getInputStream()), Context.getServerCharset());
 
             RequestParser requestParser = HttpParserFactory.getRequestParser();
             HttpRequestDescriptor request = requestParser.parseRequest(in);
@@ -118,11 +113,11 @@ public class LeapRequestHandler implements Runnable {
                     body = response.getBody();                    
                 } else {
                     resCode = 405;
-                    body = ResourceHelper.getInstance().getResourceContents(context.getResponseResource(resCode));
+                    body = ResourceHelper.getInstance().getResourceContents(Context.getResponseResource(resCode));
                 }
             } else { // When client request static resources
                 if(request.getContextPath().equals("/")) {
-                    resourcePath = ResourceHelper.getInstance().getResourcePath(request.getUrl().getHost(), request.getContextPath()+context.getWelcome());
+                    resourcePath = ResourceHelper.getInstance().getResourcePath(request.getUrl().getHost(), request.getContextPath()+Context.getWelcome());
                     body = ResourceHelper.getInstance().getResourceContents(resourcePath);
                     resCode = 200;
                 } else {
@@ -132,7 +127,7 @@ public class LeapRequestHandler implements Runnable {
                         //Implementation spec #4
                         if(resourcePath.toFile().getName().endsWith(".exe")) {
                             resCode = 403;
-                            body = ResourceHelper.getInstance().getResourceContents(context.getResponseResource(resCode));
+                            body = ResourceHelper.getInstance().getResourceContents(Context.getResponseResource(resCode));
                         } else if(mimeType == null || mimeType.equals("application/x-msdownload")) {
                             byte[] rawData = ResourceHelper.getInstance().getBinaryResource(resourcePath);
                             sendRaw(raw, resCode, rawData, mimeType);
@@ -143,7 +138,7 @@ public class LeapRequestHandler implements Runnable {
                         response.setContentType(mimeType);
                     } else {
                         resCode = 404;
-                        body = ResourceHelper.getInstance().getResourceContents(context.getResponseResource(resCode));
+                        body = ResourceHelper.getInstance().getResourceContents(Context.getResponseResource(resCode));
                     }
                 }
             }
@@ -175,7 +170,7 @@ public class LeapRequestHandler implements Runnable {
      * @throws IOException
      */
     public void sendResponse(Writer out, HttpResponseDescriptor desc) throws IOException {
-         String res = context.getHttpVersion()+" "+desc.getResponseCode()+" "+context.getHttpMsg(desc.getResponseCode())+"\r\n"; 
+         String res = Context.getHttpVersion()+" "+desc.getResponseCode()+" "+Context.getHttpMsg(desc.getResponseCode())+"\r\n"; 
          logger.info("RESPONSE: "+res);
          //logger.debug(desc.toString());
          out.write(res); 
@@ -202,7 +197,7 @@ public class LeapRequestHandler implements Runnable {
      * @throws IOException
      */
     private void sendRaw(OutputStream out, int resCode, byte[] rawData, String contentType) throws IOException {
-        out.write((context.getHttpVersion()+" "+resCode+"\r\n").getBytes()); 
+        out.write((Context.getHttpVersion()+" "+resCode+"\r\n").getBytes()); 
         out.write(("Content-Type: "+contentType+"\r\n").getBytes());
         out.write(("Content-length: "+rawData.length+"\r\n").getBytes());
         out.write("\r\n".getBytes());

@@ -4,10 +4,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.net.InetAddress;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.cli.CommandLine;
@@ -19,7 +21,6 @@ import org.apache.commons.cli.ParseException;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 
 import ch.qos.logback.classic.Level;
-import ch.qos.logback.classic.Logger;
 
 /**
  * LeapWAS main
@@ -27,11 +28,6 @@ import ch.qos.logback.classic.Logger;
  * @author 9ins
  */
 public class LeapWAS {
-    /**
-     * Logger
-     */
-    public static Logger logger = (Logger)LoggerFactory.getLogger(Context.getInstance().getDefaultHost());
-
     /**
      * Standard IO
      */
@@ -55,7 +51,7 @@ public class LeapWAS {
     /**
      * Server Map
      */
-    public Map<String, LeapHttpServer> serverMap;
+    public Map<String, LeapHttpServer> leapServerMap;
 
     /**
      * Constructor 
@@ -67,25 +63,41 @@ public class LeapWAS {
      */
     public LeapWAS(String[] args) throws IOException, URISyntaxException, WASException, ParseException {
         //set commend line options
-        applyOptions(args);
-        //build config environment
-        ResourceHelper.extractResource("config", HOME_PATH); 
-        //print trademark
-        trademark();
-        start(HOME_PATH);
+        setup(args);
     }
 
     /** 
      * Apply command line options
      * @param args
+     * @throws ParseException
+     * @throws IOException
+     * @throws URISyntaxException
+     * @throws WASException
      */
-    private void applyOptions(String[] args) throws ParseException, FileNotFoundException, IOException {
+    private void setup(String[] args) throws ParseException, IOException, WASException, URISyntaxException {
         CommandLineParser parser = new DefaultParser();
         CommandLine cmdLine = parser.parse(getOptions(), args);
+
+        //set HOME directory
+        String optionH = cmdLine.getOptionValue("h");
+        if(optionH != null) {
+            HOME_PATH = Paths.get(optionH);
+            Files.createDirectories(HOME_PATH);
+        } else {         
+            HOME_PATH = Paths.get("./"); 
+        }
+        //initialize Context
+        this.context = Context.initialize(HOME_PATH);
+        //build config environment
+        ResourceHelper.extractResource("config", HOME_PATH); 
+
+        //set debug option to logger
         String optionD = cmdLine.getOptionValue("d");
         if(optionD != null && optionD.equals("true")) {
-            logger.setLevel(Level.DEBUG);
+            LoggerFactory.getLogger(Context.getDefaultHost()).setLevel(Level.DEBUG);
         }
+
+        //set verbose option to STD IO
         String optionV = cmdLine.getOptionValue("v");
         if(optionV != null && optionV.equals("false")) {
             systemOut = System.out;
@@ -95,27 +107,25 @@ public class LeapWAS {
                 }
             }));
         }
-        String optionH = cmdLine.getOptionValue("h");
-        if(optionH != null) {
-            HOME_PATH = Paths.get(optionH);
-            Files.createDirectories(HOME_PATH);
-        } else {
-            HOME_PATH = Paths.get("./"); 
-        }
+        //instantiate virtual host object
+        this.virtualHostManager = VirtualHostManager.getInstance();
     }
 
     /**
      * Start environment
-     * @param HomePath
      * @throws WASException
      * @throws IOException
      * @throws URISyntaxException
      */
-    public void start(Path HomePath) throws WASException, IOException, URISyntaxException {
-        this.context = Context.getInstance(HomePath);
-        this.virtualHostManager = VirtualHostManager.getInstance();
-        System.out.println(LoggerFactory.getLogger("localhost").getName()+"*********"); 
-        LoggerFactory.getLogger("192.168.1.60").debug("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+    public void start() throws WASException, IOException, URISyntaxException {
+        trademark();
+        this.leapServerMap = new HashMap<>();
+        this.leapServerMap.put(Context.getDefaultHost(), 
+                               new LeapHttpServer(InetAddress.getByName(Context.getDefaultHost()), 
+                                                  Context.getDefaultPort(),
+                                                  Context.getBackLog())
+                               );
+        
     }
 
     /**
@@ -142,6 +152,7 @@ public class LeapWAS {
     }
     
     public static void main(String[] args) throws ParseException, FileNotFoundException, IOException, URISyntaxException, WASException {
-        new LeapWAS(args);  
+        LeapWAS leap = new LeapWAS(args);  
+        leap.start();
     }
 }

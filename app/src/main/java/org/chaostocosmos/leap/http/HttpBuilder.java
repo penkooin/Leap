@@ -16,10 +16,6 @@ import javax.net.ssl.SSLSession;
  */
 public class HttpBuilder {
     /**
-     * Context
-     */
-    private static final Context context = Context.getInstance();
-    /**
      * Build HttpRequest object
      * @param requestDescriptor
      * @return
@@ -33,7 +29,7 @@ public class HttpBuilder {
         if(requestDescriptor.getRequestType() == REQUEST_TYPE.GET) {            
             return request.GET().build();
         } else if(requestDescriptor.getRequestType() == REQUEST_TYPE.POST) {
-            return request.POST(BodyPublishers.ofString(requestDescriptor.getReqBody(), context.getServerCharset())).build();
+            return request.POST(BodyPublishers.ofString(requestDescriptor.getReqBody(), Context.getServerCharset())).build();
         } else {
             throw new WASException(MSG_TYPE.ERROR, "error009", requestDescriptor.getRequestType().name());
         }

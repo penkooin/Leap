@@ -41,9 +41,9 @@ public class LoggerFactory {
      */
     private LoggerFactory() throws WASException, IOException, URISyntaxException {
         loggerMap = new HashMap<>();
-        String defaultHost = Context.getInstance().getDefaultHost();
-        String defaultLogPath = Context.getInstance().getDefaultDocroot().resolve(Context.getInstance().getDefaultLogPath()).toAbsolutePath().toString();
-        Level defaultLogLevel = Context.getInstance().getDefaultLogLevel();
+        String defaultHost = Context.getDefaultHost();
+        String defaultLogPath = Context.getDefaultDocroot().resolve(Context.getDefaultLogPath()).toAbsolutePath().toString();
+        Level defaultLogLevel = Context.getDefaultLogLevel();
         loggerMap.put(defaultHost, createLoggerFor(defaultHost, defaultLogPath, defaultLogLevel));
         List<Hosts> vHosts = VirtualHostManager.getInstance().getVirtualHosts();
         for(Hosts vHost : vHosts) {

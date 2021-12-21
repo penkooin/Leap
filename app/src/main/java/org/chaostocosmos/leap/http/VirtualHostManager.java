@@ -26,11 +26,6 @@ public class VirtualHostManager {
     Logger logger = (Logger)LoggerFactory.getLogger(VirtualHostManager.class);
 
     /**
-     * Context
-     */
-    private static Context context = Context.getInstance();
-
-    /**
      * Virtual hosts
      */
     private List<Hosts> virtualHosts = new ArrayList<>();
@@ -48,7 +43,7 @@ public class VirtualHostManager {
      * @throws URISyntaxException
      */
     private VirtualHostManager() throws WASException, IOException, URISyntaxException {        
-        List<?> vList = (List<?>)context.getConfigValue("server.virtual-host");
+        List<?> vList = (List<?>)Context.getConfigValue("server.virtual-host");
         for(Object obj : vList) {
             Map<?, ?> m = (Map<?, ?>)obj;
             String serverName = (String)m.get("server-name");

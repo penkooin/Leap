@@ -40,7 +40,7 @@ public class WASException extends Exception {
      * @param cause
      */
     public WASException(MSG_TYPE type, String code, Object args, Throwable cause) {
-        super(Context.getInstance().getMsg(type, code, args), cause);
+        super(Context.getMsg(type, code, args), cause);
         this.type = type;
     }  
 

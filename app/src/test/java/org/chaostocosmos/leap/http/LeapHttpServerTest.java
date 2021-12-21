@@ -1,13 +1,13 @@
 package org.chaostocosmos.leap.http;
 
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.ServerSocket;
 import java.net.URISyntaxException;
 
-import org.chaostocosmos.leap.http.LeapHttpServer;
-import org.chaostocosmos.leap.http.WASException;
 import org.junit.jupiter.api.Test;
 
-public class HttpServerTest {
+public class LeapHttpServerTest {
 
     LeapHttpServer server;
 
@@ -17,8 +17,14 @@ public class HttpServerTest {
         this.server.start();
     }
 
+    public void testServiceHost() throws IOException {
+        InetAddress inet = InetAddress.getByName("www.leap.org");
+        ServerSocket ss = new ServerSocket(8080, 50, inet);
+        ss.accept();
+    }
+
     public static void main(String[] args) throws URISyntaxException, IOException, WASException {
-        LeapHttpServer server = new LeapHttpServer();
-        server.start();
+        LeapHttpServerTest server = new LeapHttpServerTest();
+        server.testServiceHost();
     }    
 }

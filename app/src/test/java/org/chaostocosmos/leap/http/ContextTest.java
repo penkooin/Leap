@@ -8,9 +8,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import org.chaostocosmos.leap.http.Context;
-import org.chaostocosmos.leap.http.ResourceHelper;
-import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.servlet.ServletBean;
 import org.junit.jupiter.api.Test;
 

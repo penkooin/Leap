@@ -56,6 +56,6 @@ public enum RES_CODE {
 
     RES_CODE(int code) {
         this.code = code;
-        this.resMesg = Context.getInstance().getHttpMsg(code);
+        this.resMesg = Context.getHttpMsg(code);
     }    
 }

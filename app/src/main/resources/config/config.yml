@@ -102,6 +102,9 @@ messages:
     error016: 'Not supported method type: {}'
     error017: 'Not supported method type: {}'
     error018: 'Error in building doc-root process: {}'
+    error019: 'Not found virtual host: {}'
+    error020: 'Resource is not found: {}'
+    error021: 'Error in server setup process!!!'
 static-resource:
   '403': 403.html
   '404': 404.html

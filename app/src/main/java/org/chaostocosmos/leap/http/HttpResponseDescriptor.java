@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public class HttpResponseDescriptor {
 
-    private HttpResponse httpResponse;
+    private HttpResponse<?> httpResponse;
     private int responseCode;
     private Map<String, Object> header = new HashMap<>();
     private String contentType;
@@ -24,11 +24,11 @@ public class HttpResponseDescriptor {
     public HttpResponseDescriptor() {
     }
 
-    public HttpResponse getHttpResponse() {
+    public HttpResponse<?> getHttpResponse() {
         return this.httpResponse;
     }
 
-    public void setHttpResponse(HttpResponse httpResponse) {
+    public void setHttpResponse(HttpResponse<?> httpResponse) {
         this.httpResponse = httpResponse;
     }
 

@@ -33,11 +33,6 @@ public class LoggerProvider {
     private static LoggerProvider loggerProvider = null;
 
     /**
-     * context
-     */
-    private static Context context = Context.getInstance();
-
-    /**
      * logger map for each vhost 
      */
     private static Map<String, Logger> loggerMap = new HashMap<>();

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
@@ -29,11 +30,6 @@ import ch.qos.logback.classic.Logger;
  */
 public class Context {
     /**
-     * Logger
-     */
-    public static Logger logger = (Logger)LoggerFactory.getLogger(Context.getInstance().getDefaultHost());
-
-    /**
      * Context
      */
     private static Context context;
@@ -41,31 +37,27 @@ public class Context {
     /**
      * Document root path
      */
-    private final Path HOME_PATH;
+    private static Path HOME_PATH;
 
     /**
      * Config path
      */
-    private final Path configPath;
+    private static Path configPath;
 
     /**
      * Config map
      */
-    private final Map<String, Object> configMap; 
+    private static Map<String, Object> configMap; 
 
     /**
      * Servlet List
      */
-    private List<ServletBean> servletBeanList;
-
-    /**
-     * Hosts map with port key
-     */
-    private Map<Integer, List<Hosts>> hostsMap;
+    private static List<ServletBean> servletBeanList;
 
     /**
      * Constructor
      * @param homePath
+     * @throws WASException
      * @throws IOException
      * @throws URISyntaxException
      */
@@ -80,39 +72,37 @@ public class Context {
         }
         String allStr = Files.readAllLines(this.configPath).stream().collect(Collectors.joining(System.lineSeparator()));
         Yaml yaml = new Yaml(); 
-        this.configMap = ((Map<?, ?>)yaml.load(allStr)).entrySet().stream().collect(Collectors.toMap(k -> k.getKey().toString(), v -> v.getValue()));
+        configMap = ((Map<?, ?>)yaml.load(allStr)).entrySet().stream().collect(Collectors.toMap(k -> k.getKey().toString(), v -> v.getValue()));
         ResourceHelper.extractResource("webapp", getDefaultDocroot());
-        getVirtualHosts().entrySet().stream().forEach(e -> {
-            try {
-                ResourceHelper.extractResource("webapp", e.getValue().getDocroot());
-            } catch (IOException | URISyntaxException e1) {
-                logger.error(getErrorMsg("error018", e.getValue().getHost()), e1);
-            }
-        });
-        this.servletBeanList = getServletBeanList();
-    }
-
-    /**
-     * 
-     * @return
-     */
-    public static Context getInstance() {
-        return getInstance(LeapWAS.HOME_PATH);
+        for(Map.Entry<String, Hosts> entry : getVirtualHosts().entrySet()) {
+            ResourceHelper.extractResource("webapp", entry.getValue().getDocroot());
+        }
+        servletBeanList = getServletBeanList();
     }
 
     /**
      * Get context instance without resource path
      * @return
+     * @throws WASException
      */
-    public static Context getInstance(Path homePath) {
+    public static Context initialize(Path homePath) {
         if(context == null) {
             try {
                 context = new Context(homePath);
             } catch (IOException | URISyntaxException e) {
-                logger.error("Something wrong in Context initialize process: ", e);
+                e.printStackTrace();
             }
         }
         return context;
+    }
+
+    /**
+     * Get Context object
+     * @return
+     * @throws WASException
+     */
+    public static Context getInstance() {
+        return initialize(LeapWAS.HOME_PATH);
     }
 
     /**
@@ -120,15 +110,15 @@ public class Context {
      * @param servletClassName
      * @return
      */
-    public ServletBean getServletBean(String servletClassName) {
-        return this.servletBeanList.stream().filter(s -> s.getServletClass().equals(servletClassName)).findAny().orElse(null);
+    public static ServletBean getServletBean(String servletClassName) {
+        return servletBeanList.stream().filter(s -> s.getServletClass().equals(servletClassName)).findAny().orElse(null);
     }
 
     /**
      * Get servlet bean list object
      * @return
      */
-    public List<ServletBean> getServletBeanList() {
+    public static List<ServletBean> getServletBeanList() {
         List<ServletBean> beanList = new ArrayList<>();
         List<?> servletList = (List<?>)getConfigValue("server.servlet");
         for(Object o : servletList) {
@@ -143,23 +133,43 @@ public class Context {
     }
 
     /**
+     * Get all host Map
+     * @return
+     */
+    public static Map<String, Hosts> getAllHosts() {
+        Map<String, Hosts> vHosts = getVirtualHosts();
+        Hosts defaultHosts = getDefaultHosts();
+        vHosts.put(defaultHosts.getHost(), defaultHosts);
+        return vHosts;
+    }
+
+    /**
      * Get virtual host Map by port key ordered 
      * @return
      */
-    public Map<String, Hosts> getVirtualHosts() {
+    public static Map<String, Hosts> getVirtualHosts() {
         return ((List<?>)getConfigValue("server.virtual-host"))
                          .stream()
-                         .map(m -> ((Map<?, ?>)m).get("host"))
-                         .map(sn -> new Object[]{sn, getVirtualHosts((String)sn)})
-                         .collect(Collectors.toMap(k -> (String)k[0], v -> (Hosts)v[1]));
+                         .map(m -> ((Map<?, ?>)m).get("host"))                                                  
+                         .map(h -> {
+                            try {
+                                return new Object[]{h, getVirtualHosts((String)h)};
+                            } catch (WASException e) {
+                                LoggerFactory.getLogger(getDefaultHost()).error(e.getMessage(), e);
+                            }
+                            return null;
+                        })
+                        .filter(Objects::nonNull)
+                        .collect(Collectors.toMap(k -> (String)k[0], v -> (Hosts)v[1]));
     }
 
     /**
      * Get virtual host for specified virtual host name
      * @param vhost
      * @return
+     * @throws WASException
      */
-    public Hosts getVirtualHosts(final String vhost) {
+    public static Hosts getVirtualHosts(final String vhost) throws WASException {
         return ((List<?>)getConfigValue("server.virtual-host"))
                         .stream()
                         .map(e -> (Map<String, Object>)e)
@@ -173,14 +183,14 @@ public class Context {
                                                 Paths.get((String)m.get("doc-root")), 
                                                 (String)m.get("host"),
                                                 Level.toLevel((String)m.get("log-level"))))
-                            .findFirst().orElse(null);
+                            .findFirst().orElseThrow(() -> new WASException(MSG_TYPE.ERROR, "error019"));
     }
 
     /**
      * Get default Hosts
      * @return
      */
-    public Hosts getDefaultHosts() {
+    public static Hosts getDefaultHosts() {
         return new Hosts(getDefaultServerName(),
                           getDefaultHost(),
                           getDefaultPort(),
@@ -194,30 +204,41 @@ public class Context {
      * @param port
      * @return
      */
-    public List<String> getHostsByPort(int port) {
+    public static List<String> getHostsByPort(int port) {
         List<String> hosts = new ArrayList<>();
-        getVirtualHosts().entrySet().stream().filter(h -> h.getValue().getPort() == port).map(h -> h.getValue().getHost()).forEach(h -> hosts.add(h));
+        getVirtualHosts()
+                    .entrySet()
+                    .stream()
+                    .filter(h -> h.getValue().getPort() == port)
+                    .map(h -> h.getValue().getHost())
+                    .forEach(h -> hosts.add(h));
         if(getDefaultPort() == port) {
             hosts.add(getDefaultHost());
         }
         return hosts;
     }
 
-    
+    /**
+     * Get using ports
+     * @return
+     */
+    public static int[] getUsingPorts() {
+        return getAllHosts().entrySet().stream().mapToInt(e -> e.getValue().getPort()).distinct().toArray();
+    }
 
     /**
      * Get home path
      * @return
      */
-    public Path getHomePath() {
-        return this.HOME_PATH;
+    public static Path getHomePath() {
+        return HOME_PATH;
     }
 
     /**
      * Get threadpool core size
      * @return
      */
-    public int getThreadPoolCoreSize() {
+    public static int getThreadPoolCoreSize() {
         return (int)getConfigValue("server.threadpool.core");
     }
 
@@ -225,7 +246,7 @@ public class Context {
      * Get thread pool maximum size
      * @return
      */
-    public int getThreadPoolMaxSize() {
+    public static int getThreadPoolMaxSize() {
         return (int)getConfigValue("server.threadpool.max");
     }
 
@@ -233,7 +254,7 @@ public class Context {
      * Get thread pool keep-alive seconds
      * @return
      */
-    public int getThreadPoolKeepAlive() {
+    public static int getThreadPoolKeepAlive() {
         return (int)getConfigValue("server.threadpool.keep-alive");
     }
 
@@ -241,7 +262,7 @@ public class Context {
      * Get backlog
      * @return
      */
-    public int getBackLog() {
+    public static int getBackLog() {
         return (int)getConfigValue("server.backlog");
     }
 
@@ -249,7 +270,7 @@ public class Context {
      * Get welcome filename
      * @return
      */
-    public String getWelcome() {
+    public static String getWelcome() {
         return (String)getConfigValue("server.welcome");
     }
 
@@ -257,7 +278,7 @@ public class Context {
      * Get default server version
      * @return
      */
-    public String getVersion() {
+    public static String getVersion() {
         return (String)getConfigValue("server.version");
     }
 
@@ -265,7 +286,7 @@ public class Context {
      * Get default server name
      * @return
      */
-    public String getDefaultServerName() {
+    public static String getDefaultServerName() {
         return (String)getConfigValue("server.serverName");
     }
 
@@ -273,7 +294,7 @@ public class Context {
      * Get default server name
      * @return
      */
-    public String getDefaultHost() {
+    public static String getDefaultHost() {
         return (String)getConfigValue("server.host");
     }
 
@@ -281,7 +302,7 @@ public class Context {
      * Get default server port
      * @return
      */
-    public int getDefaultPort() {
+    public static int getDefaultPort() {
         return (int)getConfigValue("server.port");
     }
 
@@ -289,7 +310,7 @@ public class Context {
      * Get default docroot
      * @return
      */
-    public Path getDefaultDocroot() {
+    public static Path getDefaultDocroot() {
         return Paths.get((String)getConfigValue("server.doc-root"));
     }
 
@@ -297,7 +318,7 @@ public class Context {
      * Get default logger
      * @return
      */
-    public Logger getDefaultLogger() {
+    public static Logger getDefaultLogger() {
         return LoggerFactory.getLogger(getDefaultHost());
     }
 
@@ -305,7 +326,7 @@ public class Context {
      * Get default log path
      * @return
      */
-    public String getDefaultLogPath() {
+    public static String getDefaultLogPath() {
         return (String)getConfigValue("server.logs");
     }
 
@@ -313,7 +334,7 @@ public class Context {
      * Get default log level
      * @return
      */
-    public Level getDefaultLogLevel() {
+    public static Level getDefaultLogLevel() {
         return Level.toLevel((String)getConfigValue("server.log-level"));
     }
 
@@ -321,7 +342,7 @@ public class Context {
      * Set document path
      * @param docroot
      */
-    public void setDefaultDocroot(String docroot) {
+    public static void setDefaultDocroot(String docroot) {
         setConfigValue("server.doc-root", docroot);
     }
 
@@ -329,7 +350,7 @@ public class Context {
      * Get http version(HTTP/1.0)
      * @return
      */
-    public String getHttpVersion() {
+    public static String getHttpVersion() {
         return (String)getConfigValue("server.http-version");
     }
 
@@ -337,7 +358,7 @@ public class Context {
      * Get charset of server
      * @return
      */
-    public Charset getServerCharset() {
+    public static Charset getServerCharset() {
         return Charset.forName(getConfigValue("server.charset")+"");
     }
     
@@ -346,7 +367,7 @@ public class Context {
      * @param code
      * @return
      */
-    public String getHttpMsg(int code) {
+    public static String getHttpMsg(int code) {
         return getMsg(MSG_TYPE.HTTP, code+"");
     }
 
@@ -356,7 +377,7 @@ public class Context {
      * @param args
      * @return
      */
-    public String getDebugMsg(String code, Object... args) {
+    public static String getDebugMsg(String code, Object... args) {
         return getMsg(MSG_TYPE.DEBUG, code, args);
     } 
 
@@ -366,7 +387,7 @@ public class Context {
      * @param args
      * @return
      */
-    public String getInfoMsg(String code, Object ... args) {
+    public static String getInfoMsg(String code, Object ... args) {
         return getMsg(MSG_TYPE.INFO, code, args);
     }
 
@@ -376,7 +397,7 @@ public class Context {
      * @param args
      * @return
      */
-    public String getWarnMsg(String code, Object ... args) {
+    public static String getWarnMsg(String code, Object ... args) {
         return getMsg(MSG_TYPE.WARN, code, args);
     }
 
@@ -386,7 +407,7 @@ public class Context {
      * @param args
      * @return
      */
-    public String getErrorMsg(String code, Object ... args) {
+    public static String getErrorMsg(String code, Object ... args) {
         return getMsg(MSG_TYPE.ERROR, code, args);
     }
 
@@ -397,7 +418,7 @@ public class Context {
      * @param args
      * @return
      */
-    public String getMsg(MSG_TYPE type, String code, Object ... args) {
+    public static String getMsg(MSG_TYPE type, String code, Object ... args) {
         Object value = getConfigValue("messages."+type.name()+"."+code);
         String msg = value == null ? "" : value.toString();
         return Arrays.stream(args).reduce(msg, (ap, a) -> ap.toString().replaceFirst("\\{\\}", a.toString())).toString();
@@ -411,12 +432,12 @@ public class Context {
      * @throws IOException
      * @throws WASException
      */
-    public Path getResponseResource(int code) throws WASException, URISyntaxException {
+    public static Path getResponseResource(int code) throws WASException, URISyntaxException {
         Object msg = getConfigValue("message.http."+code);
         if(msg == null) {
             throw new WASException(MSG_TYPE.HTTP, "500", new RuntimeException(getErrorMsg("error018", new Object[]{code})));
         }
-        return new File(this.getClass().getResource(getConfigValue("static-resource.response").toString()).toURI()).toPath();
+        return new File(Thread.currentThread().getContextClassLoader().getResource(getConfigValue("static-resource.response").toString()).toURI()).toPath();
     }
 
     /**
@@ -425,8 +446,8 @@ public class Context {
      * @param path
      * @return
      */
-    public Object getConfigValue(String path) {
-        return findValue(this.configMap, path.split("\\."));
+    public static Object getConfigValue(String path) {
+        return findValue(configMap, path.split("\\."));
     }
 
     /**
@@ -434,8 +455,8 @@ public class Context {
      * @param path
      * @param value
      */
-    public void setConfigValue(String path, Object value) {
-        setValue(this.configMap, path.split("\\."), value);
+    public static void setConfigValue(String path, Object value) {
+        setValue(configMap, path.split("\\."), value);
     }
 
     /**
@@ -444,7 +465,7 @@ public class Context {
      * @param keys
      * @param value
      */
-    public void setValue(Object obj, Object[] keys, Object value) {
+    public static void setValue(Object obj, Object[] keys, Object value) {
         ((Map)findValue(obj, Arrays.copyOfRange(keys, 0, keys.length-1))).put(keys[keys.length-1], value); 
     }
 
@@ -454,7 +475,7 @@ public class Context {
 	 * @param keys
 	 * @return
 	 */
-	public Object findValue(Object obj, Object[] keys) {
+	public static Object findValue(Object obj, Object[] keys) {
 		if (obj instanceof List) {
 			List<?> list = (List<?>) obj;
 			if (keys.length == 1) {

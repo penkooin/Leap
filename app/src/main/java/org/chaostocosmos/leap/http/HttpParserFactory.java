@@ -23,18 +23,17 @@ public class HttpParserFactory {
      * logger
      */
     public static Logger logger = LoggerFactory.getLogger(HttpParserFactory.class);
-    /**
-     * Context
-     */
-    private static final Context context = Context.getInstance();
+
     /**
      * Http request parser
      */
     private static RequestParser requestParser;
+
     /**
      * Http response parser
      */
     private static ResponseParser responseParser;    
+
     /**
      * Get request parser object
      * @return
@@ -46,6 +45,7 @@ public class HttpParserFactory {
         }
         return requestParser;
     }
+
     /**
      * Get response parser object
      * @return
@@ -56,6 +56,7 @@ public class HttpParserFactory {
         }
         return responseParser;
     }
+
     /**
      * Request parser inner class
      */
