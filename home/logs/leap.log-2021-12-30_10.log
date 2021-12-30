@@ -1,0 +1,77 @@
+2022-12-30 10:36:36.701 INFO  - Leap WAS server starting...
+2022-12-30 10:36:36.707 INFO  - --------------------------------------------------------------------------
+2022-12-30 10:36:36.709 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-30 10:36:36.710 INFO  - verbose mode on
+2022-12-30 10:36:36.771 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-30 10:36:36.771 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-12-30 10:36:36.771 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-12-30 10:36:36.772 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-12-30 10:36:36.772 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-12-30 10:36:36.772 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-12-30 10:36:36.773 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-12-30 10:36:36.773 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-30 10:36:36.775 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-30 10:36:36.781 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-30 10:36:36.782 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-12-30 10:36:36.782 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-12-30 10:36:36.782 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-12-30 10:36:36.782 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-12-30 10:36:36.783 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-12-30 10:36:36.783 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-12-30 10:36:36.783 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-30 10:36:36.790 INFO  - Accepting connections on port 8082
+2022-12-30 10:36:36.794 INFO  - Accepting connections on port 8080
+2022-12-30 10:37:00.687 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 10:37:00.689 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 10:37:00.692 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-30 10:37:00.698 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 10:37:00.698 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-30 10:37:00.699 INFO  - Connection= keep-alive
+2022-12-30 10:37:00.699 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-30 10:37:00.699 INFO  - Sec-Fetch-Site= none
+2022-12-30 10:37:00.699 INFO  - Sec-Fetch-Dest= document
+2022-12-30 10:37:00.700 INFO  - Host= localhost:8080
+2022-12-30 10:37:00.700 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-30 10:37:00.700 INFO  - Sec-Fetch-Mode= navigate
+2022-12-30 10:37:00.700 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-30 10:37:00.700 INFO  - sec-ch-ua-mobile= ?0
+2022-12-30 10:37:00.701 INFO  - Cache-Control= max-age=0
+2022-12-30 10:37:00.701 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-30 10:37:00.701 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-30 10:37:00.702 INFO  - Sec-Fetch-User= ?1
+2022-12-30 10:37:00.702 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-30 10:37:00.720 DEBUG - Request host: localhost
+2022-12-30 10:37:00.721 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 10:37:00.724 INFO  - getTime servlet started....+++++++++++++++++++++++++++++++++++++++++++++++++
+2022-12-30 10:37:00.737 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/time/GetTime GET', httpVersion='HTTP/1.1', requestLines='Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC', requestType='GET', requestHost='localhost', reqHeader='{Cookie= io=PL7TK76OSCzqZRBSAAAC, Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection= keep-alive, User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36, Sec-Fetch-Site= none, Sec-Fetch-Dest= document, Host= localhost:8080, Accept-Encoding= gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode= navigate, sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96", sec-ch-ua-mobile= ?0, Cache-Control= max-age=0, Upgrade-Insecure-Requests= 1, sec-ch-ua-platform= "Windows", Sec-Fetch-User= ?1, Accept-Language= ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/time/GetTime', url='http://localhost:8080/time/GetTime', contextParam='{}'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@164d0935', responseHeader='{Date: =Thu Dec 30 10:37:00 KST 2021, Server: =LeapWAS 1.0.0}'}
+2022-12-30 10:37:00.954 INFO  - Client request accepted... : /127.0.0.1

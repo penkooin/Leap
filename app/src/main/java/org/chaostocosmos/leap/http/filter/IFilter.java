@@ -1,11 +1,8 @@
 package org.chaostocosmos.leap.http.filter;
 
 /**
- * Top level of Filter
- * 
+ * Top model of filters
  * @author 9ins
- * @since 2021.09.17
  */
 public interface IFilter {
-    
 }

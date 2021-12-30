@@ -12,24 +12,92 @@ import java.util.Map;
  */
 public class HttpResponseDescriptor {
 
-    private HttpResponse<?> httpResponse;
-    private int responseCode;
-    private Map<String, Object> header = new HashMap<>();
-    private String contentType;
-    private String body;
+    /**
+     * Http request descriptor
+     */
+    private HttpRequestDescriptor httpRequestDescriptor;
 
     /**
-     * constructor with response header Map
+     * HttpResponse object
      */
-    public HttpResponseDescriptor() {
+    private HttpResponse<byte[]> httpResponse;
+
+    /**
+     * Content type
+     */
+    private String contentType;
+
+    /**
+     * Requested host from remotes
+     */
+    private String requestedHost;
+
+    /**
+     * Response code
+     */
+    private int responseCode;
+    
+    /**
+     * Response body bytes
+     */
+    private byte[] responseBody;
+
+    /**
+     * Response header map
+     */
+    private Map<String, Object> responseHeader;
+
+    /**
+     * Construct with HttpRequestDescriptor
+     * @param requestDescriptor
+     */
+    public HttpResponseDescriptor(HttpRequestDescriptor requestDescriptor) {
+        this(requestDescriptor, 200, "text/html; charset=utf-8", null, new HashMap<>());
     }
 
-    public HttpResponse<?> getHttpResponse() {
+    /**
+     * Construct with parameters
+     * @param httpRequestDescriptor
+     * @param responseCode
+     * @param contentType
+     * @param responseBody
+     * @param responseHeader
+     */
+    public HttpResponseDescriptor(HttpRequestDescriptor httpRequestDescriptor, int responseCode, String contentType, byte[] responseBody, Map<String, Object> responseHeader) {
+        this.httpRequestDescriptor = httpRequestDescriptor;
+        this.requestedHost = httpRequestDescriptor.getRequestedHost();
+        this.responseCode = responseCode;
+        this.contentType = contentType;
+        this.responseBody = responseBody;
+        this.responseHeader = responseHeader;
+    }
+
+    /**
+     * Get HttpRequestDescriptor object
+     * @return
+     */
+    public HttpRequestDescriptor getHttpRequestDescriptor() {
+        return this.httpRequestDescriptor;
+    }
+
+    public void setHttpRequestDescriptor(HttpRequestDescriptor httpRequestDescriptor) {
+        this.httpRequestDescriptor = httpRequestDescriptor;
+    }
+
+    public HttpResponse<byte[]> getHttpResponse() {
         return this.httpResponse;
     }
 
-    public void setHttpResponse(HttpResponse<?> httpResponse) {
+    public void setHttpResponse(HttpResponse<byte[]> httpResponse) {
         this.httpResponse = httpResponse;
+    }
+
+    public String getRequestedHost() {
+        return this.requestedHost;
+    }
+
+    public void setRequestedHost(String requestedHost) {
+        this.requestedHost = requestedHost;
     }
 
     public int getResponseCode() {
@@ -40,14 +108,6 @@ public class HttpResponseDescriptor {
         this.responseCode = responseCode;
     }
 
-    public Map<String,Object> getHeader() {
-        return this.header;
-    }
-
-    public void setHeader(Map<String,Object> header) {
-        this.header = header;
-    }
-
     public String getContentType() {
         return this.contentType;
     }
@@ -56,26 +116,39 @@ public class HttpResponseDescriptor {
         this.contentType = contentType;
     }
 
-    public String getBody() {
-        return this.body;
+    public byte[] getResponseBody() {
+        return this.responseBody;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public void setResponseBody(byte[] responseBody) {
+        this.responseBody = responseBody;
     }
 
-    public void addHeader(String key, Object value) {
-        this.header.put(key, value);
+    public Map<String, Object> getResponseHeader() {
+        return this.responseHeader;
+    }
+
+    public void setResponseHeader(Map<String, Object> responseHeader) {
+        this.responseHeader = responseHeader;
+    }
+
+    public void addHeader(String name, Object value) {
+        this.responseHeader.put(name, value);
+    }
+
+    public void removeHeader(String name) {
+        this.responseHeader.remove(name);
     }
 
     @Override
     public String toString() {
         return "{" +
-            " httpResponse='" + httpResponse + "'" +
-            ", responseCode='" + responseCode + "'" +
-            ", header='" + header + "'" +
-            ", contentType='" + contentType + "'" +
-            ", responseCode='" + body + "'" +
+            " httpRequestDescriptor='" + getHttpRequestDescriptor() + "'" +
+            ", httpResponse='" + getHttpResponse() + "'" +
+            ", requestedHost='" + getRequestedHost() + "'" +
+            ", responseCode='" + getResponseCode() + "'" +
+            ", responseBody='" + getResponseBody() + "'" +
+            ", responseHeader='" + getResponseHeader() + "'" +
             "}";
     }
 }

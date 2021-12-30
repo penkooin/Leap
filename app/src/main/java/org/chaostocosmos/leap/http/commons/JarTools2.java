@@ -64,7 +64,6 @@ public class JarTools2 {
             Files.walk(filePath).forEach(p -> {
                 Path jarInnerPath = fileSystem.getPath(jarResourcePath).resolve(filePath.toString()); 
                 try {
-                    System.out.println(jarInnerPath.toString()+"   "+filePath);
                     if(Files.isDirectory(filePath)) {
                         Files.createDirectories(jarInnerPath);
                     } else {
@@ -106,7 +105,7 @@ public class JarTools2 {
                         } catch (IOException ioe) {
                             ioe.printStackTrace();
                         }
-                        System.out.println(String.format("JAR: %-60s  DELETED: %-30s", p.toString(), p.getFileName().toString()));
+                        //System.out.println(String.format("JAR: %-60s  DELETED: %-30s", p.toString(), p.getFileName().toString()));
                     }
                  });
         } catch(IOException ioe) {
@@ -140,7 +139,7 @@ public class JarTools2 {
                             .stream()
                             .map(s -> s.equals("") ? "" : "("+Pattern.quote(s)+")")
                             .collect(Collectors.joining("(.*)"))+".*"))) {
-                        System.out.println(String.format("JAR RESOURCE: %-50s  EXCLUDE: %-30s", p.getParent().toString(), p.getFileName().toString()));
+                        //System.out.println(String.format("JAR RESOURCE: %-50s  EXCLUDE: %-30s", p.getParent().toString(), p.getFileName().toString()));
                     } else {
                         //System.out.println(p); 
                         if(Files.isDirectory(p)) {
@@ -188,7 +187,7 @@ public class JarTools2 {
                                 .matches(".*"+Arrays.asList(m.split(Pattern.quote("*")))
                                 .stream()
                                 .map(s -> s.equals("") ? "" : "("+Pattern.quote(s)+")").collect(Collectors.joining("(.*)"))+".*"))) {
-                            System.out.println(String.format("JAR: %-60s  EXCLUDE: %-30s", p.toString(), p.getFileName().toString()));
+                            //System.out.println(String.format("JAR: %-60s  EXCLUDE: %-30s", p.toString(), p.getFileName().toString()));
                         } else {
                             Path path = jarInnerPath.resolve(rootPath.relativize(p).toString()).normalize();
                             //System.out.println(path);

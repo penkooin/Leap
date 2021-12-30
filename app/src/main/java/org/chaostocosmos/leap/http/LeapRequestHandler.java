@@ -1,28 +1,18 @@
 package org.chaostocosmos.leap.http;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.Reader;
-import java.io.Writer;
-import java.lang.reflect.Method;
 import java.net.Socket;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Date;
 import java.util.Map;
 
-import org.chaostocosmos.leap.http.HttpParserFactory.RequestParser;
-import org.chaostocosmos.leap.http.HttpParserFactory.ResponseParser;
-import org.chaostocosmos.leap.http.servlet.ILeapServlet;
-import org.chaostocosmos.leap.http.servlet.ServletInvoker;
-import org.chaostocosmos.leap.http.servlet.ServletManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.chaostocosmos.leap.http.commons.LoggerFactory;
+import org.chaostocosmos.leap.http.commons.UtilBox;
+import org.chaostocosmos.leap.http.service.ServiceHolder;
+import org.chaostocosmos.leap.http.service.ServiceInvoker;
+import org.chaostocosmos.leap.http.service.ServiceManager;
 
 /**
  * Client request processor object
@@ -31,11 +21,6 @@ import org.slf4j.LoggerFactory;
  * @since 2021.09.16
  */
 public class LeapRequestHandler implements Runnable {
-    /**
-     * logger
-     */
-    private final static Logger logger = LoggerFactory.getLogger(LeapRequestHandler.class);
-
     /**
      * Path doc root
      */
@@ -54,11 +39,10 @@ public class LeapRequestHandler implements Runnable {
     /**
      * Servlet manager
      */
-    private ServletManager servletManager;
+    private ServiceManager serviceManager;
 
     /**
      * Constructor with root direcotry, index.html file, client socket
-     * 
      * @param httpServer
      * @param rootPath
      * @param welcome
@@ -66,7 +50,7 @@ public class LeapRequestHandler implements Runnable {
      * @throws WASException
      */
     public LeapRequestHandler(LeapHttpServer httpServer, Path rootPath, String welcome, Socket connection) throws WASException {
-        this.servletManager = httpServer.getServletManager();
+        this.serviceManager = httpServer.getServiceManager();
         this.rootPath = rootPath;
         if (welcome != null) {
             this.welcome = welcome;
@@ -76,133 +60,140 @@ public class LeapRequestHandler implements Runnable {
 
     @Override
     public void run() {
+        HttpRequestDescriptor request = null;
+        HttpResponseDescriptor response = null;
+        InputStream in = null; 
+        OutputStream out = null;
+        String requestedHost = Context.getDefaultHost();
         try {
-            OutputStream raw = new BufferedOutputStream(connection.getOutputStream());
-            Writer out = new OutputStreamWriter(raw);
-            Reader in = new InputStreamReader(new BufferedInputStream(connection.getInputStream()), Context.getServerCharset());
-
-            RequestParser requestParser = HttpParserFactory.getRequestParser();
-            HttpRequestDescriptor request = requestParser.parseRequest(in);
-            if(request == null) {
-                return;
-            }
-            // log request information
-            logger.info(request.getRequestLines());
+            try {
+                in = connection.getInputStream();    
+                out = connection.getOutputStream();
+            } catch(IOException ioe){
+                throw new WASException(ioe);
+            }    
+            request = HttpParser.getRequestParser().parseRequest(in);
+            response = HttpBuilder.buildHttpResponse(request);
             //request.printURLInfo();
             //Put client address to request header Map for ip filter
-            request.getReqHeader().put("@Client", connection.getInetAddress().getHostName());
-
-            ResponseParser responseParser = HttpParserFactory.getResponseParser();
-            HttpResponseDescriptor response = responseParser.createDummyHttpResponseDescriptor();
-            response.setHttpResponse(HttpBuilder.buildDummyHttpResponse());
-            Path resourcePath = ResourceHelper.getInstance().getResourcePath(request);
+            requestedHost = request.getRequestedHost();
+            request.getReqHeader().put("@Client", requestedHost);
+            LoggerFactory.getLogger(requestedHost).debug("Request host: "+requestedHost);
+            
+            // log request information
+            LoggerFactory.getLogger(request.getRequestedHost()).debug(request.getRequestLines());
+            Path resourcePath = ResourceHelper.getResourcePath(request);
 
             String contextPath = request.getContextPath();
-            ILeapServlet servlet = (ILeapServlet) this.servletManager.getMatchServlet(request.getContextPath());
-            int resCode = -1;
-            String mimeType = "text/html";
-            String body = null;
+            ServiceHolder serviceHolder = this.serviceManager.getMappingServiceHolder(request.getContextPath());
+            
+            response.addHeader("Date", new Date()); 
+            response.addHeader("Server", "LeapWAS 1.0.0");
 
             //if client request servlet path
-            if (servlet != null) {
+            if (serviceHolder != null) {
                 // request method validation
-                if (this.servletManager.vaildateRequestMethod(request.getRequestType(), request.getContextPath())) {
-                    Method invokingMethod = this.servletManager.getMatchMethod(request.getContextPath());
-                    ServletInvoker.invokeService(servlet, invokingMethod, request, response);
-                    resCode = 200;
-                    body = response.getBody();                    
+                if (this.serviceManager.vaildateRequestMethod(request.getRequestType(), request.getContextPath())) {
+                    ServiceInvoker.invokeService(serviceHolder, request, response);
+                    response.setResponseCode(200);
                 } else {
-                    resCode = 405;
-                    body = ResourceHelper.getInstance().getResourceContents(Context.getResponseResource(resCode));
+                    String message = Context.getHttpMsg(405);
+                    String body = ResourceHelper.getResourceContent(requestedHost, "response.html", Map.of("@code", 405, "@message", message));
+                    response.setResponseBody(body.getBytes());
+                    response.setResponseCode(405);
                 }
             } else { // When client request static resources
                 if(request.getContextPath().equals("/")) {
-                    resourcePath = ResourceHelper.getInstance().getResourcePath(request.getUrl().getHost(), request.getContextPath()+Context.getWelcome());
-                    body = ResourceHelper.getInstance().getResourceContents(resourcePath);
-                    resCode = 200;
+                    String body = ResourceHelper.getResourceContent(requestedHost, "index.html", Map.of("@serverName", requestedHost));
+                    response.setResponseBody(body.getBytes());
+                    response.setResponseCode(200);
                 } else {
                     if (resourcePath.toFile().exists()) {
-                        resCode = 200;
-                        mimeType = Files.probeContentType(resourcePath);
-                        //Implementation spec #4
+                        response.setResponseCode(200);
+                        String mimeType = UtilBox.probeContentType(resourcePath);
+                        response.addHeader("Content-Type", mimeType);
                         if(resourcePath.toFile().getName().endsWith(".exe")) {
-                            resCode = 403;
-                            body = ResourceHelper.getInstance().getResourceContents(Context.getResponseResource(resCode));
+                            String message = Context.getHttpMsg(405);
+                            String body = ResourceHelper.getResourceContent(requestedHost, "response.html", Map.of("@code", 405, "@message", message));
+                            response.setResponseBody(body.getBytes());
+                            response.setResponseCode(405);
                         } else if(mimeType == null || mimeType.equals("application/x-msdownload")) {
-                            byte[] rawData = ResourceHelper.getInstance().getBinaryResource(resourcePath);
-                            sendRaw(raw, resCode, rawData, mimeType);
-                            return;
+                            byte[] rawData = ResourceHelper.getBinaryResource(resourcePath);
+                            response.setResponseBody(rawData);
+                            response.setResponseCode(200);
                         } else {
-                            body = ResourceHelper.getInstance().getResourceContents(resourcePath);
+                            String body = ResourceHelper.getResourceContent(requestedHost, contextPath, null);
+                            response.setResponseBody(body.getBytes());
+                            response.setResponseCode(200);;
                         }
-                        response.setContentType(mimeType);
                     } else {
-                        resCode = 404;
-                        body = ResourceHelper.getInstance().getResourceContents(Context.getResponseResource(resCode));
+                        //When requested resource is not found
+                        throw new WASException(MSG_TYPE.HTTP, 404);
                     }
                 }
             }
-            response.setResponseCode(resCode);
-            response.setBody(body);
-
             sendResponse(out, response);
-
-        } catch (IOException e) {
-            logger.error(e.getMessage(), e);
-        } catch (URISyntaxException e) {
-            logger.error(e.getMessage(), e);
-        } catch (Exception e) {
-            e.printStackTrace();
-            logger.error(e.getMessage(), e);
+        } catch(Exception e) {        
+            Throwable throwable = null;
+            while((throwable = e.getCause()) != null) {
+                e = (Exception)throwable;
+            } 
+            WASException we = (WASException) e;
+            String responseMessage = createHttpResponsePage(requestedHost, we.getCode(), we.getMessage());
+            if(response == null) {
+                response = HttpBuilder.buildHttpResponse(request);
+            }
+            response.setResponseBody(responseMessage.getBytes());
+            sendResponse(out, response);
         } finally {
-            try {
+            try {                
                 connection.close();
-            } catch (IOException ex) {
-                ex.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
 
     /**
-     * Send response to client
-     * @param out
-     * @param desc
-     * @throws IOException
+     * Create http response page
+     * @param host
+     * @param code
+     * @param message
+     * @return
+     * @throws WASException
      */
-    public void sendResponse(Writer out, HttpResponseDescriptor desc) throws IOException {
-         String res = Context.getHttpVersion()+" "+desc.getResponseCode()+" "+Context.getHttpMsg(desc.getResponseCode())+"\r\n"; 
-         logger.info("RESPONSE: "+res);
-         //logger.debug(desc.toString());
-         out.write(res); 
-         Map<String, Object> header = desc.getHeader(); 
-         header.put("Date: ", new Date()); 
-         header.put("Server: ", "WAS 0.9"); 
-         header.put("Content-Type: ", desc.getContentType());
-         header.put("Content-length: ", desc.getBody().length());
-         for(Map.Entry<String, Object> e : header.entrySet()) {
-            out.write(e.getKey()+": "+e.getValue()+"\r\n"); 
-        } 
-        out.write("\r\n");
-        out.flush(); 
-        out.write(desc.getBody()); 
-        out.flush();
+    public String createHttpResponsePage(String host, int code, String message) {
+        try {
+            return ResourceHelper.getResourceContent(host, "response.html", Map.of("@code", code, "@message", message));
+        } catch (WASException e) {
+            e.printStackTrace();
+            LoggerFactory.getLogger(host).error(e.getMessage(), e);
+        }
+        return null;
     }
 
     /**
-     * Send raw data to client
+     * Send response to client
      * @param out
-     * @param resCode
-     * @param rawData
-     * @param contentType
+     * @param response
      * @throws IOException
      */
-    private void sendRaw(OutputStream out, int resCode, byte[] rawData, String contentType) throws IOException {
-        out.write((Context.getHttpVersion()+" "+resCode+"\r\n").getBytes()); 
-        out.write(("Content-Type: "+contentType+"\r\n").getBytes());
-        out.write(("Content-length: "+rawData.length+"\r\n").getBytes());
-        out.write("\r\n".getBytes());
-        out.flush(); 
-        out.write(rawData); 
-        out.flush();
-   }    
+    public void sendResponse(OutputStream out, HttpResponseDescriptor response) {
+        try {
+            String res = Context.getHttpVersion()+" "+response.getResponseCode()+" "+Context.getHttpMsg(response.getResponseCode())+"\r\n"; 
+            LoggerFactory.getLogger(response.getRequestedHost()).debug(response.toString());
+            out.write(res.getBytes()); 
+            response.addHeader("Content-length", response.getResponseBody().length);
+            for(Map.Entry<String, Object> e : response.getResponseHeader().entrySet()) {
+               out.write((e.getKey()+": "+e.getValue()+"\r\n").getBytes()); 
+            } 
+            out.write("\r\n".getBytes());
+            out.flush(); 
+            out.write(response.getResponseBody()); 
+            out.flush();
+        } catch(IOException e) {
+            e.printStackTrace();
+            LoggerFactory.getLogger(response.getRequestedHost()).error(e.getMessage(), e);
+        }
+    }
 }

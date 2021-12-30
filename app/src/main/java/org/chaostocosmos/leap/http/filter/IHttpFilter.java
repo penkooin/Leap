@@ -1,7 +1,6 @@
 package org.chaostocosmos.leap.http.filter;
 
-import org.chaostocosmos.leap.http.HttpRequestDescriptor;
-import org.chaostocosmos.leap.http.HttpResponseDescriptor;
+import org.chaostocosmos.leap.http.WASException;
 
 /**
  * Http filter spec
@@ -9,17 +8,12 @@ import org.chaostocosmos.leap.http.HttpResponseDescriptor;
  * @author 9ins
  * @since 2021.09.17
  */
-public interface IHttpFilter extends IFilter {
+public interface IHttpFilter<R, S> extends IHttpRequestFilter<R>, IHttpResponseFilter<S> {    
     /**
-     * Filter http request before servlet process
-     * @param request
+     * Check URL is valied
+     * @param url
      * @return
+     * @throws WASException
      */
-    public void filterRequest(HttpRequestDescriptor request) throws Exception;
-    /**
-     * Filter http respose after servlet process
-     * @param response
-     * @return
-     */
-    public void filterResponse(HttpResponseDescriptor response) throws Exception;
+    public boolean isValidURL(String url); 
 }

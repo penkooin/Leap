@@ -2,13 +2,11 @@ package org.chaostocosmos.leap.http.commons;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.Context;
-import org.chaostocosmos.leap.http.Hosts;
-import org.chaostocosmos.leap.http.VirtualHostManager;
 import org.chaostocosmos.leap.http.WASException;
 
 import ch.qos.logback.classic.Level;
@@ -34,27 +32,6 @@ public class LoggerFactory {
     private static Map<String, Logger> loggerMap = null;
 
     /**
-     * Constructor
-     * @throws WASException
-     * @throws IOException
-     * @throws URISyntaxException
-     */
-    private LoggerFactory() throws WASException, IOException, URISyntaxException {
-        loggerMap = new HashMap<>();
-        String defaultHost = Context.getDefaultHost();
-        String defaultLogPath = Context.getDefaultDocroot().resolve(Context.getDefaultLogPath()).toAbsolutePath().toString();
-        Level defaultLogLevel = Context.getDefaultLogLevel();
-        loggerMap.put(defaultHost, createLoggerFor(defaultHost, defaultLogPath, defaultLogLevel));
-        List<Hosts> vHosts = VirtualHostManager.getInstance().getVirtualHosts();
-        for(Hosts vHost : vHosts) {
-            String loggerName = vHost.getHost();
-            String logPath = vHost.getDocroot().resolve(vHost.getLogPath()).toAbsolutePath().toString();
-            Level logLevel = vHost.getLogLevel();
-            loggerMap.put(loggerName, createLoggerFor(loggerName, logPath, logLevel));
-        }
-    }
-
-    /**
      * Get logger object
      * @param hostName
      * @return
@@ -63,12 +40,16 @@ public class LoggerFactory {
      * @throws URISyntaxException
      */
     public static Logger getLogger(String hostName) {
-        if(loggerMap == null) {
-            try {
-                new LoggerFactory();
-            } catch (WASException | IOException | URISyntaxException e) {
-                e.printStackTrace();
-            }
+        if(loggerMap == null) {            
+            loggerMap = Context.getAllHosts()
+            .entrySet()
+            .stream()
+            .map(e -> {
+                String host = e.getKey();
+                String path = e.getValue().getDocroot().resolve(e.getValue().getLogPath()).toAbsolutePath().toString();
+                List<Level> level = e.getValue().getLogLevel();
+                return new Object[]{host, createLoggerFor(host, path, level)};
+            }).collect(Collectors.toMap(k -> (String)k[0], v -> (Logger)v[1]));    
         }
         return loggerMap.get(hostName);
     }
@@ -80,7 +61,7 @@ public class LoggerFactory {
      * @param level
      * @return
      */
-    public static Logger createLoggerFor(String loggerName, String loggerFile, Level level) {
+    public static Logger createLoggerFor(String loggerName, String loggerFile, List<Level> level) {
         LoggerContext logCtx = (LoggerContext) org.slf4j.LoggerFactory.getILoggerFactory();
 
         PatternLayoutEncoder logEncoder = new PatternLayoutEncoder();
@@ -114,12 +95,12 @@ public class LoggerFactory {
         logFilePolicy.start();
     
         logFileAppender.setRollingPolicy(logFilePolicy);
-        logFileAppender.start();
+        logFileAppender.start();        
 
-        Logger logger = (Logger) LoggerFactory.getLogger(loggerName);
+        Logger logger = (Logger) org.slf4j.LoggerFactory.getLogger(loggerName);
         logger.addAppender(logConsoleAppender);
         logger.addAppender(logFileAppender);
-        logger.setLevel(level);
+        level.stream().forEach(l -> logger.setLevel(l));
         logger.setAdditive(false); 
         return logger;
     }   

@@ -4,37 +4,48 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 import org.chaostocosmos.leap.http.HttpRequestDescriptor;
-import org.chaostocosmos.leap.http.HttpResponseDescriptor;
 import org.chaostocosmos.leap.http.MSG_TYPE;
 import org.chaostocosmos.leap.http.WASException;
+import org.chaostocosmos.leap.http.annotation.PreFilter;
+import org.chaostocosmos.leap.http.commons.LoggerFactory;
+import org.chaostocosmos.leap.http.user.User;
+import org.chaostocosmos.leap.http.user.UserManager;
 
-public class BasicAuthFilter implements IHttpFilter {
-    
+/**
+ * BasicAuthFilter object
+ * @author 9ins
+ */
+public class BasicAuthFilter<R, S> extends AbstractHttpFilter<R, S> implements IAuthenticate { 
+
     @Override
-    public void filterRequest(HttpRequestDescriptor request) throws Exception {
-        final String authorization = request.getReqHeader().get("Authorization");
-        if (authorization != null && authorization.toLowerCase().startsWith("basic")) {
-            String base64Credentials = authorization.substring("Basic".length()).trim();
-            byte[] credDecoded = Base64.getDecoder().decode(base64Credentials);
-            String credentials = new String(credDecoded, StandardCharsets.UTF_8);
-            final String[] values = credentials.split(":", 2);
-            if(!login(values[0], values[1])) {
-                throw new WASException(MSG_TYPE.ERROR, "error018");
+    @PreFilter
+    public void filterRequest(R r) throws WASException {
+        super.filterRequest(r);
+        if(r.getClass().isAssignableFrom(HttpRequestDescriptor.class)) {
+            HttpRequestDescriptor request = (HttpRequestDescriptor)r;
+            final String authorization = request.getReqHeader().get("Authorization");
+            if (authorization != null && authorization.startsWith(" Basic")) {
+                String base64Credentials = authorization.substring(" Basic".length()).trim();
+                byte[] credDecoded = Base64.getDecoder().decode(base64Credentials);
+                String credentials = new String(credDecoded, StandardCharsets.UTF_8);
+                final String[] values = credentials.split(":", 2);
+                if(!signIn(values[0], values[1])) {                    
+                    throw new WASException(MSG_TYPE.HTTP, 401);
+                }
+                LoggerFactory.getLogger(request.getRequestedHost()).debug("User "+values[0]+" is login.");
+            } else {
+                throw new WASException(MSG_TYPE.HTTP, 401);
             }
-        } else {
-            throw new WASException(MSG_TYPE.ERROR, "error018");
-        }        
+        }
     }
 
     @Override
-    public void filterResponse(HttpResponseDescriptor response) throws Exception {
+    public boolean signIn(String username, String password) throws WASException {
+        return UserManager.getInstance().signIn(username, password);
     }
 
-    private boolean login(String user, String password) {
-        if(user.equals("chaos930") && password.equals("9393")) {
-            return true;
-        }
-        return false;
+    @Override
+    public void signUp(User user) throws WASException {
+        UserManager.getInstance().signUp(user);
     }
-    
 }

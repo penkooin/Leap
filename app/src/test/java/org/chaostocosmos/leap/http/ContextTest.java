@@ -6,9 +6,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 
-import org.chaostocosmos.leap.http.servlet.ServletBean;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -39,8 +37,8 @@ public class ContextTest {
     @Test
     public void testGetResouce() throws IOException, URISyntaxException, WASException {
         int code = 404;
-        Path path = this.context.getResponseResource(code);
-        String html = ResourceHelper.getInstance().getResourceContents(path);
+        Path path = ResourceHelper.getResponseResourcePath("locahost", code);
+        String html = ResourceHelper.getInstance().getResourceContents("locahost", "response.html");
         System.out.println(html);
         //String res = Files.readString(new File(Context.class.getClass().getResource("/WEB-INF/static/"+code+".html").toURI()).toPath());
         //assertEquals(res, html);
@@ -49,15 +47,15 @@ public class ContextTest {
     @Test
     public void testGetMsg() {
         String type = "debug";
-        String code = "debug001";
+        int code = 1;
         String str = this.context.getDebugMsg(code, "a", "b", "c");
         System.out.println(str);
     }
 
     @Test
     public void testGetServletBeanList() {
-        List<ServletBean> list = this.context.getServletBeanList();
-        list.stream().forEach(System.out::println);
+        // List<ServiceMethodBean> list = this.context.getServiceBeanList();
+        // list.stream().forEach(System.out::println);
     }
 
     public static void main(String[] args) throws Exception {

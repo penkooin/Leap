@@ -2,6 +2,7 @@ package org.chaostocosmos.leap.http;
 
 import java.net.InetSocketAddress;
 import java.nio.file.Path;
+import java.util.List;
 
 import ch.qos.logback.classic.Level;
 
@@ -9,6 +10,11 @@ import ch.qos.logback.classic.Level;
  * Host object
  */
 public class Hosts {
+    /**
+     * Whether main host
+     */
+    private boolean isDefaultHost;
+
     /**
      * Server name
      */
@@ -37,10 +43,11 @@ public class Hosts {
     /**
      * Logging level
      */
-    private Level logLevel;
+    private List<Level> logLevel;
 
     /**
      * Constructor
+     * @param isDefaultHost
      * @param serverName
      * @param host
      * @param port
@@ -48,13 +55,22 @@ public class Hosts {
      * @param logPath
      * @param logLevel
      */
-    public Hosts(String serverName, String host, int port, Path docroot, String logPath, Level logLevel)  {
+    public Hosts(boolean isDefaultHost, String serverName, String host, int port, Path docroot, String logPath, List<Level> logLevel)  {
+        this.isDefaultHost = isDefaultHost;
         this.serverName = serverName;
         this.host = host;
         this.port = port;
-        this.docroot = docroot;
+        this.docroot = docroot.normalize();
         this.logPath = logPath;
         this.logLevel = logLevel;
+    }
+
+    /**
+     * Whether main host
+     * @return
+     */
+    public boolean isDefaultHost() {
+        return this.isDefaultHost;
     }
 
     /**
@@ -141,7 +157,7 @@ public class Hosts {
      * Get log level
      * @return
      */
-    public Level getLogLevel() {
+    public List<Level> getLogLevel() {
         return this.logLevel;
     }
 
@@ -149,7 +165,7 @@ public class Hosts {
      * Set log level
      * @param logLevel
      */
-    public void setLogLevel(Level logLevel) {
+    public void setLogLevel(List<Level> logLevel) {
         this.logLevel = logLevel;
     }
 

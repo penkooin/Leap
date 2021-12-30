@@ -1,0 +1,443 @@
+2022-12-29 17:26:54.228 INFO  - Leap WAS server starting...
+2022-12-29 17:26:54.232 INFO  - --------------------------------------------------------------------------
+2022-12-29 17:26:54.233 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 17:26:54.233 INFO  - verbose mode on
+2022-12-29 17:26:54.261 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-29 17:26:54.262 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 17:26:54.270 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 17:26:54.279 INFO  - Accepting connections on port 8082   Document Root: D:\0.github\Leap\home2
+2022-12-29 17:26:54.283 INFO  - Accepting connections on port 8080   Document Root: D:\0.github\Leap\home
+2022-12-29 17:26:58.523 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 17:26:58.524 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 17:26:58.526 INFO  - GET / HTTP/1.1
+2022-12-29 17:26:58.532 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-29 17:26:58.532 INFO  - Connection= keep-alive
+2022-12-29 17:26:58.532 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-29 17:26:58.532 INFO  - Sec-Fetch-Site= none
+2022-12-29 17:26:58.533 INFO  - Sec-Fetch-Dest= document
+2022-12-29 17:26:58.533 INFO  - Host= 127.0.0.1:8080
+2022-12-29 17:26:58.533 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-29 17:26:58.534 INFO  - Sec-Fetch-Mode= navigate
+2022-12-29 17:26:58.534 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-29 17:26:58.534 INFO  - sec-ch-ua-mobile= ?0
+2022-12-29 17:26:58.534 INFO  - Cache-Control= max-age=0
+2022-12-29 17:26:58.534 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-29 17:26:58.535 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-29 17:26:58.535 INFO  - Sec-Fetch-User= ?1
+2022-12-29 17:26:58.535 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-29 17:27:17.964 INFO  - Client request accepted... : /192.168.1.60
+2022-12-29 17:27:17.965 INFO  - Client request accepted... : /192.168.1.60
+2022-12-29 17:27:17.965 INFO  - GET / HTTP/1.1
+2022-12-29 17:27:17.966 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-29 17:27:17.966 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-29 17:27:17.967 INFO  - Connection= keep-alive
+2022-12-29 17:27:17.967 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-29 17:27:17.967 INFO  - Host= 192.168.1.60:8082
+2022-12-29 17:27:17.968 INFO  - Accept-Encoding= gzip, deflate
+2022-12-29 17:27:17.968 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-29 17:27:18.156 INFO  - GET /favicon.ico HTTP/1.1
+2022-12-29 17:27:18.157 INFO  - Accept= image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+2022-12-29 17:27:18.158 INFO  - Connection= keep-alive
+2022-12-29 17:27:18.158 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-29 17:27:18.159 INFO  - Referer= http://192.168.1.60:8082/
+2022-12-29 17:27:18.159 INFO  - Host= 192.168.1.60:8082
+2022-12-29 17:27:18.159 INFO  - Accept-Encoding= gzip, deflate
+2022-12-29 17:27:18.160 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-29 17:44:58.140 INFO  - Client request accepted... : /192.168.1.60
+2022-12-29 17:44:58.141 INFO  - Client request accepted... : /192.168.1.60
+2022-12-29 17:44:58.141 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-29 17:44:58.142 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-29 17:44:58.143 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-29 17:44:58.143 INFO  - Connection= keep-alive
+2022-12-29 17:44:58.143 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-29 17:44:58.144 INFO  - Host= 192.168.1.60:8082
+2022-12-29 17:44:58.144 INFO  - Accept-Encoding= gzip, deflate
+2022-12-29 17:44:58.145 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-29 17:49:46.982 INFO  - Leap WAS server starting...
+2022-12-29 17:49:46.985 INFO  - --------------------------------------------------------------------------
+2022-12-29 17:49:46.985 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 17:49:46.985 INFO  - verbose mode on
+2022-12-29 17:49:47.008 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-29 17:49:47.010 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 17:49:47.015 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 17:49:47.020 INFO  - Accepting connections on port 8082   Document Root: D:\0.github\Leap\home2
+2022-12-29 17:49:47.025 INFO  - Accepting connections on port 8080   Document Root: D:\0.github\Leap\home
+2022-12-29 17:49:48.670 INFO  - Client request accepted... : /192.168.1.60
+2022-12-29 17:49:48.672 INFO  - Client request accepted... : /192.168.1.60
+2022-12-29 17:49:48.674 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-29 17:49:48.678 INFO  - Cache-Control= max-age=0
+2022-12-29 17:49:48.678 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-29 17:49:48.678 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-29 17:49:48.678 INFO  - Connection= keep-alive
+2022-12-29 17:49:48.679 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-29 17:49:48.679 INFO  - Host= 192.168.1.60:8082
+2022-12-29 17:49:48.679 INFO  - Accept-Encoding= gzip, deflate
+2022-12-29 17:49:48.680 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-29 17:50:05.110 INFO  - Leap WAS server starting...
+2022-12-29 17:50:05.114 INFO  - --------------------------------------------------------------------------
+2022-12-29 17:50:05.115 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 17:50:05.115 INFO  - verbose mode on
+2022-12-29 17:50:05.169 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-29 17:50:05.171 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 17:50:05.177 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 17:50:05.183 INFO  - Accepting connections on port 8082   Document Root: D:\0.github\Leap\home2
+2022-12-29 17:50:05.187 INFO  - Accepting connections on port 8080   Document Root: D:\0.github\Leap\home
+2022-12-29 17:50:07.339 INFO  - Client request accepted... : /192.168.1.60
+2022-12-29 17:50:07.342 INFO  - Client request accepted... : /192.168.1.60
+2022-12-29 17:50:07.343 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-29 17:50:07.346 INFO  - Cache-Control= max-age=0
+2022-12-29 17:50:07.346 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-29 17:50:07.346 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-29 17:50:07.347 INFO  - Connection= keep-alive
+2022-12-29 17:50:07.347 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-29 17:50:07.347 INFO  - Host= 192.168.1.60:8082
+2022-12-29 17:50:07.347 INFO  - Accept-Encoding= gzip, deflate
+2022-12-29 17:50:07.347 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-29 17:50:44.305 INFO  - Leap WAS server starting...
+2022-12-29 17:50:44.309 INFO  - --------------------------------------------------------------------------
+2022-12-29 17:50:44.309 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 17:50:44.310 INFO  - verbose mode on
+2022-12-29 17:50:44.337 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-29 17:50:44.340 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 17:50:44.346 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 17:50:44.352 INFO  - Accepting connections on port 8082   Document Root: D:\0.github\Leap\home2
+2022-12-29 17:50:44.355 INFO  - Accepting connections on port 8080   Document Root: D:\0.github\Leap\home
+2022-12-29 17:50:45.926 INFO  - Client request accepted... : /192.168.1.60
+2022-12-29 17:50:45.927 INFO  - Client request accepted... : /192.168.1.60
+2022-12-29 17:50:45.929 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-29 17:50:45.932 INFO  - Cache-Control= max-age=0
+2022-12-29 17:50:45.932 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-29 17:50:45.932 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-29 17:50:45.932 INFO  - Connection= keep-alive
+2022-12-29 17:50:45.932 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-29 17:50:45.932 INFO  - Host= 192.168.1.60:8082
+2022-12-29 17:50:45.933 INFO  - Accept-Encoding= gzip, deflate
+2022-12-29 17:50:45.933 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-29 17:51:36.031 INFO  - Leap WAS server starting...
+2022-12-29 17:51:36.034 INFO  - --------------------------------------------------------------------------
+2022-12-29 17:51:36.035 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 17:51:36.035 INFO  - verbose mode on
+2022-12-29 17:51:36.056 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-29 17:51:36.059 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 17:51:36.066 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 17:51:36.071 INFO  - Accepting connections on port 8082   Document Root: D:\0.github\Leap\home2
+2022-12-29 17:51:36.075 INFO  - Accepting connections on port 8080   Document Root: D:\0.github\Leap\home
+2022-12-29 17:51:37.629 INFO  - Client request accepted... : /192.168.1.60
+2022-12-29 17:51:37.630 INFO  - Client request accepted... : /192.168.1.60
+2022-12-29 17:51:37.632 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-29 17:51:37.634 INFO  - Cache-Control= max-age=0
+2022-12-29 17:51:37.635 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-29 17:51:37.635 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-29 17:51:37.635 INFO  - Connection= keep-alive
+2022-12-29 17:51:37.635 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-29 17:51:37.636 INFO  - Host= 192.168.1.60:8082
+2022-12-29 17:51:37.636 INFO  - Accept-Encoding= gzip, deflate
+2022-12-29 17:51:37.636 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-29 17:51:39.356 INFO  - Client request accepted... : /192.168.1.60
+2022-12-29 17:51:39.357 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-29 17:51:39.358 INFO  - Cache-Control= max-age=0
+2022-12-29 17:51:39.358 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-29 17:51:39.359 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-29 17:51:39.359 INFO  - Connection= keep-alive
+2022-12-29 17:51:39.359 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-29 17:51:39.359 INFO  - Host= 192.168.1.60:8082
+2022-12-29 17:51:39.359 INFO  - Accept-Encoding= gzip, deflate
+2022-12-29 17:51:39.360 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-29 17:52:08.904 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 17:52:08.905 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 17:52:08.907 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-29 17:52:08.909 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 17:52:08.910 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-29 17:52:08.910 INFO  - Connection= keep-alive
+2022-12-29 17:52:08.911 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-29 17:52:08.912 INFO  - Sec-Fetch-Site= none
+2022-12-29 17:52:08.913 INFO  - Sec-Fetch-Dest= document
+2022-12-29 17:52:08.913 INFO  - Host= localhost:8080
+2022-12-29 17:52:08.914 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-29 17:52:08.914 INFO  - Sec-Fetch-Mode= navigate
+2022-12-29 17:52:08.915 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-29 17:52:08.915 INFO  - sec-ch-ua-mobile= ?0
+2022-12-29 17:52:08.917 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-29 17:52:08.918 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-29 17:52:08.918 INFO  - Sec-Fetch-User= ?1
+2022-12-29 17:52:08.919 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-29 17:52:08.920 DEBUG - Request host: localhost
+2022-12-29 17:52:08.920 DEBUG - Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 17:52:08.924 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/time/GetTime GET', httpVersion='HTTP/1.1', requestLines='Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC', requestType='GET', requestHost='localhost', reqHeader='{Cookie= io=PL7TK76OSCzqZRBSAAAC, Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection= keep-alive, User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36, Sec-Fetch-Site= none, Sec-Fetch-Dest= document, Host= localhost:8080, Accept-Encoding= gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode= navigate, sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96", sec-ch-ua-mobile= ?0, Upgrade-Insecure-Requests= 1, sec-ch-ua-platform= "Windows", Sec-Fetch-User= ?1, Accept-Language= ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/time/GetTime', url='http://localhost:8080/time/GetTime', contextParam='{}'}', httpResponse='null', requestedHost='localhost', responseCode='404', responseBody='[B@6c0801b9', responseHeader='{Date: =Wed Dec 29 17:52:08 KST 2021, Server: =LeapWAS 1.0.0}'}
+2022-12-29 17:52:09.168 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 17:54:06.873 INFO  - Leap WAS server starting...
+2022-12-29 17:54:06.876 INFO  - --------------------------------------------------------------------------
+2022-12-29 17:54:06.876 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 17:54:06.876 INFO  - verbose mode on
+2022-12-29 17:54:06.899 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-29 17:54:06.901 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 17:54:06.909 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 17:54:06.914 INFO  - Accepting connections on port 8082   Document Root: D:\0.github\Leap\home2
+2022-12-29 17:54:06.917 INFO  - Accepting connections on port 8080   Document Root: D:\0.github\Leap\home
+2022-12-29 17:54:08.985 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 17:54:08.986 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 17:54:08.989 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-29 17:54:08.993 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 17:54:08.993 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-29 17:54:08.993 INFO  - Connection= keep-alive
+2022-12-29 17:54:08.993 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-29 17:54:08.994 INFO  - Sec-Fetch-Site= none
+2022-12-29 17:54:08.994 INFO  - Sec-Fetch-Dest= document
+2022-12-29 17:54:08.994 INFO  - Host= localhost:8080
+2022-12-29 17:54:08.994 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-29 17:54:08.994 INFO  - Sec-Fetch-Mode= navigate
+2022-12-29 17:54:08.994 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-29 17:54:08.994 INFO  - sec-ch-ua-mobile= ?0
+2022-12-29 17:54:08.995 INFO  - Cache-Control= max-age=0
+2022-12-29 17:54:08.996 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-29 17:54:08.996 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-29 17:54:08.996 INFO  - Sec-Fetch-User= ?1
+2022-12-29 17:54:08.996 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-29 17:54:09.012 DEBUG - Request host: localhost
+2022-12-29 17:54:09.013 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 17:54:09.027 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/time/GetTime GET', httpVersion='HTTP/1.1', requestLines='Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC', requestType='GET', requestHost='localhost', reqHeader='{Cookie= io=PL7TK76OSCzqZRBSAAAC, Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection= keep-alive, User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36, Sec-Fetch-Site= none, Sec-Fetch-Dest= document, Host= localhost:8080, Accept-Encoding= gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode= navigate, sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96", sec-ch-ua-mobile= ?0, Cache-Control= max-age=0, Upgrade-Insecure-Requests= 1, sec-ch-ua-platform= "Windows", Sec-Fetch-User= ?1, Accept-Language= ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/time/GetTime', url='http://localhost:8080/time/GetTime', contextParam='{}'}', httpResponse='null', requestedHost='localhost', responseCode='404', responseBody='[B@59b75eae', responseHeader='{Date: =Wed Dec 29 17:54:09 KST 2021, Server: =LeapWAS 1.0.0}'}
+2022-12-29 17:54:09.232 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 17:54:23.134 INFO  - Leap WAS server starting...
+2022-12-29 17:54:23.138 INFO  - --------------------------------------------------------------------------
+2022-12-29 17:54:23.139 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 17:54:23.139 INFO  - verbose mode on
+2022-12-29 17:54:23.161 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-29 17:54:23.162 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 17:54:23.168 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 17:54:23.175 INFO  - Accepting connections on port 8082   Document Root: D:\0.github\Leap\home2
+2022-12-29 17:54:23.178 INFO  - Accepting connections on port 8080   Document Root: D:\0.github\Leap\home
+2022-12-29 17:54:25.491 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 17:54:25.492 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 17:54:25.495 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-29 17:54:25.502 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 17:54:25.503 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-29 17:54:25.503 INFO  - Connection= keep-alive
+2022-12-29 17:54:25.503 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-29 17:54:25.503 INFO  - Sec-Fetch-Site= none
+2022-12-29 17:54:25.577 INFO  - Sec-Fetch-Dest= document
+2022-12-29 17:54:25.578 INFO  - Host= localhost:8080
+2022-12-29 17:54:25.578 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-29 17:54:25.578 INFO  - Sec-Fetch-Mode= navigate
+2022-12-29 17:54:25.578 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-29 17:54:25.578 INFO  - sec-ch-ua-mobile= ?0
+2022-12-29 17:54:25.578 INFO  - Cache-Control= max-age=0
+2022-12-29 17:54:25.579 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-29 17:54:25.579 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-29 17:54:25.579 INFO  - Sec-Fetch-User= ?1
+2022-12-29 17:54:25.579 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-29 17:54:25.612 DEBUG - Request host: localhost
+2022-12-29 17:54:25.612 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 17:54:25.674 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/time/GetTime GET', httpVersion='HTTP/1.1', requestLines='Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC', requestType='GET', requestHost='localhost', reqHeader='{Cookie= io=PL7TK76OSCzqZRBSAAAC, Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection= keep-alive, User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36, Sec-Fetch-Site= none, Sec-Fetch-Dest= document, Host= localhost:8080, Accept-Encoding= gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode= navigate, sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96", sec-ch-ua-mobile= ?0, Cache-Control= max-age=0, Upgrade-Insecure-Requests= 1, sec-ch-ua-platform= "Windows", Sec-Fetch-User= ?1, Accept-Language= ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/time/GetTime', url='http://localhost:8080/time/GetTime', contextParam='{}'}', httpResponse='null', requestedHost='localhost', responseCode='404', responseBody='[B@6e1c2567', responseHeader='{Date: =Wed Dec 29 17:54:25 KST 2021, Server: =LeapWAS 1.0.0}'}
+2022-12-29 17:54:25.732 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 17:55:58.651 INFO  - Leap WAS server starting...
+2022-12-29 17:55:58.653 INFO  - --------------------------------------------------------------------------
+2022-12-29 17:55:58.654 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 17:55:58.654 INFO  - verbose mode on
+2022-12-29 17:55:58.680 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-29 17:55:58.681 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 17:55:58.688 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 17:55:58.693 INFO  - Accepting connections on port 8082   Document Root: D:\0.github\Leap\home2
+2022-12-29 17:55:58.698 INFO  - Accepting connections on port 8080   Document Root: D:\0.github\Leap\home
+2022-12-29 17:56:00.864 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 17:56:00.865 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 17:56:00.867 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-29 17:56:00.887 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 17:56:00.888 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-29 17:56:00.888 INFO  - Connection= keep-alive
+2022-12-29 17:56:00.888 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-29 17:56:00.888 INFO  - Sec-Fetch-Site= none
+2022-12-29 17:56:00.889 INFO  - Sec-Fetch-Dest= document
+2022-12-29 17:56:00.889 INFO  - Host= localhost:8080
+2022-12-29 17:56:00.889 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-29 17:56:00.889 INFO  - Sec-Fetch-Mode= navigate
+2022-12-29 17:56:00.889 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-29 17:56:00.890 INFO  - sec-ch-ua-mobile= ?0
+2022-12-29 17:56:00.890 INFO  - Cache-Control= max-age=0
+2022-12-29 17:56:00.890 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-29 17:56:00.890 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-29 17:56:00.891 INFO  - Sec-Fetch-User= ?1
+2022-12-29 17:56:00.891 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-29 17:56:00.908 DEBUG - Request host: localhost
+2022-12-29 17:56:00.909 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 17:56:00.937 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/time/GetTime GET', httpVersion='HTTP/1.1', requestLines='Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC', requestType='GET', requestHost='localhost', reqHeader='{Cookie= io=PL7TK76OSCzqZRBSAAAC, Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection= keep-alive, User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36, Sec-Fetch-Site= none, Sec-Fetch-Dest= document, Host= localhost:8080, Accept-Encoding= gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode= navigate, sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96", sec-ch-ua-mobile= ?0, Cache-Control= max-age=0, Upgrade-Insecure-Requests= 1, sec-ch-ua-platform= "Windows", Sec-Fetch-User= ?1, Accept-Language= ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/time/GetTime', url='http://localhost:8080/time/GetTime', contextParam='{}'}', httpResponse='null', requestedHost='localhost', responseCode='404', responseBody='[B@6fe5d770', responseHeader='{Date: =Wed Dec 29 17:56:00 KST 2021, Server: =LeapWAS 1.0.0}'}
+2022-12-29 17:56:01.113 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 17:58:15.381 INFO  - Leap WAS server starting...
+2022-12-29 17:58:15.384 INFO  - --------------------------------------------------------------------------
+2022-12-29 17:58:15.384 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 17:58:15.384 INFO  - verbose mode on
+2022-12-29 17:58:15.407 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-29 17:58:15.409 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 17:58:15.415 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 17:58:15.421 INFO  - Accepting connections on port 8082   Document Root: D:\0.github\Leap\home2
+2022-12-29 17:58:15.425 INFO  - Accepting connections on port 8080   Document Root: D:\0.github\Leap\home
+2022-12-29 17:58:16.911 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 17:58:16.912 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 17:58:16.916 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-29 17:58:16.920 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 17:58:16.920 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-29 17:58:16.920 INFO  - Connection= keep-alive
+2022-12-29 17:58:16.922 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-29 17:58:16.922 INFO  - Sec-Fetch-Site= none
+2022-12-29 17:58:16.922 INFO  - Sec-Fetch-Dest= document
+2022-12-29 17:58:16.922 INFO  - Host= localhost:8080
+2022-12-29 17:58:16.922 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-29 17:58:16.922 INFO  - Sec-Fetch-Mode= navigate
+2022-12-29 17:58:16.922 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-29 17:58:16.922 INFO  - sec-ch-ua-mobile= ?0
+2022-12-29 17:58:16.922 INFO  - Cache-Control= max-age=0
+2022-12-29 17:58:16.922 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-29 17:58:16.922 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-29 17:58:16.923 INFO  - Sec-Fetch-User= ?1
+2022-12-29 17:58:16.923 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-29 17:58:16.937 DEBUG - Request host: localhost
+2022-12-29 17:58:16.938 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 17:58:16.969 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/time/GetTime GET', httpVersion='HTTP/1.1', requestLines='Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC', requestType='GET', requestHost='localhost', reqHeader='{Cookie= io=PL7TK76OSCzqZRBSAAAC, Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection= keep-alive, User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36, Sec-Fetch-Site= none, Sec-Fetch-Dest= document, Host= localhost:8080, Accept-Encoding= gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode= navigate, sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96", sec-ch-ua-mobile= ?0, Cache-Control= max-age=0, Upgrade-Insecure-Requests= 1, sec-ch-ua-platform= "Windows", Sec-Fetch-User= ?1, Accept-Language= ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/time/GetTime', url='http://localhost:8080/time/GetTime', contextParam='{}'}', httpResponse='null', requestedHost='localhost', responseCode='404', responseBody='[B@682072c4', responseHeader='{Date: =Wed Dec 29 17:58:16 KST 2021, Server: =LeapWAS 1.0.0}'}
+2022-12-29 17:58:17.173 INFO  - Client request accepted... : /127.0.0.1

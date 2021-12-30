@@ -1,18 +1,15 @@
 package org.chaostocosmos.leap.http;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.URISyntaxException;
-import java.net.UnknownHostException;
 import java.nio.file.Path;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import org.chaostocosmos.leap.http.servlet.ServletManager;
+import org.chaostocosmos.leap.http.service.ServiceManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory; 
 
@@ -22,11 +19,11 @@ import org.slf4j.LoggerFactory;
  * @author 9ins
  * @since 2021.09.15
  */
-public class LeapHttpServer {
+public class LeapHttpServer extends Thread {
     /**
      * logger
      */
-    Logger logger = LoggerFactory.getLogger(LeapHttpServer.class);
+    Logger logger = (Logger)LoggerFactory.getLogger(Context.getDefaultHost());
 
     /**
      * Index file
@@ -34,9 +31,19 @@ public class LeapHttpServer {
     public static String INDEX_FILE = Context.getWelcome();
 
     /**
+     * leap home path
+     */
+    Path homePath;
+
+    /**
+     * Server socket
+     */
+    ServerSocket server;
+
+    /**
      * servlet loading & managing
      */
-    ServletManager servletManager;
+    ServiceManager serviceManager;
 
     /**
      * thread pool
@@ -44,9 +51,14 @@ public class LeapHttpServer {
     ThreadPoolExecutor threadpool;
 
     /**
-     * InetAddress object
+     * Whether default host
      */
-    InetAddress inetAddress;
+    boolean isDefaultHost;
+
+    /**
+     * host 
+     */
+    String host;
 
     /**
      * port
@@ -59,98 +71,123 @@ public class LeapHttpServer {
     int backlog;
 
     /**
+     * document root
+     */
+    Path docroot;
+
+    /**
      * Default constructor 
      * @throws WASException
-     * @throws UnknownHostException
      */
-    public LeapHttpServer() throws UnknownHostException, WASException {
-        this(InetAddress.getByName(Context.getDefaultHost()),
-             Context.getDefaultPort(),
-             Context.getBackLog());
+    public LeapHttpServer() throws WASException {
+        this(Constants.DEFAULT_HOME_PATH);
+    }
+
+    /**
+     * Construct with home path
+     * @throws WASException
+     */
+    public LeapHttpServer(Path homePath) throws WASException {
+        this(Context.initialize(homePath));
+    }
+
+    /**
+     * Construct with Context object
+     * @param context
+     * @throws WASException
+     */
+    public LeapHttpServer(Context context) throws WASException {
+        this(
+            true,
+            Context.getHomePath(),
+            Context.getDefaultHost(),
+            Context.getDefaultPort(),
+            Context.getBackLog(),
+            Context.getDefaultDocroot(),
+            new ThreadPoolExecutor(Context.getThreadPoolCoreSize(), 
+                                   Context.getThreadPoolMaxSize(),                                                  
+                                   Context.getThreadPoolKeepAlive(), 
+                                   TimeUnit.SECONDS, 
+                                   new LinkedBlockingQueue<Runnable>())
+        );
     }
 
     /**
      * Constructor with configuration file Path
-     * @param inetAddress
+     * @param isDefaultHost
+     * @param homePath
+     * @param host
      * @param port
      * @param backlog
+     * @param docroot
+     * @param threadpool
      * @throws WASException
-     * @throws URISyntaxException
-     * @throws IOException
      */
-    public LeapHttpServer(InetAddress inetAddress, int port, int backlog) throws WASException {
-        this.inetAddress = inetAddress;
+    public LeapHttpServer(boolean isDefaultHost, Path homePath, String host, int port, int backlog, Path docroot, ThreadPoolExecutor threadpool) throws WASException {
+        this.isDefaultHost = true;
+        this.homePath = homePath;
+        this.host = host;
         this.port = port;
         this.backlog = backlog;
-        try {
-            this.servletManager = new ServletManager(Context.getServletBeanList());
-        } catch (
-                InstantiationException | 
-                IllegalAccessException | 
-                IllegalArgumentException | 
-                InvocationTargetException | 
-                NoSuchMethodException | 
-                SecurityException | 
-                ClassNotFoundException | 
-                WASException e) {
-                logger.error( Context.getErrorMsg("error022", new Object[]{e.getMessage()}) );
-        }        
-        start();
+        this.docroot = docroot;
+        this.threadpool = threadpool;
+        this.serviceManager = new ServiceManager();
+    }
+
+    /**
+     * Get service host
+     * @return
+     */
+    public String getHost() {
+        return this.host;
+    }
+
+    /**
+     * Get service port
+     * @return
+     */
+    public int getPort() {
+        return this.port;
     }
 
     /**
      * Get servlet loader object
      * @return
      */
-    protected ServletManager getServletManager() {
-        return this.servletManager;
+    protected ServiceManager getServiceManager() {
+        return this.serviceManager;
     }
 
     /**
      * Get root directory
      * @return
      */
-    public static Path getVirtualHostDocroot(String host) {
-        return null;
+    public static Path getDocroot(String host) {
+        return Context.getDocroot(host);
     }
 
-    /**
-     * Start server
-     * @throws WASException
-     */
-    public void start() throws WASException {
-        logger.info("WAS server starting... port: "
-                    +this.port+" ThreadPool CORE: "
-                    +Context.getThreadPoolCoreSize()+" MAX: "
-                    +Context.getThreadPoolMaxSize()+" KEEP-ALIVE WHEN IDLE(seconds): "
-                    +Context.getThreadPoolKeepAlive());
-                    
-        this.threadpool = new ThreadPoolExecutor(Context.getThreadPoolCoreSize(), 
-                                                 Context.getThreadPoolMaxSize(),                                                  
-                                                 Context.getThreadPoolKeepAlive(), 
-                                                 TimeUnit.SECONDS, 
-                                                 new LinkedBlockingQueue<Runnable>());
-
-        try (ServerSocket server = new ServerSocket(this.port, this.backlog, this.inetAddress)) {
+    @Override
+    public void run() {
+        try {
+            this.server = new ServerSocket(this.port, this.backlog, InetAddress.getByName(this.host));
             logger.info("Accepting connections on port " + server.getLocalPort());
-            logger.info("Document Root: " + Context.getDefaultDocroot().toFile().getAbsolutePath());
-            while (true) {
+            while (true) { 
                 Socket request = server.accept();
-                //List<String> hosts = ResourceHelper.get
-                Runnable r = new LeapRequestHandler(this, Context.getDefaultDocroot(), INDEX_FILE, request); 
                 logger.info("Client request accepted... : "+request.getLocalAddress().toString());
-                this.threadpool.submit(r);
+                this.threadpool.submit(new LeapRequestHandler(this, this.docroot, INDEX_FILE, request));
             }
-        } catch(IOException e) {
-            throw new WASException(MSG_TYPE.ERROR, "error021");
+        } catch(IOException | WASException e) {
+            logger.error(e.getMessage(), e);
         }
     }
 
     /**
-     * Shutdown server 
+     * stop server 
      * @throws InterruptedException
+     * @throws IOException
      */
-    public void shutdown() throws InterruptedException {
+    public void turnOff() throws InterruptedException, IOException {
         this.threadpool.awaitTermination(10, TimeUnit.MINUTES);
+        this.server.close();
     }
 }

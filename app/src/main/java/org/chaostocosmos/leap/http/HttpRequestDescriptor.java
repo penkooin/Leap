@@ -6,6 +6,10 @@ import java.net.URL;
 import java.net.http.HttpRequest;
 import java.util.Map;
 
+import org.chaostocosmos.leap.http.commons.LoggerFactory;
+
+import ch.qos.logback.classic.Logger;
+
 /**
  * Http request descriptor
  * 
@@ -14,13 +18,14 @@ import java.util.Map;
  */
 public class HttpRequestDescriptor {
 
-    HttpRequest httpRequest;
+    private HttpRequest httpRequest;
     private String httpVersion;
-    private String requestLines;
+    private String requestLines;    
     private REQUEST_TYPE requestType;
+    private String requestedHost;
     private Map<String, String> reqHeader;
     private String contentType;
-    private String reqBody; 
+    private byte[] reqBody; 
     private String contextPath;
     private URL url;
     private Map<String, String> contextParam;
@@ -30,6 +35,7 @@ public class HttpRequestDescriptor {
      * @param httpVersion
      * @param requestLines
      * @param requestType
+     * @param requestHost
      * @param reqHeader
      * @param reqBody
      * @param contextPath
@@ -39,15 +45,17 @@ public class HttpRequestDescriptor {
                                 String httpVersion, 
                                 String requestLines, 
                                 REQUEST_TYPE requestType, 
+                                String requestHost,
                                 Map<String,String> reqHeader, 
                                 String contentType,
-                                String reqBody, 
+                                byte[] reqBody, 
                                 String contextPath, 
                                 URL url,
                                 Map<String,String> contextParam) {
         this.httpVersion = httpVersion;
         this.requestLines = requestLines;
         this.requestType = requestType;
+        this.requestedHost = requestHost;
         this.reqHeader = reqHeader;
         this.contentType = contentType;
         this.reqBody = reqBody;
@@ -76,6 +84,10 @@ public class HttpRequestDescriptor {
         return this.requestType;
     }
 
+    public String getRequestedHost() {
+        return this.requestedHost;
+    }
+
     public Map<String,String> getReqHeader() {
         return this.reqHeader;
     }
@@ -88,7 +100,7 @@ public class HttpRequestDescriptor {
         this.contentType = contentType;
     }
 
-    public String getReqBody() {
+    public byte[] getReqBody() {
         return this.reqBody;
     }
 
@@ -105,32 +117,35 @@ public class HttpRequestDescriptor {
     }
 
     public void printURLInfo() throws URISyntaxException {
+        Logger logger = (Logger)LoggerFactory.getLogger(this.requestedHost);
         URI uri = this.url.toURI();
-        System.out.println("getHost :"+uri.getHost());
-        System.out.println("getPort :"+uri.getPort());
-        System.out.println("getQuery :"+uri.getQuery());
-        System.out.println("getPath :"+uri.getPath());
-        System.out.println("getRawPath :"+uri.getRawPath());
-        System.out.println("getRawQuery :"+uri.getRawQuery());
-        System.out.println("getFragment :"+uri.getFragment());
-        System.out.println("getScheme :"+uri.getScheme());
-        System.out.println("getRawAuthority :"+uri.getRawAuthority());
-        System.out.println("getRawUserInfo :"+uri.getRawUserInfo());
-        System.out.println("getAuthority :"+uri.getAuthority());
+        logger.debug("getHost :"+uri.getHost());
+        logger.debug("getPort :"+uri.getPort());
+        logger.debug("getQuery :"+uri.getQuery());
+        logger.debug("getPath :"+uri.getPath());
+        logger.debug("getRawPath :"+uri.getRawPath());
+        logger.debug("getRawQuery :"+uri.getRawQuery());
+        logger.debug("getFragment :"+uri.getFragment());
+        logger.debug("getScheme :"+uri.getScheme());
+        logger.debug("getRawAuthority :"+uri.getRawAuthority());
+        logger.debug("getRawUserInfo :"+uri.getRawUserInfo());
+        logger.debug("getAuthority :"+uri.getAuthority());
     }
 
     @Override
     public String toString() {
         return "{" +
-            " httpVersion='" + getHttpVersion() + "'" +
+            " httpRequest='" + getHttpRequest() + "'" +
+            ", httpVersion='" + getHttpVersion() + "'" +
             ", requestLines='" + getRequestLines() + "'" +
             ", requestType='" + getRequestType() + "'" +
+            ", requestHost='" + getRequestedHost() + "'" +
             ", reqHeader='" + getReqHeader() + "'" +
+            ", contentType='" + getContentType() + "'" +
             ", reqBody='" + getReqBody() + "'" +
             ", contextPath='" + getContextPath() + "'" +
             ", url='" + getUrl() + "'" +
-            ", url='" + getContextParam() + "'" +
+            ", contextParam='" + getContextParam() + "'" +
             "}";
     }
-
 }

@@ -1,0 +1,1328 @@
+2022-12-30 13:18:12.029 INFO  - Leap WAS server starting...
+2022-12-30 13:18:12.035 INFO  - --------------------------------------------------------------------------
+2022-12-30 13:18:12.036 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-30 13:18:12.036 INFO  - verbose mode on
+2022-12-30 13:18:12.120 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-30 13:18:12.120 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-12-30 13:18:12.120 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-12-30 13:18:12.121 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-12-30 13:18:12.121 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-12-30 13:18:12.122 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-12-30 13:18:12.122 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-12-30 13:18:12.122 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-30 13:18:12.124 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-30 13:18:12.134 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-30 13:18:12.134 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-12-30 13:18:12.134 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-12-30 13:18:12.135 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-12-30 13:18:12.135 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-12-30 13:18:12.135 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-12-30 13:18:12.135 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-12-30 13:18:12.135 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-30 13:18:12.140 INFO  - Accepting connections on port 8082
+2022-12-30 13:18:12.146 INFO  - Accepting connections on port 8080
+2022-12-30 13:18:14.966 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 13:18:14.968 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 13:18:14.972 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-30 13:18:14.975 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:18:14.975 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-30 13:18:14.975 INFO  - Connection= keep-alive
+2022-12-30 13:18:14.976 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-30 13:18:14.976 INFO  - Sec-Fetch-Site= none
+2022-12-30 13:18:14.976 INFO  - Sec-Fetch-Dest= document
+2022-12-30 13:18:14.977 INFO  - Host= localhost:8080
+2022-12-30 13:18:14.977 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-30 13:18:14.978 INFO  - Sec-Fetch-Mode= navigate
+2022-12-30 13:18:14.978 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-30 13:18:14.978 INFO  - sec-ch-ua-mobile= ?0
+2022-12-30 13:18:14.978 INFO  - Cache-Control= max-age=0
+2022-12-30 13:18:14.979 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-30 13:18:14.979 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-30 13:18:14.979 INFO  - Sec-Fetch-User= ?1
+2022-12-30 13:18:14.979 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-30 13:18:14.995 DEBUG - Request host: localhost
+2022-12-30 13:18:14.996 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:18:15.000 ERROR - null
+java.lang.NullPointerException: null
+	at org.chaostocosmos.leap.http.service.AbstractLeapService.serve(AbstractLeapService.java:49)
+	at org.chaostocosmos.leap.http.service.TimeServiceImpl.serve(TimeServiceImpl.java:1)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeService(ServiceInvoker.java:34)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:94)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-12-30 13:18:15.229 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 13:18:51.388 INFO  - Leap WAS server starting...
+2022-12-30 13:18:51.392 INFO  - --------------------------------------------------------------------------
+2022-12-30 13:18:51.392 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-30 13:18:51.392 INFO  - verbose mode on
+2022-12-30 13:18:51.426 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-30 13:18:51.426 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-12-30 13:18:51.427 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-12-30 13:18:51.427 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-12-30 13:18:51.427 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-12-30 13:18:51.427 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-12-30 13:18:51.428 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-12-30 13:18:51.428 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-30 13:18:51.431 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-30 13:18:51.439 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-30 13:18:51.439 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-12-30 13:18:51.439 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-12-30 13:18:51.440 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-12-30 13:18:51.440 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-12-30 13:18:51.440 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-12-30 13:18:51.441 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-12-30 13:18:51.441 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-30 13:18:51.446 INFO  - Accepting connections on port 8082
+2022-12-30 13:18:51.452 INFO  - Accepting connections on port 8080
+2022-12-30 13:18:52.925 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 13:18:52.926 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 13:18:52.928 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-30 13:18:52.931 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:18:52.931 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-30 13:18:52.932 INFO  - Connection= keep-alive
+2022-12-30 13:18:52.932 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-30 13:18:52.932 INFO  - Sec-Fetch-Site= none
+2022-12-30 13:18:52.932 INFO  - Sec-Fetch-Dest= document
+2022-12-30 13:18:52.932 INFO  - Host= localhost:8080
+2022-12-30 13:18:52.933 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-30 13:18:52.933 INFO  - Sec-Fetch-Mode= navigate
+2022-12-30 13:18:52.933 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-30 13:18:52.933 INFO  - sec-ch-ua-mobile= ?0
+2022-12-30 13:18:52.933 INFO  - Cache-Control= max-age=0
+2022-12-30 13:18:52.933 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-30 13:18:52.933 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-30 13:18:52.934 INFO  - Sec-Fetch-User= ?1
+2022-12-30 13:18:52.934 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-30 13:18:52.949 DEBUG - Request host: localhost
+2022-12-30 13:18:52.950 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:18:52.953 INFO  - getTime servlet started....+++++++++++++++++++++++++++++++++++++++++++++++++
+2022-12-30 13:18:52.964 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/time/GetTime GET', httpVersion='HTTP/1.1', requestLines='Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC', requestType='GET', requestHost='localhost', reqHeader='{Cookie= io=PL7TK76OSCzqZRBSAAAC, Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection= keep-alive, User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36, Sec-Fetch-Site= none, Sec-Fetch-Dest= document, Host= localhost:8080, Accept-Encoding= gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode= navigate, sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96", sec-ch-ua-mobile= ?0, Cache-Control= max-age=0, Upgrade-Insecure-Requests= 1, sec-ch-ua-platform= "Windows", Sec-Fetch-User= ?1, Accept-Language= ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/time/GetTime', url='http://localhost:8080/time/GetTime', contextParam='{}'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@2e973d58', responseHeader='{Date: =Thu Dec 30 13:18:52 KST 2021, Server: =LeapWAS 1.0.0}'}
+2022-12-30 13:18:53.186 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 13:20:14.208 INFO  - Leap WAS server starting...
+2022-12-30 13:20:14.211 INFO  - --------------------------------------------------------------------------
+2022-12-30 13:20:14.211 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-30 13:20:14.212 INFO  - verbose mode on
+2022-12-30 13:20:14.250 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-30 13:20:14.250 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-12-30 13:20:14.250 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-12-30 13:20:14.251 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-12-30 13:20:14.252 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-12-30 13:20:14.252 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-12-30 13:20:14.252 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-12-30 13:20:14.252 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-30 13:20:14.255 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-30 13:20:14.262 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-30 13:20:14.262 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-12-30 13:20:14.262 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-12-30 13:20:14.263 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-12-30 13:20:14.263 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-12-30 13:20:14.264 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-12-30 13:20:14.264 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-12-30 13:20:14.264 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-30 13:20:14.283 INFO  - Accepting connections on port 8082
+2022-12-30 13:20:14.298 INFO  - Accepting connections on port 8080
+2022-12-30 13:20:16.047 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 13:20:16.048 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 13:20:16.050 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-30 13:20:16.055 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:20:16.055 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-30 13:20:16.055 INFO  - Connection= keep-alive
+2022-12-30 13:20:16.056 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-30 13:20:16.056 INFO  - Sec-Fetch-Site= none
+2022-12-30 13:20:16.056 INFO  - Sec-Fetch-Dest= document
+2022-12-30 13:20:16.056 INFO  - Host= localhost:8080
+2022-12-30 13:20:16.057 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-30 13:20:16.057 INFO  - Sec-Fetch-Mode= navigate
+2022-12-30 13:20:16.057 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-30 13:20:16.057 INFO  - sec-ch-ua-mobile= ?0
+2022-12-30 13:20:16.057 INFO  - Cache-Control= max-age=0
+2022-12-30 13:20:16.057 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-30 13:20:16.058 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-30 13:20:16.058 INFO  - Sec-Fetch-User= ?1
+2022-12-30 13:20:16.058 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-30 13:20:16.073 DEBUG - Request host: localhost
+2022-12-30 13:20:16.073 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:20:16.080 ERROR - java.lang.IllegalArgumentException: wrong number of arguments
+org.chaostocosmos.leap.http.WASException: java.lang.IllegalArgumentException: wrong number of arguments
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:64)
+	at org.chaostocosmos.leap.http.service.AbstractLeapService.serve(AbstractLeapService.java:54)
+	at org.chaostocosmos.leap.http.service.TimeServiceImpl.serve(TimeServiceImpl.java:1)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeService(ServiceInvoker.java:34)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:94)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.IllegalArgumentException: wrong number of arguments
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:62)
+	... 9 common frames omitted
+2022-12-30 13:20:16.310 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 13:20:17.113 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-30 13:20:17.114 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:20:17.115 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-30 13:20:17.115 INFO  - Connection= keep-alive
+2022-12-30 13:20:17.115 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-30 13:20:17.115 INFO  - Sec-Fetch-Site= none
+2022-12-30 13:20:17.116 INFO  - Sec-Fetch-Dest= document
+2022-12-30 13:20:17.116 INFO  - Host= localhost:8080
+2022-12-30 13:20:17.116 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-30 13:20:17.116 INFO  - Sec-Fetch-Mode= navigate
+2022-12-30 13:20:17.117 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-30 13:20:17.117 INFO  - sec-ch-ua-mobile= ?0
+2022-12-30 13:20:17.118 INFO  - Cache-Control= max-age=0
+2022-12-30 13:20:17.118 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-30 13:20:17.118 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-30 13:20:17.118 INFO  - Sec-Fetch-User= ?1
+2022-12-30 13:20:17.118 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-30 13:20:17.119 DEBUG - Request host: localhost
+2022-12-30 13:20:17.120 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:20:17.122 ERROR - java.lang.IllegalArgumentException: wrong number of arguments
+org.chaostocosmos.leap.http.WASException: java.lang.IllegalArgumentException: wrong number of arguments
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:64)
+	at org.chaostocosmos.leap.http.service.AbstractLeapService.serve(AbstractLeapService.java:54)
+	at org.chaostocosmos.leap.http.service.TimeServiceImpl.serve(TimeServiceImpl.java:1)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeService(ServiceInvoker.java:34)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:94)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.IllegalArgumentException: wrong number of arguments
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:62)
+	... 9 common frames omitted
+2022-12-30 13:20:17.126 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-30 13:20:17.127 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:20:17.127 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-30 13:20:17.127 INFO  - Connection= keep-alive
+2022-12-30 13:20:17.128 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-30 13:20:17.128 INFO  - Sec-Fetch-Site= none
+2022-12-30 13:20:17.128 INFO  - Sec-Fetch-Dest= document
+2022-12-30 13:20:17.128 INFO  - Host= localhost:8080
+2022-12-30 13:20:17.128 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-30 13:20:17.129 INFO  - Sec-Fetch-Mode= navigate
+2022-12-30 13:20:17.129 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-30 13:20:17.129 INFO  - sec-ch-ua-mobile= ?0
+2022-12-30 13:20:17.129 INFO  - Cache-Control= max-age=0
+2022-12-30 13:20:17.130 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-30 13:20:17.130 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-30 13:20:17.130 INFO  - Sec-Fetch-User= ?1
+2022-12-30 13:20:17.130 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-30 13:20:17.130 DEBUG - Request host: localhost
+2022-12-30 13:20:17.131 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:20:17.135 ERROR - java.lang.IllegalArgumentException: wrong number of arguments
+org.chaostocosmos.leap.http.WASException: java.lang.IllegalArgumentException: wrong number of arguments
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:64)
+	at org.chaostocosmos.leap.http.service.AbstractLeapService.serve(AbstractLeapService.java:54)
+	at org.chaostocosmos.leap.http.service.TimeServiceImpl.serve(TimeServiceImpl.java:1)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeService(ServiceInvoker.java:34)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:94)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.IllegalArgumentException: wrong number of arguments
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:62)
+	... 9 common frames omitted
+2022-12-30 13:20:17.446 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 13:20:17.449 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-30 13:20:17.450 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:20:17.451 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-30 13:20:17.451 INFO  - Connection= keep-alive
+2022-12-30 13:20:17.452 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-30 13:20:17.453 INFO  - Sec-Fetch-Site= none
+2022-12-30 13:20:17.453 INFO  - Sec-Fetch-Dest= document
+2022-12-30 13:20:17.453 INFO  - Host= localhost:8080
+2022-12-30 13:20:17.453 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-30 13:20:17.454 INFO  - Sec-Fetch-Mode= navigate
+2022-12-30 13:20:17.454 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-30 13:20:17.454 INFO  - sec-ch-ua-mobile= ?0
+2022-12-30 13:20:17.455 INFO  - Cache-Control= max-age=0
+2022-12-30 13:20:17.455 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-30 13:20:17.456 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-30 13:20:17.456 INFO  - Sec-Fetch-User= ?1
+2022-12-30 13:20:17.456 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-30 13:20:17.458 DEBUG - Request host: localhost
+2022-12-30 13:20:17.458 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:20:17.463 ERROR - java.lang.IllegalArgumentException: wrong number of arguments
+org.chaostocosmos.leap.http.WASException: java.lang.IllegalArgumentException: wrong number of arguments
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:64)
+	at org.chaostocosmos.leap.http.service.AbstractLeapService.serve(AbstractLeapService.java:54)
+	at org.chaostocosmos.leap.http.service.TimeServiceImpl.serve(TimeServiceImpl.java:1)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeService(ServiceInvoker.java:34)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:94)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.IllegalArgumentException: wrong number of arguments
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:62)
+	... 9 common frames omitted
+2022-12-30 13:20:17.710 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 13:20:22.505 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-30 13:20:22.506 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:20:22.507 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-30 13:20:22.507 INFO  - Connection= keep-alive
+2022-12-30 13:20:22.507 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-30 13:20:22.508 INFO  - Sec-Fetch-Site= none
+2022-12-30 13:20:22.508 INFO  - Sec-Fetch-Dest= document
+2022-12-30 13:20:22.508 INFO  - Host= localhost:8080
+2022-12-30 13:20:22.508 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-30 13:20:22.508 INFO  - Sec-Fetch-Mode= navigate
+2022-12-30 13:20:22.509 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-30 13:20:22.509 INFO  - sec-ch-ua-mobile= ?0
+2022-12-30 13:20:22.509 INFO  - Cache-Control= max-age=0
+2022-12-30 13:20:22.509 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-30 13:20:22.510 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-30 13:20:22.510 INFO  - Sec-Fetch-User= ?1
+2022-12-30 13:20:22.513 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-30 13:20:22.523 DEBUG - Request host: localhost
+2022-12-30 13:20:22.523 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:20:22.526 ERROR - java.lang.IllegalArgumentException: wrong number of arguments
+org.chaostocosmos.leap.http.WASException: java.lang.IllegalArgumentException: wrong number of arguments
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:64)
+	at org.chaostocosmos.leap.http.service.AbstractLeapService.serve(AbstractLeapService.java:54)
+	at org.chaostocosmos.leap.http.service.TimeServiceImpl.serve(TimeServiceImpl.java:1)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeService(ServiceInvoker.java:34)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:94)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.IllegalArgumentException: wrong number of arguments
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:62)
+	... 9 common frames omitted
+2022-12-30 13:20:22.818 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 13:20:22.819 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-30 13:20:22.819 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:20:22.819 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-30 13:20:22.819 INFO  - Connection= keep-alive
+2022-12-30 13:20:22.819 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-30 13:20:22.820 INFO  - Sec-Fetch-Site= none
+2022-12-30 13:20:22.820 INFO  - Sec-Fetch-Dest= document
+2022-12-30 13:20:22.820 INFO  - Host= localhost:8080
+2022-12-30 13:20:22.820 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-30 13:20:22.820 INFO  - Sec-Fetch-Mode= navigate
+2022-12-30 13:20:22.820 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-30 13:20:22.820 INFO  - sec-ch-ua-mobile= ?0
+2022-12-30 13:20:22.821 INFO  - Cache-Control= max-age=0
+2022-12-30 13:20:22.821 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-30 13:20:22.821 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-30 13:20:22.821 INFO  - Sec-Fetch-User= ?1
+2022-12-30 13:20:22.821 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-30 13:20:22.822 DEBUG - Request host: localhost
+2022-12-30 13:20:22.822 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:20:22.825 ERROR - java.lang.IllegalArgumentException: wrong number of arguments
+org.chaostocosmos.leap.http.WASException: java.lang.IllegalArgumentException: wrong number of arguments
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:64)
+	at org.chaostocosmos.leap.http.service.AbstractLeapService.serve(AbstractLeapService.java:54)
+	at org.chaostocosmos.leap.http.service.TimeServiceImpl.serve(TimeServiceImpl.java:1)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeService(ServiceInvoker.java:34)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:94)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.IllegalArgumentException: wrong number of arguments
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:62)
+	... 9 common frames omitted
+2022-12-30 13:20:53.147 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 13:20:53.148 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 13:20:53.149 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-30 13:20:53.149 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:20:53.150 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-30 13:20:53.150 INFO  - Connection= keep-alive
+2022-12-30 13:20:53.150 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-30 13:20:53.150 INFO  - Sec-Fetch-Site= none
+2022-12-30 13:20:53.150 INFO  - Sec-Fetch-Dest= document
+2022-12-30 13:20:53.150 INFO  - Host= localhost:8080
+2022-12-30 13:20:53.150 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-30 13:20:53.152 INFO  - Sec-Fetch-Mode= navigate
+2022-12-30 13:20:53.152 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-30 13:20:53.152 INFO  - sec-ch-ua-mobile= ?0
+2022-12-30 13:20:53.152 INFO  - Cache-Control= max-age=0
+2022-12-30 13:20:53.152 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-30 13:20:53.153 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-30 13:20:53.153 INFO  - Sec-Fetch-User= ?1
+2022-12-30 13:20:53.153 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-30 13:20:53.154 DEBUG - Request host: localhost
+2022-12-30 13:20:53.154 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:20:53.156 ERROR - java.lang.IllegalArgumentException: wrong number of arguments
+org.chaostocosmos.leap.http.WASException: java.lang.IllegalArgumentException: wrong number of arguments
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:64)
+	at org.chaostocosmos.leap.http.service.AbstractLeapService.serve(AbstractLeapService.java:54)
+	at org.chaostocosmos.leap.http.service.TimeServiceImpl.serve(TimeServiceImpl.java:1)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeService(ServiceInvoker.java:34)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:94)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.IllegalArgumentException: wrong number of arguments
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:62)
+	... 9 common frames omitted
+2022-12-30 13:20:53.412 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 13:21:06.155 INFO  - Leap WAS server starting...
+2022-12-30 13:21:06.159 INFO  - --------------------------------------------------------------------------
+2022-12-30 13:21:06.159 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-30 13:21:06.159 INFO  - verbose mode on
+2022-12-30 13:21:06.189 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-30 13:21:06.189 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-12-30 13:21:06.190 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-12-30 13:21:06.190 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-12-30 13:21:06.190 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-12-30 13:21:06.190 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-12-30 13:21:06.190 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-12-30 13:21:06.190 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-30 13:21:06.192 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-30 13:21:06.200 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-30 13:21:06.200 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-12-30 13:21:06.201 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-12-30 13:21:06.201 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-12-30 13:21:06.201 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-12-30 13:21:06.201 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-12-30 13:21:06.201 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-12-30 13:21:06.201 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-30 13:21:06.206 INFO  - Accepting connections on port 8082
+2022-12-30 13:21:06.211 INFO  - Accepting connections on port 8080
+2022-12-30 13:21:07.978 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 13:21:07.979 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 13:21:07.981 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-30 13:21:07.984 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:21:07.985 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-30 13:21:07.985 INFO  - Connection= keep-alive
+2022-12-30 13:21:07.985 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-30 13:21:07.986 INFO  - Sec-Fetch-Site= none
+2022-12-30 13:21:07.986 INFO  - Sec-Fetch-Dest= document
+2022-12-30 13:21:07.987 INFO  - Host= localhost:8080
+2022-12-30 13:21:07.988 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-30 13:21:07.992 INFO  - Sec-Fetch-Mode= navigate
+2022-12-30 13:21:07.998 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-30 13:21:08.001 INFO  - sec-ch-ua-mobile= ?0
+2022-12-30 13:21:08.001 INFO  - Cache-Control= max-age=0
+2022-12-30 13:21:08.002 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-30 13:21:08.002 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-30 13:21:08.002 INFO  - Sec-Fetch-User= ?1
+2022-12-30 13:21:08.002 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-30 13:21:08.023 DEBUG - Request host: localhost
+2022-12-30 13:21:08.023 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:21:08.030 DEBUG - Basic Http request filter processing...
+2022-12-30 13:21:08.031 INFO  - getTime servlet started....+++++++++++++++++++++++++++++++++++++++++++++++++
+2022-12-30 13:21:08.112 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/time/GetTime GET', httpVersion='HTTP/1.1', requestLines='Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC', requestType='GET', requestHost='localhost', reqHeader='{Cookie= io=PL7TK76OSCzqZRBSAAAC, Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection= keep-alive, User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36, Sec-Fetch-Site= none, Sec-Fetch-Dest= document, Host= localhost:8080, Accept-Encoding= gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode= navigate, sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96", sec-ch-ua-mobile= ?0, Cache-Control= max-age=0, Upgrade-Insecure-Requests= 1, sec-ch-ua-platform= "Windows", Sec-Fetch-User= ?1, Accept-Language= ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/time/GetTime', url='http://localhost:8080/time/GetTime', contextParam='{}'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@7007c81e', responseHeader='{Date: =Thu Dec 30 13:21:08 KST 2021, Server: =LeapWAS 1.0.0}'}
+2022-12-30 13:21:08.222 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 13:24:06.093 INFO  - Leap WAS server starting...
+2022-12-30 13:24:06.096 INFO  - --------------------------------------------------------------------------
+2022-12-30 13:24:06.096 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-30 13:24:06.097 INFO  - verbose mode on
+2022-12-30 13:24:06.135 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-30 13:24:06.136 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-12-30 13:24:06.136 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-12-30 13:24:06.136 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-12-30 13:24:06.136 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-12-30 13:24:06.136 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-12-30 13:24:06.136 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-12-30 13:24:06.136 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-30 13:24:06.138 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-30 13:24:06.143 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-30 13:24:06.144 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-12-30 13:24:06.144 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-12-30 13:24:06.144 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-12-30 13:24:06.144 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-12-30 13:24:06.144 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-12-30 13:24:06.145 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-12-30 13:24:06.145 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-30 13:24:06.152 INFO  - Accepting connections on port 8082
+2022-12-30 13:24:06.156 INFO  - Accepting connections on port 8080
+2022-12-30 13:24:08.932 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 13:24:08.935 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 13:24:08.937 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-30 13:24:08.941 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:24:08.942 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-30 13:24:08.942 INFO  - Connection= keep-alive
+2022-12-30 13:24:08.942 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-30 13:24:08.943 INFO  - Sec-Fetch-Site= none
+2022-12-30 13:24:08.943 INFO  - Sec-Fetch-Dest= document
+2022-12-30 13:24:08.943 INFO  - Host= localhost:8080
+2022-12-30 13:24:08.944 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-30 13:24:08.944 INFO  - Sec-Fetch-Mode= navigate
+2022-12-30 13:24:08.944 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-30 13:24:08.945 INFO  - sec-ch-ua-mobile= ?0
+2022-12-30 13:24:08.945 INFO  - Cache-Control= max-age=0
+2022-12-30 13:24:08.945 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-30 13:24:08.945 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-30 13:24:08.946 INFO  - Sec-Fetch-User= ?1
+2022-12-30 13:24:08.946 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-30 13:24:08.976 DEBUG - Request host: localhost
+2022-12-30 13:24:08.977 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:24:08.988 ERROR - java.lang.reflect.InvocationTargetException
+org.chaostocosmos.leap.http.WASException: java.lang.reflect.InvocationTargetException
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:64)
+	at org.chaostocosmos.leap.http.service.AbstractLeapService.serve(AbstractLeapService.java:54)
+	at org.chaostocosmos.leap.http.service.TimeServiceImpl.serve(TimeServiceImpl.java:1)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeService(ServiceInvoker.java:34)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:94)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:62)
+	... 9 common frames omitted
+Caused by: org.chaostocosmos.leap.http.WASException: Error in building doc-root process: [Ljava.lang.Object;@5a6b8308
+	at org.chaostocosmos.leap.http.filter.BasicAuthFilter.filterRequest(BasicAuthFilter.java:35)
+	... 14 common frames omitted
+Caused by: java.lang.Exception: 
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:32)
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:21)
+	... 15 common frames omitted
+2022-12-30 13:24:09.193 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 13:24:10.072 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-30 13:24:10.073 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:24:10.073 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-30 13:24:10.073 INFO  - Connection= keep-alive
+2022-12-30 13:24:10.074 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-30 13:24:10.074 INFO  - Sec-Fetch-Site= none
+2022-12-30 13:24:10.074 INFO  - Sec-Fetch-Dest= document
+2022-12-30 13:24:10.074 INFO  - Host= localhost:8080
+2022-12-30 13:24:10.074 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-30 13:24:10.074 INFO  - Sec-Fetch-Mode= navigate
+2022-12-30 13:24:10.074 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-30 13:24:10.075 INFO  - sec-ch-ua-mobile= ?0
+2022-12-30 13:24:10.075 INFO  - Cache-Control= max-age=0
+2022-12-30 13:24:10.075 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-30 13:24:10.075 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-30 13:24:10.075 INFO  - Sec-Fetch-User= ?1
+2022-12-30 13:24:10.076 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-30 13:24:10.076 DEBUG - Request host: localhost
+2022-12-30 13:24:10.076 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:24:10.079 ERROR - java.lang.reflect.InvocationTargetException
+org.chaostocosmos.leap.http.WASException: java.lang.reflect.InvocationTargetException
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:64)
+	at org.chaostocosmos.leap.http.service.AbstractLeapService.serve(AbstractLeapService.java:54)
+	at org.chaostocosmos.leap.http.service.TimeServiceImpl.serve(TimeServiceImpl.java:1)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeService(ServiceInvoker.java:34)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:94)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:62)
+	... 9 common frames omitted
+Caused by: org.chaostocosmos.leap.http.WASException: Error in building doc-root process: [Ljava.lang.Object;@7653db4e
+	at org.chaostocosmos.leap.http.filter.BasicAuthFilter.filterRequest(BasicAuthFilter.java:35)
+	... 14 common frames omitted
+Caused by: java.lang.Exception: 
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:32)
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:21)
+	... 15 common frames omitted
+2022-12-30 13:24:10.083 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-30 13:24:10.083 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:24:10.084 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-30 13:24:10.084 INFO  - Connection= keep-alive
+2022-12-30 13:24:10.084 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-30 13:24:10.084 INFO  - Sec-Fetch-Site= none
+2022-12-30 13:24:10.084 INFO  - Sec-Fetch-Dest= document
+2022-12-30 13:24:10.084 INFO  - Host= localhost:8080
+2022-12-30 13:24:10.085 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-30 13:24:10.085 INFO  - Sec-Fetch-Mode= navigate
+2022-12-30 13:24:10.086 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-30 13:24:10.086 INFO  - sec-ch-ua-mobile= ?0
+2022-12-30 13:24:10.086 INFO  - Cache-Control= max-age=0
+2022-12-30 13:24:10.086 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-30 13:24:10.086 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-30 13:24:10.086 INFO  - Sec-Fetch-User= ?1
+2022-12-30 13:24:10.087 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-30 13:24:10.087 DEBUG - Request host: localhost
+2022-12-30 13:24:10.087 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:24:10.090 ERROR - java.lang.reflect.InvocationTargetException
+org.chaostocosmos.leap.http.WASException: java.lang.reflect.InvocationTargetException
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:64)
+	at org.chaostocosmos.leap.http.service.AbstractLeapService.serve(AbstractLeapService.java:54)
+	at org.chaostocosmos.leap.http.service.TimeServiceImpl.serve(TimeServiceImpl.java:1)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeService(ServiceInvoker.java:34)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:94)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:62)
+	... 9 common frames omitted
+Caused by: org.chaostocosmos.leap.http.WASException: Error in building doc-root process: [Ljava.lang.Object;@5c2c2603
+	at org.chaostocosmos.leap.http.filter.BasicAuthFilter.filterRequest(BasicAuthFilter.java:35)
+	... 14 common frames omitted
+Caused by: java.lang.Exception: 
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:32)
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:21)
+	... 15 common frames omitted
+2022-12-30 13:24:10.405 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 13:24:10.406 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-30 13:24:10.407 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:24:10.407 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-30 13:24:10.407 INFO  - Connection= keep-alive
+2022-12-30 13:24:10.408 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-30 13:24:10.408 INFO  - Sec-Fetch-Site= none
+2022-12-30 13:24:10.408 INFO  - Sec-Fetch-Dest= document
+2022-12-30 13:24:10.408 INFO  - Host= localhost:8080
+2022-12-30 13:24:10.408 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-30 13:24:10.409 INFO  - Sec-Fetch-Mode= navigate
+2022-12-30 13:24:10.409 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-30 13:24:10.409 INFO  - sec-ch-ua-mobile= ?0
+2022-12-30 13:24:10.409 INFO  - Cache-Control= max-age=0
+2022-12-30 13:24:10.409 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-30 13:24:10.409 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-30 13:24:10.409 INFO  - Sec-Fetch-User= ?1
+2022-12-30 13:24:10.409 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-30 13:24:10.410 DEBUG - Request host: localhost
+2022-12-30 13:24:10.410 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:24:10.415 ERROR - java.lang.reflect.InvocationTargetException
+org.chaostocosmos.leap.http.WASException: java.lang.reflect.InvocationTargetException
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:64)
+	at org.chaostocosmos.leap.http.service.AbstractLeapService.serve(AbstractLeapService.java:54)
+	at org.chaostocosmos.leap.http.service.TimeServiceImpl.serve(TimeServiceImpl.java:1)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeService(ServiceInvoker.java:34)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:94)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:62)
+	... 9 common frames omitted
+Caused by: org.chaostocosmos.leap.http.WASException: Error in building doc-root process: [Ljava.lang.Object;@69c0b0fd
+	at org.chaostocosmos.leap.http.filter.BasicAuthFilter.filterRequest(BasicAuthFilter.java:35)
+	... 14 common frames omitted
+Caused by: java.lang.Exception: 
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:32)
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:21)
+	... 15 common frames omitted
+2022-12-30 13:24:10.669 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 13:24:15.440 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-30 13:24:15.441 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:24:15.441 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-30 13:24:15.441 INFO  - Connection= keep-alive
+2022-12-30 13:24:15.442 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-30 13:24:15.442 INFO  - Sec-Fetch-Site= none
+2022-12-30 13:24:15.442 INFO  - Sec-Fetch-Dest= document
+2022-12-30 13:24:15.443 INFO  - Host= localhost:8080
+2022-12-30 13:24:15.443 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-30 13:24:15.443 INFO  - Sec-Fetch-Mode= navigate
+2022-12-30 13:24:15.444 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-30 13:24:15.444 INFO  - sec-ch-ua-mobile= ?0
+2022-12-30 13:24:15.444 INFO  - Cache-Control= max-age=0
+2022-12-30 13:24:15.444 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-30 13:24:15.444 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-30 13:24:15.444 INFO  - Sec-Fetch-User= ?1
+2022-12-30 13:24:15.445 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-30 13:24:15.445 DEBUG - Request host: localhost
+2022-12-30 13:24:15.445 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:24:15.449 ERROR - java.lang.reflect.InvocationTargetException
+org.chaostocosmos.leap.http.WASException: java.lang.reflect.InvocationTargetException
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:64)
+	at org.chaostocosmos.leap.http.service.AbstractLeapService.serve(AbstractLeapService.java:54)
+	at org.chaostocosmos.leap.http.service.TimeServiceImpl.serve(TimeServiceImpl.java:1)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeService(ServiceInvoker.java:34)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:94)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:62)
+	... 9 common frames omitted
+Caused by: org.chaostocosmos.leap.http.WASException: Error in building doc-root process: [Ljava.lang.Object;@529c8504
+	at org.chaostocosmos.leap.http.filter.BasicAuthFilter.filterRequest(BasicAuthFilter.java:35)
+	... 14 common frames omitted
+Caused by: java.lang.Exception: 
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:32)
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:21)
+	... 15 common frames omitted
+2022-12-30 13:24:15.754 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 13:24:15.756 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-30 13:24:15.756 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:24:15.757 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-30 13:24:15.757 INFO  - Connection= keep-alive
+2022-12-30 13:24:15.757 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-30 13:24:15.757 INFO  - Sec-Fetch-Site= none
+2022-12-30 13:24:15.758 INFO  - Sec-Fetch-Dest= document
+2022-12-30 13:24:15.758 INFO  - Host= localhost:8080
+2022-12-30 13:24:15.758 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-30 13:24:15.758 INFO  - Sec-Fetch-Mode= navigate
+2022-12-30 13:24:15.759 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-30 13:24:15.759 INFO  - sec-ch-ua-mobile= ?0
+2022-12-30 13:24:15.759 INFO  - Cache-Control= max-age=0
+2022-12-30 13:24:15.759 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-30 13:24:15.759 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-30 13:24:15.760 INFO  - Sec-Fetch-User= ?1
+2022-12-30 13:24:15.760 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-30 13:24:15.761 DEBUG - Request host: localhost
+2022-12-30 13:24:15.761 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:24:15.764 ERROR - java.lang.reflect.InvocationTargetException
+org.chaostocosmos.leap.http.WASException: java.lang.reflect.InvocationTargetException
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:64)
+	at org.chaostocosmos.leap.http.service.AbstractLeapService.serve(AbstractLeapService.java:54)
+	at org.chaostocosmos.leap.http.service.TimeServiceImpl.serve(TimeServiceImpl.java:1)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeService(ServiceInvoker.java:34)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:94)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:62)
+	... 9 common frames omitted
+Caused by: org.chaostocosmos.leap.http.WASException: Error in building doc-root process: [Ljava.lang.Object;@11790956
+	at org.chaostocosmos.leap.http.filter.BasicAuthFilter.filterRequest(BasicAuthFilter.java:35)
+	... 14 common frames omitted
+Caused by: java.lang.Exception: 
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:32)
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:21)
+	... 15 common frames omitted
+2022-12-30 13:24:46.097 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 13:24:46.098 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 13:24:46.101 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-30 13:24:46.102 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:24:46.103 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-30 13:24:46.104 INFO  - Connection= keep-alive
+2022-12-30 13:24:46.104 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-30 13:24:46.104 INFO  - Sec-Fetch-Site= none
+2022-12-30 13:24:46.105 INFO  - Sec-Fetch-Dest= document
+2022-12-30 13:24:46.105 INFO  - Host= localhost:8080
+2022-12-30 13:24:46.106 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-30 13:24:46.106 INFO  - Sec-Fetch-Mode= navigate
+2022-12-30 13:24:46.106 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-30 13:24:46.107 INFO  - sec-ch-ua-mobile= ?0
+2022-12-30 13:24:46.107 INFO  - Cache-Control= max-age=0
+2022-12-30 13:24:46.107 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-30 13:24:46.108 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-30 13:24:46.108 INFO  - Sec-Fetch-User= ?1
+2022-12-30 13:24:46.108 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-30 13:24:46.108 DEBUG - Request host: localhost
+2022-12-30 13:24:46.109 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:24:46.110 ERROR - java.lang.reflect.InvocationTargetException
+org.chaostocosmos.leap.http.WASException: java.lang.reflect.InvocationTargetException
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:64)
+	at org.chaostocosmos.leap.http.service.AbstractLeapService.serve(AbstractLeapService.java:54)
+	at org.chaostocosmos.leap.http.service.TimeServiceImpl.serve(TimeServiceImpl.java:1)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeService(ServiceInvoker.java:34)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:94)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:62)
+	... 9 common frames omitted
+Caused by: org.chaostocosmos.leap.http.WASException: Error in building doc-root process: [Ljava.lang.Object;@7179cc3b
+	at org.chaostocosmos.leap.http.filter.BasicAuthFilter.filterRequest(BasicAuthFilter.java:35)
+	... 14 common frames omitted
+Caused by: java.lang.Exception: 
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:32)
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:21)
+	... 15 common frames omitted
+2022-12-30 13:24:46.364 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 13:25:46.135 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-30 13:25:46.136 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:25:46.136 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-30 13:25:46.136 INFO  - Connection= keep-alive
+2022-12-30 13:25:46.136 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-30 13:25:46.137 INFO  - Sec-Fetch-Site= none
+2022-12-30 13:25:46.137 INFO  - Sec-Fetch-Dest= document
+2022-12-30 13:25:46.137 INFO  - Host= localhost:8080
+2022-12-30 13:25:46.137 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-30 13:25:46.137 INFO  - Sec-Fetch-Mode= navigate
+2022-12-30 13:25:46.138 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-30 13:25:46.138 INFO  - sec-ch-ua-mobile= ?0
+2022-12-30 13:25:46.138 INFO  - Cache-Control= max-age=0
+2022-12-30 13:25:46.138 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-30 13:25:46.138 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-30 13:25:46.138 INFO  - Sec-Fetch-User= ?1
+2022-12-30 13:25:46.138 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-30 13:25:46.139 DEBUG - Request host: localhost
+2022-12-30 13:25:46.139 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:25:46.142 ERROR - java.lang.reflect.InvocationTargetException
+org.chaostocosmos.leap.http.WASException: java.lang.reflect.InvocationTargetException
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:64)
+	at org.chaostocosmos.leap.http.service.AbstractLeapService.serve(AbstractLeapService.java:54)
+	at org.chaostocosmos.leap.http.service.TimeServiceImpl.serve(TimeServiceImpl.java:1)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeService(ServiceInvoker.java:34)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:94)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:62)
+	... 9 common frames omitted
+Caused by: org.chaostocosmos.leap.http.WASException: Error in building doc-root process: [Ljava.lang.Object;@2e5c03dc
+	at org.chaostocosmos.leap.http.filter.BasicAuthFilter.filterRequest(BasicAuthFilter.java:35)
+	... 14 common frames omitted
+Caused by: java.lang.Exception: 
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:32)
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:21)
+	... 15 common frames omitted
+2022-12-30 13:25:46.436 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 13:25:46.439 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-30 13:25:46.441 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:25:46.441 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-30 13:25:46.442 INFO  - Connection= keep-alive
+2022-12-30 13:25:46.442 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-30 13:25:46.442 INFO  - Sec-Fetch-Site= none
+2022-12-30 13:25:46.443 INFO  - Sec-Fetch-Dest= document
+2022-12-30 13:25:46.443 INFO  - Host= localhost:8080
+2022-12-30 13:25:46.444 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-30 13:25:46.444 INFO  - Sec-Fetch-Mode= navigate
+2022-12-30 13:25:46.444 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-30 13:25:46.445 INFO  - sec-ch-ua-mobile= ?0
+2022-12-30 13:25:46.445 INFO  - Cache-Control= max-age=0
+2022-12-30 13:25:46.445 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-30 13:25:46.446 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-30 13:25:46.446 INFO  - Sec-Fetch-User= ?1
+2022-12-30 13:25:46.446 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-30 13:25:46.446 DEBUG - Request host: localhost
+2022-12-30 13:25:46.447 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:25:46.450 ERROR - java.lang.reflect.InvocationTargetException
+org.chaostocosmos.leap.http.WASException: java.lang.reflect.InvocationTargetException
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:64)
+	at org.chaostocosmos.leap.http.service.AbstractLeapService.serve(AbstractLeapService.java:54)
+	at org.chaostocosmos.leap.http.service.TimeServiceImpl.serve(TimeServiceImpl.java:1)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeService(ServiceInvoker.java:34)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:94)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:62)
+	... 9 common frames omitted
+Caused by: org.chaostocosmos.leap.http.WASException: Error in building doc-root process: [Ljava.lang.Object;@3b326547
+	at org.chaostocosmos.leap.http.filter.BasicAuthFilter.filterRequest(BasicAuthFilter.java:35)
+	... 14 common frames omitted
+Caused by: java.lang.Exception: 
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:32)
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:21)
+	... 15 common frames omitted
+2022-12-30 13:30:46.805 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 13:30:46.807 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 13:30:46.809 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-30 13:30:46.810 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:30:46.811 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-30 13:30:46.811 INFO  - Connection= keep-alive
+2022-12-30 13:30:46.811 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-30 13:30:46.812 INFO  - Sec-Fetch-Site= none
+2022-12-30 13:30:46.812 INFO  - Sec-Fetch-Dest= document
+2022-12-30 13:30:46.812 INFO  - Host= localhost:8080
+2022-12-30 13:30:46.813 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-30 13:30:46.813 INFO  - Sec-Fetch-Mode= navigate
+2022-12-30 13:30:46.813 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-30 13:30:46.814 INFO  - sec-ch-ua-mobile= ?0
+2022-12-30 13:30:46.814 INFO  - Cache-Control= max-age=0
+2022-12-30 13:30:46.814 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-30 13:30:46.814 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-30 13:30:46.814 INFO  - Sec-Fetch-User= ?1
+2022-12-30 13:30:46.814 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-30 13:30:46.815 DEBUG - Request host: localhost
+2022-12-30 13:30:46.815 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:30:46.817 ERROR - java.lang.reflect.InvocationTargetException
+org.chaostocosmos.leap.http.WASException: java.lang.reflect.InvocationTargetException
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:64)
+	at org.chaostocosmos.leap.http.service.AbstractLeapService.serve(AbstractLeapService.java:54)
+	at org.chaostocosmos.leap.http.service.TimeServiceImpl.serve(TimeServiceImpl.java:1)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeService(ServiceInvoker.java:34)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:94)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:62)
+	... 9 common frames omitted
+Caused by: org.chaostocosmos.leap.http.WASException: Error in building doc-root process: [Ljava.lang.Object;@207b9cad
+	at org.chaostocosmos.leap.http.filter.BasicAuthFilter.filterRequest(BasicAuthFilter.java:35)
+	... 14 common frames omitted
+Caused by: java.lang.Exception: 
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:32)
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:21)
+	... 15 common frames omitted
+2022-12-30 13:30:47.071 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 13:40:47.151 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 13:40:47.152 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 13:40:47.153 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-30 13:40:47.153 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:40:47.153 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-30 13:40:47.154 INFO  - Connection= keep-alive
+2022-12-30 13:40:47.154 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-30 13:40:47.154 INFO  - Sec-Fetch-Site= none
+2022-12-30 13:40:47.154 INFO  - Sec-Fetch-Dest= document
+2022-12-30 13:40:47.154 INFO  - Host= localhost:8080
+2022-12-30 13:40:47.154 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-30 13:40:47.154 INFO  - Sec-Fetch-Mode= navigate
+2022-12-30 13:40:47.154 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-30 13:40:47.154 INFO  - sec-ch-ua-mobile= ?0
+2022-12-30 13:40:47.155 INFO  - Cache-Control= max-age=0
+2022-12-30 13:40:47.155 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-30 13:40:47.155 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-30 13:40:47.155 INFO  - Sec-Fetch-User= ?1
+2022-12-30 13:40:47.155 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-30 13:40:47.155 DEBUG - Request host: localhost
+2022-12-30 13:40:47.156 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 13:40:47.158 ERROR - java.lang.reflect.InvocationTargetException
+org.chaostocosmos.leap.http.WASException: java.lang.reflect.InvocationTargetException
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:64)
+	at org.chaostocosmos.leap.http.service.AbstractLeapService.serve(AbstractLeapService.java:54)
+	at org.chaostocosmos.leap.http.service.TimeServiceImpl.serve(TimeServiceImpl.java:1)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeService(ServiceInvoker.java:34)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:94)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:62)
+	... 9 common frames omitted
+Caused by: org.chaostocosmos.leap.http.WASException: Error in building doc-root process: [Ljava.lang.Object;@efc1b64
+	at org.chaostocosmos.leap.http.filter.BasicAuthFilter.filterRequest(BasicAuthFilter.java:35)
+	... 14 common frames omitted
+Caused by: java.lang.Exception: 
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:32)
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:21)
+	... 15 common frames omitted
+2022-12-30 13:40:47.414 INFO  - Client request accepted... : /127.0.0.1

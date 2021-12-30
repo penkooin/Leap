@@ -1,0 +1,1412 @@
+2022-12-29 18:01:23.390 INFO  - Leap WAS server starting...
+2022-12-29 18:01:23.410 INFO  - --------------------------------------------------------------------------
+2022-12-29 18:01:23.410 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 18:01:23.411 INFO  - verbose mode on
+2022-12-29 18:01:23.559 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-29 18:01:23.561 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:01:23.593 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:01:23.626 INFO  - Accepting connections on port 8082   Document Root: D:\0.github\Leap\home2
+2022-12-29 18:01:23.631 INFO  - Accepting connections on port 8080   Document Root: D:\0.github\Leap\home
+2022-12-29 18:05:51.495 INFO  - Leap WAS server starting...
+2022-12-29 18:05:51.498 INFO  - --------------------------------------------------------------------------
+2022-12-29 18:05:51.499 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 18:05:51.500 INFO  - verbose mode on
+2022-12-29 18:05:51.523 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-29 18:05:51.525 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:05:51.531 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:05:51.537 INFO  - Accepting connections on port 8082   Document Root: D:\0.github\Leap\home2
+2022-12-29 18:05:51.541 INFO  - Accepting connections on port 8080   Document Root: D:\0.github\Leap\home
+2022-12-29 18:05:55.371 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 18:05:55.374 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 18:05:55.377 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-29 18:05:55.384 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 18:05:55.385 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-29 18:05:55.385 INFO  - Connection= keep-alive
+2022-12-29 18:05:55.386 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-29 18:05:55.386 INFO  - Sec-Fetch-Site= none
+2022-12-29 18:05:55.386 INFO  - Sec-Fetch-Dest= document
+2022-12-29 18:05:55.386 INFO  - Host= localhost:8080
+2022-12-29 18:05:55.386 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-29 18:05:55.387 INFO  - Sec-Fetch-Mode= navigate
+2022-12-29 18:05:55.391 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-29 18:05:55.398 INFO  - sec-ch-ua-mobile= ?0
+2022-12-29 18:05:55.403 INFO  - Cache-Control= max-age=0
+2022-12-29 18:05:55.408 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-29 18:05:55.414 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-29 18:05:55.420 INFO  - Sec-Fetch-User= ?1
+2022-12-29 18:05:55.427 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-29 18:05:55.447 DEBUG - Request host: localhost
+2022-12-29 18:05:55.447 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 18:05:55.469 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/time/GetTime GET', httpVersion='HTTP/1.1', requestLines='Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC', requestType='GET', requestHost='localhost', reqHeader='{Cookie= io=PL7TK76OSCzqZRBSAAAC, Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection= keep-alive, User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36, Sec-Fetch-Site= none, Sec-Fetch-Dest= document, Host= localhost:8080, Accept-Encoding= gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode= navigate, sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96", sec-ch-ua-mobile= ?0, Cache-Control= max-age=0, Upgrade-Insecure-Requests= 1, sec-ch-ua-platform= "Windows", Sec-Fetch-User= ?1, Accept-Language= ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/time/GetTime', url='http://localhost:8080/time/GetTime', contextParam='{}'}', httpResponse='null', requestedHost='localhost', responseCode='404', responseBody='[B@55ef3def', responseHeader='{Date: =Wed Dec 29 18:05:55 KST 2021, Server: =LeapWAS 1.0.0}'}
+2022-12-29 18:05:55.634 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 18:06:50.770 INFO  - Leap WAS server starting...
+2022-12-29 18:06:50.774 INFO  - --------------------------------------------------------------------------
+2022-12-29 18:06:50.774 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 18:06:50.774 INFO  - verbose mode on
+2022-12-29 18:06:50.796 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-29 18:06:50.798 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:06:50.804 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:06:50.809 INFO  - Accepting connections on port 8082   Document Root: D:\0.github\Leap\home2
+2022-12-29 18:06:50.813 INFO  - Accepting connections on port 8080   Document Root: D:\0.github\Leap\home
+2022-12-29 18:06:55.040 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 18:06:55.042 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 18:06:55.045 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-29 18:06:55.050 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 18:06:55.051 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-29 18:06:55.051 INFO  - Connection= keep-alive
+2022-12-29 18:06:55.052 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-29 18:06:55.052 INFO  - Sec-Fetch-Site= none
+2022-12-29 18:06:55.052 INFO  - Sec-Fetch-Dest= document
+2022-12-29 18:06:55.052 INFO  - Host= localhost:8080
+2022-12-29 18:06:55.053 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-29 18:06:55.054 INFO  - Sec-Fetch-Mode= navigate
+2022-12-29 18:06:55.054 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-29 18:06:55.054 INFO  - sec-ch-ua-mobile= ?0
+2022-12-29 18:06:55.055 INFO  - Cache-Control= max-age=0
+2022-12-29 18:06:55.055 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-29 18:06:55.055 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-29 18:06:55.055 INFO  - Sec-Fetch-User= ?1
+2022-12-29 18:06:55.055 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-29 18:06:55.074 DEBUG - Request host: localhost
+2022-12-29 18:06:55.074 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 18:06:55.092 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/time/GetTime GET', httpVersion='HTTP/1.1', requestLines='Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC', requestType='GET', requestHost='localhost', reqHeader='{Cookie= io=PL7TK76OSCzqZRBSAAAC, Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection= keep-alive, User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36, Sec-Fetch-Site= none, Sec-Fetch-Dest= document, Host= localhost:8080, Accept-Encoding= gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode= navigate, sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96", sec-ch-ua-mobile= ?0, Cache-Control= max-age=0, Upgrade-Insecure-Requests= 1, sec-ch-ua-platform= "Windows", Sec-Fetch-User= ?1, Accept-Language= ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/time/GetTime', url='http://localhost:8080/time/GetTime', contextParam='{}'}', httpResponse='null', requestedHost='localhost', responseCode='404', responseBody='[B@34aba3ce', responseHeader='{Date: =Wed Dec 29 18:06:55 KST 2021, Server: =LeapWAS 1.0.0}'}
+2022-12-29 18:06:55.290 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 18:08:26.862 INFO  - Leap WAS server starting...
+2022-12-29 18:08:26.864 INFO  - --------------------------------------------------------------------------
+2022-12-29 18:08:26.865 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 18:08:26.865 INFO  - verbose mode on
+2022-12-29 18:08:26.886 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-29 18:08:26.888 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:08:26.894 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:08:26.900 INFO  - Accepting connections on port 8082   Document Root: D:\0.github\Leap\home2
+2022-12-29 18:08:26.904 INFO  - Accepting connections on port 8080   Document Root: D:\0.github\Leap\home
+2022-12-29 18:08:28.646 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 18:08:28.649 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 18:08:28.651 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-29 18:08:28.654 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 18:08:28.654 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-29 18:08:28.654 INFO  - Connection= keep-alive
+2022-12-29 18:08:28.654 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-29 18:08:28.654 INFO  - Sec-Fetch-Site= none
+2022-12-29 18:08:28.655 INFO  - Sec-Fetch-Dest= document
+2022-12-29 18:08:28.655 INFO  - Host= localhost:8080
+2022-12-29 18:08:28.655 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-29 18:08:28.655 INFO  - Sec-Fetch-Mode= navigate
+2022-12-29 18:08:28.655 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-29 18:08:28.655 INFO  - sec-ch-ua-mobile= ?0
+2022-12-29 18:08:28.655 INFO  - Cache-Control= max-age=0
+2022-12-29 18:08:28.656 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-29 18:08:28.656 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-29 18:08:28.656 INFO  - Sec-Fetch-User= ?1
+2022-12-29 18:08:28.656 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-29 18:08:28.670 DEBUG - Request host: localhost
+2022-12-29 18:08:28.671 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 18:08:28.721 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/time/GetTime GET', httpVersion='HTTP/1.1', requestLines='Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC', requestType='GET', requestHost='localhost', reqHeader='{Cookie= io=PL7TK76OSCzqZRBSAAAC, Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection= keep-alive, User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36, Sec-Fetch-Site= none, Sec-Fetch-Dest= document, Host= localhost:8080, Accept-Encoding= gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode= navigate, sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96", sec-ch-ua-mobile= ?0, Cache-Control= max-age=0, Upgrade-Insecure-Requests= 1, sec-ch-ua-platform= "Windows", Sec-Fetch-User= ?1, Accept-Language= ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/time/GetTime', url='http://localhost:8080/time/GetTime', contextParam='{}'}', httpResponse='null', requestedHost='localhost', responseCode='404', responseBody='[B@55ef3def', responseHeader='{Date: =Wed Dec 29 18:08:28 KST 2021, Server: =LeapWAS 1.0.0}'}
+2022-12-29 18:08:28.912 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 18:09:12.204 INFO  - Leap WAS server starting...
+2022-12-29 18:09:12.208 INFO  - --------------------------------------------------------------------------
+2022-12-29 18:09:12.208 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 18:09:12.209 INFO  - verbose mode on
+2022-12-29 18:09:12.237 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-29 18:09:12.239 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:09:12.247 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:09:12.252 INFO  - Accepting connections on port 8082   Document Root: D:\0.github\Leap\home2
+2022-12-29 18:09:12.256 INFO  - Accepting connections on port 8080   Document Root: D:\0.github\Leap\home
+2022-12-29 18:09:14.001 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 18:09:14.003 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 18:09:14.006 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-29 18:09:14.011 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 18:09:14.012 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-29 18:09:14.012 INFO  - Connection= keep-alive
+2022-12-29 18:09:14.012 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-29 18:09:14.012 INFO  - Sec-Fetch-Site= none
+2022-12-29 18:09:14.012 INFO  - Sec-Fetch-Dest= document
+2022-12-29 18:09:14.013 INFO  - Host= localhost:8080
+2022-12-29 18:09:14.013 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-29 18:09:14.013 INFO  - Sec-Fetch-Mode= navigate
+2022-12-29 18:09:14.014 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-29 18:09:14.014 INFO  - sec-ch-ua-mobile= ?0
+2022-12-29 18:09:14.014 INFO  - Cache-Control= max-age=0
+2022-12-29 18:09:14.014 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-29 18:09:14.014 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-29 18:09:14.014 INFO  - Sec-Fetch-User= ?1
+2022-12-29 18:09:14.014 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-29 18:09:14.027 DEBUG - Request host: localhost
+2022-12-29 18:09:14.027 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 18:09:14.039 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/time/GetTime GET', httpVersion='HTTP/1.1', requestLines='Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC', requestType='GET', requestHost='localhost', reqHeader='{Cookie= io=PL7TK76OSCzqZRBSAAAC, Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection= keep-alive, User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36, Sec-Fetch-Site= none, Sec-Fetch-Dest= document, Host= localhost:8080, Accept-Encoding= gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode= navigate, sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96", sec-ch-ua-mobile= ?0, Cache-Control= max-age=0, Upgrade-Insecure-Requests= 1, sec-ch-ua-platform= "Windows", Sec-Fetch-User= ?1, Accept-Language= ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/time/GetTime', url='http://localhost:8080/time/GetTime', contextParam='{}'}', httpResponse='null', requestedHost='localhost', responseCode='404', responseBody='[B@1c03af1b', responseHeader='{Date: =Wed Dec 29 18:09:14 KST 2021, Server: =LeapWAS 1.0.0}'}
+2022-12-29 18:09:14.264 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 18:16:17.576 INFO  - Leap WAS server starting...
+2022-12-29 18:16:17.579 INFO  - --------------------------------------------------------------------------
+2022-12-29 18:16:17.579 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 18:16:17.579 INFO  - verbose mode on
+2022-12-29 18:16:17.604 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-29 18:16:17.605 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:16:17.611 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:16:17.616 INFO  - Accepting connections on port 8082   Document Root: D:\0.github\Leap\home2
+2022-12-29 18:16:17.621 INFO  - Accepting connections on port 8080   Document Root: D:\0.github\Leap\home
+2022-12-29 18:16:49.613 INFO  - Leap WAS server starting...
+2022-12-29 18:16:49.616 INFO  - --------------------------------------------------------------------------
+2022-12-29 18:16:49.616 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 18:16:49.617 INFO  - verbose mode on
+2022-12-29 18:16:49.638 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-29 18:16:49.639 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:16:49.699 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:16:49.706 INFO  - Accepting connections on port 8082   Document Root: D:\0.github\Leap\home2
+2022-12-29 18:16:49.710 INFO  - Accepting connections on port 8080   Document Root: D:\0.github\Leap\home
+2022-12-29 18:17:36.234 INFO  - Leap WAS server starting...
+2022-12-29 18:17:36.239 INFO  - --------------------------------------------------------------------------
+2022-12-29 18:17:36.239 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 18:17:36.239 INFO  - verbose mode on
+2022-12-29 18:17:36.276 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-29 18:17:36.278 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:17:36.283 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:17:36.288 INFO  - Accepting connections on port 8082   Document Root: D:\0.github\Leap\home2
+2022-12-29 18:17:36.292 INFO  - Accepting connections on port 8080   Document Root: D:\0.github\Leap\home
+2022-12-29 18:19:27.636 INFO  - Leap WAS server starting...
+2022-12-29 18:19:27.639 INFO  - --------------------------------------------------------------------------
+2022-12-29 18:19:27.639 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 18:19:27.639 INFO  - verbose mode on
+2022-12-29 18:22:37.855 INFO  - Leap WAS server starting...
+2022-12-29 18:22:37.858 INFO  - --------------------------------------------------------------------------
+2022-12-29 18:22:37.859 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 18:22:37.859 INFO  - verbose mode on
+2022-12-29 18:22:37.906 ERROR - org.chaostocosmos.leap.http.filter.IPreFilter
+java.lang.InstantiationException: org.chaostocosmos.leap.http.filter.IPreFilter
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:170)
+	at org.chaostocosmos.leap.http.service.ServiceManager.lambda$1(ServiceManager.java:94)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.service.ServiceManager.initialize(ServiceManager.java:94)
+	at org.chaostocosmos.leap.http.service.ServiceManager.<init>(ServiceManager.java:73)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:134)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:159)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:227)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.filter.IPreFilter.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 14 common frames omitted
+2022-12-29 18:22:37.909 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-29 18:22:37.909 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:22:37.910 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:22:37.910 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:22:37.910 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:22:37.910 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:22:37.911 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:22:37.911 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-29 18:22:37.913 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:22:37.922 ERROR - org.chaostocosmos.leap.http.filter.IPreFilter
+java.lang.InstantiationException: org.chaostocosmos.leap.http.filter.IPreFilter
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:170)
+	at org.chaostocosmos.leap.http.service.ServiceManager.lambda$1(ServiceManager.java:94)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.service.ServiceManager.initialize(ServiceManager.java:94)
+	at org.chaostocosmos.leap.http.service.ServiceManager.<init>(ServiceManager.java:73)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:134)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:164)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:227)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.filter.IPreFilter.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 14 common frames omitted
+2022-12-29 18:22:37.925 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-29 18:22:37.925 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:22:37.925 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:22:37.925 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:22:37.925 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:22:37.925 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:22:37.926 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:22:37.926 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:22:37.932 INFO  - Accepting connections on port 8082   Document Root: D:\0.github\Leap\home2
+2022-12-29 18:22:37.937 INFO  - Accepting connections on port 8080   Document Root: D:\0.github\Leap\home
+2022-12-29 18:24:22.796 INFO  - Leap WAS server starting...
+2022-12-29 18:24:22.799 INFO  - --------------------------------------------------------------------------
+2022-12-29 18:24:22.800 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 18:24:22.800 INFO  - verbose mode on
+2022-12-29 18:24:22.822 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-29 18:24:22.824 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:24:22.835 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:24:22.840 INFO  - Accepting connections on port 8082   Document Root: D:\0.github\Leap\home2
+2022-12-29 18:24:22.847 INFO  - Accepting connections on port 8080   Document Root: D:\0.github\Leap\home
+2022-12-29 18:24:26.419 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 18:24:26.422 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 18:24:26.424 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-29 18:24:26.429 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 18:24:26.430 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-29 18:24:26.430 INFO  - Connection= keep-alive
+2022-12-29 18:24:26.430 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-29 18:24:26.431 INFO  - Sec-Fetch-Site= none
+2022-12-29 18:24:26.431 INFO  - Sec-Fetch-Dest= document
+2022-12-29 18:24:26.432 INFO  - Host= localhost:8080
+2022-12-29 18:24:26.432 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-29 18:24:26.432 INFO  - Sec-Fetch-Mode= navigate
+2022-12-29 18:24:26.432 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-29 18:24:26.432 INFO  - sec-ch-ua-mobile= ?0
+2022-12-29 18:24:26.432 INFO  - Cache-Control= max-age=0
+2022-12-29 18:24:26.432 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-29 18:24:26.432 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-29 18:24:26.432 INFO  - Sec-Fetch-User= ?1
+2022-12-29 18:24:26.433 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-29 18:24:26.448 DEBUG - Request host: localhost
+2022-12-29 18:24:26.449 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 18:24:26.465 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/time/GetTime GET', httpVersion='HTTP/1.1', requestLines='Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC', requestType='GET', requestHost='localhost', reqHeader='{Cookie= io=PL7TK76OSCzqZRBSAAAC, Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection= keep-alive, User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36, Sec-Fetch-Site= none, Sec-Fetch-Dest= document, Host= localhost:8080, Accept-Encoding= gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode= navigate, sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96", sec-ch-ua-mobile= ?0, Cache-Control= max-age=0, Upgrade-Insecure-Requests= 1, sec-ch-ua-platform= "Windows", Sec-Fetch-User= ?1, Accept-Language= ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/time/GetTime', url='http://localhost:8080/time/GetTime', contextParam='{}'}', httpResponse='null', requestedHost='localhost', responseCode='404', responseBody='[B@69b34242', responseHeader='{Date: =Wed Dec 29 18:24:26 KST 2021, Server: =LeapWAS 1.0.0}'}
+2022-12-29 18:24:26.685 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 18:25:21.166 INFO  - Leap WAS server starting...
+2022-12-29 18:25:21.169 INFO  - --------------------------------------------------------------------------
+2022-12-29 18:25:21.169 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 18:25:21.170 INFO  - verbose mode on
+2022-12-29 18:25:21.205 ERROR - org.chaostocosmos.leap.http.filter.IPreFilter
+java.lang.InstantiationException: org.chaostocosmos.leap.http.filter.IPreFilter
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:171)
+	at org.chaostocosmos.leap.http.service.ServiceManager.lambda$1(ServiceManager.java:94)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.service.ServiceManager.initialize(ServiceManager.java:94)
+	at org.chaostocosmos.leap.http.service.ServiceManager.<init>(ServiceManager.java:73)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:134)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:159)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:227)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.filter.IPreFilter.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 14 common frames omitted
+2022-12-29 18:25:21.208 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-29 18:25:21.209 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:25:21.209 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:25:21.209 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:25:21.209 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:25:21.210 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:25:21.210 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:25:21.210 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-29 18:25:21.211 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:25:21.217 ERROR - org.chaostocosmos.leap.http.filter.IPreFilter
+java.lang.InstantiationException: org.chaostocosmos.leap.http.filter.IPreFilter
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:171)
+	at org.chaostocosmos.leap.http.service.ServiceManager.lambda$1(ServiceManager.java:94)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.service.ServiceManager.initialize(ServiceManager.java:94)
+	at org.chaostocosmos.leap.http.service.ServiceManager.<init>(ServiceManager.java:73)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:134)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:164)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:227)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.filter.IPreFilter.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 14 common frames omitted
+2022-12-29 18:25:21.219 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-29 18:25:21.220 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:25:21.220 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:25:21.220 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:25:21.220 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:25:21.220 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:25:21.221 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:25:21.221 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:25:21.227 INFO  - Accepting connections on port 8082   Document Root: D:\0.github\Leap\home2
+2022-12-29 18:25:21.231 INFO  - Accepting connections on port 8080   Document Root: D:\0.github\Leap\home
+2022-12-29 18:26:54.174 INFO  - Leap WAS server starting...
+2022-12-29 18:26:54.177 INFO  - --------------------------------------------------------------------------
+2022-12-29 18:26:54.177 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 18:26:54.177 INFO  - verbose mode on
+2022-12-29 18:26:54.211 ERROR - org.chaostocosmos.leap.http.filter.IPreFilter
+java.lang.InstantiationException: org.chaostocosmos.leap.http.filter.IPreFilter
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:172)
+	at org.chaostocosmos.leap.http.service.ServiceManager.lambda$1(ServiceManager.java:94)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.service.ServiceManager.initialize(ServiceManager.java:94)
+	at org.chaostocosmos.leap.http.service.ServiceManager.<init>(ServiceManager.java:73)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:134)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:159)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:227)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.filter.IPreFilter.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 14 common frames omitted
+2022-12-29 18:26:54.214 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-29 18:26:54.214 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:26:54.214 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:26:54.214 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:26:54.214 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:26:54.216 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:26:54.216 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:26:54.216 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-29 18:26:54.218 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:26:54.225 ERROR - org.chaostocosmos.leap.http.filter.IPreFilter
+java.lang.InstantiationException: org.chaostocosmos.leap.http.filter.IPreFilter
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:172)
+	at org.chaostocosmos.leap.http.service.ServiceManager.lambda$1(ServiceManager.java:94)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.service.ServiceManager.initialize(ServiceManager.java:94)
+	at org.chaostocosmos.leap.http.service.ServiceManager.<init>(ServiceManager.java:73)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:134)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:164)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:227)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.filter.IPreFilter.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 14 common frames omitted
+2022-12-29 18:26:54.227 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-29 18:26:54.228 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:26:54.228 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:26:54.228 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:26:54.228 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:26:54.228 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:26:54.229 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:26:54.229 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:26:54.235 INFO  - Accepting connections on port 8082   Document Root: D:\0.github\Leap\home2
+2022-12-29 18:26:54.239 INFO  - Accepting connections on port 8080   Document Root: D:\0.github\Leap\home
+2022-12-29 18:29:33.849 INFO  - Leap WAS server starting...
+2022-12-29 18:29:33.854 INFO  - --------------------------------------------------------------------------
+2022-12-29 18:29:33.854 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 18:29:33.854 INFO  - verbose mode on
+2022-12-29 18:29:33.878 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-29 18:29:33.879 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:29:33.886 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:29:33.891 INFO  - Accepting connections on port 8082   Document Root: D:\0.github\Leap\home2
+2022-12-29 18:29:33.895 INFO  - Accepting connections on port 8080   Document Root: D:\0.github\Leap\home
+2022-12-29 18:29:43.598 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 18:29:43.600 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 18:29:43.602 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-29 18:29:43.607 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 18:29:43.608 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-29 18:29:43.608 INFO  - Connection= keep-alive
+2022-12-29 18:29:43.608 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-29 18:29:43.608 INFO  - Sec-Fetch-Site= none
+2022-12-29 18:29:43.609 INFO  - Sec-Fetch-Dest= document
+2022-12-29 18:29:43.610 INFO  - Host= localhost:8080
+2022-12-29 18:29:43.610 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-29 18:29:43.610 INFO  - Sec-Fetch-Mode= navigate
+2022-12-29 18:29:43.611 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-29 18:29:43.611 INFO  - sec-ch-ua-mobile= ?0
+2022-12-29 18:29:43.611 INFO  - Cache-Control= max-age=0
+2022-12-29 18:29:43.611 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-29 18:29:43.611 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-29 18:29:43.611 INFO  - Sec-Fetch-User= ?1
+2022-12-29 18:29:43.611 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-29 18:29:43.644 DEBUG - Request host: localhost
+2022-12-29 18:29:43.644 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 18:29:43.671 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/time/GetTime GET', httpVersion='HTTP/1.1', requestLines='Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC', requestType='GET', requestHost='localhost', reqHeader='{Cookie= io=PL7TK76OSCzqZRBSAAAC, Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection= keep-alive, User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36, Sec-Fetch-Site= none, Sec-Fetch-Dest= document, Host= localhost:8080, Accept-Encoding= gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode= navigate, sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96", sec-ch-ua-mobile= ?0, Cache-Control= max-age=0, Upgrade-Insecure-Requests= 1, sec-ch-ua-platform= "Windows", Sec-Fetch-User= ?1, Accept-Language= ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/time/GetTime', url='http://localhost:8080/time/GetTime', contextParam='{}'}', httpResponse='null', requestedHost='localhost', responseCode='404', responseBody='[B@55ef3def', responseHeader='{Date: =Wed Dec 29 18:29:43 KST 2021, Server: =LeapWAS 1.0.0}'}
+2022-12-29 18:29:43.863 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 18:30:07.543 INFO  - Leap WAS server starting...
+2022-12-29 18:30:07.546 INFO  - --------------------------------------------------------------------------
+2022-12-29 18:30:07.546 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 18:30:07.546 INFO  - verbose mode on
+2022-12-29 18:30:07.595 ERROR - org.chaostocosmos.leap.http.filter.IPreFilter
+java.lang.InstantiationException: org.chaostocosmos.leap.http.filter.IPreFilter
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:171)
+	at org.chaostocosmos.leap.http.service.ServiceManager.lambda$1(ServiceManager.java:94)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.service.ServiceManager.initialize(ServiceManager.java:94)
+	at org.chaostocosmos.leap.http.service.ServiceManager.<init>(ServiceManager.java:73)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:134)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:159)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:227)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.filter.IPreFilter.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 14 common frames omitted
+2022-12-29 18:30:07.598 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-29 18:30:07.598 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:30:07.598 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:30:07.599 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:30:07.599 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:30:07.599 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:30:07.600 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:30:07.600 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-29 18:30:07.602 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:30:07.609 ERROR - org.chaostocosmos.leap.http.filter.IPreFilter
+java.lang.InstantiationException: org.chaostocosmos.leap.http.filter.IPreFilter
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:171)
+	at org.chaostocosmos.leap.http.service.ServiceManager.lambda$1(ServiceManager.java:94)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.service.ServiceManager.initialize(ServiceManager.java:94)
+	at org.chaostocosmos.leap.http.service.ServiceManager.<init>(ServiceManager.java:73)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:134)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:164)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:227)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.filter.IPreFilter.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 14 common frames omitted
+2022-12-29 18:30:07.612 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-29 18:30:07.612 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:30:07.613 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:30:07.613 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:30:07.613 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:30:07.613 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:30:07.613 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:30:07.614 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:30:07.621 INFO  - Accepting connections on port 8082   Document Root: D:\0.github\Leap\home2
+2022-12-29 18:30:07.626 INFO  - Accepting connections on port 8080   Document Root: D:\0.github\Leap\home
+2022-12-29 18:30:29.895 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 18:30:29.899 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 18:30:29.903 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-29 18:30:29.907 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 18:30:29.907 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-29 18:30:29.908 INFO  - Connection= keep-alive
+2022-12-29 18:30:29.908 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-29 18:30:29.910 INFO  - Sec-Fetch-Site= none
+2022-12-29 18:30:29.910 INFO  - Sec-Fetch-Dest= document
+2022-12-29 18:30:29.910 INFO  - Host= localhost:8080
+2022-12-29 18:30:29.911 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-29 18:30:29.911 INFO  - Sec-Fetch-Mode= navigate
+2022-12-29 18:30:29.911 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-29 18:30:29.912 INFO  - sec-ch-ua-mobile= ?0
+2022-12-29 18:30:29.912 INFO  - Cache-Control= max-age=0
+2022-12-29 18:30:29.913 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-29 18:30:29.913 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-29 18:30:29.913 INFO  - Sec-Fetch-User= ?1
+2022-12-29 18:30:29.914 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-29 18:30:29.931 DEBUG - Request host: localhost
+2022-12-29 18:30:29.932 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 18:30:29.934 INFO  - getTime servlet started....+++++++++++++++++++++++++++++++++++++++++++++++++
+2022-12-29 18:30:29.948 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/time/GetTime GET', httpVersion='HTTP/1.1', requestLines='Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC', requestType='GET', requestHost='localhost', reqHeader='{Cookie= io=PL7TK76OSCzqZRBSAAAC, Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection= keep-alive, User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36, Sec-Fetch-Site= none, Sec-Fetch-Dest= document, Host= localhost:8080, Accept-Encoding= gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode= navigate, sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96", sec-ch-ua-mobile= ?0, Cache-Control= max-age=0, Upgrade-Insecure-Requests= 1, sec-ch-ua-platform= "Windows", Sec-Fetch-User= ?1, Accept-Language= ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/time/GetTime', url='http://localhost:8080/time/GetTime', contextParam='{}'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@4e5497d3', responseHeader='{Date: =Wed Dec 29 18:30:29 KST 2021, Server: =LeapWAS 1.0.0}'}
+2022-12-29 18:30:30.158 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 18:35:06.553 INFO  - Leap WAS server starting...
+2022-12-29 18:35:06.556 INFO  - --------------------------------------------------------------------------
+2022-12-29 18:35:06.556 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 18:35:06.556 INFO  - verbose mode on
+2022-12-29 18:35:06.580 ERROR - org.chaostocosmos.leap.http.filter.IIpPreFilter.<init>()
+java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.filter.IIpPreFilter.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.getConstructor(Class.java:2151)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$6(ClassUtils.java:97)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:176)
+	at java.base/java.util.HashMap$KeySpliterator.forEachRemaining(HashMap.java:1621)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllFilters(ClassUtils.java:105)
+	at org.chaostocosmos.leap.http.service.ServiceManager.<init>(ServiceManager.java:69)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:134)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:159)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:227)
+2022-12-29 18:35:06.583 ERROR - org.chaostocosmos.leap.http.filter.IHttpRequestFilter.<init>()
+java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.filter.IHttpRequestFilter.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.getConstructor(Class.java:2151)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$6(ClassUtils.java:97)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:176)
+	at java.base/java.util.HashMap$KeySpliterator.forEachRemaining(HashMap.java:1621)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllFilters(ClassUtils.java:105)
+	at org.chaostocosmos.leap.http.service.ServiceManager.<init>(ServiceManager.java:69)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:134)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:159)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:227)
+2022-12-29 18:35:06.584 ERROR - org.chaostocosmos.leap.http.filter.IFilter.<init>()
+java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.filter.IFilter.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.getConstructor(Class.java:2151)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$6(ClassUtils.java:97)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:176)
+	at java.base/java.util.HashMap$KeySpliterator.forEachRemaining(HashMap.java:1621)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllFilters(ClassUtils.java:105)
+	at org.chaostocosmos.leap.http.service.ServiceManager.<init>(ServiceManager.java:69)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:134)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:159)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:227)
+2022-12-29 18:35:06.587 ERROR - org.chaostocosmos.leap.http.filter.IPreFilter.<init>()
+java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.filter.IPreFilter.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.getConstructor(Class.java:2151)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$6(ClassUtils.java:97)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:176)
+	at java.base/java.util.HashMap$KeySpliterator.forEachRemaining(HashMap.java:1621)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllFilters(ClassUtils.java:105)
+	at org.chaostocosmos.leap.http.service.ServiceManager.<init>(ServiceManager.java:69)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:134)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:159)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:227)
+2022-12-29 18:35:06.588 ERROR - org.chaostocosmos.leap.http.filter.AbstractIpPreFilter.<init>()
+java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.filter.AbstractIpPreFilter.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.getConstructor(Class.java:2151)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$6(ClassUtils.java:97)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:176)
+	at java.base/java.util.HashMap$KeySpliterator.forEachRemaining(HashMap.java:1621)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllFilters(ClassUtils.java:105)
+	at org.chaostocosmos.leap.http.service.ServiceManager.<init>(ServiceManager.java:69)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:134)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:159)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:227)
+2022-12-29 18:35:06.589 ERROR - org.chaostocosmos.leap.http.filter.IPostFilter.<init>()
+java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.filter.IPostFilter.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.getConstructor(Class.java:2151)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$6(ClassUtils.java:97)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:176)
+	at java.base/java.util.HashMap$KeySpliterator.forEachRemaining(HashMap.java:1621)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllFilters(ClassUtils.java:105)
+	at org.chaostocosmos.leap.http.service.ServiceManager.<init>(ServiceManager.java:69)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:134)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:159)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:227)
+2022-12-29 18:35:06.591 ERROR - org.chaostocosmos.leap.http.filter.IHttpFilter.<init>()
+java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.filter.IHttpFilter.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.getConstructor(Class.java:2151)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$6(ClassUtils.java:97)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:176)
+	at java.base/java.util.HashMap$KeySpliterator.forEachRemaining(HashMap.java:1621)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllFilters(ClassUtils.java:105)
+	at org.chaostocosmos.leap.http.service.ServiceManager.<init>(ServiceManager.java:69)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:134)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:159)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:227)
+2022-12-29 18:35:06.592 ERROR - org.chaostocosmos.leap.http.filter.IHttpResponseFilter.<init>()
+java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.filter.IHttpResponseFilter.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.getConstructor(Class.java:2151)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$6(ClassUtils.java:97)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:176)
+	at java.base/java.util.HashMap$KeySpliterator.forEachRemaining(HashMap.java:1621)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllFilters(ClassUtils.java:105)
+	at org.chaostocosmos.leap.http.service.ServiceManager.<init>(ServiceManager.java:69)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:134)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:159)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:227)
+2022-12-29 18:35:06.594 ERROR - org.chaostocosmos.leap.http.service.IPutService
+java.lang.InstantiationException: org.chaostocosmos.leap.http.service.IPutService
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:181)
+	at org.chaostocosmos.leap.http.service.ServiceManager.initialize(ServiceManager.java:81)
+	at org.chaostocosmos.leap.http.service.ServiceManager.<init>(ServiceManager.java:73)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:134)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:159)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:227)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.service.IPutService.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 6 common frames omitted
+2022-12-29 18:36:13.156 INFO  - Leap WAS server starting...
+2022-12-29 18:36:13.159 INFO  - --------------------------------------------------------------------------
+2022-12-29 18:36:13.160 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 18:36:13.160 INFO  - verbose mode on
+2022-12-29 18:36:13.213 ERROR - org.chaostocosmos.leap.http.filter.IIpPreFilter
+java.lang.InstantiationException: org.chaostocosmos.leap.http.filter.IIpPreFilter
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:173)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$6(ClassUtils.java:95)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.HashMap$KeySpliterator.forEachRemaining(HashMap.java:1621)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllFilters(ClassUtils.java:97)
+	at org.chaostocosmos.leap.http.service.ServiceManager.<init>(ServiceManager.java:69)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:134)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:159)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:227)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.filter.IIpPreFilter.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 14 common frames omitted
+2022-12-29 18:37:53.311 INFO  - Leap WAS server starting...
+2022-12-29 18:37:53.315 INFO  - --------------------------------------------------------------------------
+2022-12-29 18:37:53.315 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 18:37:53.315 INFO  - verbose mode on
+2022-12-29 18:37:53.344 ERROR - org.chaostocosmos.leap.http.service.ILeapService
+java.lang.InstantiationException: org.chaostocosmos.leap.http.service.ILeapService
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:175)
+	at org.chaostocosmos.leap.http.service.ServiceManager.initialize(ServiceManager.java:81)
+	at org.chaostocosmos.leap.http.service.ServiceManager.<init>(ServiceManager.java:73)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:134)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:159)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:227)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.service.ILeapService.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 6 common frames omitted
+2022-12-29 18:39:57.083 INFO  - Leap WAS server starting...
+2022-12-29 18:39:57.087 INFO  - --------------------------------------------------------------------------
+2022-12-29 18:39:57.088 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 18:39:57.088 INFO  - verbose mode on
+2022-12-29 18:39:57.116 ERROR - org.chaostocosmos.leap.http.filter.IIpPreFilter
+java.lang.InstantiationException: org.chaostocosmos.leap.http.filter.IIpPreFilter
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:173)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$6(ClassUtils.java:95)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.HashMap$KeySpliterator.forEachRemaining(HashMap.java:1621)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllFilters(ClassUtils.java:97)
+	at org.chaostocosmos.leap.http.service.ServiceManager.<init>(ServiceManager.java:69)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:134)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:159)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:227)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.filter.IIpPreFilter.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 14 common frames omitted
+2022-12-29 18:41:58.874 INFO  - Leap WAS server starting...
+2022-12-29 18:41:58.880 INFO  - --------------------------------------------------------------------------
+2022-12-29 18:41:58.880 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 18:41:58.881 INFO  - verbose mode on
+2022-12-29 18:41:58.914 ERROR - org.chaostocosmos.leap.http.service.IPutService
+java.lang.InstantiationException: org.chaostocosmos.leap.http.service.IPutService
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:172)
+	at org.chaostocosmos.leap.http.service.ServiceManager.initialize(ServiceManager.java:81)
+	at org.chaostocosmos.leap.http.service.ServiceManager.<init>(ServiceManager.java:73)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:134)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:159)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:227)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.service.IPutService.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 6 common frames omitted
+2022-12-29 18:43:40.907 INFO  - Leap WAS server starting...
+2022-12-29 18:43:40.910 INFO  - --------------------------------------------------------------------------
+2022-12-29 18:43:40.910 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 18:43:40.910 INFO  - verbose mode on
+2022-12-29 18:43:40.931 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-29 18:43:40.933 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:43:40.941 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:43:40.969 INFO  - Accepting connections on port 8082   Document Root: D:\0.github\Leap\home2
+2022-12-29 18:43:40.975 INFO  - Accepting connections on port 8080   Document Root: D:\0.github\Leap\home
+2022-12-29 18:44:40.236 INFO  - Leap WAS server starting...
+2022-12-29 18:44:40.238 INFO  - --------------------------------------------------------------------------
+2022-12-29 18:44:40.239 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 18:44:40.239 INFO  - verbose mode on
+2022-12-29 18:44:40.273 ERROR - org.chaostocosmos.leap.http.filter.IPreFilter
+java.lang.InstantiationException: org.chaostocosmos.leap.http.filter.IPreFilter
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:171)
+	at org.chaostocosmos.leap.http.service.ServiceManager.lambda$1(ServiceManager.java:94)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.service.ServiceManager.initialize(ServiceManager.java:94)
+	at org.chaostocosmos.leap.http.service.ServiceManager.<init>(ServiceManager.java:73)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:134)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:159)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:227)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.filter.IPreFilter.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 14 common frames omitted
+2022-12-29 18:44:40.276 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-29 18:44:40.276 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:44:40.277 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:44:40.277 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:44:40.277 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:44:40.277 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:44:40.277 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:44:40.278 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-29 18:44:40.279 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:44:40.286 ERROR - org.chaostocosmos.leap.http.filter.IPreFilter
+java.lang.InstantiationException: org.chaostocosmos.leap.http.filter.IPreFilter
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:171)
+	at org.chaostocosmos.leap.http.service.ServiceManager.lambda$1(ServiceManager.java:94)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.service.ServiceManager.initialize(ServiceManager.java:94)
+	at org.chaostocosmos.leap.http.service.ServiceManager.<init>(ServiceManager.java:73)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:134)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:164)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:227)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.filter.IPreFilter.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 14 common frames omitted
+2022-12-29 18:44:40.287 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-29 18:44:40.288 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:44:40.288 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:44:40.288 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:44:40.288 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:44:40.288 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:44:40.288 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:44:40.288 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:44:40.294 INFO  - Accepting connections on port 8082   Document Root: D:\0.github\Leap\home2
+2022-12-29 18:44:40.298 INFO  - Accepting connections on port 8080   Document Root: D:\0.github\Leap\home
+2022-12-29 18:46:58.930 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 18:46:58.932 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 18:46:58.933 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-29 18:46:58.938 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 18:46:58.938 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-29 18:46:58.938 INFO  - Connection= keep-alive
+2022-12-29 18:46:58.938 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-29 18:46:58.938 INFO  - Sec-Fetch-Site= none
+2022-12-29 18:46:58.938 INFO  - Sec-Fetch-Dest= document
+2022-12-29 18:46:58.938 INFO  - Host= localhost:8080
+2022-12-29 18:46:58.939 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-29 18:46:58.939 INFO  - Sec-Fetch-Mode= navigate
+2022-12-29 18:46:58.939 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-29 18:46:58.939 INFO  - sec-ch-ua-mobile= ?0
+2022-12-29 18:46:58.939 INFO  - Cache-Control= max-age=0
+2022-12-29 18:46:58.939 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-29 18:46:58.940 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-29 18:46:58.940 INFO  - Sec-Fetch-User= ?1
+2022-12-29 18:46:58.940 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-29 18:46:58.951 DEBUG - Request host: localhost
+2022-12-29 18:46:58.952 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 18:46:58.954 INFO  - getTime servlet started....+++++++++++++++++++++++++++++++++++++++++++++++++
+2022-12-29 18:46:58.967 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/time/GetTime GET', httpVersion='HTTP/1.1', requestLines='Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC', requestType='GET', requestHost='localhost', reqHeader='{Cookie= io=PL7TK76OSCzqZRBSAAAC, Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection= keep-alive, User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36, Sec-Fetch-Site= none, Sec-Fetch-Dest= document, Host= localhost:8080, Accept-Encoding= gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode= navigate, sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96", sec-ch-ua-mobile= ?0, Cache-Control= max-age=0, Upgrade-Insecure-Requests= 1, sec-ch-ua-platform= "Windows", Sec-Fetch-User= ?1, Accept-Language= ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/time/GetTime', url='http://localhost:8080/time/GetTime', contextParam='{}'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@21a01033', responseHeader='{Date: =Wed Dec 29 18:46:58 KST 2021, Server: =LeapWAS 1.0.0}'}
+2022-12-29 18:46:59.184 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 18:51:24.082 INFO  - Leap WAS server starting...
+2022-12-29 18:51:24.085 INFO  - --------------------------------------------------------------------------
+2022-12-29 18:51:24.085 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 18:51:24.085 INFO  - verbose mode on
+2022-12-29 18:52:22.180 INFO  - Leap WAS server starting...
+2022-12-29 18:52:22.184 INFO  - --------------------------------------------------------------------------
+2022-12-29 18:52:22.185 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 18:52:22.185 INFO  - verbose mode on
+2022-12-29 18:52:41.952 INFO  - Leap WAS server starting...
+2022-12-29 18:52:41.954 INFO  - --------------------------------------------------------------------------
+2022-12-29 18:52:41.955 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 18:52:41.955 INFO  - verbose mode on
+2022-12-29 18:52:41.977 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-29 18:52:41.978 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:52:41.984 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:52:41.990 INFO  - Accepting connections on port 8082   Document Root: D:\0.github\Leap\home2
+2022-12-29 18:52:41.995 INFO  - Accepting connections on port 8080   Document Root: D:\0.github\Leap\home
+2022-12-29 18:53:09.157 INFO  - Leap WAS server starting...
+2022-12-29 18:53:09.160 INFO  - --------------------------------------------------------------------------
+2022-12-29 18:53:09.161 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 18:53:09.161 INFO  - verbose mode on
+2022-12-29 18:53:09.193 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-29 18:53:09.193 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:53:09.193 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:53:09.194 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:53:09.194 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:53:09.194 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:53:09.194 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:53:09.194 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-29 18:53:09.196 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:53:09.203 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-29 18:53:09.203 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:53:09.204 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:53:09.204 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:53:09.204 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:53:09.204 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:53:09.204 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:53:09.205 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:53:09.210 INFO  - Accepting connections on port 8082   Document Root: D:\0.github\Leap\home2
+2022-12-29 18:53:09.214 INFO  - Accepting connections on port 8080   Document Root: D:\0.github\Leap\home
+2022-12-29 18:53:19.244 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 18:53:19.245 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 18:53:19.248 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-29 18:53:19.252 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 18:53:19.253 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-29 18:53:19.254 INFO  - Connection= keep-alive
+2022-12-29 18:53:19.254 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-29 18:53:19.254 INFO  - Sec-Fetch-Site= none
+2022-12-29 18:53:19.254 INFO  - Sec-Fetch-Dest= document
+2022-12-29 18:53:19.254 INFO  - Host= localhost:8080
+2022-12-29 18:53:19.255 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-29 18:53:19.255 INFO  - Sec-Fetch-Mode= navigate
+2022-12-29 18:53:19.255 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-29 18:53:19.255 INFO  - sec-ch-ua-mobile= ?0
+2022-12-29 18:53:19.256 INFO  - Cache-Control= max-age=0
+2022-12-29 18:53:19.256 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-29 18:53:19.256 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-29 18:53:19.256 INFO  - Sec-Fetch-User= ?1
+2022-12-29 18:53:19.256 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-29 18:53:19.274 DEBUG - Request host: localhost
+2022-12-29 18:53:19.274 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 18:53:19.277 INFO  - getTime servlet started....+++++++++++++++++++++++++++++++++++++++++++++++++
+2022-12-29 18:53:19.289 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/time/GetTime GET', httpVersion='HTTP/1.1', requestLines='Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC', requestType='GET', requestHost='localhost', reqHeader='{Cookie= io=PL7TK76OSCzqZRBSAAAC, Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection= keep-alive, User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36, Sec-Fetch-Site= none, Sec-Fetch-Dest= document, Host= localhost:8080, Accept-Encoding= gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode= navigate, sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96", sec-ch-ua-mobile= ?0, Cache-Control= max-age=0, Upgrade-Insecure-Requests= 1, sec-ch-ua-platform= "Windows", Sec-Fetch-User= ?1, Accept-Language= ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/time/GetTime', url='http://localhost:8080/time/GetTime', contextParam='{}'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@261449cc', responseHeader='{Date: =Wed Dec 29 18:53:19 KST 2021, Server: =LeapWAS 1.0.0}'}
+2022-12-29 18:53:19.493 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 18:53:39.461 INFO  - GET / HTTP/1.1
+2022-12-29 18:53:39.462 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 18:53:39.462 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-29 18:53:39.462 INFO  - Connection= keep-alive
+2022-12-29 18:53:39.463 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-29 18:53:39.463 INFO  - Sec-Fetch-Site= none
+2022-12-29 18:53:39.463 INFO  - Sec-Fetch-Dest= document
+2022-12-29 18:53:39.463 INFO  - Host= localhost:8080
+2022-12-29 18:53:39.463 INFO  - Purpose= prefetch
+2022-12-29 18:53:39.464 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-29 18:53:39.464 INFO  - Sec-Fetch-Mode= navigate
+2022-12-29 18:53:39.464 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-29 18:53:39.465 INFO  - sec-ch-ua-mobile= ?0
+2022-12-29 18:53:39.465 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-29 18:53:39.465 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-29 18:53:39.466 INFO  - Sec-Fetch-User= ?1
+2022-12-29 18:53:39.470 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-29 18:53:39.479 DEBUG - Request host: localhost
+2022-12-29 18:53:39.484 DEBUG - Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Purpose: prefetch
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 18:53:39.520 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/ GET', httpVersion='HTTP/1.1', requestLines='Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Purpose: prefetch
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC', requestType='GET', requestHost='localhost', reqHeader='{Cookie= io=PL7TK76OSCzqZRBSAAAC, Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection= keep-alive, User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36, Sec-Fetch-Site= none, Sec-Fetch-Dest= document, Host= localhost:8080, Purpose= prefetch, Accept-Encoding= gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode= navigate, sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96", sec-ch-ua-mobile= ?0, Upgrade-Insecure-Requests= 1, sec-ch-ua-platform= "Windows", Sec-Fetch-User= ?1, Accept-Language= ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/', url='http://localhost:8080/', contextParam='{}'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@1b4c5556', responseHeader='{Date: =Wed Dec 29 18:53:39 KST 2021, Server: =LeapWAS 1.0.0}'}
+2022-12-29 18:53:40.006 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 18:53:46.987 INFO  - GET /aaa HTTP/1.1
+2022-12-29 18:53:46.988 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 18:53:46.988 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-29 18:53:46.989 INFO  - Connection= keep-alive
+2022-12-29 18:53:46.989 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-29 18:53:46.989 INFO  - Sec-Fetch-Site= none
+2022-12-29 18:53:46.989 INFO  - Sec-Fetch-Dest= document
+2022-12-29 18:53:46.990 INFO  - Host= localhost:8080
+2022-12-29 18:53:46.990 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-29 18:53:46.990 INFO  - Sec-Fetch-Mode= navigate
+2022-12-29 18:53:46.990 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-29 18:53:46.991 INFO  - sec-ch-ua-mobile= ?0
+2022-12-29 18:53:46.991 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-29 18:53:46.991 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-29 18:53:46.991 INFO  - Sec-Fetch-User= ?1
+2022-12-29 18:53:46.991 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-29 18:53:46.992 DEBUG - Request host: localhost
+2022-12-29 18:53:46.992 DEBUG - Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 18:53:46.995 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/aaa GET', httpVersion='HTTP/1.1', requestLines='Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC', requestType='GET', requestHost='localhost', reqHeader='{Cookie= io=PL7TK76OSCzqZRBSAAAC, Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection= keep-alive, User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36, Sec-Fetch-Site= none, Sec-Fetch-Dest= document, Host= localhost:8080, Accept-Encoding= gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode= navigate, sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96", sec-ch-ua-mobile= ?0, Upgrade-Insecure-Requests= 1, sec-ch-ua-platform= "Windows", Sec-Fetch-User= ?1, Accept-Language= ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/aaa', url='http://localhost:8080/aaa', contextParam='{}'}', httpResponse='null', requestedHost='localhost', responseCode='404', responseBody='[B@57cf2352', responseHeader='{Date: =Wed Dec 29 18:53:46 KST 2021, Server: =LeapWAS 1.0.0}'}
+2022-12-29 18:54:41.683 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 18:54:41.685 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 18:54:41.686 INFO  - GET /aaa HTTP/1.1
+2022-12-29 18:54:41.686 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 18:54:41.686 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-29 18:54:41.686 INFO  - Connection= keep-alive
+2022-12-29 18:54:41.687 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-29 18:54:41.687 INFO  - Sec-Fetch-Site= none
+2022-12-29 18:54:41.687 INFO  - Sec-Fetch-Dest= document
+2022-12-29 18:54:41.687 INFO  - Host= localhost:8080
+2022-12-29 18:54:41.687 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-29 18:54:41.688 INFO  - Sec-Fetch-Mode= navigate
+2022-12-29 18:54:41.688 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-29 18:54:41.688 INFO  - sec-ch-ua-mobile= ?0
+2022-12-29 18:54:41.688 INFO  - Cache-Control= max-age=0
+2022-12-29 18:54:41.688 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-29 18:54:41.689 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-29 18:54:41.689 INFO  - Sec-Fetch-User= ?1
+2022-12-29 18:54:41.689 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-29 18:54:41.690 DEBUG - Request host: localhost
+2022-12-29 18:54:41.690 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 18:54:41.693 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/aaa GET', httpVersion='HTTP/1.1', requestLines='Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC', requestType='GET', requestHost='localhost', reqHeader='{Cookie= io=PL7TK76OSCzqZRBSAAAC, Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection= keep-alive, User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36, Sec-Fetch-Site= none, Sec-Fetch-Dest= document, Host= localhost:8080, Accept-Encoding= gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode= navigate, sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96", sec-ch-ua-mobile= ?0, Cache-Control= max-age=0, Upgrade-Insecure-Requests= 1, sec-ch-ua-platform= "Windows", Sec-Fetch-User= ?1, Accept-Language= ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/aaa', url='http://localhost:8080/aaa', contextParam='{}'}', httpResponse='null', requestedHost='localhost', responseCode='404', responseBody='[B@83bbc60', responseHeader='{Date: =Wed Dec 29 18:54:41 KST 2021, Server: =LeapWAS 1.0.0}'}
+2022-12-29 18:54:41.949 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 18:54:49.346 INFO  - Leap WAS server starting...
+2022-12-29 18:54:49.348 INFO  - --------------------------------------------------------------------------
+2022-12-29 18:54:49.349 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-29 18:54:49.349 INFO  - verbose mode on
+2022-12-29 18:54:49.381 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-29 18:54:49.382 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:54:49.382 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:54:49.382 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:54:49.382 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:54:49.382 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:54:49.383 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:54:49.383 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-29 18:54:49.385 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:54:49.392 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-29 18:54:49.393 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:54:49.393 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:54:49.393 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:54:49.393 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:54:49.393 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:54:49.393 DEBUG - Method not mapping with MethodMapper annotation: java.lang.reflect.Method
+2022-12-29 18:54:49.394 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-29 18:54:49.399 INFO  - Accepting connections on port 8082   Document Root: D:\0.github\Leap\home2
+2022-12-29 18:54:49.403 INFO  - Accepting connections on port 8080   Document Root: D:\0.github\Leap\home
+2022-12-29 18:54:51.521 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 18:54:51.524 INFO  - Client request accepted... : /127.0.0.1
+2022-12-29 18:54:51.528 INFO  - GET /aaa HTTP/1.1
+2022-12-29 18:54:51.534 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 18:54:51.535 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-29 18:54:51.535 INFO  - Connection= keep-alive
+2022-12-29 18:54:51.535 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-29 18:54:51.536 INFO  - Sec-Fetch-Site= none
+2022-12-29 18:54:51.536 INFO  - Sec-Fetch-Dest= document
+2022-12-29 18:54:51.536 INFO  - Host= localhost:8080
+2022-12-29 18:54:51.536 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-29 18:54:51.536 INFO  - Sec-Fetch-Mode= navigate
+2022-12-29 18:54:51.536 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-29 18:54:51.536 INFO  - sec-ch-ua-mobile= ?0
+2022-12-29 18:54:51.536 INFO  - Cache-Control= max-age=0
+2022-12-29 18:54:51.536 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-29 18:54:51.536 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-29 18:54:51.536 INFO  - Sec-Fetch-User= ?1
+2022-12-29 18:54:51.537 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-29 18:54:51.551 DEBUG - Request host: localhost
+2022-12-29 18:54:51.551 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-29 18:54:51.565 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/aaa GET', httpVersion='HTTP/1.1', requestLines='Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC', requestType='GET', requestHost='localhost', reqHeader='{Cookie= io=PL7TK76OSCzqZRBSAAAC, Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection= keep-alive, User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36, Sec-Fetch-Site= none, Sec-Fetch-Dest= document, Host= localhost:8080, Accept-Encoding= gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode= navigate, sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96", sec-ch-ua-mobile= ?0, Cache-Control= max-age=0, Upgrade-Insecure-Requests= 1, sec-ch-ua-platform= "Windows", Sec-Fetch-User= ?1, Accept-Language= ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/aaa', url='http://localhost:8080/aaa', contextParam='{}'}', httpResponse='null', requestedHost='localhost', responseCode='404', responseBody='[B@c8a145a', responseHeader='{Date: =Wed Dec 29 18:54:51 KST 2021, Server: =LeapWAS 1.0.0}'}
+2022-12-29 18:54:51.785 INFO  - Client request accepted... : /127.0.0.1

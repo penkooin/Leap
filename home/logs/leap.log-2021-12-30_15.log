@@ -1,0 +1,657 @@
+2022-12-30 15:11:32.077 INFO  - Leap WAS server starting...
+2022-12-30 15:11:32.083 INFO  - --------------------------------------------------------------------------
+2022-12-30 15:11:32.084 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-30 15:11:32.084 INFO  - verbose mode on
+2022-12-30 15:11:32.155 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-30 15:11:32.156 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-12-30 15:11:32.156 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-12-30 15:11:32.156 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-12-30 15:11:32.156 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-12-30 15:11:32.157 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-12-30 15:11:32.157 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-12-30 15:11:32.157 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-30 15:11:32.166 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-30 15:11:32.257 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-30 15:11:32.258 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-12-30 15:11:32.258 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-12-30 15:11:32.258 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-12-30 15:11:32.258 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-12-30 15:11:32.259 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-12-30 15:11:32.259 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-12-30 15:11:32.259 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-30 15:11:32.267 INFO  - Accepting connections on port 8082
+2022-12-30 15:11:32.269 INFO  - Accepting connections on port 8080
+2022-12-30 15:11:36.026 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 15:11:36.027 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 15:11:36.028 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-30 15:11:36.031 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 15:11:36.032 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-30 15:11:36.032 INFO  - Connection= keep-alive
+2022-12-30 15:11:36.033 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-30 15:11:36.033 INFO  - Sec-Fetch-Site= none
+2022-12-30 15:11:36.033 INFO  - Sec-Fetch-Dest= document
+2022-12-30 15:11:36.033 INFO  - Host= localhost:8080
+2022-12-30 15:11:36.033 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-30 15:11:36.033 INFO  - Sec-Fetch-Mode= navigate
+2022-12-30 15:11:36.034 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-30 15:11:36.034 INFO  - sec-ch-ua-mobile= ?0
+2022-12-30 15:11:36.034 INFO  - Cache-Control= max-age=0
+2022-12-30 15:11:36.034 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-30 15:11:36.034 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-30 15:11:36.034 INFO  - Sec-Fetch-User= ?1
+2022-12-30 15:11:36.034 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-30 15:11:36.058 DEBUG - Request host: localhost
+2022-12-30 15:11:36.060 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 15:11:36.085 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/time/GetTime GET', httpVersion='HTTP/1.1', requestLines='Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC', requestType='GET', requestHost='localhost', reqHeader='{Cookie= io=PL7TK76OSCzqZRBSAAAC, Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection= keep-alive, User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36, Sec-Fetch-Site= none, Sec-Fetch-Dest= document, Host= localhost:8080, Accept-Encoding= gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode= navigate, sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96", sec-ch-ua-mobile= ?0, Cache-Control= max-age=0, Upgrade-Insecure-Requests= 1, sec-ch-ua-platform= "Windows", Sec-Fetch-User= ?1, Accept-Language= ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/time/GetTime', url='http://localhost:8080/time/GetTime', contextParam='{}'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@1ea114c3', responseHeader='{Date: =Thu Dec 30 15:11:36 KST 2021, Server: =LeapWAS 1.0.0}'}
+2022-12-30 15:11:36.095 ERROR - Socket closed
+java.net.SocketException: Socket closed
+	at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:113)
+	at java.base/java.net.SocketOutputStream.write(SocketOutputStream.java:138)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:174)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:143)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-12-30 15:11:36.283 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 15:13:19.930 INFO  - Leap WAS server starting...
+2022-12-30 15:13:19.932 INFO  - --------------------------------------------------------------------------
+2022-12-30 15:13:19.933 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-30 15:13:19.933 INFO  - verbose mode on
+2022-12-30 15:13:19.967 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-30 15:13:19.968 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-12-30 15:13:19.968 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-12-30 15:13:19.968 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-12-30 15:13:19.968 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-12-30 15:13:19.969 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-12-30 15:13:19.969 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-12-30 15:13:19.969 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-30 15:13:19.971 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-30 15:13:20.044 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-30 15:13:20.045 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-12-30 15:13:20.045 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-12-30 15:13:20.046 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-12-30 15:13:20.046 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-12-30 15:13:20.046 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-12-30 15:13:20.047 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-12-30 15:13:20.047 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-30 15:13:20.052 INFO  - Accepting connections on port 8082
+2022-12-30 15:13:20.057 INFO  - Accepting connections on port 8080
+2022-12-30 15:13:21.718 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 15:13:21.720 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 15:13:21.723 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-30 15:13:21.727 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 15:13:21.728 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-30 15:13:21.728 INFO  - Connection= keep-alive
+2022-12-30 15:13:21.728 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-30 15:13:21.728 INFO  - Sec-Fetch-Site= none
+2022-12-30 15:13:21.729 INFO  - Sec-Fetch-Dest= document
+2022-12-30 15:13:21.729 INFO  - Host= localhost:8080
+2022-12-30 15:13:21.729 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-30 15:13:21.730 INFO  - Sec-Fetch-Mode= navigate
+2022-12-30 15:13:21.730 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-30 15:13:21.730 INFO  - sec-ch-ua-mobile= ?0
+2022-12-30 15:13:21.730 INFO  - Cache-Control= max-age=0
+2022-12-30 15:13:21.730 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-30 15:13:21.730 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-30 15:13:21.731 INFO  - Sec-Fetch-User= ?1
+2022-12-30 15:13:21.732 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-30 15:13:21.753 DEBUG - Request host: localhost
+2022-12-30 15:13:21.754 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 15:13:21.773 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/time/GetTime GET', httpVersion='HTTP/1.1', requestLines='Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC', requestType='GET', requestHost='localhost', reqHeader='{Cookie= io=PL7TK76OSCzqZRBSAAAC, Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection= keep-alive, User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36, Sec-Fetch-Site= none, Sec-Fetch-Dest= document, Host= localhost:8080, Accept-Encoding= gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode= navigate, sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96", sec-ch-ua-mobile= ?0, Cache-Control= max-age=0, Upgrade-Insecure-Requests= 1, sec-ch-ua-platform= "Windows", Sec-Fetch-User= ?1, Accept-Language= ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/time/GetTime', url='http://localhost:8080/time/GetTime', contextParam='{}'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@559e8593', responseHeader='{Date: =Thu Dec 30 15:13:21 KST 2021, Server: =LeapWAS 1.0.0}'}
+2022-12-30 15:13:21.785 ERROR - Socket closed
+java.net.SocketException: Socket closed
+	at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:113)
+	at java.base/java.net.SocketOutputStream.write(SocketOutputStream.java:138)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:173)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:142)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-12-30 15:13:21.982 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 15:15:04.919 INFO  - Leap WAS server starting...
+2022-12-30 15:15:04.924 INFO  - --------------------------------------------------------------------------
+2022-12-30 15:15:04.924 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-30 15:15:04.924 INFO  - verbose mode on
+2022-12-30 15:15:04.968 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-30 15:15:04.969 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-12-30 15:15:04.969 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-12-30 15:15:04.970 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-12-30 15:15:04.970 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-12-30 15:15:04.970 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-12-30 15:15:04.970 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-12-30 15:15:04.971 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-30 15:15:04.973 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-30 15:15:04.981 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-30 15:15:04.981 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-12-30 15:15:04.981 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-12-30 15:15:04.981 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-12-30 15:15:04.982 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-12-30 15:15:04.982 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-12-30 15:15:04.982 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-12-30 15:15:04.982 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-30 15:15:04.987 INFO  - Accepting connections on port 8082
+2022-12-30 15:15:04.991 INFO  - Accepting connections on port 8080
+2022-12-30 15:15:06.396 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 15:15:06.398 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 15:15:06.399 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-30 15:15:06.404 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 15:15:06.405 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-30 15:15:06.405 INFO  - Connection= keep-alive
+2022-12-30 15:15:06.406 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-30 15:15:06.406 INFO  - Sec-Fetch-Site= none
+2022-12-30 15:15:06.406 INFO  - Sec-Fetch-Dest= document
+2022-12-30 15:15:06.406 INFO  - Host= localhost:8080
+2022-12-30 15:15:06.407 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-30 15:15:06.407 INFO  - Sec-Fetch-Mode= navigate
+2022-12-30 15:15:06.407 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-30 15:15:06.407 INFO  - sec-ch-ua-mobile= ?0
+2022-12-30 15:15:06.408 INFO  - Cache-Control= max-age=0
+2022-12-30 15:15:06.408 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-30 15:15:06.408 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-30 15:15:06.409 INFO  - Sec-Fetch-User= ?1
+2022-12-30 15:15:06.409 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-30 15:15:06.427 DEBUG - Request host: localhost
+2022-12-30 15:15:06.428 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 15:15:06.455 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/time/GetTime GET', httpVersion='HTTP/1.1', requestLines='Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC', requestType='GET', requestHost='localhost', reqHeader='{Cookie= io=PL7TK76OSCzqZRBSAAAC, Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection= keep-alive, User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36, Sec-Fetch-Site= none, Sec-Fetch-Dest= document, Host= localhost:8080, Accept-Encoding= gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode= navigate, sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96", sec-ch-ua-mobile= ?0, Cache-Control= max-age=0, Upgrade-Insecure-Requests= 1, sec-ch-ua-platform= "Windows", Sec-Fetch-User= ?1, Accept-Language= ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/time/GetTime', url='http://localhost:8080/time/GetTime', contextParam='{}'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@6f2a627e', responseHeader='{Date: =Thu Dec 30 15:15:06 KST 2021, Server: =LeapWAS 1.0.0}'}
+2022-12-30 15:15:06.461 ERROR - Socket closed
+java.net.SocketException: Socket closed
+	at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:113)
+	at java.base/java.net.SocketOutputStream.write(SocketOutputStream.java:138)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:174)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:143)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-12-30 15:15:06.659 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 15:20:50.258 INFO  - Leap WAS server starting...
+2022-12-30 15:20:50.262 INFO  - --------------------------------------------------------------------------
+2022-12-30 15:20:50.263 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-30 15:20:50.263 INFO  - verbose mode on
+2022-12-30 15:20:50.335 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-30 15:20:50.335 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-12-30 15:20:50.336 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-12-30 15:20:50.336 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-12-30 15:20:50.336 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-12-30 15:20:50.336 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-12-30 15:20:50.336 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-12-30 15:20:50.337 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-30 15:20:50.339 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO]
+2022-12-30 15:20:50.452 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-30 15:20:50.453 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-12-30 15:20:50.453 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-12-30 15:20:50.453 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-12-30 15:20:50.453 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-12-30 15:20:50.454 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-12-30 15:20:50.454 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-12-30 15:20:50.454 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO]
+2022-12-30 15:20:50.462 INFO  - Accepting connections on port 8082
+2022-12-30 15:20:50.466 INFO  - Accepting connections on port 8080
+2022-12-30 15:20:52.376 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 15:20:52.379 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 15:20:52.380 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-30 15:20:52.383 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 15:20:52.384 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-30 15:20:52.384 INFO  - Connection= keep-alive
+2022-12-30 15:20:52.384 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-30 15:20:52.385 INFO  - Sec-Fetch-Site= none
+2022-12-30 15:20:52.385 INFO  - Sec-Fetch-Dest= document
+2022-12-30 15:20:52.385 INFO  - Host= localhost:8080
+2022-12-30 15:20:52.385 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-30 15:20:52.385 INFO  - Sec-Fetch-Mode= navigate
+2022-12-30 15:20:52.385 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-30 15:20:52.386 INFO  - sec-ch-ua-mobile= ?0
+2022-12-30 15:20:52.386 INFO  - Cache-Control= max-age=0
+2022-12-30 15:20:52.386 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-30 15:20:52.386 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-30 15:20:52.387 INFO  - Sec-Fetch-User= ?1
+2022-12-30 15:20:52.387 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-30 15:20:52.403 DEBUG - Request host: localhost
+2022-12-30 15:20:52.404 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 15:20:52.624 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 15:27:44.620 INFO  - Leap WAS server starting...
+2022-12-30 15:27:44.622 INFO  - --------------------------------------------------------------------------
+2022-12-30 15:27:44.623 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-30 15:27:44.623 INFO  - verbose mode on
+2022-12-30 15:27:44.659 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-30 15:27:44.659 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-12-30 15:27:44.660 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-12-30 15:27:44.660 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-12-30 15:27:44.660 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-12-30 15:27:44.660 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-12-30 15:27:44.661 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-12-30 15:27:44.661 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-30 15:27:44.663 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO, DEBUG, WARN, ERROR]
+2022-12-30 15:27:44.670 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-30 15:27:44.671 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-12-30 15:27:44.671 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-12-30 15:27:44.671 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-12-30 15:27:44.671 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-12-30 15:27:44.672 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-12-30 15:27:44.672 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-12-30 15:27:44.672 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO, DEBUG, WARN, ERROR]
+2022-12-30 15:27:44.679 INFO  - Accepting connections on port 8082
+2022-12-30 15:27:44.683 INFO  - Accepting connections on port 8080
+2022-12-30 15:27:49.142 INFO  - Leap WAS server starting...
+2022-12-30 15:27:49.147 INFO  - --------------------------------------------------------------------------
+2022-12-30 15:27:49.147 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-12-30 15:27:49.147 INFO  - verbose mode on
+2022-12-30 15:27:49.180 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-30 15:27:49.181 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-12-30 15:27:49.181 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-12-30 15:27:49.182 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-12-30 15:27:49.182 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-12-30 15:27:49.182 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-12-30 15:27:49.182 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-12-30 15:27:49.183 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO, DEBUG]
+2022-12-30 15:27:49.185 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [INFO, DEBUG, WARN, ERROR]
+2022-12-30 15:27:49.191 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-12-30 15:27:49.192 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-12-30 15:27:49.192 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-12-30 15:27:49.192 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-12-30 15:27:49.192 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-12-30 15:27:49.193 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-12-30 15:27:49.193 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-12-30 15:27:49.193 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [INFO, DEBUG, WARN, ERROR]
+2022-12-30 15:27:49.198 INFO  - Accepting connections on port 8082
+2022-12-30 15:27:49.202 INFO  - Accepting connections on port 8080
+2022-12-30 15:27:53.363 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 15:27:53.364 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 15:27:53.366 INFO  - GET /time/GetTime HTTP/1.1
+2022-12-30 15:27:53.369 INFO  - Cookie= io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 15:27:53.370 INFO  - Accept= text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-12-30 15:27:53.371 INFO  - Connection= keep-alive
+2022-12-30 15:27:53.371 INFO  - User-Agent= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+2022-12-30 15:27:53.372 INFO  - Sec-Fetch-Site= none
+2022-12-30 15:27:53.372 INFO  - Sec-Fetch-Dest= document
+2022-12-30 15:27:53.372 INFO  - Host= localhost:8080
+2022-12-30 15:27:53.372 INFO  - Accept-Encoding= gzip, deflate, br
+2022-12-30 15:27:53.372 INFO  - Sec-Fetch-Mode= navigate
+2022-12-30 15:27:53.373 INFO  - sec-ch-ua= " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-12-30 15:27:53.373 INFO  - sec-ch-ua-mobile= ?0
+2022-12-30 15:27:53.373 INFO  - Cache-Control= max-age=0
+2022-12-30 15:27:53.373 INFO  - Upgrade-Insecure-Requests= 1
+2022-12-30 15:27:53.373 INFO  - sec-ch-ua-platform= "Windows"
+2022-12-30 15:27:53.373 INFO  - Sec-Fetch-User= ?1
+2022-12-30 15:27:53.374 INFO  - Accept-Language= ko,en-US;q=0.9,en;q=0.8
+2022-12-30 15:27:53.393 DEBUG - Request host: localhost
+2022-12-30 15:27:53.394 DEBUG - Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-12-30 15:27:53.623 INFO  - Client request accepted... : /127.0.0.1
+2022-12-30 15:31:19.648 ERROR - null
+org.chaostocosmos.leap.http.WASException: null
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:64)
+	at org.chaostocosmos.leap.http.service.AbstractLeapService.serve(AbstractLeapService.java:54)
+	at org.chaostocosmos.leap.http.service.TimeServiceImpl.serve(TimeServiceImpl.java:1)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeService(ServiceInvoker.java:34)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:97)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:62)
+	... 9 common frames omitted
+Caused by: org.chaostocosmos.leap.http.WASException: 
+	at org.chaostocosmos.leap.http.filter.BasicAuthFilter.filterRequest(BasicAuthFilter.java:35)
+	... 14 common frames omitted
+2022-12-30 15:33:06.557 ERROR - null
+org.chaostocosmos.leap.http.WASException: null
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:64)
+	at org.chaostocosmos.leap.http.service.AbstractLeapService.serve(AbstractLeapService.java:54)
+	at org.chaostocosmos.leap.http.service.TimeServiceImpl.serve(TimeServiceImpl.java:1)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeService(ServiceInvoker.java:34)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:97)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:62)
+	... 9 common frames omitted
+Caused by: org.chaostocosmos.leap.http.WASException: 
+	at org.chaostocosmos.leap.http.filter.BasicAuthFilter.filterRequest(BasicAuthFilter.java:35)
+	... 14 common frames omitted
+2022-12-30 15:33:39.627 ERROR - null
+org.chaostocosmos.leap.http.WASException: null
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:64)
+	at org.chaostocosmos.leap.http.service.AbstractLeapService.serve(AbstractLeapService.java:54)
+	at org.chaostocosmos.leap.http.service.TimeServiceImpl.serve(TimeServiceImpl.java:1)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeService(ServiceInvoker.java:34)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:97)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:62)
+	... 9 common frames omitted
+Caused by: org.chaostocosmos.leap.http.WASException: 
+	at org.chaostocosmos.leap.http.filter.BasicAuthFilter.filterRequest(BasicAuthFilter.java:35)
+	... 14 common frames omitted
+2022-12-30 15:34:08.562 ERROR - null
+org.chaostocosmos.leap.http.WASException: null
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:64)
+	at org.chaostocosmos.leap.http.service.AbstractLeapService.serve(AbstractLeapService.java:54)
+	at org.chaostocosmos.leap.http.service.TimeServiceImpl.serve(TimeServiceImpl.java:1)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeService(ServiceInvoker.java:34)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:97)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.chaostocosmos.leap.http.service.ServiceInvoker.invokeMethod(ServiceInvoker.java:62)
+	... 9 common frames omitted
+Caused by: org.chaostocosmos.leap.http.WASException: 
+	at org.chaostocosmos.leap.http.filter.BasicAuthFilter.filterRequest(BasicAuthFilter.java:35)
+	... 14 common frames omitted
+2022-12-30 15:47:43.898 ERROR - Socket closed
+java.net.SocketException: Socket closed
+	at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:113)
+	at java.base/java.net.SocketOutputStream.write(SocketOutputStream.java:138)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:185)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:152)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-12-30 15:49:54.960 ERROR - Socket closed
+java.net.SocketException: Socket closed
+	at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:113)
+	at java.base/java.net.SocketOutputStream.write(SocketOutputStream.java:138)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:191)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:152)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-12-30 15:50:18.389 ERROR - Socket closed
+java.net.SocketException: Socket closed
+	at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:113)
+	at java.base/java.net.SocketOutputStream.write(SocketOutputStream.java:138)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:153)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-12-30 15:52:20.375 ERROR - Socket closed
+java.net.SocketException: Socket closed
+	at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:113)
+	at java.base/java.net.SocketOutputStream.write(SocketOutputStream.java:138)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:135)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-12-30 15:52:21.396 ERROR - Socket closed
+java.net.SocketException: Socket closed
+	at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:113)
+	at java.base/java.net.SocketOutputStream.write(SocketOutputStream.java:138)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:135)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-12-30 15:52:21.396 ERROR - Socket closed
+java.net.SocketException: Socket closed
+	at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:113)
+	at java.base/java.net.SocketOutputStream.write(SocketOutputStream.java:138)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:135)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-12-30 15:52:21.699 ERROR - Socket closed
+java.net.SocketException: Socket closed
+	at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:113)
+	at java.base/java.net.SocketOutputStream.write(SocketOutputStream.java:138)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:135)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-12-30 15:52:26.719 ERROR - Socket closed
+java.net.SocketException: Socket closed
+	at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:113)
+	at java.base/java.net.SocketOutputStream.write(SocketOutputStream.java:138)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:135)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-12-30 15:52:27.033 ERROR - Socket closed
+java.net.SocketException: Socket closed
+	at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:113)
+	at java.base/java.net.SocketOutputStream.write(SocketOutputStream.java:138)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:135)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-12-30 15:52:40.434 ERROR - Socket closed
+java.net.SocketException: Socket closed
+	at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:113)
+	at java.base/java.net.SocketOutputStream.write(SocketOutputStream.java:138)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:135)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-12-30 15:53:10.438 ERROR - Socket closed
+java.net.SocketException: Socket closed
+	at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:113)
+	at java.base/java.net.SocketOutputStream.write(SocketOutputStream.java:138)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:135)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-12-30 15:53:10.442 ERROR - Socket closed
+java.net.SocketException: Socket closed
+	at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:113)
+	at java.base/java.net.SocketOutputStream.write(SocketOutputStream.java:138)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:135)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-12-30 15:53:10.753 ERROR - Socket closed
+java.net.SocketException: Socket closed
+	at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:113)
+	at java.base/java.net.SocketOutputStream.write(SocketOutputStream.java:138)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:135)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-12-30 15:54:10.784 ERROR - Socket closed
+java.net.SocketException: Socket closed
+	at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:113)
+	at java.base/java.net.SocketOutputStream.write(SocketOutputStream.java:138)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:135)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-12-30 15:54:11.087 ERROR - Socket closed
+java.net.SocketException: Socket closed
+	at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:113)
+	at java.base/java.net.SocketOutputStream.write(SocketOutputStream.java:138)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:135)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)

@@ -1,6 +1,7 @@
 package org.chaostocosmos.leap.http;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.URISyntaxException;
@@ -11,9 +12,13 @@ public class LeapHttpServerTest {
 
     LeapHttpServer server;
 
+    public LeapHttpServerTest() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException, WASException {
+        this.server = new LeapHttpServer();
+        this.server.start();;
+    }
+
     @Test
     public void testHttpServer() throws WASException, URISyntaxException, IOException {
-        this.server = new LeapHttpServer();
         this.server.start();
     }
 
@@ -23,8 +28,7 @@ public class LeapHttpServerTest {
         ss.accept();
     }
 
-    public static void main(String[] args) throws URISyntaxException, IOException, WASException {
+    public static void main(String[] args) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException, WASException {
         LeapHttpServerTest server = new LeapHttpServerTest();
-        server.testServiceHost();
     }    
 }

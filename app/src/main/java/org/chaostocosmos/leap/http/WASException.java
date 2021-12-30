@@ -13,35 +13,38 @@ public class WASException extends Exception {
     MSG_TYPE type;
 
     /**
+     * Exception code
+     */
+    int code;
+
+    /**
+     * message
+     */
+    String message;
+
+    /**
      * Constructor 
      * @type
      * @code
      */
-    public WASException(MSG_TYPE type, String code) {
+    public WASException(MSG_TYPE type, int code) {
         this(type, code, new Object[0]);
     }
 
     /**
-     * Constructor with code and arguments
+     * Constructor with code, arguments
+     * @param cause
      * @param type
-     * @param code
-     * @param args
-     */
-    public WASException(MSG_TYPE type, String code, Object ... args) {
-        //System.out.println(type.name()+"   "+code+"   "+args);
-        this(type, code, args, new Exception(""));
-    }
-
-    /**
-     * Constructor with code, arguments and caused exception
-     * @param type
+     * @param httpCode
      * @param code
      * @param args
      * @param cause
      */
-    public WASException(MSG_TYPE type, String code, Object args, Throwable cause) {
-        super(Context.getMsg(type, code, args), cause);
+    public WASException(MSG_TYPE type, int code, Object... args) { 
+        super(Context.getMsg(type, code, args));
         this.type = type;
+        this.code = code;
+        this.message = Context.getMsg(type, code, args);
     }  
 
     /**
@@ -49,6 +52,38 @@ public class WASException extends Exception {
      * @param cause
      */
     public WASException(Throwable cause) {
-        super(cause);
+        super(cause.getMessage(), cause);
     }    
+
+    /**
+     * Get MSG_TYPE
+     * @return
+     */
+    public MSG_TYPE getMessageType() {
+        return this.type;
+    }
+
+    /**
+     * Get code
+     * @return
+     */
+    public int getCode() {
+        return this.code;
+    }
+
+    /**
+     * Get message
+     */
+    public String getMessage() {
+        return this.message;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " type='" + this.type + "'" +
+            ", code='" + this.code + "'" +
+            ", message='" + this.message + "'" +
+            "}";
+    }
 }

@@ -2,6 +2,7 @@ package org.chaostocosmos.leap.http;
 
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
+import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -36,6 +37,7 @@ public class ConfigTest {
     }
 
     public static void main(String[] args) throws Exception {
-        new ConfigTest().convertJsonToYaml();
+        Method m = ConfigTest.class.getMethod("convertJsonToYaml", null);
+        System.out.println(m.getDeclaringClass().getName());
     }    
 }
