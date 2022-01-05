@@ -78,7 +78,7 @@ public class UserManager implements IAuthenticate {
      */
     public void save(List<User> users) throws WASException {
         List<Map<String, Object>> list = users.stream().map(u -> u.getUserMap()).collect(Collectors.toList());
-        Context.setConfigValue("server.users", list);
+        Context.getConfigValue("server.users", list);
         Context.save();
     }    
 }

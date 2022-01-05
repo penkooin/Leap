@@ -21,6 +21,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.commons.UtilBox;
 
 /**
@@ -186,15 +187,17 @@ public class ResourceHelper {
 
     /**
      * Get resource replaced with specified params
-     * @param resourcePath
+     * @param host
+     * @param contentName
      * @param param
      * @return
-     * @throws IOException
      * @throws WASException
      */
     public static String getResourceContent(String host, String contentName, final Map<String, Object> param) throws WASException {
         try {
-            Path path = getStaticPath(host).resolve(contentName.replace("/", File.separator));
+            contentName = contentName.charAt(0) == '/' ? contentName.substring(1) : contentName;
+            Path path = getStaticPath(host).resolve(contentName);
+            LoggerFactory.getLogger(host).debug(path+"   "+contentName+"   "+getStaticPath(host));
             String all = Files.readString(path, Context.charset());
             if(param == null) {
                 return all;

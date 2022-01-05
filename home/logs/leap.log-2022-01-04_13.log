@@ -1,0 +1,24 @@
+2022-01-04 13:05:30.793 INFO  - Leap WAS server starting...
+2022-01-04 13:05:30.800 INFO  - --------------------------------------------------------------------------
+2022-01-04 13:05:30.801 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-04 13:05:30.802 INFO  - verbose mode on
+2022-01-04 13:05:30.848 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-04 13:05:30.848 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-01-04 13:05:30.849 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-01-04 13:05:30.849 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-01-04 13:05:30.849 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-01-04 13:05:30.850 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-01-04 13:05:30.850 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-01-04 13:05:30.851 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-04 13:05:30.853 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-04 13:05:30.860 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-04 13:05:30.861 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-01-04 13:05:30.862 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-01-04 13:05:30.862 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-01-04 13:05:30.862 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-01-04 13:05:30.862 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-01-04 13:05:30.862 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-01-04 13:05:30.862 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.60   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-04 13:05:30.869 INFO  - Accepting connections on port 8082
+2022-01-04 13:05:30.873 INFO  - Accepting connections on port 8080
+2022-01-04 13:05:34.347 INFO  - Client request accepted... : /127.0.0.1

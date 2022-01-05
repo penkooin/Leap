@@ -3,7 +3,6 @@ package org.chaostocosmos.leap.http;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,7 +15,6 @@ import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.commons.UtilBox;
-import org.chaostocosmos.leap.http.service.ServiceMethodBean;
 import org.yaml.snakeyaml.Yaml;
 
 import ch.qos.logback.classic.Level;
@@ -40,44 +38,94 @@ public class Context {
     private static Path HOME_PATH;
 
     /**
-     * Config Path
+     * Yaml configuration Path
      */
-    private static Path configPath;
+    private static Path configPath, messagesPath, mimeTypesPath;
 
     /**
-     * Config Map
+     * Yaml configuration Map
      */
-    private static Map<String, Object> configMap; 
-
-    /**
-     * Servlet List
-     */
-    private static List<ServiceMethodBean> servletBeanList;
+    private static Map<String, Object> configMap, messagesMap, mimeTypesMap;
 
     /**
      * Constructor
      * @param homePath
      * @throws WASException
-     * @throws IOException
-     * @throws URISyntaxException
      */
-    private Context(Path homePath) throws IOException, URISyntaxException {        
+    private Context(Path homePath) throws WASException {        
         HOME_PATH = homePath;
-        if(!HOME_PATH.toFile().isDirectory() || !HOME_PATH.toFile().exists()) {
-            throw new FileNotFoundException("Resource path must be directory and exist : "+HOME_PATH.toAbsolutePath().toString());
+        try {            
+            if(!HOME_PATH.toFile().isDirectory() || !HOME_PATH.toFile().exists()) {
+                throw new FileNotFoundException("Resource path must be directory and exist : "+HOME_PATH.toAbsolutePath().toString());
+            }
+            //build config environment
+            ResourceHelper.extractResource("config", homePath); 
+            //load configuration files
+            loadConfig();
+            loadMessages();
+            loadMimesTypes();
+            //build webapp environment
+            ResourceHelper.extractResource("webapp", getDefaultDocroot());
+            for(Map.Entry<String, Hosts> entry : getVirtualHosts().entrySet()) {
+                ResourceHelper.extractResource("webapp", entry.getValue().getDocroot());
+            }    
+        } catch(Exception e) {
+            throw new WASException(e);
         }
-        configPath = HOME_PATH.resolve("config").resolve("config.yml");
-        if(!configPath.toFile().exists()) {
-            throw new FileNotFoundException("config.yml not found. Please check your configuration : "+configPath.toAbsolutePath().toString());
+    }
+
+    /**
+     * Load config.yml
+     * @throws WASException
+     */
+    public void loadConfig() throws WASException {
+        try {
+            configPath = HOME_PATH.resolve("config").resolve("config.yml");
+            if(!configPath.toFile().exists()) {
+                throw new FileNotFoundException("config.yml not found. Please check your configuration : "+configPath.toAbsolutePath().toString());
+            }
+            String lines = Files.readAllLines(configPath).stream().collect(Collectors.joining(System.lineSeparator()));
+            Yaml yaml = new Yaml(); 
+            configMap = ((Map<?, ?>)yaml.load(lines)).entrySet().stream().collect(Collectors.toMap(k -> k.getKey().toString(), v -> v.getValue()));
+        } catch(Exception e) {
+            throw new WASException(e);
         }
-        String allStr = Files.readAllLines(configPath).stream().collect(Collectors.joining(System.lineSeparator()));
-        Yaml yaml = new Yaml(); 
-        configMap = ((Map<?, ?>)yaml.load(allStr)).entrySet().stream().collect(Collectors.toMap(k -> k.getKey().toString(), v -> v.getValue()));
-        ResourceHelper.extractResource("webapp", getDefaultDocroot());
-        for(Map.Entry<String, Hosts> entry : getVirtualHosts().entrySet()) {
-            ResourceHelper.extractResource("webapp", entry.getValue().getDocroot());
+    }
+
+    /**
+     * Load messages.yml
+     * @throws WASException
+     */
+    public void loadMessages() throws WASException {
+        try {
+            messagesPath = HOME_PATH.resolve("config").resolve("messages.yml");
+            if(!messagesPath.toFile().exists()) {
+                throw new FileNotFoundException("messages.yml not found. Please check your configuration : "+messagesPath.toAbsolutePath().toString());
+            }
+            String lines = Files.readAllLines(messagesPath).stream().collect(Collectors.joining(System.lineSeparator()));
+            Yaml yaml = new Yaml(); 
+            messagesMap = ((Map<?, ?>)yaml.load(lines)).entrySet().stream().collect(Collectors.toMap(k -> k.getKey().toString(), v -> v.getValue()));
+        } catch(Exception e) {
+            throw new WASException(e);
         }
-        //servletBeanList = getServiceBeanList();
+    }
+
+    /**
+     * Load mime.yml
+     * @throws WASException
+     */
+    public void loadMimesTypes() throws WASException {
+        try {
+            mimeTypesPath = HOME_PATH.resolve("config").resolve("mime.yml");
+            if(!mimeTypesPath.toFile().exists()) {
+                throw new FileNotFoundException("mime.yml not found. Please check your configuration : "+mimeTypesPath.toAbsolutePath().toString());
+            }
+            String lines = Files.readAllLines(mimeTypesPath).stream().collect(Collectors.joining(System.lineSeparator()));
+            Yaml yaml = new Yaml(); 
+            mimeTypesMap = ((Map<?, ?>)yaml.load(lines)).entrySet().stream().collect(Collectors.toMap(k -> k.getKey().toString(), v -> v.getValue()));
+        } catch(Exception e) {
+            throw new WASException(e);
+        }
     }
 
     /**
@@ -88,10 +136,8 @@ public class Context {
     public static Context initialize(Path homePath) {
         if(context == null) {
             try {
-                //build config environment
-                ResourceHelper.extractResource("config", homePath); 
                 context = new Context(homePath);
-            } catch (IOException | URISyntaxException e) {
+            } catch (WASException e) {
                 e.printStackTrace();
             }
         }
@@ -357,7 +403,7 @@ public class Context {
      * @param docroot
      */
     public static void setDefaultDocroot(String docroot) {
-        setConfigValue("server.doc-root", docroot);
+        getConfigValue("server.doc-root", docroot);
     }
 
     /**
@@ -433,14 +479,40 @@ public class Context {
      * @return
      */
     public static String getMsg(MSG_TYPE type, int code, Object ... args) {
-        Object value = getConfigValue("messages."+type.name().toLowerCase()+"."+type.name().toLowerCase()+String.format("%03d",code));
+        Object value = getMessagesValue("messages."+type.name().toLowerCase()+"."+type.name().toLowerCase()+String.format("%03d",code));
         String msg = value == null ? "" : value.toString();
         return Arrays.stream(args).reduce(msg, (ap, a) -> ap.toString().replaceFirst("\\{\\}", a.toString())).toString();
     }    
 
     /**
-     * Get configuration value by key path separated with dot in json. 
-     * e.g. server.name or server.port
+     * Get mime type value
+     * @param path
+     * @return
+     */
+    public static Object getMimeTypes(String path) {
+        return findValue(mimeTypesMap, path.split("\\."));
+    }
+
+    /**
+     * Get value of messages
+     * @param path
+     * @return
+     */
+    public static Object getMessagesValue(String path) {
+        return findValue(messagesMap, path.split("\\."));
+    }
+
+    /**
+     * Set value to messages
+     * @param path
+     * @param value
+     */
+    public static void setMessagesValue(String path, Object value) {
+        setValue(messagesMap, path.split("\\."), value);
+    }
+
+    /**
+     * Get value of messages
      * @param path
      * @return
      */
@@ -449,16 +521,16 @@ public class Context {
     }
 
     /**
-     * Set value to configuration
+     * Set value of config
      * @param path
      * @param value
      */
-    public static void setConfigValue(String path, Object value) {
+    public static void getConfigValue(String path, Object value) {
         setValue(configMap, path.split("\\."), value);
     }
 
     /**
-     * Set value to configuration Map
+     * Set value to config
      * @param obj
      * @param keys
      * @param value

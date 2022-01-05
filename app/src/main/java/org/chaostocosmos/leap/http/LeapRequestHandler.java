@@ -7,6 +7,7 @@ import java.net.Socket;
 import java.nio.file.Path;
 import java.util.Date;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.commons.UtilBox;
@@ -81,7 +82,7 @@ public class LeapRequestHandler implements Runnable {
             LoggerFactory.getLogger(requestedHost).debug("Request host: "+requestedHost);
             
             // log request information
-            LoggerFactory.getLogger(request.getRequestedHost()).debug(request.getRequestLines());
+            LoggerFactory.getLogger(request.getRequestedHost()).debug(request.getReqHeader().entrySet().stream().map(e -> e.getKey()+": "+e.getValue()).collect(Collectors.joining(System.lineSeparator())));
             Path resourcePath = ResourceHelper.getResourcePath(request);
 
             String contextPath = request.getContextPath();
@@ -138,8 +139,9 @@ public class LeapRequestHandler implements Runnable {
             while((throwable = e.getCause()) != null) {
                 e = (Exception)throwable;
             } 
+            e.printStackTrace();
             WASException we = (WASException) e;
-            String responseMessage = createHttpResponsePage(requestedHost, we.getCode(), we.getMessage());
+            String responseMessage = createHttpResponsePage(requestedHost, we.getMessageType(), we.getCode(), we.getMessage());
             if(response == null) {
                 response = HttpBuilder.buildHttpResponse(request);
             }
@@ -157,14 +159,15 @@ public class LeapRequestHandler implements Runnable {
     /**
      * Create http response page
      * @param host
+     * @param type
      * @param code
      * @param message
      * @return
      * @throws WASException
      */
-    public String createHttpResponsePage(String host, int code, String message) {
+    public String createHttpResponsePage(String host, MSG_TYPE type, int code, String message) {
         try {
-            return ResourceHelper.getResourceContent(host, "response.html", Map.of("@code", code, "@message", message));
+            return ResourceHelper.getResourceContent(host, "response.html", Map.of("@code", code, "@type", type.name(), "@message", message));
         } catch (WASException e) {
             e.printStackTrace();
             LoggerFactory.getLogger(host).error(e.getMessage(), e);

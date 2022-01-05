@@ -1,34 +1,22 @@
 package org.chaostocosmos.leap.http;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.Reader;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.http.HttpRequest;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.chaostocosmos.leap.http.HttpRequestDescriptor.MultipartDescriptor;
 
 /**
  * Http parsing factory object
  * @author 9ins 
  */
 public class HttpParser {
-    /**
-     * logger
-     */
-    public static Logger logger = LoggerFactory.getLogger(Context.getDefaultHost()); 
-
     /**
      * Http request parser
      */
@@ -78,40 +66,58 @@ public class HttpParser {
     }
 
     /**
+    * Read line from stream
+     * @param is
+     * @return
+     * @throws IOException
+     */
+    private static String readLine(InputStream is) throws IOException {
+        int c;
+        String line = "";
+        do {
+            c = is.read();
+            if(c == 0x0D) {
+                int lf = is.read();
+                break;
+            }
+            line += c;
+        } while(c != -1);
+        return line;
+    }
+
+    /**
+     * Read all requested lines
+     * @param is
+     * @return
+     * @throws IOException
+     */
+    private static List<String> readRequestLines(InputStream is) throws IOException {
+        String line;
+        String all = "";
+        while(!(line = readLine(is)).equals("")) {
+            all += line + System.lineSeparator();
+        }
+        return Arrays.asList(all.split(System.lineSeparator()));
+    }
+
+    /**
      * Request parser inner class
      * @author 9ins
      */
     public static class RequestParser {
-        /**
-         * 
-         * @param inputStream
-         * @return
-         * @throws IOException
-         */
-        public Map<String, Object> readInputStream(InputStream inputStream) throws IOException {
-            char previous = '\0';
-            char current = '\0';
-            ByteArrayOutputStream headPartStream = new ByteArrayOutputStream();
-            ByteArrayOutputStream bodyPartStream = new ByteArrayOutputStream();
-            int read;
-            while((read = inputStream.read()) != -1) {
-                current = (char)read;
-                if(previous == '\n' && current == '\n') {
-                    bodyPartStream.write(current);
-                } else {
-                    headPartStream.write(current);
-                }
-                if(current != '\r') {
-                    previous = current;
-                }
-            }    
-            return Map.of("HEAD", headPartStream, "BODY", bodyPartStream, "STREAM", inputStream);
-        }
 
+        /**
+         * Read by Reader
+         * @param reader
+         * @return
+         */
         public Map<String, Object> readReader(Reader reader) {
             return null;
         }
 
+        /**
+         * Read by InpuStream
+         */
         public Map<String, Object> readInputStream(InputStream inputStream, int bufferSize) {
             return null;            
         }
@@ -128,89 +134,65 @@ public class HttpParser {
          * Parse request
          * @throws IOException
          * @throws WASException
-         * @throws URISyntaxException
          */
         public HttpRequestDescriptor parseRequest(InputStream in) throws WASException {
-            REQUEST_TYPE requestType = null;
-            List<String> requestLines = new ArrayList<>();
+            HttpRequestDescriptor desc;
             try {
-                BufferedReader buffReader = new BufferedReader(new InputStreamReader(in));
-                for(String line; (line=buffReader.readLine()) != null; ) {
-                        if(line.isEmpty()) break;
-                        requestLines.add(line);
-                }    
-            } catch (IOException ios) {
-                throw new WASException(MSG_TYPE.ERROR, 41);
-            }
-            // Map<String, Object> readMap = readInputStream(in);
-            // ByteArrayOutputStream headPart = (ByteArrayOutputStream)readMap.get("HEAD");
-            // String requestAll = new String(headPart.toByteArray());
-            // List<String> requestLines = Arrays.asList(requestAll.split("\n"));
-
-            Map<String, String> reqHeader = new HashMap<>();
-            if(requestLines.size() < 1) {
-                return null;
-            }
-            String head = requestLines.remove(0);
-            logger.info(head);
-            String[] token = head.split("\\s+");
-            if(token[0].equals(REQUEST_TYPE.GET.name())) {
-                requestType = REQUEST_TYPE.GET;
-            } else if(token[0].equals(REQUEST_TYPE.POST.name())) {
-                requestType = REQUEST_TYPE.POST;
-            } else {
-                throw new WASException(MSG_TYPE.ERROR, 9, token[0]);
-            }
-            String contextPath = token[1];
-            String httpVersion = token[2];
-            Map<String, String> contextParam = new HashMap<>();
-
-            for(String header : requestLines) {
-                if(header == null || header.length() == 0)
-                    break;
-                int idx = header.indexOf(":");
-                if (idx == -1) {
-                    throw new WASException(MSG_TYPE.ERROR, 7, header);
+                REQUEST_TYPE requestType = null;
+                List<String> requestLines = readRequestLines(in);
+                Map<String, String> reqHeader = new HashMap<>();
+                if(requestLines.size() < 1) {
+                    return null;
                 }
-                reqHeader.put(header.substring(0, idx), header.substring(idx + 1, header.length()));
-            }
-            String str = reqHeader.get("Host").toString().trim();            
-            String host = !str.startsWith("http://") ? "http://"+str : str;            
-            URL url;
-            try {
+                String head = requestLines.remove(0);
+                String[] token = head.split("\\s+");
+                if(token[0].equals(REQUEST_TYPE.GET.name())) {
+                    requestType = REQUEST_TYPE.GET;
+                } else if(token[0].equals(REQUEST_TYPE.POST.name())) {
+                    requestType = REQUEST_TYPE.POST;
+                } else {
+                    throw new WASException(MSG_TYPE.ERROR, 9, token[0]);
+                }
+                String contextPath = token[1];
+                String httpVersion = token[2];
+                Map<String, String> contextParam = new HashMap<>();
+                for(String header : requestLines) {
+                    if(header == null || header.length() == 0)
+                        break;
+                    int idx = header.indexOf(":");
+                    if (idx == -1) {
+                        throw new WASException(MSG_TYPE.ERROR, 7, header);
+                    }
+                    System.out.println(header.substring(0, idx)+"   "+header.substring(idx + 1, header.length()).trim());
+                    reqHeader.put(header.substring(0, idx), header.substring(idx + 1, header.length()).trim());
+                }
+                System.out.println(reqHeader.get("Host"));
+                String str = reqHeader.get("Host").toString().trim();
+                String host = !str.startsWith("http://") ? "http://"+str : str;
+                URL url;
                 url = new URL(host+contextPath);
-            } catch (MalformedURLException e1) {
+                String contentType = reqHeader.get("Content-Type");
+                String boundary = null;
+                MultipartDescriptor multipart = null;
+                if(contentType != null) {
+                    String s = contentType.substring(contentType.indexOf(":")+1, contentType.indexOf(";")).trim().toUpperCase();
+                    s = s.replace("/", "_").replace("-", "_");
+                    System.out.println(s);
+                    MIME_TYPE mimeType = MIME_TYPE.valueOf(s);
+                    long length = Long.parseLong(reqHeader.get("Content-Length"));
+                    String[] splited = contentType.split("\\;");
+                    contentType = splited[0].trim();
+                    boundary = splited[1].substring(splited[1].indexOf("=") + 1).trim();
+                    multipart = new MultipartDescriptor(mimeType, boundary, length, in);
+                }
+                desc = new HttpRequestDescriptor(httpVersion, requestType, url.getHost(), reqHeader, contentType, null, contextPath, url, contextParam, multipart);
+                HttpRequest request = HttpBuilder.buildHttpRequest(desc);
+                desc.setHttpRequest(request);
+            } catch (Exception e1) {
                 throw new WASException(MSG_TYPE.ERROR, 42);
             }
-            String contentType = reqHeader.get("Content-Type ");
-            byte[] reqBody = null;
-            // List<String> bodyLines = new ArrayList<>();
-            // if(requestType == REQUEST_TYPE.POST) {
-            //     String line = buffReader.readLine();
-            //     while(line != null && line.length() > 0){
-            //         bodyLines.add(line);
-            //         line = buffReader.readLine();
-            //     }    
-            //     String body = bodyLines.stream().collect(Collectors.joining(System.lineSeparator()));
-            //     System.out.println(body);
-            //     reqBody = body.getBytes();
-            // }
-            //ByteArrayOutputStream bodyPart = (ByteArrayOutputStream)readMap.get("BODY");
-            reqHeader.entrySet().stream().forEach(e -> logger.info(e.getKey()+"="+e.getValue())); 
-            HttpRequestDescriptor desc = new HttpRequestDescriptor(httpVersion, 
-                                                                    requestLines.stream().collect(Collectors.joining(System.lineSeparator())), 
-                                                                    requestType, 
-                                                                    url.getHost(), 
-                                                                    reqHeader, 
-                                                                    contentType, 
-                                                                    reqBody, 
-                                                                    contextPath, 
-                                                                    url, 
-                                                                    contextParam);;
-            HttpRequest request = HttpBuilder.buildHttpRequest(desc);   
-            desc.setHttpRequest(request);
             return desc;
-        }  
+        }
     }
 
     /**

@@ -13,7 +13,7 @@ server:
       grant: GUEST
   doc-root: ./home
   logs: 'logs/leap.log'
-  log-level: 'INFO'
+  log-level: 'DEBUG'
   charset: 'utf-8'
   welcome: 'index.html'
   backlog: 50
@@ -34,99 +34,6 @@ server:
     doc-root: ./home2
     logs: 'logs/leap.log'
     log-level: 'DEBUG'
-messages:
-  http:
-    http200: OK
-    http201: Created
-    http202: Accepted
-    http203: No Content
-    http205: Reset Content
-    http206: Partial Content (RFC 7233)
-    http300: Multiple Choices
-    http301: Moved Permanently
-    http307: Temporary Redirect (since http/1.1)
-    http308: Permanent Redirect (RFC 7538)
-    http400: Bad Request
-    http401: Unauthorized (RFC 7235)
-    http402: Payment Required
-    http403: Forbidden
-    http404: Resource Not Found
-    http405: Method Not Allowed
-    http406: Not Acceptable
-    http407: Proxy Authentication Required (RFC 7235)
-    http408: Request Timeout
-    http409: Conflict
-    http412: Precondition Failed (RFC 7232)
-    http413: Payload Too Large (RFC 7231)
-    http414: URI Too Long (RFC 7231)
-    http415: Unsupported Media Type (RFC 7231)
-    http417: Expectation Failed
-    http418: I'm a teapot (RFC 2324, RFC 7168)
-    http421: Misdirected Request (RFC 7540)
-    http423: Locked (WebDAV; RFC 4918)
-    http429: Too Many Requests (RFC 6585)
-    http431: Request Header Fields Too Large (RFC 6585)
-    http451: Unavailable For Legal Reasons (RFC 7725)
-    http500: Internal Server Error
-    http501: Not Implemented
-    http502: Bad Gateway
-    http503: Service Unavailable
-    http504: Gateway Timeout
-    http505: http Version Not Supported
-    http507: Insufficient Storage (WebDAV; RFC 4918)
-    http508: Loop Detected (WebDAV; RFC 5842)
-    http510: Not Extended (RFC 2774)
-    http511: Network Authentication Required (RFC 6585)
-  debug:
-    debug001: ''
-  info:
-    info001: ''
-    info002: ''
-    info003: ''
-  warn:
-    warn001: 'ServletDescriptor annotation not found in class: {}'
-  error:
-    error001: There isn't exist path in servlet-method configuration.
-    error002: There isn't exist http request type in servlet-method configuration.
-    error003: 'Not supported http request method type : {}'
-    error004: 'URI path can not use multiple method. path: {}'
-    error005: 'Error in servlet method validate progress. Class: {}  Method: {}'
-    error006: 'Invalid request line: {}'
-    error007: 'Invalid header parameter: {}'
-    error008: 'Error occurred in response header progress: {}'
-    error009: 'Invalid method requested: {}'
-    error010: 'Error in request process '
-    error011: 'Can''t find Class which specified in config in classpath: {}'
-    error012: 'Can''t find default constructor on Servlet class: {}'
-    error013: Security problem occurred. check access security
-    error014: Virtual host's 'host' expresstion is wrong!!!
-    error015: Some problem occurred in Servlet loading progress
-    error016: 'Not supported method type: {}'
-    error017: 'Not supported method type: {}'
-    error018: 'Error in building doc-root process: {}'
-    error019: 'Not found virtual host: {}'
-    error020: 'Resource is not found: {}'
-    error021: 'Error in server setup process!!!'
-    error022: 'Can not represent trademark logo'
-    error023: 'Error occurred when shutdown!!!'
-    error024: 'Request URL is invalid: {}'
-    error025: 'User not found: {}'
-    error026: 'Password not collect'
-    error027: 'Cannot instantiate : {}'
-    error028: 'Service mapper path expression is wrong: {}'
-    error029: 'Method mapper path expression is wrong: {}'
-    error030: 'Cannot save configuration ({})'
-    error031: 'User is already exist: {}'
-    error032: 'Password validation failed: (Password must have digit, lower case, upper case, special case at least once and no whilte space and more 8 places more)'
-    error033: 'Not found mapping service exist with requested path: {}'
-    error034: 'Requested method is not matching with service: {}'
-    error035: 'Service object mapping path must be exist: {}, Service object: {}'
-    error036: 'Service operation method mapping path must be exist: {}, Service method: {}'
-    error037: 'Service operation method already exist!!! Check service object mapping. Path: {} Operation method: {}'
-    error038: 'Cannot read resource contents: {}'
-    error039: 'Cannot read binary resource: {}'
-    error041: 'Error occurred in request reading process'
-    error042: 'URL syntex is not collect'
 static-resource:
   'welcome': 'index.html'
   'response': 'response.html'
