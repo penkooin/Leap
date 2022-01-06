@@ -30,7 +30,7 @@ server:
     logs: 'logs/leap.log'
     log-level: 'DEBUG'
   - server-name: leap2
-    host: 192.168.1.60
+    host: 192.168.1.28
     port: 8082
     doc-root: ./home2
     logs: 'logs/leap.log'

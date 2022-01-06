@@ -1,0 +1,162 @@
+2022-01-06 11:19:17.906 INFO  - Leap WAS server starting...
+2022-01-06 11:19:17.910 INFO  - --------------------------------------------------------------------------
+2022-01-06 11:19:17.910 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-06 11:19:17.910 INFO  - verbose mode on
+2022-01-06 11:19:17.953 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-06 11:19:17.954 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-01-06 11:19:17.955 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-01-06 11:19:17.955 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-01-06 11:19:17.956 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-01-06 11:19:17.956 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-01-06 11:19:17.956 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-01-06 11:19:17.956 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-06 11:19:17.966 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-06 11:19:17.967 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-01-06 11:19:17.968 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-01-06 11:19:17.969 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-01-06 11:19:17.969 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-01-06 11:19:17.969 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-01-06 11:19:17.969 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-01-06 11:19:17.969 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-06 11:19:17.969 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-06 11:19:17.977 INFO  - Accepting connections on port 8082
+2022-01-06 11:19:17.983 INFO  - Accepting connections on port 8080
+2022-01-06 11:19:20.459 INFO  - Client request accepted... : /127.0.0.1
+2022-01-06 11:19:20.461 INFO  - Client request accepted... : /127.0.0.1
+2022-01-06 11:19:20.628 DEBUG - Request host: localhost
+2022-01-06 11:19:20.629 DEBUG - Cookie: io=PL7TK76OSCzqZRBSAAAC
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Sec-Fetch-Site: none
+Sec-Fetch-Dest: document
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+@Client: localhost
+Sec-Fetch-Mode: navigate
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+sec-ch-ua-platform: "Windows"
+Sec-Fetch-User: ?1
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+2022-01-06 11:19:20.632 DEBUG - .\home\webapp\WEB-INF\static\response.html   response.html   .\home\webapp\WEB-INF\static
+2022-01-06 11:19:20.659 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/ GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='localhost', reqHeader='{Cookie=io=PL7TK76OSCzqZRBSAAAC, Accept=text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection=keep-alive, User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36, Sec-Fetch-Site=none, Sec-Fetch-Dest=document, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode=navigate, sec-ch-ua=" Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96", sec-ch-ua-mobile=?0, Cache-Control=max-age=0, Upgrade-Insecure-Requests=1, sec-ch-ua-platform="Windows", Sec-Fetch-User=?1, Accept-Language=ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/', url='http://localhost:8080/', contextParam='{}', multipartList='null'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@58002892', responseHeader='{Server=LeapWAS 1.0.0, Date=Thu Jan 06 11:19:20 KST 2022}'}
+2022-01-06 11:19:20.720 INFO  - Client request accepted... : /127.0.0.1
+2022-01-06 11:19:20.877 DEBUG - Request host: localhost
+2022-01-06 11:19:20.877 DEBUG - Cookie: io=PL7TK76OSCzqZRBSAAAC
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Referer: http://localhost:8080/
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Dest: image
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+@Client: localhost
+Sec-Fetch-Mode: no-cors
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+2022-01-06 11:19:20.882 DEBUG - .\home\webapp\WEB-INF\static\response.html   response.html   .\home\webapp\WEB-INF\static
+2022-01-06 11:19:20.883 INFO  - Error client request /127.0.0.1:60748 --- /127.0.0.1:8080
+2022-01-06 11:19:20.884 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/favicon.ico GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='localhost', reqHeader='{Cookie=io=PL7TK76OSCzqZRBSAAAC, Accept=image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8, Connection=keep-alive, User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36, Referer=http://localhost:8080/, Sec-Fetch-Site=same-origin, Sec-Fetch-Dest=image, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode=no-cors, sec-ch-ua=" Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96", sec-ch-ua-mobile=?0, sec-ch-ua-platform="Windows", Accept-Language=ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/favicon.ico', url='http://localhost:8080/favicon.ico', contextParam='{}', multipartList='null'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@66682702', responseHeader='{Server=LeapWAS 1.0.0, Date=Thu Jan 06 11:19:20 KST 2022}'}
+2022-01-06 11:19:20.887 INFO  - Close client request on error /127.0.0.1:60748 --- /127.0.0.1:8080
+2022-01-06 11:20:24.692 DEBUG - .\home\webapp\WEB-INF\static\response.html   response.html   .\home\webapp\WEB-INF\static
+2022-01-06 11:20:24.693 INFO  - Error client request /127.0.0.1:60749 --- /127.0.0.1:8080
+2022-01-06 11:20:24.694 DEBUG - { httpRequestDescriptor='null', httpResponse='null', requestedHost='null', responseCode='200', responseBody='[B@610ada03', responseHeader='{}'}
+2022-01-06 11:20:24.699 ERROR - Software caused connection abort: socket write error
+java.net.SocketException: Software caused connection abort: socket write error
+	at java.base/java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:110)
+	at java.base/java.net.SocketOutputStream.write(SocketOutputStream.java:138)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:227)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:160)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-01-06 11:20:24.702 INFO  - Close client request on error /127.0.0.1:60749 --- /127.0.0.1:8080
+2022-01-06 11:21:02.947 INFO  - Leap WAS server starting...
+2022-01-06 11:21:02.951 INFO  - --------------------------------------------------------------------------
+2022-01-06 11:21:02.951 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-06 11:21:02.951 INFO  - verbose mode on
+2022-01-06 11:21:02.985 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-06 11:21:02.985 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-01-06 11:21:02.985 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-01-06 11:21:02.985 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-01-06 11:21:02.986 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-01-06 11:21:02.986 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-01-06 11:21:02.986 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-01-06 11:21:02.986 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-06 11:21:02.995 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-06 11:21:02.996 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-01-06 11:21:02.996 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-01-06 11:21:02.996 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-01-06 11:21:02.996 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-01-06 11:21:02.997 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-01-06 11:21:02.997 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-01-06 11:21:02.997 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-06 11:21:02.997 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-06 11:21:03.004 INFO  - Accepting connections on port 8082
+2022-01-06 11:21:03.009 INFO  - Accepting connections on port 8080
+2022-01-06 11:21:05.989 INFO  - Client request accepted... : /127.0.0.1
+2022-01-06 11:21:05.989 INFO  - Client request accepted... : /127.0.0.1
+2022-01-06 11:21:06.159 DEBUG - Request host: localhost
+2022-01-06 11:21:06.160 DEBUG - Cookie: io=PL7TK76OSCzqZRBSAAAC
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Sec-Fetch-Site: none
+Sec-Fetch-Dest: document
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+@Client: localhost
+Sec-Fetch-Mode: navigate
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+sec-ch-ua-platform: "Windows"
+Sec-Fetch-User: ?1
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+2022-01-06 11:21:06.163 DEBUG - .\home\webapp\WEB-INF\static\response.html   response.html   .\home\webapp\WEB-INF\static
+2022-01-06 11:21:06.175 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/ GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='localhost', reqHeader='{Cookie=io=PL7TK76OSCzqZRBSAAAC, Accept=text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection=keep-alive, User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36, Sec-Fetch-Site=none, Sec-Fetch-Dest=document, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode=navigate, sec-ch-ua=" Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96", sec-ch-ua-mobile=?0, Cache-Control=max-age=0, Upgrade-Insecure-Requests=1, sec-ch-ua-platform="Windows", Sec-Fetch-User=?1, Accept-Language=ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/', url='http://localhost:8080/', contextParam='{}', multipartList='null'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@22ef304b', responseHeader='{Server=LeapWAS 1.0.0, Date=Thu Jan 06 11:21:06 KST 2022}'}
+2022-01-06 11:21:06.250 INFO  - Client request accepted... : /127.0.0.1
+2022-01-06 11:21:06.361 DEBUG - Request host: localhost
+2022-01-06 11:21:06.362 DEBUG - Cookie: io=PL7TK76OSCzqZRBSAAAC
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Referer: http://localhost:8080/
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Dest: image
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+@Client: localhost
+Sec-Fetch-Mode: no-cors
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+2022-01-06 11:21:06.365 DEBUG - .\home\webapp\WEB-INF\static\favicon.ico   favicon.ico   .\home\webapp\WEB-INF\static
+2022-01-06 11:21:06.367 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/favicon.ico GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='localhost', reqHeader='{Cookie=io=PL7TK76OSCzqZRBSAAAC, Accept=image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8, Connection=keep-alive, User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36, Referer=http://localhost:8080/, Sec-Fetch-Site=same-origin, Sec-Fetch-Dest=image, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode=no-cors, sec-ch-ua=" Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96", sec-ch-ua-mobile=?0, sec-ch-ua-platform="Windows", Accept-Language=ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/favicon.ico', url='http://localhost:8080/favicon.ico', contextParam='{}', multipartList='null'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@44051f96', responseHeader='{Server=LeapWAS 1.0.0, Date=Thu Jan 06 11:21:06 KST 2022, Content-Type=image/x-icon}'}
+2022-01-06 11:23:59.723 DEBUG - .\home\webapp\WEB-INF\static\response.html   response.html   .\home\webapp\WEB-INF\static
+2022-01-06 11:23:59.725 INFO  - Error client request /127.0.0.1:60816 --- /127.0.0.1:8080
+2022-01-06 11:23:59.725 DEBUG - { httpRequestDescriptor='null', httpResponse='null', requestedHost='null', responseCode='200', responseBody='[B@1c19125c', responseHeader='{}'}
+2022-01-06 11:23:59.728 ERROR - Software caused connection abort: socket write error
+java.net.SocketException: Software caused connection abort: socket write error
+	at java.base/java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:110)
+	at java.base/java.net.SocketOutputStream.write(SocketOutputStream.java:138)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:227)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:160)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-01-06 11:23:59.730 INFO  - Close client request on error /127.0.0.1:60816 --- /127.0.0.1:8080

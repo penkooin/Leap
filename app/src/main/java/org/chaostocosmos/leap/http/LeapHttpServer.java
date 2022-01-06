@@ -176,7 +176,7 @@ public class LeapHttpServer extends Thread {
                 logger.info("Client request accepted... : "+request.getLocalAddress().toString());
                 this.threadpool.submit(new LeapRequestHandler(this, this.docroot, INDEX_FILE, request));
             }
-        } catch(IOException | WASException e) {
+        } catch(IOException e) {
             logger.error(e.getMessage(), e);
         }
     }

@@ -14,7 +14,7 @@ messages:
     http401: Unauthorized (RFC 7235)
     http402: Payment Required
     http403: Forbidden
-    http404: Resource Not Found
+    http404: Resource Not Found {}
     http405: Method Not Allowed
     http406: Not Acceptable
     http407: Proxy Authentication Required (RFC 7235)
@@ -42,53 +42,53 @@ messages:
     http510: Not Extended (RFC 2774)
     http511: Network Authentication Required (RFC 6585)
   debug:
-    debug001: ''
+    debug1: ''
   info:
-    info001: ''
-    info002: ''
-    info003: ''
+    info1: ''
+    info2: ''
+    info3: ''
   warn:
     warn001: 'ServletDescriptor annotation not found in class: {}'
   error:
-    error001: There isn't exist path in servlet-method configuration.
-    error002: There isn't exist http request type in servlet-method configuration.
-    error003: 'Not supported http request method type : {}'
-    error004: 'URI path can not use multiple method. path: {}'
-    error005: 'Error in servlet method validate progress. Class: {}  Method: {}'
-    error006: 'Invalid request line: {}'
-    error007: 'Invalid header parameter: {}'
-    error008: 'Error occurred in response header progress: {}'
-    error009: 'Invalid method requested: {}'
-    error010: 'Error in request process '
-    error011: 'Can''t find Class which specified in config in classpath: {}'
-    error012: 'Can''t find default constructor on Servlet class: {}'
-    error013: Security problem occurred. check access security
-    error014: Virtual host's 'host' expresstion is wrong!!!
-    error015: Some problem occurred in Servlet loading progress
-    error016: 'Not supported method type: {}'
-    error017: 'Not supported method type: {}'
-    error018: 'Error in building doc-root process: {}'
-    error019: 'Not found virtual host: {}'
-    error020: 'Resource is not found: {}'
-    error021: 'Error in server setup process!!!'
-    error022: 'Can not represent trademark logo'
-    error023: 'Error occurred when shutdown!!!'
-    error024: 'Request URL is invalid: {}'
-    error025: 'User not found: {}'
-    error026: 'Password not collect'
-    error027: 'Cannot instantiate : {}'
-    error028: 'Service mapper path expression is wrong: {}'
-    error029: 'Method mapper path expression is wrong: {}'
-    error030: 'Cannot save configuration ({})'
-    error031: 'User is already exist: {}'
-    error032: 'Password validation failed: (Password must have digit, lower case, upper case, special case at least once and no whilte space and more 8 places more)'
-    error033: 'Not found mapping service exist with requested path: {}'
-    error034: 'Requested method is not matching with service: {}'
-    error035: 'Service object mapping path must be exist: {}, Service object: {}'
-    error036: 'Service operation method mapping path must be exist: {}, Service method: {}'
-    error037: 'Service operation method already exist!!! Check service object mapping. Path: {} Operation method: {}'
-    error038: 'Cannot read resource contents: {}'
-    error039: 'Cannot read binary resource: {}'
-    error041: 'Error occurred in request reading process'
-    error042: 'URL syntex is not collect'
-    error043: 'Error is occurred on rquested file writing process. Path: {}'
+    error1: There isn't exist path in servlet-method configuration.
+    error2: There isn't exist http request type in servlet-method configuration.
+    error3: 'Not supported http request method type : {}'
+    error4: 'URI path can not use multiple method. path: {}'
+    error5: 'Error in servlet method validate progress. Class: {}  Method: {}'
+    error6: 'Invalid request line: {}'
+    error7: 'Invalid header parameter: {}'
+    error8: 'Error occurred in response header progress: {}'
+    error9: 'Invalid request information. Wrong request'
+    error10: 'Error in request process '
+    error11: 'Can''t find Class which specified in config in classpath: {}'
+    error12: 'Can''t find default constructor on Servlet class: {}'
+    error13: Security problem occurred. check access security
+    error14: Virtual host's 'host' expresstion is wrong!!!
+    error15: Some problem occurred in Servlet loading progress
+    error16: 'Not supported method type: {}'
+    error17: 'Not supported method type: {}'
+    error18: 'Error in building doc-root process: {}'
+    error19: 'Not found virtual host: {}'
+    error20: 'Resource is not found: {}'
+    error21: 'Error in server setup process!!!'
+    error22: 'Can not represent trademark logo'
+    error23: 'Error occurred when shutdown!!!'
+    error24: 'Request URL is invalid: {}'
+    error25: 'User not found: {}'
+    error26: 'Password not collect'
+    error27: 'Cannot instantiate : {}'
+    error28: 'Service mapper path expression is wrong: {}'
+    error29: 'Method mapper path expression is wrong: {}'
+    error30: 'Cannot save configuration ({})'
+    error31: 'User is already exist: {}'
+    error32: 'Password validation failed: (Password must have digit, lower case, upper case, special case at least once and no whilte space and more 8 places more)'
+    error33: 'Not found mapping service exist with requested path: {}'
+    error34: 'Requested method is not matching with service: {}'
+    error35: 'Service object mapping path must be exist: {}, Service object: {}'
+    error36: 'Service operation method mapping path must be exist: {}, Service method: {}'
+    error37: 'Service operation method already exist!!! Check service object mapping. Path: {} Operation method: {}'
+    error38: 'Cannot read resource contents: {}'
+    error39: 'Cannot read binary resource: {}'
+    error41: 'Error occurred in request reading process'
+    error42: 'Error on request parsing process'
+    error43: 'Error is occurred on rquested file writing process. Path: {}'

@@ -101,18 +101,6 @@ public class ResourceHelper {
     }
 
     /**
-     * Get server resource
-     * @param request
-     * @return
-     * @throws IOException
-     * @throws WASException
-     * @throws URISyntaxException
-     */    
-    public static String getResourceContents(HttpRequestDescriptor request) throws WASException {
-        return getResourceContents(request.getRequestedHost(), request.getContextPath());
-    }
-
-    /**
      * Get resource Path
      * @param serverName
      * @param path
@@ -156,24 +144,6 @@ public class ResourceHelper {
     }
 
     /**
-     * Get server resource
-     * @param host
-     * @param path
-     * @return
-     * @throws IOException
-     * @throws WASException
-     * @throws URISyntaxException
-     */
-    public static String getResourceContents(String host, String path) throws WASException {
-        Path rPath = getResourcePath(host, path);
-        try {
-            return Files.readString(rPath);
-        } catch (IOException e) {
-            throw new WASException(e);
-        }
-    }
-
-    /**
      * Get response page with code
      * @param code
      * @return
@@ -181,8 +151,13 @@ public class ResourceHelper {
      * @throws WASException
      * @throws URISyntaxException
      */
-    public static String getResponsePage(String host, int code) throws IOException, WASException, URISyntaxException {
-        return getResourceContent(host, "response.html", Map.of("@code", code, "@message", Context.getHttpMsg(code)));
+    public static String getResponsePage(String host, Map<String, Object> params) throws IOException, WASException, URISyntaxException {
+        byte[] bytes = getResourceContent(host, "response.html");
+        String page = new String(bytes, Context.charset());
+        for(Entry<String, Object> e : params.entrySet()) {
+            page = page.replace(e.getKey(), e.getValue().toString());
+        }
+        return page;
     }
 
     /**
@@ -193,19 +168,13 @@ public class ResourceHelper {
      * @return
      * @throws WASException
      */
-    public static String getResourceContent(String host, String contentName, final Map<String, Object> param) throws WASException {
+    public static byte[] getResourceContent(String host, String contentName) throws WASException {
         try {
+            host = host == null ? Context.getDefaultHost() : host;
             contentName = contentName.charAt(0) == '/' ? contentName.substring(1) : contentName;
             Path path = getStaticPath(host).resolve(contentName);
             LoggerFactory.getLogger(host).debug(path+"   "+contentName+"   "+getStaticPath(host));
-            String all = Files.readString(path, Context.charset());
-            if(param == null) {
-                return all;
-            }
-            for(Entry<String, Object> e : param.entrySet()) {
-                all = all.replace(e.getKey(), e.getValue().toString());
-            }
-            return all;
+            return Files.readAllBytes(path);
         } catch (IOException e) {
             throw new WASException(MSG_TYPE.ERROR, 38, contentName);
         }        

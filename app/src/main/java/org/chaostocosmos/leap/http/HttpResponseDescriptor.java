@@ -28,11 +28,6 @@ public class HttpResponseDescriptor {
     private String contentType;
 
     /**
-     * Requested host from remotes
-     */
-    private String requestedHost;
-
-    /**
      * Response code
      */
     private int responseCode;
@@ -65,7 +60,6 @@ public class HttpResponseDescriptor {
      */
     public HttpResponseDescriptor(HttpRequestDescriptor httpRequestDescriptor, int responseCode, String contentType, byte[] responseBody, Map<String, Object> responseHeader) {
         this.httpRequestDescriptor = httpRequestDescriptor;
-        this.requestedHost = httpRequestDescriptor.getRequestedHost();
         this.responseCode = responseCode;
         this.contentType = contentType;
         this.responseBody = responseBody;
@@ -93,11 +87,14 @@ public class HttpResponseDescriptor {
     }
 
     public String getRequestedHost() {
-        return this.requestedHost;
+        if(this.httpRequestDescriptor != null) {
+            return this.httpRequestDescriptor.getRequestedHost();
+        }
+        return null;
     }
 
     public void setRequestedHost(String requestedHost) {
-        this.requestedHost = requestedHost;
+        this.httpRequestDescriptor.setRequestedHost(requestedHost);
     }
 
     public int getResponseCode() {

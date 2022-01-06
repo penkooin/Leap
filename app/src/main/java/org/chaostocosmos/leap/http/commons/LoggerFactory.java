@@ -19,8 +19,9 @@ import ch.qos.logback.core.rolling.TimeBasedRollingPolicy;
 
 /**  
  * LoggerUtils object
- * Description : 
- * Logging for debug information
+ * 
+ * Description : This object provide logger for different with each host and virtual-host
+ * Each logger is logback Logger object to write log data. 
  *  
  * @author 9ins
  * @version 1.0
@@ -30,6 +31,14 @@ public class LoggerFactory {
      * logger map 
      */    
     private static Map<String, Logger> loggerMap = null;
+
+    /**
+     * Get default logger
+     * @return
+     */
+    public static Logger getLogger() {
+        return getLogger(Context.getDefaultHost());
+    }
 
     /**
      * Get logger object
@@ -51,7 +60,7 @@ public class LoggerFactory {
                 return new Object[]{host, createLoggerFor(host, path, level)};
             }).collect(Collectors.toMap(k -> (String)k[0], v -> (Logger)v[1]));    
         }
-        return loggerMap.get(hostName);
+        return loggerMap.get(hostName != null ? hostName : Context.getDefaultHost());
     }
 
     /**

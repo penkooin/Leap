@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.net.URL;
 import java.net.http.HttpRequest;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +16,8 @@ import org.chaostocosmos.leap.http.HttpRequestDescriptor.MultipartDescriptor;
  * Http parsing factory object
  * @author 9ins 
  */
-public class HttpParser {
+public class HttpParser {    
+
     /**
      * Http request parser
      */
@@ -72,17 +73,19 @@ public class HttpParser {
      * @throws IOException
      */
     private static String readLine(InputStream is) throws IOException {
-        int c;
+        int c = 0x00;
         String line = "";
         do {
-            c = is.read();
-            if(c == 0x0D) {
-                int lf = is.read();
+            System.out.println(c);                
+            if(c == 0x0D || c == -1) {
+                //int lf = is.read();
                 break;
+            } else {
+                line += (char)c;
             }
-            line += c;
-        } while(c != -1);
-        return line;
+        } while((c = is.read()) != -1);
+        System.out.println(line+" $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+        return line.trim();
     }
 
     /**
@@ -93,11 +96,12 @@ public class HttpParser {
      */
     private static List<String> readRequestLines(InputStream is) throws IOException {
         String line;
-        String all = "";
+        List<String> lines = new ArrayList<>();
         while(!(line = readLine(is)).equals("")) {
-            all += line + System.lineSeparator();
+            System.out.println(line);
+            lines.add(line);
         }
-        return Arrays.asList(all.split(System.lineSeparator()));
+        return lines;
     }
 
     /**
@@ -138,21 +142,14 @@ public class HttpParser {
         public HttpRequestDescriptor parseRequest(InputStream in) throws WASException {
             HttpRequestDescriptor desc;
             try {
-                REQUEST_TYPE requestType = null;
                 List<String> requestLines = readRequestLines(in);
                 Map<String, String> reqHeader = new HashMap<>();
                 if(requestLines.size() < 1) {
-                    return null;
+                    throw new WASException(MSG_TYPE.ERROR, 9);
                 }
                 String head = requestLines.remove(0);
                 String[] token = head.split("\\s+");
-                if(token[0].equals(REQUEST_TYPE.GET.name())) {
-                    requestType = REQUEST_TYPE.GET;
-                } else if(token[0].equals(REQUEST_TYPE.POST.name())) {
-                    requestType = REQUEST_TYPE.POST;
-                } else {
-                    throw new WASException(MSG_TYPE.ERROR, 9, token[0]);
-                }
+                REQUEST_TYPE requestType = REQUEST_TYPE.valueOf(token[0]);
                 String contextPath = token[1];
                 String httpVersion = token[2];
                 Map<String, String> contextParam = new HashMap<>();
@@ -163,10 +160,9 @@ public class HttpParser {
                     if (idx == -1) {
                         throw new WASException(MSG_TYPE.ERROR, 7, header);
                     }
-                    System.out.println(header.substring(0, idx)+"   "+header.substring(idx + 1, header.length()).trim());
+                    //System.out.println(header.substring(0, idx)+"   "+header.substring(idx + 1, header.length()).trim());
                     reqHeader.put(header.substring(0, idx), header.substring(idx + 1, header.length()).trim());
                 }
-                System.out.println(reqHeader.get("Host"));
                 String str = reqHeader.get("Host").toString().trim();
                 String host = !str.startsWith("http://") ? "http://"+str : str;
                 URL url;
@@ -188,8 +184,8 @@ public class HttpParser {
                 desc = new HttpRequestDescriptor(httpVersion, requestType, url.getHost(), reqHeader, contentType, null, contextPath, url, contextParam, multipart);
                 HttpRequest request = HttpBuilder.buildHttpRequest(desc);
                 desc.setHttpRequest(request);
-            } catch (Exception e1) {
-                throw new WASException(MSG_TYPE.ERROR, 42);
+            } catch (Exception e) {
+                throw new WASException(e);
             }
             return desc;
         }

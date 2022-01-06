@@ -219,6 +219,10 @@ public class HttpRequestDescriptor {
         return this.requestedHost;
     }
 
+    public void setRequestedHost(String requestedHost) {
+        this.requestedHost = requestedHost;
+    }
+
     public Map<String,String> getReqHeader() {
         return this.reqHeader;
     }
@@ -280,7 +284,7 @@ public class HttpRequestDescriptor {
             ", contextPath='" + getContextPath() + "'" +
             ", url='" + getUrl() + "'" +
             ", contextParam='" + getContextParam() + "'" +
-            ", multipartList='" + getMultipartDescriptor().toString() + "'" +
+            ", multipartList='" + getMultipartDescriptor() + "'" +
             "}";
     }
 }
