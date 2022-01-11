@@ -1,0 +1,202 @@
+2022-01-07 10:45:18.226 INFO  - Leap WAS server starting...
+2022-01-07 10:45:18.246 INFO  - --------------------------------------------------------------------------
+2022-01-07 10:45:18.250 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-07 10:45:18.250 INFO  - verbose mode on
+2022-01-07 10:45:18.310 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-01-07 10:45:18.311 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-01-07 10:45:18.312 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-01-07 10:45:18.312 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-01-07 10:45:18.312 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-01-07 10:45:18.313 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-01-07 10:45:18.319 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-07 10:45:18.320 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-07 10:45:18.328 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-01-07 10:45:18.328 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-01-07 10:45:18.329 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-01-07 10:45:18.329 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-01-07 10:45:18.329 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-01-07 10:45:18.330 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-01-07 10:45:18.330 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-07 10:45:18.330 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-07 10:45:18.331 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-07 10:45:18.338 INFO  - Accepting connections on port 8082
+2022-01-07 10:45:18.342 INFO  - Accepting connections on port 8080
+2022-01-07 10:45:30.511 INFO  - Client request accepted... : /127.0.0.1
+2022-01-07 10:45:30.512 INFO  - Client request accepted... : /127.0.0.1
+2022-01-07 10:45:30.774 INFO  - Client request accepted... : /127.0.0.1
+2022-01-07 10:45:30.776 DEBUG - Request host: localhost
+2022-01-07 10:45:30.777 DEBUG - Cookie: io=PL7TK76OSCzqZRBSAAAC
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36
+Sec-Fetch-Site: none
+Sec-Fetch-Dest: document
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+@Client: localhost
+Sec-Fetch-Mode: navigate
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+Upgrade-Insecure-Requests: 1
+sec-ch-ua-platform: "Windows"
+Sec-Fetch-User: ?1
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+2022-01-07 10:45:30.780 DEBUG - .\home\webapp\WEB-INF\static\response.html   response.html   .\home\webapp\WEB-INF\static
+2022-01-07 10:45:30.795 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/ GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='localhost', reqHeader='{Cookie=io=PL7TK76OSCzqZRBSAAAC, Accept=text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection=keep-alive, User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36, Sec-Fetch-Site=none, Sec-Fetch-Dest=document, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode=navigate, sec-ch-ua=" Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97", sec-ch-ua-mobile=?0, Upgrade-Insecure-Requests=1, sec-ch-ua-platform="Windows", Sec-Fetch-User=?1, Accept-Language=ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/', url='http://localhost:8080/', contextParam='{}', multipartList='null'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@79347dd8', responseHeader='{Server=LeapWAS 1.0.0, Date=Fri Jan 07 10:45:30 KST 2022}'}
+2022-01-07 10:49:58.232 DEBUG - .\home\webapp\WEB-INF\static\response.html   response.html   .\home\webapp\WEB-INF\static
+2022-01-07 10:49:58.236 INFO  - Error client request /127.0.0.1:51578 --- /127.0.0.1:8080
+2022-01-07 10:49:58.247 DEBUG - { httpRequestDescriptor='null', httpResponse='null', requestedHost='null', responseCode='200', responseBody='[B@7bafad4e', responseHeader='{}'}
+2022-01-07 10:49:58.238 DEBUG - .\home\webapp\WEB-INF\static\response.html   response.html   .\home\webapp\WEB-INF\static
+2022-01-07 10:49:58.248 INFO  - Error client request /127.0.0.1:51579 --- /127.0.0.1:8080
+2022-01-07 10:49:58.249 DEBUG - { httpRequestDescriptor='null', httpResponse='null', requestedHost='null', responseCode='200', responseBody='[B@3f68a93e', responseHeader='{}'}
+2022-01-07 10:49:58.252 ERROR - Software caused connection abort: socket write error
+java.net.SocketException: Software caused connection abort: socket write error
+	at java.base/java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:110)
+	at java.base/java.net.SocketOutputStream.write(SocketOutputStream.java:138)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:222)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:157)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-01-07 10:49:58.252 ERROR - Software caused connection abort: socket write error
+java.net.SocketException: Software caused connection abort: socket write error
+	at java.base/java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:110)
+	at java.base/java.net.SocketOutputStream.write(SocketOutputStream.java:138)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:222)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:157)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-01-07 10:49:58.256 INFO  - Close client request on error /127.0.0.1:51578 --- /127.0.0.1:8080
+2022-01-07 10:49:58.256 INFO  - Close client request on error /127.0.0.1:51579 --- /127.0.0.1:8080
+2022-01-07 10:53:28.674 INFO  - Leap WAS server starting...
+2022-01-07 10:53:28.677 INFO  - --------------------------------------------------------------------------
+2022-01-07 10:53:28.677 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-07 10:53:28.677 INFO  - verbose mode on
+2022-01-07 10:53:28.710 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-07 10:53:28.710 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-01-07 10:53:28.710 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-01-07 10:53:28.710 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-01-07 10:53:28.711 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-01-07 10:53:28.711 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-01-07 10:53:28.711 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-01-07 10:53:28.712 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-07 10:53:28.735 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-07 10:53:28.735 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-01-07 10:53:28.735 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-01-07 10:53:28.736 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-01-07 10:53:28.736 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-01-07 10:53:28.736 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-01-07 10:53:28.736 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-01-07 10:53:28.737 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-07 10:53:28.737 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-07 10:53:28.743 INFO  - Accepting connections on port 8082
+2022-01-07 10:53:28.749 INFO  - Accepting connections on port 8080
+2022-01-07 10:53:32.061 INFO  - Client request accepted... : /127.0.0.1
+2022-01-07 10:53:32.062 INFO  - Client request accepted... : /127.0.0.1
+2022-01-07 10:53:32.284 DEBUG - Request host: localhost
+2022-01-07 10:53:32.285 DEBUG - Cookie: io=PL7TK76OSCzqZRBSAAAC
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36
+Sec-Fetch-Site: none
+Sec-Fetch-Dest: document
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+@Client: localhost
+Sec-Fetch-Mode: navigate
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+sec-ch-ua-platform: "Windows"
+Sec-Fetch-User: ?1
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+2022-01-07 10:53:32.288 DEBUG - .\home\webapp\WEB-INF\static\response.html   response.html   .\home\webapp\WEB-INF\static
+2022-01-07 10:53:32.303 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/ GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='localhost', reqHeader='{Cookie=io=PL7TK76OSCzqZRBSAAAC, Accept=text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection=keep-alive, User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36, Sec-Fetch-Site=none, Sec-Fetch-Dest=document, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode=navigate, sec-ch-ua=" Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97", sec-ch-ua-mobile=?0, Cache-Control=max-age=0, Upgrade-Insecure-Requests=1, sec-ch-ua-platform="Windows", Sec-Fetch-User=?1, Accept-Language=ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/', url='http://localhost:8080/', contextParam='{}', multipartList='null'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@244ee472', responseHeader='{Server=LeapWAS 1.0.0, Date=Fri Jan 07 10:53:32 KST 2022}'}
+2022-01-07 10:53:32.321 INFO  - Client request accepted... : /127.0.0.1
+2022-01-07 10:53:32.461 DEBUG - Request host: localhost
+2022-01-07 10:53:32.462 DEBUG - Cookie: io=PL7TK76OSCzqZRBSAAAC
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36
+Referer: http://localhost:8080/
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Dest: image
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+@Client: localhost
+Sec-Fetch-Mode: no-cors
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+2022-01-07 10:53:32.467 DEBUG - .\home\webapp\WEB-INF\static\favicon.ico   favicon.ico   .\home\webapp\WEB-INF\static
+2022-01-07 10:53:32.468 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/favicon.ico GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='localhost', reqHeader='{Cookie=io=PL7TK76OSCzqZRBSAAAC, Accept=image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8, Connection=keep-alive, User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36, Referer=http://localhost:8080/, Sec-Fetch-Site=same-origin, Sec-Fetch-Dest=image, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode=no-cors, sec-ch-ua=" Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97", sec-ch-ua-mobile=?0, sec-ch-ua-platform="Windows", Accept-Language=ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/favicon.ico', url='http://localhost:8080/favicon.ico', contextParam='{}', multipartList='null'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@37396a87', responseHeader='{Server=LeapWAS 1.0.0, Date=Fri Jan 07 10:53:32 KST 2022, Content-Type=image/x-icon}'}
+2022-01-07 10:55:14.131 DEBUG - .\home\webapp\WEB-INF\static\response.html   response.html   .\home\webapp\WEB-INF\static
+2022-01-07 10:55:14.132 INFO  - Error client request /127.0.0.1:57736 --- /127.0.0.1:8080
+2022-01-07 10:55:14.132 DEBUG - { httpRequestDescriptor='null', httpResponse='null', requestedHost='null', responseCode='200', responseBody='[B@78e9fb94', responseHeader='{}'}
+2022-01-07 10:55:14.136 ERROR - Software caused connection abort: socket write error
+java.net.SocketException: Software caused connection abort: socket write error
+	at java.base/java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:110)
+	at java.base/java.net.SocketOutputStream.write(SocketOutputStream.java:138)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:222)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:157)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-01-07 10:55:14.140 INFO  - Close client request on error /127.0.0.1:57736 --- /127.0.0.1:8080
+2022-01-07 10:58:57.726 INFO  - Leap WAS server starting...
+2022-01-07 10:58:57.730 INFO  - --------------------------------------------------------------------------
+2022-01-07 10:58:57.730 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-07 10:58:57.730 INFO  - verbose mode on
+2022-01-07 10:58:57.774 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-07 10:58:57.775 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-01-07 10:58:57.775 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-01-07 10:58:57.775 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-01-07 10:58:57.776 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-01-07 10:58:57.776 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-01-07 10:58:57.777 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-01-07 10:58:57.777 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-07 10:58:57.785 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-07 10:58:57.785 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-01-07 10:58:57.785 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-01-07 10:58:57.786 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-01-07 10:58:57.787 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-01-07 10:58:57.787 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-01-07 10:58:57.787 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-01-07 10:58:57.787 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-07 10:58:57.788 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-07 10:58:57.794 INFO  - Accepting connections on port 8082
+2022-01-07 10:58:57.798 INFO  - Accepting connections on port 8080
+2022-01-07 10:59:06.141 INFO  - Client request accepted... : /127.0.0.1
+2022-01-07 10:59:06.145 INFO  - Client request accepted... : /127.0.0.1
+2022-01-07 10:59:06.393 INFO  - Client request accepted... : /127.0.0.1
+2022-01-07 10:59:06.453 DEBUG - Request host: localhost
+2022-01-07 10:59:06.454 DEBUG - Cookie: io=PL7TK76OSCzqZRBSAAAC
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36
+Sec-Fetch-Site: none
+Sec-Fetch-Dest: document
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+@Client: localhost
+Sec-Fetch-Mode: navigate
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+Upgrade-Insecure-Requests: 1
+sec-ch-ua-platform: "Windows"
+Sec-Fetch-User: ?1
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+2022-01-07 10:59:06.457 DEBUG - .\home\webapp\WEB-INF\static\response.html   response.html   .\home\webapp\WEB-INF\static
+2022-01-07 10:59:06.474 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/ GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='localhost', reqHeader='{Cookie=io=PL7TK76OSCzqZRBSAAAC, Accept=text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection=keep-alive, User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36, Sec-Fetch-Site=none, Sec-Fetch-Dest=document, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode=navigate, sec-ch-ua=" Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97", sec-ch-ua-mobile=?0, Upgrade-Insecure-Requests=1, sec-ch-ua-platform="Windows", Sec-Fetch-User=?1, Accept-Language=ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/', url='http://localhost:8080/', contextParam='{}', multipartList='null'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@244ee472', responseHeader='{Server=LeapWAS 1.0.0, Date=Fri Jan 07 10:59:06 KST 2022}'}

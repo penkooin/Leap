@@ -1,10 +1,14 @@
 package org.chaostocosmos.leap.http;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.net.http.HttpRequest;
+import java.nio.charset.Charset;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -73,32 +77,54 @@ public class HttpParser {
      * @throws IOException
      */
     private static String readLine(InputStream is) throws IOException {
-        int c = 0x00;
+        char r = '\r', n = '\n';
         String line = "";
         do {
-            System.out.println(c);                
-            if(c == 0x0D || c == -1) {
-                //int lf = is.read();
+            r = (char)is.read();
+            line += r;
+            if(r == '\n' && n == '\r') {
                 break;
-            } else {
-                line += (char)c;
             }
-        } while((c = is.read()) != -1);
+            n = r;
+        } while(n != -1);
         System.out.println(line+" $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
         return line.trim();
     }
 
     /**
-     * Read all requested lines
+     * Read all requested lines 
      * @param is
      * @return
      * @throws IOException
      */
     private static List<String> readRequestLines(InputStream is) throws IOException {
+        List<String> lines = new ArrayList<>();
+        String line = "";
+        do {
+            char r = '\r', n = '\n';
+            do {
+                r = (char)is.read();
+                line += r;
+                if(r == '\n' && n == '\r') {
+                    break;
+                }
+                n = r;
+            } while(r != -1);
+            if(line.equals("\r\n"))
+                break;
+            lines.add(line);  
+            line = "";                  
+        } while(true);
+        return lines;
+    }
+
+    private static List<String> readLines(InputStream is) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
         String line;
         List<String> lines = new ArrayList<>();
-        while(!(line = readLine(is)).equals("")) {
-            System.out.println(line);
+        while((line=br.readLine()) != null) {
+            if(line.trim().equals(""))
+                break;                        
             lines.add(line);
         }
         return lines;
@@ -182,6 +208,7 @@ public class HttpParser {
                     multipart = new MultipartDescriptor(mimeType, boundary, length, in);
                 }
                 desc = new HttpRequestDescriptor(httpVersion, requestType, url.getHost(), reqHeader, contentType, null, contextPath, url, contextParam, multipart);
+                multipart.save(Paths.get("./"), 1024);
                 HttpRequest request = HttpBuilder.buildHttpRequest(desc);
                 desc.setHttpRequest(request);
             } catch (Exception e) {

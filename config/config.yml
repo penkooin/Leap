@@ -27,12 +27,14 @@ server:
     host: 127.0.0.1
     port: 8080
     doc-root: ./home1
+    welcome: 'index.html'
     logs: 'logs/leap.log'
     log-level: 'DEBUG'
   - server-name: leap2
     host: 192.168.1.28
     port: 8082
     doc-root: ./home2
+    welcome: 'index.html'
     logs: 'logs/leap.log'
     log-level: 'DEBUG'
 static-resource:

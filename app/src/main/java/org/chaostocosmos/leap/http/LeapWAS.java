@@ -1,6 +1,5 @@
 package org.chaostocosmos.leap.http;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
@@ -179,9 +178,14 @@ public class LeapWAS {
      */
     public void shutdown() throws InterruptedException, IOException { 
         for(LeapHttpServer server : this.leapServerMap.values()) {
-            server.turnOff();
+            server.close();
             server.join();
         }
+        this.threadpool.shutdown();
+        while(!this.threadpool.awaitTermination(3, TimeUnit.SECONDS)) {
+            logger.info("Waiting for termination server...");
+        }
+        logger.info("Leap server terminated...");
     }
 
     /**
@@ -199,9 +203,6 @@ public class LeapWAS {
     /**
      * Print trademark 
      * @throws WASException
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws URISyntaxException
      */
     private void trademark() throws WASException {
         try {
@@ -213,16 +214,16 @@ public class LeapWAS {
     }
     
     public static void main(String[] args) throws InstantiationException, 
-                                                    IllegalAccessException, 
-                                                    IllegalArgumentException, 
-                                                    InvocationTargetException, 
-                                                    NoSuchMethodException, 
-                                                    SecurityException, 
-                                                    ClassNotFoundException, 
-                                                    WASException, 
-                                                    IOException, 
-                                                    URISyntaxException, 
-                                                    ParseException {
+                                                  IllegalAccessException, 
+                                                  IllegalArgumentException, 
+                                                  InvocationTargetException, 
+                                                  NoSuchMethodException, 
+                                                  SecurityException, 
+                                                  ClassNotFoundException, 
+                                                  WASException, 
+                                                  IOException, 
+                                                  URISyntaxException, 
+                                                  ParseException {
         LeapWAS leap = new LeapWAS(args);  
         leap.start();
     }

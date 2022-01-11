@@ -141,18 +141,40 @@ public class ResourceHelper {
             throw new WASException(MSG_TYPE.HTTP, 500);
         }
         return getStaticPath(host).resolve(Context.getConfigValue("static-resource.response").toString());
+    }    
+
+    /**
+     * Get welcome page matching with each host and virtual host
+     * @param host
+     * @param params
+     * @return
+     * @throws WASException
+     */
+    public static String getWelcomePage(String host, Map<String, Object> params) throws WASException {
+        return getStaticPage(host, Context.getWelcome(), params);
     }
 
     /**
      * Get response page with code
+     * @param host
      * @param code
      * @return
-     * @throws IOException
      * @throws WASException
-     * @throws URISyntaxException
      */
-    public static String getResponsePage(String host, Map<String, Object> params) throws IOException, WASException, URISyntaxException {
-        byte[] bytes = getResourceContent(host, "response.html");
+    public static String getResponsePage(String host, Map<String, Object> params) throws WASException {
+        return getStaticPage(host, "response.html", params);
+    }
+
+    /**
+     * Get static text resource by name
+     * @param host
+     * @param resourceName
+     * @param params
+     * @return
+     * @throws WASException
+     */
+    public static String getStaticPage(String host, String resourceName, Map<String, Object> params) throws WASException {
+        byte[] bytes = getResourceContent(host, resourceName);
         String page = new String(bytes, Context.charset());
         for(Entry<String, Object> e : params.entrySet()) {
             page = page.replace(e.getKey(), e.getValue().toString());

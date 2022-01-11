@@ -38,8 +38,8 @@ public class ContextTest {
     public void testGetResouce() throws IOException, URISyntaxException, WASException {
         int code = 404;
         Path path = ResourceHelper.getResponseResourcePath("locahost", code);
-        String html = ResourceHelper.getInstance().getResourceContents("locahost", "response.html");
-        System.out.println(html);
+        byte[] bytes = ResourceHelper.getInstance().getResourceContent("locahost", "response.html");
+        System.out.println(new String(bytes));
         //String res = Files.readString(new File(Context.class.getClass().getResource("/WEB-INF/static/"+code+".html").toURI()).toPath());
         //assertEquals(res, html);
     }

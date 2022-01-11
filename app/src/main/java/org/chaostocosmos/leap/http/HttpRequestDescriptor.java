@@ -1,17 +1,23 @@
 package org.chaostocosmos.leap.http;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.http.HttpRequest;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 
@@ -28,11 +34,13 @@ public class HttpRequestDescriptor {
      * Multi part descriptor
      */
     public static class MultipartDescriptor {
+
         List<Path> filePaths;
         MIME_TYPE contentType;
         String boundary;
         long contentLength;
         InputStream requestStream;
+
         /**
          * Constructor of multipart
          * @param contentType
@@ -47,21 +55,91 @@ public class HttpRequestDescriptor {
             this.requestStream = requestStream;
             this.filePaths = new ArrayList<>();
         }
+
         public List<Path> getFilePaths() {
             return this.filePaths;
         }
+
         public MIME_TYPE contentType() {
             return this.contentType;
         }
+
         public String getBoundary() {
             return this.boundary;
         }
+
         public long getContentLength() {
             return this.contentLength;
         }
+
         public InputStream getRequestInputStream() {
             return this.requestStream;
         }
+
+        public void save(Path savePath, int bufferSize) throws IOException {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(this.requestStream, StandardCharsets.UTF_8));            
+            String line = "";
+            line = reader.readLine();
+            boolean isLast = false;
+            do {
+                if(line.trim().startsWith("--"+this.boundary)) {
+                    String contentDesposition = reader.readLine().trim();
+                    String contentType =  reader.readLine().trim();
+                    String emptyLine = reader.readLine();
+                    System.out.println(contentDesposition.length()+" ----------------- "+contentType+" ===================="+emptyLine);
+                    Map<String, String> map = getBoundaryMap(contentDesposition);
+                    System.out.println(map);
+                    String filename = map.get("filename");
+                    FileOutputStream out = new FileOutputStream(new File(filename));
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    int c, d = 0x00;
+                    int len = 0;
+                    do {
+                        c = reader.read();
+                        if(c == 0x0A && d == 0x0D) {
+                            byte[] lineData = baos.toByteArray();
+                            line = new String(lineData);
+                            if(line.trim().startsWith("--"+this.boundary) || line.trim().endsWith(this.boundary+"--")) {
+                                System.out.println(len+" &&&&&&&");
+                                break;
+                            }
+                            len += lineData.length;
+                            out.write(lineData);
+                            baos.reset();
+                            line = "";
+                        }
+                        baos.write(c);
+                        d = c;
+                    } while(true);
+                    out.close();
+                    System.out.println("save: "+len);
+                    if(line.trim().endsWith((this.boundary+"--"))) {
+                        isLast = true;
+                    }
+                    continue;
+                }
+                line = reader.readLine().trim();
+            } while(!isLast);
+        }
+
+        private Map<String, String> getBoundaryMap(String contentDesposition) {
+            contentDesposition = contentDesposition.substring(contentDesposition.indexOf(":")+1).trim();
+            //System.out.println(contentDesposition);
+            String[] splited = contentDesposition.split(";");
+            Map<String, String> map = Arrays.asList(splited)
+                                            .stream()
+                                            .map(t -> t.trim())
+                                            .map(t -> t.indexOf("=") == -1 ? new String[]{t, ""} : new String[]{t.split("=")[0], t.split("=")[1].replace("\"", "")})
+                                            .collect(Collectors.toMap(k -> k[0].toString(), v -> v[1].toString()));
+            return map;
+        }
+
+        /**
+         * Save to local path
+         * @param savePath
+         * @param bufferSize
+         * @throws WASException
+         */
         public void saveTo(Path savePath, int bufferSize) throws WASException {            
             if(this.requestStream != null) {
                 System.out.println("//////////////////////////////////////");
@@ -71,6 +149,8 @@ public class HttpRequestDescriptor {
                 try {                    
                     String line = readLine(this.requestStream);
                     do {
+                        //System.out.println(line);
+                        //System.out.println(this.boundary);
                         if((this.boundary).endsWith(line)) {
                             String contentDesposition = readLine(this.requestStream);
                             String contentType =  readLine(this.requestStream);
@@ -80,17 +160,21 @@ public class HttpRequestDescriptor {
                             String filename = null;
                             System.out.println("----------------"+idx);
                             if(idx != -1) {
-                                filename = contentDesposition.substring(contentDesposition.lastIndexOf("=") + 1);
-                                filename = filename.substring(filename.indexOf("\"")+1, filename.lastIndexOf("\""));
+                                filename = contentDesposition.substring(idx);
+                                System.out.println(filename+"///////");
+                                filename = filename.substring(filename.indexOf("\"")+1);
+                                System.out.println(filename);
+                                filename = filename.substring(0, filename.indexOf("\""));
+                                System.out.println(filename);
                             }
                             FileOutputStream fos = new FileOutputStream(savePath.resolve(filename).toFile());
                             ByteArrayOutputStream baos = new ByteArrayOutputStream(bufferSize);
                             byte[] buffer = new byte[bufferSize];
-                            int c;
+                            int c, n = 0x00;
+                            line = "";
                             do {
                                 c = this.requestStream.read();
-                                line = "";
-                                if(c == 0x0D) {
+                                if(c == 0x0A && n == 0x0D) {
                                     // System.out.println("!!!!!"+line);
                                     // System.out.println(endCondition);
                                     if(this.boundary.equals(line.trim()) || line.trim().equals(endCondition)) {
@@ -101,9 +185,12 @@ public class HttpRequestDescriptor {
                                     fos.write(baos.toByteArray());
                                     baos.reset();
                                     line = "";
+                                } else {
+                                    line += (char)c;
                                 }
-                                line += (char)c;
-                                baos.write(c);  
+                                baos.write(c);
+                                n = c;      
+                                /*
                                 if(baos.size() == bufferSize)  {
                                     byte[] bytes = baos.toByteArray();
                                     System.arraycopy(bytes, 0, buffer, 0, bufferSize-endConditionLen);
@@ -113,6 +200,7 @@ public class HttpRequestDescriptor {
                                     baos.reset();
                                     baos.write(lastBytes);
                                 }
+                                */
                             } while(c != -1);
                             fos.close();
                             //System.out.println("############ saving to file");
@@ -136,19 +224,18 @@ public class HttpRequestDescriptor {
          * @throws IOException
          */
         private String readLine(InputStream is) throws IOException {
-            int c;
-            String line = "";
+            int c, n = 0x00;
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
             do {
                 c = is.read();
                 //CR
-                if(c == 0x0D) {
-                    //LF
-                    int lf = is.read();
+                if(c == 0x0A && n == 0x0D) {
                     break;
                 }
-                line += (char)c;
+                baos.write(c);
+                n = c;
             } while(c != -1);
-            return line.trim();
+            return new String(baos.toByteArray(), "utf-8").trim();
         }
     }
 

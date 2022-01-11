@@ -1,0 +1,51 @@
+2022-01-10 11:27:42.433 INFO  - Leap WAS server starting...
+2022-01-10 11:27:42.442 INFO  - --------------------------------------------------------------------------
+2022-01-10 11:27:42.443 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-10 11:27:42.444 INFO  - verbose mode on
+2022-01-10 11:27:42.479 DEBUG - Service not mapping with ServiceMapper annotation: org.chaostocosmos.leap.http.service.DeployService
+2022-01-10 11:27:42.490 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-10 11:27:42.491 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-01-10 11:27:42.492 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-01-10 11:27:42.493 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-01-10 11:27:42.493 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-01-10 11:27:42.493 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-01-10 11:27:42.493 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-01-10 11:27:42.493 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-10 11:27:42.502 DEBUG - Service not mapping with ServiceMapper annotation: org.chaostocosmos.leap.http.service.DeployService
+2022-01-10 11:27:42.502 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-10 11:27:42.503 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-01-10 11:27:42.503 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-01-10 11:27:42.503 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-01-10 11:27:42.503 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-01-10 11:27:42.503 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-01-10 11:27:42.504 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-01-10 11:27:42.504 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-10 11:27:42.504 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-10 11:27:42.511 INFO  - Accepting connections on port 8082
+2022-01-10 11:27:42.516 INFO  - Accepting connections on port 8080
+2022-01-10 11:27:54.843 INFO  - Leap WAS server starting...
+2022-01-10 11:27:54.846 INFO  - --------------------------------------------------------------------------
+2022-01-10 11:27:54.847 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-10 11:27:54.847 INFO  - verbose mode on
+2022-01-10 11:27:54.879 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-10 11:27:54.880 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-01-10 11:27:54.880 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-01-10 11:27:54.881 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-01-10 11:27:54.881 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-01-10 11:27:54.881 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-01-10 11:27:54.881 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-01-10 11:27:54.881 DEBUG - Service not mapping with ServiceMapper annotation: org.chaostocosmos.leap.http.service.DeployService
+2022-01-10 11:27:54.882 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-10 11:27:54.888 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-10 11:27:54.889 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-01-10 11:27:54.889 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-01-10 11:27:54.889 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-01-10 11:27:54.890 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-01-10 11:27:54.890 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-01-10 11:27:54.890 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-01-10 11:27:54.890 DEBUG - Service not mapping with ServiceMapper annotation: org.chaostocosmos.leap.http.service.DeployService
+2022-01-10 11:27:54.891 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-10 11:27:54.891 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-10 11:27:54.897 INFO  - Accepting connections on port 8082
+2022-01-10 11:27:54.901 INFO  - Accepting connections on port 8080
+2022-01-10 11:27:57.290 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1

@@ -2,6 +2,7 @@ package org.chaostocosmos.leap.http;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.file.Path;
@@ -169,11 +170,13 @@ public class LeapHttpServer extends Thread {
     @Override
     public void run() {
         try {
-            this.server = new ServerSocket(this.port, this.backlog, InetAddress.getByName(this.host));
+            InetSocketAddress inetSocketAddress = new InetSocketAddress(InetAddress.getByName(this.host), this.port);
+            this.server = new ServerSocket();
+            this.server.bind(inetSocketAddress, this.backlog);
             logger.info("Accepting connections on port " + server.getLocalPort());
             while (true) { 
                 Socket request = server.accept();
-                logger.info("Client request accepted... : "+request.getLocalAddress().toString());
+                logger.info("Host: "+this.host+":"+this.port+"  Client request accepted... : "+request.getLocalAddress().toString());
                 this.threadpool.submit(new LeapRequestHandler(this, this.docroot, INDEX_FILE, request));
             }
         } catch(IOException e) {
@@ -186,8 +189,7 @@ public class LeapHttpServer extends Thread {
      * @throws InterruptedException
      * @throws IOException
      */
-    public void turnOff() throws InterruptedException, IOException {
-        this.threadpool.awaitTermination(10, TimeUnit.MINUTES);
+    public void close() throws InterruptedException, IOException {
         this.server.close();
     }
 }

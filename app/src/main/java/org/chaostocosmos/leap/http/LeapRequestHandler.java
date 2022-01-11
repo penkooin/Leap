@@ -103,7 +103,7 @@ public class LeapRequestHandler implements Runnable {
                 }
             } else { // When client request static resources
                 if(request.getContextPath().equals("/")) {
-                    String body = ResourceHelper.getResponsePage(requestedHost, Map.of("@serverName", requestedHost));
+                    String body = ResourceHelper.getWelcomePage(requestedHost, Map.of("@serverName", requestedHost));
                     response.setResponseBody(body.getBytes());
                     response.setResponseCode(200);
                 } else {
@@ -134,6 +134,7 @@ public class LeapRequestHandler implements Runnable {
             sendResponse(out, response);
             close();
         } catch(Throwable e) {
+            e.printStackTrace();
             if(e instanceof WASException) {
                 Throwable throwable;
                 while((throwable = (Exception)e.getCause()) != null) {
