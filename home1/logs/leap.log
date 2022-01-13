@@ -1,0 +1,13 @@
+2022-01-13 18:25:24.320 DEBUG - Request host: 127.0.0.1
+2022-01-13 18:25:24.326 DEBUG - Authorization: Basic Y2hhb3M5MzA6OTM5Mw==
+Accept: */*
+User-Agent: PostmanRuntime/7.28.4
+Connection: keep-alive
+Postman-Token: f9494de3-0055-48a2-98c4-270a30eb90e3
+Host: 127.0.0.1:8080
+Accept-Encoding: gzip, deflate, br
+@Client: 127.0.0.1
+2022-01-13 18:25:24.350 DEBUG - User chaos930 is login.
+2022-01-13 18:25:24.352 DEBUG - Basic Http request filter processing.................
+2022-01-13 18:25:24.352 DEBUG - getTime servlet started....+++++++++++++++++++++++++++++++++++++++++++++++++
+2022-01-13 18:25:24.369 DEBUG - { httpRequestDescriptor='{ httpRequest='http://127.0.0.1:8080/time/GetTime GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='127.0.0.1', reqHeader='{Authorization=Basic Y2hhb3M5MzA6OTM5Mw==, Accept=*/*, User-Agent=PostmanRuntime/7.28.4, Connection=keep-alive, Postman-Token=f9494de3-0055-48a2-98c4-270a30eb90e3, Host=127.0.0.1:8080, Accept-Encoding=gzip, deflate, br, @Client=127.0.0.1}', contentType='null', reqBody='null', contextPath='/time/GetTime', url='http://127.0.0.1:8080/time/GetTime', contextParam='{}', multipartList='null'}', httpResponse='null', requestedHost='127.0.0.1', responseCode='200', responseBody='[B@5283856c', responseHeader='{Server=LeapWAS 1.0.0, Date=Thu Jan 13 18:25:24 KST 2022}'}

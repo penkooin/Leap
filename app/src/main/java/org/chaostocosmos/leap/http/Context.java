@@ -3,6 +3,8 @@ package org.chaostocosmos.leap.http;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,7 +15,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.chaostocosmos.leap.http.commons.Hosts;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
+import org.chaostocosmos.leap.http.commons.ResourceHelper;
 import org.chaostocosmos.leap.http.commons.UtilBox;
 import org.yaml.snakeyaml.Yaml;
 
@@ -165,6 +169,7 @@ public class Context {
     /**
      * Get service bean list object
      * @return
+     * @throws MalformedURLException
      */
     // public static List<ServiceMethodBean> getServiceBeanList() {
     //     List<ServiceMethodBean> beanList = new ArrayList<>();
@@ -179,6 +184,38 @@ public class Context {
     //     }
     //     return beanList;
     // }
+
+    /**
+     * Get all dynamic classpath URL array
+     * @return
+     * @throws MalformedURLException
+     */
+    public static URL[] getAllDynamicClasspathURLs() throws MalformedURLException {
+        List<Path> paths = getAllDynamicClasspaths();
+        List<URL> urls = new ArrayList<>();
+        for(Path path : paths) {
+            urls.add(path.toFile().toURI().toURL());
+        }
+        return urls.stream().toArray(URL[]::new);
+    }
+
+    /**
+     * Get default dynamic classpath list
+     * @return
+     */
+    public static List<Path> getDefaultDynamicClaspaths() {
+        return ((List<?>)getConfigValue("server.dynamic-classpaths")).stream().map(p -> Paths.get(p.toString())).collect(Collectors.toList());
+    }
+
+    /**
+     * Get all of dynamic classpath list
+     * @return
+     */
+    public static List<Path> getAllDynamicClasspaths() {
+        List<Path> paths = getDefaultDynamicClaspaths();
+        paths.addAll(getVirtualHosts().values().stream().flatMap(h -> h.getDynamicClasspaths().stream()).collect(Collectors.toList()));
+        return paths;
+    }
 
     /**
      * Get all host Map
@@ -196,7 +233,7 @@ public class Context {
      * @return
      */
     public static Map<String, Hosts> getVirtualHosts() {
-        return ((List<?>)getConfigValue("server.virtual-host"))
+        return ((List<?>)getConfigValue("server.virtual-host")) 
                          .stream()
                          .map(m -> ((Map<?, ?>)m))                                                  
                          .map(e -> new Object[]{e.get("host"), 
@@ -204,6 +241,7 @@ public class Context {
                                                          (String)e.get("server-name"), 
                                                          (String)e.get("host"), 
                                                          Integer.parseInt(e.get("port")+""), 
+                                                         ((List<?>)e.get("dynamic-classpaths")).stream().map(c -> Paths.get(c.toString())).collect(Collectors.toList()),
                                                          Paths.get((String)e.get("doc-root")), 
                                                          (String)e.get("logs"), 
                                                          UtilBox.getLogLevels((String)e.get("log-level"), ","))
@@ -225,13 +263,14 @@ public class Context {
                             .stream()
                             .map(o -> (Map<?, ?>)o)
                             .filter(m -> m.get("host").equals(vhost))
-                            .map(m -> new Hosts(false,
-                                                (String)m.get("server-name"), 
-                                                (String)m.get("host"), 
-                                                Integer.parseInt(m.get("port")+""), 
-                                                Paths.get((String)m.get("doc-root")), 
-                                                (String)m.get("logs"),
-                                                UtilBox.getLogLevels((String)m.get("log-level"))))
+                            .map(e -> new Hosts(false,
+                                                (String)e.get("server-name"), 
+                                                (String)e.get("host"), 
+                                                Integer.parseInt(e.get("port")+""), 
+                                                ((List<?>)e.get("dynamic-classpaths")).stream().map(c -> Paths.get(c.toString())).collect(Collectors.toList()),
+                                                Paths.get((String)e.get("doc-root")), 
+                                                (String)e.get("logs"),
+                                                UtilBox.getLogLevels((String)e.get("log-level"))))
                             .findFirst()
                             .orElseThrow(() -> new WASException(MSG_TYPE.ERROR, 19));
     }
@@ -245,6 +284,7 @@ public class Context {
                           getDefaultServerName(),
                           getDefaultHost(),
                           getDefaultPort(),
+                          getDefaultDynamicClaspaths(),
                           getDefaultDocroot(),
                           getDefaultLogPath(),
                           getDefaultLogLevel());
@@ -292,6 +332,14 @@ public class Context {
      */
     public static Path getHomePath() {
         return HOME_PATH;
+    }
+
+    /**
+     * Get upload file buffer flush size
+     * @return
+     */
+    public static long getFlushBufferSize() {
+        return (long)getConfigValue("server.flush-buffer-size");
     }
 
     /**

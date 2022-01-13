@@ -26,7 +26,7 @@ public class Constants {
     /**
      * body part max size limit
      */
-    public static final int BODY_MAX_LIMIT = 1024 * 1000 * 1;
+    public static final int MULTIPART_FLUSH_MINIMAL_SIZE = 512;
 
     /**
      * Password vaildation pattern

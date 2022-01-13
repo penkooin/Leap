@@ -8,7 +8,6 @@ import java.io.Reader;
 import java.net.URL;
 import java.net.http.HttpRequest;
 import java.nio.charset.Charset;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -87,7 +86,6 @@ public class HttpParser {
             }
             n = r;
         } while(n != -1);
-        System.out.println(line+" $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
         return line.trim();
     }
 
@@ -113,7 +111,7 @@ public class HttpParser {
             if(line.equals("\r\n"))
                 break;
             lines.add(line);  
-            line = "";                  
+            line = "";
         } while(true);
         return lines;
     }
@@ -191,24 +189,23 @@ public class HttpParser {
                 }
                 String str = reqHeader.get("Host").toString().trim();
                 String host = !str.startsWith("http://") ? "http://"+str : str;
-                URL url;
-                url = new URL(host+contextPath);
+                URL url = new URL(host+contextPath);
                 String contentType = reqHeader.get("Content-Type");
                 String boundary = null;
                 MultipartDescriptor multipart = null;
                 if(contentType != null) {
                     String s = contentType.substring(contentType.indexOf(":")+1, contentType.indexOf(";")).trim().toUpperCase();
                     s = s.replace("/", "_").replace("-", "_");
-                    System.out.println(s);
                     MIME_TYPE mimeType = MIME_TYPE.valueOf(s);
                     long length = Long.parseLong(reqHeader.get("Content-Length"));
                     String[] splited = contentType.split("\\;");
                     contentType = splited[0].trim();
                     boundary = splited[1].substring(splited[1].indexOf("=") + 1).trim();
-                    multipart = new MultipartDescriptor(mimeType, boundary, length, in);
+                    String hostStr = str.substring(0, str.indexOf(":"));
+                    multipart = new MultipartDescriptor(hostStr, mimeType, boundary, length, in);
                 }
                 desc = new HttpRequestDescriptor(httpVersion, requestType, url.getHost(), reqHeader, contentType, null, contextPath, url, contextParam, multipart);
-                multipart.save(Paths.get("./"), 1024);
+                //multipart.save(Paths.get("./"), 1024);
                 HttpRequest request = HttpBuilder.buildHttpRequest(desc);
                 desc.setHttpRequest(request);
             } catch (Exception e) {

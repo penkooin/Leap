@@ -92,3 +92,4 @@ messages:
     error41: 'Error occurred in request reading process'
     error42: 'Error on request parsing process'
     error43: 'Error is occurred on rquested file writing process. Path: {}'
+    error44: 'Service method invocation error. Service: {}  Method: {}'

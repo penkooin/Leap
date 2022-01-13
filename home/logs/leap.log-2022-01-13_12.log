@@ -1,0 +1,163 @@
+2022-01-13 12:07:50.078 INFO  - Leap WAS server starting...
+2022-01-13 12:07:50.085 INFO  - --------------------------------------------------------------------------
+2022-01-13 12:07:50.086 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 12:07:50.086 INFO  - verbose mode on
+2022-01-13 12:09:54.319 INFO  - Leap WAS server starting...
+2022-01-13 12:09:54.322 INFO  - --------------------------------------------------------------------------
+2022-01-13 12:09:54.322 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 12:09:54.322 INFO  - verbose mode on
+2022-01-13 12:13:40.177 INFO  - Leap WAS server starting...
+2022-01-13 12:13:40.180 INFO  - --------------------------------------------------------------------------
+2022-01-13 12:13:40.185 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 12:13:40.186 INFO  - verbose mode on
+2022-01-13 12:14:01.207 INFO  - Leap WAS server starting...
+2022-01-13 12:14:01.210 INFO  - --------------------------------------------------------------------------
+2022-01-13 12:14:01.211 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 12:14:01.211 INFO  - verbose mode on
+2022-01-13 12:15:02.886 INFO  - Leap WAS server starting...
+2022-01-13 12:15:02.889 INFO  - --------------------------------------------------------------------------
+2022-01-13 12:15:02.890 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 12:15:02.890 INFO  - verbose mode on
+2022-01-13 12:15:42.083 INFO  - Leap WAS server starting...
+2022-01-13 12:15:42.086 INFO  - --------------------------------------------------------------------------
+2022-01-13 12:15:42.086 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 12:15:42.086 INFO  - verbose mode on
+2022-01-13 12:18:40.033 INFO  - Leap WAS server starting...
+2022-01-13 12:18:40.037 INFO  - --------------------------------------------------------------------------
+2022-01-13 12:18:40.037 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 12:18:40.037 INFO  - verbose mode on
+2022-01-13 12:18:40.089 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 12:18:40.105 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 12:18:40.106 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 12:18:40.110 INFO  - Accepting connections on port 8082
+2022-01-13 12:18:40.115 INFO  - Accepting connections on port 8080
+2022-01-13 12:18:59.354 INFO  - Leap WAS server starting...
+2022-01-13 12:18:59.357 INFO  - --------------------------------------------------------------------------
+2022-01-13 12:18:59.357 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 12:18:59.357 INFO  - verbose mode on
+2022-01-13 12:21:57.411 INFO  - Leap WAS server starting...
+2022-01-13 12:21:57.415 INFO  - --------------------------------------------------------------------------
+2022-01-13 12:21:57.416 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 12:21:57.416 INFO  - verbose mode on
+2022-01-13 12:21:57.455 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-13 12:21:57.456 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 12:21:57.468 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-13 12:21:57.469 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 12:21:57.469 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 12:21:57.476 INFO  - Accepting connections on port 8082
+2022-01-13 12:21:57.482 INFO  - Accepting connections on port 8080
+2022-01-13 12:22:18.561 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-13 12:22:18.606 DEBUG - Request host: localhost
+2022-01-13 12:22:18.607 DEBUG - Cookie: io=PL7TK76OSCzqZRBSAAAC
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36
+Sec-Fetch-Site: none
+Sec-Fetch-Dest: document
+Host: localhost:8080
+Purpose: prefetch
+Accept-Encoding: gzip, deflate, br
+@Client: localhost
+Sec-Fetch-Mode: navigate
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+Upgrade-Insecure-Requests: 1
+sec-ch-ua-platform: "Windows"
+Sec-Fetch-User: ?1
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+2022-01-13 12:22:18.610 DEBUG - .\home\webapp\WEB-INF\static\index.html   index.html   .\home\webapp\WEB-INF\static
+2022-01-13 12:22:18.624 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/ GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='localhost', reqHeader='{Cookie=io=PL7TK76OSCzqZRBSAAAC, Accept=text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection=keep-alive, User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36, Sec-Fetch-Site=none, Sec-Fetch-Dest=document, Host=localhost:8080, Purpose=prefetch, Accept-Encoding=gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode=navigate, sec-ch-ua=" Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97", sec-ch-ua-mobile=?0, Upgrade-Insecure-Requests=1, sec-ch-ua-platform="Windows", Sec-Fetch-User=?1, Accept-Language=ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/', url='http://localhost:8080/', contextParam='{}', multipartList='null'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@4ec6c6ee', responseHeader='{Server=LeapWAS 1.0.0, Date=Thu Jan 13 12:22:18 KST 2022}'}
+2022-01-13 12:22:18.809 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-13 12:22:19.026 DEBUG - Request host: localhost
+2022-01-13 12:22:19.026 DEBUG - Cookie: io=PL7TK76OSCzqZRBSAAAC
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36
+Sec-Fetch-Site: none
+Sec-Fetch-Dest: document
+Host: localhost:8080
+Purpose: prefetch
+Accept-Encoding: gzip, deflate, br
+@Client: localhost
+Sec-Fetch-Mode: navigate
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+Upgrade-Insecure-Requests: 1
+sec-ch-ua-platform: "Windows"
+Sec-Fetch-User: ?1
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+2022-01-13 12:22:19.041 DEBUG - .\home\webapp\WEB-INF\static\response.html   response.html   .\home\webapp\WEB-INF\static
+2022-01-13 12:22:19.042 INFO  - Error client request /127.0.0.1:64970 --- /127.0.0.1:8080
+2022-01-13 12:22:19.042 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/time/GetTime GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='localhost', reqHeader='{Cookie=io=PL7TK76OSCzqZRBSAAAC, Accept=text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection=keep-alive, User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36, Sec-Fetch-Site=none, Sec-Fetch-Dest=document, Host=localhost:8080, Purpose=prefetch, Accept-Encoding=gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode=navigate, sec-ch-ua=" Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97", sec-ch-ua-mobile=?0, Upgrade-Insecure-Requests=1, sec-ch-ua-platform="Windows", Sec-Fetch-User=?1, Accept-Language=ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/time/GetTime', url='http://localhost:8080/time/GetTime', contextParam='{}', multipartList='null'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@83457ab', responseHeader='{Server=LeapWAS 1.0.0, Date=Thu Jan 13 12:22:19 KST 2022}'}
+2022-01-13 12:22:19.044 INFO  - Close client request on error /127.0.0.1:64970 --- /127.0.0.1:8080
+2022-01-13 12:22:19.327 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-13 12:22:19.436 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-13 12:23:09.014 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-13 12:25:32.292 INFO  - Leap WAS server starting...
+2022-01-13 12:25:32.296 INFO  - --------------------------------------------------------------------------
+2022-01-13 12:25:32.297 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 12:25:32.297 INFO  - verbose mode on
+2022-01-13 12:25:32.351 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-13 12:25:32.353 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 12:25:32.364 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-13 12:25:32.365 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 12:25:32.366 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 12:25:32.375 INFO  - Accepting connections on port 8082
+2022-01-13 12:25:32.380 INFO  - Accepting connections on port 8080
+2022-01-13 12:25:34.588 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-13 12:26:02.884 INFO  - Leap WAS server starting...
+2022-01-13 12:26:02.887 INFO  - --------------------------------------------------------------------------
+2022-01-13 12:26:02.888 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 12:26:02.888 INFO  - verbose mode on
+2022-01-13 12:26:02.924 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-13 12:26:02.925 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 12:26:02.935 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-13 12:26:02.935 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 12:26:02.936 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 12:26:02.940 INFO  - Accepting connections on port 8082
+2022-01-13 12:26:02.946 INFO  - Accepting connections on port 8080
+2022-01-13 12:26:04.584 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-13 12:26:07.895 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-13 12:26:35.711 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-13 12:26:35.711 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-13 12:26:35.714 DEBUG - Request host: localhost
+2022-01-13 12:26:35.715 DEBUG - Cookie: io=PL7TK76OSCzqZRBSAAAC
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36
+Sec-Fetch-Site: none
+Sec-Fetch-Dest: document
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+@Client: localhost
+Sec-Fetch-Mode: navigate
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+sec-ch-ua-platform: "Windows"
+Sec-Fetch-User: ?1
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+2022-01-13 12:26:35.728 DEBUG - .\home\webapp\WEB-INF\static\response.html   response.html   .\home\webapp\WEB-INF\static
+2022-01-13 12:26:35.729 INFO  - Error client request /127.0.0.1:65041 --- /127.0.0.1:8080
+2022-01-13 12:26:35.730 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/time/GetTime GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='localhost', reqHeader='{Cookie=io=PL7TK76OSCzqZRBSAAAC, Accept=text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection=keep-alive, User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36, Sec-Fetch-Site=none, Sec-Fetch-Dest=document, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode=navigate, sec-ch-ua=" Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97", sec-ch-ua-mobile=?0, Cache-Control=max-age=0, Upgrade-Insecure-Requests=1, sec-ch-ua-platform="Windows", Sec-Fetch-User=?1, Accept-Language=ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/time/GetTime', url='http://localhost:8080/time/GetTime', contextParam='{}', multipartList='null'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@45f52054', responseHeader='{Server=LeapWAS 1.0.0, Date=Thu Jan 13 12:26:35 KST 2022}'}
+2022-01-13 12:26:35.731 INFO  - Close client request on error /127.0.0.1:65041 --- /127.0.0.1:8080
+2022-01-13 12:26:35.756 DEBUG - Request host: localhost
+2022-01-13 12:26:35.757 DEBUG - Cookie: io=PL7TK76OSCzqZRBSAAAC
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36
+Referer: http://localhost:8080/time/GetTime
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Dest: image
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+@Client: localhost
+Sec-Fetch-Mode: no-cors
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+2022-01-13 12:26:35.762 DEBUG - .\home\webapp\WEB-INF\static\favicon.ico   favicon.ico   .\home\webapp\WEB-INF\static
+2022-01-13 12:26:35.764 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/favicon.ico GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='localhost', reqHeader='{Cookie=io=PL7TK76OSCzqZRBSAAAC, Accept=image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8, Connection=keep-alive, User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36, Referer=http://localhost:8080/time/GetTime, Sec-Fetch-Site=same-origin, Sec-Fetch-Dest=image, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode=no-cors, sec-ch-ua=" Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97", sec-ch-ua-mobile=?0, sec-ch-ua-platform="Windows", Accept-Language=ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/favicon.ico', url='http://localhost:8080/favicon.ico', contextParam='{}', multipartList='null'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@da6b8df', responseHeader='{Server=LeapWAS 1.0.0, Date=Thu Jan 13 12:26:35 KST 2022, Content-Type=image/x-icon}'}
+2022-01-13 12:26:35.979 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1

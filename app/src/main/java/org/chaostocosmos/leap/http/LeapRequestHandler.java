@@ -11,10 +11,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
+import org.chaostocosmos.leap.http.commons.ResourceHelper;
 import org.chaostocosmos.leap.http.commons.UtilBox;
-import org.chaostocosmos.leap.http.service.ServiceHolder;
-import org.chaostocosmos.leap.http.service.ServiceInvoker;
-import org.chaostocosmos.leap.http.service.ServiceManager;
+import org.chaostocosmos.leap.http.services.ServiceHolder;
+import org.chaostocosmos.leap.http.services.ServiceInvoker;
+import org.chaostocosmos.leap.http.services.ServiceManager;
 
 /**
  * Client request processor object
@@ -41,6 +42,7 @@ public class LeapRequestHandler implements Runnable {
     private OutputStream out = null;
     private HttpRequestDescriptor request = null;
     private HttpResponseDescriptor response = null;
+    private String requestedHost = null;
 
     /**
      * Servlet manager
@@ -69,7 +71,7 @@ public class LeapRequestHandler implements Runnable {
 
     @Override
     public void run() {
-        String requestedHost = Context.getDefaultHost();
+        this.requestedHost = Context.getDefaultHost();
         try {
             request = HttpParser.getRequestParser().parseRequest(in);
             response = HttpBuilder.buildHttpResponse(request);
@@ -134,7 +136,7 @@ public class LeapRequestHandler implements Runnable {
             sendResponse(out, response);
             close();
         } catch(Throwable e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             if(e instanceof WASException) {
                 Throwable throwable;
                 while((throwable = (Exception)e.getCause()) != null) {
@@ -171,15 +173,15 @@ public class LeapRequestHandler implements Runnable {
         try {
             if(in != null) {
                 in.close();
-                System.out.println("close input stream.................................");
+                //LoggerFactory.getLogger(this.requestedHost).debug("close input stream......");
             }
             if(out != null) {
                 out.close();
-                System.out.println("close output stream.................................");
+                //LoggerFactory.getLogger(this.requestedHost).debug("close output stream......");
             }
             if(connection != null) {                
-                connection.close();             
-                System.out.println("close ................................");       
+                connection.close();
+                //LoggerFactory.getLogger(this.requestedHost).debug("socket close......");
             }
         } catch (IOException e) {
             LoggerFactory.getLogger().error(e.getMessage(), e);

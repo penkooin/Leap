@@ -1,0 +1,215 @@
+2022-01-12 14:00:04.004 DEBUG - Save uploaded file - filename: java-1.8.0-openjdk-1.8.0.242-1.b08.ojdkbuild.windows.x86_64.msi, size: 149955449, content-type: application/x-msdownload
+2022-01-12 14:00:04.011 DEBUG - ============================== MULTIPART CONTENT: application/zip ==============================
+2022-01-12 14:00:04.012 DEBUG - filename = job-generator.zip
+2022-01-12 14:00:04.012 DEBUG - form-data = 
+2022-01-12 14:00:04.012 DEBUG - name = file3
+2022-01-12 14:00:20.547 DEBUG - Save uploaded file - filename: job-generator.zip, size: 585265113, content-type: application/zip
+2022-01-12 14:00:20.563 DEBUG - Request host: localhost
+2022-01-12 14:00:20.564 DEBUG - Accept: */*
+User-Agent: PostmanRuntime/7.28.4
+Connection: keep-alive
+Postman-Token: 315607c4-77c5-401a-94e3-3b60ab5b0bc0
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+Content-Length: 961032600
+@Client: localhost
+Content-Type: multipart/form-data; boundary=--------------------------011016421491173470259394
+2022-01-12 14:00:20.576 DEBUG - .\home\webapp\WEB-INF\static\index.html   index.html   .\home\webapp\WEB-INF\static
+2022-01-12 14:00:20.589 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/ GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='localhost', reqHeader='{Accept=*/*, User-Agent=PostmanRuntime/7.28.4, Connection=keep-alive, Postman-Token=315607c4-77c5-401a-94e3-3b60ab5b0bc0, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, Content-Length=961032600, @Client=localhost, Content-Type=multipart/form-data; boundary=--------------------------011016421491173470259394}', contentType='multipart/form-data', reqBody='null', contextPath='/', url='http://localhost:8080/', contextParam='{}', multipartList='org.chaostocosmos.leap.http.HttpRequestDescriptor$MultipartDescriptor@680e0dce'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@416df7c9', responseHeader='{Server=LeapWAS 1.0.0, Date=Wed Jan 12 14:00:20 KST 2022}'}
+2022-01-12 14:07:34.835 INFO  - Leap WAS server starting...
+2022-01-12 14:07:34.839 INFO  - --------------------------------------------------------------------------
+2022-01-12 14:07:34.840 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-12 14:07:34.840 INFO  - verbose mode on
+2022-01-12 14:07:34.872 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-01-12 14:07:34.872 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-01-12 14:07:34.873 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-01-12 14:07:34.873 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-01-12 14:07:34.873 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-01-12 14:07:34.873 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-01-12 14:07:34.892 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-12 14:07:34.892 DEBUG - Service not mapping with ServiceMapper annotation: org.chaostocosmos.leap.http.service.DeployService
+2022-01-12 14:07:34.893 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-12 14:07:34.904 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-01-12 14:07:34.906 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-01-12 14:07:34.906 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-01-12 14:07:34.906 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-01-12 14:07:34.906 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-01-12 14:07:34.907 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-01-12 14:07:34.907 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-12 14:07:34.907 DEBUG - Service not mapping with ServiceMapper annotation: org.chaostocosmos.leap.http.service.DeployService
+2022-01-12 14:07:34.908 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-12 14:07:34.908 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-12 14:07:34.913 INFO  - Accepting connections on port 8082
+2022-01-12 14:07:34.918 INFO  - Accepting connections on port 8080
+2022-01-12 14:07:37.402 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-12 14:07:37.410 DEBUG - ============================== MULTIPART CONTENT: application/x-msdos-program ==============================
+2022-01-12 14:07:37.413 DEBUG - filename = jdk-8u221-windows-x64.exe
+2022-01-12 14:07:37.413 DEBUG - form-data = 
+2022-01-12 14:07:37.413 DEBUG - name = file1
+2022-01-12 14:07:46.327 DEBUG - Save uploaded file - filename: jdk-8u221-windows-x64.exe, size: 225811418, content-type: application/x-msdos-program, upload elpase seconds: 8
+2022-01-12 14:07:46.329 DEBUG - ============================== MULTIPART CONTENT: application/x-msdownload ==============================
+2022-01-12 14:07:46.329 DEBUG - filename = java-1.8.0-openjdk-1.8.0.242-1.b08.ojdkbuild.windows.x86_64.msi
+2022-01-12 14:07:46.329 DEBUG - form-data = 
+2022-01-12 14:07:46.330 DEBUG - name = file2
+2022-01-12 14:07:52.348 DEBUG - Save uploaded file - filename: java-1.8.0-openjdk-1.8.0.242-1.b08.ojdkbuild.windows.x86_64.msi, size: 149955449, content-type: application/x-msdownload, upload elpase seconds: 6
+2022-01-12 14:07:52.349 DEBUG - ============================== MULTIPART CONTENT: application/zip ==============================
+2022-01-12 14:07:52.349 DEBUG - filename = job-generator.zip
+2022-01-12 14:07:52.350 DEBUG - form-data = 
+2022-01-12 14:07:52.350 DEBUG - name = file3
+2022-01-12 14:08:24.989 DEBUG - Save uploaded file - filename: job-generator.zip, size: 585265113, content-type: application/zip, upload elpase seconds: 32
+2022-01-12 14:08:25.008 DEBUG - Request host: localhost
+2022-01-12 14:08:25.010 DEBUG - Accept: */*
+User-Agent: PostmanRuntime/7.28.4
+Connection: keep-alive
+Postman-Token: 9c823fb9-34fe-4683-b928-14439fcab5e4
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+Content-Length: 961032600
+@Client: localhost
+Content-Type: multipart/form-data; boundary=--------------------------475232621855536648210133
+2022-01-12 14:08:25.013 DEBUG - .\home\webapp\WEB-INF\static\index.html   index.html   .\home\webapp\WEB-INF\static
+2022-01-12 14:08:25.028 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/ GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='localhost', reqHeader='{Accept=*/*, User-Agent=PostmanRuntime/7.28.4, Connection=keep-alive, Postman-Token=9c823fb9-34fe-4683-b928-14439fcab5e4, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, Content-Length=961032600, @Client=localhost, Content-Type=multipart/form-data; boundary=--------------------------475232621855536648210133}', contentType='multipart/form-data', reqBody='null', contextPath='/', url='http://localhost:8080/', contextParam='{}', multipartList='org.chaostocosmos.leap.http.HttpRequestDescriptor$MultipartDescriptor@2af88f73'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@5cdef1bf', responseHeader='{Server=LeapWAS 1.0.0, Date=Wed Jan 12 14:08:25 KST 2022}'}
+2022-01-12 14:09:42.083 INFO  - Leap WAS server starting...
+2022-01-12 14:09:42.085 INFO  - --------------------------------------------------------------------------
+2022-01-12 14:09:42.086 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-12 14:09:42.086 INFO  - verbose mode on
+2022-01-12 14:09:42.136 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-12 14:09:42.137 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-01-12 14:09:42.137 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-01-12 14:09:42.138 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-01-12 14:09:42.139 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-01-12 14:09:42.139 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-01-12 14:09:42.139 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-01-12 14:09:42.140 DEBUG - Service not mapping with ServiceMapper annotation: org.chaostocosmos.leap.http.service.DeployService
+2022-01-12 14:09:42.140 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-12 14:09:42.148 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-12 14:09:42.149 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-01-12 14:09:42.149 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-01-12 14:09:42.150 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-01-12 14:09:42.150 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-01-12 14:09:42.150 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-01-12 14:09:42.151 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-01-12 14:09:42.151 DEBUG - Service not mapping with ServiceMapper annotation: org.chaostocosmos.leap.http.service.DeployService
+2022-01-12 14:09:42.151 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-12 14:09:42.151 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-12 14:09:42.158 INFO  - Accepting connections on port 8082
+2022-01-12 14:09:42.162 INFO  - Accepting connections on port 8080
+2022-01-12 14:09:44.684 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-12 14:09:44.710 DEBUG - ============================== MULTIPART CONTENT: application/x-msdos-program ==============================
+2022-01-12 14:09:44.717 DEBUG - filename = jdk-8u221-windows-x64.exe
+2022-01-12 14:09:44.717 DEBUG - form-data = 
+2022-01-12 14:09:44.718 DEBUG - name = file1
+2022-01-12 14:09:53.951 DEBUG - Save uploaded file - filename: jdk-8u221-windows-x64.exe, size: 225811418, content-type: application/x-msdos-program, upload elpase seconds: 9.23
+2022-01-12 14:09:53.955 DEBUG - ============================== MULTIPART CONTENT: application/x-msdownload ==============================
+2022-01-12 14:09:53.956 DEBUG - filename = java-1.8.0-openjdk-1.8.0.242-1.b08.ojdkbuild.windows.x86_64.msi
+2022-01-12 14:09:53.956 DEBUG - form-data = 
+2022-01-12 14:09:53.956 DEBUG - name = file2
+2022-01-12 14:10:00.214 DEBUG - Save uploaded file - filename: java-1.8.0-openjdk-1.8.0.242-1.b08.ojdkbuild.windows.x86_64.msi, size: 149955449, content-type: application/x-msdownload, upload elpase seconds: 6.26
+2022-01-12 14:10:00.216 DEBUG - ============================== MULTIPART CONTENT: application/zip ==============================
+2022-01-12 14:10:00.217 DEBUG - filename = job-generator.zip
+2022-01-12 14:10:00.218 DEBUG - form-data = 
+2022-01-12 14:10:00.219 DEBUG - name = file3
+2022-01-12 14:10:28.442 DEBUG - Save uploaded file - filename: job-generator.zip, size: 585265113, content-type: application/zip, upload elpase seconds: 28.22
+2022-01-12 14:10:28.461 DEBUG - Request host: localhost
+2022-01-12 14:10:28.462 DEBUG - Accept: */*
+User-Agent: PostmanRuntime/7.28.4
+Connection: keep-alive
+Postman-Token: 3770e534-e830-420e-83f3-a64d9a2babe5
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+Content-Length: 961032600
+@Client: localhost
+Content-Type: multipart/form-data; boundary=--------------------------158259526607470708443595
+2022-01-12 14:10:28.467 DEBUG - .\home\webapp\WEB-INF\static\index.html   index.html   .\home\webapp\WEB-INF\static
+2022-01-12 14:10:28.484 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/ GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='localhost', reqHeader='{Accept=*/*, User-Agent=PostmanRuntime/7.28.4, Connection=keep-alive, Postman-Token=3770e534-e830-420e-83f3-a64d9a2babe5, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, Content-Length=961032600, @Client=localhost, Content-Type=multipart/form-data; boundary=--------------------------158259526607470708443595}', contentType='multipart/form-data', reqBody='null', contextPath='/', url='http://localhost:8080/', contextParam='{}', multipartList='org.chaostocosmos.leap.http.HttpRequestDescriptor$MultipartDescriptor@4cdce0b6'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@2a1a77d1', responseHeader='{Server=LeapWAS 1.0.0, Date=Wed Jan 12 14:10:28 KST 2022}'}
+2022-01-12 14:11:17.181 INFO  - Leap WAS server starting...
+2022-01-12 14:11:17.187 INFO  - --------------------------------------------------------------------------
+2022-01-12 14:11:17.187 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-12 14:11:17.187 INFO  - verbose mode on
+2022-01-12 14:11:17.242 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-12 14:11:17.243 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-01-12 14:11:17.243 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-01-12 14:11:17.243 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-01-12 14:11:17.243 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-01-12 14:11:17.244 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-01-12 14:11:17.244 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-01-12 14:11:17.245 DEBUG - Service not mapping with ServiceMapper annotation: org.chaostocosmos.leap.http.service.DeployService
+2022-01-12 14:11:17.245 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-12 14:11:17.259 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-12 14:11:17.260 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-01-12 14:11:17.260 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-01-12 14:11:17.261 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-01-12 14:11:17.261 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-01-12 14:11:17.261 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-01-12 14:11:17.261 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-01-12 14:11:17.262 DEBUG - Service not mapping with ServiceMapper annotation: org.chaostocosmos.leap.http.service.DeployService
+2022-01-12 14:11:17.262 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-12 14:11:17.263 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-12 14:11:17.273 INFO  - Accepting connections on port 8082
+2022-01-12 14:11:17.277 INFO  - Accepting connections on port 8080
+2022-01-12 14:11:19.598 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-12 14:11:19.606 DEBUG - ============================== MULTIPART CONTENT: application/x-msdos-program ==============================
+2022-01-12 14:11:19.609 DEBUG - filename = jdk-8u221-windows-x64.exe
+2022-01-12 14:11:19.609 DEBUG - form-data = 
+2022-01-12 14:11:19.610 DEBUG - name = file1
+2022-01-12 14:11:30.880 DEBUG - Save uploaded file - filename: jdk-8u221-windows-x64.exe, size: 225811418, content-type: application/x-msdos-program, upload elpase seconds: 11.27
+2022-01-12 14:11:30.883 DEBUG - ============================== MULTIPART CONTENT: application/x-msdownload ==============================
+2022-01-12 14:11:30.885 DEBUG - filename = java-1.8.0-openjdk-1.8.0.242-1.b08.ojdkbuild.windows.x86_64.msi
+2022-01-12 14:11:30.887 DEBUG - form-data = 
+2022-01-12 14:11:30.887 DEBUG - name = file2
+2022-01-12 14:11:35.769 DEBUG - Save uploaded file - filename: java-1.8.0-openjdk-1.8.0.242-1.b08.ojdkbuild.windows.x86_64.msi, size: 149955449, content-type: application/x-msdownload, upload elpase seconds: 4.88
+2022-01-12 14:11:35.770 DEBUG - ============================== MULTIPART CONTENT: application/zip ==============================
+2022-01-12 14:11:35.771 DEBUG - filename = job-generator.zip
+2022-01-12 14:11:35.771 DEBUG - form-data = 
+2022-01-12 14:11:35.772 DEBUG - name = file3
+2022-01-12 14:11:52.281 DEBUG - Save uploaded file - filename: job-generator.zip, size: 585265113, content-type: application/zip, upload elpase seconds: 16.51
+2022-01-12 14:11:52.296 DEBUG - Request host: localhost
+2022-01-12 14:11:52.297 DEBUG - Accept: */*
+User-Agent: PostmanRuntime/7.28.4
+Connection: keep-alive
+Postman-Token: c8e08ad6-b930-46f5-906f-004798a9b1b7
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+Content-Length: 961032600
+@Client: localhost
+Content-Type: multipart/form-data; boundary=--------------------------246324409820119544462040
+2022-01-12 14:11:52.301 DEBUG - .\home\webapp\WEB-INF\static\index.html   index.html   .\home\webapp\WEB-INF\static
+2022-01-12 14:11:52.315 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost:8080/ GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='localhost', reqHeader='{Accept=*/*, User-Agent=PostmanRuntime/7.28.4, Connection=keep-alive, Postman-Token=c8e08ad6-b930-46f5-906f-004798a9b1b7, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, Content-Length=961032600, @Client=localhost, Content-Type=multipart/form-data; boundary=--------------------------246324409820119544462040}', contentType='multipart/form-data', reqBody='null', contextPath='/', url='http://localhost:8080/', contextParam='{}', multipartList='org.chaostocosmos.leap.http.HttpRequestDescriptor$MultipartDescriptor@6f79eed7'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@48f37a7e', responseHeader='{Server=LeapWAS 1.0.0, Date=Wed Jan 12 14:11:52 KST 2022}'}
+2022-01-12 14:14:15.692 INFO  - Leap WAS server starting...
+2022-01-12 14:14:15.695 INFO  - --------------------------------------------------------------------------
+2022-01-12 14:14:15.696 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-12 14:14:15.696 INFO  - verbose mode on
+2022-01-12 14:14:15.736 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-12 14:14:15.737 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-01-12 14:14:15.737 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-01-12 14:14:15.738 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-01-12 14:14:15.739 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-01-12 14:14:15.739 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-01-12 14:14:15.740 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-01-12 14:14:15.740 DEBUG - Service not mapping with ServiceMapper annotation: org.chaostocosmos.leap.http.service.DeployService
+2022-01-12 14:14:15.740 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-12 14:14:15.749 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-12 14:14:15.749 DEBUG - Method not mapping with MethodMapper annotation: serve
+2022-01-12 14:14:15.749 DEBUG - Method not mapping with MethodMapper annotation: setFilters
+2022-01-12 14:14:15.750 DEBUG - Method not mapping with MethodMapper annotation: serveGet
+2022-01-12 14:14:15.750 DEBUG - Method not mapping with MethodMapper annotation: servePost
+2022-01-12 14:14:15.750 DEBUG - Method not mapping with MethodMapper annotation: serveDelete
+2022-01-12 14:14:15.750 DEBUG - Method not mapping with MethodMapper annotation: servePut
+2022-01-12 14:14:15.750 DEBUG - Service not mapping with ServiceMapper annotation: org.chaostocosmos.leap.http.service.DeployService
+2022-01-12 14:14:15.750 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-12 14:14:15.751 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-12 14:14:15.757 INFO  - Accepting connections on port 8082
+2022-01-12 14:14:15.762 INFO  - Accepting connections on port 8080
+2022-01-12 14:16:06.221 INFO  - Leap WAS server starting...
+2022-01-12 14:16:06.225 INFO  - --------------------------------------------------------------------------
+2022-01-12 14:16:06.225 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-12 14:16:06.225 INFO  - verbose mode on
+2022-01-12 14:16:06.260 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-12 14:16:06.260 DEBUG - Service not mapping with ServiceMapper annotation: org.chaostocosmos.leap.http.service.DeployService
+2022-01-12 14:16:06.260 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-12 14:16:06.268 INFO  - Add service: org.chaostocosmos.leap.http.service.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-12 14:16:06.268 DEBUG - Service not mapping with ServiceMapper annotation: org.chaostocosmos.leap.http.service.DeployService
+2022-01-12 14:16:06.268 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-12 14:16:06.269 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-12 14:16:06.274 INFO  - Accepting connections on port 8082
+2022-01-12 14:16:06.279 INFO  - Accepting connections on port 8080

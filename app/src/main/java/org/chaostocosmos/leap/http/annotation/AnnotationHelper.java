@@ -12,8 +12,8 @@ import org.chaostocosmos.leap.http.MSG_TYPE;
 import org.chaostocosmos.leap.http.REQUEST_TYPE;
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.commons.ClassUtils;
-import org.chaostocosmos.leap.http.filter.IFilter;
-import org.chaostocosmos.leap.http.service.ILeapService;
+import org.chaostocosmos.leap.http.filters.IFilter;
+import org.chaostocosmos.leap.http.services.ILeapService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

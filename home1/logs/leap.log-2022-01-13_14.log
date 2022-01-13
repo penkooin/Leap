@@ -1,0 +1,39 @@
+2022-01-13 14:47:29.511 DEBUG - Request host: 127.0.0.1
+2022-01-13 14:47:29.517 DEBUG - Authorization: Basic Y2hhb3M5MzA6OTM5Mw==
+Accept: */*
+User-Agent: PostmanRuntime/7.28.4
+Connection: keep-alive
+Postman-Token: 0179a988-416f-498d-9094-83aecc87b35c
+Host: 127.0.0.1:8080
+Accept-Encoding: gzip, deflate, br
+@Client: 127.0.0.1
+2022-01-13 14:47:29.527 DEBUG - home1\webapp\WEB-INF\static\response.html   response.html   home1\webapp\WEB-INF\static
+2022-01-13 14:47:29.529 INFO  - Error client request /127.0.0.1:58564 --- /127.0.0.1:8080
+2022-01-13 14:47:29.542 DEBUG - { httpRequestDescriptor='{ httpRequest='http://127.0.0.1:8080/time/GetTime GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='127.0.0.1', reqHeader='{Authorization=Basic Y2hhb3M5MzA6OTM5Mw==, Accept=*/*, User-Agent=PostmanRuntime/7.28.4, Connection=keep-alive, Postman-Token=0179a988-416f-498d-9094-83aecc87b35c, Host=127.0.0.1:8080, Accept-Encoding=gzip, deflate, br, @Client=127.0.0.1}', contentType='null', reqBody='null', contextPath='/time/GetTime', url='http://127.0.0.1:8080/time/GetTime', contextParam='{}', multipartList='null'}', httpResponse='null', requestedHost='127.0.0.1', responseCode='200', responseBody='[B@55020bc9', responseHeader='{Server=LeapWAS 1.0.0, Date=Thu Jan 13 14:47:29 KST 2022}'}
+2022-01-13 14:47:29.544 INFO  - Close client request on error /127.0.0.1:58564 --- /127.0.0.1:8080
+2022-01-13 14:49:46.132 DEBUG - Request host: 127.0.0.1
+2022-01-13 14:49:46.133 DEBUG - Authorization: Basic Y2hhb3M5MzA6OTM5Mw==
+Accept: */*
+User-Agent: PostmanRuntime/7.28.4
+Connection: keep-alive
+Postman-Token: 1adbf236-fc9b-4f8d-85ad-941646effb7a
+Host: 127.0.0.1:8080
+Accept-Encoding: gzip, deflate, br
+@Client: 127.0.0.1
+2022-01-13 14:49:46.140 DEBUG - User chaos930 is login.
+2022-01-13 14:49:46.142 DEBUG - Basic Http request filter processing.................
+2022-01-13 14:49:46.143 DEBUG - getTime servlet started....+++++++++++++++++++++++++++++++++++++++++++++++++
+2022-01-13 14:49:46.154 DEBUG - { httpRequestDescriptor='{ httpRequest='http://127.0.0.1:8080/time/GetTime GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='127.0.0.1', reqHeader='{Authorization=Basic Y2hhb3M5MzA6OTM5Mw==, Accept=*/*, User-Agent=PostmanRuntime/7.28.4, Connection=keep-alive, Postman-Token=1adbf236-fc9b-4f8d-85ad-941646effb7a, Host=127.0.0.1:8080, Accept-Encoding=gzip, deflate, br, @Client=127.0.0.1}', contentType='null', reqBody='null', contextPath='/time/GetTime', url='http://127.0.0.1:8080/time/GetTime', contextParam='{}', multipartList='null'}', httpResponse='null', requestedHost='127.0.0.1', responseCode='200', responseBody='[B@5b00b2c3', responseHeader='{Server=LeapWAS 1.0.0, Date=Thu Jan 13 14:49:46 KST 2022}'}
+2022-01-13 14:49:47.927 DEBUG - Request host: 127.0.0.1
+2022-01-13 14:49:47.928 DEBUG - Authorization: Basic Y2hhb3M5MzA6OTM5Mw==
+Accept: */*
+User-Agent: PostmanRuntime/7.28.4
+Connection: keep-alive
+Postman-Token: 7c1a00a4-9666-4119-b1b5-28d146b3a589
+Host: 127.0.0.1:8080
+Accept-Encoding: gzip, deflate, br
+@Client: 127.0.0.1
+2022-01-13 14:49:47.930 DEBUG - User chaos930 is login.
+2022-01-13 14:49:47.942 DEBUG - Basic Http request filter processing.................
+2022-01-13 14:49:47.944 DEBUG - getTime servlet started....+++++++++++++++++++++++++++++++++++++++++++++++++
+2022-01-13 14:49:47.945 DEBUG - { httpRequestDescriptor='{ httpRequest='http://127.0.0.1:8080/time/GetTime GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='127.0.0.1', reqHeader='{Authorization=Basic Y2hhb3M5MzA6OTM5Mw==, Accept=*/*, User-Agent=PostmanRuntime/7.28.4, Connection=keep-alive, Postman-Token=7c1a00a4-9666-4119-b1b5-28d146b3a589, Host=127.0.0.1:8080, Accept-Encoding=gzip, deflate, br, @Client=127.0.0.1}', contentType='null', reqBody='null', contextPath='/time/GetTime', url='http://127.0.0.1:8080/time/GetTime', contextParam='{}', multipartList='null'}', httpResponse='null', requestedHost='127.0.0.1', responseCode='200', responseBody='[B@2920168', responseHeader='{Server=LeapWAS 1.0.0, Date=Thu Jan 13 14:49:47 KST 2022}'}

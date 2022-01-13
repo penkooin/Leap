@@ -11,13 +11,16 @@ server:
     - username: guest
       password: guest
       grant: GUEST
+  dynamic-classpaths: [
+    ./home/webapp/services
+  ]
   doc-root: ./home
   logs: 'logs/leap.log'
   log-level: 'DEBUG'
   charset: 'utf-8'
   welcome: 'index.html'
   backlog: 50
-  upload-buffer-size: 10MB
+  flush-buffer-size: 10MB
   threadpool:
     core: 50
     max: 50
@@ -26,13 +29,15 @@ server:
   - server-name: leap1
     host: 127.0.0.1
     port: 8080
-    doc-root: ./home1
+    dynamic-classpaths: []
+    doc-root: ./home1    
     welcome: 'index.html'
     logs: 'logs/leap.log'
     log-level: 'DEBUG'
   - server-name: leap2
     host: 192.168.1.28
     port: 8082
+    dynamic-classpaths: []
     doc-root: ./home2
     welcome: 'index.html'
     logs: 'logs/leap.log'

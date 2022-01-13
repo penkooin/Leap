@@ -20,7 +20,10 @@ import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import org.chaostocosmos.leap.http.commons.Hosts;
+import org.chaostocosmos.leap.http.commons.HostsManager;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
+import org.chaostocosmos.leap.http.commons.ResourceHelper;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
@@ -76,8 +79,8 @@ public class LeapWAS {
      */
     public LeapWAS(String[] args) throws IOException, URISyntaxException, WASException, ParseException {
         //set commend line options
-        setup(args);
         this.leapServerMap = new HashMap<>();
+        setup(args);
     }
 
     /** 
@@ -223,7 +226,7 @@ public class LeapWAS {
                                                   WASException, 
                                                   IOException, 
                                                   URISyntaxException, 
-                                                  ParseException {
+                                                  ParseException {        
         LeapWAS leap = new LeapWAS(args);  
         leap.start();
     }

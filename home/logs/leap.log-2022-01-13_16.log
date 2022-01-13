@@ -1,0 +1,950 @@
+2022-01-13 16:14:14.671 INFO  - Leap WAS server starting...
+2022-01-13 16:14:14.682 INFO  - --------------------------------------------------------------------------
+2022-01-13 16:14:14.685 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 16:14:14.686 INFO  - verbose mode on
+2022-01-13 16:14:14.694 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-13 16:14:14.777 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 16:14:14.796 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 16:14:15.095 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 16:14:15.104 INFO  - Accepting connections on port 8082
+2022-01-13 16:14:15.107 INFO  - Accepting connections on port 8080
+2022-01-13 16:16:19.985 INFO  - Leap WAS server starting...
+2022-01-13 16:16:19.989 INFO  - --------------------------------------------------------------------------
+2022-01-13 16:16:19.989 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 16:16:19.989 INFO  - verbose mode on
+2022-01-13 16:16:19.996 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-13 16:16:20.062 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 16:16:20.080 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 16:16:20.080 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 16:16:20.086 INFO  - Accepting connections on port 8082
+2022-01-13 16:16:20.090 INFO  - Accepting connections on port 8080
+2022-01-13 16:18:56.108 INFO  - Leap WAS server starting...
+2022-01-13 16:18:56.113 INFO  - --------------------------------------------------------------------------
+2022-01-13 16:18:56.113 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 16:18:56.113 INFO  - verbose mode on
+2022-01-13 16:18:56.121 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-13 16:18:56.190 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 16:18:56.218 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 16:18:56.219 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 16:18:56.226 INFO  - Accepting connections on port 8082
+2022-01-13 16:18:56.231 INFO  - Accepting connections on port 8080
+2022-01-13 16:20:07.998 INFO  - Leap WAS server starting...
+2022-01-13 16:20:08.002 INFO  - --------------------------------------------------------------------------
+2022-01-13 16:20:08.002 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 16:20:08.002 INFO  - verbose mode on
+2022-01-13 16:20:08.007 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-13 16:20:08.074 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 16:20:08.091 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 16:20:08.091 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 16:20:08.096 INFO  - Accepting connections on port 8082
+2022-01-13 16:20:08.099 INFO  - Accepting connections on port 8080
+2022-01-13 16:30:39.182 INFO  - Leap WAS server starting...
+2022-01-13 16:30:39.185 INFO  - --------------------------------------------------------------------------
+2022-01-13 16:30:39.186 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 16:30:39.186 INFO  - verbose mode on
+2022-01-13 16:31:17.072 INFO  - Leap WAS server starting...
+2022-01-13 16:31:17.075 INFO  - --------------------------------------------------------------------------
+2022-01-13 16:31:17.075 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 16:31:17.075 INFO  - verbose mode on
+2022-01-13 16:31:17.081 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-13 16:31:17.124 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 16:31:17.140 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 16:31:17.141 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 16:31:17.147 INFO  - Accepting connections on port 8082
+2022-01-13 16:31:17.150 INFO  - Accepting connections on port 8080
+2022-01-13 16:43:48.044 INFO  - Leap WAS server starting...
+2022-01-13 16:43:48.047 INFO  - --------------------------------------------------------------------------
+2022-01-13 16:43:48.047 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 16:43:48.048 INFO  - verbose mode on
+2022-01-13 16:44:41.897 INFO  - Leap WAS server starting...
+2022-01-13 16:44:41.900 INFO  - --------------------------------------------------------------------------
+2022-01-13 16:44:41.900 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 16:44:41.901 INFO  - verbose mode on
+2022-01-13 16:44:41.906 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-13 16:44:41.925 ERROR - null
+java.lang.InstantiationException: null
+	at java.base/jdk.internal.reflect.InstantiationExceptionConstructorAccessorImpl.newInstance(InstantiationExceptionConstructorAccessorImpl.java:48)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
+	at java.base/java.lang.Class.newInstance(Class.java:584)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:242)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:256)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$15(ClassUtils.java:186)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findClasses(ClassUtils.java:186)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllLeapServices(ClassUtils.java:67)
+	at org.chaostocosmos.leap.http.services.ServiceManager.<init>(ServiceManager.java:60)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:135)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:161)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:231)
+2022-01-13 16:44:41.932 ERROR - org.chaostocosmos.leap.http.services.IDeleteService
+java.lang.InstantiationException: org.chaostocosmos.leap.http.services.IDeleteService
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:242)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:256)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$15(ClassUtils.java:186)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findClasses(ClassUtils.java:186)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllLeapServices(ClassUtils.java:67)
+	at org.chaostocosmos.leap.http.services.ServiceManager.<init>(ServiceManager.java:60)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:135)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:161)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:231)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.services.IDeleteService.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 18 common frames omitted
+2022-01-13 16:44:41.939 ERROR - org.chaostocosmos.leap.http.services.IGetService
+java.lang.InstantiationException: org.chaostocosmos.leap.http.services.IGetService
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:242)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:256)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$15(ClassUtils.java:186)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findClasses(ClassUtils.java:186)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllLeapServices(ClassUtils.java:67)
+	at org.chaostocosmos.leap.http.services.ServiceManager.<init>(ServiceManager.java:60)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:135)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:161)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:231)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.services.IGetService.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 18 common frames omitted
+2022-01-13 16:44:41.945 ERROR - org.chaostocosmos.leap.http.services.ILeapService
+java.lang.InstantiationException: org.chaostocosmos.leap.http.services.ILeapService
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:242)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:256)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$15(ClassUtils.java:186)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findClasses(ClassUtils.java:186)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllLeapServices(ClassUtils.java:67)
+	at org.chaostocosmos.leap.http.services.ServiceManager.<init>(ServiceManager.java:60)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:135)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:161)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:231)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.services.ILeapService.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 18 common frames omitted
+2022-01-13 16:44:41.952 ERROR - org.chaostocosmos.leap.http.services.IPostService
+java.lang.InstantiationException: org.chaostocosmos.leap.http.services.IPostService
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:242)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:256)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$15(ClassUtils.java:186)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findClasses(ClassUtils.java:186)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllLeapServices(ClassUtils.java:67)
+	at org.chaostocosmos.leap.http.services.ServiceManager.<init>(ServiceManager.java:60)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:135)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:161)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:231)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.services.IPostService.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 18 common frames omitted
+2022-01-13 16:44:41.958 ERROR - org.chaostocosmos.leap.http.services.IPutService
+java.lang.InstantiationException: org.chaostocosmos.leap.http.services.IPutService
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:242)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:256)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$15(ClassUtils.java:186)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findClasses(ClassUtils.java:186)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllLeapServices(ClassUtils.java:67)
+	at org.chaostocosmos.leap.http.services.ServiceManager.<init>(ServiceManager.java:60)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:135)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:161)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:231)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.services.IPutService.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 18 common frames omitted
+2022-01-13 16:47:54.843 INFO  - Leap WAS server starting...
+2022-01-13 16:47:54.847 INFO  - --------------------------------------------------------------------------
+2022-01-13 16:47:54.848 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 16:47:54.848 INFO  - verbose mode on
+2022-01-13 16:47:54.855 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-13 16:47:54.914 ERROR - null
+java.lang.InstantiationException: null
+	at java.base/jdk.internal.reflect.InstantiationExceptionConstructorAccessorImpl.newInstance(InstantiationExceptionConstructorAccessorImpl.java:48)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
+	at java.base/java.lang.Class.newInstance(Class.java:584)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:246)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:260)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$15(ClassUtils.java:189)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findClasses(ClassUtils.java:190)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllLeapServices(ClassUtils.java:67)
+	at org.chaostocosmos.leap.http.services.ServiceManager.<init>(ServiceManager.java:60)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:135)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:161)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:231)
+2022-01-13 16:47:54.921 ERROR - org.chaostocosmos.leap.http.services.IDeleteService
+java.lang.InstantiationException: org.chaostocosmos.leap.http.services.IDeleteService
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:246)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:260)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$15(ClassUtils.java:189)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findClasses(ClassUtils.java:190)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllLeapServices(ClassUtils.java:67)
+	at org.chaostocosmos.leap.http.services.ServiceManager.<init>(ServiceManager.java:60)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:135)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:161)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:231)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.services.IDeleteService.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 18 common frames omitted
+2022-01-13 16:47:54.927 ERROR - org.chaostocosmos.leap.http.services.IGetService
+java.lang.InstantiationException: org.chaostocosmos.leap.http.services.IGetService
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:246)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:260)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$15(ClassUtils.java:189)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findClasses(ClassUtils.java:190)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllLeapServices(ClassUtils.java:67)
+	at org.chaostocosmos.leap.http.services.ServiceManager.<init>(ServiceManager.java:60)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:135)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:161)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:231)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.services.IGetService.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 18 common frames omitted
+2022-01-13 16:47:54.935 ERROR - org.chaostocosmos.leap.http.services.ILeapService
+java.lang.InstantiationException: org.chaostocosmos.leap.http.services.ILeapService
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:246)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:260)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$15(ClassUtils.java:189)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findClasses(ClassUtils.java:190)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllLeapServices(ClassUtils.java:67)
+	at org.chaostocosmos.leap.http.services.ServiceManager.<init>(ServiceManager.java:60)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:135)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:161)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:231)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.services.ILeapService.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 18 common frames omitted
+2022-01-13 16:47:54.940 ERROR - org.chaostocosmos.leap.http.services.IPostService
+java.lang.InstantiationException: org.chaostocosmos.leap.http.services.IPostService
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:246)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:260)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$15(ClassUtils.java:189)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findClasses(ClassUtils.java:190)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllLeapServices(ClassUtils.java:67)
+	at org.chaostocosmos.leap.http.services.ServiceManager.<init>(ServiceManager.java:60)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:135)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:161)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:231)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.services.IPostService.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 18 common frames omitted
+2022-01-13 16:47:54.947 ERROR - org.chaostocosmos.leap.http.services.IPutService
+java.lang.InstantiationException: org.chaostocosmos.leap.http.services.IPutService
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:246)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:260)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$15(ClassUtils.java:189)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findClasses(ClassUtils.java:190)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllLeapServices(ClassUtils.java:67)
+	at org.chaostocosmos.leap.http.services.ServiceManager.<init>(ServiceManager.java:60)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:135)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:161)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:231)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.services.IPutService.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 18 common frames omitted
+2022-01-13 16:49:16.366 INFO  - Leap WAS server starting...
+2022-01-13 16:49:16.370 INFO  - --------------------------------------------------------------------------
+2022-01-13 16:49:16.371 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 16:49:16.371 INFO  - verbose mode on
+2022-01-13 16:49:16.377 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-13 16:49:16.399 ERROR - null
+java.lang.InstantiationException: null
+	at java.base/jdk.internal.reflect.InstantiationExceptionConstructorAccessorImpl.newInstance(InstantiationExceptionConstructorAccessorImpl.java:48)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
+	at java.base/java.lang.Class.newInstance(Class.java:584)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:247)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:261)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$15(ClassUtils.java:189)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findClasses(ClassUtils.java:191)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllLeapServices(ClassUtils.java:67)
+	at org.chaostocosmos.leap.http.services.ServiceManager.<init>(ServiceManager.java:60)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:135)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:161)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:231)
+2022-01-13 16:49:16.408 ERROR - org.chaostocosmos.leap.http.services.IDeleteService
+java.lang.InstantiationException: org.chaostocosmos.leap.http.services.IDeleteService
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:247)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:261)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$15(ClassUtils.java:189)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findClasses(ClassUtils.java:191)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllLeapServices(ClassUtils.java:67)
+	at org.chaostocosmos.leap.http.services.ServiceManager.<init>(ServiceManager.java:60)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:135)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:161)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:231)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.services.IDeleteService.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 18 common frames omitted
+2022-01-13 16:49:16.417 ERROR - org.chaostocosmos.leap.http.services.IGetService
+java.lang.InstantiationException: org.chaostocosmos.leap.http.services.IGetService
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:247)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:261)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$15(ClassUtils.java:189)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findClasses(ClassUtils.java:191)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllLeapServices(ClassUtils.java:67)
+	at org.chaostocosmos.leap.http.services.ServiceManager.<init>(ServiceManager.java:60)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:135)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:161)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:231)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.services.IGetService.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 18 common frames omitted
+2022-01-13 16:49:16.426 ERROR - org.chaostocosmos.leap.http.services.ILeapService
+java.lang.InstantiationException: org.chaostocosmos.leap.http.services.ILeapService
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:247)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:261)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$15(ClassUtils.java:189)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findClasses(ClassUtils.java:191)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllLeapServices(ClassUtils.java:67)
+	at org.chaostocosmos.leap.http.services.ServiceManager.<init>(ServiceManager.java:60)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:135)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:161)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:231)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.services.ILeapService.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 18 common frames omitted
+2022-01-13 16:49:16.432 ERROR - org.chaostocosmos.leap.http.services.IPostService
+java.lang.InstantiationException: org.chaostocosmos.leap.http.services.IPostService
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:247)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:261)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$15(ClassUtils.java:189)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findClasses(ClassUtils.java:191)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllLeapServices(ClassUtils.java:67)
+	at org.chaostocosmos.leap.http.services.ServiceManager.<init>(ServiceManager.java:60)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:135)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:161)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:231)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.services.IPostService.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 18 common frames omitted
+2022-01-13 16:49:16.441 ERROR - org.chaostocosmos.leap.http.services.IPutService
+java.lang.InstantiationException: org.chaostocosmos.leap.http.services.IPutService
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:247)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:261)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$15(ClassUtils.java:189)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findClasses(ClassUtils.java:191)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllLeapServices(ClassUtils.java:67)
+	at org.chaostocosmos.leap.http.services.ServiceManager.<init>(ServiceManager.java:60)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:135)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:161)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:231)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.services.IPutService.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 18 common frames omitted
+2022-01-13 16:49:16.463 ERROR - null
+java.lang.InstantiationException: null
+	at java.base/jdk.internal.reflect.InstantiationExceptionConstructorAccessorImpl.newInstance(InstantiationExceptionConstructorAccessorImpl.java:48)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
+	at java.base/java.lang.Class.newInstance(Class.java:584)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:247)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:261)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$15(ClassUtils.java:189)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findClasses(ClassUtils.java:191)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findFilters(ClassUtils.java:154)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllLeapFilters(ClassUtils.java:92)
+	at org.chaostocosmos.leap.http.services.ServiceManager.<init>(ServiceManager.java:61)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:135)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:161)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:231)
+2022-01-13 16:49:16.473 ERROR - org.chaostocosmos.leap.http.filters.AbstractIpPreFilter
+java.lang.InstantiationException: org.chaostocosmos.leap.http.filters.AbstractIpPreFilter
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:247)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:261)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$15(ClassUtils.java:189)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findClasses(ClassUtils.java:191)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findFilters(ClassUtils.java:154)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllLeapFilters(ClassUtils.java:92)
+	at org.chaostocosmos.leap.http.services.ServiceManager.<init>(ServiceManager.java:61)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:135)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:161)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:231)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.filters.AbstractIpPreFilter.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 19 common frames omitted
+2022-01-13 16:49:16.483 ERROR - org.chaostocosmos.leap.http.filters.IFilter
+java.lang.InstantiationException: org.chaostocosmos.leap.http.filters.IFilter
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:247)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:261)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$15(ClassUtils.java:189)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findClasses(ClassUtils.java:191)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findFilters(ClassUtils.java:154)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllLeapFilters(ClassUtils.java:92)
+	at org.chaostocosmos.leap.http.services.ServiceManager.<init>(ServiceManager.java:61)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:135)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:161)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:231)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.filters.IFilter.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 19 common frames omitted
+2022-01-13 16:49:16.494 ERROR - org.chaostocosmos.leap.http.filters.IHttpFilter
+java.lang.InstantiationException: org.chaostocosmos.leap.http.filters.IHttpFilter
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:247)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:261)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$15(ClassUtils.java:189)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findClasses(ClassUtils.java:191)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findFilters(ClassUtils.java:154)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllLeapFilters(ClassUtils.java:92)
+	at org.chaostocosmos.leap.http.services.ServiceManager.<init>(ServiceManager.java:61)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:135)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:161)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:231)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.filters.IHttpFilter.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 19 common frames omitted
+2022-01-13 16:49:16.500 ERROR - org.chaostocosmos.leap.http.filters.IIpPreFilter
+java.lang.InstantiationException: org.chaostocosmos.leap.http.filters.IIpPreFilter
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:247)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:261)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$15(ClassUtils.java:189)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findClasses(ClassUtils.java:191)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findFilters(ClassUtils.java:154)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllLeapFilters(ClassUtils.java:92)
+	at org.chaostocosmos.leap.http.services.ServiceManager.<init>(ServiceManager.java:61)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:135)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:161)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:231)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.filters.IIpPreFilter.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 19 common frames omitted
+2022-01-13 16:49:16.556 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 16:49:16.566 ERROR - null
+java.lang.InstantiationException: null
+	at java.base/jdk.internal.reflect.InstantiationExceptionConstructorAccessorImpl.newInstance(InstantiationExceptionConstructorAccessorImpl.java:48)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
+	at java.base/java.lang.Class.newInstance(Class.java:584)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:247)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:261)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$15(ClassUtils.java:189)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findClasses(ClassUtils.java:191)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllLeapServices(ClassUtils.java:67)
+	at org.chaostocosmos.leap.http.services.ServiceManager.<init>(ServiceManager.java:60)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:135)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:166)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:231)
+2022-01-13 16:49:16.574 ERROR - org.chaostocosmos.leap.http.services.IDeleteService
+java.lang.InstantiationException: org.chaostocosmos.leap.http.services.IDeleteService
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:247)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:261)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$15(ClassUtils.java:189)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findClasses(ClassUtils.java:191)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllLeapServices(ClassUtils.java:67)
+	at org.chaostocosmos.leap.http.services.ServiceManager.<init>(ServiceManager.java:60)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:135)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:166)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:231)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.services.IDeleteService.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 18 common frames omitted
+2022-01-13 16:49:16.582 ERROR - org.chaostocosmos.leap.http.services.IGetService
+java.lang.InstantiationException: org.chaostocosmos.leap.http.services.IGetService
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:247)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:261)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$15(ClassUtils.java:189)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findClasses(ClassUtils.java:191)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllLeapServices(ClassUtils.java:67)
+	at org.chaostocosmos.leap.http.services.ServiceManager.<init>(ServiceManager.java:60)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:135)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:166)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:231)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.services.IGetService.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 18 common frames omitted
+2022-01-13 16:49:16.591 ERROR - org.chaostocosmos.leap.http.services.ILeapService
+java.lang.InstantiationException: org.chaostocosmos.leap.http.services.ILeapService
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:247)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:261)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$15(ClassUtils.java:189)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findClasses(ClassUtils.java:191)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllLeapServices(ClassUtils.java:67)
+	at org.chaostocosmos.leap.http.services.ServiceManager.<init>(ServiceManager.java:60)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:135)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:166)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:231)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.services.ILeapService.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 18 common frames omitted
+2022-01-13 16:49:16.596 ERROR - org.chaostocosmos.leap.http.services.IPostService
+java.lang.InstantiationException: org.chaostocosmos.leap.http.services.IPostService
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:247)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:261)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$15(ClassUtils.java:189)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findClasses(ClassUtils.java:191)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllLeapServices(ClassUtils.java:67)
+	at org.chaostocosmos.leap.http.services.ServiceManager.<init>(ServiceManager.java:60)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:135)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:166)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:231)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.services.IPostService.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 18 common frames omitted
+2022-01-13 16:49:16.603 ERROR - org.chaostocosmos.leap.http.services.IPutService
+java.lang.InstantiationException: org.chaostocosmos.leap.http.services.IPutService
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:247)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:261)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$15(ClassUtils.java:189)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findClasses(ClassUtils.java:191)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllLeapServices(ClassUtils.java:67)
+	at org.chaostocosmos.leap.http.services.ServiceManager.<init>(ServiceManager.java:60)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:135)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:166)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:231)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.services.IPutService.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 18 common frames omitted
+2022-01-13 16:49:16.614 ERROR - null
+java.lang.InstantiationException: null
+	at java.base/jdk.internal.reflect.InstantiationExceptionConstructorAccessorImpl.newInstance(InstantiationExceptionConstructorAccessorImpl.java:48)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
+	at java.base/java.lang.Class.newInstance(Class.java:584)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:247)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:261)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$15(ClassUtils.java:189)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findClasses(ClassUtils.java:191)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findFilters(ClassUtils.java:154)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllLeapFilters(ClassUtils.java:92)
+	at org.chaostocosmos.leap.http.services.ServiceManager.<init>(ServiceManager.java:61)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:135)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:166)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:231)
+2022-01-13 16:49:16.621 ERROR - org.chaostocosmos.leap.http.filters.AbstractIpPreFilter
+java.lang.InstantiationException: org.chaostocosmos.leap.http.filters.AbstractIpPreFilter
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:247)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:261)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$15(ClassUtils.java:189)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findClasses(ClassUtils.java:191)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findFilters(ClassUtils.java:154)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllLeapFilters(ClassUtils.java:92)
+	at org.chaostocosmos.leap.http.services.ServiceManager.<init>(ServiceManager.java:61)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:135)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:166)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:231)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.filters.AbstractIpPreFilter.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 19 common frames omitted
+2022-01-13 16:49:16.627 ERROR - org.chaostocosmos.leap.http.filters.IFilter
+java.lang.InstantiationException: org.chaostocosmos.leap.http.filters.IFilter
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:247)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:261)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$15(ClassUtils.java:189)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findClasses(ClassUtils.java:191)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findFilters(ClassUtils.java:154)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllLeapFilters(ClassUtils.java:92)
+	at org.chaostocosmos.leap.http.services.ServiceManager.<init>(ServiceManager.java:61)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:135)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:166)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:231)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.filters.IFilter.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 19 common frames omitted
+2022-01-13 16:49:16.642 ERROR - org.chaostocosmos.leap.http.filters.IHttpFilter
+java.lang.InstantiationException: org.chaostocosmos.leap.http.filters.IHttpFilter
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:247)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:261)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$15(ClassUtils.java:189)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findClasses(ClassUtils.java:191)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findFilters(ClassUtils.java:154)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllLeapFilters(ClassUtils.java:92)
+	at org.chaostocosmos.leap.http.services.ServiceManager.<init>(ServiceManager.java:61)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:135)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:166)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:231)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.filters.IHttpFilter.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 19 common frames omitted
+2022-01-13 16:49:16.650 ERROR - org.chaostocosmos.leap.http.filters.IIpPreFilter
+java.lang.InstantiationException: org.chaostocosmos.leap.http.filters.IIpPreFilter
+	at java.base/java.lang.Class.newInstance(Class.java:571)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:247)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.instantiate(ClassUtils.java:261)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.lambda$15(ClassUtils.java:189)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findClasses(ClassUtils.java:191)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findFilters(ClassUtils.java:154)
+	at org.chaostocosmos.leap.http.commons.ClassUtils.findAllLeapFilters(ClassUtils.java:92)
+	at org.chaostocosmos.leap.http.services.ServiceManager.<init>(ServiceManager.java:61)
+	at org.chaostocosmos.leap.http.LeapHttpServer.<init>(LeapHttpServer.java:135)
+	at org.chaostocosmos.leap.http.LeapWAS.start(LeapWAS.java:166)
+	at org.chaostocosmos.leap.http.LeapWAS.main(LeapWAS.java:231)
+Caused by: java.lang.NoSuchMethodException: org.chaostocosmos.leap.http.filters.IIpPreFilter.<init>()
+	at java.base/java.lang.Class.getConstructor0(Class.java:3349)
+	at java.base/java.lang.Class.newInstance(Class.java:556)
+	... 19 common frames omitted
+2022-01-13 16:49:16.663 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 16:49:16.664 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 16:49:16.670 INFO  - Accepting connections on port 8082
+2022-01-13 16:49:16.673 INFO  - Accepting connections on port 8080
+2022-01-13 16:53:05.164 INFO  - Leap WAS server starting...
+2022-01-13 16:53:05.168 INFO  - --------------------------------------------------------------------------
+2022-01-13 16:53:05.168 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 16:53:05.168 INFO  - verbose mode on
+2022-01-13 16:53:05.173 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-13 16:53:05.289 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-13 16:53:05.289 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-13 16:53:05.289 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 16:53:05.298 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-13 16:53:05.299 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-13 16:53:05.299 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 16:53:05.300 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 16:53:05.304 INFO  - Accepting connections on port 8082
+2022-01-13 16:53:05.321 INFO  - Accepting connections on port 8080
+2022-01-13 16:53:31.617 INFO  - Leap WAS server starting...
+2022-01-13 16:53:31.620 INFO  - --------------------------------------------------------------------------
+2022-01-13 16:53:31.621 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 16:53:31.621 INFO  - verbose mode on
+2022-01-13 16:53:31.627 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-13 16:53:50.006 INFO  - Leap WAS server starting...
+2022-01-13 16:53:50.009 INFO  - --------------------------------------------------------------------------
+2022-01-13 16:53:50.009 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 16:53:50.010 INFO  - verbose mode on
+2022-01-13 16:53:50.016 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/

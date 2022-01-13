@@ -8,7 +8,7 @@ import org.chaostocosmos.leap.http.Constants;
 import org.chaostocosmos.leap.http.Context;
 import org.chaostocosmos.leap.http.MSG_TYPE;
 import org.chaostocosmos.leap.http.WASException;
-import org.chaostocosmos.leap.http.filter.IAuthenticate;
+import org.chaostocosmos.leap.http.filters.IAuthenticate;
 
 /**
  * UserManager 

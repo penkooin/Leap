@@ -7,6 +7,7 @@ import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.chaostocosmos.leap.http.commons.ResourceHelper;
 import org.junit.jupiter.api.Test;
 
 /**

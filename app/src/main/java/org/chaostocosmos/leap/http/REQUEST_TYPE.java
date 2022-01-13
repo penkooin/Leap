@@ -1,10 +1,10 @@
 package org.chaostocosmos.leap.http;
 
-import org.chaostocosmos.leap.http.service.IDeleteService;
-import org.chaostocosmos.leap.http.service.IGetService;
-import org.chaostocosmos.leap.http.service.ILeapService;
-import org.chaostocosmos.leap.http.service.IPostService;
-import org.chaostocosmos.leap.http.service.IPutService;
+import org.chaostocosmos.leap.http.services.IDeleteService;
+import org.chaostocosmos.leap.http.services.IGetService;
+import org.chaostocosmos.leap.http.services.ILeapService;
+import org.chaostocosmos.leap.http.services.IPostService;
+import org.chaostocosmos.leap.http.services.IPutService;
 
 /**
  * Http request type

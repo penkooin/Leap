@@ -10,7 +10,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import org.chaostocosmos.leap.http.service.ServiceManager;
+import org.chaostocosmos.leap.http.services.ServiceManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory; 
 
@@ -168,7 +168,7 @@ public class LeapHttpServer extends Thread {
     }
 
     @Override
-    public void run() {
+    public void run() {        
         try {
             InetSocketAddress inetSocketAddress = new InetSocketAddress(InetAddress.getByName(this.host), this.port);
             this.server = new ServerSocket();

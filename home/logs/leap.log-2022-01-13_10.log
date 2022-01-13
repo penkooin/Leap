@@ -1,0 +1,111 @@
+2022-01-13 10:08:05.121 INFO  - Leap WAS server starting...
+2022-01-13 10:08:05.129 INFO  - --------------------------------------------------------------------------
+2022-01-13 10:08:05.142 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 10:08:05.156 INFO  - verbose mode on
+2022-01-13 10:08:05.268 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 10:08:05.291 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 10:08:05.292 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 10:08:05.300 INFO  - Accepting connections on port 8082
+2022-01-13 10:08:05.305 INFO  - Accepting connections on port 8080
+2022-01-13 10:08:56.010 INFO  - Leap WAS server starting...
+2022-01-13 10:08:56.012 INFO  - --------------------------------------------------------------------------
+2022-01-13 10:08:56.013 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 10:08:56.013 INFO  - verbose mode on
+2022-01-13 10:08:56.067 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 10:08:56.103 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 10:08:56.104 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 10:08:56.111 INFO  - Accepting connections on port 8082
+2022-01-13 10:08:56.114 INFO  - Accepting connections on port 8080
+2022-01-13 10:13:14.361 INFO  - Leap WAS server starting...
+2022-01-13 10:13:14.364 INFO  - --------------------------------------------------------------------------
+2022-01-13 10:13:14.364 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 10:13:14.365 INFO  - verbose mode on
+2022-01-13 10:14:08.413 INFO  - Leap WAS server starting...
+2022-01-13 10:14:08.416 INFO  - --------------------------------------------------------------------------
+2022-01-13 10:14:08.417 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 10:14:08.417 INFO  - verbose mode on
+2022-01-13 10:14:08.458 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 10:14:08.475 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 10:14:08.475 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 10:14:08.480 INFO  - Accepting connections on port 8082
+2022-01-13 10:14:08.484 INFO  - Accepting connections on port 8080
+2022-01-13 10:14:26.590 INFO  - Leap WAS server starting...
+2022-01-13 10:14:26.593 INFO  - --------------------------------------------------------------------------
+2022-01-13 10:14:26.593 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 10:14:26.593 INFO  - verbose mode on
+2022-01-13 10:14:26.631 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 10:14:26.645 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 10:14:26.646 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 10:14:26.651 INFO  - Accepting connections on port 8082
+2022-01-13 10:14:26.655 INFO  - Accepting connections on port 8080
+2022-01-13 10:15:40.564 INFO  - Leap WAS server starting...
+2022-01-13 10:15:40.567 INFO  - --------------------------------------------------------------------------
+2022-01-13 10:15:40.568 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 10:15:40.568 INFO  - verbose mode on
+2022-01-13 10:15:57.677 INFO  - Leap WAS server starting...
+2022-01-13 10:15:57.680 INFO  - --------------------------------------------------------------------------
+2022-01-13 10:15:57.680 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 10:15:57.680 INFO  - verbose mode on
+2022-01-13 10:15:57.720 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 10:15:57.735 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 10:15:57.736 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 10:15:57.740 INFO  - Accepting connections on port 8082
+2022-01-13 10:15:57.744 INFO  - Accepting connections on port 8080
+2022-01-13 10:18:28.960 INFO  - Leap WAS server starting...
+2022-01-13 10:18:28.974 INFO  - --------------------------------------------------------------------------
+2022-01-13 10:18:28.974 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 10:18:28.974 INFO  - verbose mode on
+2022-01-13 10:20:54.810 INFO  - Leap WAS server starting...
+2022-01-13 10:20:54.813 INFO  - --------------------------------------------------------------------------
+2022-01-13 10:20:54.813 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 10:20:54.813 INFO  - verbose mode on
+2022-01-13 10:28:22.690 INFO  - Leap WAS server starting...
+2022-01-13 10:28:22.695 INFO  - --------------------------------------------------------------------------
+2022-01-13 10:28:22.695 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 10:28:22.695 INFO  - verbose mode on
+2022-01-13 10:28:34.489 INFO  - Leap WAS server starting...
+2022-01-13 10:28:34.492 INFO  - --------------------------------------------------------------------------
+2022-01-13 10:28:34.493 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 10:28:34.493 INFO  - verbose mode on
+2022-01-13 10:32:08.406 INFO  - Leap WAS server starting...
+2022-01-13 10:32:08.409 INFO  - --------------------------------------------------------------------------
+2022-01-13 10:32:08.409 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 10:32:08.410 INFO  - verbose mode on
+2022-01-13 10:32:08.450 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 10:32:08.464 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 10:32:08.465 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 10:32:08.470 INFO  - Accepting connections on port 8082
+2022-01-13 10:32:08.475 INFO  - Accepting connections on port 8080
+2022-01-13 10:32:31.803 INFO  - Leap WAS server starting...
+2022-01-13 10:32:31.806 INFO  - --------------------------------------------------------------------------
+2022-01-13 10:32:31.806 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 10:32:31.807 INFO  - verbose mode on
+2022-01-13 10:35:50.635 INFO  - Leap WAS server starting...
+2022-01-13 10:35:50.638 INFO  - --------------------------------------------------------------------------
+2022-01-13 10:35:50.638 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 10:35:50.638 INFO  - verbose mode on
+2022-01-13 10:40:15.379 INFO  - Leap WAS server starting...
+2022-01-13 10:40:15.382 INFO  - --------------------------------------------------------------------------
+2022-01-13 10:40:15.383 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 10:40:15.383 INFO  - verbose mode on
+2022-01-13 10:41:11.721 INFO  - Leap WAS server starting...
+2022-01-13 10:41:11.723 INFO  - --------------------------------------------------------------------------
+2022-01-13 10:41:11.723 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 10:41:11.724 INFO  - verbose mode on
+2022-01-13 10:44:16.026 INFO  - Leap WAS server starting...
+2022-01-13 10:44:16.029 INFO  - --------------------------------------------------------------------------
+2022-01-13 10:44:16.030 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 10:44:16.030 INFO  - verbose mode on
+2022-01-13 10:44:16.068 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 10:44:16.082 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8082   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 10:44:16.083 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-13 10:44:16.087 INFO  - Accepting connections on port 8082
+2022-01-13 10:44:16.091 INFO  - Accepting connections on port 8080
+2022-01-13 10:44:36.892 INFO  - Leap WAS server starting...
+2022-01-13 10:44:36.895 INFO  - --------------------------------------------------------------------------
+2022-01-13 10:44:36.895 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 10:44:36.896 INFO  - verbose mode on
+2022-01-13 10:53:36.280 INFO  - Leap WAS server starting...
+2022-01-13 10:53:36.304 INFO  - --------------------------------------------------------------------------
+2022-01-13 10:53:36.304 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-13 10:53:36.305 INFO  - verbose mode on
