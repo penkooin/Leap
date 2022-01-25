@@ -1,4 +1,4 @@
-package org.chaostocosmos.leap.http.commons;
+package org.chaostocosmos.leap.http.commons; 
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -71,7 +71,7 @@ public class LoggerFactory {
      * @return
      */
     public static Logger createLoggerFor(String loggerName, String loggerFile, List<Level> level) {
-        LoggerContext logCtx = (LoggerContext) org.slf4j.LoggerFactory.getILoggerFactory();
+        LoggerContext logCtx = (LoggerContext) org.slf4j.LoggerFactory.getILoggerFactory(); 
 
         PatternLayoutEncoder logEncoder = new PatternLayoutEncoder();
         logEncoder.setContext(logCtx);

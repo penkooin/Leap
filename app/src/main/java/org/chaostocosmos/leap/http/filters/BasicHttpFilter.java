@@ -19,7 +19,7 @@ public class BasicHttpFilter<R, S> extends AbstractHttpFilter<R, S> {
         super.filterRequest(r);
         if(r.getClass().isAssignableFrom(HttpRequestDescriptor.class)) {
             HttpRequestDescriptor request = (HttpRequestDescriptor)r;
-            LoggerFactory.getLogger(request.getRequestedHost()).debug("Basic Http request filter processing.................");
+            LoggerFactory.getLogger(request.getRequestedHost()).debug("Basic Http request filter processing......");
         }
     }
 
@@ -29,7 +29,7 @@ public class BasicHttpFilter<R, S> extends AbstractHttpFilter<R, S> {
         super.filterResponse(s);
         if(s.getClass().isAssignableFrom(HttpResponseDescriptor.class)) {
             HttpResponseDescriptor response = (HttpResponseDescriptor)s;
-            LoggerFactory.getLogger(response.getRequestedHost()).debug("Basic Http response filter processing...");
+            LoggerFactory.getLogger(response.getRequestedHost()).debug("Basic Http response filter processing......");
         }
     }
 }

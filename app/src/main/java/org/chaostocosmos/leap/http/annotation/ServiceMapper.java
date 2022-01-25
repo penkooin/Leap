@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ServiceMapper {
+public @interface ServiceMapper {    
     /**
      * Servlet context path
      * @return

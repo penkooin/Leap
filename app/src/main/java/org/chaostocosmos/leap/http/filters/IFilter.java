@@ -5,4 +5,5 @@ package org.chaostocosmos.leap.http.filters;
  * @author 9ins
  */
 public interface IFilter {
+    
 }

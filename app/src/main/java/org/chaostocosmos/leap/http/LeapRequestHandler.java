@@ -85,7 +85,6 @@ public class LeapRequestHandler implements Runnable {
             LoggerFactory.getLogger(request.getRequestedHost()).debug(request.getReqHeader().entrySet().stream().map(e -> e.getKey()+": "+e.getValue()).collect(Collectors.joining(System.lineSeparator())));
             Path resourcePath = ResourceHelper.getResourcePath(request);
 
-            String contextPath = request.getContextPath();
             ServiceHolder serviceHolder = this.serviceManager.getMappingServiceHolder(request.getContextPath());
             
             response.addHeader("Date", new Date()); 
@@ -94,6 +93,9 @@ public class LeapRequestHandler implements Runnable {
             //if client request servlet path
             if (serviceHolder != null) {
                 // request method validation
+                if(serviceHolder.getRequestType() == request.getRequestType()) {
+                    throw new WASException(MSG_TYPE.HTTP, 405, "<br>Requested method not supported: "+request.getRequestType().name());
+                }
                 if (this.serviceManager.vaildateRequestMethod(request.getRequestType(), request.getContextPath())) {
                     ServiceInvoker.invokeService(serviceHolder, request, response);
                     response.setResponseCode(200);
@@ -123,7 +125,7 @@ public class LeapRequestHandler implements Runnable {
                             response.setResponseBody(rawData);
                             response.setResponseCode(200);
                         } else {
-                            byte[] body = ResourceHelper.getResourceContent(requestedHost, contextPath);
+                            byte[] body = ResourceHelper.getResourceContent(requestedHost, request.getContextPath());
                             response.setResponseBody(body);
                             response.setResponseCode(200);;
                         }

@@ -20,5 +20,5 @@ public @interface MethodMappper {
      * Request type
      * @return
      */
-    REQUEST_TYPE requestMethod();
+    REQUEST_TYPE mappingMethod();
 }

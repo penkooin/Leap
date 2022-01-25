@@ -15,7 +15,7 @@ import org.chaostocosmos.leap.http.commons.ClassUtils;
 import org.chaostocosmos.leap.http.filters.IFilter;
 import org.chaostocosmos.leap.http.services.ILeapService;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.slf4j.LoggerFactory; 
 
 /**
  * Annotation helper object
@@ -58,7 +58,7 @@ public class AnnotationHelper {
         Method method = methodMatches(path, servlets);
         if(method != null) {
             MethodMappper methodDescriptor = method.getDeclaredAnnotation(MethodMappper.class);
-            if(type != methodDescriptor.requestMethod()) {
+            if(type != methodDescriptor.mappingMethod()) {
                 return false;
             }
         }

@@ -108,32 +108,29 @@ public class LeapWAS {
             } catch (IOException e) {
                 throw new WASException(e);
             }
-        } else {         
+        } else {
             HOME_PATH = Paths.get("./"); 
         }
         //initialize environment and context
         this.context = Context.initialize(HOME_PATH);
         //set log level
         String optionL = cmdLine.getOptionValue("l");
-        logger = LoggerFactory.getLogger(Context.getDefaultHost());        
+        logger = LoggerFactory.getLogger(Context.getDefaultHost());
         if(optionL != null) {
             Level level = Level.toLevel(optionL); 
             logger.setLevel(level);
         }
         //print trade mark
         trademark();
-        logger.info("Leap WAS server starting...");
+        logger.info("Leap WAS server starting......");
         //initialize thread pool
         this.threadpool = new ThreadPoolExecutor(Context.getThreadPoolCoreSize(), 
-                                                Context.getThreadPoolMaxSize(),                                                  
-                                                Context.getThreadPoolKeepAlive(), 
-                                                TimeUnit.SECONDS, 
-                                                new LinkedBlockingQueue<Runnable>());
+                                                 Context.getThreadPoolMaxSize(), 
+                                                 Context.getThreadPoolKeepAlive(), 
+                                                 TimeUnit.SECONDS, 
+                                                 new LinkedBlockingQueue<Runnable>());
         logger.info("--------------------------------------------------------------------------");
-        logger.info("ThreadPool initialized - CORE: "
-                    +Context.getThreadPoolCoreSize()+" MAX: "
-                    +Context.getThreadPoolMaxSize()+" KEEP-ALIVE WHEN IDLE(seconds): "
-                    +Context.getThreadPoolKeepAlive());                            
+        logger.info("ThreadPool initialized - CORE: "+Context.getThreadPoolCoreSize()+" MAX: "+Context.getThreadPoolMaxSize()+" KEEP-ALIVE WHEN IDLE(seconds): "+Context.getThreadPoolKeepAlive());
 
         //set verbose option to STD IO
         String optionV = cmdLine.getOptionValue("v");
@@ -154,20 +151,21 @@ public class LeapWAS {
 
     /**
      * Start environment
+     *  
      * @throws WASException
      */
     public void start() throws WASException {
         Hosts difault = Context.getDefaultHosts();
         LeapHttpServer difaultHost = new LeapHttpServer(difault.isDefaultHost(), Context.getHomePath(), difault.getHost(), difault.getPort(), Context.getBackLog(), difault.getDocroot(), this.threadpool);
         logger.info("Default host added - Server: "+difault.getServerName()+"   Host: "+difault.getHost()+"   Port: "+difault.getPort()+"   Doc-Root: "+difault.getDocroot()+"   Logging path: "+difault.getLogPath()+"   Level: "+difault.getLogLevel().toString());
-        this.leapServerMap.put(difault.getHost(), difaultHost);        
+        this.leapServerMap.put(difault.getHost(), difaultHost);
         for(Hosts host : Context.getVirtualHosts().values()) {
-            if(this.leapServerMap.values().stream().allMatch(h -> h.getPort() != host.getPort())) {
+            if(this.leapServerMap.values().stream().allMatch(h -> h.getPort() != difault.getPort())) {
                 LeapHttpServer virtual = new LeapHttpServer(host.isDefaultHost(), Context.getHomePath(), host.getHost(), host.getPort(), Context.getBackLog(), host.getDocroot(), this.threadpool);
-                this.leapServerMap.put(host.getHost(), virtual);            
+                this.leapServerMap.put(host.getHost(), virtual);
             }
-            logger.info("Virtual host added - Server: "+host.getServerName()+"   Host: "+host.getHost()+"   Port: "+host.getPort()+"   Doc-Root: "+host.getDocroot()+"   Logging path: "+host.getLogPath()+"   Level: "+host.getLogLevel().toString());    
-        }
+            logger.info("Virtual host added - Server: "+host.getServerName()+"   Host: "+host.getHost()+"   Port: "+host.getPort()+"   Doc-Root: "+host.getDocroot()+"   Logging path: "+host.getLogPath()+"   Level: "+host.getLogLevel().toString());
+        }        
         for(LeapHttpServer server : this.leapServerMap.values()) {
             server.setDaemon(false);
             server.start();

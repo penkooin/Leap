@@ -19,8 +19,13 @@ import org.chaostocosmos.leap.http.filters.BasicHttpFilter;
  */
 @ServiceMapper(path = "/time")
 public class TimeServiceImpl extends AbstractLeapService { 
-
-    @MethodMappper(requestMethod = REQUEST_TYPE.GET, path = "/GetTime")
+ 
+    /**
+     * Get current time
+     * @param request
+     * @param response
+     */
+    @MethodMappper(mappingMethod = REQUEST_TYPE.POST, path = "/GetTime")
     @FilterMapper(preFilters = {BasicAuthFilter.class, BasicHttpFilter.class})
     public void getTime(HttpRequestDescriptor request, HttpResponseDescriptor response) {
         LoggerFactory.getLogger(request.getRequestedHost()).debug("getTime servlet started....+++++++++++++++++++++++++++++++++++++++++++++++++");

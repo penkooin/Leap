@@ -1,0 +1,43 @@
+2022-01-25 11:08:34.966 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-25 11:08:57.880 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-25 11:09:34.014 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-25 11:09:34.027 DEBUG - Request host: localhost
+2022-01-25 11:09:34.041 DEBUG - Accept: */*
+User-Agent: PostmanRuntime/7.29.0
+Connection: keep-alive
+Postman-Token: 99b69900-d890-4393-9954-f224235ef0e5
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+Content-Length: 961032600
+@Client: localhost
+Content-Type: multipart/form-data; boundary=--------------------------782515782943692713458140
+2022-01-25 11:09:34.044 DEBUG - .\home\webapp\WEB-INF\static\index.html   index.html   .\home\webapp\WEB-INF\static
+2022-01-25 11:09:34.048 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='localhost', reqHeader='{Accept=*/*, User-Agent=PostmanRuntime/7.29.0, Connection=keep-alive, Postman-Token=99b69900-d890-4393-9954-f224235ef0e5, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, Content-Length=961032600, @Client=localhost, Content-Type=multipart/form-data; boundary=--------------------------782515782943692713458140}', contentType='multipart/form-data', reqBody='null', contextPath='/', contextParam='{}', multipartList='org.chaostocosmos.leap.http.HttpRequestDescriptor$MultipartDescriptor@17aabc78'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@52a830e9', responseHeader='{Server=LeapWAS 1.0.0, Date=Tue Jan 25 11:09:34 KST 2022}'}
+2022-01-25 11:09:47.465 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-25 11:10:06.344 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-25 11:10:06.347 DEBUG - Request host: localhost
+2022-01-25 11:10:06.349 DEBUG - Authorization: Basic Y2hhb3M5MzA6OTM5Mw==
+Accept: */*
+User-Agent: PostmanRuntime/7.29.0
+Connection: keep-alive
+Postman-Token: a4e839c0-c3dd-4398-b4e5-a8b47a5e2ede
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+@Client: localhost
+2022-01-25 11:10:06.357 DEBUG - .\home\webapp\WEB-INF\static\response.html   response.html   .\home\webapp\WEB-INF\static
+2022-01-25 11:10:06.359 INFO  - Error client request /127.0.0.1:64317 --- /127.0.0.1:8080
+2022-01-25 11:10:06.361 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='localhost', reqHeader='{Authorization=Basic Y2hhb3M5MzA6OTM5Mw==, Accept=*/*, User-Agent=PostmanRuntime/7.29.0, Connection=keep-alive, Postman-Token=a4e839c0-c3dd-4398-b4e5-a8b47a5e2ede, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, @Client=localhost}', contentType='null', reqBody='null', contextPath='/time/GetTime', contextParam='{}', multipartList='null'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@555080cd', responseHeader='{Server=LeapWAS 1.0.0, Date=Tue Jan 25 11:10:06 KST 2022}'}
+2022-01-25 11:10:06.376 INFO  - Close client request on error /127.0.0.1:64317 --- /127.0.0.1:8080
+2022-01-25 11:10:14.277 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-25 11:10:34.545 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-25 11:11:45.698 INFO  - Leap WAS server starting......
+2022-01-25 11:11:45.702 INFO  - --------------------------------------------------------------------------
+2022-01-25 11:11:45.702 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-25 11:11:45.702 INFO  - verbose mode on
+2022-01-25 11:11:45.710 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-25 11:11:45.743 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-25 11:11:45.744 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-25 11:11:45.746 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-25 11:11:45.747 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-25 11:11:45.759 INFO  - Accepting connections on port 8080
+2022-01-25 11:11:47.943 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1

@@ -78,7 +78,7 @@ public class ServiceManager {
                     MethodMappper mm = method.getDeclaredAnnotation(MethodMappper.class);
                     if(mm != null) {
                         String mPath = mm.path();
-                        REQUEST_TYPE rType = mm.requestMethod();
+                        REQUEST_TYPE rType = mm.mappingMethod();
                         FilterMapper fm = method.getDeclaredAnnotation(FilterMapper.class);
                         ServiceHolder serviceHolder;
                         if(fm != null) {           
@@ -120,8 +120,8 @@ public class ServiceManager {
      * @throws WASException
      */
     public boolean vaildateRequestMethod(REQUEST_TYPE type, final String contextPath) throws WASException {
-        Method sMethod = getMappingServiceMethod(contextPath);
-        if(sMethod.getDeclaredAnnotation(MethodMappper.class).requestMethod() != type) {
+        ServiceHolder serviceHolder = serviceHolderMap.get(contextPath);
+        if(serviceHolder.getRequestType() != type) {
             throw new WASException(MSG_TYPE.ERROR, 34, type.name());
         }
         return true;
@@ -131,9 +131,11 @@ public class ServiceManager {
      * Get ServiceHolder object mapping with context path
      * @param contextPath
      * @return
+     * @throws WASException
      */
-    public ServiceHolder getMappingServiceHolder(String contextPath) {
-        return serviceHolderMap.get(contextPath);
+    public ServiceHolder getMappingServiceHolder(String contextPath) throws WASException {
+        ServiceHolder serviceHolder = serviceHolderMap.get(contextPath);
+        return serviceHolder;
     }
 
     /**

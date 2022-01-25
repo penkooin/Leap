@@ -46,6 +46,15 @@ public enum MIME_TYPE {
     }
 
     /**
+     * Get mime type from content type string
+     * @param mimeType
+     * @return
+     */
+    public static MIME_TYPE getMimeType(String mimeType) {
+        return MIME_TYPE.valueOf(mimeType.replace("/", "_").replace(".", "_"));
+    }
+
+    /**
      * Get mime type list of specfied parameter
      * @param type
      * @return

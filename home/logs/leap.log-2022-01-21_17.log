@@ -1,0 +1,257 @@
+2022-01-21 17:39:12.044 INFO  - Leap WAS server starting......
+2022-01-21 17:39:12.050 INFO  - --------------------------------------------------------------------------
+2022-01-21 17:39:12.050 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-21 17:39:12.050 INFO  - verbose mode on
+2022-01-21 17:39:12.057 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-21 17:39:12.097 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-21 17:39:12.097 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-21 17:39:12.099 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-21 17:39:12.100 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-21 17:39:12.113 INFO  - Accepting connections on port 8080
+2022-01-21 17:39:15.501 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-21 17:39:15.505 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-21 17:39:15.530 DEBUG - Request host: localhost
+2022-01-21 17:39:15.532 DEBUG - Cookie: io=PL7TK76OSCzqZRBSAAAC
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36
+Sec-Fetch-Site: none
+Sec-Fetch-Dest: document
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+@Client: localhost
+Sec-Fetch-Mode: navigate
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+sec-ch-ua-platform: "Windows"
+Sec-Fetch-User: ?1
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+2022-01-21 17:39:15.564 DEBUG - .\home\webapp\WEB-INF\static\response.html   response.html   .\home\webapp\WEB-INF\static
+2022-01-21 17:39:15.565 INFO  - Error client request /127.0.0.1:54306 --- /127.0.0.1:8080
+2022-01-21 17:39:15.591 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='localhost', reqHeader='{Cookie=io=PL7TK76OSCzqZRBSAAAC, Accept=text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection=keep-alive, User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36, Sec-Fetch-Site=none, Sec-Fetch-Dest=document, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode=navigate, sec-ch-ua=" Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97", sec-ch-ua-mobile=?0, Cache-Control=max-age=0, Upgrade-Insecure-Requests=1, sec-ch-ua-platform="Windows", Sec-Fetch-User=?1, Accept-Language=ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/time/GetTime', contextParam='{}', multipartList='null'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@3d479fcf', responseHeader='{}'}
+2022-01-21 17:39:15.596 INFO  - Close client request on error /127.0.0.1:54306 --- /127.0.0.1:8080
+2022-01-21 17:39:15.653 DEBUG - Request host: localhost
+2022-01-21 17:39:15.653 DEBUG - Cookie: io=PL7TK76OSCzqZRBSAAAC
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36
+Referer: http://localhost:8080/time/GetTime
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Dest: image
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+@Client: localhost
+Sec-Fetch-Mode: no-cors
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+2022-01-21 17:39:15.658 DEBUG - .\home\webapp\WEB-INF\static\response.html   response.html   .\home\webapp\WEB-INF\static
+2022-01-21 17:39:15.660 INFO  - Error client request /127.0.0.1:54307 --- /127.0.0.1:8080
+2022-01-21 17:39:15.661 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='localhost', reqHeader='{Cookie=io=PL7TK76OSCzqZRBSAAAC, Accept=image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8, Connection=keep-alive, User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36, Referer=http://localhost:8080/time/GetTime, Sec-Fetch-Site=same-origin, Sec-Fetch-Dest=image, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode=no-cors, sec-ch-ua=" Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97", sec-ch-ua-mobile=?0, sec-ch-ua-platform="Windows", Accept-Language=ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/favicon.ico', contextParam='{}', multipartList='null'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@1e5e9340', responseHeader='{}'}
+2022-01-21 17:39:15.662 INFO  - Close client request on error /127.0.0.1:54307 --- /127.0.0.1:8080
+2022-01-21 17:39:15.747 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-21 17:39:38.437 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-21 17:39:44.780 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-21 17:40:39.405 INFO  - Leap WAS server starting......
+2022-01-21 17:40:39.409 INFO  - --------------------------------------------------------------------------
+2022-01-21 17:40:39.409 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-21 17:40:39.409 INFO  - verbose mode on
+2022-01-21 17:40:39.415 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-21 17:40:39.450 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-21 17:40:39.450 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-21 17:40:39.453 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-21 17:40:39.453 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-21 17:40:39.463 INFO  - Accepting connections on port 8080
+2022-01-21 17:40:40.744 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-21 17:40:40.747 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-21 17:40:40.767 DEBUG - Request host: localhost
+2022-01-21 17:40:40.768 DEBUG - Cookie: io=PL7TK76OSCzqZRBSAAAC
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36
+Sec-Fetch-Site: none
+Sec-Fetch-Dest: document
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+@Client: localhost
+Sec-Fetch-Mode: navigate
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+sec-ch-ua-platform: "Windows"
+Sec-Fetch-User: ?1
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+2022-01-21 17:40:40.775 DEBUG - .\home\webapp\WEB-INF\static\response.html   response.html   .\home\webapp\WEB-INF\static
+2022-01-21 17:40:40.776 INFO  - Error client request /127.0.0.1:55944 --- /127.0.0.1:8080
+2022-01-21 17:40:40.799 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='localhost', reqHeader='{Cookie=io=PL7TK76OSCzqZRBSAAAC, Accept=text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection=keep-alive, User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36, Sec-Fetch-Site=none, Sec-Fetch-Dest=document, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode=navigate, sec-ch-ua=" Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97", sec-ch-ua-mobile=?0, Cache-Control=max-age=0, Upgrade-Insecure-Requests=1, sec-ch-ua-platform="Windows", Sec-Fetch-User=?1, Accept-Language=ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/time/GetTime', contextParam='{}', multipartList='null'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@1ceea009', responseHeader='{}'}
+2022-01-21 17:40:40.801 INFO  - Close client request on error /127.0.0.1:55944 --- /127.0.0.1:8080
+2022-01-21 17:40:40.862 DEBUG - Request host: localhost
+2022-01-21 17:40:40.862 DEBUG - Cookie: io=PL7TK76OSCzqZRBSAAAC
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36
+Referer: http://localhost:8080/time/GetTime
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Dest: image
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+@Client: localhost
+Sec-Fetch-Mode: no-cors
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+2022-01-21 17:40:40.874 DEBUG - .\home\webapp\WEB-INF\static\response.html   response.html   .\home\webapp\WEB-INF\static
+2022-01-21 17:40:40.885 INFO  - Error client request /127.0.0.1:55945 --- /127.0.0.1:8080
+2022-01-21 17:40:40.893 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='localhost', reqHeader='{Cookie=io=PL7TK76OSCzqZRBSAAAC, Accept=image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8, Connection=keep-alive, User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36, Referer=http://localhost:8080/time/GetTime, Sec-Fetch-Site=same-origin, Sec-Fetch-Dest=image, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode=no-cors, sec-ch-ua=" Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97", sec-ch-ua-mobile=?0, sec-ch-ua-platform="Windows", Accept-Language=ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/favicon.ico', contextParam='{}', multipartList='null'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@274b9650', responseHeader='{}'}
+2022-01-21 17:40:40.896 INFO  - Close client request on error /127.0.0.1:55945 --- /127.0.0.1:8080
+2022-01-21 17:40:41.011 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-21 17:41:13.985 INFO  - Leap WAS server starting......
+2022-01-21 17:41:13.988 INFO  - --------------------------------------------------------------------------
+2022-01-21 17:41:13.989 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-21 17:41:13.989 INFO  - verbose mode on
+2022-01-21 17:41:13.996 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-21 17:41:14.045 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-21 17:41:14.045 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-21 17:41:14.047 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-21 17:41:14.048 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-21 17:41:14.072 INFO  - Accepting connections on port 8080
+2022-01-21 17:41:18.366 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-21 17:41:18.368 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-21 17:41:18.390 DEBUG - Request host: localhost
+2022-01-21 17:41:18.392 DEBUG - Cookie: io=PL7TK76OSCzqZRBSAAAC
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36
+Sec-Fetch-Site: none
+Sec-Fetch-Dest: document
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+@Client: localhost
+Sec-Fetch-Mode: navigate
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+sec-ch-ua-platform: "Windows"
+Sec-Fetch-User: ?1
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+2022-01-21 17:41:18.402 DEBUG - .\home\webapp\WEB-INF\static\response.html   response.html   .\home\webapp\WEB-INF\static
+2022-01-21 17:41:18.403 INFO  - Error client request /127.0.0.1:55952 --- /127.0.0.1:8080
+2022-01-21 17:41:18.430 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='localhost', reqHeader='{Cookie=io=PL7TK76OSCzqZRBSAAAC, Accept=text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection=keep-alive, User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36, Sec-Fetch-Site=none, Sec-Fetch-Dest=document, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode=navigate, sec-ch-ua=" Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97", sec-ch-ua-mobile=?0, Cache-Control=max-age=0, Upgrade-Insecure-Requests=1, sec-ch-ua-platform="Windows", Sec-Fetch-User=?1, Accept-Language=ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/time/GetTime', contextParam='{}', multipartList='null'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@7024609d', responseHeader='{}'}
+2022-01-21 17:41:18.432 INFO  - Close client request on error /127.0.0.1:55952 --- /127.0.0.1:8080
+2022-01-21 17:41:18.464 DEBUG - Request host: localhost
+2022-01-21 17:41:18.465 DEBUG - Cookie: io=PL7TK76OSCzqZRBSAAAC
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36
+Referer: http://localhost:8080/time/GetTime
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Dest: image
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+@Client: localhost
+Sec-Fetch-Mode: no-cors
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+2022-01-21 17:41:18.469 DEBUG - .\home\webapp\WEB-INF\static\response.html   response.html   .\home\webapp\WEB-INF\static
+2022-01-21 17:41:18.470 INFO  - Error client request /127.0.0.1:55953 --- /127.0.0.1:8080
+2022-01-21 17:41:18.472 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='localhost', reqHeader='{Cookie=io=PL7TK76OSCzqZRBSAAAC, Accept=image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8, Connection=keep-alive, User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36, Referer=http://localhost:8080/time/GetTime, Sec-Fetch-Site=same-origin, Sec-Fetch-Dest=image, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode=no-cors, sec-ch-ua=" Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97", sec-ch-ua-mobile=?0, sec-ch-ua-platform="Windows", Accept-Language=ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/favicon.ico', contextParam='{}', multipartList='null'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@b39540f', responseHeader='{}'}
+2022-01-21 17:41:18.474 INFO  - Close client request on error /127.0.0.1:55953 --- /127.0.0.1:8080
+2022-01-21 17:41:18.627 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-21 17:43:36.481 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-21 17:43:36.482 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-21 17:43:36.484 DEBUG - Request host: localhost
+2022-01-21 17:43:36.486 DEBUG - Cookie: io=PL7TK76OSCzqZRBSAAAC
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36
+Sec-Fetch-Site: none
+Sec-Fetch-Dest: document
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+@Client: localhost
+Sec-Fetch-Mode: navigate
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+sec-ch-ua-platform: "Windows"
+Sec-Fetch-User: ?1
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+2022-01-21 17:43:36.492 DEBUG - .\home\webapp\WEB-INF\static\response.html   response.html   .\home\webapp\WEB-INF\static
+2022-01-21 17:43:36.493 INFO  - Error client request /127.0.0.1:61776 --- /127.0.0.1:8080
+2022-01-21 17:43:36.493 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='localhost', reqHeader='{Cookie=io=PL7TK76OSCzqZRBSAAAC, Accept=text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection=keep-alive, User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36, Sec-Fetch-Site=none, Sec-Fetch-Dest=document, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode=navigate, sec-ch-ua=" Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97", sec-ch-ua-mobile=?0, Cache-Control=max-age=0, Upgrade-Insecure-Requests=1, sec-ch-ua-platform="Windows", Sec-Fetch-User=?1, Accept-Language=ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/time/GetTime', contextParam='{}', multipartList='null'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@2dd7ea38', responseHeader='{}'}
+2022-01-21 17:43:36.495 INFO  - Close client request on error /127.0.0.1:61776 --- /127.0.0.1:8080
+2022-01-21 17:43:36.564 DEBUG - Request host: localhost
+2022-01-21 17:43:36.565 DEBUG - Cookie: io=PL7TK76OSCzqZRBSAAAC
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36
+Referer: http://localhost:8080/time/GetTime
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Dest: image
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+@Client: localhost
+Sec-Fetch-Mode: no-cors
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+2022-01-21 17:43:36.571 DEBUG - .\home\webapp\WEB-INF\static\response.html   response.html   .\home\webapp\WEB-INF\static
+2022-01-21 17:43:36.572 INFO  - Error client request /127.0.0.1:61777 --- /127.0.0.1:8080
+2022-01-21 17:43:36.572 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='localhost', reqHeader='{Cookie=io=PL7TK76OSCzqZRBSAAAC, Accept=image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8, Connection=keep-alive, User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36, Referer=http://localhost:8080/time/GetTime, Sec-Fetch-Site=same-origin, Sec-Fetch-Dest=image, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode=no-cors, sec-ch-ua=" Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97", sec-ch-ua-mobile=?0, sec-ch-ua-platform="Windows", Accept-Language=ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/favicon.ico', contextParam='{}', multipartList='null'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@1184d1d7', responseHeader='{}'}
+2022-01-21 17:43:36.574 INFO  - Close client request on error /127.0.0.1:61777 --- /127.0.0.1:8080
+2022-01-21 17:43:36.745 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-21 17:54:38.851 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-21 17:54:38.853 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-21 17:54:38.867 DEBUG - Request host: localhost
+2022-01-21 17:54:38.868 DEBUG - Cookie: io=PL7TK76OSCzqZRBSAAAC
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36
+Sec-Fetch-Site: none
+Sec-Fetch-Dest: document
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+@Client: localhost
+Sec-Fetch-Mode: navigate
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+sec-ch-ua-platform: "Windows"
+Sec-Fetch-User: ?1
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+2022-01-21 17:54:38.877 DEBUG - .\home\webapp\WEB-INF\static\response.html   response.html   .\home\webapp\WEB-INF\static
+2022-01-21 17:54:38.879 INFO  - Error client request /127.0.0.1:59250 --- /127.0.0.1:8080
+2022-01-21 17:54:38.882 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='localhost', reqHeader='{Cookie=io=PL7TK76OSCzqZRBSAAAC, Accept=text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection=keep-alive, User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36, Sec-Fetch-Site=none, Sec-Fetch-Dest=document, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode=navigate, sec-ch-ua=" Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97", sec-ch-ua-mobile=?0, Cache-Control=max-age=0, Upgrade-Insecure-Requests=1, sec-ch-ua-platform="Windows", Sec-Fetch-User=?1, Accept-Language=ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/time/GetTime', contextParam='{}', multipartList='null'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@2809a441', responseHeader='{}'}
+2022-01-21 17:54:38.897 INFO  - Close client request on error /127.0.0.1:59250 --- /127.0.0.1:8080
+2022-01-21 17:54:38.943 DEBUG - Request host: localhost
+2022-01-21 17:54:38.944 DEBUG - Cookie: io=PL7TK76OSCzqZRBSAAAC
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36
+Referer: http://localhost:8080/time/GetTime
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Dest: image
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+@Client: localhost
+Sec-Fetch-Mode: no-cors
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+2022-01-21 17:54:38.949 DEBUG - .\home\webapp\WEB-INF\static\response.html   response.html   .\home\webapp\WEB-INF\static
+2022-01-21 17:54:38.950 INFO  - Error client request /127.0.0.1:59251 --- /127.0.0.1:8080
+2022-01-21 17:54:38.950 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='localhost', reqHeader='{Cookie=io=PL7TK76OSCzqZRBSAAAC, Accept=image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8, Connection=keep-alive, User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36, Referer=http://localhost:8080/time/GetTime, Sec-Fetch-Site=same-origin, Sec-Fetch-Dest=image, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode=no-cors, sec-ch-ua=" Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97", sec-ch-ua-mobile=?0, sec-ch-ua-platform="Windows", Accept-Language=ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='null', contextPath='/favicon.ico', contextParam='{}', multipartList='null'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@b95fa49', responseHeader='{}'}
+2022-01-21 17:54:38.953 INFO  - Close client request on error /127.0.0.1:59251 --- /127.0.0.1:8080
+2022-01-21 17:54:39.099 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -264,7 +265,6 @@ public class HttpRequestDescriptor {
     private String contentType;
     private byte[] reqBody; 
     private String contextPath;
-    private URL url;
     private Map<String, String> contextParam;
     private MultipartDescriptor multipart;
 
@@ -288,7 +288,6 @@ public class HttpRequestDescriptor {
                                 String contentType,
                                 byte[] reqBody, 
                                 String contextPath, 
-                                URL url,
                                 Map<String,String> contextParam,
                                 MultipartDescriptor multipart) {
         this.httpVersion = httpVersion;
@@ -298,7 +297,6 @@ public class HttpRequestDescriptor {
         this.contentType = contentType;
         this.reqBody = reqBody;
         this.contextPath = contextPath;
-        this.url = url;
         this.contextParam = contextParam;
         this.multipart = multipart;
     }
@@ -347,10 +345,6 @@ public class HttpRequestDescriptor {
         return this.contextPath;
     }
 
-    public URL getUrl() {
-        return this.url;
-    }
-
     public Map<String, String> getContextParam() {
         return this.contextParam;
     }
@@ -359,9 +353,10 @@ public class HttpRequestDescriptor {
         return this.multipart;
     }
 
-    public void printURLInfo() throws URISyntaxException {
+    public void printURLInfo() throws URISyntaxException, MalformedURLException {
         Logger logger = (Logger)LoggerFactory.getLogger(this.requestedHost);
-        URI uri = this.url.toURI();
+        String url = !this.requestedHost.startsWith("http") ? "http://"+this.requestedHost : requestedHost;
+        URI uri = new URL(url).toURI();
         logger.debug("getHost :"+uri.getHost());
         logger.debug("getPort :"+uri.getPort());
         logger.debug("getQuery :"+uri.getQuery());
@@ -386,7 +381,6 @@ public class HttpRequestDescriptor {
             ", contentType='" + getContentType() + "'" +
             ", reqBody='" + getReqBody() + "'" +
             ", contextPath='" + getContextPath() + "'" +
-            ", url='" + getUrl() + "'" +
             ", contextParam='" + getContextParam() + "'" +
             ", multipartList='" + getMultipartDescriptor() + "'" +
             "}";

@@ -77,6 +77,14 @@ public class ServiceHolder {
         this.servicePath = servicePath;
     }
 
+    public REQUEST_TYPE getRequestType() {
+        return this.requestType;
+    }
+
+    public void setRequestType(REQUEST_TYPE requestType) {
+        this.requestType = requestType;
+    }
+
     public ILeapService getService() {
         return this.service;
     }
@@ -113,6 +121,7 @@ public class ServiceHolder {
     public String toString() {
         return "{" +
             " servicePath='" + getServicePath() + "'" +
+            " requestType='" + getRequestType()+ "'" +
             ", serviceMethod='" + getServiceMethod() + "'" +
             ", preFilters='" + getPreFilters() + "'" +
             ", postFilters='" + getPostFilters() + "'" +

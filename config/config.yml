@@ -36,7 +36,7 @@ server:
     log-level: 'DEBUG'
   - server-name: leap2
     host: 192.168.1.28
-    port: 8082
+    port: 8081
     dynamic-classpaths: []
     doc-root: ./home2
     welcome: 'index.html'
