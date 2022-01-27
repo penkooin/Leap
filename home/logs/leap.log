@@ -54,3 +54,73 @@ org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caus
 2022-01-27 09:04:04.745 INFO  - Error client request /127.0.0.1:57868 --- /127.0.0.1:8080
 2022-01-27 09:04:04.745 DEBUG - { httpRequestDescriptor='null', httpResponse='null', requestedHost='null', responseCode='200', responseBody='[B@1167ba31', responseHeader='{}'}
 2022-01-27 09:04:04.746 INFO  - Close client request on error /127.0.0.1:57868 --- /127.0.0.1:8080
+2022-01-27 09:05:12.591 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-27 09:05:12.595 ERROR - Error in request parsing process. Caused: java.lang.NullPointerException
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.lang.NullPointerException
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:239)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:76)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-01-27 09:05:12.596 DEBUG - .\home\webapp\WEB-INF\static\response.html   response.html   .\home\webapp\WEB-INF\static
+2022-01-27 09:05:12.597 INFO  - Error client request /127.0.0.1:49923 --- /127.0.0.1:8080
+2022-01-27 09:05:12.597 DEBUG - { httpRequestDescriptor='null', httpResponse='null', requestedHost='null', responseCode='200', responseBody='[B@563077dd', responseHeader='{}'}
+2022-01-27 09:05:12.598 INFO  - Close client request on error /127.0.0.1:49923 --- /127.0.0.1:8080
+2022-01-27 09:05:26.724 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-27 09:05:26.728 ERROR - Error in request parsing process. Caused: java.lang.IllegalArgumentException: No enum constant org.chaostocosmos.leap.http.MIME_TYPE.APPLICATION_JAVASCRIPT
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.lang.IllegalArgumentException: No enum constant org.chaostocosmos.leap.http.MIME_TYPE.APPLICATION_JAVASCRIPT
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:239)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:76)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-01-27 09:05:26.729 DEBUG - .\home\webapp\WEB-INF\static\response.html   response.html   .\home\webapp\WEB-INF\static
+2022-01-27 09:05:26.731 INFO  - Error client request /127.0.0.1:49926 --- /127.0.0.1:8080
+2022-01-27 09:05:26.731 DEBUG - { httpRequestDescriptor='null', httpResponse='null', requestedHost='null', responseCode='200', responseBody='[B@c8c202a', responseHeader='{}'}
+2022-01-27 09:05:26.732 INFO  - Close client request on error /127.0.0.1:49926 --- /127.0.0.1:8080
+2022-01-27 09:06:04.724 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-27 09:06:04.729 ERROR - Error in request parsing process. Caused: java.lang.NullPointerException
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.lang.NullPointerException
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:239)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:76)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-01-27 09:06:04.730 DEBUG - .\home\webapp\WEB-INF\static\response.html   response.html   .\home\webapp\WEB-INF\static
+2022-01-27 09:06:04.731 INFO  - Error client request /127.0.0.1:49934 --- /127.0.0.1:8080
+2022-01-27 09:06:04.731 DEBUG - { httpRequestDescriptor='null', httpResponse='null', requestedHost='null', responseCode='200', responseBody='[B@59dbf726', responseHeader='{}'}
+2022-01-27 09:06:04.733 INFO  - Close client request on error /127.0.0.1:49934 --- /127.0.0.1:8080
+2022-01-27 09:06:39.800 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-27 09:06:39.805 ERROR - Error in request parsing process. Caused: java.lang.NullPointerException
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.lang.NullPointerException
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:239)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:76)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-01-27 09:06:39.807 DEBUG - .\home\webapp\WEB-INF\static\response.html   response.html   .\home\webapp\WEB-INF\static
+2022-01-27 09:06:39.808 INFO  - Error client request /127.0.0.1:51581 --- /127.0.0.1:8080
+2022-01-27 09:06:39.808 DEBUG - { httpRequestDescriptor='null', httpResponse='null', requestedHost='null', responseCode='200', responseBody='[B@1d9920cd', responseHeader='{}'}
+2022-01-27 09:06:39.809 INFO  - Close client request on error /127.0.0.1:51581 --- /127.0.0.1:8080
+2022-01-27 09:09:44.659 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-27 09:09:44.663 ERROR - Error in request parsing process. Caused: java.lang.IllegalArgumentException: No enum constant org.chaostocosmos.leap.http.MIME_TYPE.APPLICATION_JSON
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.lang.IllegalArgumentException: No enum constant org.chaostocosmos.leap.http.MIME_TYPE.APPLICATION_JSON
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:239)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:76)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-01-27 09:09:44.664 DEBUG - .\home\webapp\WEB-INF\static\response.html   response.html   .\home\webapp\WEB-INF\static
+2022-01-27 09:09:44.676 INFO  - Error client request /127.0.0.1:51603 --- /127.0.0.1:8080
+2022-01-27 09:09:44.695 DEBUG - { httpRequestDescriptor='null', httpResponse='null', requestedHost='null', responseCode='200', responseBody='[B@623f8cf9', responseHeader='{}'}
+2022-01-27 09:09:44.719 INFO  - Close client request on error /127.0.0.1:51603 --- /127.0.0.1:8080
