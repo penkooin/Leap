@@ -9,8 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.chaostocosmos.leap.http.HttpRequestDescriptor.MultipartDescriptor;
-
 /**
  * HttpChannelParser
  * 
@@ -120,7 +118,7 @@ public class HttpChannelParser {
                 String host = requestedHost.indexOf(":") != -1 ? requestedHost.substring(0, requestedHost.indexOf(":")) : requestedHost;
                 String contentType = reqHeader.get("Content-Type");
                 String boundary = null;
-                MultipartDescriptor multipart = null;
+                Multipart multipart = null;
                 if(contentType != null) {
                     String s = contentType.substring(contentType.indexOf(":")+1, contentType.indexOf(";")).trim().toUpperCase();
                     s = s.replace("/", "_").replace("-", "_");

@@ -138,14 +138,9 @@ public class LeapRequestHandler implements Runnable {
             sendResponse(out, response);
             close();
         } catch(Throwable e) {
-            //e.printStackTrace();
             if(e instanceof WASException) {
-                Throwable throwable;
-                while((throwable = (Exception)e.getCause()) != null) {
-                    e = throwable;
-                }
                 WASException we = (WASException)e;
-                we.printStackTrace();
+                LoggerFactory.getLogger(requestedHost).error(we.getMessage(), we);
                 String responseMessage = "Response";
                 try {
                     responseMessage = createHttpResponsePage(requestedHost, we.getMessageType(), we.getCode(), we.getMessage());

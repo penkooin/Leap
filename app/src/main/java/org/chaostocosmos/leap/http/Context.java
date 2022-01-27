@@ -53,6 +53,7 @@ public class Context {
 
     /**
      * Constructor
+     * 
      * @param homePath
      * @throws WASException
      */
@@ -338,8 +339,8 @@ public class Context {
      * Get upload file buffer flush size
      * @return
      */
-    public static long getFlushBufferSize() {
-        return (long)getConfigValue("server.flush-buffer-size");
+    public static int getFileBufferSize() {
+        return (int)getConfigValue("server.file-buffer-size");
     }
 
     /**

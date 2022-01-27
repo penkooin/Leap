@@ -1,0 +1,128 @@
+2022-01-26 10:18:04.385 INFO  - Leap WAS server starting......
+2022-01-26 10:18:04.392 INFO  - --------------------------------------------------------------------------
+2022-01-26 10:18:04.392 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-26 10:18:04.393 INFO  - verbose mode on
+2022-01-26 10:18:04.401 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-26 10:18:04.456 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-26 10:18:04.457 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 10:18:04.461 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 10:18:04.462 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 10:18:04.473 INFO  - Accepting connections on port 8080
+2022-01-26 10:18:10.053 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 10:19:04.614 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 10:32:50.175 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 10:33:54.835 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 10:34:45.935 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 10:35:07.882 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 10:51:17.323 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 10:52:19.085 INFO  - Leap WAS server starting......
+2022-01-26 10:52:19.089 INFO  - --------------------------------------------------------------------------
+2022-01-26 10:52:19.089 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-26 10:52:19.090 INFO  - verbose mode on
+2022-01-26 10:52:19.096 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-26 10:52:19.135 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-26 10:52:19.135 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 10:52:19.138 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 10:52:19.139 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 10:52:19.166 INFO  - Accepting connections on port 8080
+2022-01-26 10:52:21.080 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 10:54:04.000 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 10:55:37.374 INFO  - Leap WAS server starting......
+2022-01-26 10:55:37.378 INFO  - --------------------------------------------------------------------------
+2022-01-26 10:55:37.379 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-26 10:55:37.379 INFO  - verbose mode on
+2022-01-26 10:55:37.387 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-26 10:55:37.432 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-26 10:55:37.433 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 10:55:37.437 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 10:55:37.437 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 10:55:37.451 INFO  - Accepting connections on port 8080
+2022-01-26 10:55:38.789 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 10:55:51.335 INFO  - Leap WAS server starting......
+2022-01-26 10:55:51.339 INFO  - --------------------------------------------------------------------------
+2022-01-26 10:55:51.339 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-26 10:55:51.339 INFO  - verbose mode on
+2022-01-26 10:55:51.345 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-26 10:55:51.376 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-26 10:55:51.377 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 10:55:51.379 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 10:55:51.379 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 10:55:51.392 INFO  - Accepting connections on port 8080
+2022-01-26 10:55:52.871 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 10:57:06.079 INFO  - Leap WAS server starting......
+2022-01-26 10:57:06.082 INFO  - --------------------------------------------------------------------------
+2022-01-26 10:57:06.082 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-26 10:57:06.082 INFO  - verbose mode on
+2022-01-26 10:57:06.089 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-26 10:57:06.119 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-26 10:57:06.120 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 10:57:06.123 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 10:57:06.123 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 10:57:06.132 INFO  - Accepting connections on port 8080
+2022-01-26 10:57:08.077 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 10:57:17.747 INFO  - Leap WAS server starting......
+2022-01-26 10:57:17.750 INFO  - --------------------------------------------------------------------------
+2022-01-26 10:57:17.751 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-26 10:57:17.751 INFO  - verbose mode on
+2022-01-26 10:57:17.757 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-26 10:57:17.804 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-26 10:57:17.804 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 10:57:17.807 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 10:57:17.808 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 10:57:17.818 INFO  - Accepting connections on port 8080
+2022-01-26 10:57:19.665 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 10:57:45.715 INFO  - Leap WAS server starting......
+2022-01-26 10:57:45.718 INFO  - --------------------------------------------------------------------------
+2022-01-26 10:57:45.719 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-26 10:57:45.719 INFO  - verbose mode on
+2022-01-26 10:57:45.724 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-26 10:57:45.758 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-26 10:57:45.759 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 10:57:45.761 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 10:57:45.761 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 10:57:45.772 INFO  - Accepting connections on port 8080
+2022-01-26 10:57:47.350 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 10:57:57.684 INFO  - Leap WAS server starting......
+2022-01-26 10:57:57.689 INFO  - --------------------------------------------------------------------------
+2022-01-26 10:57:57.689 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-26 10:57:57.691 INFO  - verbose mode on
+2022-01-26 10:57:57.699 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-26 10:57:57.932 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-26 10:57:57.959 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 10:57:58.033 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 10:57:58.034 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 10:57:58.050 INFO  - Accepting connections on port 8080
+2022-01-26 10:57:59.200 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 10:58:41.373 INFO  - Leap WAS server starting......
+2022-01-26 10:58:41.376 INFO  - --------------------------------------------------------------------------
+2022-01-26 10:58:41.377 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-26 10:58:41.377 INFO  - verbose mode on
+2022-01-26 10:58:41.382 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-26 10:58:41.417 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-26 10:58:41.418 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 10:58:41.420 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 10:58:41.420 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 10:58:41.429 INFO  - Accepting connections on port 8080
+2022-01-26 10:58:43.784 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 10:59:31.439 INFO  - Leap WAS server starting......
+2022-01-26 10:59:31.443 INFO  - --------------------------------------------------------------------------
+2022-01-26 10:59:31.443 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-26 10:59:31.444 INFO  - verbose mode on
+2022-01-26 10:59:31.476 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-26 10:59:31.716 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-26 10:59:31.716 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 10:59:31.718 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 10:59:31.719 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 10:59:31.742 INFO  - Accepting connections on port 8080
+2022-01-26 10:59:33.198 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 10:59:41.931 INFO  - Leap WAS server starting......
+2022-01-26 10:59:41.934 INFO  - --------------------------------------------------------------------------
+2022-01-26 10:59:41.935 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-26 10:59:41.935 INFO  - verbose mode on
+2022-01-26 10:59:41.939 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-26 10:59:41.971 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-26 10:59:41.972 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 10:59:41.974 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 10:59:41.975 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 10:59:41.987 INFO  - Accepting connections on port 8080
+2022-01-26 10:59:43.155 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1

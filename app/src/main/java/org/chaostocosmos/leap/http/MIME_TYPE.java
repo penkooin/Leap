@@ -6,13 +6,29 @@ import java.util.stream.Collectors;
 
 /**
  * Mime type enum
+ * 
+ * @author 9ins
  */
 public enum MIME_TYPE {
-
+    APPLICATION_OCTET_STREAM("application/octet-stream"),
+    APPLICATION_PKCS12("application/pkcs12"),
+    APPLICATION_VND_MSPOWERPOINT("application/vnd.mspowerpoint"),
+    APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_DOCUMENT("application/vnd.openxmlformats-officedocument.wordprocessingml.document"),
+    APPLICATION_X_WWW_FORM_URLENCODED("application/x-www-form-urlencoded"),
+    APPLICATION_XHTML_XML("application/xhtml+xml"),
+    APPLICATION_XML("application/xml"),
+    APPLICATION_JSON("application/json"),
+    APPLICATION_JAVASCRIPT("application/javascript"),
+    APPLICATION_PDF("application/pdf"),
+    MULTIPART_FORM_DATA("multipart/form-data"),
+    MULTIPART_BYTERANGES("multipart/byteranges"),
     TEXT_PLAIN("text/plain"),
     TEXT_HTML("text/html"),
+    TEXT_XML("text/xml"),
+    TEXT_JSON("text/json"),
     TEXT_CSS("text/css"),
     TEXT_JAVASCRIPT("text/javascript"),
+
     IMAGE_GIF("image/gif"),
     IMAGE_PNG("image/png"),
     IMAGE_JPEG("image/jpeg"),
@@ -25,15 +41,7 @@ public enum MIME_TYPE {
     AUDIO_WAV("audio/wav"),
     VIDEO_WEBM("video/webm"),
     VIDEO_OGG("video/ogg"),
-    APPLICATION_OCTET_STREAM("application/octet-stream"),
-    APPLICATION_PKCS12("application/pkcs12"),
-    APPLICATION_VND_MSPOWERPOINT("application/vnd.mspowerpoint"),
-    APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_DOCUMENT("application/vnd.openxmlformats-officedocument.wordprocessingml.document"),
-    APPLICATION_XHTML_XML("application/xhtml+xml"),
-    APPLICATION_XML("application/xml"),
-    APPLICATION_PDF("application/pdf"),
-    MULTIPART_FORM_DATA("multipart/form-data"),
-    MULTIPART_BYTERANGES("multipart/byteranges");
+    ;
 
     String mimeType;
 
@@ -51,7 +59,7 @@ public enum MIME_TYPE {
      * @return
      */
     public static MIME_TYPE getMimeType(String mimeType) {
-        return MIME_TYPE.valueOf(mimeType.replace("/", "_").replace(".", "_"));
+        return MIME_TYPE.valueOf(mimeType.toUpperCase().replace("/", "_").replace("-", "_").replace(".", "_"));
     }
 
     /**

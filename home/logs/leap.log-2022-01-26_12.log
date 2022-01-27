@@ -1,0 +1,518 @@
+2022-01-26 12:17:23.451 INFO  - Leap WAS server starting......
+2022-01-26 12:17:23.458 INFO  - --------------------------------------------------------------------------
+2022-01-26 12:17:23.458 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-26 12:17:23.459 INFO  - verbose mode on
+2022-01-26 12:17:23.468 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-26 12:17:23.508 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-26 12:17:23.508 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:17:23.510 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:17:23.510 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:17:23.523 INFO  - Accepting connections on port 8080
+2022-01-26 12:17:25.951 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 12:17:25.962 ERROR - null
+java.lang.NullPointerException: null
+	at org.chaostocosmos.leap.http.Context.lambda$26(Context.java:532)
+	at java.base/java.util.stream.ReduceOps$1ReducingSink.accept(ReduceOps.java:80)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.reduce(ReferencePipeline.java:553)
+	at org.chaostocosmos.leap.http.Context.getMsg(Context.java:532)
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:44)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:241)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:76)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-01-26 12:19:15.639 INFO  - Leap WAS server starting......
+2022-01-26 12:19:15.642 INFO  - --------------------------------------------------------------------------
+2022-01-26 12:19:15.642 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-26 12:19:15.643 INFO  - verbose mode on
+2022-01-26 12:19:15.651 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-26 12:19:15.688 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-26 12:19:15.689 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:19:15.691 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:19:15.691 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:19:15.703 INFO  - Accepting connections on port 8080
+2022-01-26 12:19:17.218 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 12:19:17.233 ERROR - null
+java.lang.NullPointerException: null
+	at org.chaostocosmos.leap.http.Context.lambda$26(Context.java:532)
+	at java.base/java.util.stream.ReduceOps$1ReducingSink.accept(ReduceOps.java:80)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.reduce(ReferencePipeline.java:553)
+	at org.chaostocosmos.leap.http.Context.getMsg(Context.java:532)
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:44)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:241)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:76)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-01-26 12:19:50.713 INFO  - Leap WAS server starting......
+2022-01-26 12:19:50.717 INFO  - --------------------------------------------------------------------------
+2022-01-26 12:19:50.717 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-26 12:19:50.717 INFO  - verbose mode on
+2022-01-26 12:19:50.724 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-26 12:19:50.760 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-26 12:19:50.762 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:19:50.776 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:19:50.777 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:19:50.788 INFO  - Accepting connections on port 8080
+2022-01-26 12:19:52.077 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 12:19:52.090 ERROR - null
+java.lang.NullPointerException: null
+	at org.chaostocosmos.leap.http.Context.lambda$26(Context.java:532)
+	at java.base/java.util.stream.ReduceOps$1ReducingSink.accept(ReduceOps.java:80)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.reduce(ReferencePipeline.java:553)
+	at org.chaostocosmos.leap.http.Context.getMsg(Context.java:532)
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:44)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:241)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:76)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-01-26 12:21:52.596 INFO  - Leap WAS server starting......
+2022-01-26 12:21:52.599 INFO  - --------------------------------------------------------------------------
+2022-01-26 12:21:52.599 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-26 12:21:52.599 INFO  - verbose mode on
+2022-01-26 12:21:52.604 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-26 12:21:52.637 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-26 12:21:52.638 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:21:52.640 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:21:52.641 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:21:52.650 INFO  - Accepting connections on port 8080
+2022-01-26 12:21:54.036 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 12:21:54.055 ERROR - null
+java.lang.NullPointerException: null
+	at org.chaostocosmos.leap.http.Context.lambda$26(Context.java:532)
+	at java.base/java.util.stream.ReduceOps$1ReducingSink.accept(ReduceOps.java:80)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.reduce(ReferencePipeline.java:553)
+	at org.chaostocosmos.leap.http.Context.getMsg(Context.java:532)
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:44)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:241)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:76)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-01-26 12:23:14.453 INFO  - Leap WAS server starting......
+2022-01-26 12:23:14.456 INFO  - --------------------------------------------------------------------------
+2022-01-26 12:23:14.456 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-26 12:23:14.456 INFO  - verbose mode on
+2022-01-26 12:23:14.461 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-26 12:23:14.490 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-26 12:23:14.491 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:23:14.492 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:23:14.493 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:23:14.504 INFO  - Accepting connections on port 8080
+2022-01-26 12:23:15.999 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 12:23:16.012 ERROR - null
+java.lang.NullPointerException: null
+	at org.chaostocosmos.leap.http.Context.lambda$26(Context.java:532)
+	at java.base/java.util.stream.ReduceOps$1ReducingSink.accept(ReduceOps.java:80)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.reduce(ReferencePipeline.java:553)
+	at org.chaostocosmos.leap.http.Context.getMsg(Context.java:532)
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:44)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:241)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:76)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-01-26 12:24:06.680 INFO  - Leap WAS server starting......
+2022-01-26 12:24:06.683 INFO  - --------------------------------------------------------------------------
+2022-01-26 12:24:06.683 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-26 12:24:06.683 INFO  - verbose mode on
+2022-01-26 12:24:06.691 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-26 12:24:06.725 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-26 12:24:06.727 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:24:06.765 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:24:06.766 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:24:06.778 INFO  - Accepting connections on port 8080
+2022-01-26 12:24:08.305 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 12:24:08.319 ERROR - null
+java.lang.NullPointerException: null
+	at org.chaostocosmos.leap.http.Context.lambda$26(Context.java:532)
+	at java.base/java.util.stream.ReduceOps$1ReducingSink.accept(ReduceOps.java:80)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.reduce(ReferencePipeline.java:553)
+	at org.chaostocosmos.leap.http.Context.getMsg(Context.java:532)
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:44)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:241)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:76)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-01-26 12:26:41.339 INFO  - Leap WAS server starting......
+2022-01-26 12:26:41.346 INFO  - --------------------------------------------------------------------------
+2022-01-26 12:26:41.352 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-26 12:26:41.353 INFO  - verbose mode on
+2022-01-26 12:26:41.396 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-26 12:26:41.449 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-26 12:26:41.450 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:26:41.454 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:26:41.454 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:26:41.490 INFO  - Accepting connections on port 8080
+2022-01-26 12:26:53.919 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 12:26:53.944 ERROR - null
+java.lang.NullPointerException: null
+	at org.chaostocosmos.leap.http.Context.lambda$26(Context.java:532)
+	at java.base/java.util.stream.ReduceOps$1ReducingSink.accept(ReduceOps.java:80)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.reduce(ReferencePipeline.java:553)
+	at org.chaostocosmos.leap.http.Context.getMsg(Context.java:532)
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:44)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:241)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:76)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-01-26 12:30:09.880 INFO  - Leap WAS server starting......
+2022-01-26 12:30:09.883 INFO  - --------------------------------------------------------------------------
+2022-01-26 12:30:09.883 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-26 12:30:09.883 INFO  - verbose mode on
+2022-01-26 12:30:09.889 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-26 12:30:09.922 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-26 12:30:09.923 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:30:09.924 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:30:09.925 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:30:09.934 INFO  - Accepting connections on port 8080
+2022-01-26 12:30:11.495 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 12:30:11.507 ERROR - null
+java.lang.NullPointerException: null
+	at org.chaostocosmos.leap.http.Context.lambda$26(Context.java:534)
+	at java.base/java.util.stream.ReduceOps$1ReducingSink.accept(ReduceOps.java:80)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.reduce(ReferencePipeline.java:553)
+	at org.chaostocosmos.leap.http.Context.getMsg(Context.java:534)
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:44)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:241)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:76)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-01-26 12:30:52.937 INFO  - Leap WAS server starting......
+2022-01-26 12:30:52.940 INFO  - --------------------------------------------------------------------------
+2022-01-26 12:30:52.940 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-26 12:30:52.940 INFO  - verbose mode on
+2022-01-26 12:30:52.945 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-26 12:30:52.978 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-26 12:30:52.979 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:30:52.980 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:30:52.981 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:30:52.992 INFO  - Accepting connections on port 8080
+2022-01-26 12:30:54.437 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 12:30:54.449 ERROR - null
+java.lang.NullPointerException: null
+	at org.chaostocosmos.leap.http.Context.lambda$26(Context.java:533)
+	at java.base/java.util.stream.ReduceOps$1ReducingSink.accept(ReduceOps.java:80)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.reduce(ReferencePipeline.java:553)
+	at org.chaostocosmos.leap.http.Context.getMsg(Context.java:533)
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:44)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:241)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:76)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-01-26 12:31:40.583 INFO  - Leap WAS server starting......
+2022-01-26 12:31:40.587 INFO  - --------------------------------------------------------------------------
+2022-01-26 12:31:40.588 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-26 12:31:40.589 INFO  - verbose mode on
+2022-01-26 12:31:40.595 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-26 12:31:40.632 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-26 12:31:40.633 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:31:40.635 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:31:40.635 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:31:40.647 INFO  - Accepting connections on port 8080
+2022-01-26 12:31:57.596 INFO  - Leap WAS server starting......
+2022-01-26 12:31:57.600 INFO  - --------------------------------------------------------------------------
+2022-01-26 12:31:57.600 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-26 12:31:57.600 INFO  - verbose mode on
+2022-01-26 12:31:57.606 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-26 12:31:57.642 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-26 12:31:57.643 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:31:57.645 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:31:57.646 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:31:57.655 INFO  - Accepting connections on port 8080
+2022-01-26 12:32:00.127 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 12:32:00.141 ERROR - null
+java.lang.NullPointerException: null
+	at org.chaostocosmos.leap.http.Context.lambda$26(Context.java:534)
+	at java.base/java.util.stream.ReduceOps$1ReducingSink.accept(ReduceOps.java:80)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.reduce(ReferencePipeline.java:553)
+	at org.chaostocosmos.leap.http.Context.getMsg(Context.java:534)
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:44)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:241)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:76)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-01-26 12:33:33.324 INFO  - Leap WAS server starting......
+2022-01-26 12:33:33.329 INFO  - --------------------------------------------------------------------------
+2022-01-26 12:33:33.329 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-26 12:33:33.329 INFO  - verbose mode on
+2022-01-26 12:33:33.338 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-26 12:33:33.384 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-26 12:33:33.386 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:33:33.390 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:33:33.390 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:33:33.408 INFO  - Accepting connections on port 8080
+2022-01-26 12:33:34.824 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 12:33:34.840 ERROR - null
+java.lang.NullPointerException: null
+	at org.chaostocosmos.leap.http.Context.lambda$26(Context.java:534)
+	at java.base/java.util.stream.ReduceOps$1ReducingSink.accept(ReduceOps.java:80)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.reduce(ReferencePipeline.java:553)
+	at org.chaostocosmos.leap.http.Context.getMsg(Context.java:534)
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:44)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:241)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:76)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-01-26 12:34:02.046 INFO  - Leap WAS server starting......
+2022-01-26 12:34:02.049 INFO  - --------------------------------------------------------------------------
+2022-01-26 12:34:02.049 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-26 12:34:02.049 INFO  - verbose mode on
+2022-01-26 12:34:02.053 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-26 12:34:02.085 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-26 12:34:02.086 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:34:02.088 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:34:02.088 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:34:02.097 INFO  - Accepting connections on port 8080
+2022-01-26 12:34:03.467 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 12:34:03.480 ERROR - null
+java.lang.NullPointerException: null
+	at org.chaostocosmos.leap.http.Context.lambda$26(Context.java:533)
+	at java.base/java.util.stream.ReduceOps$1ReducingSink.accept(ReduceOps.java:80)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.reduce(ReferencePipeline.java:553)
+	at org.chaostocosmos.leap.http.Context.getMsg(Context.java:533)
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:44)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:242)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:76)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-01-26 12:34:35.385 INFO  - Leap WAS server starting......
+2022-01-26 12:34:35.389 INFO  - --------------------------------------------------------------------------
+2022-01-26 12:34:35.389 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-26 12:34:35.389 INFO  - verbose mode on
+2022-01-26 12:34:35.394 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-26 12:34:35.434 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-26 12:34:35.434 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:34:35.436 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:34:35.437 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:34:35.461 INFO  - Accepting connections on port 8080
+2022-01-26 12:34:36.633 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 12:34:36.661 ERROR - Illegal group reference
+java.lang.IllegalArgumentException: Illegal group reference
+	at java.base/java.util.regex.Matcher.appendExpandedReplacement(Matcher.java:1068)
+	at java.base/java.util.regex.Matcher.appendReplacement(Matcher.java:998)
+	at java.base/java.util.regex.Matcher.replaceFirst(Matcher.java:1408)
+	at java.base/java.lang.String.replaceFirst(String.java:2081)
+	at org.chaostocosmos.leap.http.Context.lambda$26(Context.java:533)
+	at java.base/java.util.stream.ReduceOps$1ReducingSink.accept(ReduceOps.java:80)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.reduce(ReferencePipeline.java:553)
+	at org.chaostocosmos.leap.http.Context.getMsg(Context.java:533)
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:44)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:242)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:76)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-01-26 12:35:00.243 INFO  - Leap WAS server starting......
+2022-01-26 12:35:00.246 INFO  - --------------------------------------------------------------------------
+2022-01-26 12:35:00.247 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-26 12:35:00.247 INFO  - verbose mode on
+2022-01-26 12:35:00.252 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-26 12:35:00.284 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-26 12:35:00.285 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:35:00.288 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:35:00.288 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:35:00.299 INFO  - Accepting connections on port 8080
+2022-01-26 12:35:16.169 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 12:35:16.189 ERROR - null
+java.lang.NullPointerException: null
+	at org.chaostocosmos.leap.http.Context.lambda$26(Context.java:533)
+	at java.base/java.util.stream.ReduceOps$1ReducingSink.accept(ReduceOps.java:80)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.reduce(ReferencePipeline.java:553)
+	at org.chaostocosmos.leap.http.Context.getMsg(Context.java:533)
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:44)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:242)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:76)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-01-26 12:35:44.488 INFO  - Leap WAS server starting......
+2022-01-26 12:35:44.491 INFO  - --------------------------------------------------------------------------
+2022-01-26 12:35:44.492 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-26 12:35:44.492 INFO  - verbose mode on
+2022-01-26 12:35:44.497 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-26 12:35:44.529 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-26 12:35:44.529 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:35:44.531 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:35:44.531 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:35:44.542 INFO  - Accepting connections on port 8080
+2022-01-26 12:35:45.774 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 12:35:45.788 ERROR - Illegal group reference
+java.lang.IllegalArgumentException: Illegal group reference
+	at java.base/java.util.regex.Matcher.appendExpandedReplacement(Matcher.java:1068)
+	at java.base/java.util.regex.Matcher.appendReplacement(Matcher.java:998)
+	at java.base/java.util.regex.Matcher.replaceFirst(Matcher.java:1408)
+	at java.base/java.lang.String.replaceFirst(String.java:2081)
+	at org.chaostocosmos.leap.http.Context.lambda$26(Context.java:533)
+	at java.base/java.util.stream.ReduceOps$1ReducingSink.accept(ReduceOps.java:80)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.reduce(ReferencePipeline.java:553)
+	at org.chaostocosmos.leap.http.Context.getMsg(Context.java:533)
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:44)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:242)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:76)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-01-26 12:36:25.718 INFO  - Leap WAS server starting......
+2022-01-26 12:36:25.721 INFO  - --------------------------------------------------------------------------
+2022-01-26 12:36:25.721 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-26 12:36:25.721 INFO  - verbose mode on
+2022-01-26 12:36:25.727 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-26 12:36:25.761 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-26 12:36:25.762 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:36:25.764 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:36:25.765 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:36:25.776 INFO  - Accepting connections on port 8080
+2022-01-26 12:36:28.293 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 12:36:28.305 ERROR - null
+java.lang.NullPointerException: null
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:242)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:76)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-01-26 12:37:05.477 INFO  - Leap WAS server starting......
+2022-01-26 12:37:05.480 INFO  - --------------------------------------------------------------------------
+2022-01-26 12:37:05.480 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-26 12:37:05.480 INFO  - verbose mode on
+2022-01-26 12:37:05.484 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-26 12:37:05.516 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-26 12:37:05.517 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:37:05.519 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:37:05.519 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:37:05.529 INFO  - Accepting connections on port 8080
+2022-01-26 12:37:06.876 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 12:37:06.891 DEBUG - .\home\webapp\WEB-INF\static\response.html   response.html   .\home\webapp\WEB-INF\static
+2022-01-26 12:37:06.892 INFO  - Error client request /127.0.0.1:59286 --- /127.0.0.1:8080
+2022-01-26 12:37:06.892 DEBUG - { httpRequestDescriptor='null', httpResponse='null', requestedHost='null', responseCode='200', responseBody='[B@649fe360', responseHeader='{}'}
+2022-01-26 12:37:06.893 INFO  - Close client request on error /127.0.0.1:59286 --- /127.0.0.1:8080
+2022-01-26 12:44:22.602 INFO  - Leap WAS server starting......
+2022-01-26 12:44:22.605 INFO  - --------------------------------------------------------------------------
+2022-01-26 12:44:22.605 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-26 12:44:22.605 INFO  - verbose mode on
+2022-01-26 12:44:22.610 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-26 12:44:22.658 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-26 12:44:22.659 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:44:22.661 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:44:22.661 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-26 12:44:22.672 INFO  - Accepting connections on port 8080
+2022-01-26 12:44:24.817 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-26 12:44:24.832 DEBUG - .\home\webapp\WEB-INF\static\response.html   response.html   .\home\webapp\WEB-INF\static
+2022-01-26 12:44:24.833 INFO  - Error client request /127.0.0.1:50151 --- /127.0.0.1:8080
+2022-01-26 12:44:24.833 DEBUG - { httpRequestDescriptor='null', httpResponse='null', requestedHost='null', responseCode='200', responseBody='[B@52977d9', responseHeader='{}'}
+2022-01-26 12:44:24.835 INFO  - Close client request on error /127.0.0.1:50151 --- /127.0.0.1:8080
