@@ -174,15 +174,15 @@ public class LeapRequestHandler implements Runnable {
         try {
             if(in != null) {
                 in.close();
-                //LoggerFactory.getLogger(this.requestedHost).debug("close input stream......");
+                LoggerFactory.getLogger(this.requestedHost).debug("close input stream......");
             }
             if(out != null) {
                 out.close();
-                //LoggerFactory.getLogger(this.requestedHost).debug("close output stream......");
+                LoggerFactory.getLogger(this.requestedHost).debug("close output stream......");
             }
             if(connection != null) {                
                 connection.close();
-                //LoggerFactory.getLogger(this.requestedHost).debug("socket close......");
+                LoggerFactory.getLogger(this.requestedHost).debug("socket close......");
             }
         } catch (IOException e) {
             LoggerFactory.getLogger().error(e.getMessage(), e);

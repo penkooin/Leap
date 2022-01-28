@@ -295,3 +295,279 @@ org.chaostocosmos.leap.http.WASException: Method Not Allowed   <br>Requested met
 2022-01-28 13:39:46.381 INFO  - Error client request /127.0.0.1:51986 --- /127.0.0.1:8080
 2022-01-28 13:39:46.382 INFO  - Close client request on error /127.0.0.1:51986 --- /127.0.0.1:8080
 2022-01-28 13:39:46.394 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost POST', httpVersion='HTTP/1.1', requestType='POST', requestedHost='localhost', reqHeader='{Authorization=Basic Y2hhb3M5MzA6OTM5Mw==, Accept=*/*, User-Agent=PostmanRuntime/7.29.0, Connection=keep-alive, Postman-Token=8d964f86-87a0-476b-83d4-f0674fa53871, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, korean=yahoo, Content-Length=61, @Client=localhost, Content-Type=application/x-www-form-urlencoded}', contentType='application/x-www-form-urlencoded', reqBody='[B@1d661c4e', contextPath='/time/GetTime', contextParam='{}', bodyPart='null', contentLength='61'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@5d02e0b3', responseHeader='{Server=LeapWAS 1.0.0, Date=Fri Jan 28 13:39:46 KST 2022}'}
+2022-01-28 13:40:12.682 INFO  - Leap WAS server starting......
+2022-01-28 13:40:12.685 INFO  - --------------------------------------------------------------------------
+2022-01-28 13:40:12.686 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-28 13:40:12.686 INFO  - verbose mode on
+2022-01-28 13:40:12.691 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-28 13:40:12.724 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-28 13:40:12.725 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-28 13:40:12.727 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-28 13:40:12.727 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-28 13:40:12.737 INFO  - Accepting connections on port 8080
+2022-01-28 13:40:14.343 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-28 13:40:14.351 DEBUG - Context params: {}
+2022-01-28 13:40:14.366 DEBUG - Request host: localhost
+2022-01-28 13:40:14.367 DEBUG - Authorization: Basic Y2hhb3M5MzA6OTM5Mw==
+Accept: */*
+User-Agent: PostmanRuntime/7.29.0
+Connection: keep-alive
+Postman-Token: 5d164094-5ed2-4e2b-a2e6-814c6cc25e53
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+korean: yahoo
+Content-Length: 61
+@Client: localhost
+Content-Type: application/x-www-form-urlencoded
+2022-01-28 13:40:14.373 DEBUG - User chaos930 is login.
+2022-01-28 13:40:14.374 DEBUG - Basic Http request filter processing......
+2022-01-28 13:40:14.374 DEBUG - getTime servlet started....+++++++++++++++++++++++++++++++++++++++++++++++++
+2022-01-28 13:40:14.386 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost POST', httpVersion='HTTP/1.1', requestType='POST', requestedHost='localhost', reqHeader='{Authorization=Basic Y2hhb3M5MzA6OTM5Mw==, Accept=*/*, User-Agent=PostmanRuntime/7.29.0, Connection=keep-alive, Postman-Token=5d164094-5ed2-4e2b-a2e6-814c6cc25e53, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, korean=yahoo, Content-Length=61, @Client=localhost, Content-Type=application/x-www-form-urlencoded}', contentType='application/x-www-form-urlencoded', reqBody='[B@330b49ae', contextPath='/time/GetTime', contextParam='{}', bodyPart='null', contentLength='61'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@71ac04bd', responseHeader='{Server=LeapWAS 1.0.0, Date=Fri Jan 28 13:40:14 KST 2022}'}
+2022-01-28 13:40:21.437 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-28 13:40:21.438 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-28 13:40:21.444 DEBUG - Request host: localhost
+2022-01-28 13:40:21.444 DEBUG - Cookie: io=PL7TK76OSCzqZRBSAAAC
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+Sec-Fetch-Site: none
+Sec-Fetch-Dest: document
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+@Client: localhost
+Sec-Fetch-Mode: navigate
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+sec-ch-ua-platform: "Windows"
+Sec-Fetch-User: ?1
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+2022-01-28 13:40:21.448 ERROR - org.chaostocosmos.leap.http.WASException: Method Not Allowed   <br>Requested method not supported: GET
+org.chaostocosmos.leap.http.WASException: Method Not Allowed   <br>Requested method not supported: GET
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:97)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-01-28 13:40:21.449 INFO  - Type: HTTP Code: 405 Exception: org.chaostocosmos.leap.http.WASException: Method Not Allowed   <br>Requested method not supported: GET
+2022-01-28 13:40:21.450 DEBUG - .\home\webapp\WEB-INF\static\response.html   response.html   .\home\webapp\WEB-INF\static
+2022-01-28 13:40:21.450 INFO  - Error client request /127.0.0.1:51994 --- /127.0.0.1:8080
+2022-01-28 13:40:21.450 INFO  - Close client request on error /127.0.0.1:51994 --- /127.0.0.1:8080
+2022-01-28 13:40:21.451 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='localhost', reqHeader='{Cookie=io=PL7TK76OSCzqZRBSAAAC, Accept=text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection=keep-alive, User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36, Sec-Fetch-Site=none, Sec-Fetch-Dest=document, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode=navigate, sec-ch-ua=" Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97", sec-ch-ua-mobile=?0, Cache-Control=max-age=0, Upgrade-Insecure-Requests=1, sec-ch-ua-platform="Windows", Sec-Fetch-User=?1, Accept-Language=ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='[B@6ab2cc14', contextPath='/time/GetTime', contextParam='{}', bodyPart='null', contentLength='0'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@241175a4', responseHeader='{Server=LeapWAS 1.0.0, Date=Fri Jan 28 13:40:21 KST 2022}'}
+2022-01-28 13:40:21.504 DEBUG - Request host: localhost
+2022-01-28 13:40:21.505 DEBUG - Cookie: io=PL7TK76OSCzqZRBSAAAC
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+Referer: http://localhost:8080/time/GetTime?ccc=%EC%9D%B4%EA%B2%83%EB%8F%84%20%ED%85%8C%EC%8A%A4
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Dest: image
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+@Client: localhost
+Sec-Fetch-Mode: no-cors
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+2022-01-28 13:40:21.509 DEBUG - .\home\webapp\WEB-INF\static\favicon.ico   favicon.ico   .\home\webapp\WEB-INF\static
+2022-01-28 13:40:21.510 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='localhost', reqHeader='{Cookie=io=PL7TK76OSCzqZRBSAAAC, Accept=image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8, Connection=keep-alive, User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36, Referer=http://localhost:8080/time/GetTime?ccc=%EC%9D%B4%EA%B2%83%EB%8F%84%20%ED%85%8C%EC%8A%A4, Sec-Fetch-Site=same-origin, Sec-Fetch-Dest=image, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode=no-cors, sec-ch-ua=" Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97", sec-ch-ua-mobile=?0, sec-ch-ua-platform="Windows", Accept-Language=ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='[B@3a3278e6', contextPath='/favicon.ico', contextParam='{}', bodyPart='null', contentLength='0'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@20d9004d', responseHeader='{Server=LeapWAS 1.0.0, Date=Fri Jan 28 13:40:21 KST 2022, Content-Type=image/x-icon}'}
+2022-01-28 13:40:21.703 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-28 13:42:05.519 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-28 13:42:05.540 DEBUG - Context params: {}
+2022-01-28 13:42:05.540 DEBUG - Request host: localhost
+2022-01-28 13:42:05.541 DEBUG - Authorization: Basic Y2hhb3M5MzA6OTM5Mw==
+Accept: */*
+User-Agent: PostmanRuntime/7.29.0
+Connection: keep-alive
+Postman-Token: b9e4e6f2-b5ac-4fd6-a4a9-028762b311ee
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+korean: yahoo
+Content-Length: 61
+@Client: localhost
+Content-Type: application/x-www-form-urlencoded
+2022-01-28 13:42:05.542 DEBUG - User chaos930 is login.
+2022-01-28 13:42:05.543 DEBUG - Basic Http request filter processing......
+2022-01-28 13:42:05.543 DEBUG - getTime servlet started....+++++++++++++++++++++++++++++++++++++++++++++++++
+2022-01-28 13:42:05.543 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost POST', httpVersion='HTTP/1.1', requestType='POST', requestedHost='localhost', reqHeader='{Authorization=Basic Y2hhb3M5MzA6OTM5Mw==, Accept=*/*, User-Agent=PostmanRuntime/7.29.0, Connection=keep-alive, Postman-Token=b9e4e6f2-b5ac-4fd6-a4a9-028762b311ee, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, korean=yahoo, Content-Length=61, @Client=localhost, Content-Type=application/x-www-form-urlencoded}', contentType='application/x-www-form-urlencoded', reqBody='[B@42f09a1e', contextPath='/time/GetTime', contextParam='{}', bodyPart='null', contentLength='61'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@4c376c30', responseHeader='{Server=LeapWAS 1.0.0, Date=Fri Jan 28 13:42:05 KST 2022}'}
+2022-01-28 13:43:28.981 INFO  - Leap WAS server starting......
+2022-01-28 13:43:28.984 INFO  - --------------------------------------------------------------------------
+2022-01-28 13:43:28.984 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-28 13:43:28.984 INFO  - verbose mode on
+2022-01-28 13:43:28.989 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-28 13:43:29.039 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-28 13:43:29.039 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-28 13:43:29.041 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-28 13:43:29.042 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-28 13:43:29.052 INFO  - Accepting connections on port 8080
+2022-01-28 13:43:30.414 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-28 13:43:30.421 DEBUG - Context params: {}
+2022-01-28 13:43:30.438 DEBUG - Request host: localhost
+2022-01-28 13:43:30.439 DEBUG - Authorization: Basic Y2hhb3M5MzA6OTM5Mw==
+Accept: */*
+User-Agent: PostmanRuntime/7.29.0
+Connection: keep-alive
+Postman-Token: 5cb045a5-85b4-45c8-9aa7-e2b1e7ba9c0e
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+korean: yahoo
+Content-Length: 61
+@Client: localhost
+Content-Type: application/x-www-form-urlencoded
+2022-01-28 13:43:30.447 DEBUG - User chaos930 is login.
+2022-01-28 13:43:30.449 DEBUG - Basic Http request filter processing......
+2022-01-28 13:43:30.449 DEBUG - getTime servlet started....+++++++++++++++++++++++++++++++++++++++++++++++++
+2022-01-28 13:43:30.460 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost POST', httpVersion='HTTP/1.1', requestType='POST', requestedHost='localhost', reqHeader='{Authorization=Basic Y2hhb3M5MzA6OTM5Mw==, Accept=*/*, User-Agent=PostmanRuntime/7.29.0, Connection=keep-alive, Postman-Token=5cb045a5-85b4-45c8-9aa7-e2b1e7ba9c0e, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, korean=yahoo, Content-Length=61, @Client=localhost, Content-Type=application/x-www-form-urlencoded}', contentType='application/x-www-form-urlencoded', reqBody='[B@78d2c2bc', contextPath='/time/GetTime', contextParam='{}', bodyPart='null', contentLength='61'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@58fe02b7', responseHeader='{Server=LeapWAS 1.0.0, Date=Fri Jan 28 13:43:30 KST 2022}'}
+2022-01-28 13:43:30.462 DEBUG - close input stream......
+2022-01-28 13:43:30.463 DEBUG - close output stream......
+2022-01-28 13:43:30.463 DEBUG - socket close......
+2022-01-28 13:43:38.466 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-28 13:43:38.467 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-28 13:43:38.475 DEBUG - Request host: localhost
+2022-01-28 13:43:38.476 DEBUG - Cookie: io=PL7TK76OSCzqZRBSAAAC
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+Sec-Fetch-Site: none
+Sec-Fetch-Dest: document
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+@Client: localhost
+Sec-Fetch-Mode: navigate
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+sec-ch-ua-platform: "Windows"
+Sec-Fetch-User: ?1
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+2022-01-28 13:43:38.480 ERROR - org.chaostocosmos.leap.http.WASException: Method Not Allowed   <br>Requested method not supported: GET
+org.chaostocosmos.leap.http.WASException: Method Not Allowed   <br>Requested method not supported: GET
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:97)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-01-28 13:43:38.483 INFO  - Type: HTTP Code: 405 Exception: org.chaostocosmos.leap.http.WASException: Method Not Allowed   <br>Requested method not supported: GET
+2022-01-28 13:43:38.483 DEBUG - .\home\webapp\WEB-INF\static\response.html   response.html   .\home\webapp\WEB-INF\static
+2022-01-28 13:43:38.484 INFO  - Error client request /127.0.0.1:52042 --- /127.0.0.1:8080
+2022-01-28 13:43:38.484 INFO  - Close client request on error /127.0.0.1:52042 --- /127.0.0.1:8080
+2022-01-28 13:43:38.485 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='localhost', reqHeader='{Cookie=io=PL7TK76OSCzqZRBSAAAC, Accept=text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection=keep-alive, User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36, Sec-Fetch-Site=none, Sec-Fetch-Dest=document, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode=navigate, sec-ch-ua=" Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97", sec-ch-ua-mobile=?0, Cache-Control=max-age=0, Upgrade-Insecure-Requests=1, sec-ch-ua-platform="Windows", Sec-Fetch-User=?1, Accept-Language=ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='[B@1524e58', contextPath='/time/GetTime', contextParam='{}', bodyPart='null', contentLength='0'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@14dc008d', responseHeader='{Server=LeapWAS 1.0.0, Date=Fri Jan 28 13:43:38 KST 2022}'}
+2022-01-28 13:43:38.486 DEBUG - close input stream......
+2022-01-28 13:43:38.487 DEBUG - close output stream......
+2022-01-28 13:43:38.487 DEBUG - socket close......
+2022-01-28 13:43:38.553 DEBUG - Request host: localhost
+2022-01-28 13:43:38.553 DEBUG - Cookie: io=PL7TK76OSCzqZRBSAAAC
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+Referer: http://localhost:8080/time/GetTime?ccc=%EC%9D%B4%EA%B2%83%EB%8F%84%20%ED%85%8C%EC%8A%A4
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Dest: image
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+@Client: localhost
+Sec-Fetch-Mode: no-cors
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+2022-01-28 13:43:38.558 DEBUG - .\home\webapp\WEB-INF\static\favicon.ico   favicon.ico   .\home\webapp\WEB-INF\static
+2022-01-28 13:43:38.560 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='localhost', reqHeader='{Cookie=io=PL7TK76OSCzqZRBSAAAC, Accept=image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8, Connection=keep-alive, User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36, Referer=http://localhost:8080/time/GetTime?ccc=%EC%9D%B4%EA%B2%83%EB%8F%84%20%ED%85%8C%EC%8A%A4, Sec-Fetch-Site=same-origin, Sec-Fetch-Dest=image, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode=no-cors, sec-ch-ua=" Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97", sec-ch-ua-mobile=?0, sec-ch-ua-platform="Windows", Accept-Language=ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='[B@41c3008', contextPath='/favicon.ico', contextParam='{}', bodyPart='null', contentLength='0'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@7de919a6', responseHeader='{Server=LeapWAS 1.0.0, Date=Fri Jan 28 13:43:38 KST 2022, Content-Type=image/x-icon}'}
+2022-01-28 13:43:38.562 DEBUG - close input stream......
+2022-01-28 13:43:38.563 DEBUG - close output stream......
+2022-01-28 13:43:38.563 DEBUG - socket close......
+2022-01-28 13:43:38.731 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-28 13:45:00.172 INFO  - Leap WAS server starting......
+2022-01-28 13:45:00.176 INFO  - --------------------------------------------------------------------------
+2022-01-28 13:45:00.176 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-01-28 13:45:00.176 INFO  - verbose mode on
+2022-01-28 13:45:00.183 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-01-28 13:45:00.227 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-01-28 13:45:00.229 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-28 13:45:00.231 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-28 13:45:00.232 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-01-28 13:45:00.246 INFO  - Accepting connections on port 8080
+2022-01-28 13:45:01.442 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-28 13:45:01.454 DEBUG - Context params: {}
+2022-01-28 13:45:01.498 DEBUG - Request host: localhost
+2022-01-28 13:45:01.499 DEBUG - Authorization: Basic Y2hhb3M5MzA6OTM5Mw==
+Accept: */*
+User-Agent: PostmanRuntime/7.29.0
+Connection: keep-alive
+Postman-Token: 034a2ff4-ebf8-4b0b-84ba-fca78aa7df8a
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+korean: yahoo
+Content-Length: 61
+@Client: localhost
+Content-Type: application/x-www-form-urlencoded
+2022-01-28 13:45:01.506 DEBUG - User chaos930 is login.
+2022-01-28 13:45:01.507 DEBUG - Basic Http request filter processing......
+2022-01-28 13:45:01.507 DEBUG - getTime servlet started....+++++++++++++++++++++++++++++++++++++++++++++++++
+2022-01-28 13:45:01.518 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost POST', httpVersion='HTTP/1.1', requestType='POST', requestedHost='localhost', reqHeader='{Authorization=Basic Y2hhb3M5MzA6OTM5Mw==, Accept=*/*, User-Agent=PostmanRuntime/7.29.0, Connection=keep-alive, Postman-Token=034a2ff4-ebf8-4b0b-84ba-fca78aa7df8a, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, korean=yahoo, Content-Length=61, @Client=localhost, Content-Type=application/x-www-form-urlencoded}', contentType='application/x-www-form-urlencoded', reqBody='[B@78d2c2bc', contextPath='/time/GetTime', contextParam='{}', bodyPart='null', contentLength='61'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@58fe02b7', responseHeader='{Server=LeapWAS 1.0.0, Date=Fri Jan 28 13:45:01 KST 2022}'}
+2022-01-28 13:45:01.520 DEBUG - close input stream......
+2022-01-28 13:45:01.520 DEBUG - close output stream......
+2022-01-28 13:45:01.520 DEBUG - socket close......
+2022-01-28 13:45:04.957 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-28 13:45:04.959 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-01-28 13:45:04.967 DEBUG - Request host: localhost
+2022-01-28 13:45:04.967 DEBUG - Cookie: io=PL7TK76OSCzqZRBSAAAC
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+Sec-Fetch-Site: none
+Sec-Fetch-Dest: document
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+@Client: localhost
+Sec-Fetch-Mode: navigate
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+sec-ch-ua-platform: "Windows"
+Sec-Fetch-User: ?1
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+2022-01-28 13:45:04.974 ERROR - org.chaostocosmos.leap.http.WASException: Method Not Allowed   <br>Requested method not supported: GET
+org.chaostocosmos.leap.http.WASException: Method Not Allowed   <br>Requested method not supported: GET
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:97)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-01-28 13:45:04.976 INFO  - Type: HTTP Code: 405 Exception: org.chaostocosmos.leap.http.WASException: Method Not Allowed   <br>Requested method not supported: GET
+2022-01-28 13:45:04.976 DEBUG - .\home\webapp\WEB-INF\static\response.html   response.html   .\home\webapp\WEB-INF\static
+2022-01-28 13:45:04.977 INFO  - Error client request /127.0.0.1:52062 --- /127.0.0.1:8080
+2022-01-28 13:45:04.977 INFO  - Close client request on error /127.0.0.1:52062 --- /127.0.0.1:8080
+2022-01-28 13:45:04.978 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='localhost', reqHeader='{Cookie=io=PL7TK76OSCzqZRBSAAAC, Accept=text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Connection=keep-alive, User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36, Sec-Fetch-Site=none, Sec-Fetch-Dest=document, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode=navigate, sec-ch-ua=" Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97", sec-ch-ua-mobile=?0, Cache-Control=max-age=0, Upgrade-Insecure-Requests=1, sec-ch-ua-platform="Windows", Sec-Fetch-User=?1, Accept-Language=ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='[B@3a9d926d', contextPath='/time/GetTime', contextParam='{}', bodyPart='null', contentLength='0'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@436f0f28', responseHeader='{Server=LeapWAS 1.0.0, Date=Fri Jan 28 13:45:04 KST 2022}'}
+2022-01-28 13:45:04.981 DEBUG - close input stream......
+2022-01-28 13:45:04.981 DEBUG - close output stream......
+2022-01-28 13:45:04.982 DEBUG - socket close......
+2022-01-28 13:45:05.061 DEBUG - Request host: localhost
+2022-01-28 13:45:05.061 DEBUG - Cookie: io=PL7TK76OSCzqZRBSAAAC
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+Referer: http://localhost:8080/time/GetTime?ccc=%EC%9D%B4%EA%B2%83%EB%8F%84%20%ED%85%8C%EC%8A%A4
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Dest: image
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+@Client: localhost
+Sec-Fetch-Mode: no-cors
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+2022-01-28 13:45:05.065 DEBUG - .\home\webapp\WEB-INF\static\favicon.ico   favicon.ico   .\home\webapp\WEB-INF\static
+2022-01-28 13:45:05.067 DEBUG - { httpRequestDescriptor='{ httpRequest='http://localhost GET', httpVersion='HTTP/1.1', requestType='GET', requestedHost='localhost', reqHeader='{Cookie=io=PL7TK76OSCzqZRBSAAAC, Accept=image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8, Connection=keep-alive, User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36, Referer=http://localhost:8080/time/GetTime?ccc=%EC%9D%B4%EA%B2%83%EB%8F%84%20%ED%85%8C%EC%8A%A4, Sec-Fetch-Site=same-origin, Sec-Fetch-Dest=image, Host=localhost:8080, Accept-Encoding=gzip, deflate, br, @Client=localhost, Sec-Fetch-Mode=no-cors, sec-ch-ua=" Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97", sec-ch-ua-mobile=?0, sec-ch-ua-platform="Windows", Accept-Language=ko,en-US;q=0.9,en;q=0.8}', contentType='null', reqBody='[B@748ca17e', contextPath='/favicon.ico', contextParam='{}', bodyPart='null', contentLength='0'}', httpResponse='null', requestedHost='localhost', responseCode='200', responseBody='[B@14829f1b', responseHeader='{Server=LeapWAS 1.0.0, Date=Fri Jan 28 13:45:05 KST 2022, Content-Type=image/x-icon}'}
+2022-01-28 13:45:05.069 DEBUG - close input stream......
+2022-01-28 13:45:05.069 DEBUG - close output stream......
+2022-01-28 13:45:05.070 DEBUG - socket close......
+2022-01-28 13:45:05.218 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1

@@ -175,9 +175,10 @@ public class LeapHttpServer extends Thread {
             this.server.bind(inetSocketAddress, this.backlog);
             logger.info("Accepting connections on port " + server.getLocalPort());
             while (true) { 
-                Socket request = server.accept();
-                logger.info("Host: "+this.host+":"+this.port+"  Client request accepted... : "+request.getLocalAddress().toString());
-                this.threadpool.submit(new LeapRequestHandler(this, this.docroot, INDEX_FILE, request));
+                Socket connection = server.accept();
+                connection.setSoTimeout(5000);
+                logger.info("Host: "+this.host+":"+this.port+"  Client request accepted... : "+connection.getLocalAddress().toString());
+                this.threadpool.submit(new LeapRequestHandler(this, this.docroot, INDEX_FILE, connection));
             }
         } catch(IOException e) {
             logger.error(e.getMessage(), e);
