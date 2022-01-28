@@ -32,6 +32,17 @@ public class WASException extends Exception {
     }
 
     /**
+     * Constructor with type, code, throable
+     * @param type
+     * @param code
+     * @param cause
+     */
+    public WASException(MSG_TYPE type, int code, Throwable cause) {
+        this(type, code, cause.toString());
+        super.setStackTrace(cause.getStackTrace());
+    }
+
+    /**
      * Constructor with code, arguments
      * @param cause
      * @param type
@@ -52,7 +63,7 @@ public class WASException extends Exception {
      * @param cause
      */
     public WASException(Throwable cause) {
-        super(cause.getMessage(), cause);
+        super(cause);
     }    
 
     /**
@@ -80,10 +91,6 @@ public class WASException extends Exception {
 
     @Override
     public String toString() {
-        return "{" +
-            " type='" + this.type + "'" +
-            ", code='" + this.code + "'" +
-            ", message='" + this.message + "'" +
-            "}";
+        return super.toString();
     }
 }

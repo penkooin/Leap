@@ -93,7 +93,7 @@ public class LeapRequestHandler implements Runnable {
             //if client request servlet path
             if (serviceHolder != null) {
                 // request method validation
-                if(serviceHolder.getRequestType() == request.getRequestType()) {
+                if(serviceHolder.getRequestType() != request.getRequestType()) {
                     throw new WASException(MSG_TYPE.HTTP, 405, "<br>Requested method not supported: "+request.getRequestType().name());
                 }
                 if (this.serviceManager.vaildateRequestMethod(request.getRequestType(), request.getContextPath())) {
@@ -138,28 +138,32 @@ public class LeapRequestHandler implements Runnable {
             sendResponse(out, response);
             close();
         } catch(Throwable e) {
+            String responseMessage = null;
             if(e instanceof WASException) {
                 WASException we = (WASException)e;
-                LoggerFactory.getLogger(requestedHost).error(we.getMessage(), we);
-                String responseMessage = "Response";
-                try {
-                    responseMessage = createHttpResponsePage(requestedHost, we.getMessageType(), we.getCode(), we.getMessage());
-                } catch (IOException | URISyntaxException | WASException e1) {
-                    LoggerFactory.getLogger(requestedHost).error(e1.getMessage(), e1);
-                }
+                LoggerFactory.getLogger(requestedHost).error(we.toString(), we);
+                LoggerFactory.getLogger(requestedHost).info("Type: "+we.getMessageType()+" Code: "+we.getCode()+" Exception: "+we.toString());
+                responseMessage = createHttpResponsePage(requestedHost, we.getMessageType(), we.getCode(), we.toString());
                 if(response == null) {
                     response = HttpBuilder.buildHttpResponse(request);
                 }
                 String remote = (connection != null) ? connection.getRemoteSocketAddress().toString() : "Unknown";
                 String server = (connection != null) ? connection.getLocalSocketAddress().toString() : requestedHost;
                 LoggerFactory.getLogger(requestedHost).info("Error client request "+remote+" --- "+server);
-                response.setResponseBody(responseMessage.getBytes());                
-                sendResponse(out, response);
-                close();
                 LoggerFactory.getLogger(requestedHost).info("Close client request on error "+remote+" --- "+server);
             } else {
                 LoggerFactory.getLogger(requestedHost).error(e.getMessage(), e);
+                responseMessage = createHttpResponsePage(requestedHost, MSG_TYPE.HTTP, 503, e.toString());
+                if(response == null) {
+                    response = HttpBuilder.buildHttpResponse(request);
+                }
             }
+            if(responseMessage == null) {
+                responseMessage = "Unknown error: something went wrong in server...";
+            }
+            response.setResponseBody(responseMessage.getBytes(Context.charset()));                
+            sendResponse(out, response);
+            close();
         }
     }
 
@@ -196,14 +200,19 @@ public class LeapRequestHandler implements Runnable {
      * @throws IOException
      * @throws WASException
      */
-    public String createHttpResponsePage(String host, MSG_TYPE type, int code, String message) throws IOException, URISyntaxException, WASException {
+    public String createHttpResponsePage(String host, MSG_TYPE type, int code, String message) {
         Map<String, Object> map;
         if(type != null) {
             map = Map.of("@code", code, "@type", type.name(), "@message", message);
         } else {
             map = Map.of("@code", 0, "@type", "EXCEPTION", "@message", message);
         }
-        return ResourceHelper.getResponsePage(host, map);
+        try {
+            return ResourceHelper.getResponsePage(host, map);
+        } catch (WASException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /**

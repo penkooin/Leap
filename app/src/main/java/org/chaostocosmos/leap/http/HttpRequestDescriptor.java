@@ -28,8 +28,9 @@ public class HttpRequestDescriptor {
     private byte[] reqBody; 
     private String contextPath;
     private Map<String, String> contextParam;
-    private Multipart multipart;
-
+    private BodyPart bodyPart;
+    private long contentLength;
+    
     /**
      * Constructor
      * 
@@ -41,7 +42,8 @@ public class HttpRequestDescriptor {
      * @param contextPath
      * @param url
      * @param contextParam
-     * @param multipart
+     * @param bodyPart
+     * @param contentLength
      */
     public HttpRequestDescriptor(
                                 String httpVersion, 
@@ -52,7 +54,9 @@ public class HttpRequestDescriptor {
                                 byte[] reqBody, 
                                 String contextPath, 
                                 Map<String,String> contextParam,
-                                Multipart multipart) {
+                                BodyPart bodyPart,
+                                long contentLength
+                                ) {
         this.httpVersion = httpVersion;
         this.requestType = requestType;
         this.requestedHost = requestHost;
@@ -61,7 +65,8 @@ public class HttpRequestDescriptor {
         this.reqBody = reqBody;
         this.contextPath = contextPath;
         this.contextParam = contextParam;
-        this.multipart = multipart;
+        this.bodyPart = bodyPart;
+        this.contentLength = contentLength;
     }
 
     public HttpRequest getHttpRequest() {
@@ -112,8 +117,12 @@ public class HttpRequestDescriptor {
         return this.contextParam;
     }
 
-    public Multipart getMultipart() {
-        return this.multipart;
+    public BodyPart getBodyPart() {
+        return this.bodyPart;
+    }
+
+    public long getContentLength() {
+        return this.contentLength;
     }
 
     public void printURLInfo() throws URISyntaxException, MalformedURLException {
@@ -145,7 +154,8 @@ public class HttpRequestDescriptor {
             ", reqBody='" + getReqBody() + "'" +
             ", contextPath='" + getContextPath() + "'" +
             ", contextParam='" + getContextParam() + "'" +
-            ", multipartList='" + getMultipart() + "'" +
+            ", bodyPart='" + getBodyPart() + "'" +
+            ", contentLength='" + getContentLength() + "'" +
             "}";
     }
 }

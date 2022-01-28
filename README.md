@@ -1,7 +1,7 @@
 
 ![leap-logo](./leap.png)
 
-## Are you wanna Leap?
+## You wanna Leap?
 
 ## What is Leap?
 ---

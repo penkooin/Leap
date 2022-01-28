@@ -1,18 +1,16 @@
 package org.chaostocosmos.leap.http;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import java.net.URLDecoder;
 import java.net.http.HttpRequest;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
+import org.chaostocosmos.leap.http.commons.StreamUtils;
 
 /**
  * Http parsing factory object
@@ -70,100 +68,10 @@ public class HttpParser {
     }
 
     /**
-    * Read line from stream
-     * @param is
-     * @return
-     * @throws IOException
-     */
-    private static String readLine(InputStream is) throws IOException {
-        char r = '\r', n = '\n';
-        String line = "";
-        do {
-            r = (char)is.read();
-            line += r;
-            if(r == '\n' && n == '\r') {
-                break;
-            }
-            n = r;
-        } while(n != -1);
-        return line.trim();
-    }
-
-    /**
-     * Read all requested lines 
-     * @param is
-     * @return
-     * @throws IOException
-     */
-    private static List<String> readRequestLines(InputStream is) throws IOException {
-        List<String> lines = new ArrayList<>();
-        String line = "";
-        do {
-            char r = '\r', n = '\n';
-            do {
-                r = (char)is.read();
-                line += r;
-                if(r == '\n' && n == '\r') {
-                    break;
-                }
-                n = r;
-            } while(r != -1);
-            if(line.equals("\r\n"))
-                break;
-            lines.add(line.substring(0, line.indexOf("\r\n")));  
-            line = "";
-        } while(true);
-        return lines;
-    }
-
-    /**
-     * Read lines from request
-     * @param is
-     * @return
-     * @throws IOException
-     */
-    private static List<String> readLines(InputStream is) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
-        String line;
-        List<String> lines = new ArrayList<>();
-        while((line=br.readLine()) != null) {
-            if(line.trim().equals(""))
-                break;
-            lines.add(line);
-        }
-        return lines;
-    }
-
-    /**
      * Request parser inner class
      * @author 9ins
      */
     public static class RequestParser {
-
-        /**
-         * Read by Reader
-         * @param reader
-         * @return
-         */
-        public Map<String, Object> readReader(Reader reader) {
-            return null;
-        }
-
-        /**
-         * Read by InpuStream
-         */
-        public Map<String, Object> readInputStream(InputStream inputStream, int bufferSize) {
-            return null;            
-        }
-
-        /**
-         * Parse request
-         * @throws IOException
-         */
-        public HttpRequestDescriptor parseRequest0(InputStream in) throws IOException {
-            return null;
-        }
-
         /**
          * Parse request
          * @throws IOException
@@ -172,18 +80,20 @@ public class HttpParser {
         public HttpRequestDescriptor parseRequest(InputStream in) throws WASException {
             HttpRequestDescriptor desc = null;
             try {
-                List<String> requestLines = readRequestLines(in);
-                requestLines.stream().forEach(System.out::println);
-                Map<String, String> reqHeader = new HashMap<>();
-                if(requestLines.size() < 1) {
+                String requestLine = StreamUtils.readLine(in, StandardCharsets.ISO_8859_1);
+                if(requestLine == null) {
                     throw new WASException(MSG_TYPE.ERROR, 9);
                 }
-                String head = requestLines.remove(0);
-                String[] token = head.split("\\s+");
-                REQUEST_TYPE requestType = REQUEST_TYPE.valueOf(token[0]);
-                String contextPath = token[1];
-                String httpVersion = token[2];
-                for(String header : requestLines) {
+                requestLine = URLDecoder.decode(requestLine, Context.charset());
+                System.out.println(requestLine);
+                List<String> headers = StreamUtils.readHeaders(in);
+                headers.stream().forEach(System.out::println);
+                Map<String, String> reqHeader = new HashMap<>();
+                String method = requestLine.substring(0, requestLine.indexOf(" "));
+                String contextPath = requestLine.substring(requestLine.indexOf(" ")+1, requestLine.lastIndexOf(" "));
+                String protocol = requestLine.substring(requestLine.lastIndexOf(" ")+1);
+                REQUEST_TYPE requestType = REQUEST_TYPE.valueOf(method);
+                for(String header : headers) {
                     if(header == null || header.length() == 0)
                         break;
                     int idx = header.indexOf(":");
@@ -197,46 +107,65 @@ public class HttpParser {
                 Map<String, String> contextParam = new HashMap<>();
                 int paramsIndex = contextPath.indexOf("?");
                 if(paramsIndex != -1) {
-                    String[] params = contextPath.substring(paramsIndex+1).split("&", -1);
-                    for(String param : params) {
-                        String[] keyValue = param.split("=", -1);
-                        contextParam.put(keyValue[0], keyValue[1]);
+                    String paramString = contextPath.substring(paramsIndex+1);
+                    contextPath = contextPath.substring(0, paramsIndex);
+                    System.out.println(paramString);
+                    if(paramString.indexOf("&") != -1) {
+                        String[] params = paramString.split("&", -1);
+                        for(String param : params) {
+                            String[] keyValue = param.split("=", -1);
+                            contextParam.put(keyValue[0], keyValue[1]);
+                        }    
                     }
                 }
                 String host = requestedHost.indexOf(":") != -1 ? requestedHost.substring(0, requestedHost.indexOf(":")) : requestedHost;
-                String contentType = reqHeader.get("Content-Type");
-                MIME_TYPE mimeType = contentType.indexOf(";") != -1 ? MIME_TYPE.getMimeType(contentType.substring(0, contentType.indexOf(";"))) : MIME_TYPE.getMimeType(contentType);
-                int contentLength = Integer.parseInt(reqHeader.get("Content-Length"));
-                String boundary = contentType != null ? contentType.substring(contentType.indexOf(";")+1) : null;
-                LoggerFactory.getLogger(requestedHost).debug("Context params: "+contextParam.toString());
-                System.out.println(contextPath+"  "+contentType+"   "+contentLength+"--------------------------------------");
-                if(contentLength > 0) {
-                    switch(mimeType) {
-                        case MULTIPART_FORM_DATA:
-                            long length = Long.parseLong(reqHeader.get("Content-Length"));
-                            String[] splited = contentType.split("\\;");
-                            contentType = splited[0].trim();
-                            boundary = splited[1].substring(splited[1].indexOf("=") + 1).trim();
-                            Multipart multipart = new Multipart(host, mimeType, boundary, length, in);
-                            desc = new HttpRequestDescriptor(httpVersion, requestType, host, reqHeader, contentType, null, contextPath, contextParam, multipart);
-                            break;
-                        case APPLICATION_X_WWW_FORM_URLENCODED:
-                            
-                            break;
-                        case APPLICATION_OCTET_STREAM:
-                            break;
-                        case TEXT_PLAIN:
-                        case TEXT_CSS:
-                        case TEXT_JAVASCRIPT:
-                        case APPLICATION_XHTML_XML:
-                        case APPLICATION_XML:
-                        default:
-                    }
+                String contentType = reqHeader.get("Content-Type");                
+                long contentLength = reqHeader.get("Content-Length") != null ? Long.parseLong(reqHeader.get("Content-Length")) : 0L;
+                BodyPart bodyPart = null;
+                if(contentType != null) {
+                    MIME_TYPE mimeType = contentType.indexOf(";") != -1 ? MIME_TYPE.getMimeType(contentType.substring(0, contentType.indexOf(";"))) : MIME_TYPE.getMimeType(contentType);
+                    String boundary = contentType != null ? contentType.substring(contentType.indexOf(";")+1) : null;
+                    LoggerFactory.getLogger(host).debug("Context params: "+contextParam.toString());
+                    if(contentLength > 0) {
+                        switch(mimeType) {
+                            case MULTIPART_FORM_DATA:
+                                String[] splited = contentType.split("\\;");
+                                contentType = splited[0].trim();
+                                boundary = splited[1].substring(splited[1].indexOf("=") + 1).trim();
+                                bodyPart = new MultiPart(host, mimeType, boundary, contentLength, in);
+                                break;
+                            case APPLICATION_X_WWW_FORM_URLENCODED:
+                                break;
+                            case APPLICATION_OCTET_STREAM:
+                                break;
+                            case IMAGE_GIF:
+                            case IMAGE_PNG:
+                            case IMAGE_JPEG:
+                            case IMAGE_BMP:
+                            case IMAGE_WEBP:
+                            case AUDIO_MIDI:
+                            case AUDIO_MPEG:
+                            case AUDIO_WEBM:
+                            case AUDIO_OGG:
+                            case AUDIO_WAV:
+                            case VIDEO_WEBM:
+                            case VIDEO_OGG:
+                                bodyPart = new BinaryPart(host, mimeType, contentLength, in);
+                                break;
+                            case TEXT_PLAIN:
+                            case TEXT_CSS:
+                            case TEXT_JAVASCRIPT:
+                            case APPLICATION_XHTML_XML:
+                            case APPLICATION_XML:
+                            default:
+                        }
+                    }    
                 }
+                desc = new HttpRequestDescriptor(protocol, requestType, host, reqHeader, contentType, new byte[0], contextPath, contextParam, bodyPart, contentLength);
                 HttpRequest request = HttpBuilder.buildHttpRequest(desc);
                 desc.setHttpRequest(request);
             } catch (Exception e) {
-                throw new WASException(MSG_TYPE.ERROR, 45, e.toString());
+                throw new WASException(MSG_TYPE.ERROR, 45, e);
             }
             return desc;
         }

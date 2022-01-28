@@ -5,9 +5,10 @@ import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
-import org.chaostocosmos.leap.http.commons.SaveUtils;
+import org.chaostocosmos.leap.http.commons.StreamUtils;
 
 import ch.qos.logback.classic.Logger;
 
@@ -16,7 +17,7 @@ import ch.qos.logback.classic.Logger;
  * 
  * @author 9ins
  */
-public class Multipart implements BodyPart {
+public class MultiPart extends BodyPart {
 
     Logger logger;
     String host;
@@ -34,7 +35,8 @@ public class Multipart implements BodyPart {
      * @param contentLength
      * @param requestStream
      */
-    public Multipart(String host, MIME_TYPE contentType, String boundary, long contentLength, InputStream requestStream) {
+    public MultiPart(String host, MIME_TYPE contentType, String boundary, long contentLength, InputStream requestStream) {
+        super(host, contentType, contentLength, requestStream);
         this.host = host;
         this.contentType = contentType;
         this.boundary = boundary;
@@ -50,7 +52,7 @@ public class Multipart implements BodyPart {
     }
 
     @Override
-    public byte[] getContents() {
+    public byte[] getAllContents() {
         throw new UnsupportedOperationException("This method cannot support at Multipart object!!!");
     }
 
@@ -60,12 +62,17 @@ public class Multipart implements BodyPart {
     }
 
     @Override
-    public void save(Path targetPath) throws WASException {
-        try {
-            SaveUtils.saveMultipart(this.host, this.requestStream, targetPath, Context.getFileBufferSize(), this.boundary);
-        } catch(IOException e) {
-            throw new WASException(MSG_TYPE.ERROR, 43, targetPath.toString());
-        }
+    public void save(Path targetPath) throws IOException {
+        this.filePaths = StreamUtils.saveMultiPart(this.host, this.requestStream, targetPath, Context.getFileBufferSize(), this.boundary);
+    }
+
+    /**
+     * Get contents Map
+     * @return
+     * @throws IOException
+     */
+    public Map<String, byte[]> getMultiPartContents() throws IOException {
+        return StreamUtils.getMultiPartContents(this.host, this.requestStream, this.boundary);
     }
 
     /**

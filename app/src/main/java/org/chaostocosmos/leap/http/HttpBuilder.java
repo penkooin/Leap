@@ -21,24 +21,27 @@ public class HttpBuilder {
      * @throws MalformedURLException
      * @throws URISyntaxException
      */
-    public static HttpRequest buildHttpRequest(final HttpRequestDescriptor requestDescriptor) throws WASException, MalformedURLException {
+    public static HttpRequest buildHttpRequest(final HttpRequestDescriptor requestDescriptor) throws WASException {
         HttpRequest.Builder request;
         try {
             String url = !requestDescriptor.getRequestedHost().startsWith("http") ? "http://"+requestDescriptor.getRequestedHost() : requestDescriptor.getRequestedHost();
             request = HttpRequest.newBuilder(new URL(url).toURI());
-        } catch (URISyntaxException e) {
-            throw new WASException(e);
-        }
-        //Doing comment because of header error
-        //requestDescriptor.getReqHeader().forEach(request::header);
-        System.out.println("----------------------------"+new String(requestDescriptor.getReqBody()));
-        if(requestDescriptor.getRequestType() == REQUEST_TYPE.GET) {    
-            return request.GET().build();
-        } else if(requestDescriptor.getRequestType() == REQUEST_TYPE.POST) {
-
-            return request.POST(BodyPublishers.ofByteArray(requestDescriptor.getReqBody())).build();
-        } else {
-            throw new WASException(MSG_TYPE.ERROR, 9, requestDescriptor.getRequestType().name());
+            //Doing comment because of header error
+            //requestDescriptor.getReqHeader().forEach(request::header);
+            //System.out.println("----------------------------"+new String(requestDescriptor.getReqBody()));
+            if(requestDescriptor.getRequestType() == REQUEST_TYPE.GET) {    
+                return request.GET().build();
+            } else if(requestDescriptor.getRequestType() == REQUEST_TYPE.POST) {            
+                return request.POST(BodyPublishers.ofByteArray(requestDescriptor.getReqBody())).build();
+            } else if(requestDescriptor.getRequestType() == REQUEST_TYPE.PUT) {
+                return request.PUT(BodyPublishers.ofByteArray(requestDescriptor.getReqBody())).build();
+            } else if(requestDescriptor.getRequestType() == REQUEST_TYPE.DELETE) {
+                return request.DELETE().build();
+            } else {
+                throw new WASException(MSG_TYPE.ERROR, 9, requestDescriptor.getRequestType().name());
+            }
+        } catch (Exception e) {
+            throw new WASException(MSG_TYPE.ERROR, 46, e);
         }
     }
 

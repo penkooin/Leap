@@ -63,6 +63,7 @@ public class ServiceHolder {
      */
     public ServiceHolder(String servicePath, ILeapService service, REQUEST_TYPE requestType, Method serviceMethod, List<IFilter> preFilters, List<IFilter> postFilters) {
         this.servicePath = servicePath;
+        this.requestType = requestType;
         this.service = service;
         this.serviceMethod = serviceMethod;
         this.preFilters = preFilters;

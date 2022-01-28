@@ -20,7 +20,7 @@ server:
   charset: 'utf-8'
   welcome: 'index.html'
   backlog: 50
-  flush-buffer-size: 10MB
+  file-buffer-size: 1024
   threadpool:
     core: 50
     max: 50

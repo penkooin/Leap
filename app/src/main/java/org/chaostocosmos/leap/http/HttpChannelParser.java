@@ -3,11 +3,12 @@ package org.chaostocosmos.leap.http;
 import java.io.IOException;
 import java.net.http.HttpRequest;
 import java.nio.ByteBuffer;
-import java.nio.channels.Channel;
 import java.nio.channels.SocketChannel;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.chaostocosmos.leap.http.commons.StreamUtils;
 
 /**
  * HttpChannelParser
@@ -65,21 +66,6 @@ public class HttpChannelParser {
     }
 
     /**
-    * Read line from stream
-     * @param is
-     * @return
-     * @throws IOException
-     */
-    private static String readLine(Channel ch) {
-        return null;
-    }
-
-    private static List<String> readLines(SocketChannel ch) throws IOException {
-        ByteBuffer bb = ByteBuffer.allocate(1024);
-        return null;
-    }
-
-    /**
      * Request parser inner class
      * @author 9ins
      */
@@ -93,7 +79,7 @@ public class HttpChannelParser {
             ByteBuffer bb = ByteBuffer.allocate(1024);
             HttpRequestDescriptor desc;
             try {
-                List<String> requestLines = readLines(ch);
+                List<String> requestLines = StreamUtils.requestLines(ch);
                 Map<String, String> reqHeader = new HashMap<>();
                 if(requestLines.size() < 1) {
                     throw new WASException(MSG_TYPE.ERROR, 9);
@@ -118,7 +104,7 @@ public class HttpChannelParser {
                 String host = requestedHost.indexOf(":") != -1 ? requestedHost.substring(0, requestedHost.indexOf(":")) : requestedHost;
                 String contentType = reqHeader.get("Content-Type");
                 String boundary = null;
-                Multipart multipart = null;
+                BodyPart multipart = null;
                 if(contentType != null) {
                     String s = contentType.substring(contentType.indexOf(":")+1, contentType.indexOf(";")).trim().toUpperCase();
                     s = s.replace("/", "_").replace("-", "_");
@@ -129,7 +115,7 @@ public class HttpChannelParser {
                     boundary = splited[1].substring(splited[1].indexOf("=") + 1).trim();
                     //multipart = new MultipartDescriptor(host, mimeType, boundary, length, in);
                 }
-                desc = new HttpRequestDescriptor(httpVersion, requestType, host, reqHeader, contentType, null, contextPath, contextParam, multipart);
+                desc = new HttpRequestDescriptor(httpVersion, requestType, host, reqHeader, contentType, null, contextPath, contextParam, multipart, 0);
                 HttpRequest request = HttpBuilder.buildHttpRequest(desc);
                 desc.setHttpRequest(request);
             } catch (Exception e) {

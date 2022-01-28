@@ -51,8 +51,6 @@ public class ServiceManager {
      * Constructor with 
      * @param serviceBeans
      * @throws WASException
-     * @throws URISyntaxException
-     * @throws IOException
      */
     public ServiceManager() throws WASException {
         try {
@@ -79,10 +77,10 @@ public class ServiceManager {
                     if(mm != null) {
                         String mPath = mm.path();
                         REQUEST_TYPE rType = mm.mappingMethod();
+                        System.out.println(service.toString()+" : "+rType.name());
                         FilterMapper fm = method.getDeclaredAnnotation(FilterMapper.class);
                         ServiceHolder serviceHolder;
-                        if(fm != null) {           
-
+                        if(fm != null) {
                             List<IFilter> preFilters = new ArrayList<>();                            
                             Class<? extends IFilter>[] preFilterClasses = fm.preFilters();
                             for(Class<? extends IFilter> clazz : preFilterClasses) {
@@ -121,6 +119,7 @@ public class ServiceManager {
      */
     public boolean vaildateRequestMethod(REQUEST_TYPE type, final String contextPath) throws WASException {
         ServiceHolder serviceHolder = serviceHolderMap.get(contextPath);
+        System.out.println(serviceHolder.toString());
         if(serviceHolder.getRequestType() != type) {
             throw new WASException(MSG_TYPE.ERROR, 34, type.name());
         }
