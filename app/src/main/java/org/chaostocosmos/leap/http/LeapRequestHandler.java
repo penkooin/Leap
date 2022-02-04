@@ -8,11 +8,11 @@ import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.util.Date;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.commons.ResourceHelper;
 import org.chaostocosmos.leap.http.commons.UtilBox;
+import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.services.ServiceHolder;
 import org.chaostocosmos.leap.http.services.ServiceInvoker;
 import org.chaostocosmos.leap.http.services.ServiceManager;
@@ -79,10 +79,10 @@ public class LeapRequestHandler implements Runnable {
             //Put client address to request header Map for ip filter
             requestedHost = request.getRequestedHost();
             request.getReqHeader().put("@Client", requestedHost);
-            LoggerFactory.getLogger(requestedHost).debug("Request host: "+requestedHost);
+            //LoggerFactory.getLogger(requestedHost).debug("Request host: "+requestedHost);
             
             // log request information
-            LoggerFactory.getLogger(request.getRequestedHost()).debug(request.getReqHeader().entrySet().stream().map(e -> e.getKey()+": "+e.getValue()).collect(Collectors.joining(System.lineSeparator())));
+            //LoggerFactory.getLogger(request.getRequestedHost()).debug(request.getReqHeader().entrySet().stream().map(e -> e.getKey()+": "+e.getValue()).collect(Collectors.joining(System.lineSeparator())));
             Path resourcePath = ResourceHelper.getResourcePath(request);
 
             ServiceHolder serviceHolder = this.serviceManager.getMappingServiceHolder(request.getContextPath());
@@ -107,7 +107,7 @@ public class LeapRequestHandler implements Runnable {
                 }
             } else { // When client request static resources
                 if(request.getContextPath().equals("/")) {
-                    String body = ResourceHelper.getWelcomePage(requestedHost, Map.of("@serverName", requestedHost));
+                    String body = ResourceHelper.getWelcomePage(requestedHost, Map.of("@serverName", requestedHost));                    
                     response.setResponseBody(body.getBytes());
                     response.setResponseCode(200);
                 } else {
@@ -224,7 +224,7 @@ public class LeapRequestHandler implements Runnable {
     public void sendResponse(OutputStream out, HttpResponseDescriptor response) {
         try {
             String res = Context.getHttpVersion()+" "+response.getResponseCode()+" "+Context.getHttpMsg(response.getResponseCode())+"\r\n"; 
-            LoggerFactory.getLogger(response.getRequestedHost()).debug(response.toString());
+            //LoggerFactory.getLogger(response.getRequestedHost()).debug(response.toString());
             out.write(res.getBytes()); 
             response.addHeader("Content-length", response.getResponseBody().length);
             for(Map.Entry<String, Object> e : response.getResponseHeader().entrySet()) {

@@ -1,4 +1,4 @@
-package org.chaostocosmos.leap.http;
+package org.chaostocosmos.leap.http.enums;
 
 import org.chaostocosmos.leap.http.services.IDeleteService;
 import org.chaostocosmos.leap.http.services.IGetService;

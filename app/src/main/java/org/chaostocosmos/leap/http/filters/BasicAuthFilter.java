@@ -4,10 +4,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 import org.chaostocosmos.leap.http.HttpRequestDescriptor;
-import org.chaostocosmos.leap.http.MSG_TYPE;
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.annotation.PreFilter;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
+import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.user.User;
 import org.chaostocosmos.leap.http.user.UserManager;
 

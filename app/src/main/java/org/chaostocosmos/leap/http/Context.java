@@ -19,6 +19,7 @@ import org.chaostocosmos.leap.http.commons.Hosts;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.commons.ResourceHelper;
 import org.chaostocosmos.leap.http.commons.UtilBox;
+import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.yaml.snakeyaml.Yaml;
 
 import ch.qos.logback.classic.Level;
@@ -365,6 +366,14 @@ public class Context {
      */
     public static int getThreadPoolKeepAlive() {
         return (int)getConfigValue("server.threadpool.keep-alive");
+    }
+
+    /**
+     * Get client read timeout
+     * @return
+     */
+    public static int getTimeout() {
+        return (int)getConfigValue("server.timeout");
     }
 
     /**

@@ -1,4 +1,4 @@
-package org.chaostocosmos.leap.http;
+package org.chaostocosmos.leap.http.enums;
 
 /**
  * REST request type

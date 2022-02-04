@@ -5,12 +5,20 @@ import java.io.InputStream;
 import java.net.URLDecoder;
 import java.net.http.HttpRequest;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.commons.StreamUtils;
+import org.chaostocosmos.leap.http.enums.MIME_TYPE;
+import org.chaostocosmos.leap.http.enums.MSG_TYPE;
+import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
+import org.chaostocosmos.leap.http.part.BinaryPart;
+import org.chaostocosmos.leap.http.part.BodyPart;
+import org.chaostocosmos.leap.http.part.KeyValuePart;
+import org.chaostocosmos.leap.http.part.MultiPart;
 
 /**
  * Http parsing factory object
@@ -85,15 +93,13 @@ public class HttpParser {
                     throw new WASException(MSG_TYPE.ERROR, 9);
                 }
                 requestLine = URLDecoder.decode(requestLine, Context.charset());
-                System.out.println(requestLine);
-                List<String> headers = StreamUtils.readHeaders(in);
-                headers.stream().forEach(System.out::println);
-                Map<String, String> reqHeader = new HashMap<>();
+                List<String> headerLines = StreamUtils.readHeaders(in);                
+                Map<String, String> headerMap = new HashMap<>();
                 String method = requestLine.substring(0, requestLine.indexOf(" "));
                 String contextPath = requestLine.substring(requestLine.indexOf(" ")+1, requestLine.lastIndexOf(" "));
                 String protocol = requestLine.substring(requestLine.lastIndexOf(" ")+1);
                 REQUEST_TYPE requestType = REQUEST_TYPE.valueOf(method);
-                for(String header : headers) {
+                for(String header : headerLines) {
                     if(header == null || header.length() == 0)
                         break;
                     int idx = header.indexOf(":");
@@ -101,9 +107,9 @@ public class HttpParser {
                         throw new WASException(MSG_TYPE.ERROR, 7, header);
                     }
                     //System.out.println(header.substring(0, idx)+"   "+header.substring(idx + 1, header.length()).trim());
-                    reqHeader.put(header.substring(0, idx), header.substring(idx + 1, header.length()).trim());
+                    headerMap.put(header.substring(0, idx), header.substring(idx + 1, header.length()).trim());
                 }
-                String requestedHost = reqHeader.get("Host").toString().trim();
+                String requestedHost = headerMap.get("Host").toString().trim();
                 Map<String, String> contextParam = new HashMap<>();
                 int paramsIndex = contextPath.indexOf("?");
                 if(paramsIndex != -1) {
@@ -119,13 +125,19 @@ public class HttpParser {
                     }
                 }
                 String host = requestedHost.indexOf(":") != -1 ? requestedHost.substring(0, requestedHost.indexOf(":")) : requestedHost;
-                String contentType = reqHeader.get("Content-Type");                
-                long contentLength = reqHeader.get("Content-Length") != null ? Long.parseLong(reqHeader.get("Content-Length")) : 0L;
+                LoggerFactory.getLogger(host).debug(requestLine);
+                headerLines.stream().forEach(l -> LoggerFactory.getLogger(host).debug(l));
+                String contentType = headerMap.get("Content-Type");                
+                long contentLength = headerMap.get("Content-Length") != null ? Long.parseLong(headerMap.get("Content-Length")) : 0L;
+                // byte[] bytes = new byte[(int)contentLength];
+                // in.read(bytes);
+                // System.out.println(new String(bytes));
                 BodyPart bodyPart = null;
                 if(contentType != null) {
                     MIME_TYPE mimeType = contentType.indexOf(";") != -1 ? MIME_TYPE.getMimeType(contentType.substring(0, contentType.indexOf(";"))) : MIME_TYPE.getMimeType(contentType);
                     String boundary = contentType != null ? contentType.substring(contentType.indexOf(";")+1) : null;
                     LoggerFactory.getLogger(host).debug("Context params: "+contextParam.toString());
+                    LoggerFactory.getLogger(host).debug("Mime Type: "+mimeType);
                     if(contentLength > 0) {
                         switch(mimeType) {
                             case MULTIPART_FORM_DATA:
@@ -135,8 +147,10 @@ public class HttpParser {
                                 bodyPart = new MultiPart(host, mimeType, boundary, contentLength, in);
                                 break;
                             case APPLICATION_X_WWW_FORM_URLENCODED:
+                                bodyPart = new KeyValuePart(host, mimeType, contentLength, in);
                                 break;
                             case APPLICATION_OCTET_STREAM:
+                                
                                 break;
                             case IMAGE_GIF:
                             case IMAGE_PNG:
@@ -151,6 +165,7 @@ public class HttpParser {
                             case VIDEO_WEBM:
                             case VIDEO_OGG:
                                 bodyPart = new BinaryPart(host, mimeType, contentLength, in);
+                                bodyPart.save(Paths.get("./aaa.jpg"));
                                 break;
                             case TEXT_PLAIN:
                             case TEXT_CSS:
@@ -161,7 +176,7 @@ public class HttpParser {
                         }
                     }    
                 }
-                desc = new HttpRequestDescriptor(protocol, requestType, host, reqHeader, contentType, new byte[0], contextPath, contextParam, bodyPart, contentLength);
+                desc = new HttpRequestDescriptor(protocol, requestType, host, headerMap, contentType, new byte[0], contextPath, contextParam, bodyPart, contentLength);
                 HttpRequest request = HttpBuilder.buildHttpRequest(desc);
                 desc.setHttpRequest(request);
             } catch (Exception e) {

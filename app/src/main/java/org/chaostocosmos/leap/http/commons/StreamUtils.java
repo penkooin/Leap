@@ -10,7 +10,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.io.Reader;
-import java.nio.channels.SocketChannel;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
@@ -22,8 +21,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.Constants;
-import org.chaostocosmos.leap.http.MSG_TYPE;
 import org.chaostocosmos.leap.http.WASException;
+import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 
 import ch.qos.logback.classic.Logger;
 
@@ -44,7 +43,7 @@ public class StreamUtils {
      */
     public static void saveBinary(String host, InputStream requestStream, long contentLength, Path savePath, int flushSize) throws IOException {
         Logger logger = LoggerFactory.getLogger(host);
-        String line = readLine(requestStream, StandardCharsets.ISO_8859_1);
+        //String line = readLine(requestStream, StandardCharsets.ISO_8859_1);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         FileOutputStream target = new FileOutputStream(savePath.toFile());
         long readTotal = 0;
@@ -59,6 +58,7 @@ public class StreamUtils {
         }
         target.write(baos.toByteArray());
         target.close();
+        logger.debug("Save Binary Data To: "+savePath.toString()+"   Size: "+readTotal);
     }
 
     /**
@@ -380,12 +380,15 @@ public class StreamUtils {
     }
 
     /**
-     * Read lines from SocketChannel
-     * @param channel
+     * Read data from InputStream as much as the length
+     * @param is
+     * @param length
      * @return
      * @throws IOException
      */
-    public static List<String> requestLines(SocketChannel channel) throws IOException {
-        return null;
+    public static byte[] readStream(InputStream is, int length) throws IOException {
+        byte[] data = new byte[length];
+        is.read(data, 0, length);
+        return data;
     }
 }

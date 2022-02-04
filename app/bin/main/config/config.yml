@@ -4,6 +4,13 @@ server:
   server-name: leap
   host: localhost
   port: 8080
+  timeout: 10000
+  backlog: 50
+  file-buffer-size: 1024
+  threadpool:
+    core: 50
+    max: 50
+    keep-alive: 30
   users:
     - username: chaos930
       password: 9393
@@ -19,12 +26,6 @@ server:
   log-level: 'DEBUG'
   charset: 'utf-8'
   welcome: 'index.html'
-  backlog: 50
-  file-buffer-size: 1024
-  threadpool:
-    core: 50
-    max: 50
-    keep-alive: 30
   virtual-host:
   - server-name: leap1
     host: 127.0.0.1

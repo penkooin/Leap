@@ -3,7 +3,7 @@ package org.chaostocosmos.leap.http.services;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import org.chaostocosmos.leap.http.REQUEST_TYPE;
+import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
 import org.chaostocosmos.leap.http.filters.IFilter;
 
 /**

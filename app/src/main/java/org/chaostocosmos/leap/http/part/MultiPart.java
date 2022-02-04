@@ -1,4 +1,4 @@
-package org.chaostocosmos.leap.http;
+package org.chaostocosmos.leap.http.part;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,8 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.chaostocosmos.leap.http.Context;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.commons.StreamUtils;
+import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 
 import ch.qos.logback.classic.Logger;
 
@@ -22,10 +24,7 @@ public class MultiPart extends BodyPart {
     Logger logger;
     String host;
     List<Path> filePaths;
-    MIME_TYPE contentType;
     String boundary;
-    long contentLength;
-    InputStream requestStream;
 
     /**
      * Constructor of Multipart

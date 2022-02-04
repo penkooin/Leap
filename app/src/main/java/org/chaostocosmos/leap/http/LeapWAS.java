@@ -24,6 +24,7 @@ import org.chaostocosmos.leap.http.commons.Hosts;
 import org.chaostocosmos.leap.http.commons.HostsManager;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.commons.ResourceHelper;
+import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
@@ -225,7 +226,7 @@ public class LeapWAS {
                                                   IOException, 
                                                   URISyntaxException, 
                                                   ParseException {        
-        LeapWAS leap = new LeapWAS(args);  
+        LeapWAS leap = new LeapWAS(args);
         leap.start();
     }
 }

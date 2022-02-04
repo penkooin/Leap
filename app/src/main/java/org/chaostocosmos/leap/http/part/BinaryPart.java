@@ -1,10 +1,12 @@
-package org.chaostocosmos.leap.http;
+package org.chaostocosmos.leap.http.part;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
 
+import org.chaostocosmos.leap.http.Context;
 import org.chaostocosmos.leap.http.commons.StreamUtils;
+import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 
 /**
  * BinaryPart

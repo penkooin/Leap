@@ -5,7 +5,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.chaostocosmos.leap.http.REQUEST_TYPE;
+import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

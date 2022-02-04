@@ -9,14 +9,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.chaostocosmos.leap.http.Context;
-import org.chaostocosmos.leap.http.MSG_TYPE;
-import org.chaostocosmos.leap.http.REQUEST_TYPE;
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.annotation.FilterMapper;
 import org.chaostocosmos.leap.http.annotation.MethodMappper;
 import org.chaostocosmos.leap.http.annotation.ServiceMapper;
 import org.chaostocosmos.leap.http.commons.ClassUtils;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
+import org.chaostocosmos.leap.http.enums.MSG_TYPE;
+import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
 import org.chaostocosmos.leap.http.filters.IFilter;
 
 import ch.qos.logback.classic.Logger;

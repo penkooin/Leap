@@ -1,0 +1,27 @@
+2022-02-03 10:00:53.105 INFO  - Leap WAS server starting......
+2022-02-03 10:00:53.112 INFO  - --------------------------------------------------------------------------
+2022-02-03 10:00:53.112 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-03 10:00:53.112 INFO  - verbose mode on
+2022-02-03 10:00:53.133 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-03 10:00:53.175 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-03 10:00:53.176 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-03 10:00:53.178 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-03 10:00:53.179 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-03 10:00:53.190 INFO  - Accepting connections on port 8080
+2022-02-03 10:00:56.977 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-03 10:00:56.981 DEBUG - GET / HTTP/1.1
+2022-02-03 10:00:56.982 DEBUG - User-Agent: PostmanRuntime/7.29.0
+2022-02-03 10:00:56.984 DEBUG - Accept: */*
+2022-02-03 10:00:56.985 DEBUG - Postman-Token: ee764a61-0a20-4111-b01c-3d287ca6b442
+2022-02-03 10:00:56.986 DEBUG - Host: localhost:8080
+2022-02-03 10:00:56.986 DEBUG - Accept-Encoding: gzip, deflate, br
+2022-02-03 10:00:56.987 DEBUG - Connection: keep-alive
+2022-02-03 10:00:56.987 DEBUG - Content-Length: 96604
+2022-02-03 10:00:56.988 DEBUG - Content-Type: image/jpeg
+2022-02-03 10:00:56.988 DEBUG - Context params: {}
+2022-02-03 10:00:56.988 DEBUG - Mime Type: IMAGE_JPEG
+2022-02-03 10:00:56.989 DEBUG - Save Binary Data To: .\aaa.jpg   Size: 0
+2022-02-03 10:00:57.028 DEBUG - REQUEST RESOURCE: index.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-03 10:00:57.032 DEBUG - close input stream......
+2022-02-03 10:00:57.032 DEBUG - close output stream......
+2022-02-03 10:00:57.033 DEBUG - socket close......

@@ -8,10 +8,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.Context;
-import org.chaostocosmos.leap.http.MSG_TYPE;
-import org.chaostocosmos.leap.http.REQUEST_TYPE;
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.commons.ClassUtils;
+import org.chaostocosmos.leap.http.enums.MSG_TYPE;
+import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
 import org.chaostocosmos.leap.http.filters.IFilter;
 import org.chaostocosmos.leap.http.services.ILeapService;
 import org.slf4j.Logger;

@@ -23,8 +23,8 @@ import java.util.stream.Stream;
 
 import org.chaostocosmos.leap.http.Context;
 import org.chaostocosmos.leap.http.HttpRequestDescriptor;
-import org.chaostocosmos.leap.http.MSG_TYPE;
 import org.chaostocosmos.leap.http.WASException;
+import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 
 /**
  * Resource helper object
@@ -197,7 +197,7 @@ public class ResourceHelper {
             host = host == null ? Context.getDefaultHost() : host;
             contentName = contentName.charAt(0) == '/' ? contentName.substring(1) : contentName;
             Path path = getStaticPath(host).resolve(contentName);
-            LoggerFactory.getLogger(host).debug(path+"   "+contentName+"   "+getStaticPath(host));
+            LoggerFactory.getLogger(host).debug("REQUEST RESOURCE: "+contentName+"   PATH: "+getStaticPath(host));
             return Files.readAllBytes(path);
         } catch (IOException e) {
             throw new WASException(MSG_TYPE.ERROR, 38, contentName);

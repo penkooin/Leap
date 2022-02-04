@@ -8,6 +8,8 @@ import java.net.http.HttpRequest;
 import java.util.Map;
 
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
+import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
+import org.chaostocosmos.leap.http.part.BodyPart;
 
 import ch.qos.logback.classic.Logger;
 

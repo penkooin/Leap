@@ -1,4 +1,6 @@
-package org.chaostocosmos.leap.http;
+package org.chaostocosmos.leap.http.enums;
+
+import org.chaostocosmos.leap.http.Context;
 
 public enum RES_CODE {
     RES200(200),

@@ -1,17 +1,18 @@
-package org.chaostocosmos.leap.http;
+package org.chaostocosmos.leap.http.part;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
 
 import org.chaostocosmos.leap.http.commons.StreamUtils;
+import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 
 /**
  * BodyPart
  * 
  * @author 9ins
  */
-abstract class BodyPart {
+public abstract class BodyPart {
     /**
      * Host
      */

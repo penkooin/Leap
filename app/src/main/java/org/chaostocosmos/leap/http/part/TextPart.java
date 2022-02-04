@@ -1,9 +1,11 @@
-package org.chaostocosmos.leap.http;
+package org.chaostocosmos.leap.http.part;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.Map;
+
+import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 
 /**
  * TextPart

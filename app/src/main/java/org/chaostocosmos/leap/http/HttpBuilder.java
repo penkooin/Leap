@@ -6,6 +6,9 @@ import java.net.URL;
 import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublishers;
 
+import org.chaostocosmos.leap.http.enums.MSG_TYPE;
+import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
+
 /**
  * HttpRequest Builder object
  * 

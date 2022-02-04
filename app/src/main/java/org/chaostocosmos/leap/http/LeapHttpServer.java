@@ -176,7 +176,7 @@ public class LeapHttpServer extends Thread {
             logger.info("Accepting connections on port " + server.getLocalPort());
             while (true) { 
                 Socket connection = server.accept();
-                connection.setSoTimeout(5000);
+                connection.setSoTimeout(Context.getTimeout());
                 logger.info("Host: "+this.host+":"+this.port+"  Client request accepted... : "+connection.getLocalAddress().toString());
                 this.threadpool.submit(new LeapRequestHandler(this, this.docroot, INDEX_FILE, connection));
             }
