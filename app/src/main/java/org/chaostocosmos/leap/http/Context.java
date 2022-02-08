@@ -264,11 +264,11 @@ public class Context {
                         .collect(Collectors.toList())
                             .stream()
                             .map(o -> (Map<?, ?>)o)
-                            .filter(m -> m.get("host").equals(vhost))
+                            .filter(m -> m.get("host").equals(vhost)) 
                             .map(e -> new Hosts(false,
                                                 (String)e.get("server-name"), 
                                                 (String)e.get("host"), 
-                                                Integer.parseInt(e.get("port")+""), 
+                                                Integer.parseInt(e.get("port")+""),  
                                                 ((List<?>)e.get("dynamic-classpaths")).stream().map(c -> Paths.get(c.toString())).collect(Collectors.toList()),
                                                 Paths.get((String)e.get("doc-root")), 
                                                 (String)e.get("logs"),
@@ -314,7 +314,7 @@ public class Context {
     /**
      * Get using ports
      * @return
-     */
+     */ 
     public static int[] getUsingPorts() {
         return getAllHosts().entrySet().stream().mapToInt(e -> e.getValue().getPort()).distinct().toArray();
     }
@@ -478,6 +478,24 @@ public class Context {
      */
     public static Charset charset() {
         return Charset.forName(getConfigValue("server.charset")+"");
+    }
+
+    /**
+     * Get allowed resource pattern
+     * @return
+     */
+    public static List<String> getResourceAllowed() {
+        List<?> allowedList = (List<?>)getConfigValue("server.resource-filter.allowed");
+        return allowedList.stream().map(o -> o.toString()).collect(Collectors.toList());
+    }
+
+    /**
+     * Get forbidden resource pattern
+     * @return
+     */
+    public static List<String> getResourceForbidden() {
+        List<?> forbiddenList = (List<?>)getConfigValue("server.resource-filter.forbidden");
+        return forbiddenList.stream().map(o -> o.toString()).collect(Collectors.toList());
     }
     
     /**

@@ -5,10 +5,10 @@ import java.io.InputStream;
 import java.net.URLDecoder;
 import java.net.http.HttpRequest;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.commons.StreamUtils;
@@ -19,6 +19,7 @@ import org.chaostocosmos.leap.http.part.BinaryPart;
 import org.chaostocosmos.leap.http.part.BodyPart;
 import org.chaostocosmos.leap.http.part.KeyValuePart;
 import org.chaostocosmos.leap.http.part.MultiPart;
+import org.chaostocosmos.leap.http.part.TextPart;
 
 /**
  * Http parsing factory object
@@ -87,13 +88,13 @@ public class HttpParser {
          */
         public HttpRequestDescriptor parseRequest(InputStream in) throws WASException {
             HttpRequestDescriptor desc = null;
-            try {
+            try {                
                 String requestLine = StreamUtils.readLine(in, StandardCharsets.ISO_8859_1);
                 if(requestLine == null) {
                     throw new WASException(MSG_TYPE.ERROR, 9);
                 }
                 requestLine = URLDecoder.decode(requestLine, Context.charset());
-                List<String> headerLines = StreamUtils.readHeaders(in);                
+                List<String> headerLines = StreamUtils.readHeaders(in);
                 Map<String, String> headerMap = new HashMap<>();
                 String method = requestLine.substring(0, requestLine.indexOf(" "));
                 String contextPath = requestLine.substring(requestLine.indexOf(" ")+1, requestLine.lastIndexOf(" "));
@@ -115,23 +116,26 @@ public class HttpParser {
                 if(paramsIndex != -1) {
                     String paramString = contextPath.substring(paramsIndex+1);
                     contextPath = contextPath.substring(0, paramsIndex);
-                    System.out.println(paramString);
                     if(paramString.indexOf("&") != -1) {
                         String[] params = paramString.split("&", -1);
                         for(String param : params) {
                             String[] keyValue = param.split("=", -1);
                             contextParam.put(keyValue[0], keyValue[1]);
-                        }    
+                        }
                     }
                 }
                 String host = requestedHost.indexOf(":") != -1 ? requestedHost.substring(0, requestedHost.indexOf(":")) : requestedHost;
-                LoggerFactory.getLogger(host).debug(requestLine);
-                headerLines.stream().forEach(l -> LoggerFactory.getLogger(host).debug(l));
-                String contentType = headerMap.get("Content-Type");                
+                String debug = "";
+                debug += "--------------------------------------------------------------------------------"+System.lineSeparator()+requestLine+System.lineSeparator();
+                debug += headerLines.stream().collect(Collectors.joining(System.lineSeparator()));
+                String contentType = headerMap.get("Content-Type");
                 long contentLength = headerMap.get("Content-Length") != null ? Long.parseLong(headerMap.get("Content-Length")) : 0L;
-                // byte[] bytes = new byte[(int)contentLength];
-                // in.read(bytes);
-                // System.out.println(new String(bytes));
+                /*
+                byte[] bytes = new byte[(int)contentLength];
+                in.read(bytes);
+                System.out.println(new String(bytes));
+                */
+                LoggerFactory.getLogger(host).debug(debug);
                 BodyPart bodyPart = null;
                 if(contentType != null) {
                     MIME_TYPE mimeType = contentType.indexOf(";") != -1 ? MIME_TYPE.getMimeType(contentType.substring(0, contentType.indexOf(";"))) : MIME_TYPE.getMimeType(contentType);
@@ -144,13 +148,10 @@ public class HttpParser {
                                 String[] splited = contentType.split("\\;");
                                 contentType = splited[0].trim();
                                 boundary = splited[1].substring(splited[1].indexOf("=") + 1).trim();
-                                bodyPart = new MultiPart(host, mimeType, boundary, contentLength, in);
+                                bodyPart = new MultiPart(host, mimeType, boundary, contentLength, in, false, Context.charset());
                                 break;
                             case APPLICATION_X_WWW_FORM_URLENCODED:
-                                bodyPart = new KeyValuePart(host, mimeType, contentLength, in);
-                                break;
-                            case APPLICATION_OCTET_STREAM:
-                                
+                                bodyPart = new KeyValuePart(host, mimeType, contentLength, in, false, Context.charset());
                                 break;
                             case IMAGE_GIF:
                             case IMAGE_PNG:
@@ -164,17 +165,20 @@ public class HttpParser {
                             case AUDIO_WAV:
                             case VIDEO_WEBM:
                             case VIDEO_OGG:
-                                bodyPart = new BinaryPart(host, mimeType, contentLength, in);
-                                bodyPart.save(Paths.get("./aaa.jpg"));
+                                bodyPart = new BinaryPart(host, mimeType, contentLength, in, false, Context.charset());
                                 break;
                             case TEXT_PLAIN:
                             case TEXT_CSS:
                             case TEXT_JAVASCRIPT:
                             case APPLICATION_XHTML_XML:
                             case APPLICATION_XML:
+                            case TEXT_HTML:
+                            case TEXT_XML:
+                            case TEXT_JSON:
+                                bodyPart = new TextPart(host, mimeType, contentLength, in, false, Context.charset());
                             default:
                         }
-                    }    
+                    }
                 }
                 desc = new HttpRequestDescriptor(protocol, requestType, host, headerMap, contentType, new byte[0], contextPath, contextParam, bodyPart, contentLength);
                 HttpRequest request = HttpBuilder.buildHttpRequest(desc);
@@ -193,11 +197,12 @@ public class HttpParser {
         /**
          * parse response
          * @return
+         * @throws WASException
          */
         public HttpResponseDescriptor createDummyHttpResponseDescriptor(final HttpRequestDescriptor request, 
                                                                         final int responseCode, 
                                                                         final byte[] responseBody, 
-                                                                        final Map<String, Object> headers) {
+                                                                        final Map<String, Object> headers) throws WASException {
             return new HttpResponseDescriptor(request);
         }
     }    

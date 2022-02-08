@@ -1,13 +1,18 @@
 package org.chaostocosmos.leap.http;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.commons.ResourceHelper;
@@ -17,6 +22,8 @@ import org.chaostocosmos.leap.http.services.ServiceHolder;
 import org.chaostocosmos.leap.http.services.ServiceInvoker;
 import org.chaostocosmos.leap.http.services.ServiceManager;
 
+import ch.qos.logback.classic.Logger;
+
 /**
  * Client request processor object
  * 
@@ -24,6 +31,11 @@ import org.chaostocosmos.leap.http.services.ServiceManager;
  * @since 2021.09.16
  */
 public class LeapRequestHandler implements Runnable {
+    /**
+     * Logger
+     */
+    private static Logger logger;
+    
     /**
      * Path doc root
      */
@@ -112,22 +124,25 @@ public class LeapRequestHandler implements Runnable {
                     response.setResponseCode(200);
                 } else {
                     if (resourcePath.toFile().exists()) {
-                        response.setResponseCode(200);
+                        File resourceFile = resourcePath.toFile();
+                        String resourceName = resourceFile.getName();
                         String mimeType = UtilBox.probeContentType(resourcePath);
-                        response.addHeader("Content-Type", mimeType);
-                        if(resourcePath.toFile().getName().endsWith(".exe")) {
-                            String message = Context.getHttpMsg(405);
-                            String body = ResourceHelper.getResponsePage(requestedHost, Map.of("@code", 405, "@message", message));
+                        LoggerFactory.getLogger(requestedHost).debug("DOWNLOAD RESOURCE MIME-TYPE: "+mimeType);
+                        //Condition of requeset resource in forbidden list
+                        if(Context.getResourceForbidden().stream().anyMatch(f -> !f.trim().equals("") && resourceName.matches(Arrays.asList(f.split(Pattern.quote("*"))).stream().map(s -> s.equals("") ? "" : Pattern.quote(s)).collect(Collectors.joining(".*"))+".*"))) {
+                            String message = Context.getHttpMsg(403);
+                            String body = ResourceHelper.getResponsePage(requestedHost, Map.of("@code", 403, "@type", "HTTP", "@message", message));
+                            response.addHeader("Content-Type", "text/html; charset=" + Context.charset().name().toLowerCase());
                             response.setResponseBody(body.getBytes());
-                            response.setResponseCode(405);
-                        } else if(mimeType == null || mimeType.equals("application/x-msdownload")) {
-                            byte[] rawData = ResourceHelper.getBinaryResource(resourcePath);
-                            response.setResponseBody(rawData);
+                            response.setResponseCode(403);                            
+                        } else 
+                        //Condition of request resource in allowed list
+                        if(Context.getResourceAllowed().stream().anyMatch(a -> !a.trim().equals("") && resourceName.matches(Arrays.asList(a.split(Pattern.quote("*"))).stream().map(s -> s.equals("") ? "" : Pattern.quote(s)).collect(Collectors.joining(".*"))+".*"))) {
+                            response.addHeader("Content-Type", mimeType);
+                            response.setResponseBody(resourcePath);
                             response.setResponseCode(200);
                         } else {
-                            byte[] body = ResourceHelper.getResourceContent(requestedHost, request.getContextPath());
-                            response.setResponseBody(body);
-                            response.setResponseCode(200);;
+                            LoggerFactory.getLogger(requestedHost).debug("Not allowed resource requested: "+resourceName);
                         }
                     } else {
                         //When requested resource is not found
@@ -166,6 +181,64 @@ public class LeapRequestHandler implements Runnable {
             close();
         }
     }
+
+    /**
+     * Send response to client
+     * @param out
+     * @param response
+     * @throws IOException
+     */
+    public void sendResponse(OutputStream out, HttpResponseDescriptor response) {
+        try {
+            String res = Context.getHttpVersion()+" "+response.getResponseCode()+" "+Context.getHttpMsg(response.getResponseCode())+"\r\n"; 
+            out.write(res.getBytes());
+            //LoggerFactory.getLogger(response.getRequestedHost()).debug(response.toString());
+            Object body = response.getResponseBody();
+            if(body == null) {
+                throw new IllegalArgumentException("Response body not set. Something wrong in Respose process!!!");
+            }
+            if(response.getResponseHeader().get("Content-Length") == null) {
+                int contentLength = body instanceof byte[] ? ((byte[])body).length : (int)((Path)body).toFile().length();
+                response.addHeader("Content-Length", contentLength);
+            }
+            for(Map.Entry<String, Object> e : response.getResponseHeader().entrySet()) {
+                out.write((e.getKey()+": "+e.getValue()+"\r\n").getBytes()); 
+            } 
+            out.write("\r\n".getBytes());
+            out.flush(); 
+            if(body instanceof byte[]) {
+                out.write((byte[]) body);
+            } else {
+                if(body instanceof File) {
+                    writeToStream((File)body, out, Context.getFileBufferSize());
+                } else if(body instanceof Path) {
+                    writeToStream(((Path)body).toFile(), out, Context.getFileBufferSize());
+                } else {
+                    throw new IllegalArgumentException("Not supported response body type: "+body.getClass().getName());
+                }
+            }
+            out.flush();
+        } catch(Exception e) {
+            LoggerFactory.getLogger(response.getRequestedHost()).error(e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Write resource to OutputStream for client
+     * @param resource
+     * @param out
+     * @param bufferSize
+     * @throws IOException
+     */
+    private void writeToStream(File resource, OutputStream out, int bufferSize) throws IOException {
+        byte[] buffer = new byte[bufferSize];
+        FileInputStream in = new FileInputStream(resource);
+        int len;
+        while((len=in.read(buffer)) != -1) {
+            out.write(buffer, 0, len);
+        }
+        in.close();    
+    }    
 
     /**
      * Close client connection
@@ -212,30 +285,6 @@ public class LeapRequestHandler implements Runnable {
         } catch (WASException e) {
             e.printStackTrace();
             return null;
-        }
-    }
-
-    /**
-     * Send response to client
-     * @param out
-     * @param response
-     * @throws IOException
-     */
-    public void sendResponse(OutputStream out, HttpResponseDescriptor response) {
-        try {
-            String res = Context.getHttpVersion()+" "+response.getResponseCode()+" "+Context.getHttpMsg(response.getResponseCode())+"\r\n"; 
-            //LoggerFactory.getLogger(response.getRequestedHost()).debug(response.toString());
-            out.write(res.getBytes()); 
-            response.addHeader("Content-length", response.getResponseBody().length);
-            for(Map.Entry<String, Object> e : response.getResponseHeader().entrySet()) {
-               out.write((e.getKey()+": "+e.getValue()+"\r\n").getBytes()); 
-            } 
-            out.write("\r\n".getBytes());
-            out.flush(); 
-            out.write(response.getResponseBody()); 
-            out.flush();
-        } catch(IOException e) {
-            LoggerFactory.getLogger(response.getRequestedHost()).error(e.getMessage(), e);
         }
     }
 }

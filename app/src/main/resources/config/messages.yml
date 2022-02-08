@@ -95,3 +95,5 @@ messages:
     error44: 'Service method invocation error. Service: {}  Method: {}'
     error45: 'Error in request parsing process. Caused: {}'
     error46: 'Error on building HttpRequest process. Caused: {}'
+    error47: '{} not support this operation!!!'
+    error48: 'Request stream aleary closed or Rquest body not loaded.  Is Body: {}  Is Stream: {}'

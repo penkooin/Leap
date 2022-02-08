@@ -61,7 +61,14 @@ public class Hosts {
      * @param logPath
      * @param logLevel
      */
-    public Hosts(boolean isDefaultHost, String serverName, String host, int port, List<Path> dynamicClaspaths, Path docroot, String logPath, List<Level> logLevel)  {
+    public Hosts(boolean isDefaultHost, 
+                 String serverName, 
+                 String host, 
+                 int port, 
+                 List<Path> dynamicClaspaths, 
+                 Path docroot, 
+                 String logPath, 
+                 List<Level> logLevel)  {
         this.isDefaultHost = isDefaultHost;
         this.serverName = serverName;
         this.host = host;

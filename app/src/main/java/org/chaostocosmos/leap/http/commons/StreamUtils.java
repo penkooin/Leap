@@ -1,6 +1,7 @@
 package org.chaostocosmos.leap.http.commons;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -8,10 +9,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
 import java.io.Reader;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,21 +47,38 @@ public class StreamUtils {
     public static void saveBinary(String host, InputStream requestStream, long contentLength, Path savePath, int flushSize) throws IOException {
         Logger logger = LoggerFactory.getLogger(host);
         //String line = readLine(requestStream, StandardCharsets.ISO_8859_1);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
         FileOutputStream target = new FileOutputStream(savePath.toFile());
-        long readTotal = 0;
-        while(readTotal >= contentLength) {
-            int read=requestStream.read();
-            readTotal++;            
-            baos.write(read);
-            if(baos.size() > flushSize) {
-                target.write(baos.toByteArray());
-                baos.reset();
-            }
+        byte[] buffer = new byte[flushSize];
+        int len;
+        long total = 0;
+        while((len=requestStream.read(buffer)) > 0) {
+            target.write(buffer, 0, len);
+            total += len;
+            if(total >= contentLength) 
+                break;
         }
-        target.write(baos.toByteArray());
         target.close();
-        logger.debug("Save Binary Data To: "+savePath.toString()+"   Size: "+readTotal);
+        logger.debug("Save Binary Data To: "+savePath.toString()+"   Size: "+savePath.toFile().length());
+    }
+
+    /**
+     * Save text
+     * @param host
+     * @param requestStream
+     * @param contentLength
+     * @param savePath
+     * @param charset
+     * @throws IOException
+     */
+    public static void saveText(String host, InputStream requestStream, long contentLength, Path savePath, Charset charset) throws IOException {
+        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(savePath.toFile()), charset));
+        ByteArrayOutputStream line = new ByteArrayOutputStream();
+        int total = 0;        
+        while(total > contentLength) {
+            line.write(requestStream.read());
+            total++;
+        }
+        out.close();
     }
 
     /**
@@ -69,7 +89,7 @@ public class StreamUtils {
      * @return
      * @throws IOException
      */
-    public static Map<String, byte[]> getMultiPartContents(String host, InputStream inputStream, String boundary) throws IOException {
+    public static Map<String, byte[]> getMultiPartContents(String host, InputStream inputStream, String boundary, Charset charset) throws IOException {
         Logger logger = LoggerFactory.getLogger(host);
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.ISO_8859_1));
         String line = reader.readLine();
@@ -79,8 +99,8 @@ public class StreamUtils {
         boolean isLast = false;    
         do {
             if(line.trim().startsWith(boundaryStart)) {
-                String contentDesposition = readLine(reader, StandardCharsets.UTF_8);
-                String contentType = readLine(reader, StandardCharsets.UTF_8);
+                String contentDesposition = readLine(reader, charset);
+                String contentType = readLine(reader, charset);
                 contentType = contentType.substring(contentType.indexOf(":")+1).trim();
                 String emptyLine = readLine(reader, StandardCharsets.ISO_8859_1);
                 Map<String, String> map = getBoundaryMap(contentDesposition);
@@ -97,7 +117,7 @@ public class StreamUtils {
                         byte[] lineData = lineStream.toByteArray();
                         line = new String(lineData);
                         if(line.trim().equals(boundaryStart) || line.trim().equals(boundaryEnd)) {
-                            System.out.println(line.trim());
+                            //System.out.println(line.trim());
                             len -= 2;
                             break;
                         }
@@ -128,7 +148,7 @@ public class StreamUtils {
      * @param boundary
      * @throws IOException
      */
-    public static List<Path> saveMultiPart(String host, InputStream inputStream, Path savePath, int flushSize, String boundary) throws IOException {
+    public static List<Path> saveMultiPart(String host, InputStream inputStream, Path savePath, int flushSize, String boundary, Charset charset) throws IOException {
         Logger logger = LoggerFactory.getLogger(host);
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.ISO_8859_1));
         String line = reader.readLine();
@@ -136,17 +156,20 @@ public class StreamUtils {
         List<Path> savedFiles = new ArrayList<>();
         String boundaryStart = "--"+boundary;
         String boundaryEnd = boundaryStart+"--";
+        if(!savePath.toFile().exists()) {
+            Files.createDirectories(savePath);
+        }
         do {
             //System.out.println(line);
             if(line.trim().equals(boundaryStart)) {
-                String contentDesposition = readLine(reader, StandardCharsets.UTF_8);
-                String contentType =  readLine(reader, StandardCharsets.UTF_8);
+                String contentDesposition = readLine(reader, charset);
+                String contentType =  readLine(reader, charset);
                 contentType = contentType.substring(contentType.indexOf(":")+1).trim();
                 String emptyLine = reader.readLine();
                 Map<String, String> map = getBoundaryMap(contentDesposition);
                 logger.debug("============================== MULTIPART CONTENT: {} ==============================", contentType);
                 map.entrySet().stream().forEach(e -> logger.debug(e.getKey()+" = "+e.getValue()));
-                File file = new File(map.get("filename"));
+                File file = savePath.resolve(map.get("filename")).toFile();
                 long startMillis = System.currentTimeMillis();
                 if(contentType.indexOf("text") != -1) {
                     FileWriter writer = new FileWriter(file);
@@ -229,7 +252,7 @@ public class StreamUtils {
      * @param boundary
      * @throws WASException
      */
-    private void saveMultiPart1(String host, InputStream inputStream, Path savePath, int bufferSize, String boundary) throws WASException {            
+    private void saveMultiPart1(String host, InputStream inputStream, Path savePath, int bufferSize, String boundary, Charset charset) throws WASException {            
         if(inputStream != null) {
             InputStreamReader reader = new InputStreamReader(inputStream, StandardCharsets.ISO_8859_1);
             boundary = "--"+boundary;
@@ -238,9 +261,9 @@ public class StreamUtils {
                 String line = readLine(reader, StandardCharsets.ISO_8859_1);
                 do {
                     if((boundary).endsWith(line)) {
-                        String contentDesposition = readLine(reader, StandardCharsets.UTF_8);
-                        String contentType =  readLine(reader, StandardCharsets.UTF_8);
-                        String empty = readLine(reader, StandardCharsets.UTF_8);
+                        String contentDesposition = readLine(reader, charset);
+                        String contentType =  readLine(reader, charset);
+                        String empty = readLine(reader, charset);
                         int idx = contentDesposition.indexOf("filename");
                         String filename = null;
                         if(idx != -1) {
@@ -335,13 +358,14 @@ public class StreamUtils {
         do {
             c = is.read();
             //CR
-            if(c == 0x0A && n == 0x0D) {
+            if(c == 0x0A) {
                 break;
             }
             baos.write(c);
             n = c;
         } while(c != -1);
-        String line = new String(baos.toByteArray(), charset);        
+        byte[] data = baos.toByteArray();
+        String line = new String(data, charset);
         return line.trim().equals("") ? null : line;
     }
 

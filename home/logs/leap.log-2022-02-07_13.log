@@ -1,0 +1,101 @@
+2022-02-07 13:00:46.299 INFO  - Leap WAS server starting......
+2022-02-07 13:00:46.395 INFO  - --------------------------------------------------------------------------
+2022-02-07 13:00:46.396 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-07 13:00:46.396 INFO  - verbose mode on
+2022-02-07 13:00:46.403 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-07 13:00:46.432 DEBUG - Method not mapped with MethodMapper: deployService
+2022-02-07 13:00:46.437 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@2638011 : POST
+2022-02-07 13:00:46.438 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-07 13:00:46.439 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-07 13:00:46.441 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-07 13:00:46.441 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-07 13:00:46.465 INFO  - Accepting connections on port 8080
+2022-02-07 13:00:47.961 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-07 13:00:47.969 DEBUG - POST /?aaa=bbb HTTP/1.1
+2022-02-07 13:00:47.970 DEBUG - User-Agent: PostmanRuntime/7.29.0
+2022-02-07 13:00:47.970 DEBUG - Accept: */*
+2022-02-07 13:00:47.970 DEBUG - Postman-Token: 684a0eb1-cc51-40be-9f08-7083c9434009
+2022-02-07 13:00:47.970 DEBUG - Host: localhost:8080
+2022-02-07 13:00:47.970 DEBUG - Accept-Encoding: gzip, deflate, br
+2022-02-07 13:00:47.970 DEBUG - Connection: keep-alive
+2022-02-07 13:00:47.971 DEBUG - Content-Length: 0
+2022-02-07 13:00:47.991 DEBUG - REQUEST RESOURCE: index.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-07 13:00:47.996 DEBUG - close input stream......
+2022-02-07 13:00:47.996 DEBUG - close output stream......
+2022-02-07 13:00:47.997 DEBUG - socket close......
+2022-02-07 13:02:04.456 INFO  - Leap WAS server starting......
+2022-02-07 13:02:04.459 INFO  - --------------------------------------------------------------------------
+2022-02-07 13:02:04.459 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-07 13:02:04.460 INFO  - verbose mode on
+2022-02-07 13:02:04.466 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-07 13:02:04.489 DEBUG - Method not mapped with MethodMapper: deployService
+2022-02-07 13:02:04.492 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@291b4bf5 : POST
+2022-02-07 13:02:04.493 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-07 13:02:04.493 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-07 13:02:04.495 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-07 13:02:04.495 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-07 13:02:04.505 INFO  - Accepting connections on port 8080
+2022-02-07 13:02:06.011 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-07 13:02:06.019 DEBUG - ================================================================================
+2022-02-07 13:02:06.019 DEBUG - POST /?aaa=bbb HTTP/1.1
+2022-02-07 13:02:06.020 DEBUG - User-Agent: PostmanRuntime/7.29.0
+2022-02-07 13:02:06.021 DEBUG - Accept: */*
+2022-02-07 13:02:06.021 DEBUG - Postman-Token: f5c81bac-bb52-4e30-a77b-a3b8b4184c5b
+2022-02-07 13:02:06.021 DEBUG - Host: localhost:8080
+2022-02-07 13:02:06.022 DEBUG - Accept-Encoding: gzip, deflate, br
+2022-02-07 13:02:06.022 DEBUG - Connection: keep-alive
+2022-02-07 13:02:06.023 DEBUG - Content-Length: 0
+2022-02-07 13:02:06.042 DEBUG - REQUEST RESOURCE: index.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-07 13:02:06.043 DEBUG - close input stream......
+2022-02-07 13:02:06.044 DEBUG - close output stream......
+2022-02-07 13:02:06.044 DEBUG - socket close......
+2022-02-07 13:02:31.058 INFO  - Leap WAS server starting......
+2022-02-07 13:02:31.061 INFO  - --------------------------------------------------------------------------
+2022-02-07 13:02:31.061 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-07 13:02:31.061 INFO  - verbose mode on
+2022-02-07 13:02:31.067 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-07 13:02:31.091 DEBUG - Method not mapped with MethodMapper: deployService
+2022-02-07 13:02:31.095 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@5c90e579 : POST
+2022-02-07 13:02:31.095 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-07 13:02:31.096 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-07 13:02:31.097 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-07 13:02:31.097 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-07 13:02:31.107 INFO  - Accepting connections on port 8080
+2022-02-07 13:02:32.241 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-07 13:02:32.245 DEBUG - POST /?aaa=bbb HTTP/1.1================================================================================
+2022-02-07 13:02:32.246 DEBUG - User-Agent: PostmanRuntime/7.29.0
+2022-02-07 13:02:32.246 DEBUG - Accept: */*
+2022-02-07 13:02:32.247 DEBUG - Postman-Token: c88d6193-ae86-41e6-a985-0c5b23122ca3
+2022-02-07 13:02:32.247 DEBUG - Host: localhost:8080
+2022-02-07 13:02:32.247 DEBUG - Accept-Encoding: gzip, deflate, br
+2022-02-07 13:02:32.247 DEBUG - Connection: keep-alive
+2022-02-07 13:02:32.247 DEBUG - Content-Length: 0
+2022-02-07 13:02:32.263 DEBUG - REQUEST RESOURCE: index.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-07 13:02:32.265 DEBUG - close input stream......
+2022-02-07 13:02:32.265 DEBUG - close output stream......
+2022-02-07 13:02:32.266 DEBUG - socket close......
+2022-02-07 13:02:57.142 INFO  - Leap WAS server starting......
+2022-02-07 13:02:57.145 INFO  - --------------------------------------------------------------------------
+2022-02-07 13:02:57.145 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-07 13:02:57.145 INFO  - verbose mode on
+2022-02-07 13:02:57.151 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-07 13:02:57.174 DEBUG - Method not mapped with MethodMapper: deployService
+2022-02-07 13:02:57.178 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@5c90e579 : POST
+2022-02-07 13:02:57.180 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-07 13:02:57.180 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-07 13:02:57.181 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-07 13:02:57.182 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-07 13:02:57.190 INFO  - Accepting connections on port 8080
+2022-02-07 13:02:58.548 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-07 13:02:58.554 DEBUG - ========================================POST /?aaa=bbb HTTP/1.1========================================
+2022-02-07 13:02:58.555 DEBUG - User-Agent: PostmanRuntime/7.29.0
+2022-02-07 13:02:58.556 DEBUG - Accept: */*
+2022-02-07 13:02:58.556 DEBUG - Postman-Token: ab605986-4113-401a-b08b-1b6ce4db0e15
+2022-02-07 13:02:58.556 DEBUG - Host: localhost:8080
+2022-02-07 13:02:58.556 DEBUG - Accept-Encoding: gzip, deflate, br
+2022-02-07 13:02:58.557 DEBUG - Connection: keep-alive
+2022-02-07 13:02:58.557 DEBUG - Content-Length: 0
+2022-02-07 13:02:58.576 DEBUG - REQUEST RESOURCE: index.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-07 13:02:58.580 DEBUG - close input stream......
+2022-02-07 13:02:58.580 DEBUG - close output stream......
+2022-02-07 13:02:58.580 DEBUG - socket close......

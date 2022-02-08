@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
  * @author 9ins
  */
 public enum MIME_TYPE {
+    APPLICATION_X_ZIP("application/x-zip-compressed"),
     APPLICATION_OCTET_STREAM("application/octet-stream"),
     APPLICATION_PKCS12("application/pkcs12"),
     APPLICATION_VND_MSPOWERPOINT("application/vnd.mspowerpoint"),
@@ -21,8 +22,9 @@ public enum MIME_TYPE {
     APPLICATION_JAVASCRIPT("application/javascript"),
     APPLICATION_PDF("application/pdf"),
     APPLICATION_JAVA_ARCHIVE("application/java-archive"),
+    APPLICATION_ZIP("application/zip"),
     MULTIPART_FORM_DATA("multipart/form-data"),
-    MULTIPART_BYTERANGES("multipart/byteranges"),    
+    MULTIPART_BYTERANGES("multipart/byteranges"),
     TEXT_PLAIN("text/plain"),
     TEXT_HTML("text/html"),
     TEXT_XML("text/xml"),

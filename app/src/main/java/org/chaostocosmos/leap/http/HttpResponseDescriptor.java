@@ -1,5 +1,6 @@
 package org.chaostocosmos.leap.http;
 
+import java.io.File;
 import java.net.http.HttpResponse;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,14 +34,19 @@ public class HttpResponseDescriptor {
     private int responseCode;
     
     /**
-     * Response body bytes
+     * Response body
      */
-    private byte[] responseBody;
+    private Object responseBody;
 
     /**
      * Response header map
      */
     private Map<String, Object> responseHeader;
+
+    /**
+     * Body length
+     */
+    private long contentLength;
 
     /**
      * Construct with HttpRequestDescriptor
@@ -58,12 +64,15 @@ public class HttpResponseDescriptor {
      * @param responseBody
      * @param responseHeader
      */
-    public HttpResponseDescriptor(HttpRequestDescriptor httpRequestDescriptor, int responseCode, String contentType, byte[] responseBody, Map<String, Object> responseHeader) {
+    public HttpResponseDescriptor(HttpRequestDescriptor httpRequestDescriptor, int responseCode, String contentType, Object responseBody, Map<String, Object> responseHeader) {
         this.httpRequestDescriptor = httpRequestDescriptor;
         this.responseCode = responseCode;
         this.contentType = contentType;
-        this.responseBody = responseBody;
         this.responseHeader = responseHeader;
+        this.responseBody = responseBody;
+        if(responseBody != null) {
+            this.contentLength = responseBody instanceof byte[] ? ((byte[])responseBody).length : responseBody instanceof File ? ((File)responseBody).length() : -1;
+        }
     }
 
     /**
@@ -113,12 +122,13 @@ public class HttpResponseDescriptor {
         this.contentType = contentType;
     }
 
-    public byte[] getResponseBody() {
+    public Object getResponseBody() {
         return this.responseBody;
     }
 
-    public void setResponseBody(byte[] responseBody) {
+    public void setResponseBody(Object responseBody) {                
         this.responseBody = responseBody;
+        this.contentLength = responseBody instanceof byte[] ? ((byte[])responseBody).length : responseBody instanceof File ? ((File)responseBody).length() : -1;
     }
 
     public Map<String, Object> getResponseHeader() {

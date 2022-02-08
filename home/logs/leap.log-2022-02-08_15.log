@@ -1,0 +1,24 @@
+2022-02-08 15:33:19.844 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-08 15:33:29.859 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+	at java.base/java.net.SocketInputStream.socketRead0(Native Method)
+	at java.base/java.net.SocketInputStream.socketRead(SocketInputStream.java:115)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:168)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:200)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:91)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:88)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-08 15:33:29.865 INFO  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+2022-02-08 15:33:29.866 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-08 15:33:29.868 INFO  - Error client request /127.0.0.1:57888 --- /127.0.0.1:8080
+2022-02-08 15:33:29.869 INFO  - Close client request on error /127.0.0.1:57888 --- /127.0.0.1:8080
+2022-02-08 15:33:29.870 DEBUG - { httpRequestDescriptor='null', httpResponse='null', requestedHost='null', responseCode='200', responseBody='[B@6aeecaad', responseHeader='{}'}
+2022-02-08 15:33:29.870 DEBUG - close input stream......
+2022-02-08 15:33:29.872 DEBUG - close output stream......
+2022-02-08 15:33:29.872 DEBUG - socket close......

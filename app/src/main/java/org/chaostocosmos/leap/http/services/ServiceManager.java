@@ -33,16 +33,6 @@ public class ServiceManager {
     public static final Logger logger = LoggerFactory.getLogger(Context.getDefaultHost());
 
     /**
-     * Leap service Class list
-     */
-    private static List<Class<? extends ILeapService>> services; 
-
-    /**
-     * Filter Class list
-     */
-    private static List<Class<? extends IFilter>> filters;
-
-    /**
      * ServiceHolder Map
      */
     private static Map<String, ServiceHolder> serviceHolderMap = new HashMap<>();
@@ -54,60 +44,77 @@ public class ServiceManager {
      */
     public ServiceManager() throws WASException {
         try {
-            services = ClassUtils.findAllLeapServices(false);
-            filters = ClassUtils.findAllLeapFilters(false);    
+            List<Class<? extends ILeapService>> services = ClassUtils.findAllLeapServices(false);
+            //List<Class<? extends IFilter>> filters = ClassUtils.findAllLeapFilters(false);    
+            initialize(services);
         } catch(IOException | URISyntaxException e) {
             throw new WASException(e);
         }
-        initialize();
     }
 
     /**
      * initialize
      */
-    private void initialize() {        
+    private void initialize(List<Class<? extends ILeapService>> services) {        
         for(Class<? extends ILeapService> serviceClass : services) {
             ILeapService service = (ILeapService) ClassUtils.instantiate(serviceClass);
-            ServiceMapper sm = service.getClass().getDeclaredAnnotation(ServiceMapper.class);
-            if(sm != null) {
-                String sPath = sm.path();
-                Method[] methods = service.getClass().getDeclaredMethods();
-                for(Method method : methods) {
-                    MethodMappper mm = method.getDeclaredAnnotation(MethodMappper.class);
-                    if(mm != null) {
-                        String mPath = mm.path();
-                        REQUEST_TYPE rType = mm.mappingMethod();
-                        System.out.println(service.toString()+" : "+rType.name());
-                        FilterMapper fm = method.getDeclaredAnnotation(FilterMapper.class);
-                        ServiceHolder serviceHolder;
-                        if(fm != null) {
-                            List<IFilter> preFilters = new ArrayList<>();                            
-                            Class<? extends IFilter>[] preFilterClasses = fm.preFilters();
-                            for(Class<? extends IFilter> clazz : preFilterClasses) {
-                                IFilter f = (IFilter)ClassUtils.instantiate(clazz);
-                                preFilters.add(f);
-                            }
-                            List<IFilter> postFilters = new ArrayList<>();
-                            Class<? extends IFilter>[] postFilterClasses = fm.postFilters();
-                            for(Class<? extends IFilter> clazz : postFilterClasses) {
-                                IFilter f = (IFilter)ClassUtils.instantiate(clazz);
-                                postFilters.add(f);
-                            }
-                            serviceHolder = new ServiceHolder(sPath+mPath, service, rType, method, preFilters, null);
-                            serviceHolderMap.put(sPath+mPath, serviceHolder);
-                        } else {
-                            serviceHolder = new ServiceHolder(sPath+mPath, service, rType, method);
-                            serviceHolderMap.put(sPath+mPath, serviceHolder);
-                        }
-                        logger.info("Add service: "+service.getClass().getName()+"  Mapping path: "+sPath+mPath);
-                    } else {
-                        //logger.debug("Method not mapping with MethodMapper annotation: "+method.getName());
-                    }
-                }
-            } else {
-                logger.debug("Service not mapping with ServiceMapper annotation: "+service.getClass().getName());
-            }
+            setService(service);
         }
+    }
+
+    /**
+     * Set service holder
+     * @param service
+     */
+    public void setService(final ILeapService service) {
+        ServiceMapper sm = service.getClass().getDeclaredAnnotation(ServiceMapper.class);
+        if(sm != null) {
+            String sPath = sm.path();
+            Method[] methods = service.getClass().getDeclaredMethods();
+            for(Method method : methods) {
+                MethodMappper mm = method.getDeclaredAnnotation(MethodMappper.class);
+                if(mm != null) {
+                    String mPath = mm.path();
+                    REQUEST_TYPE rType = mm.mappingMethod();
+                    logger.debug(service.toString()+" : "+rType.name());
+                    FilterMapper fm = method.getDeclaredAnnotation(FilterMapper.class);
+                    ServiceHolder serviceHolder;
+                    if(fm != null) {
+                        List<IFilter> preFilters = new ArrayList<>();
+                        Class<? extends IFilter>[] preFilterClasses = fm.preFilters();
+                        for(Class<? extends IFilter> clazz : preFilterClasses) {
+                            IFilter f = (IFilter)ClassUtils.instantiate(clazz);
+                            preFilters.add(f);
+                        }
+                        List<IFilter> postFilters = new ArrayList<>();
+                        Class<? extends IFilter>[] postFilterClasses = fm.postFilters();
+                        for(Class<? extends IFilter> clazz : postFilterClasses) {
+                            IFilter f = (IFilter)ClassUtils.instantiate(clazz);
+                            postFilters.add(f);
+                        }
+                        serviceHolder = new ServiceHolder(sPath+mPath, service, rType, method, preFilters, null);
+                        serviceHolderMap.put(sPath+mPath, serviceHolder);
+                    } else {
+                        serviceHolder = new ServiceHolder(sPath+mPath, service, rType, method);
+                        serviceHolderMap.put(sPath+mPath, serviceHolder);
+                    }
+                    logger.info("Add service: "+service.getClass().getName()+"  Mapping path: "+sPath+mPath);
+                } else {
+                    logger.debug("Method not mapped with MethodMapper: "+method.getName());
+                }
+            }
+        } else {
+            logger.debug("Service not mapped with ServiceMapper: "+service.getClass().getName());
+        }
+    }
+
+    /**
+     * Remove ServiceHolder for specified context path
+     * @param contextPath
+     * @return
+     */
+    public boolean removeService(String contextPath) {
+        return serviceHolderMap.remove(contextPath) != null ? true : false;
     }
 
     /**

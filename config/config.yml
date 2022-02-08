@@ -21,6 +21,13 @@ server:
   dynamic-classpaths: [
     ./home/webapp/services
   ]
+  resource-filter: 
+    allowed: [
+      '*'
+    ]
+    forbidden: [
+      ''    
+    ]
   doc-root: ./home
   logs: 'logs/leap.log'
   log-level: 'DEBUG'
@@ -30,7 +37,15 @@ server:
   - server-name: leap1
     host: 127.0.0.1
     port: 8080
-    dynamic-classpaths: []
+    dynamic-classpaths: [
+    ]
+    resource-filter: 
+      allowed: [
+        '*'
+      ]
+      forbidden: [
+        ''    
+      ]
     doc-root: ./home1    
     welcome: 'index.html'
     logs: 'logs/leap.log'
@@ -39,6 +54,13 @@ server:
     host: 192.168.1.28
     port: 8081
     dynamic-classpaths: []
+    resource-filter: 
+      allowed: [
+        '*'
+      ]
+      forbidden: [
+        ''    
+      ]
     doc-root: ./home2
     welcome: 'index.html'
     logs: 'logs/leap.log'

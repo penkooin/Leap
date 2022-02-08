@@ -125,6 +125,7 @@ public class ResourceHelper {
         if(!validatePath(docroot, reqPath)) {
             throw new WASException(MSG_TYPE.ERROR, 19, new Object[]{host});
         }
+        LoggerFactory.getLogger(host).debug("REQUEST CONTEXT: "+path+"   PATH: "+getStaticPath(host));
         return reqPath;
     }
 
@@ -185,6 +186,17 @@ public class ResourceHelper {
     }
 
     /**
+     * Get static resource path
+     * @param host
+     * @param resourceName
+     * @return
+     * @throws WASException
+     */
+    public static Path getStaticResourcePath(String host, String resourceName) throws WASException {
+        return getResourcePath(host, resourceName);
+    }
+
+    /**
      * Get resource replaced with specified params
      * @param host
      * @param contentName
@@ -196,9 +208,9 @@ public class ResourceHelper {
         try {
             host = host == null ? Context.getDefaultHost() : host;
             contentName = contentName.charAt(0) == '/' ? contentName.substring(1) : contentName;
-            Path path = getStaticPath(host).resolve(contentName);
+            Path path = getStaticPath(host).resolve(contentName);            
             LoggerFactory.getLogger(host).debug("REQUEST RESOURCE: "+contentName+"   PATH: "+getStaticPath(host));
-            return Files.readAllBytes(path);
+            return Files.readAllBytes(path);            
         } catch (IOException e) {
             throw new WASException(MSG_TYPE.ERROR, 38, contentName);
         }

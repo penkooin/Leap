@@ -1,0 +1,25 @@
+2022-02-07 12:58:19.524 INFO  - Leap WAS server starting......
+2022-02-07 12:58:19.627 INFO  - --------------------------------------------------------------------------
+2022-02-07 12:58:19.627 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-07 12:58:19.628 INFO  - verbose mode on
+2022-02-07 12:58:19.635 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-07 12:58:19.666 DEBUG - Method not mapped with MethodMapper: deployService
+2022-02-07 12:58:19.671 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@6a2b953e : POST
+2022-02-07 12:58:19.673 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-07 12:58:19.673 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-07 12:58:19.674 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-07 12:58:19.675 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-07 12:58:19.690 INFO  - Accepting connections on port 8080
+2022-02-07 12:58:21.989 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-07 12:58:21.994 DEBUG - POST /?aaa=bbb HTTP/1.1
+2022-02-07 12:58:21.995 DEBUG - User-Agent: PostmanRuntime/7.29.0
+2022-02-07 12:58:21.996 DEBUG - Accept: */*
+2022-02-07 12:58:21.996 DEBUG - Postman-Token: c08e6f84-91ed-41d7-9d24-b19a67341086
+2022-02-07 12:58:21.996 DEBUG - Host: localhost:8080
+2022-02-07 12:58:21.996 DEBUG - Accept-Encoding: gzip, deflate, br
+2022-02-07 12:58:21.996 DEBUG - Connection: keep-alive
+2022-02-07 12:58:21.997 DEBUG - Content-Length: 0
+2022-02-07 12:58:22.015 DEBUG - REQUEST RESOURCE: index.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-07 12:58:22.017 DEBUG - close input stream......
+2022-02-07 12:58:22.017 DEBUG - close output stream......
+2022-02-07 12:58:22.018 DEBUG - socket close......

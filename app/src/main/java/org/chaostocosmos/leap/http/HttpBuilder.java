@@ -15,9 +15,9 @@ import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
  * @param 9ins
  */
 public class HttpBuilder {
-
     /**
      * Build HttpRequest object
+     * 
      * @param requestDescriptor
      * @return
      * @throws WASException
@@ -32,9 +32,9 @@ public class HttpBuilder {
             //Doing comment because of header error
             //requestDescriptor.getReqHeader().forEach(request::header);
             //System.out.println("----------------------------"+new String(requestDescriptor.getReqBody()));
-            if(requestDescriptor.getRequestType() == REQUEST_TYPE.GET) {    
+            if(requestDescriptor.getRequestType() == REQUEST_TYPE.GET) {
                 return request.GET().build();
-            } else if(requestDescriptor.getRequestType() == REQUEST_TYPE.POST) {            
+            } else if(requestDescriptor.getRequestType() == REQUEST_TYPE.POST) {
                 return request.POST(BodyPublishers.ofByteArray(requestDescriptor.getReqBody())).build();
             } else if(requestDescriptor.getRequestType() == REQUEST_TYPE.PUT) {
                 return request.PUT(BodyPublishers.ofByteArray(requestDescriptor.getReqBody())).build();
@@ -52,6 +52,7 @@ public class HttpBuilder {
      * Build dummy HttpResponse object
      * @param responseParser
      * @return
+     * @throws WASException
      */
     public static HttpResponseDescriptor buildHttpResponse(final HttpRequestDescriptor httpRequestDescriptor) {
          return new HttpResponseDescriptor(httpRequestDescriptor);
