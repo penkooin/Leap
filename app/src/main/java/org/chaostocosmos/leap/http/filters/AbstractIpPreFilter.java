@@ -5,12 +5,18 @@ import java.util.List;
 
 import org.chaostocosmos.leap.http.HttpRequestDescriptor;
 import org.chaostocosmos.leap.http.annotation.PreFilter;
+import org.chaostocosmos.leap.http.security.UserManager;
 
 /**
  * Abstract ip filtering object
  * @author 9ins
  */
 public abstract class AbstractIpPreFilter<R> implements IIpPreFilter<R> {
+
+    /**
+     * Security manager object
+     */
+    protected UserManager securityManager;
     /**
      * Allowed / forbidden hosts
      */
@@ -43,7 +49,11 @@ public abstract class AbstractIpPreFilter<R> implements IIpPreFilter<R> {
             return !this.forbiddenHosts.stream().anyMatch(i -> i.getHostName().equals(((HttpRequestDescriptor)r).getReqHeader().get("@Client")));
         } else {
             return false;
-        }
-        
+        }        
     }
+
+    @Override
+    public void setSecurityManager(UserManager securityManager) {
+        this.securityManager = securityManager;
+    }    
 }

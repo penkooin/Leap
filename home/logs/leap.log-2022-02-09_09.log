@@ -1,0 +1,927 @@
+2022-02-09 09:00:54.193 INFO  - Leap WAS server starting......
+2022-02-09 09:00:54.202 INFO  - --------------------------------------------------------------------------
+2022-02-09 09:00:54.204 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-09 09:00:54.204 INFO  - verbose mode on
+2022-02-09 09:00:54.213 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-09 09:00:54.245 DEBUG - Method not mapped with MethodMapper: deployService
+2022-02-09 09:00:54.248 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@672872e1 : POST
+2022-02-09 09:00:54.249 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-09 09:00:54.250 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:00:54.253 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:00:54.255 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:00:54.266 INFO  - Accepting connections on port 8080
+2022-02-09 09:00:56.047 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:00:56.048 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:00:56.053 DEBUG - --------------------------------------------------------------------------------
+GET / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-09 09:00:56.077 DEBUG - REQUEST CONTEXT:    PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:00:56.078 DEBUG - REQUEST RESOURCE: index.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:00:56.081 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:00:56.117 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: http://localhost:8080/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-09 09:00:56.120 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:00:56.121 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-09 09:00:56.124 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:00:56.309 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:00:59.315 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+	at java.base/java.net.SocketInputStream.socketRead0(Native Method)
+	at java.base/java.net.SocketInputStream.socketRead(SocketInputStream.java:115)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:168)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:200)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:89)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-09 09:00:59.317 INFO  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+2022-02-09 09:00:59.317 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:00:59.318 INFO  - Error client request /127.0.0.1:60860 --- /127.0.0.1:8080
+2022-02-09 09:00:59.318 INFO  - Close client request on error /127.0.0.1:60860 --- /127.0.0.1:8080
+2022-02-09 09:00:59.319 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:02:27.641 INFO  - Leap WAS server starting......
+2022-02-09 09:02:27.644 INFO  - --------------------------------------------------------------------------
+2022-02-09 09:02:27.644 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-09 09:02:27.644 INFO  - verbose mode on
+2022-02-09 09:02:27.650 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-09 09:02:27.671 DEBUG - Method not mapped with MethodMapper: deployService
+2022-02-09 09:02:27.674 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@68267da0 : POST
+2022-02-09 09:02:27.675 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-09 09:02:27.676 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:02:27.677 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:02:27.677 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:02:27.689 INFO  - Accepting connections on port 8080
+2022-02-09 09:02:29.764 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:02:29.767 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:02:29.770 DEBUG - --------------------------------------------------------------------------------
+GET / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-09 09:02:29.792 DEBUG - REQUEST CONTEXT:    PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:02:29.793 DEBUG - REQUEST RESOURCE: index.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:02:29.796 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:02:29.834 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: http://localhost:8080/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-09 09:02:29.837 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:02:29.839 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-09 09:02:29.844 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:02:30.011 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:02:33.030 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+	at java.base/java.net.SocketInputStream.socketRead0(Native Method)
+	at java.base/java.net.SocketInputStream.socketRead(SocketInputStream.java:115)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:168)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:200)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:89)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-09 09:02:33.050 INFO  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+2022-02-09 09:02:33.060 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:02:33.071 INFO  - Error client request /127.0.0.1:60882 --- /127.0.0.1:8080
+2022-02-09 09:02:33.074 INFO  - Close client request on error /127.0.0.1:60882 --- /127.0.0.1:8080
+2022-02-09 09:02:33.075 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:09:59.858 INFO  - Leap WAS server starting......
+2022-02-09 09:09:59.861 INFO  - --------------------------------------------------------------------------
+2022-02-09 09:09:59.862 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-09 09:09:59.862 INFO  - verbose mode on
+2022-02-09 09:09:59.867 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-09 09:09:59.892 DEBUG - Method not mapped with MethodMapper: deployService
+2022-02-09 09:09:59.895 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@68267da0 : POST
+2022-02-09 09:09:59.896 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-09 09:09:59.897 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:09:59.899 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:09:59.900 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:09:59.912 INFO  - Accepting connections on port 8080
+2022-02-09 09:10:01.287 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:10:01.289 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:10:01.292 DEBUG - --------------------------------------------------------------------------------
+GET / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-09 09:10:01.311 DEBUG - REQUEST CONTEXT:    PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:10:01.312 DEBUG - REQUEST RESOURCE: index.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:10:01.317 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:10:01.369 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: http://localhost:8080/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-09 09:10:01.372 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:10:01.374 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-09 09:10:01.378 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:10:01.535 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:10:04.550 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+	at java.base/java.net.SocketInputStream.socketRead0(Native Method)
+	at java.base/java.net.SocketInputStream.socketRead(SocketInputStream.java:115)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:168)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:200)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:89)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-09 09:10:04.552 INFO  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+2022-02-09 09:10:04.553 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:10:04.554 INFO  - Error client request /127.0.0.1:62485 --- /127.0.0.1:8080
+2022-02-09 09:10:04.554 INFO  - Close client request on error /127.0.0.1:62485 --- /127.0.0.1:8080
+2022-02-09 09:10:04.554 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:10:40.893 INFO  - Leap WAS server starting......
+2022-02-09 09:10:40.896 INFO  - --------------------------------------------------------------------------
+2022-02-09 09:10:40.897 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-09 09:10:40.897 INFO  - verbose mode on
+2022-02-09 09:10:40.903 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-09 09:10:40.926 DEBUG - Method not mapped with MethodMapper: deployService
+2022-02-09 09:10:40.930 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@68267da0 : POST
+2022-02-09 09:10:40.931 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-09 09:10:40.932 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:10:40.934 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:10:40.935 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:10:40.947 INFO  - Accepting connections on port 8080
+2022-02-09 09:10:42.272 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:10:42.278 DEBUG - --------------------------------------------------------------------------------
+GET / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-09 09:10:42.298 DEBUG - REQUEST CONTEXT:    PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:10:42.301 DEBUG - REQUEST RESOURCE: index.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:10:42.302 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:10:42.659 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:10:42.663 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: http://localhost:8080/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-09 09:10:42.667 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:10:42.669 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-09 09:10:42.671 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:10:42.911 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:10:45.922 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+	at java.base/java.net.SocketInputStream.socketRead0(Native Method)
+	at java.base/java.net.SocketInputStream.socketRead(SocketInputStream.java:115)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:168)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:200)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:89)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-09 09:10:45.925 INFO  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+2022-02-09 09:10:45.925 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:10:45.926 INFO  - Error client request /127.0.0.1:57194 --- /127.0.0.1:8080
+2022-02-09 09:10:45.926 INFO  - Close client request on error /127.0.0.1:57194 --- /127.0.0.1:8080
+2022-02-09 09:10:45.928 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:11:08.316 INFO  - Leap WAS server starting......
+2022-02-09 09:11:08.319 INFO  - --------------------------------------------------------------------------
+2022-02-09 09:11:08.319 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-09 09:11:08.319 INFO  - verbose mode on
+2022-02-09 09:11:08.324 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-09 09:11:08.349 DEBUG - Method not mapped with MethodMapper: deployService
+2022-02-09 09:11:08.354 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@68267da0 : POST
+2022-02-09 09:11:08.354 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-09 09:11:08.355 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:11:08.357 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:11:08.357 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:11:08.369 INFO  - Accepting connections on port 8080
+2022-02-09 09:11:09.766 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:11:09.774 DEBUG - --------------------------------------------------------------------------------
+GET / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-09 09:11:09.795 DEBUG - REQUEST CONTEXT:    PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:11:09.796 DEBUG - REQUEST RESOURCE: index.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:11:09.798 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:11:10.138 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:11:10.143 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: http://localhost:8080/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-09 09:11:10.150 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:11:10.153 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-09 09:11:10.156 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:11:10.401 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:11:13.411 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+	at java.base/java.net.SocketInputStream.socketRead0(Native Method)
+	at java.base/java.net.SocketInputStream.socketRead(SocketInputStream.java:115)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:168)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:200)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:89)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-09 09:11:13.416 INFO  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+2022-02-09 09:11:13.417 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:11:13.418 INFO  - Error client request /127.0.0.1:57209 --- /127.0.0.1:8080
+2022-02-09 09:11:13.418 INFO  - Close client request on error /127.0.0.1:57209 --- /127.0.0.1:8080
+2022-02-09 09:11:13.420 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:13:03.362 INFO  - Leap WAS server starting......
+2022-02-09 09:13:03.366 INFO  - --------------------------------------------------------------------------
+2022-02-09 09:13:03.366 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-09 09:13:03.367 INFO  - verbose mode on
+2022-02-09 09:13:03.371 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-09 09:13:03.402 DEBUG - Method not mapped with MethodMapper: deployService
+2022-02-09 09:13:03.406 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@68267da0 : POST
+2022-02-09 09:13:03.408 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-09 09:13:03.409 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:13:03.412 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:13:03.412 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:13:03.423 INFO  - Accepting connections on port 8080
+2022-02-09 09:13:05.075 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:13:05.078 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:13:05.081 DEBUG - --------------------------------------------------------------------------------
+GET / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-09 09:13:05.099 DEBUG - REQUEST CONTEXT:    PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:13:05.100 DEBUG - REQUEST RESOURCE: index.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:13:05.103 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:13:05.141 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: http://localhost:8080/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-09 09:13:05.144 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:13:05.146 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-09 09:13:05.150 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:13:05.336 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:13:49.386 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:14:05.789 INFO  - Leap WAS server starting......
+2022-02-09 09:14:05.792 INFO  - --------------------------------------------------------------------------
+2022-02-09 09:14:05.792 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-09 09:14:05.793 INFO  - verbose mode on
+2022-02-09 09:14:05.801 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-09 09:14:05.830 DEBUG - Method not mapped with MethodMapper: deployService
+2022-02-09 09:14:05.833 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@68267da0 : POST
+2022-02-09 09:14:05.835 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-09 09:14:05.835 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:14:05.837 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:14:05.837 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:14:05.847 INFO  - Accepting connections on port 8080
+2022-02-09 09:14:06.026 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:14:06.032 DEBUG - --------------------------------------------------------------------------------
+GET / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-09 09:14:06.053 DEBUG - REQUEST CONTEXT:    PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:14:06.055 DEBUG - REQUEST RESOURCE: index.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:14:06.057 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:14:06.257 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:14:06.263 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: http://localhost:8080/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-09 09:14:06.267 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:14:06.270 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-09 09:14:06.274 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:14:06.414 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:14:23.469 INFO  - Leap WAS server starting......
+2022-02-09 09:14:23.472 INFO  - --------------------------------------------------------------------------
+2022-02-09 09:14:23.472 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-09 09:14:23.473 INFO  - verbose mode on
+2022-02-09 09:14:23.479 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-09 09:14:23.514 DEBUG - Method not mapped with MethodMapper: deployService
+2022-02-09 09:14:23.518 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@68267da0 : POST
+2022-02-09 09:14:23.520 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-09 09:14:23.520 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:14:23.523 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:14:23.523 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:14:23.536 INFO  - Accepting connections on port 8080
+2022-02-09 09:14:25.324 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:14:25.325 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:14:25.330 DEBUG - --------------------------------------------------------------------------------
+GET / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-09 09:14:25.350 DEBUG - REQUEST CONTEXT:    PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:14:25.351 DEBUG - REQUEST RESOURCE: index.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:14:25.354 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:14:25.390 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: http://localhost:8080/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-09 09:14:25.392 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:14:25.394 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-09 09:14:25.397 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:14:25.590 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:14:43.503 INFO  - Leap WAS server starting......
+2022-02-09 09:14:43.508 INFO  - --------------------------------------------------------------------------
+2022-02-09 09:14:43.508 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-09 09:14:43.508 INFO  - verbose mode on
+2022-02-09 09:14:43.518 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-09 09:14:43.551 DEBUG - Method not mapped with MethodMapper: deployService
+2022-02-09 09:14:43.556 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@68267da0 : POST
+2022-02-09 09:14:43.557 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-09 09:14:43.557 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:14:43.559 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:14:43.559 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:14:43.572 INFO  - Accepting connections on port 8080
+2022-02-09 09:14:45.580 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:14:45.583 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:14:45.588 DEBUG - --------------------------------------------------------------------------------
+GET / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-09 09:14:45.609 DEBUG - REQUEST CONTEXT:    PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:14:45.609 DEBUG - REQUEST RESOURCE: index.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:14:45.612 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:14:45.649 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: http://localhost:8080/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-09 09:14:45.659 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:14:45.680 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-09 09:14:45.684 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:14:45.841 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:14:48.852 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+	at java.base/java.net.SocketInputStream.socketRead0(Native Method)
+	at java.base/java.net.SocketInputStream.socketRead(SocketInputStream.java:115)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:168)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:200)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:89)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-09 09:14:48.857 INFO  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+2022-02-09 09:14:48.859 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:14:48.860 INFO  - Error client request /127.0.0.1:59680 --- /127.0.0.1:8080
+2022-02-09 09:14:48.861 INFO  - Close client request on error /127.0.0.1:59680 --- /127.0.0.1:8080
+2022-02-09 09:14:48.862 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:15:49.014 INFO  - Leap WAS server starting......
+2022-02-09 09:15:49.017 INFO  - --------------------------------------------------------------------------
+2022-02-09 09:15:49.017 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-09 09:15:49.017 INFO  - verbose mode on
+2022-02-09 09:15:49.022 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-09 09:15:49.048 DEBUG - Method not mapped with MethodMapper: deployService
+2022-02-09 09:15:49.052 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@68267da0 : POST
+2022-02-09 09:15:49.053 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-09 09:15:49.053 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:15:49.054 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:15:49.055 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:15:49.066 INFO  - Accepting connections on port 8080
+2022-02-09 09:15:51.532 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:15:51.534 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:15:51.539 DEBUG - --------------------------------------------------------------------------------
+GET / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-09 09:15:51.557 DEBUG - REQUEST CONTEXT:    PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:15:51.559 DEBUG - REQUEST RESOURCE: index.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:15:51.562 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:15:51.598 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: http://localhost:8080/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-09 09:15:51.601 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:15:51.602 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-09 09:15:51.606 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:15:51.798 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:15:54.817 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:187)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:89)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-09 09:15:54.819 INFO  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+2022-02-09 09:15:54.820 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:15:54.820 INFO  - Error client request /127.0.0.1:59693 --- /127.0.0.1:8080
+2022-02-09 09:15:54.821 INFO  - Close client request on error /127.0.0.1:59693 --- /127.0.0.1:8080
+2022-02-09 09:15:54.822 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:16:31.299 INFO  - Leap WAS server starting......
+2022-02-09 09:16:31.302 INFO  - --------------------------------------------------------------------------
+2022-02-09 09:16:31.303 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-09 09:16:31.303 INFO  - verbose mode on
+2022-02-09 09:16:31.308 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-09 09:16:31.333 DEBUG - Method not mapped with MethodMapper: deployService
+2022-02-09 09:16:31.336 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@68267da0 : POST
+2022-02-09 09:16:31.338 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-09 09:16:31.338 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:16:31.340 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:16:31.340 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:16:31.351 INFO  - Accepting connections on port 8080
+2022-02-09 09:16:32.720 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:16:32.727 DEBUG - --------------------------------------------------------------------------------
+GET / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-09 09:16:32.747 DEBUG - REQUEST CONTEXT:    PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:16:32.747 DEBUG - REQUEST RESOURCE: index.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:16:32.750 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:16:33.092 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:16:33.095 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: http://localhost:8080/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-09 09:16:33.099 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:16:33.101 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-09 09:16:33.105 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:16:33.357 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:16:36.371 INFO  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+2022-02-09 09:16:36.372 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:16:36.374 INFO  - Error client request /127.0.0.1:59705 --- /127.0.0.1:8080
+2022-02-09 09:16:36.375 INFO  - Close client request on error /127.0.0.1:59705 --- /127.0.0.1:8080
+2022-02-09 09:16:36.377 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:17:21.523 INFO  - Leap WAS server starting......
+2022-02-09 09:17:21.526 INFO  - --------------------------------------------------------------------------
+2022-02-09 09:17:21.527 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-09 09:17:21.527 INFO  - verbose mode on
+2022-02-09 09:17:21.532 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-09 09:17:21.559 DEBUG - Method not mapped with MethodMapper: deployService
+2022-02-09 09:17:21.562 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@68267da0 : POST
+2022-02-09 09:17:21.563 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-09 09:17:21.563 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:17:21.565 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:17:21.565 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:17:21.574 INFO  - Accepting connections on port 8080
+2022-02-09 09:17:23.275 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:17:23.283 DEBUG - --------------------------------------------------------------------------------
+GET / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-09 09:17:23.315 DEBUG - REQUEST CONTEXT:    PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:17:23.316 DEBUG - REQUEST RESOURCE: index.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:17:23.318 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:17:23.662 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:17:23.668 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: http://localhost:8080/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-09 09:17:23.675 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:17:23.679 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-09 09:17:23.686 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:17:23.926 INFO  - Host: localhost:8080  Client request accepted... : /127.0.0.1
+2022-02-09 09:17:26.930 INFO  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+2022-02-09 09:17:26.932 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:17:26.935 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:18:03.389 INFO  - Leap WAS server starting......
+2022-02-09 09:18:03.392 INFO  - --------------------------------------------------------------------------
+2022-02-09 09:18:03.393 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-09 09:18:03.393 INFO  - verbose mode on
+2022-02-09 09:18:03.398 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-09 09:18:03.423 DEBUG - Method not mapped with MethodMapper: deployService
+2022-02-09 09:18:03.428 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@68267da0 : POST
+2022-02-09 09:18:03.429 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-09 09:18:03.430 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:18:03.431 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:18:03.432 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:18:03.443 INFO  - Accepting connections on port 8080
+2022-02-09 09:18:05.715 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-09 09:18:05.720 DEBUG - --------------------------------------------------------------------------------
+GET / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-09 09:18:05.742 DEBUG - REQUEST CONTEXT:    PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:18:05.742 DEBUG - REQUEST RESOURCE: index.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:18:05.744 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:18:06.092 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-09 09:18:06.095 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: http://localhost:8080/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-09 09:18:06.097 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:18:06.099 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-09 09:18:06.102 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:18:06.353 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-09 09:18:09.357 INFO  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+2022-02-09 09:18:09.359 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 09:18:09.362 DEBUG - Client close....../127.0.0.1
+2022-02-09 09:18:55.713 INFO  - Leap WAS server starting......
+2022-02-09 09:18:55.716 INFO  - --------------------------------------------------------------------------
+2022-02-09 09:18:55.717 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-09 09:18:55.717 INFO  - verbose mode on
+2022-02-09 09:18:55.722 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-09 09:18:55.751 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-09 09:18:55.752 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO]
+2022-02-09 09:18:55.754 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:18:55.754 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:18:55.764 INFO  - Accepting connections on port 8080
+2022-02-09 09:18:57.437 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-09 09:18:57.808 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-09 09:18:58.071 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-09 09:19:01.076 INFO  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+2022-02-09 09:28:57.724 INFO  - Leap WAS server starting......
+2022-02-09 09:28:57.727 INFO  - --------------------------------------------------------------------------
+2022-02-09 09:28:57.727 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-09 09:28:57.727 INFO  - verbose mode on
+2022-02-09 09:28:57.733 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-09 09:28:57.762 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-09 09:28:57.763 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO]
+2022-02-09 09:28:57.764 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:28:57.765 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:28:57.775 INFO  - Accepting connections on port 8080
+2022-02-09 09:29:01.794 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-09 09:29:01.796 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-09 09:29:01.829 INFO  - Client close....../127.0.0.1
+2022-02-09 09:29:01.873 INFO  - Client close....../127.0.0.1
+2022-02-09 09:29:02.060 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-09 09:29:05.066 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+2022-02-09 09:29:05.069 INFO  - Client close....../127.0.0.1
+2022-02-09 09:36:09.575 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-09 09:36:09.581 INFO  - Client close....../127.0.0.1
+2022-02-09 09:37:23.155 INFO  - Leap WAS server starting......
+2022-02-09 09:37:23.160 INFO  - --------------------------------------------------------------------------
+2022-02-09 09:37:23.160 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-09 09:37:23.160 INFO  - verbose mode on
+2022-02-09 09:37:23.168 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-09 09:37:23.213 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-09 09:37:23.213 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [INFO]
+2022-02-09 09:37:23.215 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:37:23.215 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 09:37:23.228 INFO  - Accepting connections on port 8080
+2022-02-09 09:37:27.107 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-09 09:37:27.111 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-09 09:37:27.173 INFO  - Client close....../127.0.0.1
+2022-02-09 09:37:27.218 INFO  - Client close....../127.0.0.1
+2022-02-09 09:37:27.368 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-09 09:37:29.961 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-09 09:37:29.964 INFO  - Client close....../127.0.0.1
+2022-02-09 09:37:30.383 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+2022-02-09 09:37:30.385 INFO  - Client close....../127.0.0.1
+2022-02-09 09:40:30.033 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-09 09:40:30.033 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-09 09:40:30.036 INFO  - Client close....../127.0.0.1
+2022-02-09 09:40:30.078 INFO  - Client close....../127.0.0.1
+2022-02-09 09:40:30.281 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-09 09:40:33.285 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+2022-02-09 09:40:33.289 INFO  - Client close....../127.0.0.1
+2022-02-09 09:53:10.174 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-09 09:53:10.176 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-09 09:53:10.179 INFO  - Client close....../127.0.0.1
+2022-02-09 09:53:10.215 INFO  - Client close....../127.0.0.1
+2022-02-09 09:53:10.438 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-09 09:53:13.450 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+2022-02-09 09:53:13.453 INFO  - Client close....../127.0.0.1

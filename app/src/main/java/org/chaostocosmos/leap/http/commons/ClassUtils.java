@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.Context;
 import org.chaostocosmos.leap.http.WASException;
-import org.chaostocosmos.leap.http.filters.IFilter;
+import org.chaostocosmos.leap.http.filters.ILeapFilter;
 import org.chaostocosmos.leap.http.services.ILeapService;
 
 import ch.qos.logback.classic.Logger;
@@ -63,7 +63,7 @@ public class ClassUtils {
                                                             .map(c -> (Class<? extends ILeapService>)c)
                                                             .collect(Collectors.toList());
         for(URL url : dynamicURLClassLoader.getURLs()) {
-            System.out.println(url);
+            //System.out.println(url);
             services.addAll(findClasses(ILeapService.class, url)
                                 .stream()
                                 .filter(f ->!Modifier.isAbstract(f.getModifiers())
@@ -81,26 +81,26 @@ public class ClassUtils {
      * @throws IOException
      * @throws URISyntaxException
      */
-    public static List<Class<? extends IFilter>> findAllLeapFilters(boolean reloadConfig) throws IOException, URISyntaxException {
-        List<Class<? extends IFilter>> filters = findFilters(IFilter.class, dynamicURLClassLoader.getResource(""))
+    public static List<Class<? extends ILeapFilter>> findAllLeapFilters(boolean reloadConfig) throws IOException, URISyntaxException {
+        List<Class<? extends ILeapFilter>> filters = findFilters(ILeapFilter.class, dynamicURLClassLoader.getResource(""))
                                                     .stream()
                                                     .filter(f -> //f.isAssignableFrom(IFilter.class)
                                                                 !Modifier.isAbstract(f.getModifiers())
                                                                 && !Modifier.isInterface(f.getModifiers())
                                                                 )
-                                                    .map(f -> (Class<? extends IFilter>)f)
+                                                    .map(f -> (Class<? extends ILeapFilter>)f)
                                                     .collect(Collectors.toList());
         for(URL url : dynamicURLClassLoader.getURLs()) {
-            filters.addAll(findFilters(IFilter.class, url)
+            filters.addAll(findFilters(ILeapFilter.class, url)
                             .stream()
                             .filter(f -> //f.isAssignableFrom(IFilter.class)
                             !Modifier.isAbstract(f.getModifiers())
                             && !Modifier.isInterface(f.getModifiers()))
-                            .map(f -> (Class<? extends IFilter>)f)
+                            .map(f -> (Class<? extends ILeapFilter>)f)
                             .collect(Collectors.toList()));
 
         }
-        System.out.println(filters.toString());
+        //System.out.println(filters.toString());
         return filters;
     }
 
@@ -110,13 +110,13 @@ public class ClassUtils {
      * @throws IOException
      * @throws URISyntaxException
      */
-    public static List<Class<? extends IFilter>> findPreFilters(URL url) throws IOException, URISyntaxException {
-        return findFilters(IFilter.class, url)
+    public static List<Class<? extends ILeapFilter>> findPreFilters(URL url) throws IOException, URISyntaxException {
+        return findFilters(ILeapFilter.class, url)
                     .stream()
                     .filter(f -> 
                             !Modifier.isAbstract(f.getModifiers())
                             && !Modifier.isInterface(f.getModifiers()))
-                    .map(f -> (Class<? extends IFilter>)f)
+                    .map(f -> (Class<? extends ILeapFilter>)f)
                     .collect(Collectors.toList());
     }
 
@@ -126,13 +126,13 @@ public class ClassUtils {
      * @throws IOException
      * @throws URISyntaxException
      */
-    public static List<Class<? extends IFilter>> findPostFilters(URL url) throws IOException, URISyntaxException {
-        return findFilters(IFilter.class, url)
+    public static List<Class<? extends ILeapFilter>> findPostFilters(URL url) throws IOException, URISyntaxException {
+        return findFilters(ILeapFilter.class, url)
                     .stream()
                     .filter(f -> 
                                 !Modifier.isAbstract(f.getModifiers())
                                 && !Modifier.isInterface(f.getModifiers()))
-                    .map(f -> (Class<? extends IFilter>)f)
+                    .map(f -> (Class<? extends ILeapFilter>)f)
                     .collect(Collectors.toList());
     }
 
@@ -144,10 +144,10 @@ public class ClassUtils {
      * @throws URISyntaxException
      * @throws IOException
      */
-    public static List<Class<? extends IFilter>> findFilters(Class<? extends IFilter> iFilter, URL url) throws IOException, URISyntaxException {
+    public static List<Class<? extends ILeapFilter>> findFilters(Class<? extends ILeapFilter> iFilter, URL url) throws IOException, URISyntaxException {
         return findClasses(iFilter, url)
                 .stream()
-                .map(c -> (Class<? extends IFilter>)(c))
+                .map(c -> (Class<? extends ILeapFilter>)(c))
                 .collect(Collectors.toList());
     }
 

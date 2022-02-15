@@ -6,7 +6,8 @@ import java.util.List;
 import org.chaostocosmos.leap.http.HttpRequestDescriptor;
 import org.chaostocosmos.leap.http.HttpResponseDescriptor;
 import org.chaostocosmos.leap.http.WASException;
-import org.chaostocosmos.leap.http.filters.IFilter;
+import org.chaostocosmos.leap.http.filters.ILeapFilter;
+import org.chaostocosmos.leap.http.security.UserManager;
 
 /**
  * Interface for servlet
@@ -28,5 +29,11 @@ public interface ILeapService {
      * @param postFilters
      * @throws WASException
      */
-    public void setFilters(List<IFilter> preFilters, List<IFilter> postFilters) throws WASException;
+    public void setFilters(List<ILeapFilter> preFilters, List<ILeapFilter> postFilters) throws WASException;
+
+    /**
+     * Set Leap security manager object
+     * @param securityManager
+     */
+    public void setSecurityManager(UserManager securityManager);
 }

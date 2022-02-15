@@ -147,15 +147,24 @@ public class HttpResponseDescriptor {
         this.responseHeader.remove(name);
     }
 
+    public void setContentLength(long contentLength) {
+        this.contentLength = contentLength;
+    }
+
+    public long getContentLength() {
+        return this.contentLength;
+    }
+
     @Override
     public String toString() {
         return "{" +
             " httpRequestDescriptor='" + getHttpRequestDescriptor() + "'" +
             ", httpResponse='" + getHttpResponse() + "'" +
-            ", requestedHost='" + getRequestedHost() + "'" +
+            ", contentType='" + getContentType() + "'" +
             ", responseCode='" + getResponseCode() + "'" +
             ", responseBody='" + getResponseBody() + "'" +
             ", responseHeader='" + getResponseHeader() + "'" +
+            ", contentLength='" + getContentLength() + "'" +
             "}";
     }
 }

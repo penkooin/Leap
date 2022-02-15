@@ -57,6 +57,14 @@ public enum MIME_TYPE {
     }
 
     /**
+     * Get mime type
+     * @return
+     */
+    public String getMimeType() {
+        return this.mimeType;
+    }
+
+    /**
      * Get mime type from content type string
      * @param mimeType
      * @return

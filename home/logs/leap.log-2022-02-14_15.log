@@ -1,0 +1,416 @@
+2022-02-14 15:13:23.321 INFO  - Leap WAS server starting......
+2022-02-14 15:13:23.330 INFO  - --------------------------------------------------------------------------
+2022-02-14 15:13:23.330 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-14 15:13:23.330 INFO  - verbose mode on
+2022-02-14 15:13:23.404 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-14 15:13:23.776 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@7748410a : DEPLOY
+2022-02-14 15:13:23.776 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-14 15:13:23.779 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@f2ff811 : POST
+2022-02-14 15:13:23.780 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-14 15:13:23.780 INFO  - Default host added - Server: leap   Host: localhost   Port: 443   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-14 15:13:23.783 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-14 15:13:23.783 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-14 15:13:24.225 INFO  - Accepting connections on port 8080
+2022-02-14 15:13:28.323 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 15:13:28.325 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 15:13:28.599 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 15:13:28.606 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	at java.base/sun.security.ssl.SSLSocketImpl.handleEOF(SSLSocketImpl.java:1616)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1434)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	... 15 common frames omitted
+Caused by: java.io.EOFException: SSL peer shut down incorrectly
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:483)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:472)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:160)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	... 13 common frames omitted
+2022-02-14 15:13:28.606 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	at java.base/sun.security.ssl.SSLSocketImpl.handleEOF(SSLSocketImpl.java:1616)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1434)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	... 15 common frames omitted
+Caused by: java.io.EOFException: SSL peer shut down incorrectly
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:483)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:472)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:160)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	... 13 common frames omitted
+2022-02-14 15:13:28.624 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2022-02-14 15:13:28.631 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2022-02-14 15:13:28.633 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 15:13:28.633 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 15:13:28.643 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 15:13:28.643 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 15:13:28.648 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 15:13:28.645 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 15:13:28.655 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:131)
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:117)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:336)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:292)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:283)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.onConsumeCertificate(CertificateMessage.java:1194)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.consume(CertificateMessage.java:1181)
+	at java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:392)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:443)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:421)
+	at java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:182)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+	... 26 common frames omitted
+2022-02-14 15:13:28.661 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+2022-02-14 15:13:28.663 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 15:13:28.665 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 15:13:28.667 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 15:32:47.992 INFO  - Leap WAS server starting......
+2022-02-14 15:32:47.995 INFO  - --------------------------------------------------------------------------
+2022-02-14 15:32:47.995 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-14 15:32:47.996 INFO  - verbose mode on
+2022-02-14 15:32:48.002 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-14 15:32:48.030 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@6a03bcb1 : DEPLOY
+2022-02-14 15:32:48.030 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-14 15:32:48.033 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@11fc564b : POST
+2022-02-14 15:32:48.033 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-14 15:32:48.033 INFO  - Default host added - Server: leap   Host: localhost   Port: 443   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-14 15:32:48.034 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-14 15:32:48.035 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-14 15:32:48.431 INFO  - Accepting connections on port 8080
+2022-02-14 15:50:54.973 INFO  - Leap WAS server starting......
+2022-02-14 15:50:54.977 INFO  - --------------------------------------------------------------------------
+2022-02-14 15:50:54.977 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-14 15:50:54.978 INFO  - verbose mode on
+2022-02-14 15:50:54.987 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-14 15:50:55.014 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@6a03bcb1 : DEPLOY
+2022-02-14 15:50:55.015 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-14 15:50:55.018 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@11fc564b : POST
+2022-02-14 15:50:55.019 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-14 15:50:55.020 INFO  - Default host added - Server: leap   Host: localhost   Port: 443   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-14 15:50:55.021 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-14 15:50:55.022 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-14 15:50:55.408 INFO  - Accepting connections on port 8080
+2022-02-14 15:50:58.744 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 15:50:58.747 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 15:50:59.030 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	at java.base/sun.security.ssl.SSLSocketImpl.handleEOF(SSLSocketImpl.java:1616)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1434)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	... 15 common frames omitted
+Caused by: java.io.EOFException: SSL peer shut down incorrectly
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:483)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:472)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:160)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	... 13 common frames omitted
+2022-02-14 15:50:59.030 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	at java.base/sun.security.ssl.SSLSocketImpl.handleEOF(SSLSocketImpl.java:1616)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1434)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	... 15 common frames omitted
+Caused by: java.io.EOFException: SSL peer shut down incorrectly
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:483)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:472)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:160)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	... 13 common frames omitted
+2022-02-14 15:50:59.035 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2022-02-14 15:50:59.038 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2022-02-14 15:50:59.039 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 15:50:59.039 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 15:50:59.040 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 15:50:59.040 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 15:50:59.042 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 15:50:59.044 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 15:51:08.456 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 15:51:08.548 DEBUG - --------------------------------------------------------------------------------
+GET / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC; m=2258:Z3Vlc3Q6Z3Vlc3Q%253D
+2022-02-14 15:51:08.582 DEBUG - REQUEST CONTEXT:    PATH: .\home\webapp\WEB-INF\static
+2022-02-14 15:51:08.583 DEBUG - REQUEST RESOURCE: index.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 15:51:08.596 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 15:51:08.663 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 15:51:08.718 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://localhost:8080/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC; m=2258:Z3Vlc3Q6Z3Vlc3Q%253D
+2022-02-14 15:51:08.842 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 15:51:08.860 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-14 15:51:08.876 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 15:51:20.042 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 15:51:20.043 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 15:51:20.055 DEBUG - --------------------------------------------------------------------------------
+GET / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC; m=2258:Z3Vlc3Q6Z3Vlc3Q%253D
+2022-02-14 15:51:20.058 DEBUG - REQUEST CONTEXT:    PATH: .\home\webapp\WEB-INF\static
+2022-02-14 15:51:20.059 DEBUG - REQUEST RESOURCE: index.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 15:51:20.078 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 15:51:20.110 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://localhost:8080/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC; m=2258:Z3Vlc3Q6Z3Vlc3Q%253D
+2022-02-14 15:51:20.116 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 15:51:20.119 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-14 15:51:20.123 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 15:51:20.993 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 15:51:20.994 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 15:51:21.033 DEBUG - --------------------------------------------------------------------------------
+GET / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC; m=2258:Z3Vlc3Q6Z3Vlc3Q%253D
+2022-02-14 15:51:21.037 DEBUG - REQUEST CONTEXT:    PATH: .\home\webapp\WEB-INF\static
+2022-02-14 15:51:21.039 DEBUG - REQUEST RESOURCE: index.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 15:51:21.041 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 15:51:21.091 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://localhost:8080/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC; m=2258:Z3Vlc3Q6Z3Vlc3Q%253D
+2022-02-14 15:51:21.094 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 15:51:21.095 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-14 15:51:21.111 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 15:51:22.370 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 15:51:22.372 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 15:51:22.383 DEBUG - --------------------------------------------------------------------------------
+GET / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC; m=2258:Z3Vlc3Q6Z3Vlc3Q%253D
+2022-02-14 15:51:22.387 DEBUG - REQUEST CONTEXT:    PATH: .\home\webapp\WEB-INF\static
+2022-02-14 15:51:22.388 DEBUG - REQUEST RESOURCE: index.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 15:51:22.391 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 15:51:22.438 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://localhost:8080/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC; m=2258:Z3Vlc3Q6Z3Vlc3Q%253D
+2022-02-14 15:51:22.441 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 15:51:22.441 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-14 15:51:22.444 INFO  - Client close....../0:0:0:0:0:0:0:1

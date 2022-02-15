@@ -1,0 +1,99 @@
+messages:
+  http:
+    http200: OK   {}
+    http201: Created   {}
+    http202: Accepted   {}
+    http203: No Content   {}
+    http205: Reset Content   {}
+    http206: Partial Content (RFC 7233)   {}
+    http300: Multiple Choices   {}
+    http301: Moved Permanently   {}
+    http307: Temporary Redirect (since http/1.1)   {}
+    http308: Permanent Redirect (RFC 7538)   {}
+    http400: Bad Request   {}
+    http401: Unauthorized (RFC 7235)   {}
+    http402: Payment Required   {}
+    http403: Forbidden   {}
+    http404: Resource Not Found   {}
+    http405: Method Not Allowed   {}
+    http406: Not Acceptable   {}
+    http407: Proxy Authentication Required (RFC 7235)   {}
+    http408: Request Timeout   {}
+    http409: Conflict   {}
+    http412: Precondition Failed (RFC 7232)   {}
+    http413: Payload Too Large (RFC 7231)   {}
+    http414: URI Too Long (RFC 7231)   {}
+    http415: Unsupported Media Type (RFC 7231)   {}
+    http417: Expectation Failed   {}
+    http418: I'm a teapot (RFC 2324, RFC 7168)   {}
+    http421: Misdirected Request (RFC 7540)   {}
+    http423: Locked (WebDAV; RFC 4918)   {}
+    http429: Too Many Requests (RFC 6585)   {}
+    http431: Request Header Fields Too Large (RFC 6585)   {}
+    http451: Unavailable For Legal Reasons (RFC 7725)   {}
+    http500: Internal Server Error   {}
+    http501: Not Implemented   {}
+    http502: Bad Gateway   {}
+    http503: Service Unavailable   {}
+    http504: Gateway Timeout   {}
+    http505: http Version Not Supported   {}
+    http507: Insufficient Storage (WebDAV; RFC 4918)   {}
+    http508: Loop Detected (WebDAV; RFC 5842)   {}
+    http510: Not Extended (RFC 2774)   {}
+    http511: Network Authentication Required (RFC 6585)   {}
+  debug:
+    debug1: ''
+  info:
+    info1: ''
+    info2: ''
+    info3: ''
+  warn:
+    warn001: 'ServletDescriptor annotation not found in class: {}'
+  error:
+    error1: There isn't exist path in servlet-method configuration.
+    error2: There isn't exist http request type in servlet-method configuration.
+    error3: 'Not supported http request method type : {}'
+    error4: 'URI path can not use multiple method. path: {}'
+    error5: 'Error in servlet method validate progress. Class: {}  Method: {}'
+    error6: 'Invalid request line: {}'
+    error7: 'Invalid header parameter: {}'
+    error8: 'Error occurred in response header progress: {}'
+    error9: 'Invalid request information. Wrong request'
+    error10: 'Error in request process '
+    error11: 'Can''t find Class which specified in config in classpath: {}'
+    error12: 'Can''t find default constructor on Servlet class: {}'
+    error13: Security problem occurred. check access security
+    error14: Virtual host's 'host' expresstion is wrong!!!
+    error15: Some problem occurred in Servlet loading progress
+    error16: 'Not supported method type: {}'
+    error17: 'Not supported method type: {}'
+    error18: 'Error in building doc-root process: {}'
+    error19: 'Not found virtual host: {}'
+    error20: 'Resource is not found: {}'
+    error21: 'Error in server setup process!!!'
+    error22: 'Can not represent trademark logo'
+    error23: 'Error occurred when shutdown!!!'
+    error24: 'Request URL is invalid: {}'
+    error25: 'User not found: {}'
+    error26: 'Password not collect'
+    error27: 'Cannot instantiate : {}'
+    error28: 'Service mapper path expression is wrong: {}'
+    error29: 'Method mapper path expression is wrong: {}'
+    error30: 'Cannot save configuration ({})'
+    error31: 'User is already exist: {}'
+    error32: 'Password validation failed: (Password must have digit, lower case, upper case, special case at least once and no whilte space and more 8 places more)'
+    error33: 'Not found mapping service exist with requested path: {}'
+    error34: 'Requested method is not matching with service: {}'
+    error35: 'Service object mapping path must be exist: {}, Service object: {}'
+    error36: 'Service operation method mapping path must be exist: {}, Service method: {}'
+    error37: 'Service operation method already exist!!! Check service object mapping. Path: {} Operation method: {}'
+    error38: 'Cannot read resource contents: {}'
+    error39: 'Cannot read binary resource: {}'
+    error41: 'Error occurred in request reading process'
+    error42: 'Error on request parsing process'
+    error43: 'Error is occurred on rquested file writing process. Path: {}'
+    error44: 'Service method invocation error. Service: {}  Method: {}'
+    error45: 'Error in request parsing process. Caused: {}'
+    error46: 'Error on building HttpRequest process. Caused: {}'
+    error47: '{} not support this operation!!!'
+    error48: 'Request stream aleary closed or Rquest body not loaded.  Is Body: {}  Is Stream: {}'

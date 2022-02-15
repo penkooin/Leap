@@ -1,15 +1,20 @@
 package org.chaostocosmos.leap.http;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import javax.net.ssl.SSLServerSocket;
+
+import org.chaostocosmos.leap.http.security.UserManager;
 import org.chaostocosmos.leap.http.services.ServiceManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory; 
@@ -25,57 +30,50 @@ public class LeapHttpServer extends Thread {
      * logger
      */
     Logger logger = (Logger)LoggerFactory.getLogger(Context.getDefaultHost());
-
     /**
      * Index file
      */
     public static String INDEX_FILE = Context.getWelcome();
-
     /**
-     * leap home path
-     */
-    Path homePath;
-
-    /**
-     * Server socket
-     */
-    ServerSocket server;
-
-    /**
-     * servlet loading & managing
-     */
-    ServiceManager serviceManager;
-
-    /**
-     * thread pool
-     */
-    ThreadPoolExecutor threadpool;
-
-    /**
-     * Whether default host
-     */
-    boolean isDefaultHost;
-
-    /**
-     * host 
+     * host
      */
     String host;
-
     /**
      * port
      */
     int port;
-
     /**
-     * server backlog
+     * backlog
      */
     int backlog;
-
     /**
      * document root
      */
     Path docroot;
-
+    /**
+     * leap home path
+     */
+    Path homePath;
+    /**
+     * Server socket
+     */
+    ServerSocket server;
+    /**
+     * Leap security manager object
+     */
+    UserManager securityManager;
+    /**
+     * servlet loading & managing
+     */
+    ServiceManager serviceManager;
+    /**
+     * thread pool
+     */
+    ThreadPoolExecutor threadpool;
+    /**
+     * Whether default host
+     */
+    boolean isDefaultHost;
     /**
      * Default constructor 
      * @throws WASException
@@ -132,7 +130,8 @@ public class LeapHttpServer extends Thread {
         this.backlog = backlog;
         this.docroot = docroot;
         this.threadpool = threadpool;
-        this.serviceManager = new ServiceManager();
+        this.securityManager = new UserManager();
+        this.serviceManager = new ServiceManager(this.securityManager);
     }
 
     /**
@@ -149,7 +148,7 @@ public class LeapHttpServer extends Thread {
      */
     public int getPort() {
         return this.port;
-    }
+    }    
 
     /**
      * Get servlet loader object
@@ -170,23 +169,37 @@ public class LeapHttpServer extends Thread {
     @Override
     public void run() {        
         try {
-            InetSocketAddress inetSocketAddress = new InetSocketAddress(InetAddress.getByName(this.host), this.port);
-            this.server = new ServerSocket();
-            this.server.bind(inetSocketAddress, this.backlog);
-            logger.info("Accepting connections on port " + server.getLocalPort());
+            boolean useSSL = Context.useSSL();
+            if(!useSSL) {
+                InetSocketAddress inetSocketAddress = new InetSocketAddress(InetAddress.getByName(this.host), this.port);
+                this.server = new ServerSocket();
+                this.server.bind(inetSocketAddress, this.backlog);
+                logger.info("HTTP SERVER START. Port: " + server.getLocalPort());
+            } else {
+                File keyStore = Context.getKeyStore().toFile();
+                String passphrase = Context.getPassphrase();
+                String sslProtocol = Context.getSSLProtocol();
+                this.server = HttpsServerSocketFactory.getSSLServerSocket(
+                                                                        keyStore, 
+                                                                        passphrase, 
+                                                                        sslProtocol, 
+                                                                        this.host, this.port, this.backlog);
+                logger.info("HTTPS SERVER START.  Port: "+this.port+"  Protocol: "+sslProtocol+"  KeyStore: "+keyStore+"  Supported Protocol: "+Arrays.toString(((SSLServerSocket)server).getSupportedProtocols()));                
+            }
             while (true) { 
                 Socket connection = server.accept();
                 connection.setSoTimeout(Context.getTimeout());
-                logger.info("Host: "+this.host+":"+this.port+"  Client request accepted... : "+connection.getLocalAddress().toString());
+                //connection.setSoLinger(true, 10);
+                logger.info("Host: "+this.host+":"+this.port+"  Client request accepted...... "+connection.getLocalAddress().toString()+"  ---  "+connection.getPort());
                 this.threadpool.submit(new LeapRequestHandler(this, this.docroot, INDEX_FILE, connection));
-            }
-        } catch(IOException e) {
+            } 
+        } catch(Exception e) {
             logger.error(e.getMessage(), e);
         }
     }
 
     /**
-     * stop server 
+     * Stop server 
      * @throws InterruptedException
      * @throws IOException
      */

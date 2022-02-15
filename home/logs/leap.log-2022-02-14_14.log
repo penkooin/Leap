@@ -1,0 +1,1868 @@
+2022-02-14 14:03:58.016 INFO  - Leap WAS server starting......
+2022-02-14 14:03:58.026 INFO  - --------------------------------------------------------------------------
+2022-02-14 14:03:58.027 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-14 14:03:58.028 INFO  - verbose mode on
+2022-02-14 14:03:58.039 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-14 14:03:58.075 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@7748410a : DEPLOY
+2022-02-14 14:03:58.075 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-14 14:03:58.078 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@f2ff811 : POST
+2022-02-14 14:03:58.079 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-14 14:03:58.080 INFO  - Default host added - Server: leap   Host: localhost   Port: 443   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-14 14:03:58.083 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-14 14:03:58.083 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-14 14:03:58.336 INFO  - Accepting connections on port 443
+2022-02-14 14:04:07.977 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:04:07.979 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:04:08.013 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	at java.base/sun.security.ssl.SSLSocketImpl.handleEOF(SSLSocketImpl.java:1616)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1434)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	... 15 common frames omitted
+Caused by: java.io.EOFException: SSL peer shut down incorrectly
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:483)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:472)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:160)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	... 13 common frames omitted
+2022-02-14 14:04:08.018 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2022-02-14 14:04:08.018 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:04:08.034 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:04:08.038 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:04:08.244 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:131)
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:117)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:336)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:292)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:283)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.onConsumeCertificate(CertificateMessage.java:1194)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.consume(CertificateMessage.java:1181)
+	at java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:392)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:443)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:421)
+	at java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:182)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+	... 26 common frames omitted
+2022-02-14 14:04:08.248 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+2022-02-14 14:04:08.249 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:04:08.251 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:04:08.253 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:04:28.919 INFO  - Leap WAS server starting......
+2022-02-14 14:04:28.923 INFO  - --------------------------------------------------------------------------
+2022-02-14 14:04:28.924 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-14 14:04:28.925 INFO  - verbose mode on
+2022-02-14 14:04:28.945 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-14 14:04:28.972 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@3098cf3b : DEPLOY
+2022-02-14 14:04:28.973 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-14 14:04:28.981 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@68567e20 : POST
+2022-02-14 14:04:28.983 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-14 14:04:28.983 INFO  - Default host added - Server: leap   Host: localhost   Port: 443   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-14 14:04:28.985 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-14 14:04:28.985 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-14 14:04:29.272 INFO  - Accepting connections on port 8080
+2022-02-14 14:04:30.419 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:04:30.421 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:04:30.875 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:04:30.895 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	at java.base/sun.security.ssl.SSLSocketImpl.handleEOF(SSLSocketImpl.java:1616)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1434)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	... 15 common frames omitted
+Caused by: java.io.EOFException: SSL peer shut down incorrectly
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:483)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:472)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:160)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	... 13 common frames omitted
+2022-02-14 14:04:30.933 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2022-02-14 14:04:30.895 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	at java.base/sun.security.ssl.SSLSocketImpl.handleEOF(SSLSocketImpl.java:1616)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1434)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	... 15 common frames omitted
+Caused by: java.io.EOFException: SSL peer shut down incorrectly
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:483)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:472)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:160)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	... 13 common frames omitted
+2022-02-14 14:04:30.936 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:04:30.938 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2022-02-14 14:04:30.939 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:04:30.940 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:04:30.943 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:04:30.941 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:04:30.949 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:04:30.963 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:131)
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:117)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:336)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:292)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:283)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.onConsumeCertificate(CertificateMessage.java:1194)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.consume(CertificateMessage.java:1181)
+	at java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:392)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:443)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:421)
+	at java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:182)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+	... 26 common frames omitted
+2022-02-14 14:04:30.970 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+2022-02-14 14:04:30.971 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:04:30.972 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:04:30.975 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:05:01.758 INFO  - Leap WAS server starting......
+2022-02-14 14:05:01.762 INFO  - --------------------------------------------------------------------------
+2022-02-14 14:05:01.762 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-14 14:05:01.762 INFO  - verbose mode on
+2022-02-14 14:05:01.771 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-14 14:05:01.797 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@3098cf3b : DEPLOY
+2022-02-14 14:05:01.798 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-14 14:05:01.802 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@68567e20 : POST
+2022-02-14 14:05:01.803 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-14 14:05:01.803 INFO  - Default host added - Server: leap   Host: localhost   Port: 443   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-14 14:05:01.805 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-14 14:05:01.805 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-14 14:05:02.038 INFO  - Accepting connections on port 8080
+2022-02-14 14:05:04.355 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:05:04.357 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:05:04.642 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:05:04.650 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	at java.base/sun.security.ssl.SSLSocketImpl.handleEOF(SSLSocketImpl.java:1616)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1434)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	... 15 common frames omitted
+Caused by: java.io.EOFException: SSL peer shut down incorrectly
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:483)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:472)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:160)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	... 13 common frames omitted
+2022-02-14 14:05:04.650 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	at java.base/sun.security.ssl.SSLSocketImpl.handleEOF(SSLSocketImpl.java:1616)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1434)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	... 15 common frames omitted
+Caused by: java.io.EOFException: SSL peer shut down incorrectly
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:483)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:472)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:160)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	... 13 common frames omitted
+2022-02-14 14:05:04.717 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2022-02-14 14:05:04.719 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2022-02-14 14:05:04.719 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:05:04.720 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:05:04.723 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:05:04.723 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:05:04.725 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:05:04.727 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:05:04.765 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:131)
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:117)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:336)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:292)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:283)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.onConsumeCertificate(CertificateMessage.java:1194)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.consume(CertificateMessage.java:1181)
+	at java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:392)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:443)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:421)
+	at java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:182)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+	... 26 common frames omitted
+2022-02-14 14:05:04.771 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+2022-02-14 14:05:04.783 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:05:04.785 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:05:04.788 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:06:46.230 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:06:46.231 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:06:46.440 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:06:46.443 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	at java.base/sun.security.ssl.SSLSocketImpl.handleEOF(SSLSocketImpl.java:1616)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1434)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	... 15 common frames omitted
+Caused by: java.io.EOFException: SSL peer shut down incorrectly
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:483)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:472)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:160)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	... 13 common frames omitted
+2022-02-14 14:06:46.555 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketException: Software caused connection abort: socket write error
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketException: Software caused connection abort: socket write error
+	at java.base/java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:110)
+	at java.base/java.net.SocketOutputStream.write(SocketOutputStream.java:150)
+	at java.base/sun.security.ssl.SSLSocketOutputRecord.flush(SSLSocketOutputRecord.java:251)
+	at java.base/sun.security.ssl.HandshakeOutStream.flush(HandshakeOutStream.java:89)
+	at java.base/sun.security.ssl.Finished$T13FinishedProducer.onProduceFinished(Finished.java:773)
+	at java.base/sun.security.ssl.Finished$T13FinishedProducer.produce(Finished.java:661)
+	at java.base/sun.security.ssl.SSLHandshake.produce(SSLHandshake.java:436)
+	at java.base/sun.security.ssl.ClientHello$T13ClientHelloConsumer.goServerHello(ClientHello.java:1234)
+	at java.base/sun.security.ssl.ClientHello$T13ClientHelloConsumer.consume(ClientHello.java:1170)
+	at java.base/sun.security.ssl.ClientHello$ClientHelloConsumer.onClientHello(ClientHello.java:852)
+	at java.base/sun.security.ssl.ClientHello$ClientHelloConsumer.consume(ClientHello.java:813)
+	at java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:392)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:443)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:421)
+	at java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:182)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.net.SocketException: Software caused connection abort: socket write error
+	... 31 common frames omitted
+2022-02-14 14:06:46.695 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketException: Software caused connection abort: socket write error
+2022-02-14 14:06:46.686 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2022-02-14 14:06:46.699 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:06:46.699 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:06:46.701 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:06:46.701 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:06:46.708 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:06:46.706 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:06:46.786 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:131)
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:117)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:336)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:292)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:283)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.onConsumeCertificate(CertificateMessage.java:1194)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.consume(CertificateMessage.java:1181)
+	at java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:392)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:443)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:421)
+	at java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:182)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+	... 26 common frames omitted
+2022-02-14 14:06:46.795 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+2022-02-14 14:06:46.795 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:06:46.796 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:06:46.798 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:06:47.833 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:06:47.834 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:06:47.864 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:131)
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:117)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:336)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:292)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:283)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.onConsumeCertificate(CertificateMessage.java:1194)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.consume(CertificateMessage.java:1181)
+	at java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:392)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:443)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:421)
+	at java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:182)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+	... 26 common frames omitted
+2022-02-14 14:06:47.877 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+2022-02-14 14:06:47.878 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:06:47.865 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:131)
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:117)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:336)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:292)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:283)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.onConsumeCertificate(CertificateMessage.java:1194)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.consume(CertificateMessage.java:1181)
+	at java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:392)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:443)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:421)
+	at java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:182)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+	... 26 common frames omitted
+2022-02-14 14:06:47.884 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+2022-02-14 14:06:47.882 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:06:47.891 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:06:47.890 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:06:47.893 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:06:47.899 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:06:52.207 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:06:52.208 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:06:52.281 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:06:52.281 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	at java.base/sun.security.ssl.SSLSocketImpl.handleEOF(SSLSocketImpl.java:1616)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1434)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	... 15 common frames omitted
+Caused by: java.io.EOFException: SSL peer shut down incorrectly
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:483)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:472)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:160)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	... 13 common frames omitted
+2022-02-14 14:06:52.287 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketException: Software caused connection abort: socket write error
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketException: Software caused connection abort: socket write error
+	at java.base/java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:110)
+	at java.base/java.net.SocketOutputStream.write(SocketOutputStream.java:150)
+	at java.base/sun.security.ssl.SSLSocketOutputRecord.flush(SSLSocketOutputRecord.java:251)
+	at java.base/sun.security.ssl.HandshakeOutStream.flush(HandshakeOutStream.java:89)
+	at java.base/sun.security.ssl.Finished$T13FinishedProducer.onProduceFinished(Finished.java:773)
+	at java.base/sun.security.ssl.Finished$T13FinishedProducer.produce(Finished.java:661)
+	at java.base/sun.security.ssl.SSLHandshake.produce(SSLHandshake.java:436)
+	at java.base/sun.security.ssl.ClientHello$T13ClientHelloConsumer.goServerHello(ClientHello.java:1234)
+	at java.base/sun.security.ssl.ClientHello$T13ClientHelloConsumer.consume(ClientHello.java:1170)
+	at java.base/sun.security.ssl.ClientHello$ClientHelloConsumer.onClientHello(ClientHello.java:852)
+	at java.base/sun.security.ssl.ClientHello$ClientHelloConsumer.consume(ClientHello.java:813)
+	at java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:392)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:443)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:421)
+	at java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:182)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.net.SocketException: Software caused connection abort: socket write error
+	... 31 common frames omitted
+2022-02-14 14:06:52.291 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2022-02-14 14:06:52.296 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:06:52.294 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketException: Software caused connection abort: socket write error
+2022-02-14 14:06:52.297 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:06:52.297 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:06:52.298 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:06:52.300 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:06:52.300 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:06:52.324 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:131)
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:117)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:336)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:292)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:283)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.onConsumeCertificate(CertificateMessage.java:1194)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.consume(CertificateMessage.java:1181)
+	at java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:392)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:443)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:421)
+	at java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:182)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+	... 26 common frames omitted
+2022-02-14 14:06:52.331 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+2022-02-14 14:06:52.331 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:06:52.332 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:06:52.333 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:09:17.626 INFO  - Leap WAS server starting......
+2022-02-14 14:09:17.629 INFO  - --------------------------------------------------------------------------
+2022-02-14 14:09:17.629 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-14 14:09:17.629 INFO  - verbose mode on
+2022-02-14 14:09:17.638 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-14 14:09:17.667 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@3098cf3b : DEPLOY
+2022-02-14 14:09:17.668 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-14 14:09:17.670 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@68567e20 : POST
+2022-02-14 14:09:17.670 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-14 14:09:17.671 INFO  - Default host added - Server: leap   Host: localhost   Port: 443   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-14 14:09:17.672 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-14 14:09:17.672 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-14 14:09:17.986 INFO  - Accepting connections on port 8080
+2022-02-14 14:09:21.286 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:09:21.288 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:09:21.462 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:09:21.468 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	at java.base/sun.security.ssl.SSLSocketImpl.handleEOF(SSLSocketImpl.java:1616)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1434)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	... 15 common frames omitted
+Caused by: java.io.EOFException: SSL peer shut down incorrectly
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:483)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:472)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:160)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	... 13 common frames omitted
+2022-02-14 14:09:21.473 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2022-02-14 14:09:21.468 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	at java.base/sun.security.ssl.SSLSocketImpl.handleEOF(SSLSocketImpl.java:1616)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1434)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	... 15 common frames omitted
+Caused by: java.io.EOFException: SSL peer shut down incorrectly
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:483)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:472)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:160)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	... 13 common frames omitted
+2022-02-14 14:09:21.492 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:09:21.492 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2022-02-14 14:09:21.494 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:09:21.496 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:09:21.496 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:09:21.498 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:09:21.499 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:09:21.523 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:131)
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:117)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:336)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:292)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:283)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.onConsumeCertificate(CertificateMessage.java:1194)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.consume(CertificateMessage.java:1181)
+	at java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:392)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:443)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:421)
+	at java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:182)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+	... 26 common frames omitted
+2022-02-14 14:09:21.533 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+2022-02-14 14:09:21.534 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:09:21.535 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:09:21.539 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:10:56.246 INFO  - Leap WAS server starting......
+2022-02-14 14:10:56.262 INFO  - --------------------------------------------------------------------------
+2022-02-14 14:10:56.263 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-14 14:10:56.263 INFO  - verbose mode on
+2022-02-14 14:10:56.269 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-14 14:10:56.297 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@3098cf3b : DEPLOY
+2022-02-14 14:10:56.298 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-14 14:10:56.301 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@68567e20 : POST
+2022-02-14 14:10:56.301 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-14 14:10:56.302 INFO  - Default host added - Server: leap   Host: localhost   Port: 443   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-14 14:10:56.304 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-14 14:10:56.305 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-14 14:10:56.628 INFO  - Accepting connections on port 8080
+2022-02-14 14:10:59.443 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:10:59.445 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:10:59.658 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:10:59.666 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	at java.base/sun.security.ssl.SSLSocketImpl.handleEOF(SSLSocketImpl.java:1616)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1434)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	... 15 common frames omitted
+Caused by: java.io.EOFException: SSL peer shut down incorrectly
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:483)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:472)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:160)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	... 13 common frames omitted
+2022-02-14 14:10:59.672 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2022-02-14 14:10:59.674 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:10:59.667 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	at java.base/sun.security.ssl.SSLSocketImpl.handleEOF(SSLSocketImpl.java:1616)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1434)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	... 15 common frames omitted
+Caused by: java.io.EOFException: SSL peer shut down incorrectly
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:483)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:472)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:160)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	... 13 common frames omitted
+2022-02-14 14:10:59.678 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2022-02-14 14:10:59.680 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:10:59.681 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:10:59.683 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:10:59.682 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:10:59.687 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:10:59.707 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:131)
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:117)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:336)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:292)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:283)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.onConsumeCertificate(CertificateMessage.java:1194)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.consume(CertificateMessage.java:1181)
+	at java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:392)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:443)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:421)
+	at java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:182)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+	... 26 common frames omitted
+2022-02-14 14:10:59.713 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+2022-02-14 14:10:59.719 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:10:59.723 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:10:59.725 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:13:02.546 INFO  - Leap WAS server starting......
+2022-02-14 14:13:02.549 INFO  - --------------------------------------------------------------------------
+2022-02-14 14:13:02.549 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-14 14:13:02.549 INFO  - verbose mode on
+2022-02-14 14:13:02.555 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-14 14:13:02.582 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@3098cf3b : DEPLOY
+2022-02-14 14:13:02.582 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-14 14:13:02.584 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@68567e20 : POST
+2022-02-14 14:13:02.585 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-14 14:13:02.585 INFO  - Default host added - Server: leap   Host: localhost   Port: 443   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-14 14:13:02.587 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-14 14:13:02.587 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-14 14:13:02.885 INFO  - Accepting connections on port 8080
+2022-02-14 14:13:19.882 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:13:19.884 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:13:19.928 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	at java.base/sun.security.ssl.SSLSocketImpl.handleEOF(SSLSocketImpl.java:1616)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1434)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	... 15 common frames omitted
+Caused by: java.io.EOFException: SSL peer shut down incorrectly
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:483)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:472)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:160)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	... 13 common frames omitted
+2022-02-14 14:13:19.931 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2022-02-14 14:13:19.933 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:13:19.935 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:13:19.936 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:13:20.026 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:131)
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:117)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:336)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:292)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:283)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.onConsumeCertificate(CertificateMessage.java:1194)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.consume(CertificateMessage.java:1181)
+	at java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:392)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:443)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:421)
+	at java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:182)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+	... 26 common frames omitted
+2022-02-14 14:13:20.032 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+2022-02-14 14:13:20.033 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:13:20.034 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:13:20.037 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:13:45.963 INFO  - Leap WAS server starting......
+2022-02-14 14:13:45.966 INFO  - --------------------------------------------------------------------------
+2022-02-14 14:13:45.967 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-14 14:13:45.967 INFO  - verbose mode on
+2022-02-14 14:13:45.975 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-14 14:13:46.002 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@3098cf3b : DEPLOY
+2022-02-14 14:13:46.003 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-14 14:13:46.005 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@68567e20 : POST
+2022-02-14 14:13:46.005 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-14 14:13:46.007 INFO  - Default host added - Server: leap   Host: localhost   Port: 443   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-14 14:13:46.009 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-14 14:13:46.009 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-14 14:13:46.254 INFO  - Accepting connections on port 8080
+2022-02-14 14:13:47.655 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:13:47.658 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:13:47.698 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	at java.base/sun.security.ssl.SSLSocketImpl.handleEOF(SSLSocketImpl.java:1616)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1434)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	... 15 common frames omitted
+Caused by: java.io.EOFException: SSL peer shut down incorrectly
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:483)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:472)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:160)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	... 13 common frames omitted
+2022-02-14 14:13:47.702 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2022-02-14 14:13:47.703 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:13:47.704 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:13:47.708 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:13:47.818 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:131)
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:117)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:336)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:292)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:283)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.onConsumeCertificate(CertificateMessage.java:1194)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.consume(CertificateMessage.java:1181)
+	at java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:392)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:443)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:421)
+	at java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:182)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+	... 26 common frames omitted
+2022-02-14 14:13:47.822 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+2022-02-14 14:13:47.823 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:13:47.826 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:13:47.829 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:14:46.250 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:14:46.251 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:14:46.256 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	at java.base/sun.security.ssl.SSLSocketImpl.handleEOF(SSLSocketImpl.java:1616)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1434)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	... 15 common frames omitted
+Caused by: java.io.EOFException: SSL peer shut down incorrectly
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:483)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:472)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:160)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	... 13 common frames omitted
+2022-02-14 14:14:46.261 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2022-02-14 14:14:46.270 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:14:46.272 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:14:46.274 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:14:46.299 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:131)
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:117)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:336)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:292)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:283)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.onConsumeCertificate(CertificateMessage.java:1194)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.consume(CertificateMessage.java:1181)
+	at java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:392)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:443)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:421)
+	at java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:182)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+	... 26 common frames omitted
+2022-02-14 14:14:46.304 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+2022-02-14 14:14:46.305 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:14:46.307 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:14:46.309 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:14:53.206 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:14:53.207 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:14:53.212 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	at java.base/sun.security.ssl.SSLSocketImpl.handleEOF(SSLSocketImpl.java:1616)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1434)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	... 15 common frames omitted
+Caused by: java.io.EOFException: SSL peer shut down incorrectly
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:483)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:472)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:160)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	... 13 common frames omitted
+2022-02-14 14:14:53.216 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2022-02-14 14:14:53.218 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:14:53.219 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:14:53.221 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:14:53.236 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:131)
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:117)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:336)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:292)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:283)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.onConsumeCertificate(CertificateMessage.java:1194)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.consume(CertificateMessage.java:1181)
+	at java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:392)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:443)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:421)
+	at java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:182)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+	... 26 common frames omitted
+2022-02-14 14:14:53.240 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+2022-02-14 14:14:53.241 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:14:53.241 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:14:53.243 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:14:57.964 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:14:57.965 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:14:57.969 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	at java.base/sun.security.ssl.SSLSocketImpl.handleEOF(SSLSocketImpl.java:1616)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1434)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	... 15 common frames omitted
+Caused by: java.io.EOFException: SSL peer shut down incorrectly
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:483)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:472)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:160)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	... 13 common frames omitted
+2022-02-14 14:14:57.975 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2022-02-14 14:14:57.978 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:14:57.982 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:14:57.983 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	at java.base/sun.security.ssl.SSLSocketImpl.handleEOF(SSLSocketImpl.java:1616)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1434)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	... 15 common frames omitted
+Caused by: java.io.EOFException: SSL peer shut down incorrectly
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:483)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:472)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:160)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	... 13 common frames omitted
+2022-02-14 14:14:57.992 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2022-02-14 14:14:57.995 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:14:58.001 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:14:58.006 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:14:57.986 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:15:53.787 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:15:53.789 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:15:53.791 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	at java.base/sun.security.ssl.SSLSocketImpl.handleEOF(SSLSocketImpl.java:1616)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1434)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	... 15 common frames omitted
+Caused by: java.io.EOFException: SSL peer shut down incorrectly
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:483)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:472)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:160)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	... 13 common frames omitted
+2022-02-14 14:15:53.795 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2022-02-14 14:15:53.800 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:15:53.818 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:15:53.859 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:15:53.862 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	at java.base/sun.security.ssl.SSLSocketImpl.handleEOF(SSLSocketImpl.java:1616)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1434)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	... 15 common frames omitted
+Caused by: java.io.EOFException: SSL peer shut down incorrectly
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:483)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:472)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:160)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	... 13 common frames omitted
+2022-02-14 14:15:53.867 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2022-02-14 14:15:53.867 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:15:53.869 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:15:53.872 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:17:02.577 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:17:02.578 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:17:02.581 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	at java.base/sun.security.ssl.SSLSocketImpl.handleEOF(SSLSocketImpl.java:1616)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1434)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	... 15 common frames omitted
+Caused by: java.io.EOFException: SSL peer shut down incorrectly
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:483)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:472)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:160)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	... 13 common frames omitted
+2022-02-14 14:17:02.598 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2022-02-14 14:17:02.599 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:17:02.599 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:17:02.601 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:17:02.605 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	at java.base/sun.security.ssl.SSLSocketImpl.handleEOF(SSLSocketImpl.java:1616)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1434)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	... 15 common frames omitted
+Caused by: java.io.EOFException: SSL peer shut down incorrectly
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:483)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:472)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:160)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	... 13 common frames omitted
+2022-02-14 14:17:02.624 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2022-02-14 14:17:02.625 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:17:02.626 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:17:02.626 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:17:13.030 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:17:13.032 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:17:13.034 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	at java.base/sun.security.ssl.SSLSocketImpl.handleEOF(SSLSocketImpl.java:1616)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1434)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	... 15 common frames omitted
+Caused by: java.io.EOFException: SSL peer shut down incorrectly
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:483)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:472)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:160)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	... 13 common frames omitted
+2022-02-14 14:17:13.038 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2022-02-14 14:17:13.039 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:17:13.040 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:17:13.042 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:17:13.066 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	at java.base/sun.security.ssl.SSLSocketImpl.handleEOF(SSLSocketImpl.java:1616)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1434)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	... 15 common frames omitted
+Caused by: java.io.EOFException: SSL peer shut down incorrectly
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:483)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:472)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:160)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	... 13 common frames omitted
+2022-02-14 14:17:13.072 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2022-02-14 14:17:13.074 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:17:13.075 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:17:13.076 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:43:20.410 INFO  - Leap WAS server starting......
+2022-02-14 14:43:20.413 INFO  - --------------------------------------------------------------------------
+2022-02-14 14:43:20.413 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-14 14:43:20.414 INFO  - verbose mode on
+2022-02-14 14:43:20.422 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-14 14:43:20.448 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@3098cf3b : DEPLOY
+2022-02-14 14:43:20.448 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-14 14:43:20.450 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@68567e20 : POST
+2022-02-14 14:43:20.451 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-14 14:43:20.452 INFO  - Default host added - Server: leap   Host: localhost   Port: 443   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-14 14:43:20.453 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-14 14:43:20.454 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-14 14:43:20.696 INFO  - Accepting connections on port 8080
+2022-02-14 14:43:31.308 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:43:31.311 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:43:31.526 INFO  - Host: localhost:443  Client request accepted...... /0:0:0:0:0:0:0:1
+2022-02-14 14:43:31.578 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	at java.base/sun.security.ssl.SSLSocketImpl.handleEOF(SSLSocketImpl.java:1616)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1434)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	... 15 common frames omitted
+Caused by: java.io.EOFException: SSL peer shut down incorrectly
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:483)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:472)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:160)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	... 13 common frames omitted
+2022-02-14 14:43:31.585 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2022-02-14 14:43:31.579 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	at java.base/sun.security.ssl.SSLSocketImpl.handleEOF(SSLSocketImpl.java:1616)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1434)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+	... 15 common frames omitted
+	Suppressed: java.net.SocketException: Software caused connection abort: socket write error
+		at java.base/java.net.SocketOutputStream.socketWrite0(Native Method)
+		at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:110)
+		at java.base/java.net.SocketOutputStream.write(SocketOutputStream.java:150)
+		at java.base/sun.security.ssl.SSLSocketOutputRecord.encodeAlert(SSLSocketOutputRecord.java:81)
+		at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:380)
+		at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:292)
+		at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:462)
+		... 11 common frames omitted
+Caused by: java.io.EOFException: SSL peer shut down incorrectly
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:483)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:472)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:160)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	... 13 common frames omitted
+2022-02-14 14:43:31.608 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:43:31.612 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2022-02-14 14:43:31.616 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:43:31.616 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:43:31.621 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:43:31.618 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:43:31.624 INFO  - Client close....../0:0:0:0:0:0:0:1
+2022-02-14 14:43:31.699 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:131)
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:117)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:336)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:292)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:283)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.onConsumeCertificate(CertificateMessage.java:1194)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.consume(CertificateMessage.java:1181)
+	at java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:392)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:443)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:421)
+	at java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:182)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+	... 26 common frames omitted
+2022-02-14 14:43:31.707 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: Empty client certificate chain
+2022-02-14 14:43:31.710 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-14 14:43:31.711 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-14 14:43:31.760 INFO  - Client close....../0:0:0:0:0:0:0:1

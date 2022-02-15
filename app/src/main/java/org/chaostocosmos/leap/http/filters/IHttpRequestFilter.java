@@ -6,7 +6,7 @@ import org.chaostocosmos.leap.http.WASException;
  * IHttpRequestFilter
  * @author 9ins
  */
-public interface IHttpRequestFilter<R> extends IFilter{
+public interface IHttpRequestFilter<R> extends ILeapFilter{
     /**
      * Filter http request before servlet process
      * @param request

@@ -12,7 +12,8 @@ import org.chaostocosmos.leap.http.annotation.AnnotationHelper;
 import org.chaostocosmos.leap.http.annotation.PostFilter;
 import org.chaostocosmos.leap.http.annotation.PreFilter;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
-import org.chaostocosmos.leap.http.filters.IFilter;
+import org.chaostocosmos.leap.http.filters.ILeapFilter;
+import org.chaostocosmos.leap.http.security.UserManager;
 
 /**
  * Abstraction of SimpleServlet object
@@ -27,27 +28,28 @@ public abstract class AbstractLeapService implements IGetService,
      * Context
      */
     private static final Context context = Context.getInstance();
-
     /**
      * Method to be called for request
      */
     private Method invokingMethod;
-
     /**
      * Filters for previous filtering process of service method
      */
-    private List<IFilter> preFilters;
-
+    private List<ILeapFilter> preFilters;
     /**
      * Filter for after filtering process of service method
      */
-    private List<IFilter> postFilters;
+    private List<ILeapFilter> postFilters;
+    /**
+     * Leap security manager object
+     */
+    private UserManager securityManager;
 
     @Override
     public void serve(HttpRequestDescriptor request, HttpResponseDescriptor response, Method invokingMethod) throws WASException {
         this.invokingMethod = invokingMethod;
         if(this.preFilters != null) {
-            for(IFilter filter : this.preFilters) {
+            for(ILeapFilter filter : this.preFilters) {
                 List<Method> methods = AnnotationHelper.getFilterMethods(filter, PreFilter.class); 
                 for(Method method : methods) {
                     ServiceInvoker.invokeMethod(filter, method, request);
@@ -71,7 +73,7 @@ public abstract class AbstractLeapService implements IGetService,
                 throw new WASException(MSG_TYPE.ERROR, 16, request.getRequestType().name());
         }
         if(this.postFilters != null) {
-            for(IFilter filter : this.postFilters) {
+            for(ILeapFilter filter : this.postFilters) {
                 List<Method> methods = AnnotationHelper.getFilterMethods(filter, PostFilter.class);
                 for(Method method : methods) {
                     ServiceInvoker.invokeMethod(filter, method, response);
@@ -117,8 +119,13 @@ public abstract class AbstractLeapService implements IGetService,
     }    
 
     @Override
-    public void setFilters(List<IFilter> preFilters, List<IFilter> postFilters) throws WASException {
+    public void setFilters(List<ILeapFilter> preFilters, List<ILeapFilter> postFilters) throws WASException {
         this.preFilters = preFilters;
         this.postFilters = postFilters;
     } 
+
+    @Override
+    public void setSecurityManager(UserManager securityManager) {
+        this.securityManager = securityManager;
+    }
 }

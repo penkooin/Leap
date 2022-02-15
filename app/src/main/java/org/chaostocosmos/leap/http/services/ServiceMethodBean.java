@@ -3,7 +3,7 @@ package org.chaostocosmos.leap.http.services;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import org.chaostocosmos.leap.http.filters.IFilter;
+import org.chaostocosmos.leap.http.filters.ILeapFilter;
 
 /**
  * Service info bean object
@@ -22,12 +22,12 @@ public class ServiceMethodBean {
     /**
      * Service filter for pre process
      */
-    protected List<IFilter> preFilters;
+    protected List<ILeapFilter> preFilters;
 
     /**
      * Service filter for post process
      */
-    protected List<IFilter> postFilters;
+    protected List<ILeapFilter> postFilters;
 
     /**
      * Constructor with attributes
@@ -36,7 +36,7 @@ public class ServiceMethodBean {
      * @param preFilters
      * @param postFilters
      */
-    public ServiceMethodBean(ILeapService service, Method serviceMethod, List<IFilter> preFilters, List<IFilter> postFilters) {
+    public ServiceMethodBean(ILeapService service, Method serviceMethod, List<ILeapFilter> preFilters, List<ILeapFilter> postFilters) {
         this.service = service;
         this.serviceMethod = serviceMethod;
         this.preFilters = preFilters;
@@ -59,19 +59,19 @@ public class ServiceMethodBean {
         this.serviceMethod = serviceMethod;
     }
 
-    public List<IFilter> getPreFilters() {
+    public List<ILeapFilter> getPreFilters() {
         return this.preFilters;
     }
 
-    public void setPreFilters(List<IFilter> preFilters) {
+    public void setPreFilters(List<ILeapFilter> preFilters) {
         this.preFilters = preFilters;
     }
 
-    public List<IFilter> getPostFilters() {
+    public List<ILeapFilter> getPostFilters() {
         return this.postFilters;
     }
 
-    public void setPostFilters(List<IFilter> postFilters) {
+    public void setPostFilters(List<ILeapFilter> postFilters) {
         this.postFilters = postFilters;
     }
 

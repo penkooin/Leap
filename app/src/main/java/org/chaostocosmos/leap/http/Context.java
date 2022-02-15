@@ -337,6 +337,36 @@ public class Context {
     }
 
     /**
+     * Whether using SSL
+     * @return
+     */
+    public static boolean useSSL() {
+        return (boolean)getConfigValue("server.ssl.use-ssl");
+    }
+
+    /**
+     * Get SSL key store Path
+     */
+    public static Path getKeyStore() {
+        return Paths.get((String)getConfigValue("server.ssl.keystore"));
+    }
+
+    /**
+     * Get SSL key store password
+     */
+    public static String getPassphrase() {
+        return (String)getConfigValue("server.ssl.passphrase");
+    }
+
+    /**
+     * Get SSL protocol
+     * @return
+     */
+    public static String getSSLProtocol() {
+        return (String)getConfigValue("server.ssl.protocol");
+    }
+
+    /**
      * Get upload file buffer flush size
      * @return
      */

@@ -1,0 +1,16 @@
+package org.chaostocosmos.leap.http.filters;
+
+import org.chaostocosmos.leap.http.security.UserManager;
+
+/**
+ * Top model of Leap filters
+ * 
+ * @author 9ins
+ */
+public interface ILeapFilter {
+    /**
+     * Set security manager object
+     * @param securityManager
+     */
+    public void setSecurityManager(UserManager securityManager);
+}

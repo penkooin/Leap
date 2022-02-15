@@ -9,7 +9,6 @@ import org.chaostocosmos.leap.http.annotation.PreFilter;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.user.User;
-import org.chaostocosmos.leap.http.user.UserManager;
 
 /**
  * BasicAuthFilter object
@@ -41,11 +40,17 @@ public class BasicAuthFilter<R, S> extends AbstractHttpFilter<R, S> implements I
 
     @Override
     public boolean signIn(String username, String password) throws WASException {
-        return UserManager.getInstance().signIn(username, password);
+        if(super.securityManager == null) {
+            throw new IllegalStateException("Leap security manager not set. Can not sing in with "+username+"/"+password);
+        }   
+        return super.securityManager.signIn(username, password);
     }
 
     @Override
     public void signUp(User user) throws WASException {
-        UserManager.getInstance().signUp(user);
+        if(super.securityManager == null) {
+            throw new IllegalStateException("Leap security manager not set. Can not sing up with "+user.toString());
+        }   
+        super.securityManager.signUp(user);
     }
 }

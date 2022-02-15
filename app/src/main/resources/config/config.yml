@@ -4,7 +4,12 @@ server:
   server-name: leap
   host: localhost
   port: 8080
-  timeout: 10000
+  ssl:
+    use-ssl: true
+    protocol: 'TLS'
+    keystore: './config/ssl/leap-keystore.jks'
+    passphrase: '939393'
+  timeout: 3000
   backlog: 50
   file-buffer-size: 1024
   threadpool:

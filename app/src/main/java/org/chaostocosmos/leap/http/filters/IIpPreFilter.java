@@ -11,7 +11,7 @@ import org.chaostocosmos.leap.http.annotation.PreFilter;
  * @author 9ins
  * @since 2021.09.18
  */
-public interface IIpPreFilter<R> extends IFilter {    
+public interface IIpPreFilter<R> extends ILeapFilter {    
     /**
      * Check allowed hosts when request be happening.
      * @param request

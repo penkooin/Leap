@@ -6,12 +6,18 @@ import java.net.URL;
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.annotation.PostFilter;
 import org.chaostocosmos.leap.http.annotation.PreFilter;
+import org.chaostocosmos.leap.http.security.UserManager;
 
 /**
  * Filtering request URL
  * @author 9ins
  */
 public abstract class AbstractHttpFilter<R, S> implements IHttpFilter<R, S> {
+
+    /**
+     * Security manager object
+     */
+    protected UserManager securityManager;
 
     @Override
     @PreFilter
@@ -33,5 +39,10 @@ public abstract class AbstractHttpFilter<R, S> implements IHttpFilter<R, S> {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public void setSecurityManager(UserManager securityManager) {
+        this.securityManager = securityManager;
     }
 }

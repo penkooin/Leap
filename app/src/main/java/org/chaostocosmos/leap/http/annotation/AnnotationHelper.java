@@ -12,7 +12,7 @@ import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.commons.ClassUtils;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
-import org.chaostocosmos.leap.http.filters.IFilter;
+import org.chaostocosmos.leap.http.filters.ILeapFilter;
 import org.chaostocosmos.leap.http.services.ILeapService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory; 
@@ -236,7 +236,7 @@ public class AnnotationHelper {
      * @param annotationClass
      * @return
      */
-    public static List<Method> getFilterMethods(IFilter filter, Class annotationClass) {
+    public static List<Method> getFilterMethods(ILeapFilter filter, Class annotationClass) {
         return Arrays.asList(filter.getClass().getDeclaredMethods()).stream().filter(m -> m.getDeclaredAnnotation(annotationClass) != null).collect(Collectors.toList());
     }
 }

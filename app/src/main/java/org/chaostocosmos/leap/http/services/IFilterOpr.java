@@ -3,7 +3,7 @@ package org.chaostocosmos.leap.http.services;
 import java.util.List;
 
 import org.chaostocosmos.leap.http.WASException;
-import org.chaostocosmos.leap.http.filters.IFilter;
+import org.chaostocosmos.leap.http.filters.ILeapFilter;
 
 /**
  * Top level of Filter
@@ -17,21 +17,21 @@ public interface IFilterOpr {
      * @param filter
      * @throws WASException
      */
-    public void addFilter(IFilter filter) throws WASException;
+    public void addFilter(ILeapFilter filter) throws WASException;
 
     /**
      * Add all filters
      * @param filters
      * @throws WASException
      */
-    public void addAllFilters(List<IFilter> filters) throws WASException;
+    public void addAllFilters(List<ILeapFilter> filters) throws WASException;
 
     /**
      * Remove filter
      * @param filter
      * @throws WASException
      */
-    public void removeFilter(IFilter filter) throws WASException;
+    public void removeFilter(ILeapFilter filter) throws WASException;
 
     /**
      * Remove all filters

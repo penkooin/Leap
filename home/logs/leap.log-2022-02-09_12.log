@@ -1,0 +1,163 @@
+2022-02-09 12:33:09.153 INFO  - Leap WAS server starting......
+2022-02-09 12:33:09.161 INFO  - --------------------------------------------------------------------------
+2022-02-09 12:33:09.161 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-09 12:33:09.162 INFO  - verbose mode on
+2022-02-09 12:33:09.175 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-09 12:33:09.216 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@3f56875e : DEPLOY
+2022-02-09 12:33:09.217 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-09 12:33:09.220 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@7748410a : POST
+2022-02-09 12:33:09.222 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-09 12:33:09.222 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 12:33:09.228 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@45ca843 : DEPLOY
+2022-02-09 12:33:09.228 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-09 12:33:09.228 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@11c9af63 : POST
+2022-02-09 12:33:09.229 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-09 12:33:09.229 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 12:33:09.233 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@757acd7b : DEPLOY
+2022-02-09 12:33:09.233 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-09 12:33:09.233 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@36b4fe2a : POST
+2022-02-09 12:33:09.234 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-09 12:33:09.234 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 12:33:09.241 INFO  - Accepting connections on port 61781
+2022-02-09 12:33:09.241 INFO  - Accepting connections on port 61782
+2022-02-09 12:33:09.241 INFO  - Accepting connections on port 61783
+2022-02-09 12:34:34.808 INFO  - Leap WAS server starting......
+2022-02-09 12:34:34.811 INFO  - --------------------------------------------------------------------------
+2022-02-09 12:34:34.812 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-09 12:34:34.812 INFO  - verbose mode on
+2022-02-09 12:34:34.820 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-09 12:34:34.845 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@68267da0 : DEPLOY
+2022-02-09 12:34:34.846 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-09 12:34:34.848 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@a1cdc6d : POST
+2022-02-09 12:34:34.850 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-09 12:34:34.850 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 12:34:34.852 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 12:34:34.853 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 12:34:34.862 INFO  - Accepting connections on port 8080
+2022-02-09 12:34:37.592 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-09 12:34:37.598 DEBUG - --------------------------------------------------------------------------------
+GET /?aaa=bbb HTTP/1.1
+User-Agent: PostmanRuntime/7.29.0
+Accept: */*
+Postman-Token: 6ff070ba-433f-4a65-86e4-6c8783981e1b
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+2022-02-09 12:34:37.616 DEBUG - REQUEST CONTEXT:    PATH: .\home\webapp\WEB-INF\static
+2022-02-09 12:34:37.617 DEBUG - REQUEST RESOURCE: index.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 12:34:37.621 INFO  - Client close....../127.0.0.1
+2022-02-09 12:35:03.536 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-09 12:35:03.539 DEBUG - --------------------------------------------------------------------------------
+GET /time/Gettime HTTP/1.1
+korean: yahoo
+Authorization: Basic Y2hhb3M5MzA6OTM5Mw==
+User-Agent: PostmanRuntime/7.29.0
+Accept: */*
+Postman-Token: 8b7d33ef-a868-4ecb-893b-761631c0c689
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Content-Type: multipart/form-data; boundary=--------------------------590632485319508796278487
+Content-Length: 43972028
+2022-02-09 12:35:03.542 DEBUG - Context params: {}
+2022-02-09 12:35:03.543 DEBUG - Mime Type: MULTIPART_FORM_DATA
+2022-02-09 12:35:03.544 DEBUG - REQUEST CONTEXT: time/Gettime   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 12:35:03.547 ERROR - null
+java.lang.NullPointerException: null
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:66)
+	at org.chaostocosmos.leap.http.WASException.<init>(WASException.java:53)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:145)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-09 12:35:03.550 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 12:35:03.552 INFO  - Client close....../127.0.0.1
+2022-02-09 12:35:43.548 INFO  - Leap WAS server starting......
+2022-02-09 12:35:43.551 INFO  - --------------------------------------------------------------------------
+2022-02-09 12:35:43.551 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-09 12:35:43.551 INFO  - verbose mode on
+2022-02-09 12:35:43.559 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-09 12:35:43.588 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@68267da0 : DEPLOY
+2022-02-09 12:35:43.588 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-09 12:35:43.591 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@a1cdc6d : POST
+2022-02-09 12:35:43.592 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-09 12:35:43.592 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 12:35:43.593 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 12:35:43.594 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-09 12:35:43.604 INFO  - Accepting connections on port 8080
+2022-02-09 12:35:44.961 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-09 12:35:44.969 DEBUG - --------------------------------------------------------------------------------
+GET /time/Gettime HTTP/1.1
+korean: yahoo
+Authorization: Basic Y2hhb3M5MzA6OTM5Mw==
+User-Agent: PostmanRuntime/7.29.0
+Accept: */*
+Postman-Token: 0e12039b-d9a6-4e06-9efb-2b93c01df1a9
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Content-Type: multipart/form-data; boundary=--------------------------417853475017623987746748
+Content-Length: 43972028
+2022-02-09 12:35:44.970 DEBUG - Context params: {}
+2022-02-09 12:35:44.970 DEBUG - Mime Type: MULTIPART_FORM_DATA
+2022-02-09 12:35:44.986 DEBUG - REQUEST CONTEXT: time/Gettime   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 12:35:44.990 ERROR - org.chaostocosmos.leap.http.WASException: Resource Not Found   /time/Gettime
+org.chaostocosmos.leap.http.WASException: Resource Not Found   /time/Gettime
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:145)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-09 12:35:44.991 WARN  - Type: HTTP Code: 404 Exception: org.chaostocosmos.leap.http.WASException: Resource Not Found   /time/Gettime
+2022-02-09 12:35:44.991 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 12:35:44.993 INFO  - Client close....../127.0.0.1
+2022-02-09 12:36:04.188 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-09 12:36:04.192 DEBUG - --------------------------------------------------------------------------------
+GET /time/GetTime HTTP/1.1
+korean: yahoo
+Authorization: Basic Y2hhb3M5MzA6OTM5Mw==
+User-Agent: PostmanRuntime/7.29.0
+Accept: */*
+Postman-Token: 5c9ad010-fc2f-45c3-a45e-bbb8f0682204
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Content-Type: multipart/form-data; boundary=--------------------------791038073519221303573162
+Content-Length: 43972028
+2022-02-09 12:36:04.196 DEBUG - Context params: {}
+2022-02-09 12:36:04.197 DEBUG - Mime Type: MULTIPART_FORM_DATA
+2022-02-09 12:36:04.198 DEBUG - REQUEST CONTEXT: time/GetTime   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 12:36:04.199 ERROR - org.chaostocosmos.leap.http.WASException: Method Not Allowed   <br>Requested method not supported: GET
+org.chaostocosmos.leap.http.WASException: Method Not Allowed   <br>Requested method not supported: GET
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:104)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-09 12:36:04.200 WARN  - Type: HTTP Code: 405 Exception: org.chaostocosmos.leap.http.WASException: Method Not Allowed   <br>Requested method not supported: GET
+2022-02-09 12:36:04.201 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 12:36:04.202 INFO  - Client close....../127.0.0.1
+2022-02-09 12:36:11.284 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-09 12:36:11.286 DEBUG - --------------------------------------------------------------------------------
+POST /time/GetTime HTTP/1.1
+korean: yahoo
+Authorization: Basic Y2hhb3M5MzA6OTM5Mw==
+User-Agent: PostmanRuntime/7.29.0
+Accept: */*
+Postman-Token: 4f2c2719-7f99-43d9-ad54-305fb26e8ae6
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Content-Type: multipart/form-data; boundary=--------------------------327417337239538258175964
+Content-Length: 43972028
+2022-02-09 12:36:11.288 DEBUG - Context params: {}
+2022-02-09 12:36:11.288 DEBUG - Mime Type: MULTIPART_FORM_DATA
+2022-02-09 12:36:11.289 DEBUG - REQUEST CONTEXT: time/GetTime   PATH: .\home\webapp\WEB-INF\static
+2022-02-09 12:36:11.294 DEBUG - User chaos930 is login.
+2022-02-09 12:36:11.297 DEBUG - Basic Http request filter processing......
+2022-02-09 12:36:11.297 DEBUG - getTime servlet started....+++++++++++++++++++++++++++++++++++++++++++++++++
+2022-02-09 12:36:11.299 INFO  - Client close....../127.0.0.1

@@ -1,0 +1,742 @@
+2022-02-10 17:46:28.141 INFO  - Leap WAS server starting......
+2022-02-10 17:46:28.149 INFO  - --------------------------------------------------------------------------
+2022-02-10 17:46:28.150 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-10 17:46:28.151 INFO  - verbose mode on
+2022-02-10 17:46:28.160 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-10 17:46:28.193 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@37f1104d : DEPLOY
+2022-02-10 17:46:28.194 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-10 17:46:28.196 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@50caa560 : POST
+2022-02-10 17:46:28.198 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-10 17:46:28.199 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-10 17:46:28.202 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-10 17:46:28.202 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-10 17:46:28.216 ERROR - DER input, Integer tag error
+java.io.IOException: DER input, Integer tag error
+	at java.base/sun.security.util.DerInputStream.getInteger(DerInputStream.java:195)
+	at java.base/sun.security.pkcs12.PKCS12KeyStore.engineLoad(PKCS12KeyStore.java:1975)
+	at java.base/sun.security.util.KeyStoreDelegator.engineLoad(KeyStoreDelegator.java:222)
+	at java.base/java.security.KeyStore.load(KeyStore.java:1479)
+	at org.chaostocosmos.leap.http.ServerSocketProvider.getServerSocketFactory(ServerSocketProvider.java:70)
+	at org.chaostocosmos.leap.http.ServerSocketProvider.getSocketServer(ServerSocketProvider.java:155)
+	at org.chaostocosmos.leap.http.LeapHttpServer.run(LeapHttpServer.java:178)
+2022-02-10 17:46:52.479 INFO  - Leap WAS server starting......
+2022-02-10 17:46:52.483 INFO  - --------------------------------------------------------------------------
+2022-02-10 17:46:52.483 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-10 17:46:52.484 INFO  - verbose mode on
+2022-02-10 17:46:52.493 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-10 17:46:52.536 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@3098cf3b : DEPLOY
+2022-02-10 17:46:52.537 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-10 17:46:52.539 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@68567e20 : POST
+2022-02-10 17:46:52.540 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-10 17:46:52.540 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-10 17:46:52.542 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-10 17:46:52.542 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-10 17:46:52.569 ERROR - DER input, Integer tag error
+java.io.IOException: DER input, Integer tag error
+	at java.base/sun.security.util.DerInputStream.getInteger(DerInputStream.java:195)
+	at java.base/sun.security.pkcs12.PKCS12KeyStore.engineLoad(PKCS12KeyStore.java:1975)
+	at java.base/sun.security.util.KeyStoreDelegator.engineLoad(KeyStoreDelegator.java:222)
+	at java.base/java.security.KeyStore.load(KeyStore.java:1479)
+	at org.chaostocosmos.leap.http.ServerSocketProvider.getServerSocketFactory(ServerSocketProvider.java:78)
+	at org.chaostocosmos.leap.http.ServerSocketProvider.getSocketServer(ServerSocketProvider.java:153)
+	at org.chaostocosmos.leap.http.LeapHttpServer.run(LeapHttpServer.java:178)
+2022-02-10 17:48:50.180 INFO  - Leap WAS server starting......
+2022-02-10 17:48:50.183 INFO  - --------------------------------------------------------------------------
+2022-02-10 17:48:50.184 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-10 17:48:50.184 INFO  - verbose mode on
+2022-02-10 17:48:50.193 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-10 17:48:50.220 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@3098cf3b : DEPLOY
+2022-02-10 17:48:50.220 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-10 17:48:50.223 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@68567e20 : POST
+2022-02-10 17:48:50.223 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-10 17:48:50.224 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-10 17:48:50.226 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-10 17:48:50.227 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-10 17:49:06.092 INFO  - Leap WAS server starting......
+2022-02-10 17:49:06.096 INFO  - --------------------------------------------------------------------------
+2022-02-10 17:49:06.097 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-10 17:49:06.097 INFO  - verbose mode on
+2022-02-10 17:49:06.106 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-10 17:49:06.137 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@3098cf3b : DEPLOY
+2022-02-10 17:49:06.138 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-10 17:49:06.140 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@68567e20 : POST
+2022-02-10 17:49:06.141 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-10 17:49:06.141 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-10 17:49:06.143 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-10 17:49:06.143 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-10 17:49:06.166 ERROR - Unable to initialize, java.io.IOException: Short read of DER length
+java.security.cert.CertificateException: Unable to initialize, java.io.IOException: Short read of DER length
+	at java.base/sun.security.x509.X509CertImpl.<init>(X509CertImpl.java:197)
+	at java.base/sun.security.provider.X509Factory.engineGenerateCertificate(X509Factory.java:105)
+	at java.base/java.security.cert.CertificateFactory.generateCertificate(CertificateFactory.java:355)
+	at org.chaostocosmos.leap.http.ServerSocketProvider.loadPEMTrustStore(ServerSocketProvider.java:77)
+	at org.chaostocosmos.leap.http.ServerSocketProvider.getServerSocketFactory(ServerSocketProvider.java:58)
+	at org.chaostocosmos.leap.http.ServerSocketProvider.getSocketServer(ServerSocketProvider.java:120)
+	at org.chaostocosmos.leap.http.LeapHttpServer.run(LeapHttpServer.java:178)
+Caused by: java.io.IOException: Short read of DER length
+	at java.base/sun.security.util.DerInputStream.getLength(DerInputStream.java:584)
+	at java.base/sun.security.util.DerValue.<init>(DerValue.java:257)
+	at java.base/sun.security.util.DerInputStream.getDerValue(DerInputStream.java:453)
+	at java.base/sun.security.x509.X509CertImpl.parse(X509CertImpl.java:1822)
+	at java.base/sun.security.x509.X509CertImpl.<init>(X509CertImpl.java:194)
+	... 6 common frames omitted
+2022-02-10 17:49:52.358 INFO  - Leap WAS server starting......
+2022-02-10 17:49:52.361 INFO  - --------------------------------------------------------------------------
+2022-02-10 17:49:52.361 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-10 17:49:52.362 INFO  - verbose mode on
+2022-02-10 17:49:52.367 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-10 17:49:52.390 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@3098cf3b : DEPLOY
+2022-02-10 17:49:52.391 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-10 17:49:52.395 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@68567e20 : POST
+2022-02-10 17:49:52.396 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-10 17:49:52.396 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-10 17:49:52.398 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-10 17:49:52.398 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-10 17:49:52.421 ERROR - DER input, Integer tag error
+java.io.IOException: DER input, Integer tag error
+	at java.base/sun.security.util.DerInputStream.getInteger(DerInputStream.java:195)
+	at java.base/sun.security.pkcs12.PKCS12KeyStore.engineLoad(PKCS12KeyStore.java:1975)
+	at java.base/sun.security.util.KeyStoreDelegator.engineLoad(KeyStoreDelegator.java:222)
+	at java.base/java.security.KeyStore.load(KeyStore.java:1479)
+	at org.chaostocosmos.leap.http.ServerSocketProvider.getServerSocketFactory(ServerSocketProvider.java:57)
+	at org.chaostocosmos.leap.http.ServerSocketProvider.getSocketServer(ServerSocketProvider.java:119)
+	at org.chaostocosmos.leap.http.LeapHttpServer.run(LeapHttpServer.java:178)
+2022-02-10 17:53:38.068 INFO  - Leap WAS server starting......
+2022-02-10 17:53:38.071 INFO  - --------------------------------------------------------------------------
+2022-02-10 17:53:38.072 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-10 17:53:38.072 INFO  - verbose mode on
+2022-02-10 17:53:38.078 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-10 17:53:38.099 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@6a03bcb1 : DEPLOY
+2022-02-10 17:53:38.100 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-10 17:53:38.102 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@11fc564b : POST
+2022-02-10 17:53:38.103 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-10 17:53:38.104 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-10 17:53:38.106 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-10 17:53:38.106 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-10 17:53:38.402 INFO  - Accepting connections on port 8080
+2022-02-10 17:53:46.477 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-10 17:53:46.480 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-10 17:53:46.629 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-10 17:53:46.630 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-10 17:53:46.636 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:131)
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:117)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:336)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:292)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:283)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateProducer.onProduceCertificate(CertificateMessage.java:972)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateProducer.produce(CertificateMessage.java:961)
+	at java.base/sun.security.ssl.SSLHandshake.produce(SSLHandshake.java:436)
+	at java.base/sun.security.ssl.ClientHello$T13ClientHelloConsumer.goServerHello(ClientHello.java:1234)
+	at java.base/sun.security.ssl.ClientHello$T13ClientHelloConsumer.consume(ClientHello.java:1170)
+	at java.base/sun.security.ssl.ClientHello$ClientHelloConsumer.onClientHello(ClientHello.java:852)
+	at java.base/sun.security.ssl.ClientHello$ClientHelloConsumer.consume(ClientHello.java:813)
+	at java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:392)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:443)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:421)
+	at java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:182)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+	... 31 common frames omitted
+2022-02-10 17:53:46.636 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:131)
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:117)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:336)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:292)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:283)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateProducer.onProduceCertificate(CertificateMessage.java:972)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateProducer.produce(CertificateMessage.java:961)
+	at java.base/sun.security.ssl.SSLHandshake.produce(SSLHandshake.java:436)
+	at java.base/sun.security.ssl.ClientHello$T13ClientHelloConsumer.goServerHello(ClientHello.java:1234)
+	at java.base/sun.security.ssl.ClientHello$T13ClientHelloConsumer.consume(ClientHello.java:1170)
+	at java.base/sun.security.ssl.ClientHello$ClientHelloConsumer.onClientHello(ClientHello.java:852)
+	at java.base/sun.security.ssl.ClientHello$ClientHelloConsumer.consume(ClientHello.java:813)
+	at java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:392)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:443)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:421)
+	at java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:182)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+	... 31 common frames omitted
+2022-02-10 17:53:46.715 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+2022-02-10 17:53:46.721 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-10 17:53:46.715 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:131)
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:117)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:336)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:292)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:283)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateProducer.onProduceCertificate(CertificateMessage.java:972)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateProducer.produce(CertificateMessage.java:961)
+	at java.base/sun.security.ssl.SSLHandshake.produce(SSLHandshake.java:436)
+	at java.base/sun.security.ssl.ClientHello$T13ClientHelloConsumer.goServerHello(ClientHello.java:1234)
+	at java.base/sun.security.ssl.ClientHello$T13ClientHelloConsumer.consume(ClientHello.java:1170)
+	at java.base/sun.security.ssl.ClientHello$ClientHelloConsumer.onClientHello(ClientHello.java:852)
+	at java.base/sun.security.ssl.ClientHello$ClientHelloConsumer.consume(ClientHello.java:813)
+	at java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:392)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:443)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:421)
+	at java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:182)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+	... 31 common frames omitted
+2022-02-10 17:53:46.718 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:131)
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:117)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:336)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:292)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:283)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateProducer.onProduceCertificate(CertificateMessage.java:972)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateProducer.produce(CertificateMessage.java:961)
+	at java.base/sun.security.ssl.SSLHandshake.produce(SSLHandshake.java:436)
+	at java.base/sun.security.ssl.ClientHello$T13ClientHelloConsumer.goServerHello(ClientHello.java:1234)
+	at java.base/sun.security.ssl.ClientHello$T13ClientHelloConsumer.consume(ClientHello.java:1170)
+	at java.base/sun.security.ssl.ClientHello$ClientHelloConsumer.onClientHello(ClientHello.java:852)
+	at java.base/sun.security.ssl.ClientHello$ClientHelloConsumer.consume(ClientHello.java:813)
+	at java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:392)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:443)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:421)
+	at java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:182)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+	... 31 common frames omitted
+2022-02-10 17:53:46.720 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+2022-02-10 17:53:46.733 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+2022-02-10 17:53:46.734 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-10 17:53:46.735 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-10 17:53:46.736 INFO  - Client close....../127.0.0.1
+2022-02-10 17:53:46.723 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-10 17:53:46.746 INFO  - Client close....../127.0.0.1
+2022-02-10 17:53:46.730 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+2022-02-10 17:53:46.734 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-10 17:53:46.748 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-10 17:53:46.749 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-10 17:53:46.749 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-10 17:53:46.750 INFO  - Client close....../127.0.0.1
+2022-02-10 17:53:46.751 INFO  - Client close....../127.0.0.1
+2022-02-10 17:54:34.432 INFO  - Leap WAS server starting......
+2022-02-10 17:54:34.435 INFO  - --------------------------------------------------------------------------
+2022-02-10 17:54:34.435 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-10 17:54:34.436 INFO  - verbose mode on
+2022-02-10 17:54:34.442 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-10 17:54:34.470 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@3098cf3b : DEPLOY
+2022-02-10 17:54:34.471 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-10 17:54:34.473 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@68567e20 : POST
+2022-02-10 17:54:34.474 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-10 17:54:34.474 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-10 17:54:34.476 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-10 17:54:34.476 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-10 17:54:34.875 INFO  - Accepting connections on port 8080
+2022-02-10 17:54:40.820 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-10 17:54:40.824 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-10 17:54:40.952 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-10 17:54:40.953 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-10 17:54:40.960 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:131)
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:117)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:336)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:292)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:283)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateProducer.onProduceCertificate(CertificateMessage.java:972)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateProducer.produce(CertificateMessage.java:961)
+	at java.base/sun.security.ssl.SSLHandshake.produce(SSLHandshake.java:436)
+	at java.base/sun.security.ssl.ClientHello$T13ClientHelloConsumer.goServerHello(ClientHello.java:1234)
+	at java.base/sun.security.ssl.ClientHello$T13ClientHelloConsumer.consume(ClientHello.java:1170)
+	at java.base/sun.security.ssl.ClientHello$ClientHelloConsumer.onClientHello(ClientHello.java:852)
+	at java.base/sun.security.ssl.ClientHello$ClientHelloConsumer.consume(ClientHello.java:813)
+	at java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:392)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:443)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:421)
+	at java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:182)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+	... 31 common frames omitted
+2022-02-10 17:54:40.965 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+2022-02-10 17:54:40.960 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:131)
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:117)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:336)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:292)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:283)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateProducer.onProduceCertificate(CertificateMessage.java:972)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateProducer.produce(CertificateMessage.java:961)
+	at java.base/sun.security.ssl.SSLHandshake.produce(SSLHandshake.java:436)
+	at java.base/sun.security.ssl.ClientHello$T13ClientHelloConsumer.goServerHello(ClientHello.java:1234)
+	at java.base/sun.security.ssl.ClientHello$T13ClientHelloConsumer.consume(ClientHello.java:1170)
+	at java.base/sun.security.ssl.ClientHello$ClientHelloConsumer.onClientHello(ClientHello.java:852)
+	at java.base/sun.security.ssl.ClientHello$ClientHelloConsumer.consume(ClientHello.java:813)
+	at java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:392)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:443)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:421)
+	at java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:182)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+	... 31 common frames omitted
+2022-02-10 17:54:40.972 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+2022-02-10 17:54:40.967 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-10 17:54:40.972 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:131)
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:117)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:336)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:292)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:283)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateProducer.onProduceCertificate(CertificateMessage.java:972)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateProducer.produce(CertificateMessage.java:961)
+	at java.base/sun.security.ssl.SSLHandshake.produce(SSLHandshake.java:436)
+	at java.base/sun.security.ssl.ClientHello$T13ClientHelloConsumer.goServerHello(ClientHello.java:1234)
+	at java.base/sun.security.ssl.ClientHello$T13ClientHelloConsumer.consume(ClientHello.java:1170)
+	at java.base/sun.security.ssl.ClientHello$ClientHelloConsumer.onClientHello(ClientHello.java:852)
+	at java.base/sun.security.ssl.ClientHello$ClientHelloConsumer.consume(ClientHello.java:813)
+	at java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:392)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:443)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:421)
+	at java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:182)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+	... 31 common frames omitted
+2022-02-10 17:54:40.975 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-10 17:54:40.984 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+2022-02-10 17:54:40.981 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:131)
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:117)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:336)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:292)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:283)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateProducer.onProduceCertificate(CertificateMessage.java:972)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateProducer.produce(CertificateMessage.java:961)
+	at java.base/sun.security.ssl.SSLHandshake.produce(SSLHandshake.java:436)
+	at java.base/sun.security.ssl.ClientHello$T13ClientHelloConsumer.goServerHello(ClientHello.java:1234)
+	at java.base/sun.security.ssl.ClientHello$T13ClientHelloConsumer.consume(ClientHello.java:1170)
+	at java.base/sun.security.ssl.ClientHello$ClientHelloConsumer.onClientHello(ClientHello.java:852)
+	at java.base/sun.security.ssl.ClientHello$ClientHelloConsumer.consume(ClientHello.java:813)
+	at java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:392)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:443)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:421)
+	at java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:182)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+	... 31 common frames omitted
+2022-02-10 17:54:40.983 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-10 17:54:40.988 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-10 17:54:40.991 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-10 17:54:40.996 INFO  - Client close....../127.0.0.1
+2022-02-10 17:54:40.995 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+2022-02-10 17:54:40.995 INFO  - Client close....../127.0.0.1
+2022-02-10 17:54:40.997 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-10 17:54:40.997 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-10 17:54:40.999 INFO  - Client close....../127.0.0.1
+2022-02-10 17:54:40.999 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-10 17:54:41.001 INFO  - Client close....../127.0.0.1
+2022-02-10 17:56:09.678 INFO  - Leap WAS server starting......
+2022-02-10 17:56:09.681 INFO  - --------------------------------------------------------------------------
+2022-02-10 17:56:09.682 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-10 17:56:09.682 INFO  - verbose mode on
+2022-02-10 17:56:09.690 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-10 17:56:09.719 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@3098cf3b : DEPLOY
+2022-02-10 17:56:09.721 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-10 17:56:09.723 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@68567e20 : POST
+2022-02-10 17:56:09.724 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-10 17:56:09.724 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-10 17:56:09.726 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-10 17:56:09.727 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-10 17:56:10.039 INFO  - Accepting connections on port 8080
+2022-02-10 17:56:14.923 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-10 17:56:14.930 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-10 17:56:15.050 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-10 17:56:15.051 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
+2022-02-10 17:56:15.059 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:131)
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:117)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:336)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:292)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:283)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateProducer.onProduceCertificate(CertificateMessage.java:972)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateProducer.produce(CertificateMessage.java:961)
+	at java.base/sun.security.ssl.SSLHandshake.produce(SSLHandshake.java:436)
+	at java.base/sun.security.ssl.ClientHello$T13ClientHelloConsumer.goServerHello(ClientHello.java:1234)
+	at java.base/sun.security.ssl.ClientHello$T13ClientHelloConsumer.consume(ClientHello.java:1170)
+	at java.base/sun.security.ssl.ClientHello$ClientHelloConsumer.onClientHello(ClientHello.java:852)
+	at java.base/sun.security.ssl.ClientHello$ClientHelloConsumer.consume(ClientHello.java:813)
+	at java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:392)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:443)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:421)
+	at java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:182)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+	... 31 common frames omitted
+2022-02-10 17:56:15.070 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+2022-02-10 17:56:15.077 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-10 17:56:15.059 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:131)
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:117)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:336)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:292)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:283)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateProducer.onProduceCertificate(CertificateMessage.java:972)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateProducer.produce(CertificateMessage.java:961)
+	at java.base/sun.security.ssl.SSLHandshake.produce(SSLHandshake.java:436)
+	at java.base/sun.security.ssl.ClientHello$T13ClientHelloConsumer.goServerHello(ClientHello.java:1234)
+	at java.base/sun.security.ssl.ClientHello$T13ClientHelloConsumer.consume(ClientHello.java:1170)
+	at java.base/sun.security.ssl.ClientHello$ClientHelloConsumer.onClientHello(ClientHello.java:852)
+	at java.base/sun.security.ssl.ClientHello$ClientHelloConsumer.consume(ClientHello.java:813)
+	at java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:392)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:443)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:421)
+	at java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:182)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+	... 31 common frames omitted
+2022-02-10 17:56:15.087 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+2022-02-10 17:56:15.083 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:131)
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:117)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:336)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:292)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:283)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateProducer.onProduceCertificate(CertificateMessage.java:972)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateProducer.produce(CertificateMessage.java:961)
+	at java.base/sun.security.ssl.SSLHandshake.produce(SSLHandshake.java:436)
+	at java.base/sun.security.ssl.ClientHello$T13ClientHelloConsumer.goServerHello(ClientHello.java:1234)
+	at java.base/sun.security.ssl.ClientHello$T13ClientHelloConsumer.consume(ClientHello.java:1170)
+	at java.base/sun.security.ssl.ClientHello$ClientHelloConsumer.onClientHello(ClientHello.java:852)
+	at java.base/sun.security.ssl.ClientHello$ClientHelloConsumer.consume(ClientHello.java:813)
+	at java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:392)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:443)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:421)
+	at java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:182)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+	... 31 common frames omitted
+2022-02-10 17:56:15.086 ERROR - org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:131)
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:117)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:336)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:292)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:283)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateProducer.onProduceCertificate(CertificateMessage.java:972)
+	at java.base/sun.security.ssl.CertificateMessage$T13CertificateProducer.produce(CertificateMessage.java:961)
+	at java.base/sun.security.ssl.SSLHandshake.produce(SSLHandshake.java:436)
+	at java.base/sun.security.ssl.ClientHello$T13ClientHelloConsumer.goServerHello(ClientHello.java:1234)
+	at java.base/sun.security.ssl.ClientHello$T13ClientHelloConsumer.consume(ClientHello.java:1170)
+	at java.base/sun.security.ssl.ClientHello$ClientHelloConsumer.onClientHello(ClientHello.java:852)
+	at java.base/sun.security.ssl.ClientHello$ClientHelloConsumer.consume(ClientHello.java:813)
+	at java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:392)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:443)
+	at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:421)
+	at java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:182)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:86)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+	... 31 common frames omitted
+2022-02-10 17:56:15.107 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+2022-02-10 17:56:15.087 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-10 17:56:15.093 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-10 17:56:15.100 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: javax.net.ssl.SSLHandshakeException: No available authentication scheme
+2022-02-10 17:56:15.115 INFO  - Client close....../127.0.0.1
+2022-02-10 17:56:15.116 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-10 17:56:15.117 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-10 17:56:15.114 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-10 17:56:15.117 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-10 17:56:15.120 INFO  - Client close....../127.0.0.1
+2022-02-10 17:56:15.121 INFO  - Client close....../127.0.0.1
+2022-02-10 17:56:15.122 ERROR - Connection or outbound has closed
+java.net.SocketException: Connection or outbound has closed
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1217)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.sendResponse(LeapRequestHandler.java:192)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:178)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-10 17:56:15.123 INFO  - Client close....../127.0.0.1

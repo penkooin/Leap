@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.commons.ResourceHelper;
 import org.chaostocosmos.leap.http.commons.UtilBox;
+import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.services.ServiceHolder;
 import org.chaostocosmos.leap.http.services.ServiceInvoker;
@@ -35,17 +37,14 @@ public class LeapRequestHandler implements Runnable {
      * Logger
      */
     private static Logger logger;
-    
     /**
      * Path doc root
      */
     private Path rootPath;
-
     /**
      * welcome index html
      */
     private String welcome = Context.getWelcome();
-
     /**
      * Client socket
      */
@@ -55,14 +54,13 @@ public class LeapRequestHandler implements Runnable {
     private HttpRequestDescriptor request = null;
     private HttpResponseDescriptor response = null;
     private String requestedHost = null;
-
     /**
      * Servlet manager
      */
     private ServiceManager serviceManager;
 
     /**
-     * Constructor with root direcotry, index.html file, client socket
+     * Constructor with HeapHttpServer, root direcotry, index.html file, client socket 
      * @param httpServer
      * @param rootPath
      * @param welcome
@@ -93,16 +91,13 @@ public class LeapRequestHandler implements Runnable {
             request.getReqHeader().put("@Client", requestedHost);
             //LoggerFactory.getLogger(requestedHost).debug("Request host: "+requestedHost);
             
-            // log request information
-            //LoggerFactory.getLogger(request.getRequestedHost()).debug(request.getReqHeader().entrySet().stream().map(e -> e.getKey()+": "+e.getValue()).collect(Collectors.joining(System.lineSeparator())));
+            //Log request information
             Path resourcePath = ResourceHelper.getResourcePath(request);
-
             ServiceHolder serviceHolder = this.serviceManager.getMappingServiceHolder(request.getContextPath());
-            
             response.addHeader("Date", new Date()); 
-            response.addHeader("Server", "LeapWAS "+Context.getVersion());
+            response.addHeader("Server", "Leap? "+Context.getVersion());
 
-            //if client request servlet path
+            //If client request servlet path
             if (serviceHolder != null) {
                 // request method validation
                 if(serviceHolder.getRequestType() != request.getRequestType()) {
@@ -119,7 +114,8 @@ public class LeapRequestHandler implements Runnable {
                 }
             } else { // When client request static resources
                 if(request.getContextPath().equals("/")) {
-                    String body = ResourceHelper.getWelcomePage(requestedHost, Map.of("@serverName", requestedHost));                    
+                    String body = ResourceHelper.getWelcomePage(requestedHost, Map.of("@serverName", requestedHost));
+                    response.addHeader("Content-Type", MIME_TYPE.TEXT_HTML.getMimeType()+"; charset=" + Context.charset().name().toLowerCase());
                     response.setResponseBody(body.getBytes());
                     response.setResponseCode(200);
                 } else {
@@ -132,9 +128,9 @@ public class LeapRequestHandler implements Runnable {
                         if(Context.getResourceForbidden().stream().anyMatch(f -> !f.trim().equals("") && resourceName.matches(Arrays.asList(f.split(Pattern.quote("*"))).stream().map(s -> s.equals("") ? "" : Pattern.quote(s)).collect(Collectors.joining(".*"))+".*"))) {
                             String message = Context.getHttpMsg(403);
                             String body = ResourceHelper.getResponsePage(requestedHost, Map.of("@code", 403, "@type", "HTTP", "@message", message));
-                            response.addHeader("Content-Type", "text/html; charset=" + Context.charset().name().toLowerCase());
+                            response.addHeader("Content-Type", MIME_TYPE.TEXT_HTML.getMimeType()+"; charset=" + Context.charset().name().toLowerCase());
                             response.setResponseBody(body.getBytes());
-                            response.setResponseCode(403);                            
+                            response.setResponseCode(403);
                         } else 
                         //Condition of request resource in allowed list
                         if(Context.getResourceAllowed().stream().anyMatch(a -> !a.trim().equals("") && resourceName.matches(Arrays.asList(a.split(Pattern.quote("*"))).stream().map(s -> s.equals("") ? "" : Pattern.quote(s)).collect(Collectors.joining(".*"))+".*"))) {
@@ -156,16 +152,18 @@ public class LeapRequestHandler implements Runnable {
             String responseMessage = null;
             if(e instanceof WASException) {
                 WASException we = (WASException)e;
-                LoggerFactory.getLogger(requestedHost).error(we.toString(), we);
-                LoggerFactory.getLogger(requestedHost).info("Type: "+we.getMessageType()+" Code: "+we.getCode()+" Exception: "+we.toString());
+                if(e.getCause() instanceof SocketTimeoutException == false) {
+                    LoggerFactory.getLogger(requestedHost).error(we.toString(), we);
+                }
+                LoggerFactory.getLogger(requestedHost).warn("Type: "+we.getMessageType()+" Code: "+we.getCode()+" Exception: "+we.toString());
                 responseMessage = createHttpResponsePage(requestedHost, we.getMessageType(), we.getCode(), we.toString());
                 if(response == null) {
                     response = HttpBuilder.buildHttpResponse(request);
                 }
                 String remote = (connection != null) ? connection.getRemoteSocketAddress().toString() : "Unknown";
                 String server = (connection != null) ? connection.getLocalSocketAddress().toString() : requestedHost;
-                LoggerFactory.getLogger(requestedHost).info("Error client request "+remote+" --- "+server);
-                LoggerFactory.getLogger(requestedHost).info("Close client request on error "+remote+" --- "+server);
+                //LoggerFactory.getLogger(requestedHost).info("Error client request "+remote+" --- "+server);
+                //LoggerFactory.getLogger(requestedHost).info("Close client request on error "+remote+" --- "+server);
             } else {
                 LoggerFactory.getLogger(requestedHost).error(e.getMessage(), e);
                 responseMessage = createHttpResponsePage(requestedHost, MSG_TYPE.HTTP, 503, e.toString());
@@ -174,7 +172,7 @@ public class LeapRequestHandler implements Runnable {
                 }
             }
             if(responseMessage == null) {
-                responseMessage = "Unknown error: something went wrong in server...";
+                responseMessage = "Unknown error: something went wrong in server......";
             }
             response.setResponseBody(responseMessage.getBytes(Context.charset()));                
             sendResponse(out, response);
@@ -192,7 +190,6 @@ public class LeapRequestHandler implements Runnable {
         try {
             String res = Context.getHttpVersion()+" "+response.getResponseCode()+" "+Context.getHttpMsg(response.getResponseCode())+"\r\n"; 
             out.write(res.getBytes());
-            //LoggerFactory.getLogger(response.getRequestedHost()).debug(response.toString());
             Object body = response.getResponseBody();
             if(body == null) {
                 throw new IllegalArgumentException("Response body not set. Something wrong in Respose process!!!");
@@ -201,6 +198,7 @@ public class LeapRequestHandler implements Runnable {
                 int contentLength = body instanceof byte[] ? ((byte[])body).length : (int)((Path)body).toFile().length();
                 response.addHeader("Content-Length", contentLength);
             }
+            //LoggerFactory.getLogger(response.getRequestedHost()).debug(response.toString());
             for(Map.Entry<String, Object> e : response.getResponseHeader().entrySet()) {
                 out.write((e.getKey()+": "+e.getValue()+"\r\n").getBytes()); 
             } 
@@ -247,15 +245,15 @@ public class LeapRequestHandler implements Runnable {
         try {
             if(in != null) {
                 in.close();
-                LoggerFactory.getLogger(this.requestedHost).debug("close input stream......");
+                //LoggerFactory.getLogger(this.requestedHost).info("close input stream......");
             }
             if(out != null) {
                 out.close();
-                LoggerFactory.getLogger(this.requestedHost).debug("close output stream......");
+                //LoggerFactory.getLogger(this.requestedHost).info("close output stream......");
             }
             if(connection != null) {                
+                LoggerFactory.getLogger(this.requestedHost).info("Client close......"+connection.getInetAddress().toString());
                 connection.close();
-                LoggerFactory.getLogger(this.requestedHost).debug("socket close......");
             }
         } catch (IOException e) {
             LoggerFactory.getLogger().error(e.getMessage(), e);

@@ -7,7 +7,7 @@ import org.chaostocosmos.leap.http.annotation.PostFilter;
  * IHttpResponseFilter
  * @author 9ins
  */
-public interface IHttpResponseFilter<S> extends IFilter {
+public interface IHttpResponseFilter<S> extends ILeapFilter {
     /**
      * Filter http respose after servlet process
      * @param response
