@@ -14,5 +14,5 @@ public interface IPostService extends ILeapService {
      * @param response
      * @throws Exception
      */
-    public void servePost(HttpRequestDescriptor request, HttpResponseDescriptor response) throws WASException;    
+    public void servePost(HttpRequestDescriptor request, HttpResponseDescriptor response) throws Exception;    
 }

@@ -29,7 +29,7 @@ import javax.net.ssl.X509TrustManager;
 
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.security.SecurityHandler;
-import org.chaostocosmos.leap.http.security.UserManager;
+import org.chaostocosmos.leap.http.user.UserManager;
 
 import ch.qos.logback.classic.Logger;
 
@@ -76,6 +76,7 @@ public class HttpsServerSocketFactory extends UserManager {
                                                                       KeyStoreException, 
                                                                       CertificateException {        
         KeyStore keyStore = SecurityHandler.loadKeyStore(keyStoreFile, passphrase);
+        //KeyStore keyStore = CertificateHandler.loadCertificates(new File("D:\\0.github\\Leap\\app\\src\\main\\resources\\config\\ssl\\localhost+1.pem"), new File("D:\\0.github\\Leap\\app\\src\\main\\resources\\config\\ssl\\localhost+1-key.pem"), passphrase);
         KeyManager[] keyStores = SecurityHandler.getKeyManagers(keyStore, passphrase);
         TrustManager[] trustManagers = SecurityHandler.getTrustManagers(keyStore); 
         SSLContext sslContext = SSLContext.getInstance(protocol);  

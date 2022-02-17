@@ -14,5 +14,5 @@ public interface IPutService extends ILeapService {
      * @param response
      * @throws Exception
      */
-    public void servePut(HttpRequestDescriptor request, HttpResponseDescriptor response) throws WASException;    
+    public void servePut(HttpRequestDescriptor request, HttpResponseDescriptor response) throws Exception;    
 }

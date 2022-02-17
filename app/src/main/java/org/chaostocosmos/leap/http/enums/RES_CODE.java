@@ -46,18 +46,19 @@ public enum RES_CODE {
     RES511(511);
 
     int code;
-    String resMesg;
+    String resMsg;
 
     public int getCode() {
         return code;
     }
 
     public String getMessage() {
-        return this.resMesg;
+        return this.resMsg;
     }
 
     RES_CODE(int code) {
         this.code = code;
-        this.resMesg = Context.getHttpMsg(code);
+        this.resMsg = Context.getHttpMsg(code);
+        this.resMsg = resMsg.substring(0, resMsg.lastIndexOf(" ")).trim();
     }    
 }

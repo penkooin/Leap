@@ -18,7 +18,7 @@ public class BasicAuthFilter<R, S> extends AbstractHttpFilter<R, S> implements I
 
     @Override
     @PreFilter
-    public void filterRequest(R r) throws WASException { 
+    public void filterRequest(R r) throws Exception { 
         super.filterRequest(r);
         if(r.getClass().isAssignableFrom(HttpRequestDescriptor.class)) {
             HttpRequestDescriptor request = (HttpRequestDescriptor)r;
@@ -33,7 +33,7 @@ public class BasicAuthFilter<R, S> extends AbstractHttpFilter<R, S> implements I
                 }
                 LoggerFactory.getLogger(request.getRequestedHost()).debug("User "+values[0]+" is login."); 
             } else {
-                throw new WASException(MSG_TYPE.HTTP, 401);
+                throw new WASException(MSG_TYPE.HTTP, 401, "Auth information not found!!!");
             }
         }
     }

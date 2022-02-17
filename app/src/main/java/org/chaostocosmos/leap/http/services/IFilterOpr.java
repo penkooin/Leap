@@ -15,27 +15,27 @@ public interface IFilterOpr {
     /**
      * Add filter
      * @param filter
-     * @throws WASException
+     * @throws Exception
      */
-    public void addFilter(ILeapFilter filter) throws WASException;
+    public void addFilter(ILeapFilter filter) throws Exception;
 
     /**
      * Add all filters
      * @param filters
-     * @throws WASException
+     * @throws Exception
      */
-    public void addAllFilters(List<ILeapFilter> filters) throws WASException;
+    public void addAllFilters(List<ILeapFilter> filters) throws Exception;
 
     /**
      * Remove filter
      * @param filter
-     * @throws WASException
+     * @throws Exception
      */
-    public void removeFilter(ILeapFilter filter) throws WASException;
+    public void removeFilter(ILeapFilter filter) throws Exception;
 
     /**
      * Remove all filters
-     * @throws WASException
+     * @throws Exception
      */
-    public void removeAllFilters() throws WASException;
+    public void removeAllFilters() throws Exception;
 }

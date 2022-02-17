@@ -1,0 +1,1293 @@
+2022-02-17 10:13:31.868 INFO  - Leap WAS server starting......
+2022-02-17 10:13:31.880 INFO  - --------------------------------------------------------------------------
+2022-02-17 10:13:31.880 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-17 10:13:31.881 INFO  - verbose mode on
+2022-02-17 10:13:31.894 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-17 10:13:31.933 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 10:13:31.936 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@740773a3 : POST
+2022-02-17 10:13:31.937 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-17 10:13:31.942 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@568ff82 : GET
+2022-02-17 10:13:31.943 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-17 10:13:31.943 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 10:13:31.943 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:13:31.945 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:13:31.946 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:13:32.561 INFO  - HTTPS SERVER START.  Port: 8080  Protocol: TLS  KeyStore: .\config\ssl\leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-02-17 10:13:34.963 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  55851
+2022-02-17 10:13:34.966 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  55852
+2022-02-17 10:13:35.141 DEBUG - --------------------------------------------------------------------------------
+GET /time/GetTime HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 10:13:35.144 DEBUG - REQUEST CONTEXT: time/GetTime   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:13:35.154 ERROR - Unauthorized (RFC 7235)   Auth information not found!!!
+java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.chaostocosmos.leap.http.services.ServiceInvoker.invokeMethod(ServiceInvoker.java:70)
+	at org.chaostocosmos.leap.http.services.AbstractLeapService.serve(AbstractLeapService.java:57)
+	at org.chaostocosmos.leap.http.services.ServiceInvoker.invokeService(ServiceInvoker.java:39)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:97)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: org.chaostocosmos.leap.http.WASException: Unauthorized (RFC 7235)   Auth information not found!!!
+	at org.chaostocosmos.leap.http.filters.BasicAuthFilter.filterRequest(BasicAuthFilter.java:36)
+	... 13 common frames omitted
+2022-02-17 10:13:35.157 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:13:35.159 DEBUG - Server: [Leap? 1.0.0]Content-Length: [193]Date: [Thu Feb 17 10:13:35 KST 2022]Content-Type: [TEXT_HTML, charset=utf-8]
+2022-02-17 10:13:35.161 DEBUG - Server: [Leap? 1.0.0]Content-Length: [193]Date: [Thu Feb 17 10:13:35 KST 2022]Content-Type: [TEXT_HTML, charset=utf-8]
+2022-02-17 10:13:35.164 ERROR - Software caused connection abort: socket write error
+java.net.SocketException: Software caused connection abort: socket write error
+	at java.base/java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:110)
+	at java.base/java.net.SocketOutputStream.write(SocketOutputStream.java:150)
+	at java.base/sun.security.ssl.SSLSocketOutputRecord.deliver(SSLSocketOutputRecord.java:319)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1224)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.sendResponse(HttpTransferBuilder.java:96)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:149)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-17 10:13:35.196 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://localhost:8080/time/GetTime
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 10:13:35.202 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:13:35.207 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-17 10:13:35.211 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  55853
+2022-02-17 10:13:35.211 DEBUG - Server: [Leap? 1.0.0]Content-Length: [1150]Date: [Thu Feb 17 10:13:35 KST 2022]Content-Type: [TEXT_HTML, charset=utf-8, image/x-icon]
+2022-02-17 10:13:35.216 INFO  - Client close....../127.0.0.1
+2022-02-17 10:13:38.239 ERROR - SocketTimeoutException occurred: Read timed out
+2022-02-17 10:13:38.241 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:13:38.249 ERROR - null
+java.lang.NullPointerException: null
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:140)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-17 10:13:41.262 INFO  - Client close....../127.0.0.1
+2022-02-17 10:14:58.843 INFO  - Leap WAS server starting......
+2022-02-17 10:14:58.847 INFO  - --------------------------------------------------------------------------
+2022-02-17 10:14:58.847 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-17 10:14:58.847 INFO  - verbose mode on
+2022-02-17 10:14:58.856 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-17 10:14:58.882 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 10:14:58.884 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@610f7aa : POST
+2022-02-17 10:14:58.884 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-17 10:14:58.886 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@76ed1b7c : GET
+2022-02-17 10:14:58.887 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-17 10:14:58.887 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 10:14:58.887 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:14:58.889 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:14:58.890 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:14:59.299 INFO  - HTTPS SERVER START.  Port: 8080  Protocol: TLS  KeyStore: .\config\ssl\leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-02-17 10:15:00.336 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  65263
+2022-02-17 10:15:00.339 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  65264
+2022-02-17 10:15:00.557 DEBUG - --------------------------------------------------------------------------------
+GET /time/GetTime HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 10:15:00.568 DEBUG - REQUEST CONTEXT: time/GetTime   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:15:00.575 ERROR - Unauthorized (RFC 7235)   Auth information not found!!!
+java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.chaostocosmos.leap.http.services.ServiceInvoker.invokeMethod(ServiceInvoker.java:70)
+	at org.chaostocosmos.leap.http.services.AbstractLeapService.serve(AbstractLeapService.java:57)
+	at org.chaostocosmos.leap.http.services.ServiceInvoker.invokeService(ServiceInvoker.java:39)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:97)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: org.chaostocosmos.leap.http.WASException: Unauthorized (RFC 7235)   Auth information not found!!!
+	at org.chaostocosmos.leap.http.filters.BasicAuthFilter.filterRequest(BasicAuthFilter.java:36)
+	... 13 common frames omitted
+2022-02-17 10:15:00.579 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:15:00.580 DEBUG - Server: [Leap? 1.0.0]Content-Length: [193]Date: [Thu Feb 17 10:15:00 KST 2022]Content-Type: [TEXT_HTML, charset=utf-8]
+2022-02-17 10:15:00.581 DEBUG - Server: [Leap? 1.0.0]Content-Length: [193]Date: [Thu Feb 17 10:15:00 KST 2022]Content-Type: [TEXT_HTML, charset=utf-8]
+2022-02-17 10:15:00.585 ERROR - Software caused connection abort: socket write error
+java.net.SocketException: Software caused connection abort: socket write error
+	at java.base/java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:110)
+	at java.base/java.net.SocketOutputStream.write(SocketOutputStream.java:150)
+	at java.base/sun.security.ssl.SSLSocketOutputRecord.deliver(SSLSocketOutputRecord.java:319)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1224)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.sendResponse(HttpTransferBuilder.java:96)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:152)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-17 10:15:00.591 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  65265
+2022-02-17 10:15:00.645 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://localhost:8080/time/GetTime
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 10:15:00.647 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:15:00.649 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-17 10:15:00.652 DEBUG - Server: [Leap? 1.0.0]Content-Length: [1150]Date: [Thu Feb 17 10:15:00 KST 2022]Content-Type: [TEXT_HTML, charset=utf-8, image/x-icon]
+2022-02-17 10:15:00.654 INFO  - Client close....../127.0.0.1
+2022-02-17 10:15:03.609 ERROR - SocketTimeoutException occurred: Read timed out
+2022-02-17 10:15:03.610 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:15:03.617 ERROR - null
+java.lang.NullPointerException: null
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:143)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-17 10:15:06.621 INFO  - Client close....../127.0.0.1
+2022-02-17 10:15:52.392 INFO  - Leap WAS server starting......
+2022-02-17 10:15:52.396 INFO  - --------------------------------------------------------------------------
+2022-02-17 10:15:52.396 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-17 10:15:52.396 INFO  - verbose mode on
+2022-02-17 10:15:52.404 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-17 10:15:52.428 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 10:15:52.431 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@610f7aa : POST
+2022-02-17 10:15:52.431 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-17 10:15:52.434 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@76ed1b7c : GET
+2022-02-17 10:15:52.435 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-17 10:15:52.435 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 10:15:52.435 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:15:52.437 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:15:52.437 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:15:52.822 INFO  - HTTPS SERVER START.  Port: 8080  Protocol: TLS  KeyStore: .\config\ssl\leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-02-17 10:15:54.348 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  65272
+2022-02-17 10:15:54.349 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  65273
+2022-02-17 10:15:54.506 DEBUG - --------------------------------------------------------------------------------
+GET /time/GetTime HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 10:15:54.512 DEBUG - REQUEST CONTEXT: time/GetTime   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:15:54.518 ERROR - Unauthorized (RFC 7235)   Auth information not found!!!
+java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.chaostocosmos.leap.http.services.ServiceInvoker.invokeMethod(ServiceInvoker.java:70)
+	at org.chaostocosmos.leap.http.services.AbstractLeapService.serve(AbstractLeapService.java:57)
+	at org.chaostocosmos.leap.http.services.ServiceInvoker.invokeService(ServiceInvoker.java:39)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:97)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: org.chaostocosmos.leap.http.WASException: Unauthorized (RFC 7235)   Auth information not found!!!
+	at org.chaostocosmos.leap.http.filters.BasicAuthFilter.filterRequest(BasicAuthFilter.java:36)
+	... 13 common frames omitted
+2022-02-17 10:15:54.520 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:15:54.522 DEBUG - Server: [Leap? 1.0.0]Content-Length: [193]Date: [Thu Feb 17 10:15:54 KST 2022]Content-Type: [TEXT_HTML, charset=utf-8]
+2022-02-17 10:15:54.525 INFO  - Client close....../127.0.0.1
+2022-02-17 10:15:54.555 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://localhost:8080/time/GetTime
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 10:15:54.560 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:15:54.572 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-17 10:15:54.577 DEBUG - Server: [Leap? 1.0.0]Content-Length: [1150]Date: [Thu Feb 17 10:15:54 KST 2022]Content-Type: [TEXT_HTML, charset=utf-8, image/x-icon]
+2022-02-17 10:15:54.580 INFO  - Client close....../127.0.0.1
+2022-02-17 10:15:54.611 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  65274
+2022-02-17 10:15:57.622 ERROR - SocketTimeoutException occurred: Read timed out
+2022-02-17 10:15:57.624 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:15:57.631 ERROR - null
+java.lang.NullPointerException: null
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:143)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-17 10:16:00.644 INFO  - Client close....../127.0.0.1
+2022-02-17 10:16:36.184 INFO  - Leap WAS server starting......
+2022-02-17 10:16:36.187 INFO  - --------------------------------------------------------------------------
+2022-02-17 10:16:36.187 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-17 10:16:36.187 INFO  - verbose mode on
+2022-02-17 10:16:36.193 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-17 10:16:36.216 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 10:16:36.218 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@610f7aa : POST
+2022-02-17 10:16:36.219 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-17 10:16:36.221 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@76ed1b7c : GET
+2022-02-17 10:16:36.221 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-17 10:16:36.221 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 10:16:36.221 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:16:36.223 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:16:36.224 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:16:36.688 INFO  - HTTPS SERVER START.  Port: 8080  Protocol: TLS  KeyStore: .\config\ssl\leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-02-17 10:16:37.708 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  65286
+2022-02-17 10:16:37.710 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  65287
+2022-02-17 10:16:37.882 DEBUG - --------------------------------------------------------------------------------
+GET /time/GetTime HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 10:16:37.885 DEBUG - REQUEST CONTEXT: time/GetTime   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:16:37.893 ERROR - Unauthorized (RFC 7235)   Auth information not found!!!
+java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.chaostocosmos.leap.http.services.ServiceInvoker.invokeMethod(ServiceInvoker.java:70)
+	at org.chaostocosmos.leap.http.services.AbstractLeapService.serve(AbstractLeapService.java:57)
+	at org.chaostocosmos.leap.http.services.ServiceInvoker.invokeService(ServiceInvoker.java:39)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:97)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: org.chaostocosmos.leap.http.WASException: Unauthorized (RFC 7235)   Auth information not found!!!
+	at org.chaostocosmos.leap.http.filters.BasicAuthFilter.filterRequest(BasicAuthFilter.java:36)
+	... 13 common frames omitted
+2022-02-17 10:16:37.898 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:16:37.974 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  65288
+2022-02-17 10:16:40.878 ERROR - SocketTimeoutException occurred: Read timed out
+2022-02-17 10:16:40.880 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:16:40.886 ERROR - null
+java.lang.NullPointerException: null
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:141)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-17 10:16:41.005 ERROR - SocketTimeoutException occurred: Read timed out
+2022-02-17 10:16:41.006 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:16:41.012 ERROR - null
+java.lang.NullPointerException: null
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:141)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-17 10:16:43.906 INFO  - Client close....../127.0.0.1
+2022-02-17 10:16:44.029 INFO  - Client close....../127.0.0.1
+2022-02-17 10:17:15.842 INFO  - Leap WAS server starting......
+2022-02-17 10:17:15.845 INFO  - --------------------------------------------------------------------------
+2022-02-17 10:17:15.845 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-17 10:17:15.846 INFO  - verbose mode on
+2022-02-17 10:17:15.855 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-17 10:17:15.892 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@610f7aa : POST
+2022-02-17 10:17:15.893 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-17 10:17:15.893 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 10:17:15.897 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@76ed1b7c : GET
+2022-02-17 10:17:15.899 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-17 10:17:15.900 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 10:17:15.900 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:17:15.902 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:17:15.903 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:17:16.290 INFO  - HTTPS SERVER START.  Port: 8080  Protocol: TLS  KeyStore: .\config\ssl\leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-02-17 10:17:16.465 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  65303
+2022-02-17 10:17:16.576 DEBUG - --------------------------------------------------------------------------------
+GET /time/GetTime HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 10:17:16.581 DEBUG - REQUEST CONTEXT: time/GetTime   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:17:16.589 ERROR - Unauthorized (RFC 7235)   Auth information not found!!!
+java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.chaostocosmos.leap.http.services.ServiceInvoker.invokeMethod(ServiceInvoker.java:70)
+	at org.chaostocosmos.leap.http.services.AbstractLeapService.serve(AbstractLeapService.java:57)
+	at org.chaostocosmos.leap.http.services.ServiceInvoker.invokeService(ServiceInvoker.java:39)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:97)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: org.chaostocosmos.leap.http.WASException: Unauthorized (RFC 7235)   Auth information not found!!!
+	at org.chaostocosmos.leap.http.filters.BasicAuthFilter.filterRequest(BasicAuthFilter.java:36)
+	... 13 common frames omitted
+2022-02-17 10:17:16.591 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:17:16.593 DEBUG - Server: [Leap? 1.0.0]Content-Length: [193]Date: [Thu Feb 17 10:17:16 KST 2022]Content-Type: [TEXT_HTML, charset=utf-8]
+2022-02-17 10:17:16.597 INFO  - Client close....../127.0.0.1
+2022-02-17 10:17:16.714 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  65302
+2022-02-17 10:17:16.714 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  65301
+2022-02-17 10:17:16.725 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://localhost:8080/time/GetTime
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 10:17:16.729 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:17:16.731 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-17 10:17:16.736 DEBUG - Server: [Leap? 1.0.0]Content-Length: [1150]Date: [Thu Feb 17 10:17:16 KST 2022]Content-Type: [TEXT_HTML, charset=utf-8, image/x-icon]
+2022-02-17 10:17:16.739 INFO  - Client close....../127.0.0.1
+2022-02-17 10:17:19.760 ERROR - SocketTimeoutException occurred: Read timed out
+2022-02-17 10:17:19.762 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:17:22.777 INFO  - Client close....../127.0.0.1
+2022-02-17 10:17:23.322 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  65308
+2022-02-17 10:17:23.323 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  65309
+2022-02-17 10:17:23.342 DEBUG - --------------------------------------------------------------------------------
+GET /time/GetTime HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 10:17:23.348 DEBUG - REQUEST CONTEXT: time/GetTime   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:17:23.349 ERROR - Unauthorized (RFC 7235)   Auth information not found!!!
+java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.chaostocosmos.leap.http.services.ServiceInvoker.invokeMethod(ServiceInvoker.java:70)
+	at org.chaostocosmos.leap.http.services.AbstractLeapService.serve(AbstractLeapService.java:57)
+	at org.chaostocosmos.leap.http.services.ServiceInvoker.invokeService(ServiceInvoker.java:39)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:97)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: org.chaostocosmos.leap.http.WASException: Unauthorized (RFC 7235)   Auth information not found!!!
+	at org.chaostocosmos.leap.http.filters.BasicAuthFilter.filterRequest(BasicAuthFilter.java:36)
+	... 13 common frames omitted
+2022-02-17 10:17:23.352 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:17:23.355 DEBUG - Server: [Leap? 1.0.0]Content-Length: [193]Date: [Thu Feb 17 10:17:23 KST 2022]Content-Type: [TEXT_HTML, charset=utf-8]
+2022-02-17 10:17:23.357 INFO  - Client close....../127.0.0.1
+2022-02-17 10:17:23.388 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://localhost:8080/time/GetTime
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 10:17:23.390 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:17:23.391 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-17 10:17:23.392 DEBUG - Server: [Leap? 1.0.0]Content-Length: [1150]Date: [Thu Feb 17 10:17:23 KST 2022]Content-Type: [TEXT_HTML, charset=utf-8, image/x-icon]
+2022-02-17 10:17:23.394 INFO  - Client close....../127.0.0.1
+2022-02-17 10:17:23.588 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  65310
+2022-02-17 10:17:26.621 ERROR - SocketTimeoutException occurred: Read timed out
+2022-02-17 10:17:26.621 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:17:29.638 INFO  - Client close....../127.0.0.1
+2022-02-17 10:24:23.228 INFO  - Leap WAS server starting......
+2022-02-17 10:24:23.232 INFO  - --------------------------------------------------------------------------
+2022-02-17 10:24:23.233 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-17 10:24:23.233 INFO  - verbose mode on
+2022-02-17 10:24:23.245 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-17 10:24:23.293 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 10:24:23.295 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@610f7aa : POST
+2022-02-17 10:24:23.295 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-17 10:24:23.299 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@76ed1b7c : GET
+2022-02-17 10:24:23.300 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-17 10:24:23.300 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 10:24:23.301 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:24:23.304 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:24:23.305 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:24:23.751 INFO  - HTTPS SERVER START.  Port: 8080  Protocol: TLS  KeyStore: .\config\ssl\leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-02-17 10:24:25.489 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  57591
+2022-02-17 10:24:25.491 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  57592
+2022-02-17 10:24:25.737 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  57593
+2022-02-17 10:24:25.812 DEBUG - --------------------------------------------------------------------------------
+GET /time/GetTime HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 10:24:25.815 DEBUG - REQUEST CONTEXT: time/GetTime   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:24:25.824 ERROR - Unauthorized (RFC 7235)   Auth information not found!!!
+java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.chaostocosmos.leap.http.services.ServiceInvoker.invokeMethod(ServiceInvoker.java:72)
+	at org.chaostocosmos.leap.http.services.AbstractLeapService.serve(AbstractLeapService.java:57)
+	at org.chaostocosmos.leap.http.services.ServiceInvoker.invokeService(ServiceInvoker.java:41)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:98)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: org.chaostocosmos.leap.http.WASException: Unauthorized (RFC 7235)   Auth information not found!!!
+	at org.chaostocosmos.leap.http.filters.BasicAuthFilter.filterRequest(BasicAuthFilter.java:36)
+	... 13 common frames omitted
+2022-02-17 10:24:25.827 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:24:25.829 DEBUG - Server: [Leap? 1.0.0]Content-Length: [193]Date: [Thu Feb 17 10:24:25 KST 2022]Content-Type: [TEXT_HTML, charset=utf-8]
+2022-02-17 10:24:25.832 INFO  - Client close....../127.0.0.1
+2022-02-17 10:24:25.881 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://localhost:8080/time/GetTime
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 10:24:25.887 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:24:25.889 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-17 10:24:25.893 DEBUG - Server: [Leap? 1.0.0]Content-Length: [1150]Date: [Thu Feb 17 10:24:25 KST 2022]Content-Type: [TEXT_HTML, charset=utf-8, image/x-icon]
+2022-02-17 10:24:25.894 INFO  - Client close....../127.0.0.1
+2022-02-17 10:24:28.814 ERROR - SocketTimeoutException occurred: Read timed out
+2022-02-17 10:24:28.815 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:24:31.827 INFO  - Client close....../127.0.0.1
+2022-02-17 10:28:44.808 INFO  - Leap WAS server starting......
+2022-02-17 10:28:44.813 INFO  - --------------------------------------------------------------------------
+2022-02-17 10:28:44.813 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-17 10:28:44.813 INFO  - verbose mode on
+2022-02-17 10:28:44.821 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-17 10:28:44.847 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 10:28:44.849 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@610f7aa : POST
+2022-02-17 10:28:44.850 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-17 10:28:44.852 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@76ed1b7c : GET
+2022-02-17 10:28:44.853 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-17 10:28:44.853 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 10:28:44.853 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:28:44.856 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:28:44.857 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:28:45.226 INFO  - HTTPS SERVER START.  Port: 8080  Protocol: TLS  KeyStore: .\config\ssl\leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-02-17 10:28:47.142 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  57637
+2022-02-17 10:28:47.144 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  57638
+2022-02-17 10:28:47.359 DEBUG - --------------------------------------------------------------------------------
+GET /time/GetTime HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 10:28:47.362 DEBUG - REQUEST CONTEXT: time/GetTime   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:28:47.372 ERROR - Unauthorized (RFC 7235)   Auth information not found!!!
+java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.chaostocosmos.leap.http.services.ServiceInvoker.invokeMethod(ServiceInvoker.java:74)
+	at org.chaostocosmos.leap.http.services.AbstractLeapService.serve(AbstractLeapService.java:57)
+	at org.chaostocosmos.leap.http.services.ServiceInvoker.invokeService(ServiceInvoker.java:41)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:98)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: org.chaostocosmos.leap.http.WASException: Unauthorized (RFC 7235)   Auth information not found!!!
+	at org.chaostocosmos.leap.http.filters.BasicAuthFilter.filterRequest(BasicAuthFilter.java:36)
+	... 13 common frames omitted
+2022-02-17 10:28:47.374 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:28:47.376 DEBUG - Server: [Leap? 1.0.0]Content-Length: [193]Date: [Thu Feb 17 10:28:47 KST 2022]Content-Type: [TEXT_HTML, charset=utf-8]
+2022-02-17 10:28:47.379 INFO  - Client close....../127.0.0.1
+2022-02-17 10:28:47.380 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  57639
+2022-02-17 10:28:47.443 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://localhost:8080/time/GetTime
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 10:28:47.446 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:28:47.448 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-17 10:28:47.454 DEBUG - Server: [Leap? 1.0.0]Content-Length: [1150]Date: [Thu Feb 17 10:28:47 KST 2022]Content-Type: [TEXT_HTML, charset=utf-8, image/x-icon]
+2022-02-17 10:28:47.456 INFO  - Client close....../127.0.0.1
+2022-02-17 10:28:50.407 ERROR - SocketTimeoutException occurred: Read timed out
+2022-02-17 10:28:50.408 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:28:53.415 INFO  - Client close....../127.0.0.1
+2022-02-17 10:29:22.708 INFO  - Leap WAS server starting......
+2022-02-17 10:29:22.711 INFO  - --------------------------------------------------------------------------
+2022-02-17 10:29:22.712 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-17 10:29:22.712 INFO  - verbose mode on
+2022-02-17 10:29:22.720 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-17 10:29:22.746 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 10:29:22.748 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@610f7aa : POST
+2022-02-17 10:29:22.748 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-17 10:29:22.751 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@76ed1b7c : GET
+2022-02-17 10:29:22.752 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-17 10:29:22.752 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 10:29:22.752 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:29:22.754 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:29:22.754 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:29:23.087 INFO  - HTTPS SERVER START.  Port: 8080  Protocol: TLS  KeyStore: .\config\ssl\leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-02-17 10:29:24.489 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  63982
+2022-02-17 10:29:24.490 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  63983
+2022-02-17 10:29:24.732 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  63984
+2022-02-17 10:29:24.756 DEBUG - --------------------------------------------------------------------------------
+GET /time/GetTime HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 10:29:24.762 DEBUG - REQUEST CONTEXT: time/GetTime   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:29:24.776 ERROR - Unauthorized (RFC 7235)   Auth information not found!!!
+java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.chaostocosmos.leap.http.services.ServiceInvoker.invokeMethod(ServiceInvoker.java:74)
+	at org.chaostocosmos.leap.http.services.AbstractLeapService.serve(AbstractLeapService.java:57)
+	at org.chaostocosmos.leap.http.services.ServiceInvoker.invokeService(ServiceInvoker.java:41)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:98)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: org.chaostocosmos.leap.http.WASException: Unauthorized (RFC 7235)   Auth information not found!!!
+	at org.chaostocosmos.leap.http.filters.BasicAuthFilter.filterRequest(BasicAuthFilter.java:36)
+	... 13 common frames omitted
+2022-02-17 10:29:24.779 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:29:24.781 DEBUG - Server: [Leap? 1.0.0]Content-Length: [193]Date: [Thu Feb 17 10:29:24 KST 2022]Content-Type: [TEXT_HTML, charset=utf-8]
+2022-02-17 10:29:24.785 INFO  - Client close....../127.0.0.1
+2022-02-17 10:29:24.834 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://localhost:8080/time/GetTime
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 10:29:24.838 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:29:24.840 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-17 10:29:24.843 DEBUG - Server: [Leap? 1.0.0]Content-Length: [1150]Date: [Thu Feb 17 10:29:24 KST 2022]Content-Type: [TEXT_HTML, charset=utf-8, image/x-icon]
+2022-02-17 10:29:24.846 INFO  - Client close....../127.0.0.1
+2022-02-17 10:29:27.809 ERROR - SocketTimeoutException occurred: Read timed out
+2022-02-17 10:29:27.810 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:29:30.813 INFO  - Client close....../127.0.0.1
+2022-02-17 10:30:35.697 INFO  - Leap WAS server starting......
+2022-02-17 10:30:35.700 INFO  - --------------------------------------------------------------------------
+2022-02-17 10:30:35.700 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-17 10:30:35.701 INFO  - verbose mode on
+2022-02-17 10:30:35.710 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-17 10:30:35.737 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@610f7aa : POST
+2022-02-17 10:30:35.738 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-17 10:30:35.739 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 10:30:35.742 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@76ed1b7c : GET
+2022-02-17 10:30:35.742 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-17 10:30:35.743 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 10:30:35.743 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:30:35.744 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:30:35.745 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:30:36.147 INFO  - HTTPS SERVER START.  Port: 8080  Protocol: TLS  KeyStore: .\config\ssl\leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-02-17 10:30:37.904 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  63995
+2022-02-17 10:30:37.907 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  63996
+2022-02-17 10:30:38.090 DEBUG - --------------------------------------------------------------------------------
+GET /time/GetTime HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 10:30:38.093 DEBUG - REQUEST CONTEXT: time/GetTime   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:30:38.099 ERROR - Unauthorized (RFC 7235)   Auth information not found!!!
+java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.chaostocosmos.leap.http.services.ServiceInvoker.invokeMethod(ServiceInvoker.java:74)
+	at org.chaostocosmos.leap.http.services.AbstractLeapService.serve(AbstractLeapService.java:57)
+	at org.chaostocosmos.leap.http.services.ServiceInvoker.invokeService(ServiceInvoker.java:41)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:98)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: org.chaostocosmos.leap.http.WASException: Unauthorized (RFC 7235)   Auth information not found!!!
+	at org.chaostocosmos.leap.http.filters.BasicAuthFilter.filterRequest(BasicAuthFilter.java:36)
+	... 13 common frames omitted
+2022-02-17 10:30:38.102 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:30:38.104 DEBUG - Server: [Leap? 1.0.0]Content-Length: [193]Date: [Thu Feb 17 10:30:38 KST 2022]Content-Type: [TEXT_HTML, charset=utf-8]
+2022-02-17 10:30:38.109 INFO  - Client close....../127.0.0.1
+2022-02-17 10:30:38.159 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  63997
+2022-02-17 10:30:38.161 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://localhost:8080/time/GetTime
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 10:30:38.164 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:30:38.171 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-17 10:30:38.179 DEBUG - Server: [Leap? 1.0.0]Content-Length: [1150]Date: [Thu Feb 17 10:30:38 KST 2022]Content-Type: [TEXT_HTML, charset=utf-8, image/x-icon]
+2022-02-17 10:30:38.184 INFO  - Client close....../127.0.0.1
+2022-02-17 10:30:41.185 ERROR - SocketTimeoutException occurred: Read timed out
+2022-02-17 10:30:41.186 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:30:44.192 INFO  - Client close....../127.0.0.1
+2022-02-17 10:30:59.584 INFO  - Leap WAS server starting......
+2022-02-17 10:30:59.587 INFO  - --------------------------------------------------------------------------
+2022-02-17 10:30:59.588 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-17 10:30:59.588 INFO  - verbose mode on
+2022-02-17 10:30:59.596 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-17 10:30:59.619 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 10:30:59.621 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@610f7aa : POST
+2022-02-17 10:30:59.622 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-17 10:30:59.626 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@76ed1b7c : GET
+2022-02-17 10:30:59.626 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-17 10:30:59.627 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 10:30:59.627 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:30:59.630 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:30:59.631 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:31:00.026 INFO  - HTTPS SERVER START.  Port: 8080  Protocol: TLS  KeyStore: .\config\ssl\leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-02-17 10:31:01.645 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  64006
+2022-02-17 10:31:01.647 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  64007
+2022-02-17 10:31:01.838 DEBUG - --------------------------------------------------------------------------------
+GET /time/GetTime HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 10:31:01.844 DEBUG - REQUEST CONTEXT: time/GetTime   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:31:01.852 ERROR - class java.lang.reflect.InvocationTargetException cannot be cast to class org.chaostocosmos.leap.http.WASException (java.lang.reflect.InvocationTargetException is in module java.base of loader 'bootstrap'; org.chaostocosmos.leap.http.WASException is in unnamed module of loader 'app')
+java.lang.ClassCastException: class java.lang.reflect.InvocationTargetException cannot be cast to class org.chaostocosmos.leap.http.WASException (java.lang.reflect.InvocationTargetException is in module java.base of loader 'bootstrap'; org.chaostocosmos.leap.http.WASException is in unnamed module of loader 'app')
+	at org.chaostocosmos.leap.http.services.TimeServiceImpl.errorHandling(TimeServiceImpl.java:44)
+	at org.chaostocosmos.leap.http.services.ServiceInvoker.invokeService(ServiceInvoker.java:43)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:98)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-17 10:31:01.854 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:31:01.856 DEBUG - Server: [Leap? 1.0.0]Content-Length: [410]Date: [Thu Feb 17 10:31:01 KST 2022]Content-Type: [TEXT_HTML, charset=utf-8]
+2022-02-17 10:31:01.859 INFO  - Client close....../127.0.0.1
+2022-02-17 10:31:01.892 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  64008
+2022-02-17 10:31:01.913 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://localhost:8080/time/GetTime
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 10:31:01.916 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:31:01.918 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-17 10:31:01.921 DEBUG - Server: [Leap? 1.0.0]Content-Length: [1150]Date: [Thu Feb 17 10:31:01 KST 2022]Content-Type: [TEXT_HTML, charset=utf-8, image/x-icon]
+2022-02-17 10:31:01.925 INFO  - Client close....../127.0.0.1
+2022-02-17 10:31:04.907 ERROR - SocketTimeoutException occurred: Read timed out
+2022-02-17 10:31:04.908 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:31:07.923 INFO  - Client close....../127.0.0.1
+2022-02-17 10:31:37.270 INFO  - Leap WAS server starting......
+2022-02-17 10:31:37.277 INFO  - --------------------------------------------------------------------------
+2022-02-17 10:31:37.278 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-17 10:31:37.278 INFO  - verbose mode on
+2022-02-17 10:31:37.289 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-17 10:31:37.338 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 10:31:37.340 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@610f7aa : POST
+2022-02-17 10:31:37.340 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-17 10:31:37.355 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@76ed1b7c : GET
+2022-02-17 10:31:37.357 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-17 10:31:37.357 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 10:31:37.357 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:31:37.360 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:31:37.361 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:31:37.755 INFO  - HTTPS SERVER START.  Port: 8080  Protocol: TLS  KeyStore: .\config\ssl\leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-02-17 10:31:39.326 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  64016
+2022-02-17 10:31:39.329 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  64017
+2022-02-17 10:31:39.493 DEBUG - --------------------------------------------------------------------------------
+GET /time/GetTime HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 10:31:39.497 DEBUG - REQUEST CONTEXT: time/GetTime   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:31:39.503 ERROR - null
+java.lang.NullPointerException: null
+	at org.chaostocosmos.leap.http.services.TimeServiceImpl.errorHandling(TimeServiceImpl.java:49)
+	at org.chaostocosmos.leap.http.services.ServiceInvoker.invokeService(ServiceInvoker.java:43)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:98)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-17 10:31:39.504 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:31:39.505 DEBUG - Server: [Leap? 1.0.0]WWW-Authenticate: [true]Content-Length: [126]Date: [Thu Feb 17 10:31:39 KST 2022]Content-Type: [TEXT_HTML, charset=utf-8]
+2022-02-17 10:31:39.507 INFO  - Client close....../127.0.0.1
+2022-02-17 10:31:39.541 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://localhost:8080/time/GetTime
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 10:31:39.546 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:31:39.550 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-17 10:31:39.554 DEBUG - Server: [Leap? 1.0.0]Content-Length: [1150]Date: [Thu Feb 17 10:31:39 KST 2022]Content-Type: [TEXT_HTML, charset=utf-8, image/x-icon]
+2022-02-17 10:31:39.555 INFO  - Client close....../127.0.0.1
+2022-02-17 10:31:39.589 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  64018
+2022-02-17 10:31:42.607 ERROR - SocketTimeoutException occurred: Read timed out
+2022-02-17 10:31:42.609 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:31:45.620 INFO  - Client close....../127.0.0.1
+2022-02-17 10:39:23.835 INFO  - Leap WAS server starting......
+2022-02-17 10:39:23.838 INFO  - --------------------------------------------------------------------------
+2022-02-17 10:39:23.839 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-17 10:39:23.839 INFO  - verbose mode on
+2022-02-17 10:39:23.846 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-17 10:39:23.874 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 10:39:23.876 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@610f7aa : POST
+2022-02-17 10:39:23.876 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-17 10:39:23.879 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@76ed1b7c : GET
+2022-02-17 10:39:23.879 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-17 10:39:23.879 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 10:39:23.880 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:39:23.882 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:39:23.882 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:39:24.279 INFO  - HTTPS SERVER START.  Port: 8080  Protocol: TLS  KeyStore: .\config\ssl\leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-02-17 10:39:26.002 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  57165
+2022-02-17 10:39:26.005 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  57166
+2022-02-17 10:39:26.172 DEBUG - --------------------------------------------------------------------------------
+GET /time/GetTime HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 10:39:26.176 DEBUG - REQUEST CONTEXT: time/GetTime   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:39:26.185 ERROR - Response body not set. Something wrong in Respose process!!!
+java.lang.IllegalArgumentException: Response body not set. Something wrong in Respose process!!!
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.sendResponse(HttpTransferBuilder.java:83)
+	at org.chaostocosmos.leap.http.services.TimeServiceImpl.errorHandling(TimeServiceImpl.java:49)
+	at org.chaostocosmos.leap.http.services.ServiceInvoker.invokeService(ServiceInvoker.java:43)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:98)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-17 10:39:26.187 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:39:26.191 DEBUG - Server: [Leap? 1.0.0]WWW-Authenticate: [true]Content-Length: [192]Date: [Thu Feb 17 10:39:26 KST 2022]Content-Type: [TEXT_HTML, charset=utf-8]
+2022-02-17 10:39:26.194 INFO  - Client close....../127.0.0.1
+2022-02-17 10:39:26.230 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://localhost:8080/time/GetTime
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 10:39:26.234 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:39:26.236 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-17 10:39:26.239 DEBUG - Server: [Leap? 1.0.0]Content-Length: [1150]Date: [Thu Feb 17 10:39:26 KST 2022]Content-Type: [TEXT_HTML, charset=utf-8, image/x-icon]
+2022-02-17 10:39:26.241 INFO  - Client close....../127.0.0.1
+2022-02-17 10:39:26.267 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  57167
+2022-02-17 10:39:29.318 ERROR - SocketTimeoutException occurred: Read timed out
+2022-02-17 10:39:29.319 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:39:32.329 INFO  - Client close....../127.0.0.1
+2022-02-17 10:40:19.541 INFO  - Leap WAS server starting......
+2022-02-17 10:40:19.545 INFO  - --------------------------------------------------------------------------
+2022-02-17 10:40:19.546 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-17 10:40:19.547 INFO  - verbose mode on
+2022-02-17 10:40:19.586 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-17 10:40:19.616 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 10:40:19.620 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@610f7aa : POST
+2022-02-17 10:40:19.621 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-17 10:40:19.625 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@76ed1b7c : GET
+2022-02-17 10:40:19.626 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-17 10:40:19.626 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 10:40:19.627 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:40:19.629 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:40:19.630 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:40:20.084 INFO  - HTTPS SERVER START.  Port: 8080  Protocol: TLS  KeyStore: .\config\ssl\leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-02-17 10:40:21.177 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  57181
+2022-02-17 10:40:21.178 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  57182
+2022-02-17 10:40:21.491 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  57183
+2022-02-17 10:40:21.586 DEBUG - --------------------------------------------------------------------------------
+GET /time/GetTime HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 10:40:21.591 DEBUG - REQUEST CONTEXT: time/GetTime   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:40:21.598 DEBUG - Server: [Leap? 1.0.0]WWW-Authenticate: [true]Content-Length: [0]Date: [Thu Feb 17 10:40:21 KST 2022]Content-Type: [TEXT_HTML, charset=utf-8]
+2022-02-17 10:40:21.607 ERROR - Software caused connection abort: socket write error
+java.net.SocketException: Software caused connection abort: socket write error
+	at java.base/java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:110)
+	at java.base/java.net.SocketOutputStream.write(SocketOutputStream.java:150)
+	at java.base/sun.security.ssl.SSLSocketOutputRecord.deliver(SSLSocketOutputRecord.java:319)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1224)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.sendResponse(HttpTransferBuilder.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:151)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-17 10:40:21.635 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://localhost:8080/time/GetTime
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 10:40:21.638 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:40:21.641 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-17 10:40:21.643 DEBUG - Server: [Leap? 1.0.0]Content-Length: [1150]Date: [Thu Feb 17 10:40:21 KST 2022]Content-Type: [TEXT_HTML, charset=utf-8, image/x-icon]
+2022-02-17 10:40:21.646 INFO  - Client close....../127.0.0.1
+2022-02-17 10:40:24.593 ERROR - SocketTimeoutException occurred: Read timed out
+2022-02-17 10:40:24.593 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:40:27.608 INFO  - Client close....../127.0.0.1
+2022-02-17 10:58:09.327 INFO  - Leap WAS server starting......
+2022-02-17 10:58:09.331 INFO  - --------------------------------------------------------------------------
+2022-02-17 10:58:09.331 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-17 10:58:09.331 INFO  - verbose mode on
+2022-02-17 10:58:09.340 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-17 10:58:09.372 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@610f7aa : POST
+2022-02-17 10:58:09.373 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-17 10:58:09.373 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 10:58:09.376 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@76ed1b7c : GET
+2022-02-17 10:58:09.377 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-17 10:58:09.377 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 10:58:09.380 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:58:09.406 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:58:09.406 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:58:09.821 INFO  - HTTPS SERVER START.  Port: 8080  Protocol: TLS  KeyStore: .\config\ssl\leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-02-17 10:58:11.062 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  62716
+2022-02-17 10:58:11.064 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  62717
+2022-02-17 10:58:11.260 DEBUG - --------------------------------------------------------------------------------
+GET /time/GetTime HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 10:58:11.264 DEBUG - REQUEST CONTEXT: time/GetTime   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:58:11.270 DEBUG - Server: [Leap? 1.0.0]WWW-Authenticate: [true]Content-Length: [0]Date: [Thu Feb 17 10:58:11 KST 2022]Content-Type: [TEXT_HTML, charset=utf-8]
+2022-02-17 10:58:11.283 ERROR - Software caused connection abort: socket write error
+java.net.SocketException: Software caused connection abort: socket write error
+	at java.base/java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:110)
+	at java.base/java.net.SocketOutputStream.write(SocketOutputStream.java:150)
+	at java.base/sun.security.ssl.SSLSocketOutputRecord.deliver(SSLSocketOutputRecord.java:319)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1224)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.sendResponse(HttpTransferBuilder.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:150)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-17 10:58:11.319 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  62718
+2022-02-17 10:58:11.320 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://localhost:8080/time/GetTime
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 10:58:11.324 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:58:11.329 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-17 10:58:11.332 DEBUG - Server: [Leap? 1.0.0]Content-Length: [1150]Date: [Thu Feb 17 10:58:11 KST 2022]Content-Type: [TEXT_HTML, charset=utf-8, image/x-icon]
+2022-02-17 10:58:11.336 INFO  - Client close....../127.0.0.1
+2022-02-17 10:58:14.343 ERROR - SocketTimeoutException occurred: Read timed out
+2022-02-17 10:58:14.344 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:58:17.360 INFO  - Client close....../127.0.0.1
+2022-02-17 10:59:52.628 INFO  - Leap WAS server starting......
+2022-02-17 10:59:52.632 INFO  - --------------------------------------------------------------------------
+2022-02-17 10:59:52.632 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-17 10:59:52.632 INFO  - verbose mode on
+2022-02-17 10:59:52.642 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-17 10:59:52.667 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 10:59:52.670 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@610f7aa : POST
+2022-02-17 10:59:52.671 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-17 10:59:52.674 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@76ed1b7c : GET
+2022-02-17 10:59:52.675 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-17 10:59:52.675 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 10:59:52.676 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:59:52.677 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:59:52.678 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 10:59:53.163 INFO  - HTTPS SERVER START.  Port: 8080  Protocol: TLS  KeyStore: .\config\ssl\leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-02-17 10:59:54.263 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  63774
+2022-02-17 10:59:54.267 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  63775
+2022-02-17 10:59:54.519 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  63776
+2022-02-17 10:59:54.542 DEBUG - --------------------------------------------------------------------------------
+GET /time/GetTime HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 10:59:54.548 DEBUG - REQUEST CONTEXT: time/GetTime   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:59:54.557 DEBUG - Server: [Leap? 1.0.0]WWW-Authenticate: [true]Content-Length: [0]Date: [Thu Feb 17 10:59:54 KST 2022]Content-Type: [TEXT_HTML, charset=utf-8]
+2022-02-17 10:59:54.577 ERROR - Software caused connection abort: socket write error
+java.net.SocketException: Software caused connection abort: socket write error
+	at java.base/java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:110)
+	at java.base/java.net.SocketOutputStream.write(SocketOutputStream.java:150)
+	at java.base/sun.security.ssl.SSLSocketOutputRecord.deliver(SSLSocketOutputRecord.java:319)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppOutputStream.write(SSLSocketImpl.java:1224)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.sendResponse(HttpTransferBuilder.java:92)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:151)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-17 10:59:54.609 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://localhost:8080/time/GetTime
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 10:59:54.614 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 10:59:54.617 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-17 10:59:54.620 DEBUG - Server: [Leap? 1.0.0]Content-Length: [1150]Date: [Thu Feb 17 10:59:54 KST 2022]Content-Type: [TEXT_HTML, charset=utf-8, image/x-icon]
+2022-02-17 10:59:54.623 INFO  - Client close....../127.0.0.1
+2022-02-17 10:59:57.581 ERROR - SocketTimeoutException occurred: Read timed out
+2022-02-17 10:59:57.581 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static

@@ -1,7 +1,5 @@
 package org.chaostocosmos.leap.http.filters;
 
-import org.chaostocosmos.leap.http.WASException;
-
 /**
  * IHttpRequestFilter
  * @author 9ins
@@ -12,5 +10,5 @@ public interface IHttpRequestFilter<R> extends ILeapFilter{
      * @param request
      * @return
      */
-    public void filterRequest(R request) throws WASException;    
+    public void filterRequest(R request) throws Exception;    
 }

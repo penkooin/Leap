@@ -111,8 +111,8 @@ public class ResourceHelper {
      * @throws URISyntaxException
      * @throws IOException
      */
-    public static Path getResourcePath(String host, String path) throws WASException {
-        path = path.charAt(0) == '/' ? path.substring(1) : path;
+    public static Path getResourcePath(String host, String path_) throws WASException {
+        String path = path_.charAt(0) == '/' ? path_.substring(1) : path_;
         Path docroot = null;
         Path reqPath = null;
         Hosts vhost = HostsManager.getInstance().getHosts(host);
@@ -125,7 +125,7 @@ public class ResourceHelper {
         if(!validatePath(docroot, reqPath)) {
             throw new WASException(MSG_TYPE.ERROR, 19, new Object[]{host});
         }
-        LoggerFactory.getLogger(host).debug("REQUEST CONTEXT: "+path+"   PATH: "+getStaticPath(host));
+        LoggerFactory.getLogger(host).debug("REQUEST CONTEXT: "+path_+"   PATH: "+getStaticPath(host));
         return reqPath;
     }
 
@@ -307,7 +307,7 @@ public class ResourceHelper {
                     path.toFile().mkdirs();
                 } else { 
                     if(path.toFile().lastModified() != modMillis) {
-                        path.toFile().delete();
+                        path.toFile().delete(); 
                     }
                     if(!path.toFile().exists()) {
                         File file = Files.write(path, Files.readAllBytes(p), StandardOpenOption.CREATE).toFile();

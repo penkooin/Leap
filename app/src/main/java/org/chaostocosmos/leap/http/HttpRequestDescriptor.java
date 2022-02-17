@@ -4,7 +4,6 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.net.http.HttpRequest;
 import java.util.Map;
 
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
@@ -21,12 +20,11 @@ import ch.qos.logback.classic.Logger;
  */
 public class HttpRequestDescriptor {
 
-    private HttpRequest httpRequest;
-    private String httpVersion;
     private REQUEST_TYPE requestType;
     private String requestedHost;
-    private Map<String, String> reqHeader;
     private String contentType;
+    private String httpVersion;
+    private Map<String, String> reqHeader;
     private byte[] reqBody; 
     private String contextPath;
     private Map<String, String> contextParam;
@@ -69,14 +67,6 @@ public class HttpRequestDescriptor {
         this.contextParam = contextParam;
         this.bodyPart = bodyPart;
         this.contentLength = contentLength;
-    }
-
-    public HttpRequest getHttpRequest() {
-        return this.httpRequest;
-    }
-
-    public void setHttpRequest(HttpRequest httpRequest) {
-        this.httpRequest = httpRequest;
     }
 
     public String getHttpVersion() {
@@ -147,7 +137,6 @@ public class HttpRequestDescriptor {
     @Override
     public String toString() {
         return "{" +
-            " httpRequest='" + getHttpRequest() + "'" +
             ", httpVersion='" + getHttpVersion() + "'" +
             ", requestType='" + getRequestType() + "'" +
             ", requestedHost='" + getRequestedHost() + "'" +

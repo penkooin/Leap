@@ -7,56 +7,61 @@ import java.util.List;
 import org.chaostocosmos.leap.http.Context;
 import org.chaostocosmos.leap.http.HttpRequestDescriptor;
 import org.chaostocosmos.leap.http.HttpResponseDescriptor;
+import org.chaostocosmos.leap.http.HttpTransferBuilder.HttpTransfer;
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.annotation.AnnotationHelper;
 import org.chaostocosmos.leap.http.annotation.PostFilter;
 import org.chaostocosmos.leap.http.annotation.PreFilter;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.filters.ILeapFilter;
-import org.chaostocosmos.leap.http.security.UserManager;
+import org.chaostocosmos.leap.http.user.UserManager;
 
 /**
  * Abstraction of SimpleServlet object
  * @author Kooin-Shin
  * @since 2021.09.15
  */
-public abstract class AbstractLeapService implements IGetService, 
-                                              IPostService, 
-                                              IPutService, 
-                                              IDeleteService {
+public abstract class AbstractLeapService implements IGetService, IPostService, IPutService, IDeleteService {
     /**
      * Context
      */
-    private static final Context context = Context.getInstance();
+    protected static final Context context = Context.getInstance();
     /**
      * Method to be called for request
      */
-    private Method invokingMethod;
+    protected Method invokingMethod;
     /**
      * Filters for previous filtering process of service method
      */
-    private List<ILeapFilter> preFilters;
+    protected List<ILeapFilter> preFilters;
     /**
      * Filter for after filtering process of service method
      */
-    private List<ILeapFilter> postFilters;
+    protected List<ILeapFilter> postFilters;
     /**
      * Leap security manager object
      */
-    private UserManager securityManager;
+    protected UserManager userManager;
+    /**
+     * HttpTransfer object
+     */
+    protected HttpTransfer httpTransfer;
 
     @Override
-    public void serve(HttpRequestDescriptor request, HttpResponseDescriptor response, Method invokingMethod) throws WASException {
+    public HttpResponseDescriptor serve(HttpTransfer httpTransfer, Method invokingMethod) throws Exception {
+        this.httpTransfer = httpTransfer;
         this.invokingMethod = invokingMethod;
         if(this.preFilters != null) {
             for(ILeapFilter filter : this.preFilters) {
                 List<Method> methods = AnnotationHelper.getFilterMethods(filter, PreFilter.class); 
                 for(Method method : methods) {
-                    ServiceInvoker.invokeMethod(filter, method, request);
+                    ServiceInvoker.invokeMethod(filter, method, this.httpTransfer.getRequest());
                 }
             }
-        }
-        switch(request.getRequestType()) {
+        }        
+        HttpRequestDescriptor request = httpTransfer.getRequest();
+        HttpResponseDescriptor response = httpTransfer.getResponse();
+        switch(httpTransfer.getRequest().getRequestType()) {
             case GET: 
             serveGet(request, response);
             break;
@@ -80,6 +85,7 @@ public abstract class AbstractLeapService implements IGetService,
                 }
             }
         }
+        return response;
     }
 
     @Override
@@ -119,13 +125,18 @@ public abstract class AbstractLeapService implements IGetService,
     }    
 
     @Override
-    public void setFilters(List<ILeapFilter> preFilters, List<ILeapFilter> postFilters) throws WASException {
+    public void setFilters(List<ILeapFilter> preFilters, List<ILeapFilter> postFilters) {
         this.preFilters = preFilters;
         this.postFilters = postFilters;
     } 
 
     @Override
-    public void setSecurityManager(UserManager securityManager) {
-        this.securityManager = securityManager;
+    public void setSecurityManager(UserManager userManager) {
+        this.userManager = userManager;
     }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }    
 }

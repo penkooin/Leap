@@ -3,7 +3,6 @@ package org.chaostocosmos.leap.http;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -39,32 +38,26 @@ public class LeapWAS {
      * Logger
      */
     public static Logger logger;
-
     /**
      * Standard IO
      */
     public static PrintStream systemOut;
-
     /**
      * Home path
      */
     public static Path HOME_PATH;
-
     /**
      * Context
      */
     public Context context;
-
     /**
      * Virtual host manager
      */
     public HostsManager hostsManager;
-
     /**
      * Server Map
      */
     public Map<String, LeapHttpServer> leapServerMap;
-
     /**
      * Thread pool
      */
@@ -155,18 +148,19 @@ public class LeapWAS {
      *  
      * @throws WASException
      */
-    public void start() throws WASException {
+    public void start() throws Exception {
         Hosts difault = Context.getDefaultHosts();
-        LeapHttpServer difaultHost = new LeapHttpServer(difault.isDefaultHost(), Context.getHomePath(), difault.getHost(), difault.getPort(), Context.getBackLog(), difault.getDocroot(), this.threadpool);
-        logger.info("Default host added - Server: "+difault.getServerName()+"   Host: "+difault.getHost()+"   Port: "+difault.getPort()+"   Doc-Root: "+difault.getDocroot()+"   Logging path: "+difault.getLogPath()+"   Level: "+difault.getLogLevel().toString());
+        LeapHttpServer difaultHost = new LeapHttpServer(difault.isDefaultHost(), Context.getHomePath(), difault.getProtocol(), difault.getHost(), difault.getPort(), Context.getBackLog(), difault.getDocroot(), this.threadpool);
+        logger.info("Default host added - Protocol: "+difault.getProtocol().name()+"   Server: "+difault.getServerName()+"   Host: "+difault.getHost()+"   Port: "+difault.getPort()+"   Doc-Root: "+difault.getDocroot()+"   Logging path: "+difault.getLogPath()+"   Level: "+difault.getLogLevel().toString());
         this.leapServerMap.put(difault.getHost(), difaultHost);
         for(Hosts host : Context.getVirtualHosts().values()) {
-            if(this.leapServerMap.values().stream().allMatch(h -> h.getPort() != difault.getPort())) {
-                LeapHttpServer virtual = new LeapHttpServer(host.isDefaultHost(), Context.getHomePath(), host.getHost(), host.getPort(), Context.getBackLog(), host.getDocroot(), this.threadpool);
+            if(!this.leapServerMap.entrySet().stream().map(h -> h.getValue().getPort()).anyMatch(p -> p == host.getPort())) {
+                LeapHttpServer virtual = new LeapHttpServer(host.isDefaultHost(), Context.getHomePath(), host.getProtocol(), host.getHost(), host.getPort(), Context.getBackLog(), host.getDocroot(), this.threadpool);
                 this.leapServerMap.put(host.getHost(), virtual);
+                logger.info("Virtual host added - Protocol: "+host.getProtocol().name()+"   Server: "+host.getServerName()+"   Host: "+host.getHost()+"   Port: "+host.getPort()+"   Doc-Root: "+host.getDocroot()+"   Logging path: "+host.getLogPath()+"   Level: "+host.getLogLevel().toString());
             }
-            logger.info("Virtual host added - Server: "+host.getServerName()+"   Host: "+host.getHost()+"   Port: "+host.getPort()+"   Doc-Root: "+host.getDocroot()+"   Logging path: "+host.getLogPath()+"   Level: "+host.getLogLevel().toString());
         }        
+        logger.info("--------------------------------------------------------------------------");
         for(LeapHttpServer server : this.leapServerMap.values()) {
             server.setDaemon(false);
             server.start();
@@ -215,17 +209,7 @@ public class LeapWAS {
         }
     }
     
-    public static void main(String[] args) throws InstantiationException, 
-                                                  IllegalAccessException, 
-                                                  IllegalArgumentException, 
-                                                  InvocationTargetException, 
-                                                  NoSuchMethodException, 
-                                                  SecurityException, 
-                                                  ClassNotFoundException, 
-                                                  WASException, 
-                                                  IOException, 
-                                                  URISyntaxException, 
-                                                  ParseException {        
+    public static void main(String[] args) throws Exception {        
         LeapWAS leap = new LeapWAS(args);
         leap.start();
     }

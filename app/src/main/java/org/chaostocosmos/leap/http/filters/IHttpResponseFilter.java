@@ -1,6 +1,5 @@
 package org.chaostocosmos.leap.http.filters;
 
-import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.annotation.PostFilter;
 
 /**
@@ -14,5 +13,5 @@ public interface IHttpResponseFilter<S> extends ILeapFilter {
      * @return
      */
     @PostFilter
-    public void filterResponse(S response) throws WASException;    
+    public void filterResponse(S response) throws Exception;    
 }

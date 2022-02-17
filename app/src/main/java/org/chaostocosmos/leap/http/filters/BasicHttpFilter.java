@@ -2,7 +2,6 @@ package org.chaostocosmos.leap.http.filters;
 
 import org.chaostocosmos.leap.http.HttpRequestDescriptor;
 import org.chaostocosmos.leap.http.HttpResponseDescriptor;
-import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.annotation.PostFilter;
 import org.chaostocosmos.leap.http.annotation.PreFilter;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
@@ -15,7 +14,7 @@ public class BasicHttpFilter<R, S> extends AbstractHttpFilter<R, S> {
 
     @Override
     @PreFilter
-    public void filterRequest(R r) throws WASException { 
+    public void filterRequest(R r) throws Exception { 
         super.filterRequest(r);
         if(r.getClass().isAssignableFrom(HttpRequestDescriptor.class)) {
             HttpRequestDescriptor request = (HttpRequestDescriptor)r;
@@ -25,7 +24,7 @@ public class BasicHttpFilter<R, S> extends AbstractHttpFilter<R, S> {
 
     @Override
     @PostFilter
-    public void filterResponse(S s) throws WASException {
+    public void filterResponse(S s) throws Exception {
         super.filterResponse(s);
         if(s.getClass().isAssignableFrom(HttpResponseDescriptor.class)) {
             HttpResponseDescriptor response = (HttpResponseDescriptor)s;

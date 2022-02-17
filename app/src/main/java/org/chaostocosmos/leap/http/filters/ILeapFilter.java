@@ -1,6 +1,6 @@
 package org.chaostocosmos.leap.http.filters;
 
-import org.chaostocosmos.leap.http.security.UserManager;
+import org.chaostocosmos.leap.http.user.UserManager;
 
 /**
  * Top model of Leap filters

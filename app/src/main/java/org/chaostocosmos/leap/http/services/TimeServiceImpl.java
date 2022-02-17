@@ -14,22 +14,34 @@ import org.chaostocosmos.leap.http.filters.BasicHttpFilter;
 
 /**
  * Time serving servlet object
+ * 
  * @author 9ins
  * @since 2021.09.17
  */
 @ServiceMapper(path = "/time")
-public class TimeServiceImpl extends AbstractLeapService { 
- 
+public class TimeServiceImpl extends AbstractLeapService {  
+
+    public String cloneTestString = "";
+
     /**
      * Get current time
      * @param request
      * @param response
      */
-    @MethodMappper(mappingMethod = REQUEST_TYPE.POST, path = "/GetTime")
+    @MethodMappper(mappingMethod = REQUEST_TYPE.GET, path = "/GetTime")
     @FilterMapper(preFilters = {BasicAuthFilter.class, BasicHttpFilter.class})
     public void getTime(HttpRequestDescriptor request, HttpResponseDescriptor response) {
         LoggerFactory.getLogger(request.getRequestedHost()).debug("getTime servlet started....+++++++++++++++++++++++++++++++++++++++++++++++++");
         String resBody = "<html><title>This is what time</title><body><h2>"+new Date().toString()+"</h2><body></html>";
-        response.setResponseBody(resBody.getBytes());
+        response.setStatusCode(200);
+        response.setBody(resBody.getBytes());
+    }
+
+    @Override
+    public Throwable errorHandling(HttpResponseDescriptor response, Throwable t) throws Throwable {
+        response.addHeader("WWW-Authenticate", "Basic");
+        response.setStatusCode(401);
+        response.setBody("".getBytes());
+        return null;
     }
 } 

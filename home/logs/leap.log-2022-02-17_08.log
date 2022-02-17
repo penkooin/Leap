@@ -1,0 +1,248 @@
+2022-02-17 08:52:47.706 INFO  - Leap WAS server starting......
+2022-02-17 08:52:47.713 INFO  - --------------------------------------------------------------------------
+2022-02-17 08:52:47.713 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-17 08:52:47.714 INFO  - verbose mode on
+2022-02-17 08:52:47.721 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-17 08:52:47.757 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 08:52:47.758 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@740773a3 : POST
+2022-02-17 08:52:47.759 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-17 08:52:47.761 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@568ff82 : GET
+2022-02-17 08:52:47.762 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-17 08:52:47.762 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 08:52:47.763 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 08:52:47.766 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 08:52:47.767 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 08:52:48.124 INFO  - HTTPS SERVER START.  Port: 8080  Protocol: TLS  KeyStore: .\config\ssl\leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-02-17 08:52:48.609 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  55808
+2022-02-17 08:52:48.611 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  55809
+2022-02-17 08:52:48.872 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  55810
+2022-02-17 08:52:52.202 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  55813
+2022-02-17 08:52:52.246 DEBUG - --------------------------------------------------------------------------------
+GET / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 08:52:52.268 DEBUG - REQUEST CONTEXT:    PATH: .\home\webapp\WEB-INF\static
+2022-02-17 08:52:52.272 DEBUG - REQUEST RESOURCE: index.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 08:52:52.274 DEBUG - Content-Length: [225]
+2022-02-17 08:52:52.275 INFO  - Client close....../127.0.0.1
+2022-02-17 08:52:52.465 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  55815
+2022-02-17 08:52:52.492 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://localhost:8080/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 08:52:52.495 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 08:52:52.507 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-17 08:52:52.517 ERROR - Specified name of key must be exist in response headers: Content-Type
+java.lang.IllegalStateException: Specified name of key must be exist in response headers: Content-Type
+	at org.chaostocosmos.leap.http.HttpResponseDescriptor.setHeader(HttpResponseDescriptor.java:146)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:125)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-17 08:52:52.520 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 08:52:52.524 DEBUG - Content-Length: [198]
+2022-02-17 08:52:52.528 INFO  - Client close....../127.0.0.1
+2022-02-17 08:52:52.705 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  55816
+2022-02-17 08:52:55.736 ERROR - SocketTimeoutException occurred: Read timed out
+2022-02-17 08:52:55.736 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 08:52:55.739 ERROR - null
+java.lang.NullPointerException: null
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:141)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-17 08:52:58.750 INFO  - Client close....../127.0.0.1
+2022-02-17 08:54:28.532 INFO  - Leap WAS server starting......
+2022-02-17 08:54:28.536 INFO  - --------------------------------------------------------------------------
+2022-02-17 08:54:28.536 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-17 08:54:28.537 INFO  - verbose mode on
+2022-02-17 08:54:28.545 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-17 08:54:28.571 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 08:54:28.573 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@610f7aa : POST
+2022-02-17 08:54:28.574 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-17 08:54:28.578 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@76ed1b7c : GET
+2022-02-17 08:54:28.579 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-17 08:54:28.579 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 08:54:28.579 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 08:54:28.581 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 08:54:28.581 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 08:54:29.045 INFO  - HTTPS SERVER START.  Port: 8080  Protocol: TLS  KeyStore: .\config\ssl\leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-02-17 08:54:30.100 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  58046
+2022-02-17 08:54:30.104 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  58047
+2022-02-17 08:54:30.308 DEBUG - --------------------------------------------------------------------------------
+GET / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 08:54:30.321 DEBUG - REQUEST CONTEXT:    PATH: .\home\webapp\WEB-INF\static
+2022-02-17 08:54:30.323 DEBUG - REQUEST RESOURCE: index.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 08:54:30.325 DEBUG - Content-Length: [225]
+2022-02-17 08:54:30.327 INFO  - Client close....../127.0.0.1
+2022-02-17 08:54:30.356 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  58048
+2022-02-17 08:54:30.386 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://localhost:8080/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 08:54:30.389 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 08:54:30.392 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-17 08:54:30.397 ERROR - Specified name of key must be exist in response headers: Content-Type
+java.lang.IllegalStateException: Specified name of key must be exist in response headers: Content-Type
+	at org.chaostocosmos.leap.http.HttpResponseDescriptor.setHeader(HttpResponseDescriptor.java:147)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:125)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-17 08:54:30.400 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 08:54:30.400 DEBUG - Content-Length: [198]
+2022-02-17 08:54:30.403 INFO  - Client close....../127.0.0.1
+2022-02-17 08:54:33.381 ERROR - SocketTimeoutException occurred: Read timed out
+2022-02-17 08:54:33.381 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 08:54:33.384 ERROR - null
+java.lang.NullPointerException: null
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:141)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-17 08:54:35.866 INFO  - Client close....../127.0.0.1
+2022-02-17 08:56:31.520 INFO  - Leap WAS server starting......
+2022-02-17 08:56:31.523 INFO  - --------------------------------------------------------------------------
+2022-02-17 08:56:31.523 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-17 08:56:31.524 INFO  - verbose mode on
+2022-02-17 08:56:31.532 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-17 08:56:31.558 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 08:56:31.561 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@610f7aa : POST
+2022-02-17 08:56:31.561 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-17 08:56:31.564 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@76ed1b7c : GET
+2022-02-17 08:56:31.565 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-17 08:56:31.566 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-17 08:56:31.566 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 08:56:31.568 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 08:56:31.568 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-17 08:56:32.009 INFO  - HTTPS SERVER START.  Port: 8080  Protocol: TLS  KeyStore: .\config\ssl\leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-02-17 08:56:33.583 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  58080
+2022-02-17 08:56:33.584 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  58081
+2022-02-17 08:56:33.783 DEBUG - --------------------------------------------------------------------------------
+GET / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 08:56:33.802 DEBUG - REQUEST CONTEXT:    PATH: .\home\webapp\WEB-INF\static
+2022-02-17 08:56:33.804 DEBUG - REQUEST RESOURCE: index.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 08:56:33.806 DEBUG - Server: [Leap? 1.0.0]Content-Length: [225]Date: [Thu Feb 17 08:56:33 KST 2022]Content-Type: [TEXT_HTML, charset=utf-8]
+2022-02-17 08:56:33.813 INFO  - Client close....../127.0.0.1
+2022-02-17 08:56:33.818 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  58082
+2022-02-17 08:56:33.859 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://localhost:8080/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-17 08:56:33.863 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 08:56:33.866 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-17 08:56:33.871 ERROR - null
+java.lang.UnsupportedOperationException: null
+	at java.base/java.util.AbstractList.add(AbstractList.java:153)
+	at java.base/java.util.AbstractList.add(AbstractList.java:111)
+	at org.chaostocosmos.leap.http.HttpResponseDescriptor.setHeader(HttpResponseDescriptor.java:144)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:125)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-17 08:56:33.872 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 08:56:33.873 DEBUG - Server: [Leap? 1.0.0]Content-Length: [135]Date: [Thu Feb 17 08:56:33 KST 2022]Content-Type: [TEXT_HTML, charset=utf-8]
+2022-02-17 08:56:33.877 INFO  - Client close....../127.0.0.1
+2022-02-17 08:56:36.844 ERROR - SocketTimeoutException occurred: Read timed out
+2022-02-17 08:56:36.845 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-17 08:56:36.848 ERROR - null
+java.lang.NullPointerException: null
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:141)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-17 08:56:39.859 INFO  - Client close....../127.0.0.1

@@ -20,6 +20,7 @@ import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.commons.ResourceHelper;
 import org.chaostocosmos.leap.http.commons.UtilBox;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
+import org.chaostocosmos.leap.http.enums.PROTOCOL;
 import org.yaml.snakeyaml.Yaml;
 
 import ch.qos.logback.classic.Level;
@@ -156,36 +157,11 @@ public class Context {
      * @throws WASException
      */
     public static Context getInstance() {
+        if(LeapWAS.HOME_PATH == null) {
+            return null;
+        }
         return initialize(LeapWAS.HOME_PATH);
     }
-
-    /**
-     * Get service bean object
-     * @param serviceClassName
-     * @return
-     */
-    // public static ServiceMethodBean getServiceBean(String serviceClassName) {
-    //     return servletBeanList.stream().filter(s -> s.getServiceClass().equals(serviceClassName)).findAny().orElse(null);
-    // }
-
-    /**
-     * Get service bean list object
-     * @return
-     * @throws MalformedURLException
-     */
-    // public static List<ServiceMethodBean> getServiceBeanList() {
-    //     List<ServiceMethodBean> beanList = new ArrayList<>();
-    //     List<?> servletList = (List<?>)getConfigValue("server.servlet");
-    //     for(Object o : servletList) {
-    //         Map<?, ?> m = (Map<?,?>)o;
-    //         String servletName = m.get("servlet-name").toString();
-    //         String servletClass = m.get("servlet-class").toString();
-    //         List<String> servletFilters = ((List<?>) m.get("servlet-filters")).stream().map(Object::toString).collect(Collectors.toList());
-    //         ServiceMethodBean bean = new ServiceMethodBean(servletName, servletClass, servletFilters, servletFilters);
-    //         beanList.add(bean);
-    //     }
-    //     return beanList;
-    // }
 
     /**
      * Get all dynamic classpath URL array
@@ -240,6 +216,7 @@ public class Context {
                          .map(m -> ((Map<?, ?>)m))                                                  
                          .map(e -> new Object[]{e.get("host"), 
                                                 new Hosts(false,
+                                                         getProtocol((String)e.get("host")),
                                                          (String)e.get("server-name"), 
                                                          (String)e.get("host"), 
                                                          Integer.parseInt(e.get("port")+""), 
@@ -257,7 +234,7 @@ public class Context {
      * @return
      * @throws WASException
      */
-    public static Hosts getVirtualHosts(final String vhost) throws WASException {
+    public static Hosts getVirtualHosts(final String vhost) {
         return ((List<?>)getConfigValue("server.virtual-host"))
                         .stream()
                         .map(e -> (Map<?, ?>)e)
@@ -266,6 +243,7 @@ public class Context {
                             .map(o -> (Map<?, ?>)o)
                             .filter(m -> m.get("host").equals(vhost)) 
                             .map(e -> new Hosts(false,
+                                                getProtocol((String)e.get("host")),
                                                 (String)e.get("server-name"), 
                                                 (String)e.get("host"), 
                                                 Integer.parseInt(e.get("port")+""),  
@@ -274,15 +252,17 @@ public class Context {
                                                 (String)e.get("logs"),
                                                 UtilBox.getLogLevels((String)e.get("log-level"))))
                             .findFirst()
-                            .orElseThrow(() -> new WASException(MSG_TYPE.ERROR, 19));
+                            .orElse(null);
     }
 
     /**
      * Get default Hosts
      * @return
+     * @throws WASException
      */
     public static Hosts getDefaultHosts() {
         return new Hosts( true,
+                          getProtocol(getDefaultHost()),
                           getDefaultServerName(),
                           getDefaultHost(),
                           getDefaultPort(),
@@ -337,11 +317,18 @@ public class Context {
     }
 
     /**
-     * Whether using SSL
+     * Get web protocol of Host or vHost
+     * @param host
      * @return
+     * @throws WASException
      */
-    public static boolean useSSL() {
-        return (boolean)getConfigValue("server.ssl.use-ssl");
+    public static PROTOCOL getProtocol(String host) {
+        if(getDefaultHost().equals(host)) {
+            return PROTOCOL.valueOf(getConfigValue("server.protocol").toString().replace("/", "_").replace(".", "_"));
+        } else {
+            List<Map> list = (List<Map>)getConfigValue("server.virtual-host");
+            return PROTOCOL.valueOf(list.stream().filter(m -> m.get("host").equals(host)).findAny().get().get("protocol").toString().replace("/", "_").replace(".", "_"));
+        }
     }
 
     /**
@@ -362,8 +349,8 @@ public class Context {
      * Get SSL protocol
      * @return
      */
-    public static String getSSLProtocol() {
-        return (String)getConfigValue("server.ssl.protocol");
+    public static String getEncryptionMethod() {
+        return (String)getConfigValue("server.ssl.encryption");
     }
 
     /**
@@ -492,14 +479,6 @@ public class Context {
      */
     public static void setDefaultDocroot(String docroot) {
         getConfigValue("server.doc-root", docroot);
-    }
-
-    /**
-     * Get http version(HTTP/1.0)
-     * @return
-     */
-    public static String getHttpVersion() {
-        return (String)getConfigValue("server.http-version");
     }
 
     /**

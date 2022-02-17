@@ -1,8 +1,8 @@
 package org.chaostocosmos.leap.http;
 
 import java.io.File;
-import java.net.http.HttpResponse;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -12,64 +12,40 @@ import java.util.Map;
  * @since 2021.09.18
  */
 public class HttpResponseDescriptor {
-
     /**
      * Http request descriptor
      */
     private HttpRequestDescriptor httpRequestDescriptor;
-
-    /**
-     * HttpResponse object
-     */
-    private HttpResponse<byte[]> httpResponse;
-
-    /**
-     * Content type
-     */
-    private String contentType;
-
     /**
      * Response code
      */
-    private int responseCode;
-    
+    private int statusCode;    
     /**
      * Response body
      */
     private Object responseBody;
-
-    /**
-     * Response header map
-     */
-    private Map<String, Object> responseHeader;
-
     /**
      * Body length
      */
     private long contentLength;
-
     /**
-     * Construct with HttpRequestDescriptor
-     * @param requestDescriptor
+     * Response header map
      */
-    public HttpResponseDescriptor(HttpRequestDescriptor requestDescriptor) {
-        this(requestDescriptor, 200, "text/html; charset=utf-8", null, new HashMap<>());
-    }
-
+    private Map<String, List<Object>> headers;
     /**
      * Construct with parameters
      * @param httpRequestDescriptor
-     * @param responseCode
-     * @param contentType
-     * @param responseBody
-     * @param responseHeader
+     * @param response
      */
-    public HttpResponseDescriptor(HttpRequestDescriptor httpRequestDescriptor, int responseCode, String contentType, Object responseBody, Map<String, Object> responseHeader) {
+    public HttpResponseDescriptor(HttpRequestDescriptor httpRequestDescriptor, 
+                                  int statusCode,
+                                  Object responseBody,                                   
+                                  Map<String, List<Object>> headers
+                                  ) {
         this.httpRequestDescriptor = httpRequestDescriptor;
-        this.responseCode = responseCode;
-        this.contentType = contentType;
-        this.responseHeader = responseHeader;
+        this.statusCode = statusCode;
         this.responseBody = responseBody;
+        this.headers = headers;
         if(responseBody != null) {
             this.contentLength = responseBody instanceof byte[] ? ((byte[])responseBody).length : responseBody instanceof File ? ((File)responseBody).length() : -1;
         }
@@ -87,14 +63,6 @@ public class HttpResponseDescriptor {
         this.httpRequestDescriptor = httpRequestDescriptor;
     }
 
-    public HttpResponse<byte[]> getHttpResponse() {
-        return this.httpResponse;
-    }
-
-    public void setHttpResponse(HttpResponse<byte[]> httpResponse) {
-        this.httpResponse = httpResponse;
-    }
-
     public String getRequestedHost() {
         if(this.httpRequestDescriptor != null) {
             return this.httpRequestDescriptor.getRequestedHost();
@@ -106,45 +74,51 @@ public class HttpResponseDescriptor {
         this.httpRequestDescriptor.setRequestedHost(requestedHost);
     }
 
-    public int getResponseCode() {
-        return this.responseCode;
+    public int getStatusCode() {
+        return this.statusCode;
     }
 
-    public void setResponseCode(int responseCode) {
-        this.responseCode = responseCode;
+    public void setStatusCode(int statusCode) {
+        this.statusCode = statusCode;
     }
 
-    public String getContentType() {
-        return this.contentType;
-    }
-
-    public void setContentType(String contentType) {
-        this.contentType = contentType;
-    }
-
-    public Object getResponseBody() {
+    public Object getBody() {
         return this.responseBody;
     }
 
-    public void setResponseBody(Object responseBody) {                
+    public void setBody(Object responseBody) {
         this.responseBody = responseBody;
         this.contentLength = responseBody instanceof byte[] ? ((byte[])responseBody).length : responseBody instanceof File ? ((File)responseBody).length() : -1;
     }
 
-    public Map<String, Object> getResponseHeader() {
-        return this.responseHeader;
+    public Map<String, List<Object>> getHeaders() {
+        return this.headers;
     }
 
-    public void setResponseHeader(Map<String, Object> responseHeader) {
-        this.responseHeader = responseHeader;
+    public void setHeaders(Map<String, List<Object>> responseHeader) {
+        this.headers = responseHeader;
     }
 
     public void addHeader(String name, Object value) {
-        this.responseHeader.put(name, value);
+        if(!this.headers.containsKey(name)) {
+            List<Object> values = new ArrayList<>();
+            values.add(value);
+            this.headers.put(name, values);
+        } else {
+            this.headers.get(name).add(value);
+        }
+    }
+
+    public void setHeader(String name, Object value) {
+        if(this.headers.containsKey(name)) {
+            this.headers.get(name).add(value);
+        } else {
+            throw new IllegalStateException("Specified name of key must be exist in response headers: "+name);
+        }
     }
 
     public void removeHeader(String name) {
-        this.responseHeader.remove(name);
+        this.headers.remove(name);
     }
 
     public void setContentLength(long contentLength) {
@@ -159,12 +133,10 @@ public class HttpResponseDescriptor {
     public String toString() {
         return "{" +
             " httpRequestDescriptor='" + getHttpRequestDescriptor() + "'" +
-            ", httpResponse='" + getHttpResponse() + "'" +
-            ", contentType='" + getContentType() + "'" +
-            ", responseCode='" + getResponseCode() + "'" +
-            ", responseBody='" + getResponseBody() + "'" +
-            ", responseHeader='" + getResponseHeader() + "'" +
+            ", statusCode='" + getStatusCode() + "'" +
+            ", responseBody='" + getBody() + "'" +
             ", contentLength='" + getContentLength() + "'" +
+            ", headers='" + getHeaders() + "'" +
             "}";
     }
 }

@@ -1,0 +1,246 @@
+2022-02-15 15:13:08.063 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  58933
+2022-02-15 15:13:08.072 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  58934
+2022-02-15 15:13:08.098 DEBUG - --------------------------------------------------------------------------------
+GET /time/Gettime HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC; m=2258:Z3Vlc3Q6Z3Vlc3Q%253D
+2022-02-15 15:13:08.103 DEBUG - REQUEST CONTEXT: time/Gettime   PATH: .\home\webapp\WEB-INF\static
+2022-02-15 15:13:08.104 ERROR - org.chaostocosmos.leap.http.WASException: Resource Not Found   /time/Gettime
+org.chaostocosmos.leap.http.WASException: Resource Not Found   /time/Gettime
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:145)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-15 15:13:08.105 WARN  - Type: HTTP Code: 404 Exception: org.chaostocosmos.leap.http.WASException: Resource Not Found   /time/Gettime
+2022-02-15 15:13:08.105 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-15 15:13:08.108 INFO  - Client close....../127.0.0.1
+2022-02-15 15:13:08.151 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://localhost:8080/time/Gettime
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC; m=2258:Z3Vlc3Q6Z3Vlc3Q%253D
+2022-02-15 15:13:08.154 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-15 15:13:08.156 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-15 15:13:08.159 INFO  - Client close....../127.0.0.1
+2022-02-15 15:13:08.325 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  58935
+2022-02-15 15:13:11.345 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+2022-02-15 15:13:11.347 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-15 15:13:14.352 INFO  - Client close....../127.0.0.1
+2022-02-15 15:13:22.379 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  58937
+2022-02-15 15:13:22.403 DEBUG - --------------------------------------------------------------------------------
+GET /tim HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC; m=2258:Z3Vlc3Q6Z3Vlc3Q%253D
+2022-02-15 15:13:22.407 DEBUG - REQUEST CONTEXT: tim   PATH: .\home\webapp\WEB-INF\static
+2022-02-15 15:13:22.409 ERROR - org.chaostocosmos.leap.http.WASException: Resource Not Found   /tim
+org.chaostocosmos.leap.http.WASException: Resource Not Found   /tim
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:145)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-15 15:13:22.412 WARN  - Type: HTTP Code: 404 Exception: org.chaostocosmos.leap.http.WASException: Resource Not Found   /tim
+2022-02-15 15:13:22.412 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-15 15:13:22.415 INFO  - Client close....../127.0.0.1
+2022-02-15 15:13:27.256 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  58941
+2022-02-15 15:13:27.258 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  58942
+2022-02-15 15:13:27.274 DEBUG - --------------------------------------------------------------------------------
+GET /time HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC; m=2258:Z3Vlc3Q6Z3Vlc3Q%253D
+2022-02-15 15:13:27.278 DEBUG - REQUEST CONTEXT: time   PATH: .\home\webapp\WEB-INF\static
+2022-02-15 15:13:27.279 ERROR - org.chaostocosmos.leap.http.WASException: Resource Not Found   /time
+org.chaostocosmos.leap.http.WASException: Resource Not Found   /time
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:145)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-15 15:13:27.280 WARN  - Type: HTTP Code: 404 Exception: org.chaostocosmos.leap.http.WASException: Resource Not Found   /time
+2022-02-15 15:13:27.281 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-15 15:13:27.283 INFO  - Client close....../127.0.0.1
+2022-02-15 15:13:27.522 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  58943
+2022-02-15 15:13:30.290 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+2022-02-15 15:13:30.292 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-15 15:13:30.537 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+2022-02-15 15:13:30.538 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-15 15:13:32.886 INFO  - Client close....../127.0.0.1
+2022-02-15 15:13:33.542 INFO  - Client close....../127.0.0.1
+2022-02-15 15:13:37.514 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  58946
+2022-02-15 15:13:37.535 DEBUG - --------------------------------------------------------------------------------
+GET /time/GetTime HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC; m=2258:Z3Vlc3Q6Z3Vlc3Q%253D
+2022-02-15 15:13:37.539 DEBUG - REQUEST CONTEXT: time/GetTime   PATH: .\home\webapp\WEB-INF\static
+2022-02-15 15:13:37.539 ERROR - org.chaostocosmos.leap.http.WASException: Method Not Allowed   <br>Requested method not supported: GET
+org.chaostocosmos.leap.http.WASException: Method Not Allowed   <br>Requested method not supported: GET
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:104)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-15 15:13:37.541 WARN  - Type: HTTP Code: 405 Exception: org.chaostocosmos.leap.http.WASException: Method Not Allowed   <br>Requested method not supported: GET
+2022-02-15 15:13:37.541 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-15 15:13:37.543 INFO  - Client close....../127.0.0.1
+2022-02-15 15:13:37.867 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  58949
+2022-02-15 15:13:37.881 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://localhost:8080/time/GetTime
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC; m=2258:Z3Vlc3Q6Z3Vlc3Q%253D
+2022-02-15 15:13:37.886 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-15 15:13:37.887 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-15 15:13:37.891 INFO  - Client close....../127.0.0.1
+2022-02-15 15:13:38.135 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  58950
+2022-02-15 15:13:41.160 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+2022-02-15 15:13:41.162 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-15 15:13:44.171 INFO  - Client close....../127.0.0.1
+2022-02-15 15:40:00.737 INFO  - Leap WAS server starting......
+2022-02-15 15:40:00.740 INFO  - --------------------------------------------------------------------------
+2022-02-15 15:40:00.740 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-15 15:40:00.741 INFO  - verbose mode on
+2022-02-15 15:40:00.748 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
+2022-02-15 15:40:00.778 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@3098cf3b : DEPLOY
+2022-02-15 15:40:00.778 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
+2022-02-15 15:40:00.780 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@68567e20 : POST
+2022-02-15 15:40:00.780 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-15 15:40:00.780 INFO  - Default host added - Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-15 15:40:00.782 INFO  - Virtual host added - Server: leap2   Host: 192.168.1.28   Port: 8081   Doc-Root: home2   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-15 15:40:00.782 INFO  - Virtual host added - Server: leap1   Host: 127.0.0.1   Port: 8080   Doc-Root: home1   Logging path: logs/leap.log   Level: [DEBUG]
+2022-02-15 15:40:01.142 INFO  - HTTPS SERVER START.  Port: 8080  Protocol: TLS  KeyStore: .\config\ssl\leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-02-15 15:40:03.210 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  58219
+2022-02-15 15:40:03.212 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  58220
+2022-02-15 15:40:03.413 DEBUG - --------------------------------------------------------------------------------
+GET /time/GetTime HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC; m=2258:Z3Vlc3Q6Z3Vlc3Q%253D
+2022-02-15 15:40:03.432 DEBUG - REQUEST CONTEXT: time/GetTime   PATH: .\home\webapp\WEB-INF\static
+2022-02-15 15:40:03.441 ERROR - org.chaostocosmos.leap.http.WASException: Method Not Allowed   <br>Requested method not supported: GET
+org.chaostocosmos.leap.http.WASException: Method Not Allowed   <br>Requested method not supported: GET
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:104)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-15 15:40:03.443 WARN  - Type: HTTP Code: 405 Exception: org.chaostocosmos.leap.http.WASException: Method Not Allowed   <br>Requested method not supported: GET
+2022-02-15 15:40:03.443 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-15 15:40:03.447 INFO  - Client close....../127.0.0.1
+2022-02-15 15:40:03.456 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  58221
+2022-02-15 15:40:03.500 DEBUG - --------------------------------------------------------------------------------
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://localhost:8080/time/GetTime
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC; m=2258:Z3Vlc3Q6Z3Vlc3Q%253D
+2022-02-15 15:40:03.504 DEBUG - REQUEST CONTEXT: favicon.ico   PATH: .\home\webapp\WEB-INF\static
+2022-02-15 15:40:03.506 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-15 15:40:03.510 INFO  - Client close....../127.0.0.1
+2022-02-15 15:40:06.485 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
+2022-02-15 15:40:06.486 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
+2022-02-15 15:40:09.499 INFO  - Client close....../127.0.0.1

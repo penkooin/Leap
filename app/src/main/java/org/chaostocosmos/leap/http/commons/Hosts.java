@@ -4,12 +4,18 @@ import java.net.InetSocketAddress;
 import java.nio.file.Path;
 import java.util.List;
 
+import org.chaostocosmos.leap.http.enums.PROTOCOL;
+
 import ch.qos.logback.classic.Level;
 
 /**
  * Host object
  */
 public class Hosts {
+    /**
+     * Web protocol type
+     */
+    private PROTOCOL protocol;    
     /**
      * Whether main host
      */
@@ -53,6 +59,7 @@ public class Hosts {
     /**
      * Constructor
      * @param isDefaultHost
+     * @param protocol
      * @param serverName
      * @param host
      * @param port
@@ -62,6 +69,7 @@ public class Hosts {
      * @param logLevel
      */
     public Hosts(boolean isDefaultHost, 
+                 PROTOCOL protocol,
                  String serverName, 
                  String host, 
                  int port, 
@@ -70,6 +78,7 @@ public class Hosts {
                  String logPath, 
                  List<Level> logLevel)  {
         this.isDefaultHost = isDefaultHost;
+        this.protocol = protocol;
         this.serverName = serverName;
         this.host = host;
         this.port = port;
@@ -85,6 +94,22 @@ public class Hosts {
      */
     public boolean isDefaultHost() {
         return this.isDefaultHost;
+    }
+
+    /**
+     * Get specified web protocol
+     * @return
+     */
+    public PROTOCOL getProtocol() {
+        return this.protocol;
+    }
+
+    /**
+     * Set protocol
+     * @param protocol
+     */
+    public void setProtocol(PROTOCOL protocol) {
+        this.protocol = protocol;
     }
 
     /**
@@ -209,7 +234,8 @@ public class Hosts {
     @Override
     public String toString() {
         return "{" +
-            " isDefaultHost='" + isDefaultHost() + "'" +
+            " protocol='" + getProtocol() + "'" +
+            ", isDefaultHost='" + isDefaultHost() + "'" +
             ", serverName='" + getServerName() + "'" +
             ", host='" + getHost() + "'" +
             ", port='" + getPort() + "'" +

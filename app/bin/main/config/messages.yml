@@ -97,3 +97,5 @@ messages:
     error46: 'Error on building HttpRequest process. Caused: {}'
     error47: '{} not support this operation!!!'
     error48: 'Request stream aleary closed or Rquest body not loaded.  Is Body: {}  Is Stream: {}'
+    error49: 'Can not find the specifed Host: {}'
+    error50: 'Request or response build process failed. It is probably HTTP protocol issue: {}'

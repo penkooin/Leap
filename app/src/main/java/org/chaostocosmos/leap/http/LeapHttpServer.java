@@ -14,8 +14,9 @@ import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.SSLServerSocket;
 
-import org.chaostocosmos.leap.http.security.UserManager;
+import org.chaostocosmos.leap.http.enums.PROTOCOL;
 import org.chaostocosmos.leap.http.services.ServiceManager;
+import org.chaostocosmos.leap.http.user.UserManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory; 
 
@@ -34,6 +35,10 @@ public class LeapHttpServer extends Thread {
      * Index file
      */
     public static String INDEX_FILE = Context.getWelcome();
+    /**
+     * Protocol enum
+     */
+    PROTOCOL protocol;
     /**
      * host
      */
@@ -78,7 +83,7 @@ public class LeapHttpServer extends Thread {
      * Default constructor 
      * @throws WASException
      */
-    public LeapHttpServer() throws WASException {
+    public LeapHttpServer() throws Exception {
         this(Constants.DEFAULT_HOME_PATH);
     }
 
@@ -86,7 +91,7 @@ public class LeapHttpServer extends Thread {
      * Construct with home path
      * @throws WASException
      */
-    public LeapHttpServer(Path homePath) throws WASException {
+    public LeapHttpServer(Path homePath) throws Exception {
         this(Context.initialize(homePath));
     }
 
@@ -95,10 +100,11 @@ public class LeapHttpServer extends Thread {
      * @param context
      * @throws WASException
      */
-    public LeapHttpServer(Context context) throws WASException {
+    public LeapHttpServer(Context context) throws Exception {
         this(
             true,
             Context.getHomePath(),
+            Context.getProtocol(Context.getDefaultHost()),
             Context.getDefaultHost(),
             Context.getDefaultPort(),
             Context.getBackLog(),
@@ -115,6 +121,7 @@ public class LeapHttpServer extends Thread {
      * Constructor with configuration file Path
      * @param isDefaultHost
      * @param homePath
+     * @param protocol
      * @param host
      * @param port
      * @param backlog
@@ -122,9 +129,10 @@ public class LeapHttpServer extends Thread {
      * @param threadpool
      * @throws WASException
      */
-    public LeapHttpServer(boolean isDefaultHost, Path homePath, String host, int port, int backlog, Path docroot, ThreadPoolExecutor threadpool) throws WASException {
+    public LeapHttpServer(boolean isDefaultHost, Path homePath, PROTOCOL protocol, String host, int port, int backlog, Path docroot, ThreadPoolExecutor threadpool) throws Exception {
         this.isDefaultHost = true;
         this.homePath = homePath;
+        this.protocol = protocol;
         this.host = host;
         this.port = port;
         this.backlog = backlog;
@@ -167,23 +175,18 @@ public class LeapHttpServer extends Thread {
     }
 
     @Override
-    public void run() {        
+    public void run() {
         try {
-            boolean useSSL = Context.useSSL();
-            if(!useSSL) {
+            if(!this.protocol.isSSL()) {
                 InetSocketAddress inetSocketAddress = new InetSocketAddress(InetAddress.getByName(this.host), this.port);
                 this.server = new ServerSocket();
                 this.server.bind(inetSocketAddress, this.backlog);
-                logger.info("HTTP SERVER START. Port: " + server.getLocalPort());
+                logger.info("HTTP SERVER START. " + inetSocketAddress.toString());
             } else {
                 File keyStore = Context.getKeyStore().toFile();
                 String passphrase = Context.getPassphrase();
-                String sslProtocol = Context.getSSLProtocol();
-                this.server = HttpsServerSocketFactory.getSSLServerSocket(
-                                                                        keyStore, 
-                                                                        passphrase, 
-                                                                        sslProtocol, 
-                                                                        this.host, this.port, this.backlog);
+                String sslProtocol = Context.getEncryptionMethod();
+                this.server = HttpsServerSocketFactory.getSSLServerSocket(keyStore, passphrase, sslProtocol, this.host, this.port, this.backlog);
                 logger.info("HTTPS SERVER START.  Port: "+this.port+"  Protocol: "+sslProtocol+"  KeyStore: "+keyStore+"  Supported Protocol: "+Arrays.toString(((SSLServerSocket)server).getSupportedProtocols()));                
             }
             while (true) { 

@@ -1,15 +1,14 @@
 server:
-  version: 1.0.0
-  http-version: HTTP/1.0
   server-name: leap
+  version: 1.0
+  protocol: HTTP/1.0
   host: localhost
   port: 8080
   ssl:
-    use-ssl: true
-    protocol: 'TLS'
+    encryption: 'TLS'
     keystore: './config/ssl/leap-keystore.jks'
     passphrase: '939393'
-  timeout: 3000
+  timeout: 30000
   backlog: 50
   file-buffer-size: 1024
   threadpool:
@@ -40,6 +39,7 @@ server:
   welcome: 'index.html'
   virtual-host:
   - server-name: leap1
+    protocol: HTTP/1.0
     host: 127.0.0.1
     port: 8080
     dynamic-classpaths: [
@@ -56,8 +56,9 @@ server:
     logs: 'logs/leap.log'
     log-level: 'DEBUG'
   - server-name: leap2
-    host: 192.168.1.28
-    port: 8081
+    protocol: HTTP/1.0
+    host: localhost
+    port: 8080
     dynamic-classpaths: []
     resource-filter: 
       allowed: [

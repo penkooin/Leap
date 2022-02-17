@@ -12,7 +12,7 @@ public class LeapHttpServerTest {
 
     LeapHttpServer server;
 
-    public LeapHttpServerTest() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException, WASException {
+    public LeapHttpServerTest() throws Exception {
         this.server = new LeapHttpServer();
         this.server.start();;
     }
@@ -28,7 +28,7 @@ public class LeapHttpServerTest {
         ss.accept();
     }
 
-    public static void main(String[] args) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException, WASException {
+    public static void main(String[] args) throws Exception {
         LeapHttpServerTest server = new LeapHttpServerTest();
     }    
 }

@@ -18,7 +18,7 @@ import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
 import org.chaostocosmos.leap.http.filters.ILeapFilter;
-import org.chaostocosmos.leap.http.security.UserManager;
+import org.chaostocosmos.leap.http.user.UserManager;
 
 import ch.qos.logback.classic.Logger;
 
@@ -39,18 +39,19 @@ public class ServiceManager {
     /**
      * Leap security manager object
      */
-    private static UserManager securityManager;
+    private static UserManager userManager;
  
     /**
      * Constructor with 
-     * @param serviceBeans
+     * 
+     * @param userManager_ 
      * @throws WASException
      */
-    public ServiceManager(UserManager securityManager_) throws WASException {
+    public ServiceManager(UserManager userManager_) throws Exception {
         try {
             List<Class<? extends ILeapService>> services = ClassUtils.findAllLeapServices(false);
             //List<Class<? extends IFilter>> filters = ClassUtils.findAllLeapFilters(false);    
-            securityManager  = securityManager_;
+            userManager  = userManager_;
             initialize(services);
         } catch(IOException | URISyntaxException e) {
             throw new WASException(e);
@@ -63,8 +64,7 @@ public class ServiceManager {
     private void initialize(List<Class<? extends ILeapService>> services) {        
         for(Class<? extends ILeapService> serviceClass : services) {
             ILeapService service = (ILeapService) ClassUtils.instantiate(serviceClass);
-            service.setSecurityManager(securityManager);
-            setService(service);
+            addService(service);
         }
     }
 
@@ -72,7 +72,8 @@ public class ServiceManager {
      * Set service holder
      * @param service
      */
-    public void setService(final ILeapService service) {
+    public void addService(final ILeapService service) {
+        service.setSecurityManager(userManager);
         ServiceMapper sm = service.getClass().getDeclaredAnnotation(ServiceMapper.class);
         if(sm != null) {
             String sPath = sm.path();
@@ -90,17 +91,18 @@ public class ServiceManager {
                         Class<? extends ILeapFilter>[] preFilterClasses = fm.preFilters();
                         for(Class<? extends ILeapFilter> clazz : preFilterClasses) {
                             ILeapFilter f = (ILeapFilter)ClassUtils.instantiate(clazz);
-                            f.setSecurityManager(securityManager);
-                            preFilters.add(f);
+                            f.setSecurityManager(userManager);
+                            preFilters.add(f);                            
                         }
                         List<ILeapFilter> postFilters = new ArrayList<>();
                         Class<? extends ILeapFilter>[] postFilterClasses = fm.postFilters();
                         for(Class<? extends ILeapFilter> clazz : postFilterClasses) {
                             ILeapFilter f = (ILeapFilter)ClassUtils.instantiate(clazz);
-                            f.setSecurityManager(securityManager);
+                            f.setSecurityManager(userManager);
                             postFilters.add(f);
-                        }
-                        serviceHolder = new ServiceHolder(sPath+mPath, service, rType, method, preFilters, null);
+                        }                     
+                        service.setFilters(preFilters, postFilters);   
+                        serviceHolder = new ServiceHolder(sPath+mPath, service, rType, method);
                         serviceHolderMap.put(sPath+mPath, serviceHolder);
                     } else {
                         serviceHolder = new ServiceHolder(sPath+mPath, service, rType, method);
@@ -132,7 +134,7 @@ public class ServiceManager {
      * @return
      * @throws WASException
      */
-    public boolean vaildateRequestMethod(REQUEST_TYPE type, final String contextPath) throws WASException {
+    public boolean vaildateRequestMethod(REQUEST_TYPE type, final String contextPath) throws Exception {
         ServiceHolder serviceHolder = serviceHolderMap.get(contextPath);
         if(serviceHolder.getRequestType() != type) {
             throw new WASException(MSG_TYPE.ERROR, 34, type.name());
@@ -146,7 +148,7 @@ public class ServiceManager {
      * @return
      * @throws WASException
      */
-    public ServiceHolder getMappingServiceHolder(String contextPath) throws WASException {
+    public ServiceHolder getMappingServiceHolder(String contextPath) throws Exception {
         ServiceHolder serviceHolder = serviceHolderMap.get(contextPath);
         return serviceHolder;
     }
@@ -166,7 +168,7 @@ public class ServiceManager {
      * @return
      * @throws WASException
      */
-    public Method getMappingServiceMethod(String contextPath) throws WASException {
+    public Method getMappingServiceMethod(String contextPath) throws Exception {
         return serviceHolderMap.get(contextPath).getServiceMethod();
     }
 
@@ -176,7 +178,7 @@ public class ServiceManager {
      * @return
      * @throws Exception
      */
-    public static ILeapService newServiceInstance(String serviceClassName) throws WASException {
+    public static ILeapService newServiceInstance(String serviceClassName) throws Exception {
         return (ILeapService)ClassUtils.instantiate(serviceClassName);
     }   
 
@@ -186,7 +188,7 @@ public class ServiceManager {
      * @return
      * @throws WASException
      */
-    public static ILeapFilter newFilterInstance(String filterClassName) throws WASException {
+    public static ILeapFilter newFilterInstance(String filterClassName) throws Exception {
         return (ILeapFilter)ClassUtils.instantiate(filterClassName);
     }
 }

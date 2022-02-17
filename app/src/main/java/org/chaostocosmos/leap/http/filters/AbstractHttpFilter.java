@@ -3,10 +3,9 @@ package org.chaostocosmos.leap.http.filters;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.annotation.PostFilter;
 import org.chaostocosmos.leap.http.annotation.PreFilter;
-import org.chaostocosmos.leap.http.security.UserManager;
+import org.chaostocosmos.leap.http.user.UserManager;
 
 /**
  * Filtering request URL
@@ -21,13 +20,13 @@ public abstract class AbstractHttpFilter<R, S> implements IHttpFilter<R, S> {
 
     @Override
     @PreFilter
-    public void filterRequest(R r) throws WASException {
+    public void filterRequest(R r) throws Exception {
         //System.out.println("Processing pre filter..........");
     }
 
     @Override
     @PostFilter
-    public void filterResponse(S s) throws WASException {
+    public void filterResponse(S s) throws Exception {
         //System.out.println("Processing post filter..........");
     }
     

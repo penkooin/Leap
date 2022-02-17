@@ -49,26 +49,11 @@ public class ServiceHolder {
      * @param serviceMethod
      */
     public ServiceHolder(String servicePath, ILeapService service, REQUEST_TYPE requestType, Method serviceMethod) {
-        this(servicePath, service, requestType, serviceMethod, null, null);
-    }
-
-    /**
-     * Construct with parameters
-     * @param servicePath
-     * @param service
-     * @param requestType
-     * @param serviceMethod
-     * @param preFilters
-     * @param postFilters
-     */
-    public ServiceHolder(String servicePath, ILeapService service, REQUEST_TYPE requestType, Method serviceMethod, List<ILeapFilter> preFilters, List<ILeapFilter> postFilters) {
         this.servicePath = servicePath;
         this.requestType = requestType;
         this.service = service;
         this.serviceMethod = serviceMethod;
-        this.preFilters = preFilters;
-        this.postFilters = postFilters;
-    }    
+    }
 
     public String getServicePath() {
         return this.servicePath;
@@ -102,30 +87,12 @@ public class ServiceHolder {
         this.serviceMethod = serviceMethod;
     }
 
-    public List<ILeapFilter> getPreFilters() {
-        return this.preFilters;
-    }
-
-    public void setPreFilters(List<ILeapFilter> preFilters) {
-        this.preFilters = preFilters;
-    }
-
-    public List<ILeapFilter> getPostFilters() {
-        return this.postFilters;
-    }
-
-    public void setPostFilters(List<ILeapFilter> postFilters) {
-        this.postFilters = postFilters;
-    }
-
     @Override
     public String toString() {
         return "{" +
             " servicePath='" + getServicePath() + "'" +
             " requestType='" + getRequestType()+ "'" +
             ", serviceMethod='" + getServiceMethod() + "'" +
-            ", preFilters='" + getPreFilters() + "'" +
-            ", postFilters='" + getPostFilters() + "'" +
             "}";
     }
 }

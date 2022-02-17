@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.chaostocosmos.leap.http.HttpRequestDescriptor;
 import org.chaostocosmos.leap.http.annotation.PreFilter;
-import org.chaostocosmos.leap.http.security.UserManager;
+import org.chaostocosmos.leap.http.user.UserManager;
 
 /**
  * Abstract ip filtering object
