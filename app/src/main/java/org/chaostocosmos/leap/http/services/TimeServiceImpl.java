@@ -8,6 +8,7 @@ import org.chaostocosmos.leap.http.annotation.FilterMapper;
 import org.chaostocosmos.leap.http.annotation.MethodMappper;
 import org.chaostocosmos.leap.http.annotation.ServiceMapper;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
+import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
 import org.chaostocosmos.leap.http.filters.BasicAuthFilter;
 import org.chaostocosmos.leap.http.filters.BasicHttpFilter;
@@ -33,6 +34,7 @@ public class TimeServiceImpl extends AbstractLeapService {
     public void getTime(HttpRequestDescriptor request, HttpResponseDescriptor response) {
         LoggerFactory.getLogger(request.getRequestedHost()).debug("getTime servlet started....+++++++++++++++++++++++++++++++++++++++++++++++++");
         String resBody = "<html><title>This is what time</title><body><h2>"+new Date().toString()+"</h2><body></html>";
+        response.addHeader("Content-Type", MIME_TYPE.TEXT_HTML.getMimeType());
         response.setStatusCode(200);
         response.setBody(resBody.getBytes());
     }

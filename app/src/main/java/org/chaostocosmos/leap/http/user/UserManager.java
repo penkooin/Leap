@@ -38,7 +38,8 @@ public class UserManager implements IAuthenticate {
     }
 
     @Override
-    public boolean signIn(String username, String password) throws WASException {
+    public boolean signIn(String username, String password) {
+        System.out.println(this.users.toString());
         User user = this.users.stream().filter(u -> u.getUsername().equals(username)).findAny().orElseThrow(() -> new WASException(MSG_TYPE.ERROR, 25, username));
         if(!user.getPassword().equals(password)) {
             throw new WASException(MSG_TYPE.ERROR, 26, password);

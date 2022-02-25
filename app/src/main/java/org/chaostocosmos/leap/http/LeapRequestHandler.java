@@ -142,6 +142,7 @@ public class LeapRequestHandler implements Runnable {
                 httpTransfer.close();
             }                
         } catch(Throwable e) {
+            e.printStackTrace();
             try {
                 processError(httpTransfer, e);
             } catch(Exception e1) {

@@ -28,6 +28,7 @@ public class BasicAuthFilter<R, S> extends AbstractHttpFilter<R, S> implements I
                 byte[] credDecoded = Base64.getDecoder().decode(base64Credentials);
                 String credentials = new String(credDecoded, StandardCharsets.UTF_8);
                 final String[] values = credentials.split(":", 2);
+                //System.out.println(values[0]+" "+values[1]);
                 if(!signIn(values[0], values[1])) {                    
                     throw new WASException(MSG_TYPE.HTTP, 401);
                 }
@@ -40,17 +41,18 @@ public class BasicAuthFilter<R, S> extends AbstractHttpFilter<R, S> implements I
 
     @Override
     public boolean signIn(String username, String password) throws WASException {
-        if(super.securityManager == null) {
+        if(super.userManager == null) {
             throw new IllegalStateException("Leap security manager not set. Can not sing in with "+username+"/"+password);
         }   
-        return super.securityManager.signIn(username, password);
+        //System.out.println(username + ":" + password+" "+super.userManager);
+        return super.userManager.signIn(username, password);
     }
 
     @Override
     public void signUp(User user) throws WASException {
-        if(super.securityManager == null) {
+        if(super.userManager == null) {
             throw new IllegalStateException("Leap security manager not set. Can not sing up with "+user.toString());
         }   
-        super.securityManager.signUp(user);
+        super.userManager.signUp(user);
     }
 }

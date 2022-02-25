@@ -65,7 +65,7 @@ public abstract class AbstractLeapService implements IGetService, IPostService, 
                     ServiceInvoker.invokeMethod(filter, method, this.httpTransfer.getRequest());
                 }
             }
-        }        
+        }                
         HttpRequestDescriptor request = httpTransfer.getRequest();
         HttpResponseDescriptor response = httpTransfer.getResponse();
         switch(httpTransfer.getRequest().getRequestType()) {

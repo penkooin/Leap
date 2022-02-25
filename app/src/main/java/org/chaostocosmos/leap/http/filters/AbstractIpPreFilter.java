@@ -53,7 +53,7 @@ public abstract class AbstractIpPreFilter<R> implements IIpPreFilter<R> {
     }
 
     @Override
-    public void setSecurityManager(UserManager securityManager) {
+    public void setUserManager(UserManager securityManager) {
         this.securityManager = securityManager;
     }    
 }

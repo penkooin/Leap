@@ -33,7 +33,7 @@ server:
           password: guest
           grant: GUEST
       dynamic-classpaths: './home/webapp/services'
-      resource-filter: 
+      resource-filters: 
         allowed: ['*']
         forbidden: ['']
       error-filters: [
@@ -64,7 +64,7 @@ server:
           password: guest
           grant: GUEST
       dynamic-classpaths: ''
-      resource-filter: 
+      resource-filters: 
         allowed: ['*']
         forbidden: ['']
       error-filters: [
@@ -89,7 +89,7 @@ server:
           password: guest
           grant: GUEST
       dynamic-classpaths: ''
-      resource-filter: 
+      resource-filters: 
         allowed: ['*']
         forbidden: ['']
       error-filters: [

@@ -131,10 +131,8 @@ public class LeapHttpServer extends Thread {
             Context.getBackLog(),
             threadpool,
             new ServiceManager(
-                        new DynamicURLClassLoader(new URL[] {
-                                    hosts.getDynamicClasspaths().toUri().toURL()
-                                    }
-                            ), new UserManager(hosts.getHost())),
+                hosts.getDynamicClasspaths() != null ? new DynamicURLClassLoader(new URL[] {hosts.getDynamicClasspaths().toUri().toURL()}) : new DynamicURLClassLoader()
+                , new UserManager(hosts.getHost())),
             hosts
         );        
     }

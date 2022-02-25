@@ -16,7 +16,7 @@ public abstract class AbstractHttpFilter<R, S> implements IHttpFilter<R, S> {
     /**
      * Security manager object
      */
-    protected UserManager securityManager;
+    protected UserManager userManager;
 
     @Override
     @PreFilter
@@ -41,7 +41,7 @@ public abstract class AbstractHttpFilter<R, S> implements IHttpFilter<R, S> {
     }
 
     @Override
-    public void setSecurityManager(UserManager securityManager) {
-        this.securityManager = securityManager;
+    public void setUserManager(UserManager userManager) {
+        this.userManager = userManager;
     }
 }

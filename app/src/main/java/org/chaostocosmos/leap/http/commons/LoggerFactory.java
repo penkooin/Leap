@@ -53,14 +53,13 @@ public class LoggerFactory {
             loggerMap = new HashMap<String, Logger>();
         }
         if(!loggerMap.containsKey(host)) {
-            Hosts hosts = HostsManager.get().getHosts(host);
+            HostsManager manager = HostsManager.get();
+            Hosts hosts = manager.getHosts(host.trim());
             Logger logger = createLoggerFor(hosts.getHost(), hosts.getDocroot().resolve(hosts.getLogPath()).toAbsolutePath().toString(), hosts.getLogLevel());
-            System.out.println(host);
             loggerMap.put(hosts.getHost(), logger);
             return logger;
-        } else {
-            return loggerMap.get(host);
         }
+        return loggerMap.get(host);
     }
 
     /**

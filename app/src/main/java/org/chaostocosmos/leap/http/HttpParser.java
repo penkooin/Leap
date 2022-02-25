@@ -141,7 +141,6 @@ public class HttpParser {
                 throw new WASException(MSG_TYPE.HTTP, 400, "Requested host not exist in this server: "+host);
             }
             Charset charset = HostsManager.get().charset(host);
-            System.out.println(host);
             LoggerFactory.getLogger(host).debug(debug);
             BodyPart bodyPart = null;
             if(contentType != null) {

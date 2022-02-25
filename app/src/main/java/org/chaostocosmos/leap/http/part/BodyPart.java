@@ -65,7 +65,7 @@ public abstract class BodyPart {
      * @throws IOException
      */
     public BodyPart(String host, MIME_TYPE contentType, long contentLength, InputStream requestStream, boolean loadBody, Charset charset) throws IOException {
-        this.logger = LoggerFactory.getLogger(this.host);
+        this.logger = LoggerFactory.getLogger(host);
         this.host = host;
         this.contentType = contentType;
         this.contentLength = contentLength;

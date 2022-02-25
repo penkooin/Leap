@@ -12,5 +12,5 @@ public interface ILeapFilter {
      * Set security manager object
      * @param securityManager
      */
-    public void setSecurityManager(UserManager securityManager);
+    public void setUserManager(UserManager securityManager);
 }

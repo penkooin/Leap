@@ -15,3 +15,7 @@ RES CODE: 200
 Content-Length: [660]
 Content-Type: [text/html]
 2022-02-25 15:17:32.527 INFO  - Client closing....../127.0.0.1
+2022-02-25 15:18:02.679 DEBUG - ============================== RES : HTTP/1.0 500 Internal Server Error. - /127.0.0.1:54985 ==============================
+RES CODE: 500
+Content-Length: [14]
+Content-Type: [text/html]

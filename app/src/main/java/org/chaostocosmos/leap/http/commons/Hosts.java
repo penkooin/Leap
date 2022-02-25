@@ -110,7 +110,7 @@ public class Hosts {
         this.host = (String)map.get("host");
         this.port = (int)map.get("port");
         this.users = (List<User>)((List<Map<?, ?>>)map.get("users")).stream().map(m -> new User(m.get("username").toString(), m.get("password").toString(), GRANT.valueOf(m.get("grant").toString()))).collect(Collectors.toList());
-        this.dynamicClaspaths = Paths.get((String)map.get("dynamic-classpaths"));
+        this.dynamicClaspaths = !map.get("dynamic-classpaths").equals("") ? Paths.get((String)map.get("dynamic-classpaths")) : null;
         this.allowedResourceFilters = (List<String>)((List<?>)((Map<?, ?>)map.get("resource-filters")).get("allowed")).stream().map(f -> f.toString()).collect(Collectors.toList());
         this.forbiddenResourceFilters = (List<String>)((List<?>)((Map<?, ?>)map.get("resource-filters")).get("forbidden")).stream().map(f -> f.toString()).collect(Collectors.toList());
         this.errorFilters = ((List<?>)map.get("error-filters")).stream().map(f -> ClassUtils.getClass(ClassLoader.getSystemClassLoader(), f.toString().trim())).collect(Collectors.toList());

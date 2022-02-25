@@ -12,8 +12,6 @@ import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.annotation.FilterMapper;
 import org.chaostocosmos.leap.http.annotation.MethodMappper;
 import org.chaostocosmos.leap.http.annotation.ServiceMapper;
-import org.chaostocosmos.leap.http.commons.ClassUtils;
-import org.chaostocosmos.leap.http.commons.DynamicURLClassLoader;
 import org.chaostocosmos.leap.http.commons.HostsManager;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
@@ -34,14 +32,19 @@ public class LeapServiceDeploy extends AbstractLeapService {
             MultiPart multipart = (MultiPart) bodyPart;
             String packages = headers.get("package");
             String classname = headers.get("classname");
-            
+                        
             super.logger.debug("Deploying service... "+request.getReqHeader().toString());
             Path serviceClassesPath = HostsManager.get().getDynamicClaspaths(request.getRequestedHost());
-            DynamicURLClassLoader classLoader = ClassUtils.getClassLoader();
-            classLoader.addPath(serviceClassesPath);
+            super.serviceManager.getClassLoader().addPath(serviceClassesPath);
 
             Path packagePath = Paths.get(packages.replace(".", File.separator));
-            multipart.save(serviceClassesPath.resolve(packagePath));
+            System.out.println("-----------------------------------------------------------------"+serviceClassesPath.resolve(packagePath).toAbsolutePath().toString());
+            try{
+                multipart.save(serviceClassesPath.resolve(packagePath).toAbsolutePath());
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+            super.logger.debug("Uploaded service saved: "+serviceClassesPath.resolve(packagePath).toAbsolutePath().toString());
 
             ILeapService deployService = super.serviceManager.newServiceInstance(packages+"."+classname);
             //(ILeapService)ClassUtils.instantiate(packages+"."+classname);

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.lang.reflect.Modifier;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLClassLoader;
 import java.nio.charset.Charset;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
@@ -71,7 +72,7 @@ public class ClassUtils {
      * @throws URISyntaxException
      * @throws IOException
      */
-    public static List<Class<? extends ILeapService>> findAllLeapServices(ClassLoader classLoader, boolean reloadConfig) throws IOException, URISyntaxException {
+    public static List<Class<? extends ILeapService>> findAllLeapServices(URLClassLoader classLoader, boolean reloadConfig) throws IOException, URISyntaxException {
         if(reloadConfig) {
             Context.getInstance().loadConfig();
         }
@@ -80,8 +81,8 @@ public class ClassUtils {
                                                        .filter(f ->!Modifier.isAbstract(f.getModifiers()) && !Modifier.isInterface(f.getModifiers()))
                                                        .map(c -> (Class<? extends ILeapService>)c)
                                                        .collect(Collectors.toList());
-        for(URL url : getClassLoader().getURLs()) {
-            //System.out.println(url);
+        for(URL url : classLoader.getURLs()) {
+            System.out.println(url);
             services.addAll(findClasses(classLoader, ILeapService.class, url)
                             .stream()
                             .filter(f ->!Modifier.isAbstract(f.getModifiers()) && !Modifier.isInterface(f.getModifiers()))
@@ -99,7 +100,7 @@ public class ClassUtils {
      * @throws URISyntaxException
      * @throws IOException
      */
-    public static List<Class<? extends ILeapFilter>> findAllLeapFilters(ClassLoader classLoader, boolean reloadConfig) throws IOException, URISyntaxException {
+    public static List<Class<? extends ILeapFilter>> findAllLeapFilters(URLClassLoader classLoader, boolean reloadConfig) throws IOException, URISyntaxException {
         List<Class<? extends ILeapFilter>> filters = findFilters(classLoader, ILeapFilter.class, getClassLoader().getResource(""))
                                                     .stream()
                                                     .filter(f -> //f.isAssignableFrom(IFilter.class)
@@ -107,7 +108,7 @@ public class ClassUtils {
                                                             )
                                                     .map(f -> (Class<? extends ILeapFilter>)f)
                                                     .collect(Collectors.toList());
-        for(URL url : getClassLoader().getURLs()) {
+        for(URL url : classLoader.getURLs()) {
             filters.addAll(findFilters(classLoader, ILeapFilter.class, url)
                             .stream()
                             .filter(f -> //f.isAssignableFrom(IFilter.class)
@@ -128,7 +129,7 @@ public class ClassUtils {
      * @throws URISyntaxException
      * @throws IOException
      */
-    public static List<Class<? extends ILeapFilter>> findPreFilters(ClassLoader classLoader, URL url) throws IOException, URISyntaxException {
+    public static List<Class<? extends ILeapFilter>> findPreFilters(URLClassLoader classLoader, URL url) throws IOException, URISyntaxException {
         return findFilters(classLoader, ILeapFilter.class, url)
                     .stream()
                     .filter(f -> !Modifier.isAbstract(f.getModifiers()) && !Modifier.isInterface(f.getModifiers()))
@@ -144,7 +145,7 @@ public class ClassUtils {
      * @throws URISyntaxException
      * @throws IOException
      */
-    public static List<Class<? extends ILeapFilter>> findPostFilters(ClassLoader classLoader, URL url) throws IOException, URISyntaxException {
+    public static List<Class<? extends ILeapFilter>> findPostFilters(URLClassLoader classLoader, URL url) throws IOException, URISyntaxException {
         return findFilters(classLoader, ILeapFilter.class, url)
                     .stream()
                     .filter(f -> !Modifier.isAbstract(f.getModifiers()) && !Modifier.isInterface(f.getModifiers()))
@@ -161,7 +162,7 @@ public class ClassUtils {
      * @throws URISyntaxException
      * @throws IOException
      */
-    public static List<Class<? extends ILeapFilter>> findFilters(ClassLoader classLoader, Class<? extends ILeapFilter> iFilter, URL url) throws IOException, URISyntaxException {
+    public static List<Class<? extends ILeapFilter>> findFilters(URLClassLoader classLoader, Class<? extends ILeapFilter> iFilter, URL url) throws IOException, URISyntaxException {
         return findClasses(classLoader, iFilter, url)
                 .stream()
                 .map(c -> (Class<? extends ILeapFilter>)c)
@@ -176,7 +177,7 @@ public class ClassUtils {
      * @throws URISyntaxException
      * @throws IOException
      */
-    public static List<Class<? extends Object>> findDynamicClasses(ClassLoader classLoader, Class<?> clazz) throws IOException, URISyntaxException {
+    public static List<Class<? extends Object>> findDynamicClasses(URLClassLoader classLoader, Class<?> clazz) throws IOException, URISyntaxException {
         List<Class<? extends Object>> classes = new ArrayList<>();
         for(URL url : getClassLoader().getURLs()) {
             classes.addAll(findClasses(classLoader, clazz, url));
@@ -193,7 +194,7 @@ public class ClassUtils {
      * @throws URISyntaxException
      * @throws IOException
      */
-    public static List<Class<? extends Object>> findClasses(ClassLoader classLoader, Class<?> clazz, URL url) throws IOException, URISyntaxException {
+    public static List<Class<? extends Object>> findClasses(URLClassLoader classLoader, Class<?> clazz, URL url) throws IOException, URISyntaxException {
         List<String> classes = findClassNames(url);
         return classes.stream().map(c -> getClass(classLoader, c)).filter(c -> c != null && clazz.isAssignableFrom(c)).collect(Collectors.toList());
     }
@@ -267,7 +268,7 @@ public class ClassUtils {
      * @param clazz
      * @return
      */
-    public static Object instantiate(ClassLoader classLoader, Class<?> clazz) {
+    public static Object instantiate(URLClassLoader classLoader, Class<?> clazz) {
         return instantiate(classLoader, clazz.getName());
     }
 

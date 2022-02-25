@@ -224,7 +224,7 @@ public class Context {
      * @return
      */
     public static int getFileBufferSize() {
-        return (int)getConfigValue("server.file-buffer-size");
+        return (int)getConfigValue("server.performance.file-buffer-size");
     }
 
     /**

@@ -99,14 +99,14 @@ public class ServiceManager {
                         Class<? extends ILeapFilter>[] preFilterClasses = fm.preFilters();
                         for(Class<? extends ILeapFilter> clazz : preFilterClasses) {
                             ILeapFilter f = (ILeapFilter)newFilterInstance(clazz.getName());
-                            f.setSecurityManager(userManager);
+                            f.setUserManager(userManager);
                             preFilters.add(f);                            
                         }
                         List<ILeapFilter> postFilters = new ArrayList<>();
                         Class<? extends ILeapFilter>[] postFilterClasses = fm.postFilters();
                         for(Class<? extends ILeapFilter> clazz : postFilterClasses) {
                             ILeapFilter f = (ILeapFilter)newFilterInstance(clazz.getName());
-                            f.setSecurityManager(userManager);
+                            f.setUserManager(userManager);
                             postFilters.add(f);
                         }                     
                         service.setFilters(preFilters, postFilters);
@@ -133,6 +133,14 @@ public class ServiceManager {
      */
     public UserManager getUserManager() {
         return this.userManager;
+    }
+
+    /**
+     * Get class loader object
+     * @return
+     */
+    public DynamicURLClassLoader getClassLoader() {
+        return this.classLoader;
     }
 
     /**
