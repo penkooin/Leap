@@ -7,7 +7,7 @@ import org.chaostocosmos.leap.http.enums.MSG_TYPE;
  * 
  * @author 9ins
  */
-public class WASException extends Exception {
+public class WASException extends RuntimeException {
     /**
      * Message type on config.yml
      */

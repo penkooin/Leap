@@ -3,11 +3,13 @@ package org.chaostocosmos.leap.http;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.net.InetAddress;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -71,7 +73,7 @@ public class LeapWAS {
      * @throws WASException
      * @throws ParseException
      */
-    public LeapWAS(String[] args) throws IOException, URISyntaxException, WASException, ParseException {
+    public LeapWAS(String[] args) throws Exception {
         //set commend line options
         this.leapServerMap = new HashMap<>();
         setup(args);
@@ -85,7 +87,7 @@ public class LeapWAS {
      * @throws URISyntaxException
      * @throws WASException
      */
-    private void setup(String[] args) throws WASException {
+    private void setup(String[] args) throws IOException, URISyntaxException {
         CommandLineParser parser = new DefaultParser();
         CommandLine cmdLine;
         try {
@@ -107,6 +109,13 @@ public class LeapWAS {
         }
         //initialize environment and context
         this.context = Context.initialize(HOME_PATH);
+
+        //build webapp environment
+        List<Hosts> hosts = HostsManager.get().getAllHosts();
+        for(Hosts host : hosts) {
+            ResourceHelper.extractResource("webapp", host.getDocroot());
+        }
+
         //set log level
         String optionL = cmdLine.getOptionValue("l");
         logger = LoggerFactory.getLogger(Context.getDefaultHost());
@@ -140,7 +149,7 @@ public class LeapWAS {
             logger.info("verbose mode on");
         }
         //instantiate virtual host object
-        hostsManager = HostsManager.getInstance(); 
+        hostsManager = HostsManager.get(); 
     }
 
     /**
@@ -149,17 +158,22 @@ public class LeapWAS {
      * @throws WASException
      */
     public void start() throws Exception {
-        Hosts difault = Context.getDefaultHosts();
-        LeapHttpServer difaultHost = new LeapHttpServer(difault.isDefaultHost(), Context.getHomePath(), difault.getProtocol(), difault.getHost(), difault.getPort(), Context.getBackLog(), difault.getDocroot(), this.threadpool);
-        logger.info("Default host added - Protocol: "+difault.getProtocol().name()+"   Server: "+difault.getServerName()+"   Host: "+difault.getHost()+"   Port: "+difault.getPort()+"   Doc-Root: "+difault.getDocroot()+"   Logging path: "+difault.getLogPath()+"   Level: "+difault.getLogLevel().toString());
-        this.leapServerMap.put(difault.getHost(), difaultHost);
-        for(Hosts host : Context.getVirtualHosts().values()) {
-            if(!this.leapServerMap.entrySet().stream().map(h -> h.getValue().getPort()).anyMatch(p -> p == host.getPort())) {
-                LeapHttpServer virtual = new LeapHttpServer(host.isDefaultHost(), Context.getHomePath(), host.getProtocol(), host.getHost(), host.getPort(), Context.getBackLog(), host.getDocroot(), this.threadpool);
-                this.leapServerMap.put(host.getHost(), virtual);
-                logger.info("Virtual host added - Protocol: "+host.getProtocol().name()+"   Server: "+host.getServerName()+"   Host: "+host.getHost()+"   Port: "+host.getPort()+"   Doc-Root: "+host.getDocroot()+"   Logging path: "+host.getLogPath()+"   Level: "+host.getLogLevel().toString());
+        //NetworkInterfaces.getAllNetworkAddresses().stream().forEach(i -> System.out.println(i.getHostName()));
+        for(Hosts host : HostsManager.get().getAllHosts()) {
+            InetAddress hostAddress = InetAddress.getByName(host.getHost());
+            String hostName = hostAddress.getHostAddress()+":"+host.getPort();
+            if(this.leapServerMap.containsKey(hostName)) {
+                String key = this.leapServerMap.keySet().stream().filter(k -> k.equals(hostName)).findAny().get();
+                throw new IllegalArgumentException("Mapping host address is collapse on network interace: "+hostAddress.toString()+":"+host.getPort()+" with "+key);
             }
-        }        
+            LeapHttpServer server = new LeapHttpServer(Context.getLeapHomePath(), host, this.threadpool);
+            this.leapServerMap.put(hostAddress.getHostAddress()+":"+host.getPort(), server);
+            if(host.isDefaultHost()) {
+                logger.info("[DEFAULT HOST] - Protocol: "+host.getProtocol().name()+"   Server: "+host.getServerName()+"   Host: "+host.getHost()+"   Port: "+host.getPort()+"   Doc-Root: "+host.getDocroot()+"   Logging path: "+host.getLogPath()+"   Level: "+host.getLogLevel().toString());
+            } else {
+                logger.info("[VIRTUAL HOST] - Protocol: "+host.getProtocol().name()+"   Server: "+host.getServerName()+"   Host: "+host.getHost()+"   Port: "+host.getPort()+"   Doc-Root: "+host.getDocroot()+"   Logging path: "+host.getLogPath()+"   Level: "+host.getLogLevel().toString());
+            }
+        }
         logger.info("--------------------------------------------------------------------------");
         for(LeapHttpServer server : this.leapServerMap.values()) {
             server.setDaemon(false);

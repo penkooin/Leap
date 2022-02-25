@@ -22,6 +22,7 @@ import ch.qos.logback.classic.Level;
  * @since 2021.09.15
  */
 public class UtilBox {
+
     /**
      * Read all
      * @param is

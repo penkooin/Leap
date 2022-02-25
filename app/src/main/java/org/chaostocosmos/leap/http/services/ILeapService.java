@@ -7,7 +7,6 @@ import org.chaostocosmos.leap.http.HttpResponseDescriptor;
 import org.chaostocosmos.leap.http.HttpTransferBuilder.HttpTransfer;
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.filters.ILeapFilter;
-import org.chaostocosmos.leap.http.user.UserManager;
 
 /**
  * Interface for servlet
@@ -33,9 +32,9 @@ public interface ILeapService extends Cloneable {
 
     /**
      * Set Leap security manager object
-     * @param securityManager
+     * @param serviceManager
      */
-    public void setSecurityManager(UserManager securityManager);
+    public void setServiceManager(ServiceManager serviceManager);
 
     /**
      * Service error handle method

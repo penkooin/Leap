@@ -29,7 +29,6 @@ import javax.net.ssl.X509TrustManager;
 
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.security.SecurityHandler;
-import org.chaostocosmos.leap.http.user.UserManager;
 
 import ch.qos.logback.classic.Logger;
 
@@ -38,7 +37,7 @@ import ch.qos.logback.classic.Logger;
  * 
  * @author 9ins
  */
-public class HttpsServerSocketFactory extends UserManager {
+public class HttpsServerSocketFactory {
     /**
      * Logger
      */
@@ -49,8 +48,7 @@ public class HttpsServerSocketFactory extends UserManager {
      * @param keyStoreFile
      * @param passphrase
      * @param protocol
-     * @param host
-     * @param port
+     * @param address
      * @param backlog
      * @return
      * @throws NoSuchAlgorithmException
@@ -65,8 +63,7 @@ public class HttpsServerSocketFactory extends UserManager {
     public static ServerSocket getSSLServerSocket(File keyStoreFile, 
                                                   String passphrase, 
                                                   String protocol, 
-                                                  String host, 
-                                                  int port, 
+                                                  InetSocketAddress address,
                                                   int backlog) throws NoSuchAlgorithmException,                                                                                                                                 
                                                                       KeyManagementException, 
                                                                       UnknownHostException, 
@@ -82,7 +79,7 @@ public class HttpsServerSocketFactory extends UserManager {
         SSLContext sslContext = SSLContext.getInstance(protocol);  
         sslContext.init(keyStores, trustManagers, null);
         SSLServerSocketFactory serverSocketFactory = sslContext.getServerSocketFactory();
-        SSLServerSocket serverSocket = (SSLServerSocket)serverSocketFactory.createServerSocket(port, backlog, new InetSocketAddress(host, port).getAddress());        
+        SSLServerSocket serverSocket = (SSLServerSocket)serverSocketFactory.createServerSocket(address.getPort(), backlog, address.getAddress());
         serverSocket.setNeedClientAuth(true);                
         return serverSocket;        
     }

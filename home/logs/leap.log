@@ -1,252 +1,278 @@
-2022-02-17 17:09:22.353 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  56476
-2022-02-17 17:09:22.359 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  56477
-2022-02-17 17:09:22.366 ERROR - Request Method value is wired: ??c?f??j??©­5H¨ùkc??Z!??c¨£#?TN???
-org.chaostocosmos.leap.http.WASException: Request Method value is wired: ??c?f??j??©­5H¨ùkc??Z!??c¨£#?TN???
-	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:96)
-	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:124)
-	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.<init>(HttpTransferBuilder.java:71)
-	at org.chaostocosmos.leap.http.HttpTransferBuilder.buildHttpTransfer(HttpTransferBuilder.java:277)
-	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:71)
+2022-02-25 15:10:35.266 INFO  - Leap WAS server starting......
+2022-02-25 15:10:35.272 INFO  - --------------------------------------------------------------------------
+2022-02-25 15:10:35.276 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-25 15:10:35.278 INFO  - verbose mode on
+2022-02-25 15:11:58.571 INFO  - Leap WAS server starting......
+2022-02-25 15:11:58.576 INFO  - --------------------------------------------------------------------------
+2022-02-25 15:11:58.577 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-25 15:11:58.578 INFO  - verbose mode on
+2022-02-25 15:11:58.621 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-25 15:11:58.626 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@5fa07e12 : POST
+2022-02-25 15:11:58.628 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload
+2022-02-25 15:11:58.629 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@62e7f11d : GET
+2022-02-25 15:11:58.629 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-25 15:11:58.630 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-25 15:11:58.630 INFO  - [DEFAULT HOST] - Protocol: HTTPS_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: .\home   Logging path: logs\leap.log   Level: [DEBUG]
+2022-02-25 15:11:58.635 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-25 15:11:58.635 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@2abf4075 : POST
+2022-02-25 15:11:58.636 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload
+2022-02-25 15:11:58.636 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@770d3326 : GET
+2022-02-25 15:11:58.636 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-25 15:11:58.637 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-25 15:11:58.637 INFO  - [VIRTUAL HOST] - Protocol: HTTPS_1_0   Server: leap1   Host: awesome   Port: 8082   Doc-Root: .\home1   Logging path: logs\leap.log   Level: [DEBUG]
+2022-02-25 15:11:58.643 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-25 15:11:58.644 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@51f116b8 : POST
+2022-02-25 15:11:58.644 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload
+2022-02-25 15:11:58.645 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@19d481b : GET
+2022-02-25 15:11:58.645 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-25 15:11:58.645 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-25 15:11:58.646 INFO  - [VIRTUAL HOST] - Protocol: HTTP_1_0   Server: leap2   Host: www.leap1.org   Port: 8081   Doc-Root: .\home2   Logging path: logs\leap.log   Level: [DEBUG]
+2022-02-25 15:11:58.646 INFO  - --------------------------------------------------------------------------
+2022-02-25 15:11:58.649 INFO  - [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:8081
+2022-02-25 15:11:59.104 INFO  - [HTTPS SERVER START] Address: localhost/127.0.0.1:8080  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-02-25 15:11:59.104 INFO  - [HTTPS SERVER START] Address: awesome/127.0.0.1:8082  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-02-25 15:12:10.335 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  58451
+2022-02-25 15:12:10.336 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  58452
+2022-02-25 15:12:10.375 ERROR - Unsupported or unrecognized SSL message
+javax.net.ssl.SSLException: Unsupported or unrecognized SSL message
+	at java.base/sun.security.ssl.SSLSocketInputRecord.handleUnknownRecord(SSLSocketInputRecord.java:451)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:175)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:90)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:205)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.getRequest(HttpTransferBuilder.java:172)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:75)
 	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
 	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:829)
-2022-02-17 17:09:22.366 ERROR - Request Method value is wired: ???7?O???~A?K?¢´?Ay?Xq¡¾uR?i???
-org.chaostocosmos.leap.http.WASException: Request Method value is wired: ???7?O???~A?K?¢´?Ay?Xq¡¾uR?i???
-	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:96)
-	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:124)
-	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.<init>(HttpTransferBuilder.java:71)
-	at org.chaostocosmos.leap.http.HttpTransferBuilder.buildHttpTransfer(HttpTransferBuilder.java:277)
-	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:71)
+2022-02-25 15:12:11.417 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  58453
+2022-02-25 15:12:11.418 ERROR - Unsupported or unrecognized SSL message
+javax.net.ssl.SSLException: Unsupported or unrecognized SSL message
+	at java.base/sun.security.ssl.SSLSocketInputRecord.handleUnknownRecord(SSLSocketInputRecord.java:451)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:175)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:90)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:205)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.getRequest(HttpTransferBuilder.java:172)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:75)
 	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
 	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:829)
-2022-02-17 17:09:22.619 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  56478
-2022-02-17 17:09:22.673 ERROR - null
+2022-02-25 15:12:16.445 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  58457
+2022-02-25 15:12:16.446 ERROR - Unsupported or unrecognized SSL message
+javax.net.ssl.SSLException: Unsupported or unrecognized SSL message
+	at java.base/sun.security.ssl.SSLSocketInputRecord.handleUnknownRecord(SSLSocketInputRecord.java:451)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:175)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:90)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:205)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.getRequest(HttpTransferBuilder.java:172)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:75)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-25 15:12:34.799 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  58458
+2022-02-25 15:12:34.800 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  58459
+2022-02-25 15:12:34.805 ERROR - Bad Request.   Requested host not exist in this server: www.leap1.org
+org.chaostocosmos.leap.http.WASException: Bad Request.   Requested host not exist in this server: www.leap1.org
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:141)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:205)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.getRequest(HttpTransferBuilder.java:172)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:75)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-25 15:12:38.804 ERROR - Bad Request.   Requested host not exist in this server: www.leap1.org
+org.chaostocosmos.leap.http.WASException: Bad Request.   Requested host not exist in this server: www.leap1.org
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:141)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:205)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.getRequest(HttpTransferBuilder.java:172)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:75)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-25 15:13:16.461 ERROR - Read timed out
+java.net.SocketTimeoutException: Read timed out
+	at java.base/java.net.SocketInputStream.socketRead0(Native Method)
+	at java.base/java.net.SocketInputStream.socketRead(SocketInputStream.java:115)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:168)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:478)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:472)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:160)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:90)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:205)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.getRequest(HttpTransferBuilder.java:172)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:75)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-02-25 15:14:01.985 INFO  - Leap WAS server starting......
+2022-02-25 15:14:01.988 INFO  - --------------------------------------------------------------------------
+2022-02-25 15:14:01.989 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-25 15:14:01.989 INFO  - verbose mode on
+2022-02-25 15:14:02.055 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@13b13b5d : POST
+2022-02-25 15:14:02.057 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload
+2022-02-25 15:14:02.057 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-25 15:14:02.058 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@366647c2 : GET
+2022-02-25 15:14:02.058 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-25 15:14:02.059 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-25 15:14:02.059 INFO  - [DEFAULT HOST] - Protocol: HTTPS_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: .\home   Logging path: logs\leap.log   Level: [DEBUG]
+2022-02-25 15:14:02.067 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@865dd6 : POST
+2022-02-25 15:14:02.067 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload
+2022-02-25 15:14:02.068 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-25 15:14:02.068 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@4da4253 : GET
+2022-02-25 15:14:02.068 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-25 15:14:02.068 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-25 15:14:02.068 INFO  - [VIRTUAL HOST] - Protocol: HTTPS_1_0   Server: leap1   Host: awesome   Port: 8082   Doc-Root: .\home1   Logging path: logs\leap.log   Level: [DEBUG]
+2022-02-25 15:14:02.076 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@62e7f11d : POST
+2022-02-25 15:14:02.076 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload
+2022-02-25 15:14:02.076 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-25 15:14:02.077 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@503d687a : GET
+2022-02-25 15:14:02.078 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-25 15:14:02.079 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-25 15:14:02.079 INFO  - [VIRTUAL HOST] - Protocol: HTTP_1_0   Server: leap2   Host: www.leap1.org   Port: 8081   Doc-Root: .\home2   Logging path: logs\leap.log   Level: [DEBUG]
+2022-02-25 15:14:02.080 INFO  - --------------------------------------------------------------------------
+2022-02-25 15:14:02.084 INFO  - [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:8081
+2022-02-25 15:14:02.286 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  54950
+2022-02-25 15:14:02.306 ERROR - null
 java.lang.NullPointerException: null
-	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:74)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:144)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:205)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.getRequest(HttpTransferBuilder.java:172)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:75)
 	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
 	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:829)
-2022-02-17 17:09:22.673 ERROR - null
+2022-02-25 15:14:02.547 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  54951
+2022-02-25 15:14:02.631 INFO  - [HTTPS SERVER START] Address: awesome/127.0.0.1:8082  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-02-25 15:14:02.631 INFO  - [HTTPS SERVER START] Address: localhost/127.0.0.1:8080  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-02-25 15:14:26.933 INFO  - Leap WAS server starting......
+2022-02-25 15:14:26.937 INFO  - --------------------------------------------------------------------------
+2022-02-25 15:14:26.937 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-02-25 15:14:26.937 INFO  - verbose mode on
+2022-02-25 15:14:26.980 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-25 15:14:26.988 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@13b13b5d : POST
+2022-02-25 15:14:26.998 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload
+2022-02-25 15:14:26.999 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@366647c2 : GET
+2022-02-25 15:14:27.000 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-25 15:14:27.000 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-25 15:14:27.001 INFO  - [DEFAULT HOST] - Protocol: HTTPS_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: .\home   Logging path: logs\leap.log   Level: [DEBUG]
+2022-02-25 15:14:27.008 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-25 15:14:27.008 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@865dd6 : POST
+2022-02-25 15:14:27.008 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload
+2022-02-25 15:14:27.009 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@4da4253 : GET
+2022-02-25 15:14:27.009 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-25 15:14:27.009 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-25 15:14:27.010 INFO  - [VIRTUAL HOST] - Protocol: HTTPS_1_0   Server: leap1   Host: awesome   Port: 8082   Doc-Root: .\home1   Logging path: logs\leap.log   Level: [DEBUG]
+2022-02-25 15:14:27.015 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-25 15:14:27.016 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@62e7f11d : POST
+2022-02-25 15:14:27.016 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload
+2022-02-25 15:14:27.017 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@503d687a : GET
+2022-02-25 15:14:27.017 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-02-25 15:14:27.017 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-02-25 15:14:27.017 INFO  - [VIRTUAL HOST] - Protocol: HTTP_1_0   Server: leap2   Host: www.leap1.org   Port: 8081   Doc-Root: .\home2   Logging path: logs\leap.log   Level: [DEBUG]
+2022-02-25 15:14:27.018 INFO  - --------------------------------------------------------------------------
+2022-02-25 15:14:27.023 INFO  - [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:8081
+2022-02-25 15:14:27.482 INFO  - [HTTPS SERVER START] Address: localhost/127.0.0.1:8080  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-02-25 15:14:27.482 INFO  - [HTTPS SERVER START] Address: awesome/127.0.0.1:8082  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-02-25 15:14:29.599 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  54957
+2022-02-25 15:14:29.600 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  54959
+2022-02-25 15:14:29.603 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  54958
+2022-02-25 15:14:29.621 ERROR - null
 java.lang.NullPointerException: null
-	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:74)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:145)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:205)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.getRequest(HttpTransferBuilder.java:172)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:75)
 	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
 	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:829)
-2022-02-17 17:09:22.675 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
-2022-02-17 17:09:22.675 ERROR - Request Method value is wired: ?}¡¤¡Æ?¡Æ¡×?w????©¡x-?¨ö?Q	?¨¬?>¨ù?c??
-org.chaostocosmos.leap.http.WASException: Request Method value is wired: ?}¡¤¡Æ?¡Æ¡×?w????©¡x-?¨ö?Q	?¨¬?>¨ù?c??
-	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:96)
-	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:124)
-	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.<init>(HttpTransferBuilder.java:71)
-	at org.chaostocosmos.leap.http.HttpTransferBuilder.buildHttpTransfer(HttpTransferBuilder.java:277)
-	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:71)
+2022-02-25 15:14:59.618 ERROR - Read timed out
+java.net.SocketTimeoutException: Read timed out
+	at java.base/java.net.SocketInputStream.socketRead0(Native Method)
+	at java.base/java.net.SocketInputStream.socketRead(SocketInputStream.java:115)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:168)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:200)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:90)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:205)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.getRequest(HttpTransferBuilder.java:172)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:75)
 	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
 	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:829)
-2022-02-17 17:09:22.677 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
-2022-02-17 17:09:22.679 ERROR - null
-java.lang.NullPointerException: null
-	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:74)
+2022-02-25 15:15:29.635 ERROR - Read timed out
+java.net.SocketTimeoutException: Read timed out
+	at java.base/java.net.SocketInputStream.socketRead0(Native Method)
+	at java.base/java.net.SocketInputStream.socketRead(SocketInputStream.java:115)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:168)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:478)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:472)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:160)
+	at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
+	at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1426)
+	at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1336)
+	at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
+	at java.base/sun.security.ssl.SSLSocketImpl.ensureNegotiated(SSLSocketImpl.java:841)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:932)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:892)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:90)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:205)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.getRequest(HttpTransferBuilder.java:172)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:75)
 	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
 	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:829)
-2022-02-17 17:09:22.680 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
-2022-02-17 17:09:22.680 WARN  - HttpResponse is NULL. Please check Leap server.
-2022-02-17 17:09:22.680 WARN  - HttpResponse is NULL. Please check Leap server.
-2022-02-17 17:09:22.681 WARN  - HttpResponse is NULL. Please check Leap server.
-2022-02-17 17:09:22.682 INFO  - Client closing....../127.0.0.1
-2022-02-17 17:09:22.682 INFO  - Client closing....../127.0.0.1
-2022-02-17 17:09:22.683 INFO  - Client closing....../127.0.0.1
-2022-02-17 17:09:22.998 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  56482
-2022-02-17 17:09:22.999 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  56483
-2022-02-17 17:09:22.999 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  56484
-2022-02-17 17:09:23.002 ERROR - Request Method value is wired: ?YI?¡Æ??Y?2¨ú???SO?tPJ?????¨ù*.?
-org.chaostocosmos.leap.http.WASException: Request Method value is wired: ?YI?¡Æ??Y?2¨ú???SO?tPJ?????¨ù*.?
-	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:96)
-	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:124)
-	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.<init>(HttpTransferBuilder.java:71)
-	at org.chaostocosmos.leap.http.HttpTransferBuilder.buildHttpTransfer(HttpTransferBuilder.java:277)
-	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:71)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at java.base/java.lang.Thread.run(Thread.java:829)
-2022-02-17 17:09:23.002 ERROR - URLDecoder: Illegal hex characters in escape (%) pattern - Error at index 0 in: "? "
-java.lang.IllegalArgumentException: URLDecoder: Illegal hex characters in escape (%) pattern - Error at index 0 in: "? "
-	at java.base/java.net.URLDecoder.decode(URLDecoder.java:232)
-	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:93)
-	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:124)
-	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.<init>(HttpTransferBuilder.java:71)
-	at org.chaostocosmos.leap.http.HttpTransferBuilder.buildHttpTransfer(HttpTransferBuilder.java:277)
-	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:71)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at java.base/java.lang.Thread.run(Thread.java:829)
-2022-02-17 17:09:23.003 ERROR - begin 0, end -1, length 29
-java.lang.StringIndexOutOfBoundsException: begin 0, end -1, length 29
-	at java.base/java.lang.String.checkBoundsBeginEnd(String.java:3319)
-	at java.base/java.lang.String.substring(String.java:1874)
-	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:94)
-	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:124)
-	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.<init>(HttpTransferBuilder.java:71)
-	at org.chaostocosmos.leap.http.HttpTransferBuilder.buildHttpTransfer(HttpTransferBuilder.java:277)
-	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:71)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at java.base/java.lang.Thread.run(Thread.java:829)
-2022-02-17 17:09:23.004 ERROR - null
-java.lang.NullPointerException: null
-	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:74)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at java.base/java.lang.Thread.run(Thread.java:829)
-2022-02-17 17:09:23.006 ERROR - null
-java.lang.NullPointerException: null
-	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:74)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at java.base/java.lang.Thread.run(Thread.java:829)
-2022-02-17 17:09:23.007 ERROR - null
-java.lang.NullPointerException: null
-	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:74)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at java.base/java.lang.Thread.run(Thread.java:829)
-2022-02-17 17:09:23.008 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
-2022-02-17 17:09:23.009 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
-2022-02-17 17:09:23.010 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
-2022-02-17 17:09:23.010 WARN  - HttpResponse is NULL. Please check Leap server.
-2022-02-17 17:09:23.010 WARN  - HttpResponse is NULL. Please check Leap server.
-2022-02-17 17:09:23.011 WARN  - HttpResponse is NULL. Please check Leap server.
-2022-02-17 17:09:23.012 INFO  - Client closing....../127.0.0.1
-2022-02-17 17:09:23.012 INFO  - Client closing....../127.0.0.1
-2022-02-17 17:09:23.013 INFO  - Client closing....../127.0.0.1
-2022-02-17 17:17:47.561 INFO  - Leap WAS server starting......
-2022-02-17 17:17:47.565 INFO  - --------------------------------------------------------------------------
-2022-02-17 17:17:47.565 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
-2022-02-17 17:17:47.565 INFO  - verbose mode on
-2022-02-17 17:17:47.574 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
-2022-02-17 17:17:47.599 DEBUG - Method not mapped with MethodMapper: errorHandling
-2022-02-17 17:17:47.601 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@2b4bac49 : POST
-2022-02-17 17:17:47.602 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
-2022-02-17 17:17:47.604 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@740773a3 : GET
-2022-02-17 17:17:47.605 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
-2022-02-17 17:17:47.606 DEBUG - Method not mapped with MethodMapper: errorHandling
-2022-02-17 17:17:47.606 INFO  - Default host added - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
-2022-02-17 17:17:47.609 INFO  - --------------------------------------------------------------------------
-2022-02-17 17:17:47.621 INFO  - HTTP SERVER START. localhost/127.0.0.1:8080
-2022-02-17 17:17:49.228 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  58534
-2022-02-17 17:17:49.240 ERROR - Request or response build process failed. It is probably HTTP protocol issue: ¡À  ?{?S???A¢ç??<d:?uw?{????S???1N0
-org.chaostocosmos.leap.http.WASException: Request or response build process failed. It is probably HTTP protocol issue: ¡À  ?{?S???A¢ç??<d:?uw?{????S???1N0
-	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:96)
-	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:123)
-	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.<init>(HttpTransferBuilder.java:71)
-	at org.chaostocosmos.leap.http.HttpTransferBuilder.buildHttpTransfer(HttpTransferBuilder.java:276)
-	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:71)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at java.base/java.lang.Thread.run(Thread.java:829)
-2022-02-17 17:17:49.242 ERROR - Request or response build process failed. It is probably HTTP protocol issue: /127.0.0.1:58534
-org.chaostocosmos.leap.http.WASException: Request or response build process failed. It is probably HTTP protocol issue: /127.0.0.1:58534
-	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:132)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at java.base/java.lang.Thread.run(Thread.java:829)
-2022-02-17 17:17:49.243 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home\webapp\WEB-INF\static
-2022-02-17 17:17:49.244 WARN  - HttpResponse is NULL. Please check Leap server.
-2022-02-17 17:17:49.246 INFO  - Client closing....../127.0.0.1
-2022-02-17 17:19:52.920 INFO  - Leap WAS server starting......
-2022-02-17 17:19:52.925 INFO  - --------------------------------------------------------------------------
-2022-02-17 17:19:52.926 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
-2022-02-17 17:19:52.926 INFO  - verbose mode on
-2022-02-17 17:19:52.935 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
-2022-02-17 17:19:52.964 DEBUG - Method not mapped with MethodMapper: errorHandling
-2022-02-17 17:19:52.966 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@32910148 : POST
-2022-02-17 17:19:52.966 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
-2022-02-17 17:19:52.970 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@7c83dc97 : GET
-2022-02-17 17:19:52.971 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
-2022-02-17 17:19:52.971 DEBUG - Method not mapped with MethodMapper: errorHandling
-2022-02-17 17:19:52.972 INFO  - Default host added - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
-2022-02-17 17:19:52.974 INFO  - --------------------------------------------------------------------------
-2022-02-17 17:19:52.987 INFO  - HTTP SERVER START. localhost/127.0.0.1:8080
-2022-02-17 17:19:54.977 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  65101
-2022-02-17 17:19:54.996 ERROR - Request or response build process failed. It is probably HTTP protocol issue: ¡À  ?
-org.chaostocosmos.leap.http.WASException: Request or response build process failed. It is probably HTTP protocol issue: ¡À  ?
-	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:96)
-	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:123)
-	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.<init>(HttpTransferBuilder.java:71)
-	at org.chaostocosmos.leap.http.HttpTransferBuilder.buildHttpTransfer(HttpTransferBuilder.java:276)
-	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:71)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at java.base/java.lang.Thread.run(Thread.java:829)
-2022-02-17 17:19:54.999 WARN  - Request or response build process failed. It is probably HTTP protocol issue: /127.0.0.1:65101
-2022-02-17 17:19:55.000 WARN  - HttpResponse is NULL. Please check Leap server.
-2022-02-17 17:19:55.001 INFO  - Client closing....../127.0.0.1
-2022-02-17 17:20:46.988 INFO  - Leap WAS server starting......
-2022-02-17 17:20:46.993 INFO  - --------------------------------------------------------------------------
-2022-02-17 17:20:46.993 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
-2022-02-17 17:20:46.994 INFO  - verbose mode on
-2022-02-17 17:20:47.003 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
-2022-02-17 17:20:47.026 DEBUG - Method not mapped with MethodMapper: errorHandling
-2022-02-17 17:20:47.028 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@32910148 : POST
-2022-02-17 17:20:47.029 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
-2022-02-17 17:20:47.032 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@7c83dc97 : GET
-2022-02-17 17:20:47.033 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
-2022-02-17 17:20:47.034 DEBUG - Method not mapped with MethodMapper: errorHandling
-2022-02-17 17:20:47.034 INFO  - Default host added - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
-2022-02-17 17:20:47.037 INFO  - --------------------------------------------------------------------------
-2022-02-17 17:20:47.050 INFO  - HTTP SERVER START. localhost/127.0.0.1:8080
-2022-02-17 17:20:48.337 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  65108
-2022-02-17 17:20:48.344 ERROR - Request or response build process failed. It is probably HTTP protocol issue: ¡À  ?sV???W?R?T??e??©öj
-2022-02-17 17:20:48.346 WARN  - Request or response build process failed. It is probably HTTP protocol issue: /127.0.0.1:65108
-2022-02-17 17:20:48.347 WARN  - HttpResponse is NULL. Please check Leap server.
-2022-02-17 17:20:48.348 INFO  - Client closing....../127.0.0.1
-2022-02-17 17:21:12.350 INFO  - Leap WAS server starting......
-2022-02-17 17:21:12.354 INFO  - --------------------------------------------------------------------------
-2022-02-17 17:21:12.355 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
-2022-02-17 17:21:12.355 INFO  - verbose mode on
-2022-02-17 17:21:12.362 INFO  - Add dynamic classpath to ClassLoader: file:/D:/0.github/Leap/./home/webapp/services/
-2022-02-17 17:21:12.388 DEBUG - Method not mapped with MethodMapper: errorHandling
-2022-02-17 17:21:12.390 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@32910148 : POST
-2022-02-17 17:21:12.390 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/service/
-2022-02-17 17:21:12.393 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@7c83dc97 : GET
-2022-02-17 17:21:12.393 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
-2022-02-17 17:21:12.393 DEBUG - Method not mapped with MethodMapper: errorHandling
-2022-02-17 17:21:12.394 INFO  - Default host added - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs/leap.log   Level: [DEBUG]
-2022-02-17 17:21:12.396 INFO  - --------------------------------------------------------------------------
-2022-02-17 17:21:12.407 INFO  - HTTP SERVER START. localhost/127.0.0.1:8080
-2022-02-17 17:21:13.587 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1  ---  65111
-2022-02-17 17:21:13.593 ERROR - URLDecoder: Illegal hex characters in escape (%) pattern - Error at index 0 in: "o¡¤"
-2022-02-17 17:21:13.595 WARN  - Request or response build process failed. It is probably HTTP protocol issue: /127.0.0.1:65111
-2022-02-17 17:21:13.598 INFO  - Client closing....../127.0.0.1

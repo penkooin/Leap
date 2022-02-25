@@ -1,10 +1,17 @@
 package org.chaostocosmos.leap.http.commons;
 
+import java.io.File;
 import java.net.InetSocketAddress;
+import java.nio.charset.Charset;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.enums.PROTOCOL;
+import org.chaostocosmos.leap.http.user.GRANT;
+import org.chaostocosmos.leap.http.user.User;
 
 import ch.qos.logback.classic.Level;
 
@@ -13,10 +20,6 @@ import ch.qos.logback.classic.Level;
  */
 public class Hosts {
     /**
-     * Web protocol type
-     */
-    private PROTOCOL protocol;    
-    /**
      * Whether main host
      */
     private boolean isDefaultHost;
@@ -24,66 +27,146 @@ public class Hosts {
     /**
      * Server name
      */
-    private String serverName;
+    String serverName;
+
+    /**
+     * Web protocol type
+     */
+    PROTOCOL protocol;
+
+    /**
+     * Host charset
+     */
+    Charset charset;
 
     /**
      * Host name
      */
-    private String host;    
+    String host;
+    
+    /**
+     * Host port
+     */
+    int port;
 
     /**
-     * port
+     * User Map list
      */
-    private int port;
+    List<User> users;
 
     /**
-     * Dynamic class path list
+     * Dynamic class path object
      */
-    private List<Path> dynamicClasspaths;
+    Path dynamicClaspaths;
 
     /**
-     * Document root
+     * Allowed resource filter string
      */
-    private Path docroot;
+    List<String> allowedResourceFilters;
 
     /**
-     * log path
+     * forbidden resource filter string
      */
-    private String logPath;
+    List<String> forbiddenResourceFilters;
 
     /**
-     * Logging level
+     * Error filter classes
      */
-    private List<Level> logLevel;
+    List<Class<?>> errorFilters;
+
+    /**
+     * Document root path object
+     */
+    Path docroot;
+
+    /**
+     * Welcome file object
+     */
+    File welcomeFile;
+
+    /**
+     * Log path object
+     */
+    Path logPath;
+
+    /**
+     * Log levels liste
+     */
+    List<Level> logLevel;
+
+    /**
+     * Host map object
+     */
+    Map<Object, Object> hostMap;
+
+    /**
+     * Default constructor
+     */
+    public Hosts(Map<Object, Object> map) {
+        this.isDefaultHost = map.get("default") != null ? (boolean)map.get("default") : false;
+        this.serverName = (String)map.get("server-name");
+        this.protocol = PROTOCOL.getProtocol((String)map.get("protocol"));
+        this.charset = Charset.forName((String)map.get("charset"));
+        this.host = (String)map.get("host");
+        this.port = (int)map.get("port");
+        this.users = (List<User>)((List<Map<?, ?>>)map.get("users")).stream().map(m -> new User(m.get("username").toString(), m.get("password").toString(), GRANT.valueOf(m.get("grant").toString()))).collect(Collectors.toList());
+        this.dynamicClaspaths = Paths.get((String)map.get("dynamic-classpaths"));
+        this.allowedResourceFilters = (List<String>)((List<?>)((Map<?, ?>)map.get("resource-filters")).get("allowed")).stream().map(f -> f.toString()).collect(Collectors.toList());
+        this.forbiddenResourceFilters = (List<String>)((List<?>)((Map<?, ?>)map.get("resource-filters")).get("forbidden")).stream().map(f -> f.toString()).collect(Collectors.toList());
+        this.errorFilters = ((List<?>)map.get("error-filters")).stream().map(f -> ClassUtils.getClass(ClassLoader.getSystemClassLoader(), f.toString().trim())).collect(Collectors.toList());
+        this.docroot = Paths.get((String)map.get("doc-root"));
+        this.welcomeFile = Paths.get((String)map.get("doc-root")).resolve((String)map.get("welcome")).toFile();
+        this.logPath = Paths.get((String)map.get("logs"));
+        this.logLevel = UtilBox.getLogLevels((String)map.get("log-level"), ",");    
+    }
 
     /**
      * Constructor
      * @param isDefaultHost
-     * @param protocol
      * @param serverName
+     * @param protocol
+     * @param charset
      * @param host
      * @param port
+     * @param users
      * @param dynamicClasspaths
+     * @param allowedResourceFilters
+     * @param forbiddenResourceFilters
+     * @param errorFilters
      * @param docroot
+     * @param welcomeFile
      * @param logPath
      * @param logLevel
      */
-    public Hosts(boolean isDefaultHost, 
-                 PROTOCOL protocol,
+    public Hosts(
+                 boolean isDefaultHost, 
                  String serverName, 
+                 PROTOCOL protocol,
+                 Charset charset,
                  String host, 
                  int port, 
-                 List<Path> dynamicClaspaths, 
+                 List<User> users, 
+                 Path dynamicClaspaths, 
+                 List<String> allowedResourceFilters, 
+                 List<String> forbiddenResourceFilters,
+                 List<Class<?>> errorFilters, 
                  Path docroot, 
-                 String logPath, 
+                 File welcomeFile,
+                 Path logPath,  
                  List<Level> logLevel)  {
         this.isDefaultHost = isDefaultHost;
-        this.protocol = protocol;
         this.serverName = serverName;
+        this.protocol = protocol;
+        this.charset = charset;
         this.host = host;
         this.port = port;
-        this.dynamicClasspaths = dynamicClaspaths;
+        this.users = users;
+        this.dynamicClaspaths = dynamicClaspaths;
+        this.allowedResourceFilters = allowedResourceFilters;
+        this.forbiddenResourceFilters = forbiddenResourceFilters;
+        this.errorFilters = errorFilters;
         this.docroot = docroot.normalize();
+        this.welcomeFile = welcomeFile;
         this.logPath = logPath;
         this.logLevel = logLevel;
     }
@@ -94,6 +177,22 @@ public class Hosts {
      */
     public boolean isDefaultHost() {
         return this.isDefaultHost;
+    }
+
+    /**
+     * Get server name
+     * @return
+     */
+    public String getServerName() {
+        return this.serverName;
+    }
+
+    /**
+     * Get server name
+     * @param serverName
+     */
+    public void setServerName(String serverName) {
+        this.serverName = serverName;
     }
 
     /**
@@ -113,19 +212,19 @@ public class Hosts {
     }
 
     /**
-     * Get server name
+     * Get charset of the host
      * @return
      */
-    public String getServerName() {
-        return this.serverName;
+    public Charset getCharset() {
+        return this.charset;
     }
 
     /**
-     * Get server name
-     * @param serverName
+     * Set charset 
+     * @param charset
      */
-    public void setServerName(String serverName) {
-        this.serverName = serverName;
+    public void setCharset(Charset charset) {
+        this.charset = charset;
     }
 
     /**
@@ -161,20 +260,84 @@ public class Hosts {
     }
 
     /**
-     * Get dynamic class path list
+     * Get users
      * @return
      */
-    public List<Path> getDynamicClasspaths() {
-        return this.dynamicClasspaths;
+    public List<User> getUsers() {
+        return this.users;
     }
 
     /**
-     * Set synamic class path list
+     * Set users
+     * @param users
+     */
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+    /**
+     * Get dynamic class path
+     * @return
+     */
+    public Path getDynamicClasspaths() {
+        return this.dynamicClaspaths;
+    }
+
+    /**
+     * Set synamic class path 
      * @param dynamicClasspaths
      */
-    public void setDynamicClasspaths(List<Path> dynamicClasspaths) {
-        this.dynamicClasspaths = dynamicClasspaths;
+    public void setDynamicClasspaths(Path dynamicClaspaths) {
+        this.dynamicClaspaths = dynamicClaspaths;
     }
+
+    /**
+     * Get allowed resource filters
+     * @return
+     */
+    public List<String> getAllowedResourceFilters() {
+        return this.allowedResourceFilters;
+    }
+
+    /**
+     * Set allowed resource filters
+     * @param allowedResourceFilters
+     */
+    public void setAllowedResourceFilters(List<String> allowedResourceFilters) {
+        this.allowedResourceFilters = allowedResourceFilters;
+    }
+
+    /**
+     * Get forbidden resource filters
+     * @return
+     */
+    public List<String> getForbiddenResourceFilters() {
+        return this.allowedResourceFilters;
+    }
+
+    /**
+     * Set forbidden resource filter
+     * @param forbiddenResourceFilters
+     */
+    public void setForbiddenResourceFilters(List<String> forbiddenResourceFilters) {
+        this.forbiddenResourceFilters = forbiddenResourceFilters;
+    }
+
+    /**
+     * Get error filters
+     * @return
+     */
+    public List<Class<?>> getErrorFilters() {
+        return this.errorFilters;
+    }
+
+    /**
+     * Set error filters
+     * @param errorFilters
+     */
+    public void setErrorFilters(List<Class<?>> errorFilters) {
+        this.errorFilters = errorFilters;
+    }  
 
     /**
      * Get docroot
@@ -193,10 +356,26 @@ public class Hosts {
     }
 
     /**
+     * Get welcome file
+     * @return
+     */
+    public File getWelcomeFile() {
+        return this.welcomeFile;
+    }
+
+    /**
+     * Set welcome file
+     * @param welcomeFile
+     */
+    public void setWelcomeFile(File welcomeFile) {
+        this.welcomeFile = welcomeFile;
+    }
+
+    /**
      * Get logPath
      * @return
      */
-    public String getLogPath() {
+    public Path getLogPath() {
         return this.logPath;
     }
 
@@ -204,7 +383,7 @@ public class Hosts {
      * Set logPath
      * @param logPath
      */
-    public void setLogger(String logPath) {
+    public void setLogger(Path logPath) {
         this.logPath = logPath;
     }
 
@@ -231,16 +410,29 @@ public class Hosts {
         return new InetSocketAddress(getHost(), getPort());
     }
 
+    /**
+     * Assing to Map
+     */
+    public Map<Object, Object> assignToMap() {
+        return ClassUtils.mappingToMap(this);
+    }
+
     @Override
     public String toString() {
         return "{" +
-            " protocol='" + getProtocol() + "'" +
-            ", isDefaultHost='" + isDefaultHost() + "'" +
+            " isDefaultHost='" + isDefaultHost() + "'" +
             ", serverName='" + getServerName() + "'" +
+            ", protocol='" + getProtocol() + "'" +
+            ", charset='" + getCharset() + "'" +
             ", host='" + getHost() + "'" +
             ", port='" + getPort() + "'" +
-            ", dynamicClasspaths='" + getDynamicClasspaths() + "'" +
+            ", users='" + getUsers() + "'" +
+            ", dynamicClaspaths='" + getDynamicClasspaths() + "'" +
+            ", allowedResourceFilters='" + getAllowedResourceFilters() + "'" +
+            ", forbiddenResourceFilters='" + getForbiddenResourceFilters() + "'" +
+            ", errorFilters='" + getErrorFilters() + "'" +
             ", docroot='" + getDocroot() + "'" +
+            ", welcomeFile='" + getWelcomeFile() + "'" +
             ", logPath='" + getLogPath() + "'" +
             ", logLevel='" + getLogLevel() + "'" +
             "}";

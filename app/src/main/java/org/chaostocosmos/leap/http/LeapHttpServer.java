@@ -4,8 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.net.MalformedURLException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.URL;
+import java.net.UnknownHostException;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -14,6 +17,9 @@ import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.SSLServerSocket;
 
+import org.chaostocosmos.leap.http.commons.DynamicURLClassLoader;
+import org.chaostocosmos.leap.http.commons.Hosts;
+import org.chaostocosmos.leap.http.commons.HostsManager;
 import org.chaostocosmos.leap.http.enums.PROTOCOL;
 import org.chaostocosmos.leap.http.services.ServiceManager;
 import org.chaostocosmos.leap.http.user.UserManager;
@@ -31,115 +37,139 @@ public class LeapHttpServer extends Thread {
      * logger
      */
     Logger logger = (Logger)LoggerFactory.getLogger(Context.getDefaultHost());
+
     /**
-     * Index file
+     * Whether default host
      */
-    public static String INDEX_FILE = Context.getWelcome();
+    boolean isDefaultHost;    
+
     /**
-     * Protocol enum
+     * Protocol
      */
     PROTOCOL protocol;
+
     /**
-     * host
+     * InetSocketAddress
      */
-    String host;
-    /**
-     * port
-     */
-    int port;
+    InetSocketAddress inetSocketAddress;
+
     /**
      * backlog
      */
     int backlog;
+
     /**
      * document root
      */
     Path docroot;
+
     /**
      * leap home path
      */
     Path homePath;
+
     /**
      * Server socket
      */
     ServerSocket server;
-    /**
-     * Leap security manager object
-     */
-    UserManager securityManager;
+
     /**
      * servlet loading & managing
      */
     ServiceManager serviceManager;
+
     /**
      * thread pool
      */
     ThreadPoolExecutor threadpool;
+
     /**
-     * Whether default host
+     * Hosts
      */
-    boolean isDefaultHost;
+    Hosts hosts;
+
     /**
      * Default constructor 
-     * @throws WASException
+     * @throws UnknownHostException
+     * @throws MalformedURLException
      */
-    public LeapHttpServer() throws Exception {
+    public LeapHttpServer() throws UnknownHostException, MalformedURLException {
         this(Constants.DEFAULT_HOME_PATH);
     }
 
     /**
      * Construct with home path
-     * @throws WASException
+     * @param homePath
+     * @throws UnknownHostException
+     * @throws MalformedURLException
      */
-    public LeapHttpServer(Path homePath) throws Exception {
-        this(Context.initialize(homePath));
+    public LeapHttpServer(Path homePath) throws UnknownHostException, MalformedURLException {
+        this(homePath, 
+             HostsManager.get().getHosts(Context.getDefaultHost()),             
+             new ThreadPoolExecutor(Context.getThreadPoolCoreSize(), 
+                        Context.getThreadPoolMaxSize(),                  
+                        Context.getThreadPoolKeepAlive(), 
+                        TimeUnit.SECONDS, 
+                        new LinkedBlockingQueue<Runnable>() ));
     }
 
     /**
      * Construct with Context object
-     * @param context
-     * @throws WASException
+     * @param homePath
+     * @param hosts
+     * @param threadpool 
+     * @throws UnknownHostException
+     * @throws MalformedURLException
      */
-    public LeapHttpServer(Context context) throws Exception {
+    public LeapHttpServer(Path homePath, Hosts hosts, ThreadPoolExecutor threadpool) throws UnknownHostException, MalformedURLException {
         this(
             true,
-            Context.getHomePath(),
-            Context.getProtocol(Context.getDefaultHost()),
-            Context.getDefaultHost(),
-            Context.getDefaultPort(),
+            Context.getLeapHomePath(),
+            hosts.getDocroot(),
+            hosts.getProtocol(),
+            new InetSocketAddress(InetAddress.getByName(hosts.getHost()), hosts.getPort()),
             Context.getBackLog(),
-            Context.getDefaultDocroot(),
-            new ThreadPoolExecutor(Context.getThreadPoolCoreSize(), 
-                                   Context.getThreadPoolMaxSize(),                                                  
-                                   Context.getThreadPoolKeepAlive(), 
-                                   TimeUnit.SECONDS, 
-                                   new LinkedBlockingQueue<Runnable>())
-        );
+            threadpool,
+            new ServiceManager(
+                        new DynamicURLClassLoader(new URL[] {
+                                    hosts.getDynamicClasspaths().toUri().toURL()
+                                    }
+                            ), new UserManager(hosts.getHost())),
+            hosts
+        );        
     }
 
     /**
      * Constructor with configuration file Path
      * @param isDefaultHost
      * @param homePath
-     * @param protocol
-     * @param host
-     * @param port
+     * @param docroot
+     * @param protocol1
+     * @param inetSocketAddress
      * @param backlog
      * @param docroot
      * @param threadpool
-     * @throws WASException
+     * @param serviceManager
      */
-    public LeapHttpServer(boolean isDefaultHost, Path homePath, PROTOCOL protocol, String host, int port, int backlog, Path docroot, ThreadPoolExecutor threadpool) throws Exception {
+    public LeapHttpServer(boolean isDefaultHost, 
+                          Path homePath, 
+                          Path docroot, 
+                          PROTOCOL protocol, 
+                          InetSocketAddress inetSocketAddress, 
+                          int backlog, 
+                          ThreadPoolExecutor threadpool,
+                          ServiceManager serviceManager,
+                          Hosts hosts
+                          ) {
         this.isDefaultHost = true;
         this.homePath = homePath;
         this.protocol = protocol;
-        this.host = host;
-        this.port = port;
         this.backlog = backlog;
         this.docroot = docroot;
         this.threadpool = threadpool;
-        this.securityManager = new UserManager();
-        this.serviceManager = new ServiceManager(this.securityManager);
+        this.inetSocketAddress = inetSocketAddress;
+        this.serviceManager = serviceManager;
+        this.hosts = hosts;
     }
 
     /**
@@ -147,7 +177,7 @@ public class LeapHttpServer extends Thread {
      * @return
      */
     public String getHost() {
-        return this.host;
+        return this.inetSocketAddress.getHostName();
     }
 
     /**
@@ -155,7 +185,7 @@ public class LeapHttpServer extends Thread {
      * @return
      */
     public int getPort() {
-        return this.port;
+        return this.inetSocketAddress.getPort();
     }    
 
     /**
@@ -170,31 +200,32 @@ public class LeapHttpServer extends Thread {
      * Get root directory
      * @return
      */
-    public static Path getDocroot(String host) {
-        return Context.getDocroot(host);
+    public Path getDocroot() {
+        return this.docroot;
     }
+
+
 
     @Override
     public void run() {
         try {
             if(!this.protocol.isSSL()) {
-                InetSocketAddress inetSocketAddress = new InetSocketAddress(InetAddress.getByName(this.host), this.port);
                 this.server = new ServerSocket();
-                this.server.bind(inetSocketAddress, this.backlog);
-                logger.info("HTTP SERVER START. " + inetSocketAddress.toString());
+                this.server.bind(this.inetSocketAddress, this.backlog);
+                logger.info("[HTTP SERVER START] Address: " + this.inetSocketAddress.toString());
             } else {
                 File keyStore = Context.getKeyStore().toFile();
                 String passphrase = Context.getPassphrase();
                 String sslProtocol = Context.getEncryptionMethod();
-                this.server = HttpsServerSocketFactory.getSSLServerSocket(keyStore, passphrase, sslProtocol, this.host, this.port, this.backlog);
-                logger.info("HTTPS SERVER START.  Port: "+this.port+"  Protocol: "+sslProtocol+"  KeyStore: "+keyStore+"  Supported Protocol: "+Arrays.toString(((SSLServerSocket)server).getSupportedProtocols()));                
+                this.server = HttpsServerSocketFactory.getSSLServerSocket(keyStore, passphrase, sslProtocol, this.inetSocketAddress, this.backlog);
+                logger.info("[HTTPS SERVER START] Address: "+this.inetSocketAddress.toString()+"  Protocol: "+sslProtocol+"  KeyStore: "+keyStore.getName()+"  Supported Protocol: "+Arrays.toString(((SSLServerSocket)server).getSupportedProtocols()));
             }
             while (true) { 
                 Socket connection = server.accept();
-                connection.setSoTimeout(Context.getTimeout());
+                connection.setSoTimeout(Context.getConnectionTimeout());
                 //connection.setSoLinger(true, 10);
-                logger.info("Host: "+this.host+":"+this.port+"  Client request accepted...... "+connection.getLocalAddress().toString()+"  ---  "+connection.getPort());
-                this.threadpool.submit(new LeapRequestHandler(this, this.docroot, INDEX_FILE, connection));
+                logger.info("[CLIENT DETECTED] Client request accepted......"+connection.getLocalAddress().toString()+"  ---  "+connection.getPort());
+                this.threadpool.submit(new LeapRequestHandler(this, this.docroot, connection, this.hosts));
             } 
         } catch(Exception e) {
             logger.error(e.getMessage(), e);

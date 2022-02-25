@@ -183,7 +183,7 @@ public class AnnotationHelper {
                         if(serviceContextMappings.containsKey(fullPath)) {
                             throw new WASException(MSG_TYPE.ERROR, 21, new Object[]{service, fullPath});
                         }
-                        serviceContextMappings.put(fullPath, (ILeapService)ClassUtils.instantiate(service));
+                        serviceContextMappings.put(fullPath, (ILeapService)ClassUtils.instantiate(ClassLoader.getSystemClassLoader().getSystemClassLoader(), service));
                     }
                 }
             } else {

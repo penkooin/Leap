@@ -1,76 +1,101 @@
+############################## Leap Server Configuration ##############################
 server:
-  server-name: leap
-  version: 1.0
-  protocol: HTTP/1.0
-  host: localhost
-  port: 8080
-  ssl:
-    encryption: 'TLS'
-    keystore: './config/ssl/leap-keystore.jks'
-    passphrase: '939393'
-  timeout: 30000
-  backlog: 50
-  file-buffer-size: 1024
-  threadpool:
-    core: 50
-    max: 50
-    keep-alive: 30
-  users:
-    - username: chaos930
-      password: 9393
-      grant: ADMIN      
-    - username: guest
-      password: guest
-      grant: GUEST
-  dynamic-classpaths: [
-    ./home/webapp/services
-  ]
-  resource-filter: 
-    allowed: [
-      '*'
-    ]
-    forbidden: [
-      ''    
-    ]
-  doc-root: ./home
-  logs: 'logs/leap.log'
-  log-level: 'DEBUG'
-  charset: 'utf-8'
-  welcome: 'index.html'
-  virtual-host:
-  - server-name: leap1
-    protocol: HTTP/1.0
-    host: 127.0.0.1
-    port: 8080
-    dynamic-classpaths: [
-    ]
-    resource-filter: 
-      allowed: [
-        '*'
+    version: 1.0
+    connection: 
+      connection-timeout: 30000
+      backlog: 50
+    
+    performance: 
+      file-buffer-size: 1024
+      threadpool:
+        core: 50
+        max: 50
+        keep-alive: 30
+
+    security:
+      ssl:
+        encryption: 'TLS'
+        keystore: './config/ssl/leap-keystore.jks'
+        passphrase: '939393'
+
+    default-host:
+      server-name: leap
+      protocol: HTTPS/1.0
+      charset: 'utf-8'
+      host: localhost
+      port: 8080
+      users:
+        - username: chaos930
+          password: 9393
+          grant: ADMIN
+        - username: guest
+          password: guest
+          grant: GUEST
+      dynamic-classpaths: './home/webapp/services'
+      resource-filters: 
+        allowed: ['*']
+        forbidden: ['']
+      error-filters: [
+        javax.net.ssl.SSLHandshakeException,
+        java.net.SocketException
       ]
-      forbidden: [
-        ''    
+      doc-root: ./home
+      welcome: 'index.html'
+      static-resource:
+        'welcome': 'index.html'
+        'response': 'response.html'  
+      logs: 'logs/leap.log'
+      log-level: 'DEBUG'
+
+    ############################## Virtual Hosts ##############################
+
+    virtual-host:
+    - server-name: leap1
+      protocol: HTTPS/1.0
+      charset: 'utf-8'
+      host: awesome
+      port: 8082
+      users:
+        - username: chaos930
+          password: 9393
+          grant: ADMIN
+        - username: guest
+          password: guest
+          grant: GUEST
+      dynamic-classpaths: ''
+      resource-filters: 
+        allowed: ['*']
+        forbidden: ['']
+      error-filters: [
+        javax.net.ssl.SSLHandshakeException,
+        java.net.SocketException
       ]
-    doc-root: ./home1    
-    welcome: 'index.html'
-    logs: 'logs/leap.log'
-    log-level: 'DEBUG'
-  - server-name: leap2
-    protocol: HTTP/1.0
-    host: localhost
-    port: 8080
-    dynamic-classpaths: []
-    resource-filter: 
-      allowed: [
-        '*'
+      doc-root: ./home1    
+      welcome: 'index.html'
+      logs: 'logs/leap.log'
+      log-level: 'DEBUG'
+
+    - server-name: leap2
+      protocol: HTTP/1.0
+      charset: 'utf-8'
+      host: www.leap1.org
+      port: 8081
+      users:
+        - username: chaos930
+          password: 9393
+          grant: ADMIN
+        - username: guest
+          password: guest
+          grant: GUEST
+      dynamic-classpaths: ''
+      resource-filters: 
+        allowed: ['*']
+        forbidden: ['']
+      error-filters: [
+        javax.net.ssl.SSLHandshakeException,
+        java.net.SocketException
       ]
-      forbidden: [
-        ''    
-      ]
-    doc-root: ./home2
-    welcome: 'index.html'
-    logs: 'logs/leap.log'
-    log-level: 'DEBUG'
-static-resource:
-  'welcome': 'index.html'
-  'response': 'response.html'
+      doc-root: ./home2
+      welcome: 'index.html'
+      logs: 'logs/leap.log'
+      log-level: 'DEBUG'

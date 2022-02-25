@@ -23,6 +23,7 @@ import java.util.stream.Stream;
 
 import org.chaostocosmos.leap.http.Context;
 import org.chaostocosmos.leap.http.HttpRequestDescriptor;
+import org.chaostocosmos.leap.http.LeapWAS;
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 
@@ -63,7 +64,7 @@ public class ResourceHelper {
      * @throws IOException
      */
     public static ResourceHelper getInstance() {
-        return getInstance(Context.getDefaultDocroot());
+        return getInstance(LeapWAS.HOME_PATH);
     }
 
     /**
@@ -113,15 +114,9 @@ public class ResourceHelper {
      */
     public static Path getResourcePath(String host, String path_) throws WASException {
         String path = path_.charAt(0) == '/' ? path_.substring(1) : path_;
-        Path docroot = null;
-        Path reqPath = null;
-        Hosts vhost = HostsManager.getInstance().getHosts(host);
-        if(vhost != null) {
-            docroot = vhost.getDocroot().toAbsolutePath();
-        } else {
-            docroot = Context.getDefaultDocroot().toAbsolutePath(); 
-        }
-        reqPath = getStaticPath(host).resolve(path).toAbsolutePath();
+        Hosts hosts = HostsManager.get().getHosts(host);
+        Path docroot = hosts.getDocroot().toAbsolutePath();
+        Path reqPath = getStaticPath(host).resolve(path).toAbsolutePath();
         if(!validatePath(docroot, reqPath)) {
             throw new WASException(MSG_TYPE.ERROR, 19, new Object[]{host});
         }
@@ -154,7 +149,7 @@ public class ResourceHelper {
      * @throws WASException
      */
     public static String getWelcomePage(String host, Map<String, Object> params) throws WASException {
-        return getStaticPage(host, Context.getWelcome(), params);
+        return getStaticPage(host, HostsManager.get().getHosts(host).getWelcomeFile().getName(), params);
     }
 
     /**
@@ -178,7 +173,7 @@ public class ResourceHelper {
      */
     public static String getStaticPage(String host, String resourceName, Map<String, Object> params) throws WASException {
         byte[] bytes = getResourceContent(host, resourceName);
-        String page = new String(bytes, Context.charset());
+        String page = new String(bytes, HostsManager.get().charset(host));
         for(Entry<String, Object> e : params.entrySet()) {
             page = page.replace(e.getKey(), e.getValue().toString());
         }
@@ -208,9 +203,9 @@ public class ResourceHelper {
         try {
             host = host == null ? Context.getDefaultHost() : host;
             contentName = contentName.charAt(0) == '/' ? contentName.substring(1) : contentName;
-            Path path = getStaticPath(host).resolve(contentName);            
+            Path path = getStaticPath(host).resolve(contentName);
             LoggerFactory.getLogger(host).debug("REQUEST RESOURCE: "+contentName+"   PATH: "+getStaticPath(host));
-            return Files.readAllBytes(path);            
+            return Files.readAllBytes(path);
         } catch (IOException e) {
             throw new WASException(MSG_TYPE.ERROR, 38, contentName);
         }
@@ -265,7 +260,7 @@ public class ResourceHelper {
      * @throws IOException
      */
     public String getTrademark() throws FileNotFoundException, IOException {
-        File file = Context.getHomePath().resolve("config").resolve("trademark").toFile();
+        File file = Context.getLeapHomePath().resolve("config").resolve("trademark").toFile();
         return UtilBox.readAllString(new FileInputStream(file)); 
     }
 
@@ -331,12 +326,8 @@ public class ResourceHelper {
      * @return
      * @throws WASException
      */
-    public static Path getHomePath(String host) throws WASException {
-        if(Context.getDefaultHost().equals(host)) {
-            return Context.getDefaultDocroot();
-        } else {
-            return Context.getVirtualHosts(host).getDocroot();
-        }
+    public static Path getDocroot(String host) throws WASException {
+        return HostsManager.get().getDocroot(host);
     }
 
     /**
@@ -346,7 +337,7 @@ public class ResourceHelper {
      * @throws WASException
      */
     public static Path getWebAppPath(String host) throws WASException {
-        return getHomePath(host).resolve("webapp");
+        return getDocroot(host).resolve("webapp");
     }
 
     /**

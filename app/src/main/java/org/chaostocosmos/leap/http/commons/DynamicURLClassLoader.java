@@ -17,8 +17,8 @@ public class DynamicURLClassLoader extends URLClassLoader {
     /**
      * Default constructor
      */
-    public DynamicURLClassLoader() {
-        this(new URL[0], ClassLoader.getSystemClassLoader());
+    public DynamicURLClassLoader() { 
+        super(new URL[0], ClassLoader.getSystemClassLoader());
     }
 
     /**
@@ -26,7 +26,7 @@ public class DynamicURLClassLoader extends URLClassLoader {
      * @param urls
      */
     public DynamicURLClassLoader(URL[] urls) {
-        this(urls, ClassLoader.getSystemClassLoader());
+        super(urls, ClassLoader.getSystemClassLoader());
     }
 
     /**
@@ -40,6 +40,7 @@ public class DynamicURLClassLoader extends URLClassLoader {
                 LoggerFactory.getLogger().info("Add dynamic classpath to ClassLoader: "+url.toString());
                 return url;
             } catch (MalformedURLException e) {
+                e.printStackTrace();
                 LoggerFactory.getLogger().error(e.getMessage(), e);
                 return null;
             }
@@ -52,7 +53,7 @@ public class DynamicURLClassLoader extends URLClassLoader {
      * @param parent
      */
     public DynamicURLClassLoader(URL[] urls, ClassLoader parent) {
-        super(urls, parent);        
+        super(urls, parent);
     }
 
     /**

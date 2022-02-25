@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.chaostocosmos.leap.http.Constants;
 import org.chaostocosmos.leap.http.Context;
 import org.chaostocosmos.leap.http.WASException;
+import org.chaostocosmos.leap.http.commons.HostsManager;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.filters.IAuthenticate;
 
@@ -16,6 +17,12 @@ import org.chaostocosmos.leap.http.filters.IAuthenticate;
  * @author 9ins
  */
 public class UserManager implements IAuthenticate {    
+
+    /**
+     * host
+     */
+    protected String host;
+
     /**
      * User list
      */
@@ -25,14 +32,9 @@ public class UserManager implements IAuthenticate {
      * Default constructor
      * @param context
      */
-    public UserManager() {
-        this.users = ((List<?>)Context.getConfigValue("server.users"))
-                                      .stream()
-                                      .map(u -> (Map<?, ?>)u)
-                                      .map(m -> new User(m.get("username")+"", 
-                                                         m.get("password")+"", 
-                                                         GRANT.valueOf(m.get("grant")+"")))
-                                      .collect(Collectors.toList());
+    public UserManager(String host) {
+        this.host = host;
+        this.users = HostsManager.get().getUsers(host);
     }
 
     @Override

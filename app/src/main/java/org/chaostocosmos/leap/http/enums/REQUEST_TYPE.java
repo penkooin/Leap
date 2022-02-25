@@ -1,7 +1,6 @@
 package org.chaostocosmos.leap.http.enums;
 
 import org.chaostocosmos.leap.http.services.IDeleteService;
-import org.chaostocosmos.leap.http.services.IDeployService;
 import org.chaostocosmos.leap.http.services.IGetService;
 import org.chaostocosmos.leap.http.services.ILeapService;
 import org.chaostocosmos.leap.http.services.IPostService;
@@ -30,12 +29,7 @@ public enum REQUEST_TYPE {
     /**
      * Delete type for IDeleteServlet
      */
-    DELETE(IDeleteService.class),
-
-    /**
-     * Deploy service type for IDeplyService
-     */
-    DEPLOY(IDeployService.class);
+    DELETE(IDeleteService.class);
 
     /**
      * Request type mananging class

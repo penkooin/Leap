@@ -1,0 +1,83 @@
+2022-02-23 11:01:34.567 ERROR - Received fatal alert: certificate_unknown
+2022-02-23 11:01:34.567 ERROR - Received fatal alert: certificate_unknown
+2022-02-23 11:01:34.610 INFO  - Client closing....../127.0.0.1
+2022-02-23 11:01:34.615 INFO  - Client closing....../127.0.0.1
+2022-02-23 11:01:34.652 ERROR - null
+2022-02-23 11:01:34.654 INFO  - Client closing....../127.0.0.1
+2022-02-23 11:02:26.343 ERROR - Software caused connection abort: recv failed
+2022-02-23 11:02:26.343 ERROR - Software caused connection abort: recv failed
+2022-02-23 11:02:26.362 INFO  - Client closing....../127.0.0.1
+2022-02-23 11:02:26.362 INFO  - Client closing....../127.0.0.1
+2022-02-23 11:02:26.389 ERROR - null
+2022-02-23 11:02:26.394 INFO  - Client closing....../127.0.0.1
+2022-02-23 11:03:49.976 ERROR - Received fatal alert: certificate_unknown
+2022-02-23 11:03:49.983 INFO  - Client closing....../127.0.0.1
+2022-02-23 11:03:49.994 ERROR - Received fatal alert: certificate_unknown
+2022-02-23 11:03:50.003 INFO  - Client closing....../127.0.0.1
+2022-02-23 11:03:50.049 ERROR - null
+2022-02-23 11:03:50.059 INFO  - Client closing....../127.0.0.1
+2022-02-23 11:03:51.100 ERROR - Received fatal alert: certificate_unknown
+2022-02-23 11:03:51.133 INFO  - Client closing....../127.0.0.1
+2022-02-23 11:03:51.166 ERROR - Software caused connection abort: recv failed
+2022-02-23 11:03:51.174 INFO  - Client closing....../127.0.0.1
+2022-02-23 11:03:51.189 ERROR - null
+2022-02-23 11:03:51.196 INFO  - Client closing....../127.0.0.1
+2022-02-23 11:03:56.221 ERROR - Received fatal alert: certificate_unknown
+2022-02-23 11:03:56.228 ERROR - Software caused connection abort: recv failed
+2022-02-23 11:03:56.228 INFO  - Client closing....../127.0.0.1
+2022-02-23 11:03:56.244 INFO  - Client closing....../127.0.0.1
+2022-02-23 11:03:56.247 ERROR - null
+2022-02-23 11:03:56.253 INFO  - Client closing....../127.0.0.1
+2022-02-23 11:04:27.017 ERROR - Software caused connection abort: recv failed
+2022-02-23 11:04:27.025 ERROR - Software caused connection abort: recv failed
+2022-02-23 11:04:27.037 INFO  - Client closing....../127.0.0.1
+2022-02-23 11:04:27.037 INFO  - Client closing....../127.0.0.1
+2022-02-23 11:04:27.103 ERROR - Received fatal alert: certificate_unknown
+2022-02-23 11:04:27.118 INFO  - Client closing....../127.0.0.1
+2022-02-23 11:04:27.137 ERROR - null
+2022-02-23 11:04:27.146 INFO  - Client closing....../127.0.0.1
+2022-02-23 11:09:04.350 DEBUG - ------------------------------ REQ: GET / HTTP/1.1 ------------------------------
+Host: localhost:8082
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-23 11:09:04.358 DEBUG - REQUEST CONTEXT: /   PATH: home1\webapp\WEB-INF\static
+2022-02-23 11:09:04.359 DEBUG - REQUEST RESOURCE: index.html   PATH: home1\webapp\WEB-INF\static
+2022-02-23 11:09:04.363 DEBUG - ============================== RES : HTTPS_1_0 200 OK - /127.0.0.1:51287 ==============================
+RES CODE: 200
+Content-Length: [225]
+Content-Type: [TEXT_HTML]
+2022-02-23 11:09:04.365 INFO  - Client closing....../127.0.0.1
+2022-02-23 11:09:04.599 DEBUG - ------------------------------ REQ: GET /favicon.ico HTTP/1.1 ------------------------------
+Host: localhost:8082
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: https://localhost:8082/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-02-23 11:09:04.605 DEBUG - REQUEST CONTEXT: /favicon.ico   PATH: home1\webapp\WEB-INF\static
+2022-02-23 11:09:04.607 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: image/x-icon
+2022-02-23 11:09:04.610 DEBUG - ============================== RES : HTTPS_1_0 200 OK - /127.0.0.1:51289 ==============================
+RES CODE: 200
+Content-Length: [1150]
+Content-Type: [image/x-icon]
+2022-02-23 11:09:04.613 INFO  - Client closing....../127.0.0.1

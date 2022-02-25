@@ -2,9 +2,9 @@ package org.chaostocosmos.leap.http.commons;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.Context;
 import org.chaostocosmos.leap.http.WASException;
@@ -42,25 +42,25 @@ public class LoggerFactory {
 
     /**
      * Get logger object
-     * @param hostName
+     * @param host
      * @return
      * @throws WASException
      * @throws IOException
      * @throws URISyntaxException
      */
-    public static Logger getLogger(String hostName) {
+    public static Logger getLogger(String host) {
         if(loggerMap == null) {            
-            loggerMap = Context.getAllHosts()
-            .entrySet()
-            .stream()
-            .map(e -> {
-                String host = e.getKey();
-                String path = e.getValue().getDocroot().resolve(e.getValue().getLogPath()).toAbsolutePath().toString();
-                List<Level> level = e.getValue().getLogLevel();
-                return new Object[]{host, createLoggerFor(host, path, level)};
-            }).collect(Collectors.toMap(k -> (String)k[0], v -> (Logger)v[1]));    
+            loggerMap = new HashMap<String, Logger>();
         }
-        return loggerMap.get(hostName != null ? hostName : Context.getDefaultHost());
+        if(!loggerMap.containsKey(host)) {
+            Hosts hosts = HostsManager.get().getHosts(host);
+            Logger logger = createLoggerFor(hosts.getHost(), hosts.getDocroot().resolve(hosts.getLogPath()).toAbsolutePath().toString(), hosts.getLogLevel());
+            System.out.println(host);
+            loggerMap.put(hosts.getHost(), logger);
+            return logger;
+        } else {
+            return loggerMap.get(host);
+        }
     }
 
     /**
@@ -72,37 +72,31 @@ public class LoggerFactory {
      */
     public static Logger createLoggerFor(String loggerName, String loggerFile, List<Level> level) {
         LoggerContext logCtx = (LoggerContext) org.slf4j.LoggerFactory.getILoggerFactory(); 
-
         PatternLayoutEncoder logEncoder = new PatternLayoutEncoder();
         logEncoder.setContext(logCtx);
         logEncoder.setPattern("%-12date{YYYY-MM-dd HH:mm:ss.SSS} %-5level - %msg%n");
-        logEncoder.start();
-    
+        logEncoder.start();    
         ConsoleAppender logConsoleAppender = new ConsoleAppender();
         logConsoleAppender.setContext(logCtx);
         logConsoleAppender.setName("console");
         logConsoleAppender.setEncoder(logEncoder);
-        logConsoleAppender.start();
-    
+        logConsoleAppender.start();    
         logEncoder = new PatternLayoutEncoder();
         logEncoder.setContext(logCtx);
         logEncoder.setPattern("%-12date{YYYY-MM-dd HH:mm:ss.SSS} %-5level - %msg%n");
-        logEncoder.start();
-    
+        logEncoder.start();    
         RollingFileAppender logFileAppender = new RollingFileAppender();
         logFileAppender.setContext(logCtx);
         logFileAppender.setName("logFile");
         logFileAppender.setEncoder(logEncoder);
         logFileAppender.setAppend(true);
-        logFileAppender.setFile(loggerFile);
-    
+        logFileAppender.setFile(loggerFile);    
         TimeBasedRollingPolicy logFilePolicy = new TimeBasedRollingPolicy();
         logFilePolicy.setContext(logCtx);
         logFilePolicy.setParent(logFileAppender);
         logFilePolicy.setFileNamePattern(loggerFile+"-%d{yyyy-MM-dd_HH}.log");
         logFilePolicy.setMaxHistory(7);
-        logFilePolicy.start();
-    
+        logFilePolicy.start();    
         logFileAppender.setRollingPolicy(logFilePolicy);
         logFileAppender.start();        
 

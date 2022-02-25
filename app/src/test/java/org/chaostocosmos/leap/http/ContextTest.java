@@ -17,7 +17,7 @@ public class ContextTest {
 
     Context context;
 
-    public ContextTest() throws URISyntaxException, IOException {    
+    public ContextTest() throws URISyntaxException, IOException, WASException {    
         this.context = Context.getInstance();
     }
 

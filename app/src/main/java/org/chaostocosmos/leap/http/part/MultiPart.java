@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.Context;
 import org.chaostocosmos.leap.http.commons.StreamUtils;
@@ -81,6 +82,6 @@ public class MultiPart extends BodyPart {
         } else {
             throw new IOException(Context.getErrorMsg(48, super.isLoadedBody, super.isClosedStream));
         }
-        super.logger.debug(super.contentType.name()+" saved: "+targetPath.toString()+"  Size: "+targetPath.toFile().length());
+        super.logger.debug(super.contentType.name()+" saved: "+targetPath.toString()+"  Size: "+filePaths.stream().map(p -> p.toFile()).map(f -> f.getName()+": "+f.length()).collect(Collectors.joining(", ")));
     }
 }

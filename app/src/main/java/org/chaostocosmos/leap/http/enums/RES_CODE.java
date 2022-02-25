@@ -58,7 +58,6 @@ public enum RES_CODE {
 
     RES_CODE(int code) {
         this.code = code;
-        this.resMsg = Context.getHttpMsg(code);
-        this.resMsg = resMsg.substring(0, resMsg.lastIndexOf(" ")).trim();
+        this.resMsg = Context.getHttpMsg(code).trim();
     }    
 }

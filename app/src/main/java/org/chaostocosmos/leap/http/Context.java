@@ -3,28 +3,19 @@ package org.chaostocosmos.leap.http;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.commons.Hosts;
-import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.commons.ResourceHelper;
-import org.chaostocosmos.leap.http.commons.UtilBox;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
-import org.chaostocosmos.leap.http.enums.PROTOCOL;
 import org.yaml.snakeyaml.Yaml;
-
-import ch.qos.logback.classic.Level;
-import ch.qos.logback.classic.Logger;
 
 /**
  * Context management object
@@ -54,12 +45,17 @@ public class Context {
     private static Map<String, Object> configMap, messagesMap, mimeTypesMap;
 
     /**
-     * Constructor
+     * Hosts Map
+     */
+    private static Map<String, Hosts> hostsMap;
+
+    /**
+     * Constructor with home path
      * 
      * @param homePath
      * @throws WASException
      */
-    private Context(Path homePath) throws WASException {        
+    private Context(Path homePath) {        
         HOME_PATH = homePath;
         try {            
             if(!HOME_PATH.toFile().isDirectory() || !HOME_PATH.toFile().exists()) {
@@ -68,93 +64,18 @@ public class Context {
             //build config environment
             ResourceHelper.extractResource("config", homePath); 
             //load configuration files
-            loadConfig();
-            loadMessages();
-            loadMimesTypes();
-            //build webapp environment
-            ResourceHelper.extractResource("webapp", getDefaultDocroot());
-            for(Map.Entry<String, Hosts> entry : getVirtualHosts().entrySet()) {
-                ResourceHelper.extractResource("webapp", entry.getValue().getDocroot());
-            }    
+            configMap = loadConfig();
+            messagesMap = loadMessages();
+            mimeTypesMap = loadMimesTypes();
+            hostsMap = getAllHostsMap();
         } catch(Exception e) {
             throw new WASException(e);
         }
-    }
-
-    /**
-     * Load config.yml
-     * @throws WASException
-     */
-    public void loadConfig() throws WASException {
-        try {
-            configPath = HOME_PATH.resolve("config").resolve("config.yml");
-            if(!configPath.toFile().exists()) {
-                throw new FileNotFoundException("config.yml not found. Please check your configuration : "+configPath.toAbsolutePath().toString());
-            }
-            String lines = Files.readAllLines(configPath).stream().collect(Collectors.joining(System.lineSeparator()));
-            Yaml yaml = new Yaml(); 
-            configMap = ((Map<?, ?>)yaml.load(lines)).entrySet().stream().collect(Collectors.toMap(k -> k.getKey().toString(), v -> v.getValue()));
-        } catch(Exception e) {
-            throw new WASException(e);
-        }
-    }
-
-    /**
-     * Load messages.yml
-     * @throws WASException
-     */
-    public void loadMessages() throws WASException {
-        try {
-            messagesPath = HOME_PATH.resolve("config").resolve("messages.yml");
-            if(!messagesPath.toFile().exists()) {
-                throw new FileNotFoundException("messages.yml not found. Please check your configuration : "+messagesPath.toAbsolutePath().toString());
-            }
-            String lines = Files.readAllLines(messagesPath).stream().collect(Collectors.joining(System.lineSeparator()));
-            Yaml yaml = new Yaml(); 
-            messagesMap = ((Map<?, ?>)yaml.load(lines)).entrySet().stream().collect(Collectors.toMap(k -> k.getKey().toString(), v -> v.getValue()));
-        } catch(Exception e) {
-            throw new WASException(e);
-        }
-    }
-
-    /**
-     * Load mime.yml
-     * @throws WASException
-     */
-    public void loadMimesTypes() throws WASException {
-        try {
-            mimeTypesPath = HOME_PATH.resolve("config").resolve("mime.yml");
-            if(!mimeTypesPath.toFile().exists()) {
-                throw new FileNotFoundException("mime.yml not found. Please check your configuration : "+mimeTypesPath.toAbsolutePath().toString());
-            }
-            String lines = Files.readAllLines(mimeTypesPath).stream().collect(Collectors.joining(System.lineSeparator()));
-            Yaml yaml = new Yaml(); 
-            mimeTypesMap = ((Map<?, ?>)yaml.load(lines)).entrySet().stream().collect(Collectors.toMap(k -> k.getKey().toString(), v -> v.getValue()));
-        } catch(Exception e) {
-            throw new WASException(e);
-        }
-    }
-
-    /**
-     * Get context instance without resource path
-     * @return
-     * @throws WASException
-     */
-    public static Context initialize(Path homePath) {
-        if(context == null) {
-            try {
-                context = new Context(homePath);
-            } catch (WASException e) {
-                e.printStackTrace();
-            }
-        }
-        return context;
     }
 
     /**
      * Get Context object
      * @return
-     * @throws WASException
      */
     public static Context getInstance() {
         if(LeapWAS.HOME_PATH == null) {
@@ -164,194 +85,139 @@ public class Context {
     }
 
     /**
-     * Get all dynamic classpath URL array
+     * Get context instance without resource path
      * @return
-     * @throws MalformedURLException
      */
-    public static URL[] getAllDynamicClasspathURLs() throws MalformedURLException {
-        List<Path> paths = getAllDynamicClasspaths();
-        List<URL> urls = new ArrayList<>();
-        for(Path path : paths) {
-            urls.add(path.toFile().toURI().toURL());
+    public static Context initialize(Path homePath) {
+        if(context == null) {
+            context = new Context(homePath);
         }
-        return urls.stream().toArray(URL[]::new);
+        return context;
     }
 
     /**
-     * Get default dynamic classpath list
+     * Load config.yml
      * @return
      */
-    public static List<Path> getDefaultDynamicClaspaths() {
-        return ((List<?>)getConfigValue("server.dynamic-classpaths")).stream().map(p -> Paths.get(p.toString())).collect(Collectors.toList());
+    public Map<String, Object> loadConfig() {
+        try {
+            configPath = HOME_PATH.resolve("config").resolve("config.yml");
+            if(!configPath.toFile().exists()) {
+                throw new FileNotFoundException("config.yml not found. Please check your configuration : "+configPath.toAbsolutePath().toString());
+            }
+            String lines = Files.readAllLines(configPath).stream().collect(Collectors.joining(System.lineSeparator()));
+            Yaml yaml = new Yaml(); 
+            return ((Map<?, ?>)yaml.load(lines)).entrySet().stream().collect(Collectors.toMap(k -> k.getKey().toString(), v -> v.getValue()));
+        } catch(Exception e) {
+            throw new WASException(e);
+        }
     }
 
     /**
-     * Get all of dynamic classpath list
+     * Load messages.yml
+     */
+    public Map<String, Object> loadMessages() {
+        try {
+            messagesPath = HOME_PATH.resolve("config").resolve("messages.yml");
+            if(!messagesPath.toFile().exists()) {
+                throw new FileNotFoundException("messages.yml not found. Please check your configuration : "+messagesPath.toAbsolutePath().toString());
+            }
+            String lines = Files.readAllLines(messagesPath).stream().collect(Collectors.joining(System.lineSeparator()));
+            Yaml yaml = new Yaml(); 
+            return ((Map<?, ?>)yaml.load(lines)).entrySet().stream().collect(Collectors.toMap(k -> k.getKey().toString(), v -> v.getValue()));
+        } catch(Exception e) {
+            throw new WASException(e);
+        }
+    }
+
+    /**
+     * Load mime.yml
      * @return
      */
-    public static List<Path> getAllDynamicClasspaths() {
-        List<Path> paths = getDefaultDynamicClaspaths();
-        paths.addAll(getVirtualHosts().values().stream().flatMap(h -> h.getDynamicClasspaths().stream()).collect(Collectors.toList()));
-        return paths;
+    public Map<String, Object> loadMimesTypes() {
+        try {
+            mimeTypesPath = HOME_PATH.resolve("config").resolve("mime.yml");
+            if(!mimeTypesPath.toFile().exists()) {
+                throw new FileNotFoundException("mime.yml not found. Please check your configuration : "+mimeTypesPath.toAbsolutePath().toString());
+            }
+            String lines = Files.readAllLines(mimeTypesPath).stream().collect(Collectors.joining(System.lineSeparator()));
+            Yaml yaml = new Yaml(); 
+            return ((Map<?, ?>)yaml.load(lines)).entrySet().stream().collect(Collectors.toMap(k -> k.getKey().toString(), v -> v.getValue()));
+        } catch(Exception e) {
+            throw new WASException(e);
+        }
     }
 
     /**
      * Get all host Map
      * @return
      */
-    public static Map<String, Hosts> getAllHosts() {
-        Map<String, Hosts> hosts = getVirtualHosts();
-        Hosts defaultHosts = getDefaultHosts();
-        hosts.put(defaultHosts.getHost(), defaultHosts);
-        return hosts;
+    private static Map<String, Hosts> getAllHostsMap() {        
+        Map<String, Hosts> hostsMap = new HashMap<>();
+        Map<Object, Object> map = (Map<Object, Object>)getConfigValue("server.default-host");        
+        map.put("default", true);
+        hostsMap.put(map.get("host").toString(), new Hosts(map)); 
+        ((List<Map<Object, Object>>)getConfigValue("server.virtual-host"))
+                            .stream().map(m -> new Hosts(m) )
+                            .forEach(h -> hostsMap.put(h.getHost(), h));
+        return hostsMap;
     }
 
     /**
-     * Get virtual host Map by port key ordered 
+     * Get hosts Map
      * @return
      */
-    public static Map<String, Hosts> getVirtualHosts() {
-        return ((List<?>)getConfigValue("server.virtual-host")) 
-                         .stream()
-                         .map(m -> ((Map<?, ?>)m))                                                  
-                         .map(e -> new Object[]{e.get("host"), 
-                                                new Hosts(false,
-                                                         getProtocol((String)e.get("host")),
-                                                         (String)e.get("server-name"), 
-                                                         (String)e.get("host"), 
-                                                         Integer.parseInt(e.get("port")+""), 
-                                                         ((List<?>)e.get("dynamic-classpaths")).stream().map(c -> Paths.get(c.toString())).collect(Collectors.toList()),
-                                                         Paths.get((String)e.get("doc-root")), 
-                                                         (String)e.get("logs"), 
-                                                         UtilBox.getLogLevels((String)e.get("log-level"), ","))
-                                                         })
-                        .collect(Collectors.toMap(k -> (String)k[0], v -> (Hosts)v[1])); 
+    public static Map<String, Hosts> getHostsMap() { 
+        return hostsMap;
     }
 
     /**
-     * Get virtual host for specified virtual host name
-     * @param vhost
-     * @return
-     * @throws WASException
-     */
-    public static Hosts getVirtualHosts(final String vhost) {
-        return ((List<?>)getConfigValue("server.virtual-host"))
-                        .stream()
-                        .map(e -> (Map<?, ?>)e)
-                        .collect(Collectors.toList())
-                            .stream()
-                            .map(o -> (Map<?, ?>)o)
-                            .filter(m -> m.get("host").equals(vhost)) 
-                            .map(e -> new Hosts(false,
-                                                getProtocol((String)e.get("host")),
-                                                (String)e.get("server-name"), 
-                                                (String)e.get("host"), 
-                                                Integer.parseInt(e.get("port")+""),  
-                                                ((List<?>)e.get("dynamic-classpaths")).stream().map(c -> Paths.get(c.toString())).collect(Collectors.toList()),
-                                                Paths.get((String)e.get("doc-root")), 
-                                                (String)e.get("logs"),
-                                                UtilBox.getLogLevels((String)e.get("log-level"))))
-                            .findFirst()
-                            .orElse(null);
-    }
-
-    /**
-     * Get default Hosts
-     * @return
-     * @throws WASException
-     */
-    public static Hosts getDefaultHosts() {
-        return new Hosts( true,
-                          getProtocol(getDefaultHost()),
-                          getDefaultServerName(),
-                          getDefaultHost(),
-                          getDefaultPort(),
-                          getDefaultDynamicClaspaths(),
-                          getDefaultDocroot(),
-                          getDefaultLogPath(),
-                          getDefaultLogLevel());
-    }
-
-    /**
-     * Get host list matching with a port 
-     * @param port
+     * Get default host
      * @return
      */
-    public static List<String> getHostsByPort(int port) {
-        List<String> hosts = new ArrayList<>();
-        getVirtualHosts()
-                    .entrySet()
-                    .stream()
-                    .filter(h -> h.getValue().getPort() == port)
-                    .map(h -> h.getValue().getHost())
-                    .forEach(h -> hosts.add(h));
-        if(getDefaultPort() == port) {
-            hosts.add(getDefaultHost());
-        }
-        return hosts;
+    public static String getDefaultHost() {
+        return (String)getConfigValue("server.default-host.host");
     }
 
     /**
-     * Get using ports
-     * @return
-     */ 
-    public static int[] getUsingPorts() {
-        return getAllHosts().entrySet().stream().mapToInt(e -> e.getValue().getPort()).distinct().toArray();
-    }
-
-    /**
-     * Get docroot path by host name
-     * @param host
+     * Get default port
      * @return
      */
-    public static Path getDocroot(String host) {
-        return getAllHosts().values().stream().filter(h -> h.getHost().equals(host)).map(h -> h.getDocroot()).findFirst().orElseThrow();
+    public static int getDefaultPort() {
+        return (int)getConfigValue("server.default-host.port");
     }
 
     /**
      * Get home path
      * @return
      */
-    public static Path getHomePath() {
+    public static Path getLeapHomePath() {
         return HOME_PATH;
     }
 
     /**
-     * Get web protocol of Host or vHost
-     * @param host
-     * @return
-     * @throws WASException
-     */
-    public static PROTOCOL getProtocol(String host) {
-        if(getDefaultHost().equals(host)) {
-            return PROTOCOL.valueOf(getConfigValue("server.protocol").toString().replace("/", "_").replace(".", "_"));
-        } else {
-            List<Map> list = (List<Map>)getConfigValue("server.virtual-host");
-            return PROTOCOL.valueOf(list.stream().filter(m -> m.get("host").equals(host)).findAny().get().get("protocol").toString().replace("/", "_").replace(".", "_"));
-        }
-    }
-
-    /**
-     * Get SSL key store Path
-     */
-    public static Path getKeyStore() {
-        return Paths.get((String)getConfigValue("server.ssl.keystore"));
-    }
-
-    /**
-     * Get SSL key store password
-     */
-    public static String getPassphrase() {
-        return (String)getConfigValue("server.ssl.passphrase");
-    }
-
-    /**
-     * Get SSL protocol
+     * Get leap version
      * @return
      */
-    public static String getEncryptionMethod() {
-        return (String)getConfigValue("server.ssl.encryption");
+    public static String getLeapVersion() {
+        return (String)getConfigValue("server.version");
     }
+
+    /**
+     * Get connection timeout
+     * @return
+     */
+    public static int getConnectionTimeout() {
+        return (int)getConfigValue("server.connection.connection-timeout");
+    }
+
+    /**
+     * Get server backlog
+     * @return
+     */
+    public static int getBackLog() {
+        return (int)getConfigValue("server.connection.backlog");
+    }    
 
     /**
      * Get upload file buffer flush size
@@ -366,158 +232,71 @@ public class Context {
      * @return
      */
     public static int getThreadPoolCoreSize() {
-        return (int)getConfigValue("server.threadpool.core");
+        return (int)getConfigValue("server.performance.threadpool.core");
     }
 
     /**
-     * Get thread pool maximum size
+     * Get threadpool max size
      * @return
      */
     public static int getThreadPoolMaxSize() {
-        return (int)getConfigValue("server.threadpool.max");
+        return (int)getConfigValue("server.performance.threadpool.max");
     }
 
     /**
-     * Get thread pool keep-alive seconds
+     * Get threadpool keep-alive 
      * @return
      */
     public static int getThreadPoolKeepAlive() {
-        return (int)getConfigValue("server.threadpool.keep-alive");
+        return (int)getConfigValue("server.performance.threadpool.keep-alive");
     }
 
     /**
-     * Get client read timeout
+     * Get SSL protocol
      * @return
      */
-    public static int getTimeout() {
-        return (int)getConfigValue("server.timeout");
+    public static String getEncryptionMethod() {
+        return (String)getConfigValue("server.security.ssl.encryption");
     }
 
     /**
-     * Get backlog
+     * Get SSL key store Path
      * @return
      */
-    public static int getBackLog() {
-        return (int)getConfigValue("server.backlog");
+    public static Path getKeyStore() {
+        return Paths.get((String)getConfigValue("server.security.ssl.keystore"));
     }
 
     /**
-     * Get welcome filename
+     * Get SSL key store password
      * @return
      */
-    public static String getWelcome() {
-        return (String)getConfigValue("server.welcome");
+    public static String getPassphrase() {
+        return (String)getConfigValue("server.security.ssl.passphrase");
     }
 
-    /**
-     * Get default server version
-     * @return
-     */
-    public static String getVersion() {
-        return (String)getConfigValue("server.version");
-    }
-
-    /**
-     * Get default server name
-     * @return
-     */
-    public static String getDefaultServerName() {
-        return (String)getConfigValue("server.server-name");
-    }
-
-    /**
-     * Get default server name
-     * @return
-     */
-    public static String getDefaultHost() {
-        return (String)getConfigValue("server.host");
-    }
-
-    /**
-     * Get default server port
-     * @return
-     */
-    public static int getDefaultPort() {
-        return (int)getConfigValue("server.port");
-    }
-
-    /**
-     * Get default docroot
-     * @return
-     */
-    public static Path getDefaultDocroot() {
-        return Paths.get((String)getConfigValue("server.doc-root"));
-    }
-
-    /**
-     * Get default logger
-     * @return
-     */
-    public static Logger getDefaultLogger() {
-        return LoggerFactory.getLogger(getDefaultHost());
-    }
-
-    /**
-     * Get default log path
-     * @return
-     */
-    public static String getDefaultLogPath() {
-        return (String)getConfigValue("server.logs");
-    }
-
-    /**
-     * Get default log level
-     * @return
-     */
-    public static List<Level> getDefaultLogLevel() {
-        return UtilBox.getLogLevels((String)getConfigValue("server.log-level"));
-    }
-
-    /**
-     * Set document path
-     * @param docroot
-     */
-    public static void setDefaultDocroot(String docroot) {
-        getConfigValue("server.doc-root", docroot);
-    }
-
-    /**
-     * Get charset of server
-     * @return
-     */
-    public static Charset charset() {
-        return Charset.forName(getConfigValue("server.charset")+"");
-    }
-
-    /**
-     * Get allowed resource pattern
-     * @return
-     */
-    public static List<String> getResourceAllowed() {
-        List<?> allowedList = (List<?>)getConfigValue("server.resource-filter.allowed");
-        return allowedList.stream().map(o -> o.toString()).collect(Collectors.toList());
-    }
-
-    /**
-     * Get forbidden resource pattern
-     * @return
-     */
-    public static List<String> getResourceForbidden() {
-        List<?> forbiddenList = (List<?>)getConfigValue("server.resource-filter.forbidden");
-        return forbiddenList.stream().map(o -> o.toString()).collect(Collectors.toList());
-    }
-    
     /**
      * Get http message by specified code
      * @param code
      * @return
      */
     public static String getHttpMsg(int code) {
-        return getMsg(MSG_TYPE.HTTP, code);
+        String str = getMsg(MSG_TYPE.HTTP, code);
+        return str.substring(0, str.lastIndexOf(" "));
     }
 
     /**
-     * Get debug message from config
+     * Get HTTP message from messages.yml
+     * @param code
+     * @param args
+     * @return
+     */
+    public static String getHttpMsg(int code, Object... args) {
+        return getMsg(MSG_TYPE.HTTP, code, args);
+    }
+
+    /**
+     * Get debug message from messages.yml
      * @param code
      * @param args
      * @return
@@ -527,7 +306,7 @@ public class Context {
     } 
 
     /**
-     * Get info message from config
+     * Get info message from messages.yml
      * @param code
      * @param args
      * @return
@@ -537,7 +316,7 @@ public class Context {
     }
 
     /**
-     * Get warn message from config
+     * Get warn message from messages.yml
      * @param code
      * @param args
      * @return
@@ -547,7 +326,7 @@ public class Context {
     }
 
     /**
-     * Get error message from config
+     * Get error message from messages.yml
      * @param code
      * @param args
      * @return
@@ -557,7 +336,7 @@ public class Context {
     }
 
     /**
-     * Get message from config
+     * Get message from messages.yml
      * @param type
      * @param code
      * @param args

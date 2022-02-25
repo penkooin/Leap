@@ -6,16 +6,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
-import java.net.SocketTimeoutException;
 import java.net.URISyntaxException;
+import java.nio.charset.Charset;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.chaostocosmos.leap.http.commons.HostsManager;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.commons.ResourceHelper;
+import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
 
@@ -26,6 +29,71 @@ import org.chaostocosmos.leap.http.enums.RES_CODE;
  */
 public class HttpTransferBuilder {
     /**
+     * Build error response messasge
+     * @param requestedHost
+     * @param e
+     * @return
+     * @throws WASException
+     */
+    public static String buildErrorResponse(String requestedHost, MSG_TYPE msgType, int errorCode, String errorMsg) throws WASException {
+        LoggerFactory.getLogger(requestedHost).error("["+msgType.name()+": "+errorCode+"] - "+errorMsg);
+        return buildHttpResponsePage(requestedHost, msgType, errorCode, errorMsg);
+    }
+
+    /**
+     * Create http response page
+     * @param requestedHost
+     * @param type
+     * @param code
+     * @param message
+     * @return
+     * @throws URISyntaxException
+     * @throws IOException
+     * @throws WASException
+     */
+    public static String buildHttpResponsePage(String requestedHost, MSG_TYPE type, int code, String message) throws WASException {
+        Map<String, Object> map;
+        if(type != null) {
+            map = Map.of("@code", code, "@type", type.name(), "@message", message);
+        } else {
+            map = Map.of("@code", 0, "@type", "EXCEPTION", "@message", message);
+        }
+        return ResourceHelper.getResponsePage(requestedHost, map);
+    }        
+
+    /**
+     * Build HttpTransfer object
+     * @param vHost
+     * @param client
+     * @throws IOException
+     * @throws WASException
+     * @throws Exception
+     */
+    public static HttpTransfer buildHttpTransfer(String vHost, Socket client) throws IOException, WASException {
+        return new HttpTransfer(vHost, client);
+    } 
+
+    /**
+     * Add key-value to header Map
+     * @param headers
+     * @param key
+     * @param value
+     * @return
+     */
+    public static Map<String, List<Object>> addHeader(Map<String, List<Object>> headers, String key, Object value) {
+        if(headers != null) {
+            headers = new HashMap<>();
+        }
+        List<Object> values = headers.get(key);
+        if(values == null) {
+            values = new ArrayList<>();
+        }
+        values.add(value);
+        headers.put(key, values);
+        return headers;
+    }
+
+    /**
      * HttpTransfer object
      * @author 9ins
      */
@@ -33,11 +101,11 @@ public class HttpTransferBuilder {
         /**
          * Requested host
          */
-        String vHost;
+        String host;
         /**
          * Client Socket
          */
-        Socket client;
+        Socket socket;
         /**
          * InputStream
          */
@@ -57,27 +125,24 @@ public class HttpTransferBuilder {
 
         /**
          * Construct with request host and client socket
-         * @param vHost
+         * @param host
          * @param client
          * @throws IOException
          * @throws WASException
          */
-        public HttpTransfer(String vHost, Socket client) {
-            try {
-                this.vHost = vHost;
-                this.client = client;
-                this.clientInputStream = this.client.getInputStream();
-                this.clientOutputStream = this.client.getOutputStream();
-                this.httpRequestDescriptor = parseRequest();
-                this.httpResponseDescriptor = HttpResponseBuilder.getBuilder()
-                                                                 .build(this.httpRequestDescriptor)
-                                                                 .setStatusCode(-1)
-                                                                 .setBody(null)
-                                                                 .setHeaders(new HashMap<String, List<Object>>())
-                                                                 .get();        
-            } catch(Exception e) {
-                LoggerFactory.getLogger(vHost).error(e.getMessage());
-            }
+        public HttpTransfer(String host, Socket client) throws IOException, WASException {
+            this.host = host;
+            this.socket = client;
+            this.clientInputStream = client.getInputStream();
+            this.clientOutputStream = client.getOutputStream();
+        }
+
+        /**
+         * Get requested host
+         * @return
+         */
+        public String getRequestedHost() {
+            return this.host;
         }
 
         /**
@@ -85,7 +150,7 @@ public class HttpTransferBuilder {
          * @return
          */
         public InputStream getClientInputStream() {
-            return this.clientInputStream;
+            return clientInputStream;
         }
 
         /**
@@ -93,22 +158,39 @@ public class HttpTransferBuilder {
          * @return
          */
         public OutputStream getClientOutputStream() {
-            return this.clientOutputStream;
+            return clientOutputStream;
         }
 
         /**
          * Get HttpRequestDescriptor
          * @return
+         * @throws WASException
+         * @throws IOException
          */
-        public HttpRequestDescriptor getRequest() {
+        public HttpRequestDescriptor getRequest() throws IOException, WASException {
+            if(this.httpRequestDescriptor == null) {
+                this.httpRequestDescriptor = parseRequest();
+            }
             return this.httpRequestDescriptor;
         }
 
         /**
          * Get HttpResponseDescriptor
          * @return
+         * @throws WASException
          */
-        public HttpResponseDescriptor getResponse() {
+        public HttpResponseDescriptor getResponse() throws WASException {
+            if(this.httpResponseDescriptor == null) {
+                String msg = buildHttpResponsePage(this.httpRequestDescriptor.getRequestedHost(), MSG_TYPE.HTTP, 200, Context.getHttpMsg(200));
+                Map<String, List<Object>> headers = addHeader(new HashMap<>(), "Content-Type", MIME_TYPE.TEXT_HTML.getMimeType());
+                headers = addHeader(new HashMap<>(), "Content-Length", msg.getBytes().length);
+                this.httpResponseDescriptor = HttpResponseBuilder.getBuilder()
+                                                                .build(this.httpRequestDescriptor)
+                                                                .setStatusCode(200)
+                                                                .setBody(msg)
+                                                                .setHeaders(headers)
+                                                                .get();
+            }
             return this.httpResponseDescriptor;
         }
 
@@ -120,43 +202,61 @@ public class HttpTransferBuilder {
          * @throws Exception
          */
         private HttpRequestDescriptor parseRequest() throws IOException, WASException {
-            return HttpParser.buildRequestParser().parseRequest(this.clientInputStream);
+            return HttpParser.buildRequestParser().parseRequest(clientInputStream);
         }
 
         /**
-         * Send response to client
-         * @param out
+         * Send response to client by HttpResponseDescriptor object
          * @param response
          * @throws IOException
          */
         public void sendResponse(HttpResponseDescriptor response) throws IOException {
-            System.out.println(Context.getHttpMsg(response.getStatusCode()));
-            String res = Context.getProtocol(response.getRequestedHost()).name()+" "+response.getStatusCode()+" "+RES_CODE.valueOf("RES"+response.getStatusCode()).getMessage()+"\r\n"; 
+            sendResponse(response.getRequestedHost(), response.getStatusCode(), response.getHeaders(), response.getBody());
+        }
+
+        /**
+         * Send response to client by requested host, status code, reponse headers, body object
+         * @param host
+         * @param resCode
+         * @param headers
+         * @param body
+         * @throws IOException
+         */
+        public void sendResponse(String host, int resCode, Map<String, List<Object>> headers, Object body) throws IOException {
+            Charset charset = HostsManager.get().charset(host);
+            String str = HostsManager.get().getHosts(host).getProtocol().name();
+            String protocol = str.substring(0, str.indexOf("_"));
+            String version = str.substring(str.indexOf("_")+1).replace("_", ".");
+            String resLine = RES_CODE.valueOf("RES"+resCode).getMessage();
+            String res = protocol+"/"+version+" "+resCode+" "+resLine+"\r\n"; 
             this.clientOutputStream.write(res.getBytes());
-            Object body = response.getBody();
             if(body == null) {
-                throw new IllegalArgumentException("Response body not set. Something wrong in Respose process!!!");
+                LoggerFactory.getLogger(host).warn("Response body is Null: "+resCode);
+                return ;
             }
-            if(response.getHeaders().get("Content-Length") == null) {
-                int contentLength = body instanceof byte[] ? ((byte[])body).length : (int)((Path)body).toFile().length();
-                response.addHeader("Content-Length", contentLength+"");
+            if(headers.get("Content-Length") == null) {
+                int contentLength = body instanceof byte[] ? ((byte[])body).length : body instanceof String ? ((String)body).getBytes(charset).length : (int)((Path)body).toFile().length();
+                List<Object> values = new ArrayList<>();
+                values.add(contentLength);
+                headers.put("Content-Length", values);
             }
             //LoggerFactory.getLogger(response.getRequestedHost()).debug(response.toString());
             StringBuffer resStr = new StringBuffer();
-            resStr.append("============================== RES : "+res.trim()+" - "+this.client.getRemoteSocketAddress().toString()+" =============================="+System.lineSeparator());
-            resStr.append("RES CODE: "+response.getStatusCode()+System.lineSeparator());
-            for(Map.Entry<String, List<Object>> e : response.getHeaders().entrySet()) {
+            resStr.append("============================== RES : "+res.trim()+" - "+this.socket.getRemoteSocketAddress().toString()+" =============================="+System.lineSeparator());
+            resStr.append("RES CODE: "+resCode+System.lineSeparator());
+            for(Map.Entry<String, List<Object>> e : headers.entrySet()) {
                 this.clientOutputStream.write((e.getKey()+": "+e.getValue().stream().map(v -> v.toString()).collect(Collectors.joining("; "))+"\r\n").getBytes());
                 resStr.append(e.getKey()+": "+e.getValue()+System.lineSeparator());
             }
-            LoggerFactory.getLogger(response.getRequestedHost()).debug(resStr.substring(0, resStr.length()-1));
+            LoggerFactory.getLogger(host).debug(resStr.substring(0, resStr.length()-1));
             this.clientOutputStream.write("\r\n".getBytes());
             this.clientOutputStream.flush(); 
             if(body instanceof byte[]) {
+                System.out.println(new String((byte[])body));
                 this.clientOutputStream.write((byte[]) body);
             } else {
-                if(body instanceof String) {
-                    this.clientOutputStream.write(body.toString().getBytes(Context.charset()));
+                if(body instanceof String) {                                        
+                    this.clientOutputStream.write(body.toString().getBytes(charset));
                 } else if(body instanceof File) {
                     writeToStream((File)body, this.clientOutputStream, Context.getFileBufferSize());
                 } else if(body instanceof Path) {
@@ -197,82 +297,13 @@ public class HttpTransferBuilder {
                 if(this.clientOutputStream != null) {
                     this.clientOutputStream.close();
                 }
-                if(this.client != null) {
-                    this.client.close();
+                if(this.socket != null) {
+                    this.socket.close();
                 }    
             } catch(Exception e) {
-                LoggerFactory.getLogger(this.vHost).error(e.getMessage(), e);
+                LoggerFactory.getLogger(this.host).error(e.getMessage(), e);
             }
-            LoggerFactory.getLogger(this.vHost).info("Client closing......"+this.client.getInetAddress().toString());
+            LoggerFactory.getLogger(this.host).info("Client closing......"+socket.getInetAddress().toString());
         }
     }
-
-    /**
-     * Build error response messasge
-     * @param requestedHost
-     * @param e
-     * @return
-     * @throws WASException
-     */
-    public static String buildErrorResponse(String requestedHost, Throwable e) throws WASException {
-        Throwable throwable = e;
-        do {
-            if(throwable instanceof WASException || throwable == null) {
-                break;
-            }
-            throwable = e.getCause();
-        } while(true);
-        if(throwable instanceof WASException) {
-            WASException we = (WASException)throwable;
-            //LoggerFactory.getLogger(requestedHost).warn("Type: "+we.getMessageType()+" Code: "+we.getCode()+" Exception: "+we.toString());
-            LoggerFactory.getLogger(requestedHost).error(we.getMessage(), e);
-            return buildHttpResponsePage(requestedHost, we.getMessageType(), we.getCode(), we.toString());
-            // String remote = (connection != null) ? connection.getRemoteSocketAddress().toString() : "Unknown";
-            // String server = (connection != null) ? connection.getLocalSocketAddress().toString() : requestedHost;
-            // LoggerFactory.getLogger(requestedHost).info("Error client request "+remote+" --- "+server);
-            // LoggerFactory.getLogger(requestedHost).info("Close client request on error "+remote+" --- "+server);
-        } else {
-            if(throwable == null)
-                throwable = e;
-            if(throwable instanceof SocketTimeoutException) {
-                LoggerFactory.getLogger(requestedHost).error("SocketTimeoutException occurred: "+throwable.getMessage());
-            } else {
-                LoggerFactory.getLogger(requestedHost).error(e.getMessage(), e);
-            }
-            return buildHttpResponsePage(requestedHost, MSG_TYPE.HTTP, 503, e.toString());
-        }
-    }
-
-    /**
-     * Create http response page
-     * @param requestedHost
-     * @param type
-     * @param code
-     * @param message
-     * @return
-     * @throws URISyntaxException
-     * @throws IOException
-     * @throws WASException
-     */
-    public static String buildHttpResponsePage(String requestedHost, MSG_TYPE type, int code, String message) throws WASException {
-        Map<String, Object> map;
-        if(type != null) {
-            map = Map.of("@code", code, "@type", type.name(), "@message", message);
-        } else {
-            map = Map.of("@code", 0, "@type", "EXCEPTION", "@message", message);
-        }
-        return ResourceHelper.getResponsePage(requestedHost, map);
-    }        
-
-    /**
-     * Build HttpTransfer object
-     * @param vHost
-     * @param client
-     * @throws IOException
-     * @throws WASException
-     * @throws Exception
-     */
-    public static HttpTransfer buildHttpTransfer(String vHost, Socket client) throws IOException, WASException {
-        return new HttpTransfer(vHost, client);
-    } 
 }

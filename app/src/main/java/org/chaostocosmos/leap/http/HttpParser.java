@@ -3,6 +3,7 @@ package org.chaostocosmos.leap.http;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLDecoder;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.chaostocosmos.leap.http.commons.HostsManager;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.commons.StreamUtils;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
@@ -89,7 +91,8 @@ public class HttpParser {
             if(requestLine == null) {
                 throw new WASException(MSG_TYPE.ERROR, 9);
             }
-            requestLine = URLDecoder.decode(requestLine, Context.charset()).trim();
+            requestLine = URLDecoder.decode(requestLine, StandardCharsets.UTF_8);
+            System.out.println(requestLine);
             String method = requestLine.substring(0, requestLine.indexOf(" "));
             if(!Arrays.asList(REQUEST_TYPE.values()).stream().anyMatch(R -> R.name().equals(method))) {
                 throw new WASException(MSG_TYPE.ERROR, 50, method);
@@ -134,6 +137,11 @@ public class HttpParser {
             in.read(bytes);
             System.out.println(new String(bytes));
             */
+            if(!HostsManager.get().isExistHost(host)) {
+                throw new WASException(MSG_TYPE.HTTP, 400, "Requested host not exist in this server: "+host);
+            }
+            Charset charset = HostsManager.get().charset(host);
+            System.out.println(host);
             LoggerFactory.getLogger(host).debug(debug);
             BodyPart bodyPart = null;
             if(contentType != null) {
@@ -147,10 +155,10 @@ public class HttpParser {
                             String[] splited = contentType.split("\\;");
                             contentType = splited[0].trim();
                             boundary = splited[1].substring(splited[1].indexOf("=") + 1).trim();
-                            bodyPart = new MultiPart(host, mimeType, boundary, contentLength, in, false, Context.charset());
+                            bodyPart = new MultiPart(host, mimeType, boundary, contentLength, in, false, charset);
                             break;
                         case APPLICATION_X_WWW_FORM_URLENCODED:
-                            bodyPart = new KeyValuePart(host, mimeType, contentLength, in, false, Context.charset());
+                            bodyPart = new KeyValuePart(host, mimeType, contentLength, in, false, charset);
                             break;
                         case IMAGE_GIF:
                         case IMAGE_PNG:
@@ -164,7 +172,7 @@ public class HttpParser {
                         case AUDIO_WAV:
                         case VIDEO_WEBM:
                         case VIDEO_OGG:
-                            bodyPart = new BinaryPart(host, mimeType, contentLength, in, false, Context.charset());
+                            bodyPart = new BinaryPart(host, mimeType, contentLength, in, false, charset);
                             break;
                         case TEXT_PLAIN:
                         case TEXT_CSS:
@@ -174,7 +182,7 @@ public class HttpParser {
                         case TEXT_HTML:
                         case TEXT_XML:
                         case TEXT_JSON:
-                            bodyPart = new TextPart(host, mimeType, contentLength, in, false, Context.charset());
+                            bodyPart = new TextPart(host, mimeType, contentLength, in, false, charset);
                         default:
                     }
                 }

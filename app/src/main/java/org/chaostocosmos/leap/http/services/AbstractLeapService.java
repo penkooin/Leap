@@ -12,9 +12,11 @@ import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.annotation.AnnotationHelper;
 import org.chaostocosmos.leap.http.annotation.PostFilter;
 import org.chaostocosmos.leap.http.annotation.PreFilter;
+import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.filters.ILeapFilter;
-import org.chaostocosmos.leap.http.user.UserManager;
+
+import ch.qos.logback.classic.Logger;
 
 /**
  * Abstraction of SimpleServlet object
@@ -22,6 +24,10 @@ import org.chaostocosmos.leap.http.user.UserManager;
  * @since 2021.09.15
  */
 public abstract class AbstractLeapService implements IGetService, IPostService, IPutService, IDeleteService {
+    /**
+     * Logger
+     */
+    protected Logger logger;
     /**
      * Context
      */
@@ -39,9 +45,9 @@ public abstract class AbstractLeapService implements IGetService, IPostService, 
      */
     protected List<ILeapFilter> postFilters;
     /**
-     * Leap security manager object
+     * Leap service manager object
      */
-    protected UserManager userManager;
+    protected ServiceManager serviceManager;
     /**
      * HttpTransfer object
      */
@@ -49,6 +55,7 @@ public abstract class AbstractLeapService implements IGetService, IPostService, 
 
     @Override
     public HttpResponseDescriptor serve(HttpTransfer httpTransfer, Method invokingMethod) throws Exception {
+        this.logger = LoggerFactory.getLogger(httpTransfer.getRequest().getRequestedHost());
         this.httpTransfer = httpTransfer;
         this.invokingMethod = invokingMethod;
         if(this.preFilters != null) {
@@ -131,8 +138,8 @@ public abstract class AbstractLeapService implements IGetService, IPostService, 
     } 
 
     @Override
-    public void setSecurityManager(UserManager userManager) {
-        this.userManager = userManager;
+    public void setServiceManager(ServiceManager serviceManager) {
+        this.serviceManager = serviceManager;
     }
 
     @Override

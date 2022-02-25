@@ -14,6 +14,7 @@ import org.chaostocosmos.leap.http.annotation.FilterMapper;
 import org.chaostocosmos.leap.http.annotation.MethodMappper;
 import org.chaostocosmos.leap.http.annotation.ServiceMapper;
 import org.chaostocosmos.leap.http.commons.ClassUtils;
+import org.chaostocosmos.leap.http.commons.DynamicURLClassLoader;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
@@ -32,26 +33,33 @@ public class ServiceManager {
      * Logger
      */
     public static final Logger logger = LoggerFactory.getLogger(Context.getDefaultHost());
+
     /**
      * ServiceHolder Map
      */
-    private static Map<String, ServiceHolder> serviceHolderMap = new HashMap<>();
+    private Map<String, ServiceHolder> serviceHolderMap = new HashMap<>();
+
+    /**
+     * ClassLoder for host
+     */
+    private DynamicURLClassLoader classLoader;
+
     /**
      * Leap security manager object
      */
-    private static UserManager userManager;
+    private UserManager userManager;
  
     /**
      * Constructor with 
-     * 
+     * @param classLoader
      * @param userManager_ 
-     * @throws WASException
      */
-    public ServiceManager(UserManager userManager_) throws Exception {
+    public ServiceManager(ClassLoader classLoader_, UserManager userManager_) {
+        classLoader = (DynamicURLClassLoader) classLoader_;
+        userManager  = userManager_;
         try {
-            List<Class<? extends ILeapService>> services = ClassUtils.findAllLeapServices(false);
-            //List<Class<? extends IFilter>> filters = ClassUtils.findAllLeapFilters(false);    
-            userManager  = userManager_;
+            List<Class<? extends ILeapService>> services = ClassUtils.findAllLeapServices(classLoader, false);
+            //List<Class<? extends IFilter>> filters = ClassUtils.findAllLeapFilters(false); 
             initialize(services);
         } catch(IOException | URISyntaxException e) {
             throw new WASException(e);
@@ -63,7 +71,7 @@ public class ServiceManager {
      */
     private void initialize(List<Class<? extends ILeapService>> services) {        
         for(Class<? extends ILeapService> serviceClass : services) {
-            ILeapService service = (ILeapService) ClassUtils.instantiate(serviceClass);
+            ILeapService service = (ILeapService) ClassUtils.instantiate(classLoader, serviceClass);
             addService(service);
         }
     }
@@ -73,7 +81,7 @@ public class ServiceManager {
      * @param service
      */
     public void addService(final ILeapService service) {
-        service.setSecurityManager(userManager);
+        service.setServiceManager(this);
         ServiceMapper sm = service.getClass().getDeclaredAnnotation(ServiceMapper.class);
         if(sm != null) {
             String sPath = sm.path();
@@ -90,18 +98,19 @@ public class ServiceManager {
                         List<ILeapFilter> preFilters = new ArrayList<>();
                         Class<? extends ILeapFilter>[] preFilterClasses = fm.preFilters();
                         for(Class<? extends ILeapFilter> clazz : preFilterClasses) {
-                            ILeapFilter f = (ILeapFilter)ClassUtils.instantiate(clazz);
+                            ILeapFilter f = (ILeapFilter)newFilterInstance(clazz.getName());
                             f.setSecurityManager(userManager);
                             preFilters.add(f);                            
                         }
                         List<ILeapFilter> postFilters = new ArrayList<>();
                         Class<? extends ILeapFilter>[] postFilterClasses = fm.postFilters();
                         for(Class<? extends ILeapFilter> clazz : postFilterClasses) {
-                            ILeapFilter f = (ILeapFilter)ClassUtils.instantiate(clazz);
+                            ILeapFilter f = (ILeapFilter)newFilterInstance(clazz.getName());
                             f.setSecurityManager(userManager);
                             postFilters.add(f);
                         }                     
-                        service.setFilters(preFilters, postFilters);   
+                        service.setFilters(preFilters, postFilters);
+                        service.setServiceManager(this);
                         serviceHolder = new ServiceHolder(sPath+mPath, service, rType, method);
                         serviceHolderMap.put(sPath+mPath, serviceHolder);
                     } else {
@@ -116,6 +125,14 @@ public class ServiceManager {
         } else {
             logger.debug("Service not mapped with ServiceMapper: "+service.getClass().getName());
         }
+    }
+
+    /**
+     * Get user manager object
+     * @return
+     */
+    public UserManager getUserManager() {
+        return this.userManager;
     }
 
     /**
@@ -178,8 +195,8 @@ public class ServiceManager {
      * @return
      * @throws Exception
      */
-    public static ILeapService newServiceInstance(String serviceClassName) throws Exception {
-        return (ILeapService)ClassUtils.instantiate(serviceClassName);
+    public ILeapService newServiceInstance(String serviceClassName) {
+        return (ILeapService)ClassUtils.instantiate(this.classLoader, serviceClassName);
     }   
 
     /**
@@ -188,8 +205,8 @@ public class ServiceManager {
      * @return
      * @throws WASException
      */
-    public static ILeapFilter newFilterInstance(String filterClassName) throws Exception {
-        return (ILeapFilter)ClassUtils.instantiate(filterClassName);
+    public ILeapFilter newFilterInstance(String filterClassName) {
+        return (ILeapFilter)ClassUtils.instantiate(this.classLoader, filterClassName);
     }
 }
 
