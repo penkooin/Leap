@@ -12,7 +12,8 @@ Leap? provides simple ways to build your web-based services and easy to configur
 You can easily build up your services using to be making service classes for your purpose.  
 Leap? can have a various filters for security, parsing and authenticating, It will be enhancing your Web Service more powerful and Secured.  
 The remote deploy is to get achievement of varieties of service on active time in server, so that user do not need to stop server for new service deployments.  
-
+Also upload file instant saving could get to decrease of server memory throghtput for uploading when huge file is uploaded.
+And Enhanced Resource Manager will provides a resources of server to users more quickly and no waiting.
 
 ## Configuration for security.
 ---
