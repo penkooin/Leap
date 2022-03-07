@@ -110,24 +110,24 @@ public class StaticResourceManager {
 
         String host;        
         Path staticResourcePath;
-        List<Path> inDiskResource;
-        Map<Path, byte[]> inMemoryResourceMap;
-        Map<Path, Object> resourceTree;
+        //List<Path> inDiskResource;
+        //Map<Path, byte[]> inMemoryResourceMap;
+        //Map<Path, Object> resourceTree;
         List<Path> resourceDirs;
         WatchService watchService;
+        Map<WatchKey, Object> hostResourceMap;
 
         /**
          * Construct with host name
          * @param host
          * @throws IOException
-         * @throws InterruptedException
          */
         public Resource(String host) throws IOException {
             this.host = host;
             this.staticResourcePath = ResourceHelper.getStaticPath(this.host);
             //this.inDiskResource = getInDiskResourcePaths();
             //this.inMemoryResourceMap = loadInMemoryResources();
-            this.resourceTree = new LinkedHashMap<>();
+            //this.resourceTree = new LinkedHashMap<>();
             ////////////////////////////////////////////////////////////////////////////////////////////
             //Critical section... Below code is setting Resource object to host object in Context.
             //This must be implemented at this point after all of in-memory and resource be loaded.
@@ -141,7 +141,8 @@ public class StaticResourceManager {
                 this.watchMap.put(p.register(this.watchService, WATCH_KIND), p);
                 LoggerFactory.getLogger(this.host).info("Path: "+p.toString());
             }
-            this.resourceTree = loadResoureTree(this.resourceTree, this.staticResourcePath);
+            //this.resourceTree = loadResoureTree(this.resourceTree, this.staticResourcePath);
+
             start();
             LoggerFactory.getLogger(this.host).info("[RESOUCE INITIALIZED] Resource object for host: "+this.host+" started. Watching Paths: ");
         }
@@ -157,7 +158,7 @@ public class StaticResourceManager {
                 try {
                     key = this.watchService.take();
                     for(WatchEvent<?> event : key.pollEvents()) {
-                        System.out.println("KIND: "+event.kind()+"     Context: "+event.context()+"   Path: "+this.watchMap.get(key));
+                        System.out.println("KIND: "+event.kind()+"   Context: "+event.context()+"   Path: "+this.watchMap.get(key));
                         Path eventPath = this.watchMap.get(key);
                         if(eventPath == null) continue;
                         eventPath = eventPath.resolve((Path)event.context());
@@ -172,18 +173,18 @@ public class StaticResourceManager {
                                     this.resourceTree.put(eventPath, eventPath.toFile());
                                 }
                             }
-                        } else if(event.kind() == StandardWatchEventKinds.ENTRY_DELETE) {                            
+                        } else if(event.kind() == StandardWatchEventKinds.ENTRY_DELETE) {
                             this.resourceTree.remove(eventPath);
                             watchMap.remove(key);
                             LoggerFactory.getLogger(this.host).debug("[WATCH] Resource removed: "+eventPath.toString());
                         } else {
                             LoggerFactory.getLogger(this.host).debug("[WATCH] Watch service overflow detected: "+event.toString());
-                        }                                   
+                        }
                     }
                     ObjectMapper om = new ObjectMapper();
                     String json = om.writerWithDefaultPrettyPrinter().writeValueAsString(this.resourceTree);
                     System.out.println(json);
-                } catch(Exception e) {                    
+                } catch(Exception e) {
                     LoggerFactory.getLogger(this.host).error(e.getMessage(), e);
                 } finally {
                     if(key != null) {
@@ -290,7 +291,6 @@ public class StaticResourceManager {
          * @param path
          * @return
          * @throws IOException
-         */
         public Map<Path, Object> loadResoureTree(Map<Path, Object> tree, Path path) throws IOException {
             File[] files = path.toFile().listFiles();
             for(File file : files) {
@@ -306,6 +306,7 @@ public class StaticResourceManager {
             }
             return tree;
         }
+         */
 
         /**
          * Get resource data from resource tree map
