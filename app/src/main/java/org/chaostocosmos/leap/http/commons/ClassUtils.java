@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.Context;
+import org.chaostocosmos.leap.http.StaticResourceManager;
 import org.chaostocosmos.leap.http.enums.PROTOCOL;
 import org.chaostocosmos.leap.http.filters.ILeapFilter;
 import org.chaostocosmos.leap.http.services.ILeapService;
@@ -59,7 +60,7 @@ public class ClassUtils {
      */
     public static List<Class<? extends ILeapService>> findLeapServices(String host, boolean reloadConfig) {
         if(reloadConfig) {
-            Context.getInstance().loadConfig();
+            Context.get().loadConfig();
         }
 
         return null;        
@@ -74,7 +75,7 @@ public class ClassUtils {
      */
     public static List<Class<? extends ILeapService>> findAllLeapServices(URLClassLoader classLoader, boolean reloadConfig) throws IOException, URISyntaxException {
         if(reloadConfig) {
-            Context.getInstance().loadConfig();
+            Context.get().loadConfig();
         }
         List<Class<? extends ILeapService>> services = findClasses(classLoader, ILeapService.class, getClassLoader().getResource(""))
                                                        .stream()
@@ -276,25 +277,28 @@ public class ClassUtils {
      * Get Hosts object mapping with Map
      * @param map
      * @return
+     * @throws IOException
      */
-    public static Hosts mappingToHosts(Map<Object, Object> map) {
+    public static Hosts mappingToHosts(Map<Object, Object> map) throws IOException {
         return new Hosts(
-            (boolean)map.get("default"),
+            map.get("default") != null ? (boolean)map.get("default") : false,
             (String)map.get("server-name"),
             PROTOCOL.getProtocol((String)map.get("protocol")),
             Charset.forName((String)map.get("charset")),
             (String)map.get("host"),
             (int)map.get("port"),
             (List<User>)((List<Map<?, ?>>)map.get("users")).stream().map(m -> new User(m.get("username").toString(), m.get("password").toString(), GRANT.valueOf(m.get("grant").toString()))).collect(Collectors.toList()),
-            Paths.get((String)map.get("dynamic-classpaths")),
-            (List<String>)((List<?>)((Map<?, ?>)map.get("resource-filters")).get("allowed")).stream().map(f -> f.toString()).collect(Collectors.toList()),
-            (List<String>)((List<?>)((Map<?, ?>)map.get("resource-filters")).get("forbidden")).stream().map(f -> f.toString()).collect(Collectors.toList()),
-            ((List<?>)map.get("error-filters")).stream().map(f -> getClass(ClassLoader.getSystemClassLoader(), f.toString())).collect(Collectors.toList()),
-            Paths.get((String)map.get("docroot")),
-            Paths.get((String)map.get("docroot")).resolve((String)map.get("welcome")).toFile(),
+            !map.get("dynamic-classpaths").equals("") ? Paths.get((String)map.get("dynamic-classpaths")) : null,
+            ((List<?>)((Map<?, ?>)map.get("resource")).get("in-memory-filter")).stream().map(p -> p.toString()).collect(Collectors.toList()),
+            (List<String>)((Map<?, ?>)map.get("resource.access-filters")),
+            ((List<?>)map.get("error-filters")).stream().map(f -> ClassUtils.getClass(ClassLoader.getSystemClassLoader(), f.toString().trim())).collect(Collectors.toList()),
+            Paths.get((String)map.get("doc-root")),
+            Paths.get((String)map.get("doc-root")).resolve((String)map.get("welcome")).toFile(),
             Paths.get((String)map.get("logs")),
-            UtilBox.getLogLevels((String)map.get("log-level"), ",")
-        );
+            UtilBox.getLogLevels((String)map.get("log-level"), ","),
+            map,
+            StaticResourceManager.get((String)map.get("host"))
+            );
     }
 
     /**
@@ -307,15 +311,15 @@ public class ClassUtils {
         map.put("default", host.isDefaultHost());
         map.put("server-name", host.getServerName());
         map.put("protocol", host.getProtocol().name());
-        map.put("charset", host.getCharset().name());
+        map.put("charset", host.charset().name());
         map.put("host", host.getHost());
         map.put("port", host.getPort());
         map.put("users", host.getUsers().stream().map(user -> user.getUserMap()).collect(Collectors.toList()));
         map.put("dynamic-classpaths", host.getDynamicClasspaths().toString());
-        Map<Object, Object> resourceFilterMap = new HashMap<>();
-        resourceFilterMap.put("allowed", host.getAllowedResourceFilters());
-        resourceFilterMap.put("forbidden", host.getForbiddenResourceFilters());
-        map.put("resource-filters", resourceFilterMap);
+        Map<Object, Object> filterMap = new HashMap<>();
+        filterMap.put("in-memory-filters", host.getInMemoryFilters()); 
+        filterMap.put("access-filters", host.getAccessFilters());
+        map.put("resource", filterMap);
         map.put("error-filters", host.getErrorFilters());
         map.put("doc-root", host.getDocroot().toString());
         map.put("welcome", host.getWelcomeFile().toPath().toString());

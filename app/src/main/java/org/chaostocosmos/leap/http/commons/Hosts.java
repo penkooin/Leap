@@ -1,14 +1,18 @@
 package org.chaostocosmos.leap.http.commons;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import org.chaostocosmos.leap.http.StaticResourceManager.Resource;
 import org.chaostocosmos.leap.http.enums.PROTOCOL;
 import org.chaostocosmos.leap.http.user.GRANT;
 import org.chaostocosmos.leap.http.user.User;
@@ -27,97 +31,107 @@ public class Hosts {
     /**
      * Server name
      */
-    String serverName;
+    private String serverName;
 
     /**
      * Web protocol type
      */
-    PROTOCOL protocol;
+    private PROTOCOL protocol;
 
     /**
      * Host charset
      */
-    Charset charset;
+    private Charset charset;
 
     /**
      * Host name
      */
-    String host;
+    private String host;
     
     /**
      * Host port
      */
-    int port;
+    private int port;
 
     /**
      * User Map list
      */
-    List<User> users;
+    private List<User> users;
 
     /**
      * Dynamic class path object
      */
-    Path dynamicClaspaths;
+    private Path dynamicClasspaths;
+
+    /**
+     * Resources filter to be in memory area
+     */
+    private List<String> inMemoryFilter;
 
     /**
      * Allowed resource filter string
      */
-    List<String> allowedResourceFilters;
-
-    /**
-     * forbidden resource filter string
-     */
-    List<String> forbiddenResourceFilters;
+    private List<String> accessFilters;
 
     /**
      * Error filter classes
      */
-    List<Class<?>> errorFilters;
+    private List<Class<?>> errorFilters;
 
     /**
      * Document root path object
      */
-    Path docroot;
+    private Path docroot;
 
     /**
      * Welcome file object
      */
-    File welcomeFile;
+    private File welcomeFile;
 
     /**
      * Log path object
      */
-    Path logPath;
+    private Path logPath;
 
     /**
      * Log levels liste
      */
-    List<Level> logLevel;
+    private List<Level> logLevel;
 
     /**
      * Host map object
      */
-    Map<Object, Object> hostMap;
+    private Map<Object, Object> hostsMap;
+
+    /**
+     * Resource object for host
+     */
+    private Resource resource;
 
     /**
      * Default constructor
+     * @param map
+     * @throws IOException
      */
-    public Hosts(Map<Object, Object> map) {
-        this.isDefaultHost = map.get("default") != null ? (boolean)map.get("default") : false;
-        this.serverName = (String)map.get("server-name");
-        this.protocol = PROTOCOL.getProtocol((String)map.get("protocol"));
-        this.charset = Charset.forName((String)map.get("charset"));
-        this.host = (String)map.get("host");
-        this.port = (int)map.get("port");
-        this.users = (List<User>)((List<Map<?, ?>>)map.get("users")).stream().map(m -> new User(m.get("username").toString(), m.get("password").toString(), GRANT.valueOf(m.get("grant").toString()))).collect(Collectors.toList());
-        this.dynamicClaspaths = !map.get("dynamic-classpaths").equals("") ? Paths.get((String)map.get("dynamic-classpaths")) : null;
-        this.allowedResourceFilters = (List<String>)((List<?>)((Map<?, ?>)map.get("resource-filters")).get("allowed")).stream().map(f -> f.toString()).collect(Collectors.toList());
-        this.forbiddenResourceFilters = (List<String>)((List<?>)((Map<?, ?>)map.get("resource-filters")).get("forbidden")).stream().map(f -> f.toString()).collect(Collectors.toList());
-        this.errorFilters = ((List<?>)map.get("error-filters")).stream().map(f -> ClassUtils.getClass(ClassLoader.getSystemClassLoader(), f.toString().trim())).collect(Collectors.toList());
-        this.docroot = Paths.get((String)map.get("doc-root"));
-        this.welcomeFile = Paths.get((String)map.get("doc-root")).resolve((String)map.get("welcome")).toFile();
-        this.logPath = Paths.get((String)map.get("logs"));
-        this.logLevel = UtilBox.getLogLevels((String)map.get("log-level"), ",");    
+    public Hosts(Map<Object, Object> map) throws IOException {
+        this(
+        map.get("default") != null ? (boolean)map.get("default") : false,
+        (String)map.get("server-name"),
+        PROTOCOL.getProtocol((String)map.get("protocol")),
+        Charset.forName((String)map.get("charset")),
+        (String)map.get("host"),
+        (int)map.get("port"),
+        (List<User>)((List<Map<?, ?>>)map.get("users")).stream().map(m -> new User(m.get("username").toString(), m.get("password").toString(), GRANT.valueOf(m.get("grant").toString()))).collect(Collectors.toList()),
+        !map.get("dynamic-classpaths").equals("") ? Paths.get((String)map.get("dynamic-classpaths")) : null,
+        (List<String>)((Map<?, ?>)map.get("resource")).get("in-memory-filters"),
+        (List<String>)((Map<?, ?>)map.get("resource")).get("access-filters"),
+        ((List<?>)map.get("error-filters")).stream().map(f -> ClassUtils.getClass(ClassLoader.getSystemClassLoader(), f.toString().trim())).collect(Collectors.toList()),
+        Paths.get((String)map.get("doc-root")),
+        Paths.get((String)map.get("doc-root")).resolve((String)map.get("welcome")).toFile(),
+        Paths.get((String)map.get("logs")),
+        UtilBox.getLogLevels((String)map.get("log-level"), ","),
+        map,
+        null);
     }
 
     /**
@@ -130,13 +144,15 @@ public class Hosts {
      * @param port
      * @param users
      * @param dynamicClasspaths
-     * @param allowedResourceFilters
-     * @param forbiddenResourceFilters
+     * @param inMemoryFilter
+     * @param accessFilters
      * @param errorFilters
      * @param docroot
      * @param welcomeFile
      * @param logPath
      * @param logLevel
+     * @param hostsMap
+     * @param resource
      */
     public Hosts(
                  boolean isDefaultHost, 
@@ -147,13 +163,16 @@ public class Hosts {
                  int port, 
                  List<User> users, 
                  Path dynamicClaspaths, 
-                 List<String> allowedResourceFilters, 
-                 List<String> forbiddenResourceFilters,
+                 List<String> inMemoryFilter, 
+                 List<String> accessFilters, 
                  List<Class<?>> errorFilters, 
                  Path docroot, 
                  File welcomeFile,
                  Path logPath,  
-                 List<Level> logLevel)  {
+                 List<Level> logLevel,
+                 Map<Object, Object> hostsMap,
+                 Resource resource
+                 )  {
         this.isDefaultHost = isDefaultHost;
         this.serverName = serverName;
         this.protocol = protocol;
@@ -161,14 +180,16 @@ public class Hosts {
         this.host = host;
         this.port = port;
         this.users = users;
-        this.dynamicClaspaths = dynamicClaspaths;
-        this.allowedResourceFilters = allowedResourceFilters;
-        this.forbiddenResourceFilters = forbiddenResourceFilters;
+        this.dynamicClasspaths = dynamicClaspaths;
+        this.inMemoryFilter = inMemoryFilter;
+        this.accessFilters = accessFilters;
         this.errorFilters = errorFilters;
         this.docroot = docroot.normalize();
         this.welcomeFile = welcomeFile;
         this.logPath = logPath;
         this.logLevel = logLevel;
+        this.hostsMap = hostsMap;
+        this.resource = resource;
     }
 
     /**
@@ -215,7 +236,7 @@ public class Hosts {
      * Get charset of the host
      * @return
      */
-    public Charset getCharset() {
+    public Charset charset() {
         return this.charset;
     }
 
@@ -280,7 +301,7 @@ public class Hosts {
      * @return
      */
     public Path getDynamicClasspaths() {
-        return this.dynamicClaspaths;
+        return this.dynamicClasspaths;
     }
 
     /**
@@ -288,39 +309,39 @@ public class Hosts {
      * @param dynamicClasspaths
      */
     public void setDynamicClasspaths(Path dynamicClaspaths) {
-        this.dynamicClaspaths = dynamicClaspaths;
+        this.dynamicClasspaths = dynamicClaspaths;
+    }
+
+    /**
+     * Get filters for being loaded resources to memory
+     * @return
+     */
+    public List<String> getInMemoryFilters() {
+        return this.inMemoryFilter;
+    }
+
+    /**
+     * Set filters for being loaded resources to memory
+     * @param resourcesInMemory
+     */
+    public void setInMemoryFilter(List<String> inMemoryFilter) {
+        this.inMemoryFilter = inMemoryFilter;
     }
 
     /**
      * Get allowed resource filters
      * @return
      */
-    public List<String> getAllowedResourceFilters() {
-        return this.allowedResourceFilters;
+    public List<String> getAccessFilters() {
+        return this.accessFilters;
     }
 
     /**
      * Set allowed resource filters
      * @param allowedResourceFilters
      */
-    public void setAllowedResourceFilters(List<String> allowedResourceFilters) {
-        this.allowedResourceFilters = allowedResourceFilters;
-    }
-
-    /**
-     * Get forbidden resource filters
-     * @return
-     */
-    public List<String> getForbiddenResourceFilters() {
-        return this.allowedResourceFilters;
-    }
-
-    /**
-     * Set forbidden resource filter
-     * @param forbiddenResourceFilters
-     */
-    public void setForbiddenResourceFilters(List<String> forbiddenResourceFilters) {
-        this.forbiddenResourceFilters = forbiddenResourceFilters;
+    public void setAccessFilters(List<String> accessFilters) {
+        this.accessFilters = accessFilters;
     }
 
     /**
@@ -338,6 +359,34 @@ public class Hosts {
     public void setErrorFilters(List<Class<?>> errorFilters) {
         this.errorFilters = errorFilters;
     }  
+
+    /**
+     * Filtering in-memory resources with specified resourceName
+     * @param resourceName
+     * @return
+     */
+    public boolean filteringInMemory(String resourceName) {
+        return filtering(resourceName, this.inMemoryFilter);
+    }
+
+    /**
+     * Filtering in-disk resources with specified resourceName
+     * @param resourceName
+     * @return
+     */
+    public boolean filteringInAccess(String resourceName) {
+        return filtering(resourceName, this.accessFilters);
+    }
+
+    /**
+     * Whether resource name is corresponded with in-memory filters
+     * @param resourceName
+     * @param filters
+     * @return
+     */
+    public boolean filtering(String resourceName, List<String> filters) {
+        return filters.stream().anyMatch(f -> !f.trim().equals("") && resourceName.matches(Arrays.asList(f.split(Pattern.quote("*"))).stream().map(s -> s.equals("") ? "" : Pattern.quote(s)).collect(Collectors.joining(".*"))+".*"));
+    }
 
     /**
      * Get docroot
@@ -404,6 +453,29 @@ public class Hosts {
     }
 
     /**
+     * Get hosts Map
+     * @return
+     */
+    public Map<Object, Object> getHostsMap() {
+        return this.hostsMap;
+    }
+
+    /**
+     * Get resource for host object
+     * @return
+     */
+    public Resource getResource() {
+        return this.resource;
+    }
+
+    /**
+     * Set resource for host object
+     */
+    public void setResource(Resource resource) {
+        this.resource = resource;
+    }
+
+    /**
      * Get InetSocketAddress
      */
     public InetSocketAddress getInetAddress() {
@@ -417,24 +489,27 @@ public class Hosts {
         return ClassUtils.mappingToMap(this);
     }
 
+
     @Override
     public String toString() {
         return "{" +
             " isDefaultHost='" + isDefaultHost() + "'" +
             ", serverName='" + getServerName() + "'" +
             ", protocol='" + getProtocol() + "'" +
-            ", charset='" + getCharset() + "'" +
+            ", charset='" + charset() + "'" +
             ", host='" + getHost() + "'" +
             ", port='" + getPort() + "'" +
             ", users='" + getUsers() + "'" +
             ", dynamicClaspaths='" + getDynamicClasspaths() + "'" +
-            ", allowedResourceFilters='" + getAllowedResourceFilters() + "'" +
-            ", forbiddenResourceFilters='" + getForbiddenResourceFilters() + "'" +
+            ", accessFilters='" + getAccessFilters() + "'" +
+            ", inMemoryFilter='" + getInMemoryFilters() + "'" +
             ", errorFilters='" + getErrorFilters() + "'" +
             ", docroot='" + getDocroot() + "'" +
             ", welcomeFile='" + getWelcomeFile() + "'" +
             ", logPath='" + getLogPath() + "'" +
             ", logLevel='" + getLogLevel() + "'" +
+            ", hostMap='" + getHostsMap() + "'" +
+            ", resource='" + getResource() + "'" +
             "}";
     }
 }

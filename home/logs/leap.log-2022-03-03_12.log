@@ -1,0 +1,460 @@
+2022-03-03 12:22:49.228 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static
+2022-03-03 12:22:49.243 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더
+2022-03-03 12:22:49.245 INFO  - [RESOUCE INITIALIZED] Resource object for host: localhost started. Watching Paths: 
+2022-03-03 12:22:49.322 INFO  - Leap WAS server starting......
+2022-03-03 12:22:49.326 INFO  - --------------------------------------------------------------------------
+2022-03-03 12:22:49.328 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-03-03 12:22:49.329 INFO  - verbose mode on
+2022-03-03 12:22:49.399 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:22:49.400 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 12:22:49.401 INFO  - [DEFAULT HOST] - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:22:49.408 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:22:49.409 INFO  - [VIRTUAL HOST] - Protocol: HTTPS_1_0   Server: leap1   Host: awesome   Port: 8082   Doc-Root: home1   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:22:49.413 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:22:49.414 INFO  - [VIRTUAL HOST] - Protocol: HTTP_1_0   Server: leap2   Host: www.leap1.org   Port: 8081   Doc-Root: home2   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:22:49.414 INFO  - --------------------------------------------------------------------------
+2022-03-03 12:22:49.418 INFO  - [HTTP SERVER START] Address: localhost/127.0.0.1:8080
+2022-03-03 12:22:49.418 INFO  - [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:8081
+2022-03-03 12:22:49.937 INFO  - [HTTPS SERVER START] Address: awesome/127.0.0.1:8082  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-03-03 12:23:40.863 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static
+2022-03-03 12:23:40.866 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더
+2022-03-03 12:23:40.867 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더 (2)
+2022-03-03 12:23:40.867 INFO  - [RESOUCE INITIALIZED] Resource object for host: localhost started. Watching Paths: 
+2022-03-03 12:23:40.883 INFO  - Leap WAS server starting......
+2022-03-03 12:23:40.885 INFO  - --------------------------------------------------------------------------
+2022-03-03 12:23:40.886 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-03-03 12:23:40.886 INFO  - verbose mode on
+2022-03-03 12:23:40.942 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:23:40.943 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 12:23:40.944 INFO  - [DEFAULT HOST] - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:23:40.952 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:23:40.953 INFO  - [VIRTUAL HOST] - Protocol: HTTPS_1_0   Server: leap1   Host: awesome   Port: 8082   Doc-Root: home1   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:23:40.958 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:23:40.959 INFO  - [VIRTUAL HOST] - Protocol: HTTP_1_0   Server: leap2   Host: www.leap1.org   Port: 8081   Doc-Root: home2   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:23:40.960 INFO  - --------------------------------------------------------------------------
+2022-03-03 12:23:40.976 INFO  - [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:8081
+2022-03-03 12:23:40.976 INFO  - [HTTP SERVER START] Address: localhost/127.0.0.1:8080
+2022-03-03 12:23:41.374 INFO  - [HTTPS SERVER START] Address: awesome/127.0.0.1:8082  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-03-03 12:23:43.120 ERROR - D:\0.github\Leap\big.html
+java.nio.file.NoSuchFileException: D:\0.github\Leap\big.html
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:85)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:103)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:108)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:235)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:371)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:422)
+	at java.base/java.nio.file.Files.readAllBytes(Files.java:3206)
+	at org.chaostocosmos.leap.http.StaticResourceManager$Resource.run(StaticResourceManager.java:166)
+2022-03-03 12:23:55.707 ERROR - D:\0.github\Leap\big.html.bak
+java.nio.file.NoSuchFileException: D:\0.github\Leap\big.html.bak
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:85)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:103)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:108)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:235)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:371)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:422)
+	at java.base/java.nio.file.Files.readAllBytes(Files.java:3206)
+	at org.chaostocosmos.leap.http.StaticResourceManager$Resource.run(StaticResourceManager.java:166)
+2022-03-03 12:24:36.114 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static
+2022-03-03 12:24:36.117 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더
+2022-03-03 12:24:36.117 INFO  - [RESOUCE INITIALIZED] Resource object for host: localhost started. Watching Paths: 
+2022-03-03 12:24:36.145 INFO  - Leap WAS server starting......
+2022-03-03 12:24:36.149 INFO  - --------------------------------------------------------------------------
+2022-03-03 12:24:36.151 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-03-03 12:24:36.153 INFO  - verbose mode on
+2022-03-03 12:24:36.198 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:24:36.200 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 12:24:36.200 INFO  - [DEFAULT HOST] - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:24:36.205 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:24:36.205 INFO  - [VIRTUAL HOST] - Protocol: HTTPS_1_0   Server: leap1   Host: awesome   Port: 8082   Doc-Root: home1   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:24:36.210 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:24:36.210 INFO  - [VIRTUAL HOST] - Protocol: HTTP_1_0   Server: leap2   Host: www.leap1.org   Port: 8081   Doc-Root: home2   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:24:36.211 INFO  - --------------------------------------------------------------------------
+2022-03-03 12:24:36.216 INFO  - [HTTP SERVER START] Address: localhost/127.0.0.1:8080
+2022-03-03 12:24:36.216 INFO  - [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:8081
+2022-03-03 12:24:36.717 INFO  - [HTTPS SERVER START] Address: awesome/127.0.0.1:8082  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-03-03 12:24:39.661 ERROR - D:\0.github\Leap\big.html
+java.nio.file.NoSuchFileException: D:\0.github\Leap\big.html
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:85)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:103)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:108)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:235)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:371)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:422)
+	at java.base/java.nio.file.Files.readAllBytes(Files.java:3206)
+	at org.chaostocosmos.leap.http.StaticResourceManager$Resource.run(StaticResourceManager.java:166)
+2022-03-03 12:25:25.918 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static
+2022-03-03 12:25:25.920 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더
+2022-03-03 12:25:25.921 INFO  - [RESOUCE INITIALIZED] Resource object for host: localhost started. Watching Paths: 
+2022-03-03 12:25:26.029 INFO  - Leap WAS server starting......
+2022-03-03 12:25:26.030 INFO  - --------------------------------------------------------------------------
+2022-03-03 12:25:26.031 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-03-03 12:25:26.031 INFO  - verbose mode on
+2022-03-03 12:25:26.076 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:25:26.078 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 12:25:26.079 INFO  - [DEFAULT HOST] - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:25:26.084 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:25:26.086 INFO  - [VIRTUAL HOST] - Protocol: HTTPS_1_0   Server: leap1   Host: awesome   Port: 8082   Doc-Root: home1   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:25:26.092 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:25:26.093 INFO  - [VIRTUAL HOST] - Protocol: HTTP_1_0   Server: leap2   Host: www.leap1.org   Port: 8081   Doc-Root: home2   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:25:26.093 INFO  - --------------------------------------------------------------------------
+2022-03-03 12:25:26.098 INFO  - [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:8081
+2022-03-03 12:25:26.098 INFO  - [HTTP SERVER START] Address: localhost/127.0.0.1:8080
+2022-03-03 12:25:26.491 INFO  - [HTTPS SERVER START] Address: awesome/127.0.0.1:8082  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-03-03 12:26:48.061 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static
+2022-03-03 12:26:48.063 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더
+2022-03-03 12:26:48.063 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더 (2)
+2022-03-03 12:26:48.064 INFO  - [RESOUCE INITIALIZED] Resource object for host: localhost started. Watching Paths: 
+2022-03-03 12:26:48.079 INFO  - Leap WAS server starting......
+2022-03-03 12:26:48.080 INFO  - --------------------------------------------------------------------------
+2022-03-03 12:26:48.081 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-03-03 12:26:48.081 INFO  - verbose mode on
+2022-03-03 12:26:48.124 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:26:48.126 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 12:26:48.126 INFO  - [DEFAULT HOST] - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:26:48.131 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:26:48.132 INFO  - [VIRTUAL HOST] - Protocol: HTTPS_1_0   Server: leap1   Host: awesome   Port: 8082   Doc-Root: home1   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:26:48.137 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:26:48.138 INFO  - [VIRTUAL HOST] - Protocol: HTTP_1_0   Server: leap2   Host: www.leap1.org   Port: 8081   Doc-Root: home2   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:26:48.139 INFO  - --------------------------------------------------------------------------
+2022-03-03 12:26:48.143 INFO  - [HTTP SERVER START] Address: localhost/127.0.0.1:8080
+2022-03-03 12:26:48.143 INFO  - [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:8081
+2022-03-03 12:26:48.574 INFO  - [HTTPS SERVER START] Address: awesome/127.0.0.1:8082  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-03-03 12:27:58.700 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static
+2022-03-03 12:27:58.702 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더
+2022-03-03 12:27:58.703 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더 (2)
+2022-03-03 12:27:58.704 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더 (3)
+2022-03-03 12:27:58.705 INFO  - [RESOUCE INITIALIZED] Resource object for host: localhost started. Watching Paths: 
+2022-03-03 12:27:58.723 INFO  - Leap WAS server starting......
+2022-03-03 12:27:58.725 INFO  - --------------------------------------------------------------------------
+2022-03-03 12:27:58.726 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-03-03 12:27:58.726 INFO  - verbose mode on
+2022-03-03 12:27:58.779 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:27:58.780 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 12:27:58.780 INFO  - [DEFAULT HOST] - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:27:58.787 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:27:58.787 INFO  - [VIRTUAL HOST] - Protocol: HTTPS_1_0   Server: leap1   Host: awesome   Port: 8082   Doc-Root: home1   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:27:58.796 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:27:58.797 INFO  - [VIRTUAL HOST] - Protocol: HTTP_1_0   Server: leap2   Host: www.leap1.org   Port: 8081   Doc-Root: home2   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:27:58.798 INFO  - --------------------------------------------------------------------------
+2022-03-03 12:27:58.802 INFO  - [HTTP SERVER START] Address: localhost/127.0.0.1:8080
+2022-03-03 12:27:58.802 INFO  - [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:8081
+2022-03-03 12:27:59.256 INFO  - [HTTPS SERVER START] Address: awesome/127.0.0.1:8082  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-03-03 12:28:19.541 ERROR - D:\0.github\Leap\home\webapp\WEB-INF\static\big.html
+java.nio.file.NoSuchFileException: D:\0.github\Leap\home\webapp\WEB-INF\static\big.html
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:85)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:103)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:108)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:235)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:371)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:422)
+	at java.base/java.nio.file.Files.readAllBytes(Files.java:3206)
+	at org.chaostocosmos.leap.http.StaticResourceManager$Resource.run(StaticResourceManager.java:164)
+2022-03-03 12:28:19.558 ERROR - D:\0.github\Leap\home\webapp\WEB-INF\static\big.html
+java.nio.file.NoSuchFileException: D:\0.github\Leap\home\webapp\WEB-INF\static\big.html
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:85)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:103)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:108)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:235)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:371)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:422)
+	at java.base/java.nio.file.Files.readAllBytes(Files.java:3206)
+	at org.chaostocosmos.leap.http.StaticResourceManager$Resource.run(StaticResourceManager.java:164)
+2022-03-03 12:28:26.458 ERROR - D:\0.github\Leap\home\webapp\WEB-INF\static\big.html
+java.nio.file.NoSuchFileException: D:\0.github\Leap\home\webapp\WEB-INF\static\big.html
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:85)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:103)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:108)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:235)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:371)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:422)
+	at java.base/java.nio.file.Files.readAllBytes(Files.java:3206)
+	at org.chaostocosmos.leap.http.StaticResourceManager$Resource.run(StaticResourceManager.java:164)
+2022-03-03 12:28:26.573 ERROR - D:\0.github\Leap\home\webapp\WEB-INF\static\big.html
+java.nio.file.NoSuchFileException: D:\0.github\Leap\home\webapp\WEB-INF\static\big.html
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:85)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:103)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:108)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:235)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:371)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:422)
+	at java.base/java.nio.file.Files.readAllBytes(Files.java:3206)
+	at org.chaostocosmos.leap.http.StaticResourceManager$Resource.run(StaticResourceManager.java:164)
+2022-03-03 12:29:25.576 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static
+2022-03-03 12:29:25.579 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더
+2022-03-03 12:29:25.579 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더 (2)
+2022-03-03 12:29:25.579 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더 (3)
+2022-03-03 12:29:25.580 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더 (4)
+2022-03-03 12:29:25.580 INFO  - [RESOUCE INITIALIZED] Resource object for host: localhost started. Watching Paths: 
+2022-03-03 12:29:25.596 INFO  - Leap WAS server starting......
+2022-03-03 12:29:25.597 INFO  - --------------------------------------------------------------------------
+2022-03-03 12:29:25.597 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-03-03 12:29:25.598 INFO  - verbose mode on
+2022-03-03 12:29:25.737 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:29:25.738 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 12:29:25.739 INFO  - [DEFAULT HOST] - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:29:25.744 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:29:25.745 INFO  - [VIRTUAL HOST] - Protocol: HTTPS_1_0   Server: leap1   Host: awesome   Port: 8082   Doc-Root: home1   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:29:25.754 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:29:25.754 INFO  - [VIRTUAL HOST] - Protocol: HTTP_1_0   Server: leap2   Host: www.leap1.org   Port: 8081   Doc-Root: home2   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:29:25.754 INFO  - --------------------------------------------------------------------------
+2022-03-03 12:29:25.758 INFO  - [HTTP SERVER START] Address: localhost/127.0.0.1:8080
+2022-03-03 12:29:25.758 INFO  - [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:8081
+2022-03-03 12:29:26.276 INFO  - [HTTPS SERVER START] Address: awesome/127.0.0.1:8082  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-03-03 12:29:31.193 ERROR - D:\0.github\Leap\home\webapp\WEB-INF\static\big - 복사본.html
+java.nio.file.NoSuchFileException: D:\0.github\Leap\home\webapp\WEB-INF\static\big - 복사본.html
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:85)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:103)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:108)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:235)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:371)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:422)
+	at java.base/java.nio.file.Files.readAllBytes(Files.java:3206)
+	at org.chaostocosmos.leap.http.StaticResourceManager$Resource.run(StaticResourceManager.java:164)
+2022-03-03 12:29:31.203 ERROR - D:\0.github\Leap\home\webapp\WEB-INF\static\big.html
+java.nio.file.NoSuchFileException: D:\0.github\Leap\home\webapp\WEB-INF\static\big.html
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:85)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:103)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:108)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:235)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:371)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:422)
+	at java.base/java.nio.file.Files.readAllBytes(Files.java:3206)
+	at org.chaostocosmos.leap.http.StaticResourceManager$Resource.run(StaticResourceManager.java:164)
+2022-03-03 12:29:55.850 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static
+2022-03-03 12:29:55.853 INFO  - [RESOUCE INITIALIZED] Resource object for host: localhost started. Watching Paths: 
+2022-03-03 12:29:55.866 INFO  - Leap WAS server starting......
+2022-03-03 12:29:55.867 INFO  - --------------------------------------------------------------------------
+2022-03-03 12:29:55.868 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-03-03 12:29:55.868 INFO  - verbose mode on
+2022-03-03 12:29:55.909 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:29:55.910 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 12:29:55.911 INFO  - [DEFAULT HOST] - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:29:55.915 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:29:55.916 INFO  - [VIRTUAL HOST] - Protocol: HTTPS_1_0   Server: leap1   Host: awesome   Port: 8082   Doc-Root: home1   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:29:55.922 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:29:55.923 INFO  - [VIRTUAL HOST] - Protocol: HTTP_1_0   Server: leap2   Host: www.leap1.org   Port: 8081   Doc-Root: home2   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:29:55.923 INFO  - --------------------------------------------------------------------------
+2022-03-03 12:29:55.929 INFO  - [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:8081
+2022-03-03 12:29:55.929 INFO  - [HTTP SERVER START] Address: localhost/127.0.0.1:8080
+2022-03-03 12:29:56.345 INFO  - [HTTPS SERVER START] Address: awesome/127.0.0.1:8082  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-03-03 12:30:11.813 ERROR - D:\0.github\Leap\home\webapp\WEB-INF\static\big.html
+java.nio.file.NoSuchFileException: D:\0.github\Leap\home\webapp\WEB-INF\static\big.html
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:85)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:103)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:108)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:235)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:371)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:422)
+	at java.base/java.nio.file.Files.readAllBytes(Files.java:3206)
+	at org.chaostocosmos.leap.http.StaticResourceManager$Resource.run(StaticResourceManager.java:164)
+2022-03-03 12:39:13.970 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static
+2022-03-03 12:39:13.973 INFO  - [RESOUCE INITIALIZED] Resource object for host: localhost started. Watching Paths: 
+2022-03-03 12:39:14.012 INFO  - Leap WAS server starting......
+2022-03-03 12:39:14.015 INFO  - --------------------------------------------------------------------------
+2022-03-03 12:39:14.018 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-03-03 12:39:14.019 INFO  - verbose mode on
+2022-03-03 12:39:14.091 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:39:14.093 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 12:39:14.095 INFO  - [DEFAULT HOST] - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:39:14.104 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:39:14.105 INFO  - [VIRTUAL HOST] - Protocol: HTTPS_1_0   Server: leap1   Host: awesome   Port: 8082   Doc-Root: home1   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:39:14.118 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:39:14.120 INFO  - [VIRTUAL HOST] - Protocol: HTTP_1_0   Server: leap2   Host: www.leap1.org   Port: 8081   Doc-Root: home2   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:39:14.121 INFO  - --------------------------------------------------------------------------
+2022-03-03 12:39:14.126 INFO  - [HTTP SERVER START] Address: localhost/127.0.0.1:8080
+2022-03-03 12:39:14.126 INFO  - [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:8081
+2022-03-03 12:39:14.611 INFO  - [HTTPS SERVER START] Address: awesome/127.0.0.1:8082  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-03-03 12:41:23.606 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static
+2022-03-03 12:41:23.609 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더
+2022-03-03 12:41:23.610 INFO  - [RESOUCE INITIALIZED] Resource object for host: localhost started. Watching Paths: 
+2022-03-03 12:41:23.628 INFO  - Leap WAS server starting......
+2022-03-03 12:41:23.630 INFO  - --------------------------------------------------------------------------
+2022-03-03 12:41:23.630 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-03-03 12:41:23.630 INFO  - verbose mode on
+2022-03-03 12:41:23.688 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:41:23.691 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 12:41:23.693 INFO  - [DEFAULT HOST] - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:41:23.700 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:41:23.700 INFO  - [VIRTUAL HOST] - Protocol: HTTPS_1_0   Server: leap1   Host: awesome   Port: 8082   Doc-Root: home1   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:41:23.707 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:41:23.708 INFO  - [VIRTUAL HOST] - Protocol: HTTP_1_0   Server: leap2   Host: www.leap1.org   Port: 8081   Doc-Root: home2   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:41:23.709 INFO  - --------------------------------------------------------------------------
+2022-03-03 12:41:23.714 INFO  - [HTTP SERVER START] Address: localhost/127.0.0.1:8080
+2022-03-03 12:41:23.714 INFO  - [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:8081
+2022-03-03 12:41:24.225 INFO  - [HTTPS SERVER START] Address: awesome/127.0.0.1:8082  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-03-03 12:45:41.553 DEBUG - [WATCH] Added in-disk resurce: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더
+2022-03-03 12:46:11.973 DEBUG - [WATCH] Added in-disk resurce: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더1
+2022-03-03 12:49:59.930 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static
+2022-03-03 12:49:59.932 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa
+2022-03-03 12:49:59.932 INFO  - [RESOUCE INITIALIZED] Resource object for host: localhost started. Watching Paths: 
+2022-03-03 12:49:59.947 INFO  - Leap WAS server starting......
+2022-03-03 12:49:59.949 INFO  - --------------------------------------------------------------------------
+2022-03-03 12:49:59.950 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-03-03 12:49:59.950 INFO  - verbose mode on
+2022-03-03 12:49:59.988 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:49:59.989 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 12:49:59.990 INFO  - [DEFAULT HOST] - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:49:59.995 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:49:59.997 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 12:49:59.997 INFO  - [VIRTUAL HOST] - Protocol: HTTPS_1_0   Server: leap1   Host: awesome   Port: 8082   Doc-Root: home1   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:50:00.003 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:50:00.003 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 12:50:00.004 INFO  - [VIRTUAL HOST] - Protocol: HTTP_1_0   Server: leap2   Host: www.leap1.org   Port: 8081   Doc-Root: home2   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:50:00.004 INFO  - --------------------------------------------------------------------------
+2022-03-03 12:50:00.007 INFO  - [HTTP SERVER START] Address: localhost/127.0.0.1:8080
+2022-03-03 12:50:00.007 INFO  - [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:8081
+2022-03-03 12:50:00.402 INFO  - [HTTPS SERVER START] Address: awesome/127.0.0.1:8082  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-03-03 12:50:36.510 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static
+2022-03-03 12:50:36.512 INFO  - [RESOUCE INITIALIZED] Resource object for host: localhost started. Watching Paths: 
+2022-03-03 12:50:36.531 INFO  - Leap WAS server starting......
+2022-03-03 12:50:36.532 INFO  - --------------------------------------------------------------------------
+2022-03-03 12:50:36.533 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-03-03 12:50:36.534 INFO  - verbose mode on
+2022-03-03 12:50:36.590 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:50:36.592 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 12:50:36.593 INFO  - [DEFAULT HOST] - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:50:36.602 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:50:36.604 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 12:50:36.604 INFO  - [VIRTUAL HOST] - Protocol: HTTPS_1_0   Server: leap1   Host: awesome   Port: 8082   Doc-Root: home1   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:50:36.612 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:50:36.612 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 12:50:36.614 INFO  - [VIRTUAL HOST] - Protocol: HTTP_1_0   Server: leap2   Host: www.leap1.org   Port: 8081   Doc-Root: home2   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:50:36.614 INFO  - --------------------------------------------------------------------------
+2022-03-03 12:50:36.619 INFO  - [HTTP SERVER START] Address: localhost/127.0.0.1:8080
+2022-03-03 12:50:36.619 INFO  - [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:8081
+2022-03-03 12:50:37.089 INFO  - [HTTPS SERVER START] Address: awesome/127.0.0.1:8082  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-03-03 12:50:38.906 DEBUG - [WATCH] Added resource directory: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더
+2022-03-03 12:50:44.200 DEBUG - [WATCH] Added in-disk resurce: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더
+2022-03-03 12:50:56.744 DEBUG - [WATCH] Added resource directory: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더
+2022-03-03 12:50:59.384 DEBUG - [WATCH] Added resource directory: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더 (2)
+2022-03-03 12:51:02.384 DEBUG - [WATCH] Added resource directory: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더 (3)
+2022-03-03 12:51:14.583 DEBUG - [WATCH] Added resource directory: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더
+2022-03-03 12:51:37.848 DEBUG - [WATCH] Added resource directory: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더
+2022-03-03 12:52:36.185 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static
+2022-03-03 12:52:36.188 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더
+2022-03-03 12:52:36.188 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더 (2)
+2022-03-03 12:52:36.189 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더 (3)
+2022-03-03 12:52:36.189 INFO  - [RESOUCE INITIALIZED] Resource object for host: localhost started. Watching Paths: 
+2022-03-03 12:52:36.201 INFO  - Leap WAS server starting......
+2022-03-03 12:52:36.202 INFO  - --------------------------------------------------------------------------
+2022-03-03 12:52:36.202 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-03-03 12:52:36.202 INFO  - verbose mode on
+2022-03-03 12:52:36.241 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:52:36.243 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 12:52:36.243 INFO  - [DEFAULT HOST] - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:52:36.248 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:52:36.248 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 12:52:36.249 INFO  - [VIRTUAL HOST] - Protocol: HTTPS_1_0   Server: leap1   Host: awesome   Port: 8082   Doc-Root: home1   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:52:36.253 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:52:36.255 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 12:52:36.262 INFO  - [VIRTUAL HOST] - Protocol: HTTP_1_0   Server: leap2   Host: www.leap1.org   Port: 8081   Doc-Root: home2   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:52:36.267 INFO  - --------------------------------------------------------------------------
+2022-03-03 12:52:36.298 INFO  - [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:8081
+2022-03-03 12:52:36.298 INFO  - [HTTP SERVER START] Address: localhost/127.0.0.1:8080
+2022-03-03 12:52:36.712 INFO  - [HTTPS SERVER START] Address: awesome/127.0.0.1:8082  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-03-03 12:52:40.261 DEBUG - [WATCH] Added resource directory: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더
+2022-03-03 12:53:45.787 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static
+2022-03-03 12:53:45.789 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더
+2022-03-03 12:53:45.789 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더 (2)
+2022-03-03 12:53:45.790 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더 (3)
+2022-03-03 12:53:45.790 INFO  - [RESOUCE INITIALIZED] Resource object for host: localhost started. Watching Paths: 
+2022-03-03 12:53:45.808 INFO  - Leap WAS server starting......
+2022-03-03 12:53:45.810 INFO  - --------------------------------------------------------------------------
+2022-03-03 12:53:45.810 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-03-03 12:53:45.811 INFO  - verbose mode on
+2022-03-03 12:53:45.853 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:53:45.854 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 12:53:45.855 INFO  - [DEFAULT HOST] - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:53:45.873 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:53:45.873 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 12:53:45.874 INFO  - [VIRTUAL HOST] - Protocol: HTTPS_1_0   Server: leap1   Host: awesome   Port: 8082   Doc-Root: home1   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:53:45.881 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:53:45.881 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 12:53:45.883 INFO  - [VIRTUAL HOST] - Protocol: HTTP_1_0   Server: leap2   Host: www.leap1.org   Port: 8081   Doc-Root: home2   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:53:45.883 INFO  - --------------------------------------------------------------------------
+2022-03-03 12:53:45.885 INFO  - [HTTP SERVER START] Address: localhost/127.0.0.1:8080
+2022-03-03 12:53:45.885 INFO  - [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:8081
+2022-03-03 12:53:46.292 INFO  - [HTTPS SERVER START] Address: awesome/127.0.0.1:8082  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-03-03 12:53:50.137 DEBUG - [WATCH] Added resource directory: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더
+2022-03-03 12:53:50.146 DEBUG - [WATCH] Added resource directory: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더 (2)
+2022-03-03 12:54:36.064 DEBUG - [WATCH] Added in-disk resurce: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더 (2)
+2022-03-03 12:54:36.098 ERROR - D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더
+java.nio.file.NoSuchFileException: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:85)
+	at java.base/sun.nio.fs.WindowsException.asIOException(WindowsException.java:112)
+	at java.base/sun.nio.fs.WindowsWatchService$Poller.implRegister(WindowsWatchService.java:366)
+	at java.base/sun.nio.fs.AbstractPoller.processRequests(AbstractPoller.java:265)
+	at java.base/sun.nio.fs.WindowsWatchService$Poller.run(WindowsWatchService.java:596)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-03-03 12:54:36.104 DEBUG - [WATCH] Added in-disk resurce: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더 (3)
+2022-03-03 12:54:36.110 DEBUG - [WATCH] Added in-disk resurce: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더
+2022-03-03 12:55:05.417 DEBUG - [WATCH] Added resource directory: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더
+2022-03-03 12:55:40.704 DEBUG - [WATCH] Added in-disk resurce: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더
+2022-03-03 12:55:44.304 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static
+2022-03-03 12:55:44.306 INFO  - [RESOUCE INITIALIZED] Resource object for host: localhost started. Watching Paths: 
+2022-03-03 12:55:44.319 INFO  - Leap WAS server starting......
+2022-03-03 12:55:44.320 INFO  - --------------------------------------------------------------------------
+2022-03-03 12:55:44.321 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-03-03 12:55:44.321 INFO  - verbose mode on
+2022-03-03 12:55:44.373 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:55:44.374 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 12:55:44.374 INFO  - [DEFAULT HOST] - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:55:44.379 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:55:44.380 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 12:55:44.380 INFO  - [VIRTUAL HOST] - Protocol: HTTPS_1_0   Server: leap1   Host: awesome   Port: 8082   Doc-Root: home1   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:55:44.385 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:55:44.387 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 12:55:44.387 INFO  - [VIRTUAL HOST] - Protocol: HTTP_1_0   Server: leap2   Host: www.leap1.org   Port: 8081   Doc-Root: home2   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:55:44.388 INFO  - --------------------------------------------------------------------------
+2022-03-03 12:55:44.392 INFO  - [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:8081
+2022-03-03 12:55:44.392 INFO  - [HTTP SERVER START] Address: localhost/127.0.0.1:8080
+2022-03-03 12:55:44.919 INFO  - [HTTPS SERVER START] Address: awesome/127.0.0.1:8082  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-03-03 12:55:47.029 DEBUG - [WATCH] Added resource directory: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더
+2022-03-03 12:55:52.532 DEBUG - [WATCH] Added resource directory: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더
+2022-03-03 12:55:52.534 DEBUG - [WATCH] Added resource directory: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더
+2022-03-03 12:57:23.786 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static
+2022-03-03 12:57:23.788 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더
+2022-03-03 12:57:23.788 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더\새 폴더
+2022-03-03 12:57:23.789 INFO  - [RESOUCE INITIALIZED] Resource object for host: localhost started. Watching Paths: 
+2022-03-03 12:57:23.808 INFO  - Leap WAS server starting......
+2022-03-03 12:57:23.810 INFO  - --------------------------------------------------------------------------
+2022-03-03 12:57:23.811 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-03-03 12:57:23.812 INFO  - verbose mode on
+2022-03-03 12:57:23.857 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:57:23.860 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 12:57:23.861 INFO  - [DEFAULT HOST] - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:57:23.868 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:57:23.868 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 12:57:23.869 INFO  - [VIRTUAL HOST] - Protocol: HTTPS_1_0   Server: leap1   Host: awesome   Port: 8082   Doc-Root: home1   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:57:23.874 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:57:23.874 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 12:57:23.875 INFO  - [VIRTUAL HOST] - Protocol: HTTP_1_0   Server: leap2   Host: www.leap1.org   Port: 8081   Doc-Root: home2   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:57:23.875 INFO  - --------------------------------------------------------------------------
+2022-03-03 12:57:23.880 INFO  - [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:8081
+2022-03-03 12:57:23.880 INFO  - [HTTP SERVER START] Address: localhost/127.0.0.1:8080
+2022-03-03 12:57:24.343 INFO  - [HTTPS SERVER START] Address: awesome/127.0.0.1:8082  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-03-03 12:57:27.367 DEBUG - [WATCH] Added resource directory: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더
+2022-03-03 12:59:17.479 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static
+2022-03-03 12:59:17.482 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더
+2022-03-03 12:59:17.482 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더\새 폴더
+2022-03-03 12:59:17.483 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더\새 폴더 (2)
+2022-03-03 12:59:17.483 INFO  - [RESOUCE INITIALIZED] Resource object for host: localhost started. Watching Paths: 
+2022-03-03 12:59:17.501 INFO  - Leap WAS server starting......
+2022-03-03 12:59:17.502 INFO  - --------------------------------------------------------------------------
+2022-03-03 12:59:17.503 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-03-03 12:59:17.503 INFO  - verbose mode on
+2022-03-03 12:59:17.550 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:59:17.551 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 12:59:17.552 INFO  - [DEFAULT HOST] - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:59:17.558 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:59:17.559 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 12:59:17.559 INFO  - [VIRTUAL HOST] - Protocol: HTTPS_1_0   Server: leap1   Host: awesome   Port: 8082   Doc-Root: home1   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:59:17.565 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 12:59:17.566 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 12:59:17.567 INFO  - [VIRTUAL HOST] - Protocol: HTTP_1_0   Server: leap2   Host: www.leap1.org   Port: 8081   Doc-Root: home2   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 12:59:17.567 INFO  - --------------------------------------------------------------------------
+2022-03-03 12:59:17.571 INFO  - [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:8081
+2022-03-03 12:59:17.571 INFO  - [HTTP SERVER START] Address: localhost/127.0.0.1:8080
+2022-03-03 12:59:17.961 INFO  - [HTTPS SERVER START] Address: awesome/127.0.0.1:8082  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-03-03 12:59:21.827 DEBUG - [WATCH] Added resource directory: D:\0.github\Leap\home\webapp\WEB-INF\static\새 폴더

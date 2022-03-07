@@ -7,7 +7,6 @@ import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.chaostocosmos.leap.http.commons.ResourceHelper;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -18,7 +17,7 @@ public class ContextTest {
     Context context;
 
     public ContextTest() throws URISyntaxException, IOException, WASException {    
-        this.context = Context.getInstance();
+        this.context = Context.get();
     }
 
     @Test
@@ -39,8 +38,8 @@ public class ContextTest {
     public void testGetResouce() throws IOException, URISyntaxException, WASException {
         int code = 404;
         Path path = ResourceHelper.getResponseResourcePath("locahost", code);
-        byte[] bytes = ResourceHelper.getInstance().getResourceContent("locahost", "response.html");
-        System.out.println(new String(bytes));
+        //byte[] bytes = ResourceHelper.getResourceContent("response.html");
+        //System.out.println(new String(bytes));
         //String res = Files.readString(new File(Context.class.getClass().getResource("/WEB-INF/static/"+code+".html").toURI()).toPath());
         //assertEquals(res, html);
     }

@@ -1,4 +1,4 @@
-package org.chaostocosmos.leap.http.commons;
+package org.chaostocosmos.leap.http;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -6,11 +6,13 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.http.Context;
+import org.chaostocosmos.leap.http.commons.Hosts;
+import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.enums.PROTOCOL;
 import org.chaostocosmos.leap.http.user.User;
 
@@ -36,8 +38,9 @@ public class HostsManager {
     /**
      * Constructor
      */
-    private HostsManager() {
+    private HostsManager() {        
         this.hostsMap = Context.getHostsMap();
+        System.out.println("HostsManager Initialized... "+new Date().toString());
     }
 
     /**
@@ -254,7 +257,16 @@ public class HostsManager {
      * @return
      */
     public Charset charset(String host) {
-        return this.hostsMap.get(host).getCharset();
+        return this.hostsMap.get(host).charset();
+    }
+
+    /**
+     * Get in-memory filters
+     * @param host
+     * @return
+     */
+    public List<String> getInMemoryFilters(String host) {
+        return this.hostsMap.get(host).getInMemoryFilters();
     }
 
     /**
@@ -262,16 +274,26 @@ public class HostsManager {
      * @param host
      * @return
      */
-    public List<String> getAllowedResourceFilters(String host) {
-        return this.hostsMap.get(host).getAllowedResourceFilters();
+    public List<String> getAccessFilters(String host) {
+        return this.hostsMap.get(host).getAccessFilters();
     }
 
     /**
-     * Get forbidden resource pattern
+     * Filtering in-memory resources with specified resourceName
      * @param host
+     * @param resourceName
      * @return
      */
-    public List<String> getResourceForbidden(String host) {
-        return this.hostsMap.get(host).getForbiddenResourceFilters();
+    public boolean filteringInMemory(String host, String resourceName) {
+        return getHosts(host).filteringInMemory(resourceName);
+    }
+
+    /**
+     * Filtering in-disk resources with specified resourceName
+     * @param resourceName
+     * @return
+     */
+    public boolean filteringInAccess(String host, String resourceName) {
+        return getHosts(host).filteringInAccess(resourceName);
     }
 }

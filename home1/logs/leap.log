@@ -1,94 +1,34 @@
-2022-02-24 10:16:02.574 DEBUG - ------------------------------ REQ: GET / HTTP/1.1 ------------------------------
-Host: awesome:8082
-Connection: keep-alive
-sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
-sec-ch-ua-mobile: ?0
-sec-ch-ua-platform: "Windows"
-Upgrade-Insecure-Requests: 1
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Sec-Fetch-Site: none
-Sec-Fetch-Mode: navigate
-Sec-Fetch-User: ?1
-Sec-Fetch-Dest: document
-Accept-Encoding: gzip, deflate, br
-Accept-Language: ko,en-US;q=0.9,en;q=0.8
-2022-02-24 10:16:02.578 DEBUG - REQUEST RESOURCE: response.html   PATH: home1\webapp\WEB-INF\static
-2022-02-24 10:16:02.579 DEBUG - REQUEST CONTEXT: /   PATH: home1\webapp\WEB-INF\static
-2022-02-24 10:16:02.580 DEBUG - REQUEST RESOURCE: index.html   PATH: home1\webapp\WEB-INF\static
-2022-02-24 10:16:02.582 DEBUG - ============================== RES : HTTPS/1.0 200 OK. - /127.0.0.1:51995 ==============================
-RES CODE: 200
-Content-Length: [660]
-Content-Type: [TEXT_HTML]
-2022-02-24 10:16:02.585 INFO  - Client closing....../127.0.0.1
-2022-02-24 10:16:19.295 DEBUG - ------------------------------ REQ: GET / HTTP/1.1 ------------------------------
-Host: awesome:8082
-Connection: keep-alive
-Cache-Control: max-age=0
-sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
-sec-ch-ua-mobile: ?0
-sec-ch-ua-platform: "Windows"
-Upgrade-Insecure-Requests: 1
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Sec-Fetch-Site: none
-Sec-Fetch-Mode: navigate
-Sec-Fetch-User: ?1
-Sec-Fetch-Dest: document
-Accept-Encoding: gzip, deflate, br
-Accept-Language: ko,en-US;q=0.9,en;q=0.8
-2022-02-24 10:16:19.299 DEBUG - REQUEST RESOURCE: response.html   PATH: home1\webapp\WEB-INF\static
-2022-02-24 10:16:19.303 DEBUG - REQUEST CONTEXT: /   PATH: home1\webapp\WEB-INF\static
-2022-02-24 10:16:19.305 DEBUG - REQUEST RESOURCE: index.html   PATH: home1\webapp\WEB-INF\static
-2022-02-24 10:16:19.309 DEBUG - ============================== RES : HTTPS/1.0 200 OK. - /127.0.0.1:52005 ==============================
-RES CODE: 200
-Content-Length: [660]
-Content-Type: [TEXT_HTML]
-2022-02-24 10:16:19.312 INFO  - Client closing....../127.0.0.1
-2022-02-24 10:22:56.620 DEBUG - ------------------------------ REQ: GET / HTTP/1.1 ------------------------------
-Host: awesome:8082
-Connection: keep-alive
-sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
-sec-ch-ua-mobile: ?0
-sec-ch-ua-platform: "Windows"
-Upgrade-Insecure-Requests: 1
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Sec-Fetch-Site: none
-Sec-Fetch-Mode: navigate
-Sec-Fetch-User: ?1
-Sec-Fetch-Dest: document
-Accept-Encoding: gzip, deflate, br
-Accept-Language: ko,en-US;q=0.9,en;q=0.8
-2022-02-24 10:22:56.627 DEBUG - REQUEST RESOURCE: response.html   PATH: home1\webapp\WEB-INF\static
-2022-02-24 10:22:56.629 DEBUG - REQUEST CONTEXT: /   PATH: home1\webapp\WEB-INF\static
-2022-02-24 10:22:56.632 DEBUG - REQUEST RESOURCE: index.html   PATH: home1\webapp\WEB-INF\static
-2022-02-24 10:22:56.634 DEBUG - ============================== RES : HTTPS/1.0 200 OK. - /127.0.0.1:52122 ==============================
-RES CODE: 200
-Content-Length: [660]
-Content-Type: [text/html]
-2022-02-24 10:22:56.646 INFO  - Client closing....../127.0.0.1
-2022-02-24 10:24:53.121 DEBUG - ------------------------------ REQ: GET / HTTP/1.1 ------------------------------
-Host: awesome:8082
-Connection: keep-alive
-Cache-Control: max-age=0
-sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
-sec-ch-ua-mobile: ?0
-sec-ch-ua-platform: "Windows"
-Upgrade-Insecure-Requests: 1
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Sec-Fetch-Site: none
-Sec-Fetch-Mode: navigate
-Sec-Fetch-User: ?1
-Sec-Fetch-Dest: document
-Accept-Encoding: gzip, deflate, br
-Accept-Language: ko,en-US;q=0.9,en;q=0.8
-2022-02-24 10:24:53.124 DEBUG - REQUEST RESOURCE: response.html   PATH: home1\webapp\WEB-INF\static
-2022-02-24 10:24:53.126 DEBUG - REQUEST CONTEXT: /   PATH: home1\webapp\WEB-INF\static
-2022-02-24 10:24:53.127 DEBUG - REQUEST RESOURCE: index.html   PATH: home1\webapp\WEB-INF\static
-2022-02-24 10:24:53.128 DEBUG - ============================== RES : HTTPS/1.0 200 OK. - /127.0.0.1:58523 ==============================
-RES CODE: 200
-Content-Length: [660]
-Content-Type: [text/html]
-2022-02-24 10:24:53.132 INFO  - Client closing....../127.0.0.1
+2022-03-03 17:01:20.652 INFO  - Path: D:\0.github\Leap\home1\webapp\WEB-INF\static
+2022-03-03 17:01:20.656 INFO  - [RESOUCE INITIALIZED] Resource object for host: awesome started. Watching Paths: 
+2022-03-03 17:02:04.166 INFO  - Path: D:\0.github\Leap\home1\webapp\WEB-INF\static
+2022-03-03 17:02:04.168 INFO  - [RESOUCE INITIALIZED] Resource object for host: awesome started. Watching Paths: 
+2022-03-03 17:03:50.730 INFO  - Path: D:\0.github\Leap\home1\webapp\WEB-INF\static
+2022-03-03 17:03:50.732 INFO  - [RESOUCE INITIALIZED] Resource object for host: awesome started. Watching Paths: 
+2022-03-03 17:05:20.999 INFO  - Path: D:\0.github\Leap\home1\webapp\WEB-INF\static
+2022-03-03 17:05:21.001 INFO  - [RESOUCE INITIALIZED] Resource object for host: awesome started. Watching Paths: 
+2022-03-03 17:06:01.897 INFO  - Path: D:\0.github\Leap\home1\webapp\WEB-INF\static
+2022-03-03 17:06:01.899 INFO  - [RESOUCE INITIALIZED] Resource object for host: awesome started. Watching Paths: 
+2022-03-03 17:06:34.389 INFO  - Path: D:\0.github\Leap\home1\webapp\WEB-INF\static
+2022-03-03 17:06:34.391 INFO  - [RESOUCE INITIALIZED] Resource object for host: awesome started. Watching Paths: 
+2022-03-03 17:07:15.366 INFO  - Path: D:\0.github\Leap\home1\webapp\WEB-INF\static
+2022-03-03 17:07:15.367 INFO  - [RESOUCE INITIALIZED] Resource object for host: awesome started. Watching Paths: 
+2022-03-03 17:09:58.916 INFO  - Path: D:\0.github\Leap\home1\webapp\WEB-INF\static
+2022-03-03 17:09:58.920 INFO  - [RESOUCE INITIALIZED] Resource object for host: awesome started. Watching Paths: 
+2022-03-03 17:10:44.225 INFO  - Path: D:\0.github\Leap\home1\webapp\WEB-INF\static
+2022-03-03 17:10:44.227 INFO  - [RESOUCE INITIALIZED] Resource object for host: awesome started. Watching Paths: 
+2022-03-03 17:11:55.160 INFO  - Path: D:\0.github\Leap\home1\webapp\WEB-INF\static
+2022-03-03 17:11:55.162 INFO  - [RESOUCE INITIALIZED] Resource object for host: awesome started. Watching Paths: 
+2022-03-03 17:13:55.934 INFO  - Path: D:\0.github\Leap\home1\webapp\WEB-INF\static
+2022-03-03 17:13:55.936 INFO  - [RESOUCE INITIALIZED] Resource object for host: awesome started. Watching Paths: 
+2022-03-03 17:17:31.206 INFO  - Path: D:\0.github\Leap\home1\webapp\WEB-INF\static
+2022-03-03 17:17:31.208 INFO  - [RESOUCE INITIALIZED] Resource object for host: awesome started. Watching Paths: 
+2022-03-03 17:19:25.661 INFO  - Path: D:\0.github\Leap\home1\webapp\WEB-INF\static
+2022-03-03 17:19:25.663 INFO  - [RESOUCE INITIALIZED] Resource object for host: awesome started. Watching Paths: 
+2022-03-03 17:23:02.473 INFO  - Path: D:\0.github\Leap\home1\webapp\WEB-INF\static
+2022-03-03 17:23:02.475 INFO  - [RESOUCE INITIALIZED] Resource object for host: awesome started. Watching Paths: 
+2022-03-03 17:23:45.570 INFO  - Path: D:\0.github\Leap\home1\webapp\WEB-INF\static
+2022-03-03 17:23:45.573 INFO  - [RESOUCE INITIALIZED] Resource object for host: awesome started. Watching Paths: 
+2022-03-03 17:26:01.494 INFO  - Path: D:\0.github\Leap\home1\webapp\WEB-INF\static
+2022-03-03 17:26:01.495 INFO  - [RESOUCE INITIALIZED] Resource object for host: awesome started. Watching Paths: 
+2022-03-03 17:26:38.082 INFO  - Path: D:\0.github\Leap\home1\webapp\WEB-INF\static
+2022-03-03 17:26:38.084 INFO  - [RESOUCE INITIALIZED] Resource object for host: awesome started. Watching Paths: 

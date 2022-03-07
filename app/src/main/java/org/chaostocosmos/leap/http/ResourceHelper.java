@@ -1,4 +1,4 @@
-package org.chaostocosmos.leap.http.commons;
+package org.chaostocosmos.leap.http;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,16 +15,13 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.chaostocosmos.leap.http.Context;
-import org.chaostocosmos.leap.http.HttpRequestDescriptor;
-import org.chaostocosmos.leap.http.LeapWAS;
-import org.chaostocosmos.leap.http.WASException;
+import org.chaostocosmos.leap.http.commons.Hosts;
+import org.chaostocosmos.leap.http.commons.LoggerFactory;
+import org.chaostocosmos.leap.http.commons.UtilBox;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 
 /**
@@ -40,11 +37,6 @@ public class ResourceHelper {
     Path HOME_PATH;
 
     /**
-     * Context map
-     */
-    Map<String, Context> contextMap;
-
-    /**
      * ResourceHandler
      */
     private static ResourceHelper resourceHelper;
@@ -52,7 +44,6 @@ public class ResourceHelper {
     /**
      * Private constructor
      * @param HOME_PATH
-     * @throws IOException
      */
     private ResourceHelper(Path HOME_PATH) {
         this.HOME_PATH = HOME_PATH;
@@ -61,7 +52,6 @@ public class ResourceHelper {
     /**
      * Get ResourceHelper instance
      * @return
-     * @throws IOException
      */
     public static ResourceHelper getInstance() {
         return getInstance(LeapWAS.HOME_PATH);
@@ -70,7 +60,6 @@ public class ResourceHelper {
     /**
      * Get ResourceHelper instance
      * @param HOME_PATH
-     * @throws IOException
      */
     public static ResourceHelper getInstance(Path HOME_PATH) {
         if(resourceHelper == null) {
@@ -83,11 +72,8 @@ public class ResourceHelper {
      * Get mime type
      * @param request
      * @return
-     * @throws URISyntaxException
-     * @throws WASException
-     * @throws IOException
      */
-    public static  String getMimeType(HttpRequestDescriptor request) throws WASException {
+    public static  String getMimeType(HttpRequestDescriptor request) {
         return UtilBox.probeContentType(getResourcePath(request));
     }
 
@@ -95,11 +81,8 @@ public class ResourceHelper {
      * Get resource Path
      * @param request
      * @return
-     * @throws URISyntaxException
-     * @throws WASException
-     * @throws IOException
      */
-    public static Path getResourcePath(HttpRequestDescriptor request) throws WASException {
+    public static Path getResourcePath(HttpRequestDescriptor request) {
         return getResourcePath(request.getRequestedHost(), request.getContextPath());
     }
 
@@ -108,19 +91,16 @@ public class ResourceHelper {
      * @param serverName
      * @param path
      * @return
-     * @throws WASException
-     * @throws URISyntaxException
-     * @throws IOException
      */
-    public static Path getResourcePath(String host, String path_) throws WASException {
-        String path = path_.charAt(0) == '/' ? path_.substring(1) : path_;
+    public static Path getResourcePath(String host, String path) {
+        path = path.charAt(0) == '/' ? path.substring(1) : path;
         Hosts hosts = HostsManager.get().getHosts(host);
         Path docroot = hosts.getDocroot().toAbsolutePath();
         Path reqPath = getStaticPath(host).resolve(path).toAbsolutePath();
         if(!validatePath(docroot, reqPath)) {
-            throw new WASException(MSG_TYPE.ERROR, 19, new Object[]{host});
+            throw new WASException(MSG_TYPE.HTTP, 403, host, path);
         }
-        LoggerFactory.getLogger(host).debug("REQUEST CONTEXT: "+path_+"   PATH: "+getStaticPath(host));
+        LoggerFactory.getLogger(host).debug("REQUEST PATH: "+reqPath.toString()); 
         return reqPath;
     }
 
@@ -129,11 +109,8 @@ public class ResourceHelper {
      * @param host
      * @param code
      * @return
-     * @throws URISyntaxException
-     * @throws IOException
-     * @throws WASException
      */
-    public static Path getResponseResourcePath(String host, int code) throws WASException, URISyntaxException {
+    public static Path getResponseResourcePath(String host, int code) {
         Object msg = Context.getConfigValue("message.http."+code);
         if(msg == null) {
             throw new WASException(MSG_TYPE.HTTP, 500);
@@ -142,83 +119,21 @@ public class ResourceHelper {
     }    
 
     /**
-     * Get welcome page matching with each host and virtual host
-     * @param host
-     * @param params
-     * @return
-     * @throws WASException
-     */
-    public static String getWelcomePage(String host, Map<String, Object> params) throws WASException {
-        return getStaticPage(host, HostsManager.get().getHosts(host).getWelcomeFile().getName(), params);
-    }
-
-    /**
-     * Get response page with code
-     * @param host
-     * @param code
-     * @return
-     * @throws WASException
-     */
-    public static String getResponsePage(String host, Map<String, Object> params) throws WASException {
-        return getStaticPage(host, "response.html", params);
-    }
-
-    /**
-     * Get static text resource by name
-     * @param host
-     * @param resourceName
-     * @param params
-     * @return
-     * @throws WASException
-     */
-    public static String getStaticPage(String host, String resourceName, Map<String, Object> params) throws WASException {
-        byte[] bytes = getResourceContent(host, resourceName);
-        String page = new String(bytes, HostsManager.get().charset(host));
-        for(Entry<String, Object> e : params.entrySet()) {
-            page = page.replace(e.getKey(), e.getValue().toString());
-        }
-        return page;
-    }
-
-    /**
      * Get static resource path
      * @param host
      * @param resourceName
      * @return
-     * @throws WASException
      */
-    public static Path getStaticResourcePath(String host, String resourceName) throws WASException {
+    public static Path getStaticResourcePath(String host, String resourceName) {
         return getResourcePath(host, resourceName);
-    }
-
-    /**
-     * Get resource replaced with specified params
-     * @param host
-     * @param contentName
-     * @param param
-     * @return
-     * @throws WASException
-     */
-    public static byte[] getResourceContent(String host, String contentName) throws WASException {
-        try {
-            host = host == null ? Context.getDefaultHost() : host;
-            contentName = contentName.charAt(0) == '/' ? contentName.substring(1) : contentName;
-            Path path = getStaticPath(host).resolve(contentName);
-            LoggerFactory.getLogger(host).debug("REQUEST RESOURCE: "+contentName+"   PATH: "+getStaticPath(host));
-            return Files.readAllBytes(path);
-        } catch (IOException e) {
-            throw new WASException(MSG_TYPE.ERROR, 38, contentName);
-        }
     }
 
     /**
      * Get binary data
      * @param resourcePath
      * @return
-     * @throws WASException
-     * @throws IOException
      */
-    public static byte[] getBinaryResource(Path resourcePath) throws WASException {
+    public static byte[] getBinaryResource(Path resourcePath) {
         try {
             return Files.readAllBytes(resourcePath);
         } catch (IOException e) {
@@ -233,9 +148,7 @@ public class ResourceHelper {
      * @return
      */
     public static boolean validatePath(Path docroot, Path resource) {
-        docroot = docroot.normalize();
-        resource = resource.normalize();
-        if(resource.startsWith(docroot)) {
+        if(resource.normalize().startsWith(docroot.normalize())) {
             return true;
         }
         return false;    
@@ -248,7 +161,7 @@ public class ResourceHelper {
      * @throws IOException
      * @throws URISyntaxException
      */
-    public String getResourceContent(String resourceName) throws IOException, URISyntaxException {
+    public static String getResourceContent(String resourceName) throws IOException, URISyntaxException {
         InputStream is = UtilBox.class.getResourceAsStream(resourceName);
         return UtilBox.readAllString(is);
     }
@@ -327,7 +240,7 @@ public class ResourceHelper {
      * @throws WASException
      */
     public static Path getDocroot(String host) throws WASException {
-        return HostsManager.get().getDocroot(host);
+        return HostsManager.get().getDocroot(host).toAbsolutePath();
     }
 
     /**

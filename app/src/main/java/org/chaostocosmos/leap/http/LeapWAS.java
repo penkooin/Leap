@@ -22,9 +22,7 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.chaostocosmos.leap.http.commons.Hosts;
-import org.chaostocosmos.leap.http.commons.HostsManager;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
-import org.chaostocosmos.leap.http.commons.ResourceHelper;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 
 import ch.qos.logback.classic.Level;
@@ -40,26 +38,37 @@ public class LeapWAS {
      * Logger
      */
     public static Logger logger;
+
     /**
      * Standard IO
      */
     public static PrintStream systemOut;
+
     /**
      * Home path
      */
     public static Path HOME_PATH;
+
     /**
      * Context
      */
     public Context context;
+
     /**
      * Virtual host manager
      */
     public HostsManager hostsManager;
+
+    /**
+     * Static resource manager
+     */
+    public StaticResourceManager staticResourceManager;
+
     /**
      * Server Map
      */
     public Map<String, LeapHttpServer> leapServerMap;
+
     /**
      * Thread pool
      */
@@ -82,12 +91,9 @@ public class LeapWAS {
     /** 
      * Apply command line options
      * @param args
-     * @throws ParseException
-     * @throws IOException
-     * @throws URISyntaxException
-     * @throws WASException
+     * @throws Exception
      */
-    private void setup(String[] args) throws IOException, URISyntaxException {
+    private void setup(String[] args) throws Exception {
         CommandLineParser parser = new DefaultParser();
         CommandLine cmdLine;
         try {
@@ -109,6 +115,9 @@ public class LeapWAS {
         }
         //initialize environment and context
         this.context = Context.initialize(HOME_PATH);
+
+        //initialize static resource manager
+        this.staticResourceManager = StaticResourceManager.initialize();
 
         //build webapp environment
         List<Hosts> hosts = HostsManager.get().getAllHosts();
@@ -204,7 +213,7 @@ public class LeapWAS {
      */
     private Options getOptions() {
         Options options = new Options();
-        options.addOption(new Option("h", "home", true, "run home path"));
+        options.addOption(new Option("h", "home", true, "run home path")); 
         options.addOption(new Option("v", "verbose", true, "run with verbose mode"));
         options.addOption(new Option("l", "logLevel", true, "log level setting"));
         return options;

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.chaostocosmos.leap.http.Context;
+import org.chaostocosmos.leap.http.HostsManager;
 import org.chaostocosmos.leap.http.WASException;
 
 import ch.qos.logback.classic.Level;

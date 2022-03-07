@@ -31,7 +31,7 @@ public abstract class AbstractLeapService implements IGetService, IPostService, 
     /**
      * Context
      */
-    protected static final Context context = Context.getInstance();
+    protected static final Context context = Context.get();
     /**
      * Method to be called for request
      */

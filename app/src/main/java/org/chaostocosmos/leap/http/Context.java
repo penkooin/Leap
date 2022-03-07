@@ -7,13 +7,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.commons.Hosts;
-import org.chaostocosmos.leap.http.commons.ResourceHelper;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.yaml.snakeyaml.Yaml;
 
@@ -71,13 +71,14 @@ public class Context {
         } catch(Exception e) {
             throw new WASException(e);
         }
+        System.out.println("Context Initialized... "+new Date().toString());
     }
 
     /**
      * Get Context object
      * @return
      */
-    public static Context getInstance() {
+    public static Context get() {
         if(LeapWAS.HOME_PATH == null) {
             return null;
         }
@@ -115,6 +116,7 @@ public class Context {
 
     /**
      * Load messages.yml
+     * @return
      */
     public Map<String, Object> loadMessages() {
         try {
@@ -151,16 +153,25 @@ public class Context {
     /**
      * Get all host Map
      * @return
+     * @throws IOException
      */
-    private static Map<String, Hosts> getAllHostsMap() {        
+    private static Map<String, Hosts> getAllHostsMap() throws IOException {
         Map<String, Hosts> hostsMap = new HashMap<>();
-        Map<Object, Object> map = (Map<Object, Object>)getConfigValue("server.default-host");        
+        Map<Object, Object> map = (Map<Object, Object>)getConfigValue("server.default-host");
         map.put("default", true);
         hostsMap.put(map.get("host").toString(), new Hosts(map)); 
-        ((List<Map<Object, Object>>)getConfigValue("server.virtual-host"))
-                            .stream().map(m -> new Hosts(m) )
-                            .forEach(h -> hostsMap.put(h.getHost(), h));
+        for(Map<Object, Object> vmap : ((List<Map<Object, Object>>)getConfigValue("server.virtual-host"))) {
+            hostsMap.put(vmap.get("host").toString(), new Hosts(vmap));
+        }
         return hostsMap;
+    }
+
+    /**
+     * Get home path
+     * @return
+     */
+    public static Path getLeapHomePath() {
+        return HOME_PATH;
     }
 
     /**
@@ -169,6 +180,15 @@ public class Context {
      */
     public static Map<String, Hosts> getHostsMap() { 
         return hostsMap;
+    }
+
+    /**
+     * Get hosts object
+     * @param host
+     * @return
+     */
+    public static Hosts getHosts(String host) {
+        return hostsMap.get(host);
     }
 
     /**
@@ -185,14 +205,6 @@ public class Context {
      */
     public static int getDefaultPort() {
         return (int)getConfigValue("server.default-host.port");
-    }
-
-    /**
-     * Get home path
-     * @return
-     */
-    public static Path getLeapHomePath() {
-        return HOME_PATH;
     }
 
     /**

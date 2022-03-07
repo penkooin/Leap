@@ -6,13 +6,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
 
+import org.chaostocosmos.leap.http.HostsManager;
 import org.chaostocosmos.leap.http.HttpRequestDescriptor;
 import org.chaostocosmos.leap.http.HttpResponseDescriptor;
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.annotation.FilterMapper;
 import org.chaostocosmos.leap.http.annotation.MethodMappper;
 import org.chaostocosmos.leap.http.annotation.ServiceMapper;
-import org.chaostocosmos.leap.http.commons.HostsManager;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
@@ -21,30 +21,27 @@ import org.chaostocosmos.leap.http.part.BodyPart;
 import org.chaostocosmos.leap.http.part.MultiPart;
 
 @ServiceMapper(path="/deploy")
-public class LeapServiceDeploy extends AbstractLeapService {
+public class LeapServiceDeploy extends AbstractLeapService implements IDeploy {
     
     @MethodMappper(mappingMethod = REQUEST_TYPE.POST, path = "/upload")
     @FilterMapper(preFilters = BasicAuthFilter.class)
-    public void deployService(HttpRequestDescriptor request, HttpResponseDescriptor response) throws WASException, IOException {
+    public void deploy(HttpRequestDescriptor request, HttpResponseDescriptor response) throws WASException, IOException {
         Map<String, String> headers = request.getReqHeader();
         BodyPart bodyPart = request.getBodyPart();        
         if(bodyPart.getContentType() == MIME_TYPE.MULTIPART_FORM_DATA) {
             MultiPart multipart = (MultiPart) bodyPart;
             String packages = headers.get("package");
             String classname = headers.get("classname");
-                        
+            
             super.logger.debug("Deploying service... "+request.getReqHeader().toString());
             Path serviceClassesPath = HostsManager.get().getDynamicClaspaths(request.getRequestedHost());
-            super.serviceManager.getClassLoader().addPath(serviceClassesPath);
-
+            
             Path packagePath = Paths.get(packages.replace(".", File.separator));
             System.out.println("-----------------------------------------------------------------"+serviceClassesPath.resolve(packagePath).toAbsolutePath().toString());
-            try{
-                multipart.save(serviceClassesPath.resolve(packagePath).toAbsolutePath());
-            } catch(Exception e) {
-                e.printStackTrace();
-            }
+            multipart.save(serviceClassesPath.resolve(packagePath).toAbsolutePath());
             super.logger.debug("Uploaded service saved: "+serviceClassesPath.resolve(packagePath).toAbsolutePath().toString());
+
+            super.serviceManager.getClassLoader().addPath(serviceClassesPath);
 
             ILeapService deployService = super.serviceManager.newServiceInstance(packages+"."+classname);
             //(ILeapService)ClassUtils.instantiate(packages+"."+classname);
@@ -60,5 +57,13 @@ public class LeapServiceDeploy extends AbstractLeapService {
         response.setStatusCode(401);
         response.setBody("".getBytes());
         return null;
+    }
+
+    @Override
+    public void deployService(Class<ILeapService> service) throws Exception {
+    }
+
+    @Override
+    public void removeService(String serviceName) throws Exception {
     }
 }

@@ -1,0 +1,1028 @@
+2022-03-03 15:00:21.900 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  49810
+2022-03-03 15:00:21.922 DEBUG - ------------------------------ REQ: GET /aaa/bbb/TimeServiceImpl.class HTTP/1.1 ------------------------------
+Authorization: Basic YWRtaW46YWRtaW4=
+User-Agent: PostmanRuntime/7.29.0
+Accept: */*
+Postman-Token: 2854b421-54c4-4496-8e4f-dd1cef93b5a1
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+2022-03-03 15:00:21.924 DEBUG - REQUEST RESOURCE: response.html   PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\response.html
+2022-03-03 15:00:21.926 DEBUG - REQUEST PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa\bbb\TimeServiceImpl.class
+2022-03-03 15:00:21.932 ERROR - Specfied path is not exist!!!
+java.lang.IllegalStateException: Specfied path is not exist!!!
+	at org.chaostocosmos.leap.http.StaticResourceManager$Resource.lambda$6(StaticResourceManager.java:329)
+	at java.base/java.util.Optional.orElseThrow(Optional.java:408)
+	at org.chaostocosmos.leap.http.StaticResourceManager$Resource.getResourceData(StaticResourceManager.java:329)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:103)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-03-03 15:00:21.937 DEBUG - ============================== RES : HTTP/1.0 500 Internal Server Error. - /127.0.0.1:49810 ==============================
+RES CODE: 500
+Content-Length: [29]
+Content-Type: [text/html]
+2022-03-03 15:01:43.153 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static
+2022-03-03 15:01:43.156 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa
+2022-03-03 15:01:43.156 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa\bbb
+2022-03-03 15:01:43.162 INFO  - [RESOUCE INITIALIZED] Resource object for host: localhost started. Watching Paths: 
+2022-03-03 15:01:43.206 INFO  - Leap WAS server starting......
+2022-03-03 15:01:43.207 INFO  - --------------------------------------------------------------------------
+2022-03-03 15:01:43.207 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-03-03 15:01:43.207 INFO  - verbose mode on
+2022-03-03 15:01:43.297 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 15:01:43.299 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 15:01:43.300 INFO  - [DEFAULT HOST] - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 15:01:43.307 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 15:01:43.309 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 15:01:43.311 INFO  - [VIRTUAL HOST] - Protocol: HTTPS_1_0   Server: leap1   Host: awesome   Port: 8082   Doc-Root: home1   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 15:01:43.320 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 15:01:43.321 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 15:01:43.321 INFO  - [VIRTUAL HOST] - Protocol: HTTP_1_0   Server: leap2   Host: www.leap1.org   Port: 8081   Doc-Root: home2   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 15:01:43.322 INFO  - --------------------------------------------------------------------------
+2022-03-03 15:01:43.325 INFO  - [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:8081
+2022-03-03 15:01:43.325 INFO  - [HTTP SERVER START] Address: localhost/127.0.0.1:8080
+2022-03-03 15:01:43.850 INFO  - [HTTPS SERVER START] Address: awesome/127.0.0.1:8082  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-03-03 15:01:45.143 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  49856
+2022-03-03 15:01:45.151 DEBUG - ------------------------------ REQ: GET /aaa/bbb/TimeServiceImpl.class HTTP/1.1 ------------------------------
+Authorization: Basic YWRtaW46YWRtaW4=
+User-Agent: PostmanRuntime/7.29.0
+Accept: */*
+Postman-Token: 15b6da43-ae79-4b82-af07-1868f31c3b91
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+2022-03-03 15:01:45.153 DEBUG - REQUEST RESOURCE: response.html   PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\response.html
+2022-03-03 15:01:45.156 DEBUG - REQUEST PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa\bbb\TimeServiceImpl.class
+2022-03-03 15:01:45.161 DEBUG - [RESOURCE] In-Disk resource requested: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa\bbb\TimeServiceImpl.class
+2022-03-03 15:01:45.166 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: null
+2022-03-03 15:01:45.172 ERROR - class java.io.File cannot be cast to class java.nio.file.Path (java.io.File and java.nio.file.Path are in module java.base of loader 'bootstrap')
+java.lang.ClassCastException: class java.io.File cannot be cast to class java.nio.file.Path (java.io.File and java.nio.file.Path are in module java.base of loader 'bootstrap')
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.sendResponse(HttpTransferBuilder.java:242)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.sendResponse(HttpTransferBuilder.java:214)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:120)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-03-03 15:01:45.176 ERROR - Software caused connection abort: socket write error
+java.net.SocketException: Software caused connection abort: socket write error
+	at java.base/java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:110)
+	at java.base/java.net.SocketOutputStream.write(SocketOutputStream.java:138)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.sendResponse(HttpTransferBuilder.java:252)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.processError(LeapRequestHandler.java:157)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:127)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-03-03 15:08:25.999 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static
+2022-03-03 15:08:26.002 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa
+2022-03-03 15:08:26.002 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa\bbb
+2022-03-03 15:08:26.006 INFO  - [RESOUCE INITIALIZED] Resource object for host: localhost started. Watching Paths: 
+2022-03-03 15:08:26.021 INFO  - Leap WAS server starting......
+2022-03-03 15:08:26.022 INFO  - --------------------------------------------------------------------------
+2022-03-03 15:08:26.022 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-03-03 15:08:26.023 INFO  - verbose mode on
+2022-03-03 15:08:26.080 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 15:08:26.081 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 15:08:26.082 INFO  - [DEFAULT HOST] - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 15:08:26.087 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 15:08:26.088 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 15:08:26.088 INFO  - [VIRTUAL HOST] - Protocol: HTTPS_1_0   Server: leap1   Host: awesome   Port: 8082   Doc-Root: home1   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 15:08:26.093 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 15:08:26.093 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 15:08:26.094 INFO  - [VIRTUAL HOST] - Protocol: HTTP_1_0   Server: leap2   Host: www.leap1.org   Port: 8081   Doc-Root: home2   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 15:08:26.094 INFO  - --------------------------------------------------------------------------
+2022-03-03 15:08:26.097 INFO  - [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:8081
+2022-03-03 15:08:26.097 INFO  - [HTTP SERVER START] Address: localhost/127.0.0.1:8080
+2022-03-03 15:08:26.563 INFO  - [HTTPS SERVER START] Address: awesome/127.0.0.1:8082  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-03-03 15:08:28.025 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  51038
+2022-03-03 15:08:28.033 DEBUG - ------------------------------ REQ: GET /aaa/bbb/TimeServiceImpl.class HTTP/1.1 ------------------------------
+Authorization: Basic YWRtaW46YWRtaW4=
+User-Agent: PostmanRuntime/7.29.0
+Accept: */*
+Postman-Token: eda0f39e-cb63-4d15-adc2-044834443f1b
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+2022-03-03 15:08:28.038 DEBUG - REQUEST RESOURCE: response.html   PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\response.html
+2022-03-03 15:08:28.040 DEBUG - REQUEST PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa\bbb\TimeServiceImpl.class
+2022-03-03 15:08:28.045 DEBUG - [RESOURCE] In-Disk resource requested: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa\bbb\TimeServiceImpl.class
+2022-03-03 15:08:28.050 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: null
+2022-03-03 15:08:28.059 ERROR - null
+java.lang.NullPointerException: null
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.lambda$0(HttpTransferBuilder.java:263)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.sendResponse(HttpTransferBuilder.java:263)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.sendResponse(HttpTransferBuilder.java:214)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:120)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-03-03 15:08:28.062 WARN  - Response body is Null: 500
+2022-03-03 15:09:27.199 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static
+2022-03-03 15:09:27.202 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa
+2022-03-03 15:09:27.202 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa\bbb
+2022-03-03 15:09:27.211 INFO  - [RESOUCE INITIALIZED] Resource object for host: localhost started. Watching Paths: 
+2022-03-03 15:09:27.236 INFO  - Leap WAS server starting......
+2022-03-03 15:09:27.238 INFO  - --------------------------------------------------------------------------
+2022-03-03 15:09:27.238 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-03-03 15:09:27.238 INFO  - verbose mode on
+2022-03-03 15:09:27.322 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 15:09:27.326 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 15:09:27.327 INFO  - [DEFAULT HOST] - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 15:09:27.343 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 15:09:27.344 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 15:09:27.344 INFO  - [VIRTUAL HOST] - Protocol: HTTPS_1_0   Server: leap1   Host: awesome   Port: 8082   Doc-Root: home1   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 15:09:27.351 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 15:09:27.353 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 15:09:27.353 INFO  - [VIRTUAL HOST] - Protocol: HTTP_1_0   Server: leap2   Host: www.leap1.org   Port: 8081   Doc-Root: home2   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 15:09:27.353 INFO  - --------------------------------------------------------------------------
+2022-03-03 15:09:27.357 INFO  - [HTTP SERVER START] Address: localhost/127.0.0.1:8080
+2022-03-03 15:09:27.357 INFO  - [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:8081
+2022-03-03 15:09:27.738 INFO  - [HTTPS SERVER START] Address: awesome/127.0.0.1:8082  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-03-03 15:09:28.403 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  56346
+2022-03-03 15:09:28.413 DEBUG - ------------------------------ REQ: GET /aaa/bbb/TimeServiceImpl.class HTTP/1.1 ------------------------------
+Authorization: Basic YWRtaW46YWRtaW4=
+User-Agent: PostmanRuntime/7.29.0
+Accept: */*
+Postman-Token: aeecb616-b4d8-490e-8fd8-49baa4491c5e
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+2022-03-03 15:09:28.417 DEBUG - REQUEST RESOURCE: response.html   PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\response.html
+2022-03-03 15:09:28.419 DEBUG - REQUEST PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa\bbb\TimeServiceImpl.class
+2022-03-03 15:09:28.427 DEBUG - [RESOURCE] In-Disk resource requested: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa\bbb\TimeServiceImpl.class
+2022-03-03 15:09:28.433 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: null
+2022-03-03 15:09:28.441 ERROR - Specified type of response body object is not supported: java.io.File
+org.chaostocosmos.leap.http.WASException: Specified type of response body object is not supported: java.io.File
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.sendResponse(HttpTransferBuilder.java:251)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.sendResponse(HttpTransferBuilder.java:214)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:120)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-03-03 15:09:28.444 ERROR - [ERROR: 55] - Specified type of response body object is not supported: java.io.File
+2022-03-03 15:09:28.444 DEBUG - REQUEST RESOURCE: response.html   PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\response.html
+2022-03-03 15:09:28.446 ERROR - Software caused connection abort: socket write error
+java.net.SocketException: Software caused connection abort: socket write error
+	at java.base/java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:110)
+	at java.base/java.net.SocketOutputStream.write(SocketOutputStream.java:138)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.sendResponse(HttpTransferBuilder.java:264)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.processError(LeapRequestHandler.java:157)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:127)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-03-03 15:10:55.157 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static
+2022-03-03 15:10:55.160 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa
+2022-03-03 15:10:55.160 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa\bbb
+2022-03-03 15:10:55.165 INFO  - [RESOUCE INITIALIZED] Resource object for host: localhost started. Watching Paths: 
+2022-03-03 15:10:55.186 INFO  - Leap WAS server starting......
+2022-03-03 15:10:55.188 INFO  - --------------------------------------------------------------------------
+2022-03-03 15:10:55.189 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-03-03 15:10:55.189 INFO  - verbose mode on
+2022-03-03 15:10:55.237 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 15:10:55.238 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 15:10:55.239 INFO  - [DEFAULT HOST] - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 15:10:55.246 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 15:10:55.247 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 15:10:55.247 INFO  - [VIRTUAL HOST] - Protocol: HTTPS_1_0   Server: leap1   Host: awesome   Port: 8082   Doc-Root: home1   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 15:10:55.256 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 15:10:55.256 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 15:10:55.257 INFO  - [VIRTUAL HOST] - Protocol: HTTP_1_0   Server: leap2   Host: www.leap1.org   Port: 8081   Doc-Root: home2   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 15:10:55.257 INFO  - --------------------------------------------------------------------------
+2022-03-03 15:10:55.260 INFO  - [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:8081
+2022-03-03 15:10:55.260 INFO  - [HTTP SERVER START] Address: localhost/127.0.0.1:8080
+2022-03-03 15:10:56.091 INFO  - [HTTPS SERVER START] Address: awesome/127.0.0.1:8082  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-03-03 15:10:58.592 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  56404
+2022-03-03 15:10:58.607 DEBUG - ------------------------------ REQ: GET /aaa/bbb/TimeServiceImpl.class HTTP/1.1 ------------------------------
+Authorization: Basic YWRtaW46YWRtaW4=
+User-Agent: PostmanRuntime/7.29.0
+Accept: */*
+Postman-Token: bb2bfd98-ab32-4f79-8fed-463fb122ce3e
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+2022-03-03 15:10:58.612 DEBUG - REQUEST RESOURCE: response.html   PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\response.html
+2022-03-03 15:10:58.641 DEBUG - REQUEST PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa\bbb\TimeServiceImpl.class
+2022-03-03 15:10:58.673 DEBUG - [RESOURCE] In-Disk resource requested: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa\bbb\TimeServiceImpl.class
+2022-03-03 15:10:58.679 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: null
+2022-03-03 15:10:58.687 ERROR - null
+java.lang.NullPointerException: null
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.lambda$0(HttpTransferBuilder.java:263)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.sendResponse(HttpTransferBuilder.java:263)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.sendResponse(HttpTransferBuilder.java:214)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:120)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-03-03 15:10:58.691 WARN  - Response body is Null: 500
+2022-03-03 15:13:12.759 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static
+2022-03-03 15:13:12.762 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa
+2022-03-03 15:13:12.762 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa\bbb
+2022-03-03 15:13:12.767 INFO  - [RESOUCE INITIALIZED] Resource object for host: localhost started. Watching Paths: 
+2022-03-03 15:13:12.795 INFO  - Leap WAS server starting......
+2022-03-03 15:13:12.798 INFO  - --------------------------------------------------------------------------
+2022-03-03 15:13:12.799 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-03-03 15:13:12.799 INFO  - verbose mode on
+2022-03-03 15:13:12.846 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 15:13:12.847 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 15:13:12.847 INFO  - [DEFAULT HOST] - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 15:13:12.852 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 15:13:12.852 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 15:13:12.853 INFO  - [VIRTUAL HOST] - Protocol: HTTPS_1_0   Server: leap1   Host: awesome   Port: 8082   Doc-Root: home1   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 15:13:12.856 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 15:13:12.857 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 15:13:12.857 INFO  - [VIRTUAL HOST] - Protocol: HTTP_1_0   Server: leap2   Host: www.leap1.org   Port: 8081   Doc-Root: home2   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 15:13:12.857 INFO  - --------------------------------------------------------------------------
+2022-03-03 15:13:12.861 INFO  - [HTTP SERVER START] Address: localhost/127.0.0.1:8080
+2022-03-03 15:13:12.861 INFO  - [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:8081
+2022-03-03 15:13:13.209 INFO  - [HTTPS SERVER START] Address: awesome/127.0.0.1:8082  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-03-03 15:13:14.524 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  56493
+2022-03-03 15:13:14.535 DEBUG - ------------------------------ REQ: GET /aaa/bbb/TimeServiceImpl.class HTTP/1.1 ------------------------------
+Authorization: Basic YWRtaW46YWRtaW4=
+User-Agent: PostmanRuntime/7.29.0
+Accept: */*
+Postman-Token: fcc7f671-71ac-47a6-b2ab-32bee6b05c57
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+2022-03-03 15:13:14.544 DEBUG - REQUEST RESOURCE: response.html   PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\response.html
+2022-03-03 15:13:14.547 DEBUG - REQUEST PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa\bbb\TimeServiceImpl.class
+2022-03-03 15:13:14.568 DEBUG - [RESOURCE] In-Disk resource requested: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa\bbb\TimeServiceImpl.class
+2022-03-03 15:13:14.575 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: application/octet-stream
+2022-03-03 15:13:14.579 DEBUG - ============================== RES : HTTP/1.0 200 OK. - /127.0.0.1:56493 ==============================
+RES CODE: 200
+Content-Length: [2576]
+Content-Type: [application/octet-stream]
+2022-03-03 15:13:14.581 INFO  - Client closing....../127.0.0.1
+2022-03-03 15:13:58.743 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  56622
+2022-03-03 15:13:58.744 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  56623
+2022-03-03 15:13:58.753 ERROR - Bad Request.   Requested host not exist in this server: www.localhost
+org.chaostocosmos.leap.http.WASException: Bad Request.   Requested host not exist in this server: www.localhost
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:140)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:205)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.getRequest(HttpTransferBuilder.java:173)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:70)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-03-03 15:13:58.756 ERROR - [HTTP: 400] - Bad Request.   Requested host not exist in this server: www.localhost
+2022-03-03 15:13:58.756 DEBUG - REQUEST RESOURCE: response.html   PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\response.html
+2022-03-03 15:13:58.758 DEBUG - ============================== RES : HTTP/1.0 400 OK. - /127.0.0.1:56622 ==============================
+RES CODE: 400
+Content-Length: [724]
+Content-Type: [text/html]
+2022-03-03 15:13:58.997 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  56624
+2022-03-03 15:13:59.003 ERROR - Bad Request.   Requested host not exist in this server: www.localhost
+org.chaostocosmos.leap.http.WASException: Bad Request.   Requested host not exist in this server: www.localhost
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:140)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:205)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.getRequest(HttpTransferBuilder.java:173)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:70)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-03-03 15:13:59.005 ERROR - [HTTP: 400] - Bad Request.   Requested host not exist in this server: www.localhost
+2022-03-03 15:13:59.006 DEBUG - REQUEST RESOURCE: response.html   PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\response.html
+2022-03-03 15:13:59.007 DEBUG - ============================== RES : HTTP/1.0 400 OK. - /127.0.0.1:56623 ==============================
+RES CODE: 400
+Content-Length: [724]
+Content-Type: [text/html]
+2022-03-03 15:14:17.233 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  56640
+2022-03-03 15:14:17.234 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  56641
+2022-03-03 15:14:17.238 DEBUG - ------------------------------ REQ: GET /aaa/bbb/TimeServiceImpl.class HTTP/1.1 ------------------------------
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-03-03 15:14:17.240 DEBUG - REQUEST RESOURCE: response.html   PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\response.html
+2022-03-03 15:14:17.241 DEBUG - REQUEST PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa\bbb\TimeServiceImpl.class
+2022-03-03 15:14:17.245 DEBUG - [RESOURCE] In-Disk resource requested: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa\bbb\TimeServiceImpl.class
+2022-03-03 15:14:17.245 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: application/octet-stream
+2022-03-03 15:14:17.246 DEBUG - ============================== RES : HTTP/1.0 200 OK. - /127.0.0.1:56640 ==============================
+RES CODE: 200
+Content-Length: [2576]
+Content-Type: [application/octet-stream]
+2022-03-03 15:14:17.249 INFO  - Client closing....../127.0.0.1
+2022-03-03 15:14:17.501 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  56643
+2022-03-03 15:14:29.006 ERROR - Read timed out
+java.net.SocketTimeoutException: Read timed out
+	at java.base/java.net.SocketInputStream.socketRead0(Native Method)
+	at java.base/java.net.SocketInputStream.socketRead(SocketInputStream.java:115)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:168)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:200)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:89)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:205)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.getRequest(HttpTransferBuilder.java:173)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:70)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-03-03 15:14:29.014 DEBUG - ============================== RES : HTTP/1.0 500 Internal Server Error. - /127.0.0.1:56624 ==============================
+RES CODE: 500
+Content-Length: [14]
+Content-Type: [text/html]
+2022-03-03 15:14:47.247 ERROR - Read timed out
+java.net.SocketTimeoutException: Read timed out
+	at java.base/java.net.SocketInputStream.socketRead0(Native Method)
+	at java.base/java.net.SocketInputStream.socketRead(SocketInputStream.java:115)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:168)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:200)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:89)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:205)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.getRequest(HttpTransferBuilder.java:173)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:70)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-03-03 15:14:47.252 DEBUG - ============================== RES : HTTP/1.0 500 Internal Server Error. - /127.0.0.1:56641 ==============================
+RES CODE: 500
+Content-Length: [14]
+Content-Type: [text/html]
+2022-03-03 15:14:47.510 ERROR - Read timed out
+java.net.SocketTimeoutException: Read timed out
+	at java.base/java.net.SocketInputStream.socketRead0(Native Method)
+	at java.base/java.net.SocketInputStream.socketRead(SocketInputStream.java:115)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:168)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:200)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:89)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:205)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.getRequest(HttpTransferBuilder.java:173)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:70)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-03-03 15:14:47.513 DEBUG - ============================== RES : HTTP/1.0 500 Internal Server Error. - /127.0.0.1:56643 ==============================
+RES CODE: 500
+Content-Length: [14]
+Content-Type: [text/html]
+2022-03-03 15:15:19.905 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  58205
+2022-03-03 15:15:19.906 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  58206
+2022-03-03 15:15:19.909 ERROR - Bad Request.   Requested host not exist in this server: www.localhost
+org.chaostocosmos.leap.http.WASException: Bad Request.   Requested host not exist in this server: www.localhost
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:140)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:205)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.getRequest(HttpTransferBuilder.java:173)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:70)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-03-03 15:15:19.910 ERROR - [HTTP: 400] - Bad Request.   Requested host not exist in this server: www.localhost
+2022-03-03 15:15:19.910 DEBUG - REQUEST RESOURCE: response.html   PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\response.html
+2022-03-03 15:15:19.911 DEBUG - ============================== RES : HTTP/1.0 400 OK. - /127.0.0.1:58205 ==============================
+RES CODE: 400
+Content-Length: [724]
+Content-Type: [text/html]
+2022-03-03 15:15:19.966 ERROR - Bad Request.   Requested host not exist in this server: www.localhost
+org.chaostocosmos.leap.http.WASException: Bad Request.   Requested host not exist in this server: www.localhost
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:140)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:205)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.getRequest(HttpTransferBuilder.java:173)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:70)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-03-03 15:15:19.969 ERROR - [HTTP: 400] - Bad Request.   Requested host not exist in this server: www.localhost
+2022-03-03 15:15:19.969 DEBUG - REQUEST RESOURCE: response.html   PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\response.html
+2022-03-03 15:15:19.971 DEBUG - ============================== RES : HTTP/1.0 400 OK. - /127.0.0.1:58206 ==============================
+RES CODE: 400
+Content-Length: [724]
+Content-Type: [text/html]
+2022-03-03 15:15:20.171 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  58207
+2022-03-03 15:15:25.592 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static
+2022-03-03 15:15:25.594 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa
+2022-03-03 15:15:25.594 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa\bbb
+2022-03-03 15:15:25.599 INFO  - [RESOUCE INITIALIZED] Resource object for host: localhost started. Watching Paths: 
+2022-03-03 15:15:25.614 INFO  - Leap WAS server starting......
+2022-03-03 15:15:25.615 INFO  - --------------------------------------------------------------------------
+2022-03-03 15:15:25.615 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-03-03 15:15:25.616 INFO  - verbose mode on
+2022-03-03 15:15:25.657 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 15:15:25.658 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 15:15:25.658 INFO  - [DEFAULT HOST] - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 15:15:25.663 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 15:15:25.664 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 15:15:25.664 INFO  - [VIRTUAL HOST] - Protocol: HTTPS_1_0   Server: leap1   Host: awesome   Port: 8082   Doc-Root: home1   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 15:15:25.670 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 15:15:25.671 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 15:15:25.671 INFO  - [VIRTUAL HOST] - Protocol: HTTP_1_0   Server: leap2   Host: www.leap1.org   Port: 8081   Doc-Root: home2   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 15:15:25.671 INFO  - --------------------------------------------------------------------------
+2022-03-03 15:15:25.675 INFO  - [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:8081
+2022-03-03 15:15:25.675 INFO  - [HTTP SERVER START] Address: localhost/127.0.0.1:8080
+2022-03-03 15:15:26.023 INFO  - [HTTPS SERVER START] Address: awesome/127.0.0.1:8082  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-03-03 15:15:29.504 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  58895
+2022-03-03 15:15:29.508 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  58896
+2022-03-03 15:15:29.537 ERROR - Bad Request.   Requested host not exist in this server: www.localhost
+org.chaostocosmos.leap.http.WASException: Bad Request.   Requested host not exist in this server: www.localhost
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:140)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:205)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.getRequest(HttpTransferBuilder.java:173)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:70)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-03-03 15:15:29.541 ERROR - [HTTP: 400] - Bad Request.   Requested host not exist in this server: www.localhost
+2022-03-03 15:15:29.541 DEBUG - REQUEST RESOURCE: response.html   PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\response.html
+2022-03-03 15:15:29.546 DEBUG - ============================== RES : HTTP/1.0 400 OK. - /127.0.0.1:58895 ==============================
+RES CODE: 400
+Content-Length: [724]
+Content-Type: [text/html]
+2022-03-03 15:15:29.589 ERROR - Bad Request.   Requested host not exist in this server: www.localhost
+org.chaostocosmos.leap.http.WASException: Bad Request.   Requested host not exist in this server: www.localhost
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:140)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:205)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.getRequest(HttpTransferBuilder.java:173)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:70)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-03-03 15:15:29.592 ERROR - [HTTP: 400] - Bad Request.   Requested host not exist in this server: www.localhost
+2022-03-03 15:15:29.592 DEBUG - REQUEST RESOURCE: response.html   PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\response.html
+2022-03-03 15:15:29.593 DEBUG - ============================== RES : HTTP/1.0 400 OK. - /127.0.0.1:58896 ==============================
+RES CODE: 400
+Content-Length: [724]
+Content-Type: [text/html]
+2022-03-03 15:15:29.767 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  58897
+2022-03-03 15:15:59.775 ERROR - Read timed out
+java.net.SocketTimeoutException: Read timed out
+	at java.base/java.net.SocketInputStream.socketRead0(Native Method)
+	at java.base/java.net.SocketInputStream.socketRead(SocketInputStream.java:115)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:168)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:200)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:89)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:205)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.getRequest(HttpTransferBuilder.java:173)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:70)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-03-03 15:15:59.779 DEBUG - ============================== RES : HTTP/1.0 500 Internal Server Error. - /127.0.0.1:58897 ==============================
+RES CODE: 500
+Content-Length: [14]
+Content-Type: [text/html]
+2022-03-03 15:16:14.370 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  58926
+2022-03-03 15:16:14.371 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  58927
+2022-03-03 15:16:14.377 DEBUG - ------------------------------ REQ: GET /aaa/ccc/rabbit.zip HTTP/1.1 ------------------------------
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-03-03 15:16:14.381 DEBUG - REQUEST RESOURCE: response.html   PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\response.html
+2022-03-03 15:16:14.382 DEBUG - REQUEST PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa\ccc\rabbit.zip
+2022-03-03 15:16:14.383 ERROR - Resource Not Found.   /aaa/ccc/rabbit.zip
+org.chaostocosmos.leap.http.WASException: Resource Not Found.   /aaa/ccc/rabbit.zip
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:117)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-03-03 15:16:14.387 ERROR - [HTTP: 404] - Resource Not Found.   /aaa/ccc/rabbit.zip
+2022-03-03 15:16:14.387 DEBUG - REQUEST RESOURCE: response.html   PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\response.html
+2022-03-03 15:16:14.388 DEBUG - ============================== RES : HTTP/1.0 404 Resource Not Found. - /127.0.0.1:58926 ==============================
+RES CODE: 404
+Content-Length: [696]
+Content-Type: [text/html]
+2022-03-03 15:16:14.638 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  58928
+2022-03-03 15:16:44.387 ERROR - Read timed out
+java.net.SocketTimeoutException: Read timed out
+	at java.base/java.net.SocketInputStream.socketRead0(Native Method)
+	at java.base/java.net.SocketInputStream.socketRead(SocketInputStream.java:115)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:168)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:200)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:89)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:205)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.getRequest(HttpTransferBuilder.java:173)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:70)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-03-03 15:16:44.391 DEBUG - ============================== RES : HTTP/1.0 500 Internal Server Error. - /127.0.0.1:58927 ==============================
+RES CODE: 500
+Content-Length: [14]
+Content-Type: [text/html]
+2022-03-03 15:16:44.650 ERROR - Read timed out
+java.net.SocketTimeoutException: Read timed out
+	at java.base/java.net.SocketInputStream.socketRead0(Native Method)
+	at java.base/java.net.SocketInputStream.socketRead(SocketInputStream.java:115)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:168)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:200)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:89)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:205)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.getRequest(HttpTransferBuilder.java:173)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:70)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-03-03 15:16:44.657 DEBUG - ============================== RES : HTTP/1.0 500 Internal Server Error. - /127.0.0.1:58928 ==============================
+RES CODE: 500
+Content-Length: [14]
+Content-Type: [text/html]
+2022-03-03 15:19:45.393 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static
+2022-03-03 15:19:45.396 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa
+2022-03-03 15:19:45.397 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa\bbb
+2022-03-03 15:19:45.598 INFO  - [RESOUCE INITIALIZED] Resource object for host: localhost started. Watching Paths: 
+2022-03-03 15:19:45.627 INFO  - Leap WAS server starting......
+2022-03-03 15:19:45.629 INFO  - --------------------------------------------------------------------------
+2022-03-03 15:19:45.629 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-03-03 15:19:45.629 INFO  - verbose mode on
+2022-03-03 15:19:45.669 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 15:19:45.670 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 15:19:45.672 INFO  - [DEFAULT HOST] - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 15:19:45.680 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 15:19:45.680 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 15:19:45.680 INFO  - [VIRTUAL HOST] - Protocol: HTTPS_1_0   Server: leap1   Host: awesome   Port: 8082   Doc-Root: home1   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 15:19:45.685 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 15:19:45.686 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 15:19:45.687 INFO  - [VIRTUAL HOST] - Protocol: HTTP_1_0   Server: leap2   Host: www.leap1.org   Port: 8081   Doc-Root: home2   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 15:19:45.687 INFO  - --------------------------------------------------------------------------
+2022-03-03 15:19:45.691 INFO  - [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:8081
+2022-03-03 15:19:45.691 INFO  - [HTTP SERVER START] Address: localhost/127.0.0.1:8080
+2022-03-03 15:19:46.109 INFO  - [HTTPS SERVER START] Address: awesome/127.0.0.1:8082  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-03-03 15:30:47.741 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  54366
+2022-03-03 15:30:47.743 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  54367
+2022-03-03 15:30:47.749 DEBUG - ------------------------------ REQ: GET /aaa/ccc/rabbit.zip HTTP/1.1 ------------------------------
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-03-03 15:30:47.753 DEBUG - REQUEST RESOURCE: response.html   PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\response.html
+2022-03-03 15:30:47.756 DEBUG - REQUEST PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa\ccc\rabbit.zip
+2022-03-03 15:30:47.762 ERROR - Resource Not Found.   /aaa/ccc/rabbit.zip
+org.chaostocosmos.leap.http.WASException: Resource Not Found.   /aaa/ccc/rabbit.zip
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:117)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-03-03 15:30:47.764 ERROR - [HTTP: 404] - Resource Not Found.   /aaa/ccc/rabbit.zip
+2022-03-03 15:30:47.764 DEBUG - REQUEST RESOURCE: response.html   PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\response.html
+2022-03-03 15:30:47.767 DEBUG - ============================== RES : HTTP/1.0 404 Resource Not Found. - /127.0.0.1:54366 ==============================
+RES CODE: 404
+Content-Length: [696]
+Content-Type: [text/html]
+2022-03-03 15:30:48.005 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  54368
+2022-03-03 15:31:17.750 ERROR - Read timed out
+java.net.SocketTimeoutException: Read timed out
+	at java.base/java.net.SocketInputStream.socketRead0(Native Method)
+	at java.base/java.net.SocketInputStream.socketRead(SocketInputStream.java:115)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:168)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:200)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:89)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:205)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.getRequest(HttpTransferBuilder.java:173)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:70)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-03-03 15:31:17.753 DEBUG - ============================== RES : HTTP/1.0 500 Internal Server Error. - /127.0.0.1:54367 ==============================
+RES CODE: 500
+Content-Length: [14]
+Content-Type: [text/html]
+2022-03-03 15:31:18.014 ERROR - Read timed out
+java.net.SocketTimeoutException: Read timed out
+	at java.base/java.net.SocketInputStream.socketRead0(Native Method)
+	at java.base/java.net.SocketInputStream.socketRead(SocketInputStream.java:115)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:168)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:200)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:89)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:205)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.getRequest(HttpTransferBuilder.java:173)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:70)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-03-03 15:31:18.017 DEBUG - ============================== RES : HTTP/1.0 500 Internal Server Error. - /127.0.0.1:54368 ==============================
+RES CODE: 500
+Content-Length: [14]
+Content-Type: [text/html]
+2022-03-03 15:40:21.570 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  61035
+2022-03-03 15:40:21.572 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  61036
+2022-03-03 15:40:21.577 DEBUG - ------------------------------ REQ: GET /aaa/ccc/rabbit.zip HTTP/1.1 ------------------------------
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-03-03 15:40:21.583 DEBUG - REQUEST RESOURCE: response.html   PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\response.html
+2022-03-03 15:40:21.591 DEBUG - REQUEST PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa\ccc\rabbit.zip
+2022-03-03 15:40:21.593 ERROR - Resource Not Found.   /aaa/ccc/rabbit.zip
+org.chaostocosmos.leap.http.WASException: Resource Not Found.   /aaa/ccc/rabbit.zip
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:117)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-03-03 15:40:21.594 ERROR - [HTTP: 404] - Resource Not Found.   /aaa/ccc/rabbit.zip
+2022-03-03 15:40:21.594 DEBUG - REQUEST RESOURCE: response.html   PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\response.html
+2022-03-03 15:40:21.595 DEBUG - ============================== RES : HTTP/1.0 404 Resource Not Found. - /127.0.0.1:61035 ==============================
+RES CODE: 404
+Content-Length: [696]
+Content-Type: [text/html]
+2022-03-03 15:40:21.833 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  61037
+2022-03-03 15:40:51.577 ERROR - Read timed out
+java.net.SocketTimeoutException: Read timed out
+	at java.base/java.net.SocketInputStream.socketRead0(Native Method)
+	at java.base/java.net.SocketInputStream.socketRead(SocketInputStream.java:115)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:168)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:200)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:89)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:205)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.getRequest(HttpTransferBuilder.java:173)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:70)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-03-03 15:40:51.585 DEBUG - ============================== RES : HTTP/1.0 500 Internal Server Error. - /127.0.0.1:61036 ==============================
+RES CODE: 500
+Content-Length: [14]
+Content-Type: [text/html]
+2022-03-03 15:40:51.843 ERROR - Read timed out
+java.net.SocketTimeoutException: Read timed out
+	at java.base/java.net.SocketInputStream.socketRead0(Native Method)
+	at java.base/java.net.SocketInputStream.socketRead(SocketInputStream.java:115)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:168)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:200)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:89)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:205)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.getRequest(HttpTransferBuilder.java:173)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:70)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-03-03 15:40:51.845 DEBUG - ============================== RES : HTTP/1.0 500 Internal Server Error. - /127.0.0.1:61037 ==============================
+RES CODE: 500
+Content-Length: [14]
+Content-Type: [text/html]
+2022-03-03 15:40:59.225 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static
+2022-03-03 15:40:59.229 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa
+2022-03-03 15:40:59.229 INFO  - Path: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa\bbb
+2022-03-03 15:40:59.409 INFO  - [RESOUCE INITIALIZED] Resource object for host: localhost started. Watching Paths: 
+2022-03-03 15:40:59.443 INFO  - Leap WAS server starting......
+2022-03-03 15:40:59.476 INFO  - --------------------------------------------------------------------------
+2022-03-03 15:40:59.492 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-03-03 15:40:59.498 INFO  - verbose mode on
+2022-03-03 15:40:59.554 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 15:40:59.555 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 15:40:59.555 INFO  - [DEFAULT HOST] - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 15:40:59.560 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 15:40:59.560 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 15:40:59.560 INFO  - [VIRTUAL HOST] - Protocol: HTTPS_1_0   Server: leap1   Host: awesome   Port: 8082   Doc-Root: home1   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 15:40:59.565 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-03 15:40:59.566 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-03 15:40:59.566 INFO  - [VIRTUAL HOST] - Protocol: HTTP_1_0   Server: leap2   Host: www.leap1.org   Port: 8081   Doc-Root: home2   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-03 15:40:59.566 INFO  - --------------------------------------------------------------------------
+2022-03-03 15:40:59.571 INFO  - [HTTP SERVER START] Address: localhost/127.0.0.1:8080
+2022-03-03 15:40:59.571 INFO  - [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:8081
+2022-03-03 15:40:59.912 INFO  - [HTTPS SERVER START] Address: awesome/127.0.0.1:8082  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-03-03 15:41:07.460 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  61064
+2022-03-03 15:41:07.462 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  61065
+2022-03-03 15:41:07.471 DEBUG - ------------------------------ REQ: GET /aaa/ccc/rabbit.zip HTTP/1.1 ------------------------------
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-03-03 15:41:07.476 DEBUG - REQUEST RESOURCE: response.html   PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\response.html
+2022-03-03 15:41:07.477 DEBUG - REQUEST PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa\ccc\rabbit.zip
+2022-03-03 15:41:07.481 ERROR - Resource Not Found.   /aaa/ccc/rabbit.zip
+org.chaostocosmos.leap.http.WASException: Resource Not Found.   /aaa/ccc/rabbit.zip
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:118)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-03-03 15:41:07.485 ERROR - [HTTP: 404] - Resource Not Found.   /aaa/ccc/rabbit.zip
+2022-03-03 15:41:07.486 DEBUG - REQUEST RESOURCE: response.html   PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\response.html
+2022-03-03 15:41:07.490 DEBUG - ============================== RES : HTTP/1.0 404 Resource Not Found. - /127.0.0.1:61064 ==============================
+RES CODE: 404
+Content-Length: [696]
+Content-Type: [text/html]
+2022-03-03 15:41:07.708 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  61066
+2022-03-03 15:41:37.470 ERROR - Read timed out
+java.net.SocketTimeoutException: Read timed out
+	at java.base/java.net.SocketInputStream.socketRead0(Native Method)
+	at java.base/java.net.SocketInputStream.socketRead(SocketInputStream.java:115)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:168)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:200)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:89)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:205)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.getRequest(HttpTransferBuilder.java:173)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:70)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-03-03 15:41:37.474 DEBUG - ============================== RES : HTTP/1.0 500 Internal Server Error. - /127.0.0.1:61065 ==============================
+RES CODE: 500
+Content-Length: [14]
+Content-Type: [text/html]
+2022-03-03 15:41:37.719 ERROR - Read timed out
+java.net.SocketTimeoutException: Read timed out
+	at java.base/java.net.SocketInputStream.socketRead0(Native Method)
+	at java.base/java.net.SocketInputStream.socketRead(SocketInputStream.java:115)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:168)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:200)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:89)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:205)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.getRequest(HttpTransferBuilder.java:173)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:70)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-03-03 15:41:37.725 DEBUG - ============================== RES : HTTP/1.0 500 Internal Server Error. - /127.0.0.1:61066 ==============================
+RES CODE: 500
+Content-Length: [14]
+Content-Type: [text/html]
+2022-03-03 15:41:47.294 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  61091
+2022-03-03 15:41:59.403 DEBUG - ------------------------------ REQ: GET /aaa/bbb/rabbit.zip HTTP/1.1 ------------------------------
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-03-03 15:41:59.406 DEBUG - REQUEST RESOURCE: response.html   PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\response.html
+2022-03-03 15:41:59.407 DEBUG - REQUEST PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa\bbb\rabbit.zip
+2022-03-03 15:41:59.412 DEBUG - [RESOURCE] In-Disk resource requested: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa\bbb\rabbit.zip
+2022-03-03 15:41:59.415 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: application/x-zip-compressed
+2022-03-03 15:41:59.415 DEBUG - ============================== RES : HTTP/1.0 200 OK. - /127.0.0.1:61091 ==============================
+RES CODE: 200
+Content-Length: [4868798]
+Content-Type: [application/x-zip-compressed]
+2022-03-03 15:41:59.496 INFO  - Client closing....../127.0.0.1
+2022-03-03 15:41:59.711 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  61100
+2022-03-03 15:42:21.036 DEBUG - ------------------------------ REQ: GET /aaa/bbb/rabbit.zip HTTP/1.1 ------------------------------
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-03-03 15:42:21.039 DEBUG - REQUEST RESOURCE: response.html   PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\response.html
+2022-03-03 15:42:21.040 DEBUG - REQUEST PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa\bbb\rabbit.zip
+2022-03-03 15:42:21.043 DEBUG - [RESOURCE] In-Disk resource requested: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa\bbb\rabbit.zip
+2022-03-03 15:42:21.044 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: application/x-zip-compressed
+2022-03-03 15:42:21.045 DEBUG - ============================== RES : HTTP/1.0 200 OK. - /127.0.0.1:61100 ==============================
+RES CODE: 200
+Content-Length: [4868798]
+Content-Type: [application/x-zip-compressed]
+2022-03-03 15:42:21.343 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  61146
+2022-03-03 15:42:21.714 INFO  - Client closing....../127.0.0.1
+2022-03-03 15:42:51.347 ERROR - Read timed out
+java.net.SocketTimeoutException: Read timed out
+	at java.base/java.net.SocketInputStream.socketRead0(Native Method)
+	at java.base/java.net.SocketInputStream.socketRead(SocketInputStream.java:115)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:168)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:200)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:89)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:205)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.getRequest(HttpTransferBuilder.java:173)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:70)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-03-03 15:42:51.350 DEBUG - ============================== RES : HTTP/1.0 500 Internal Server Error. - /127.0.0.1:61146 ==============================
+RES CODE: 500
+Content-Length: [14]
+Content-Type: [text/html]
+2022-03-03 15:49:32.020 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  51549
+2022-03-03 15:49:32.022 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  51550
+2022-03-03 15:49:32.027 DEBUG - ------------------------------ REQ: GET /aaa/bbb/rabbit.zip HTTP/1.1 ------------------------------
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko,en-US;q=0.9,en;q=0.8
+Cookie: io=PL7TK76OSCzqZRBSAAAC
+2022-03-03 15:49:32.030 DEBUG - REQUEST RESOURCE: response.html   PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\response.html
+2022-03-03 15:49:32.030 DEBUG - REQUEST PATH: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa\bbb\rabbit.zip
+2022-03-03 15:49:32.034 DEBUG - [RESOURCE] In-Disk resource requested: D:\0.github\Leap\home\webapp\WEB-INF\static\aaa\bbb\rabbit.zip
+2022-03-03 15:49:32.034 DEBUG - DOWNLOAD RESOURCE MIME-TYPE: application/x-zip-compressed
+2022-03-03 15:49:32.035 DEBUG - ============================== RES : HTTP/1.0 200 OK. - /127.0.0.1:51549 ==============================
+RES CODE: 200
+Content-Length: [4868798]
+Content-Type: [application/x-zip-compressed]
+2022-03-03 15:49:32.099 INFO  - Client closing....../127.0.0.1
+2022-03-03 15:49:32.267 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  51551
+2022-03-03 15:50:02.039 ERROR - Read timed out
+java.net.SocketTimeoutException: Read timed out
+	at java.base/java.net.SocketInputStream.socketRead0(Native Method)
+	at java.base/java.net.SocketInputStream.socketRead(SocketInputStream.java:115)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:168)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:200)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:89)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:205)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.getRequest(HttpTransferBuilder.java:173)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:70)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-03-03 15:50:02.045 DEBUG - ============================== RES : HTTP/1.0 500 Internal Server Error. - /127.0.0.1:51550 ==============================
+RES CODE: 500
+Content-Length: [14]
+Content-Type: [text/html]
+2022-03-03 15:50:02.271 ERROR - Read timed out
+java.net.SocketTimeoutException: Read timed out
+	at java.base/java.net.SocketInputStream.socketRead0(Native Method)
+	at java.base/java.net.SocketInputStream.socketRead(SocketInputStream.java:115)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:168)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:200)
+	at org.chaostocosmos.leap.http.commons.StreamUtils.readLine(StreamUtils.java:359)
+	at org.chaostocosmos.leap.http.HttpParser$RequestParser.parseRequest(HttpParser.java:89)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.parseRequest(HttpTransferBuilder.java:205)
+	at org.chaostocosmos.leap.http.HttpTransferBuilder$HttpTransfer.getRequest(HttpTransferBuilder.java:173)
+	at org.chaostocosmos.leap.http.LeapRequestHandler.run(LeapRequestHandler.java:70)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-03-03 15:50:02.278 DEBUG - ============================== RES : HTTP/1.0 500 Internal Server Error. - /127.0.0.1:51551 ==============================
+RES CODE: 500
+Content-Length: [14]
+Content-Type: [text/html]

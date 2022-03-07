@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.http.commons.HostsManager;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.commons.StreamUtils;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
@@ -86,7 +85,7 @@ public class HttpParser {
          * @throws IOException
          * @throws WASException
          */
-        public HttpRequestDescriptor parseRequest(InputStream in) throws IOException, WASException {
+        public HttpRequestDescriptor parseRequest(InputStream in) throws IOException {
             String requestLine = StreamUtils.readLine(in, StandardCharsets.ISO_8859_1);
             if(requestLine == null) {
                 throw new WASException(MSG_TYPE.ERROR, 9);
@@ -203,7 +202,7 @@ public class HttpParser {
         public HttpResponseDescriptor buildResponse(final HttpRequestDescriptor request, 
                                                     final int statusCode, 
                                                     final Object body, 
-                                                    final Map<String, List<Object>> headers) throws WASException {
+                                                    final Map<String, List<Object>> headers) {
             return new HttpResponseDescriptor(request, statusCode, body, headers);
         }
     }    

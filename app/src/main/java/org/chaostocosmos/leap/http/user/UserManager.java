@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.Constants;
 import org.chaostocosmos.leap.http.Context;
+import org.chaostocosmos.leap.http.HostsManager;
 import org.chaostocosmos.leap.http.WASException;
-import org.chaostocosmos.leap.http.commons.HostsManager;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.filters.IAuthenticate;
 

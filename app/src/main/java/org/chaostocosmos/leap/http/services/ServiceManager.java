@@ -89,9 +89,11 @@ public class ServiceManager {
             for(Method method : methods) {
                 MethodMappper mm = method.getDeclaredAnnotation(MethodMappper.class);
                 if(mm != null) {
-                    String mPath = mm.path();
+                    String sKey = sPath + mm.path();
+                    if(!this.serviceHolderMap.containsKey(sKey)) {
+                        logger.info("Add service: "+service.getClass().getName()+"  Mapping path: "+ sKey + "   METHOD: "+mm.mappingMethod());
+                    }
                     REQUEST_TYPE rType = mm.mappingMethod();
-                    logger.debug(service.toString()+" : "+rType.name());
                     FilterMapper fm = method.getDeclaredAnnotation(FilterMapper.class);
                     ServiceHolder serviceHolder;
                     if(fm != null) {
@@ -111,15 +113,14 @@ public class ServiceManager {
                         }                     
                         service.setFilters(preFilters, postFilters);
                         service.setServiceManager(this);
-                        serviceHolder = new ServiceHolder(sPath+mPath, service, rType, method);
-                        serviceHolderMap.put(sPath+mPath, serviceHolder);
+                        serviceHolder = new ServiceHolder(sKey, service, rType, method);
+                        serviceHolderMap.put(sKey, serviceHolder);
                     } else {
-                        serviceHolder = new ServiceHolder(sPath+mPath, service, rType, method);
-                        serviceHolderMap.put(sPath+mPath, serviceHolder);
+                        serviceHolder = new ServiceHolder(sKey, service, rType, method);
+                        serviceHolderMap.put(sKey, serviceHolder);
                     }
-                    logger.info("Add service: "+service.getClass().getName()+"  Mapping path: "+sPath+mPath);
                 } else {
-                    logger.debug("Method not mapped with MethodMapper: "+method.getName());
+                    //logger.debug("Method not mapped with MethodMapper: "+method.getName());
                 }
             }
         } else {

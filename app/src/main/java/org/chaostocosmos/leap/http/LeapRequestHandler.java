@@ -4,21 +4,17 @@ import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
 import java.nio.file.Path;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.HttpTransferBuilder.HttpTransfer;
 import org.chaostocosmos.leap.http.commons.Hosts;
-import org.chaostocosmos.leap.http.commons.HostsManager;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
-import org.chaostocosmos.leap.http.commons.ResourceHelper;
 import org.chaostocosmos.leap.http.commons.UtilBox;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
+import org.chaostocosmos.leap.http.enums.RES_CODE;
 import org.chaostocosmos.leap.http.services.ServiceHolder;
 import org.chaostocosmos.leap.http.services.ServiceInvoker;
 import org.chaostocosmos.leap.http.services.ServiceManager;
@@ -31,10 +27,10 @@ import org.chaostocosmos.leap.http.services.ServiceManager;
  */
 public class LeapRequestHandler implements Runnable {
     /**
-     * Path doc root
+     * Leap server home path
      */
-    private Path rootPath;
-    
+    Path LEAP_HOME;
+
     /**
      * Server
      */
@@ -57,10 +53,10 @@ public class LeapRequestHandler implements Runnable {
      * @param client
      * @param hosts
      */
-    public LeapRequestHandler(LeapHttpServer httpServer, Path rootPath, Socket client, Hosts hosts) {
+    public LeapRequestHandler(LeapHttpServer httpServer, Path LEAP_HOME, Socket client, Hosts hosts) {
         this.httpServer = httpServer;
+        this.LEAP_HOME = LEAP_HOME;
         this.client = client;
-        this.rootPath = rootPath;
         this.hosts = hosts;
     }
 
@@ -68,72 +64,60 @@ public class LeapRequestHandler implements Runnable {
     public void run() {
         HttpRequestDescriptor request = null;
         HttpResponseDescriptor response = null;
-        HttpTransfer httpTransfer = null;
-        String requestedHost = null;
+        HttpTransfer httpTransfer = null;        
         try {            
             httpTransfer = HttpTransferBuilder.buildHttpTransfer(httpServer.getHost(), this.client);
             request = httpTransfer.getRequest();
             response = httpTransfer.getResponse();
-            //if(request != null && response != null) {
-                requestedHost = request.getRequestedHost();            
-                //Put requested host to request header Map for ip filter
-                request.getReqHeader().put("@Client", requestedHost);
-                //LoggerFactory.getLogger(requestedHost).debug("Request host: "+requestedHost); 
+            Hosts hosts = httpTransfer.getHosts();
+
+            //Put requested host to request header Map for ip filter
+            request.getReqHeader().put("@Client", hosts.getHost());
+
+            ServiceManager serviceManager = httpServer.getServiceManager();
+            ServiceHolder serviceHolder = serviceManager.getMappingServiceHolder(request.getContextPath());    
+            //If client request context path in Services.
+            if (serviceHolder != null) {
+                // Request method validation
+                if(serviceHolder.getRequestType() != request.getRequestType()) {
+                    throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES405.getCode(), "Not supported: "+request.getRequestType().name());
+                } else if (serviceManager.vaildateRequestMethod(request.getRequestType(), request.getContextPath())) {
+                    // Do requested service to execute by cloned service of request
+                    response = ServiceInvoker.invokeService(serviceHolder, httpTransfer, true);
+                } else {
+                    throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES405.getCode(), Context.getHttpMsg(405));
+                }
+            } else { // When client request static resources
                 Path resourcePath = ResourceHelper.getResourcePath(request);
-                ServiceManager serviceManager = httpServer.getServiceManager();
-                ServiceHolder serviceHolder = serviceManager.getMappingServiceHolder(request.getContextPath());
-    
-                //If client request context path in Services.
-                if (serviceHolder != null) {
-                    // Request method validation
-                    if(serviceHolder.getRequestType() != request.getRequestType()) {
-                        throw new WASException(MSG_TYPE.HTTP, 405, "Not supported: "+request.getRequestType().name());
-                    } else if (serviceManager.vaildateRequestMethod(request.getRequestType(), request.getContextPath())) {
-                        // Do requested service to execute by cloned service of request
-                        response = ServiceInvoker.invokeService(serviceHolder, httpTransfer, true);
-                    } else {
-                        String message = Context.getHttpMsg(405);
-                        String body = ResourceHelper.getResponsePage(requestedHost, Map.of("@code", 405, "@message", message));
-                        response.addHeader("Content-Type", MIME_TYPE.TEXT_HTML.getMimeType());
-                        response.setBody(body.getBytes());
-                        response.setStatusCode(405);                    
-                    }
-                } else { // When client request static resources
-                    if(request.getContextPath().equals("/")) {
-                        String body = ResourceHelper.getWelcomePage(requestedHost, Map.of("@serverName", requestedHost));
-                        response.addHeader("Content-Type", MIME_TYPE.TEXT_HTML.getMimeType());
-                        response.setBody(body.getBytes());
-                        response.setStatusCode(200);
-                    } else {
-                        if (resourcePath.toFile().exists()) {
-                            File resourceFile = resourcePath.toFile();
-                            String resourceName = resourceFile.getName();
+                if(request.getContextPath().equals("/")) {
+                    String body = hosts.getResource().getWelcomePage(Map.of("@serverName", hosts.getHost()));
+                    response.addHeader("Content-Type", MIME_TYPE.TEXT_HTML.getMimeType());
+                    response.setBody(body.getBytes());
+                    response.setStatusCode(RES_CODE.RES200.getCode());
+                } else {
+                    if (resourcePath.toFile().exists()) {
+                        File resourceFile = resourcePath.toFile();
+                        String resourceName = resourceFile.getName();
+                        int responseCode = RES_CODE.RES200.getCode();
+                        //Get requested resource data
+                        Object resource = hosts.getResource().getResourceData(resourcePath);
+                        if(resource != null) {
                             String mimeType = UtilBox.probeContentType(resourcePath);
-                            LoggerFactory.getLogger(requestedHost).debug("DOWNLOAD RESOURCE MIME-TYPE: "+mimeType);
-                            //Condition of requeset resource in forbidden list
-                            if(this.hosts.getForbiddenResourceFilters().stream().anyMatch(f -> !f.trim().equals("") && resourceName.matches(Arrays.asList(f.split(Pattern.quote("*"))).stream().map(s -> s.equals("") ? "" : Pattern.quote(s)).collect(Collectors.joining(".*"))+".*"))) {
-                                String message = Context.getHttpMsg(403);
-                                String body = ResourceHelper.getResponsePage(requestedHost, Map.of("@code", 403, "@type", "HTTP", "@message", message));
-                                response.addHeader("Content-Type", MIME_TYPE.TEXT_HTML.getMimeType());
-                                response.setBody(body.getBytes());
-                                response.setStatusCode(403);
-                            } else if(this.hosts.getAllowedResourceFilters().stream().anyMatch(a -> !a.trim().equals("") && resourceName.matches(Arrays.asList(a.split(Pattern.quote("*"))).stream().map(s -> s.equals("") ? "" : Pattern.quote(s)).collect(Collectors.joining(".*"))+".*"))) {
-                                //Condition of request resource in allowed list
-                                response.addHeader("Content-Type", mimeType);
-                                response.setBody(resourcePath);
-                                response.setStatusCode(200);
-                            } else {
-                                LoggerFactory.getLogger(requestedHost).debug("Not allowed resource requested: "+resourceName);
+                            if(mimeType == null) {
+                                mimeType = MIME_TYPE.APPLICATION_OCTET_STREAM.getMimeType();
                             }
+                            response.setStatusCode(responseCode);
+                            response.addHeader("Content-Type", mimeType);
+                            response.setBody(resource);
+                            LoggerFactory.getLogger(hosts.getHost()).debug("DOWNLOAD RESOURCE MIME-TYPE: "+mimeType);
                         } else {
-                            //When requested resource is not found
-                            throw new WASException(MSG_TYPE.HTTP, 404, request.getContextPath());
+                            throw new WASException(MSG_TYPE.HTTP, 403, request.getContextPath());
                         }
+                    } else {
+                        throw new WASException(MSG_TYPE.HTTP, 404, request.getContextPath());
                     }
-                }                    
-            //} else {
-            //    LoggerFactory.getLogger(requestedHost).warn(Context.getErrorMsg(50, this.client.getRemoteSocketAddress().toString()));
-            //}
+                }   
+            }                 
             if(response != null) {
                 //Send response to client
                 httpTransfer.sendResponse(response);
@@ -142,12 +126,8 @@ public class LeapRequestHandler implements Runnable {
                 httpTransfer.close();
             }                
         } catch(Throwable e) {
-            e.printStackTrace();
-            try {
-                processError(httpTransfer, e);
-            } catch(Exception e1) {
-                LoggerFactory.getLogger(requestedHost).error(e.getMessage(), e);
-            }
+            LoggerFactory.getLogger(httpTransfer.getHosts().getHost()).error(e.getMessage(), e);
+            processError(httpTransfer, e);
         }
     }
 
@@ -158,26 +138,29 @@ public class LeapRequestHandler implements Runnable {
      * @throws WASException
      * @throws IOException
      */
-    public void processError(HttpTransfer httpTransfer, Throwable error) throws WASException, IOException {
-        String requestedHost = httpTransfer.getRequestedHost();
-        Throwable t = getCaused(error);
-                
-        int resCode = -1;
-        MSG_TYPE msgType = null;
-        if(t instanceof WASException) {
-            WASException w = (WASException)t;
-            resCode = w.getCode();
-            msgType = w.getMessageType();
-        } else {
-            resCode = 500;
-            msgType = MSG_TYPE.HTTP;
+    public void processError(HttpTransfer httpTransfer, Throwable error) {
+        try {
+            String requestedHost = httpTransfer.getHosts().getHost();
+            Throwable t = getCaused(error);
+            int resCode = -1;
+            MSG_TYPE msgType = null;
+            if(t instanceof WASException) {
+                WASException w = (WASException)t;
+                resCode = w.getCode();
+                msgType = w.getMessageType();
+            } else {
+                resCode = 500;
+                msgType = MSG_TYPE.HTTP;
+            }
+            if(!HostsManager.get().isExistHost(requestedHost)) {
+                requestedHost = Context.getDefaultHost();
+            }
+            Map<String, List<Object>> headers = HttpTransferBuilder.addHeader(new HashMap<String, List<Object>>(), "Content-Type", "text/html");
+            Object body = t != null ? HttpTransferBuilder.buildErrorResponse(requestedHost, msgType, resCode, t.getMessage()) : error.getMessage();
+            httpTransfer.sendResponse(requestedHost, resCode, headers, body);    
+        } catch(Exception e) {
+            LoggerFactory.getLogger(httpTransfer.getHosts().getHost()).error(e.getMessage(), e);
         }
-        if(!HostsManager.get().isExistHost(requestedHost)) {
-            requestedHost = Context.getDefaultHost();
-        }
-        Map<String, List<Object>> headers = HttpTransferBuilder.addHeader(new HashMap<String, List<Object>>(), "Content-Type", "text/html");
-        Object body = t != null ? HttpTransferBuilder.buildErrorResponse(requestedHost, msgType, resCode, t.getMessage()) : error.getMessage();
-        httpTransfer.sendResponse(requestedHost, resCode, headers, body);
     }
 
     /**

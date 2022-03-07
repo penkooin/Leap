@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
-import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -15,9 +14,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.http.commons.HostsManager;
+import org.chaostocosmos.leap.http.commons.Hosts;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
-import org.chaostocosmos.leap.http.commons.ResourceHelper;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
@@ -33,43 +31,43 @@ public class HttpTransferBuilder {
      * @param requestedHost
      * @param e
      * @return
+     * @throws IOException
+     * @throws InterruptedException
      * @throws WASException
      */
-    public static String buildErrorResponse(String requestedHost, MSG_TYPE msgType, int errorCode, String errorMsg) throws WASException {
+    public static String buildErrorResponse(String requestedHost, MSG_TYPE msgType, int errorCode, String errorMsg) throws IOException, InterruptedException {
         LoggerFactory.getLogger(requestedHost).error("["+msgType.name()+": "+errorCode+"] - "+errorMsg);
         return buildHttpResponsePage(requestedHost, msgType, errorCode, errorMsg);
     }
 
     /**
      * Create http response page
-     * @param requestedHost
+     * @param host
      * @param type
      * @param code
      * @param message
      * @return
-     * @throws URISyntaxException
      * @throws IOException
-     * @throws WASException
+     * @throws InterruptedException
      */
-    public static String buildHttpResponsePage(String requestedHost, MSG_TYPE type, int code, String message) throws WASException {
+    public static String buildHttpResponsePage(String host, MSG_TYPE type, int code, String message) throws IOException, InterruptedException {
         Map<String, Object> map;
         if(type != null) {
             map = Map.of("@code", code, "@type", type.name(), "@message", message);
         } else {
             map = Map.of("@code", 0, "@type", "EXCEPTION", "@message", message);
         }
-        return ResourceHelper.getResponsePage(requestedHost, map);
-    }        
+        return StaticResourceManager.get(host).getResponsePage(map);
+    }
 
     /**
      * Build HttpTransfer object
      * @param vHost
      * @param client
      * @throws IOException
-     * @throws WASException
      * @throws Exception
      */
-    public static HttpTransfer buildHttpTransfer(String vHost, Socket client) throws IOException, WASException {
+    public static HttpTransfer buildHttpTransfer(String vHost, Socket client) throws IOException {
         return new HttpTransfer(vHost, client);
     } 
 
@@ -99,25 +97,30 @@ public class HttpTransferBuilder {
      */
     public static class HttpTransfer {
         /**
-         * Requested host
+         * Hosts, Information configured in config.yml
          */
-        String host;
+        Hosts hosts;
+        
         /**
          * Client Socket
          */
         Socket socket;
+
         /**
          * InputStream
          */
         InputStream clientInputStream;
+
         /**
          * OutputStream
          */
         OutputStream clientOutputStream;
+
         /**
          * Http request
          */
         HttpRequestDescriptor httpRequestDescriptor;
+
         /**
          * Http response
          */
@@ -128,10 +131,9 @@ public class HttpTransferBuilder {
          * @param host
          * @param client
          * @throws IOException
-         * @throws WASException
          */
-        public HttpTransfer(String host, Socket client) throws IOException, WASException {
-            this.host = host;
+        public HttpTransfer(String host, Socket client) throws IOException {
+            this.hosts = HostsManager.get().getHosts(host);
             this.socket = client;
             this.clientInputStream = client.getInputStream();
             this.clientOutputStream = client.getOutputStream();
@@ -141,8 +143,8 @@ public class HttpTransferBuilder {
          * Get requested host
          * @return
          */
-        public String getRequestedHost() {
-            return this.host;
+        public Hosts getHosts() {
+            return this.hosts;
         }
 
         /**
@@ -164,10 +166,9 @@ public class HttpTransferBuilder {
         /**
          * Get HttpRequestDescriptor
          * @return
-         * @throws WASException
          * @throws IOException
          */
-        public HttpRequestDescriptor getRequest() throws IOException, WASException {
+        public HttpRequestDescriptor getRequest() throws IOException {
             if(this.httpRequestDescriptor == null) {
                 this.httpRequestDescriptor = parseRequest();
             }
@@ -177,9 +178,10 @@ public class HttpTransferBuilder {
         /**
          * Get HttpResponseDescriptor
          * @return
-         * @throws WASException
+         * @throws IOException
+         * @throws InterruptedException
          */
-        public HttpResponseDescriptor getResponse() throws WASException {
+        public HttpResponseDescriptor getResponse() throws IOException, InterruptedException {
             if(this.httpResponseDescriptor == null) {
                 String msg = buildHttpResponsePage(this.httpRequestDescriptor.getRequestedHost(), MSG_TYPE.HTTP, 200, Context.getHttpMsg(200));
                 Map<String, List<Object>> headers = addHeader(new HashMap<>(), "Content-Type", MIME_TYPE.TEXT_HTML.getMimeType());
@@ -197,11 +199,9 @@ public class HttpTransferBuilder {
         /**
          * Get HttpRequestDescriptor object
          * @return
-         * @throws WASException
          * @throws IOException
-         * @throws Exception
          */
-        private HttpRequestDescriptor parseRequest() throws IOException, WASException {
+        private HttpRequestDescriptor parseRequest() throws IOException {
             return HttpParser.buildRequestParser().parseRequest(clientInputStream);
         }
 
@@ -227,19 +227,34 @@ public class HttpTransferBuilder {
             String str = HostsManager.get().getHosts(host).getProtocol().name();
             String protocol = str.substring(0, str.indexOf("_"));
             String version = str.substring(str.indexOf("_")+1).replace("_", ".");
-            String resLine = RES_CODE.valueOf("RES"+resCode).getMessage();
-            String res = protocol+"/"+version+" "+resCode+" "+resLine+"\r\n"; 
+            String resMsg = null;
+            if(resCode >= 200 && resCode <= 600) {
+                resMsg = RES_CODE.valueOf("RES"+resCode).getMessage();
+            } else {
+                resMsg = Context.getErrorMsg(resCode, host);
+            }
+            String res = protocol+"/"+version+" "+resCode+" "+resMsg+"\r\n"; 
             this.clientOutputStream.write(res.getBytes());
             if(body == null) {
                 LoggerFactory.getLogger(host).warn("Response body is Null: "+resCode);
                 return ;
+            }            
+            long contentLength = -1;
+            if(body instanceof byte[]) {
+                contentLength = ((byte[])body).length;
+            } else if(body instanceof String) {
+                contentLength = ((String)body).getBytes(charset).length;
+            } else if(body instanceof Path) {
+                contentLength = ((Path)body).toFile().length();
+            } else if(body instanceof File) {
+                contentLength = ((File)body).length();
+            } else {
+                throw new WASException(MSG_TYPE.ERROR, 55, body.getClass().getName());
             }
-            if(headers.get("Content-Length") == null) {
-                int contentLength = body instanceof byte[] ? ((byte[])body).length : body instanceof String ? ((String)body).getBytes(charset).length : (int)((Path)body).toFile().length();
-                List<Object> values = new ArrayList<>();
-                values.add(contentLength);
-                headers.put("Content-Length", values);
-            }
+            List<Object> values = new ArrayList<>();
+            values.add(contentLength);
+            headers.put("Content-Length", values);
+
             //LoggerFactory.getLogger(response.getRequestedHost()).debug(response.toString());
             StringBuffer resStr = new StringBuffer();
             resStr.append("============================== RES : "+res.trim()+" - "+this.socket.getRemoteSocketAddress().toString()+" =============================="+System.lineSeparator());
@@ -252,7 +267,6 @@ public class HttpTransferBuilder {
             this.clientOutputStream.write("\r\n".getBytes());
             this.clientOutputStream.flush(); 
             if(body instanceof byte[]) {
-                System.out.println(new String((byte[])body));
                 this.clientOutputStream.write((byte[]) body);
             } else {
                 if(body instanceof String) {                                        
@@ -301,9 +315,9 @@ public class HttpTransferBuilder {
                     this.socket.close();
                 }    
             } catch(Exception e) {
-                LoggerFactory.getLogger(this.host).error(e.getMessage(), e);
+                LoggerFactory.getLogger(this.hosts.getHost()).error(e.getMessage(), e);
             }
-            LoggerFactory.getLogger(this.host).info("Client closing......"+socket.getInetAddress().toString());
+            LoggerFactory.getLogger(this.hosts.getHost()).info("Client closing......"+socket.getInetAddress().toString());
         }
     }
 }

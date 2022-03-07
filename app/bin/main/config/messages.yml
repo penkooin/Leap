@@ -103,3 +103,4 @@ messages:
     error52: '{} must be in Network Interfaces List: {}'
     error53: 'SSL Handshake failed: {}'
     error54: 'Leap service deploy must be requested with POST multi-part form data. {}'
+    error55: 'Specified type of response body object is not supported: {}'

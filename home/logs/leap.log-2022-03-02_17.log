@@ -1,0 +1,195 @@
+2022-03-02 17:30:19.830 INFO  - Leap WAS server starting......
+2022-03-02 17:30:19.855 INFO  - --------------------------------------------------------------------------
+2022-03-02 17:30:19.867 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-03-02 17:30:19.867 INFO  - verbose mode on
+2022-03-02 17:30:20.063 DEBUG - Method not mapped with MethodMapper: removeService
+2022-03-02 17:30:20.064 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-03-02 17:30:20.096 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@62e7f11d : POST
+2022-03-02 17:30:20.096 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload
+2022-03-02 17:30:20.399 DEBUG - Method not mapped with MethodMapper: deployService
+2022-03-02 17:30:20.401 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@140c9f39 : GET
+2022-03-02 17:30:20.403 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-03-02 17:30:20.406 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-03-02 17:30:20.407 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@26275bef : GET
+2022-03-02 17:30:20.407 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-03-02 17:30:20.408 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-03-02 17:30:20.409 INFO  - [DEFAULT HOST] - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-02 17:30:20.414 DEBUG - Method not mapped with MethodMapper: removeService
+2022-03-02 17:30:20.415 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-03-02 17:30:20.415 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@77eca502 : POST
+2022-03-02 17:30:20.416 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload
+2022-03-02 17:30:20.416 DEBUG - Method not mapped with MethodMapper: deployService
+2022-03-02 17:30:20.416 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@3246fb96 : GET
+2022-03-02 17:30:20.416 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-03-02 17:30:20.417 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-03-02 17:30:20.417 INFO  - [VIRTUAL HOST] - Protocol: HTTPS_1_0   Server: leap1   Host: awesome   Port: 8082   Doc-Root: home1   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-02 17:30:20.423 DEBUG - Method not mapped with MethodMapper: removeService
+2022-03-02 17:30:20.424 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-03-02 17:30:20.424 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@61386958 : POST
+2022-03-02 17:30:20.425 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload
+2022-03-02 17:30:20.425 DEBUG - Method not mapped with MethodMapper: deployService
+2022-03-02 17:30:20.425 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@73ee04c8 : GET
+2022-03-02 17:30:20.426 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-03-02 17:30:20.426 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-03-02 17:30:20.426 INFO  - [VIRTUAL HOST] - Protocol: HTTP_1_0   Server: leap2   Host: www.leap1.org   Port: 8081   Doc-Root: home2   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-02 17:30:20.427 INFO  - --------------------------------------------------------------------------
+2022-03-02 17:30:20.430 INFO  - [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:8081
+2022-03-02 17:30:20.430 INFO  - [HTTP SERVER START] Address: localhost/127.0.0.1:8080
+2022-03-02 17:30:20.863 INFO  - [HTTPS SERVER START] Address: awesome/127.0.0.1:8082  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-03-02 17:30:41.821 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  52478
+2022-03-02 17:30:41.823 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  52479
+2022-03-02 17:30:45.848 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  52481
+2022-03-02 17:30:45.849 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  52482
+2022-03-02 17:44:19.107 INFO  - Leap WAS server starting......
+2022-03-02 17:44:19.110 INFO  - --------------------------------------------------------------------------
+2022-03-02 17:44:19.110 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-03-02 17:44:19.111 INFO  - verbose mode on
+2022-03-02 17:44:19.148 DEBUG - Method not mapped with MethodMapper: removeService
+2022-03-02 17:44:19.148 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-03-02 17:44:19.148 DEBUG - Method not mapped with MethodMapper: deployService
+2022-03-02 17:44:19.154 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@1bb266b3 : POST
+2022-03-02 17:44:19.155 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload
+2022-03-02 17:44:19.156 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@40cb8df7 : GET
+2022-03-02 17:44:19.156 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-03-02 17:44:19.156 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-03-02 17:44:19.156 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@2892dae4 : GET
+2022-03-02 17:44:19.157 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-03-02 17:44:19.157 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-03-02 17:44:19.157 INFO  - [DEFAULT HOST] - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-02 17:44:19.163 DEBUG - Method not mapped with MethodMapper: removeService
+2022-03-02 17:44:19.163 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-03-02 17:44:19.164 DEBUG - Method not mapped with MethodMapper: deployService
+2022-03-02 17:44:19.164 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@29647f75 : POST
+2022-03-02 17:44:19.164 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload
+2022-03-02 17:44:19.164 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@3315d2d7 : GET
+2022-03-02 17:44:19.164 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-03-02 17:44:19.165 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-03-02 17:44:19.165 INFO  - [VIRTUAL HOST] - Protocol: HTTPS_1_0   Server: leap1   Host: awesome   Port: 8082   Doc-Root: home1   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-02 17:44:19.171 DEBUG - Method not mapped with MethodMapper: removeService
+2022-03-02 17:44:19.172 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-03-02 17:44:19.172 DEBUG - Method not mapped with MethodMapper: deployService
+2022-03-02 17:44:19.172 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@5fa07e12 : POST
+2022-03-02 17:44:19.173 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload
+2022-03-02 17:44:19.173 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@55b53d44 : GET
+2022-03-02 17:44:19.173 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-03-02 17:44:19.173 DEBUG - Method not mapped with MethodMapper: errorHandling
+2022-03-02 17:44:19.173 INFO  - [VIRTUAL HOST] - Protocol: HTTP_1_0   Server: leap2   Host: www.leap1.org   Port: 8081   Doc-Root: home2   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-02 17:44:19.173 INFO  - --------------------------------------------------------------------------
+2022-03-02 17:44:19.177 INFO  - [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:8081
+2022-03-02 17:44:19.177 INFO  - [HTTP SERVER START] Address: localhost/127.0.0.1:8080
+2022-03-02 17:44:19.542 INFO  - [HTTPS SERVER START] Address: awesome/127.0.0.1:8082  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-03-02 17:45:07.740 INFO  - Leap WAS server starting......
+2022-03-02 17:45:07.743 INFO  - --------------------------------------------------------------------------
+2022-03-02 17:45:07.744 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-03-02 17:45:07.744 INFO  - verbose mode on
+2022-03-02 17:45:07.787 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@1bb266b3 : POST
+2022-03-02 17:45:07.788 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload
+2022-03-02 17:45:07.789 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@40cb8df7 : GET
+2022-03-02 17:45:07.789 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-03-02 17:45:07.790 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@2892dae4 : GET
+2022-03-02 17:45:07.790 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-03-02 17:45:07.790 INFO  - [DEFAULT HOST] - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-02 17:45:07.795 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@29647f75 : POST
+2022-03-02 17:45:07.795 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload
+2022-03-02 17:45:07.796 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@3315d2d7 : GET
+2022-03-02 17:45:07.796 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-03-02 17:45:07.796 INFO  - [VIRTUAL HOST] - Protocol: HTTPS_1_0   Server: leap1   Host: awesome   Port: 8082   Doc-Root: home1   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-02 17:45:07.803 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@5fa07e12 : POST
+2022-03-02 17:45:07.804 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload
+2022-03-02 17:45:07.804 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@55b53d44 : GET
+2022-03-02 17:45:07.804 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-03-02 17:45:07.804 INFO  - [VIRTUAL HOST] - Protocol: HTTP_1_0   Server: leap2   Host: www.leap1.org   Port: 8081   Doc-Root: home2   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-02 17:45:07.805 INFO  - --------------------------------------------------------------------------
+2022-03-02 17:45:07.808 INFO  - [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:8081
+2022-03-02 17:45:07.808 INFO  - [HTTP SERVER START] Address: localhost/127.0.0.1:8080
+2022-03-02 17:45:08.259 INFO  - [HTTPS SERVER START] Address: awesome/127.0.0.1:8082  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-03-02 17:51:09.297 INFO  - Leap WAS server starting......
+2022-03-02 17:51:09.300 INFO  - --------------------------------------------------------------------------
+2022-03-02 17:51:09.301 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-03-02 17:51:09.302 INFO  - verbose mode on
+2022-03-02 17:51:09.370 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload
+2022-03-02 17:51:09.370 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@1bb266b3 : POST
+2022-03-02 17:51:09.371 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-03-02 17:51:09.372 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@40cb8df7 : GET
+2022-03-02 17:51:09.373 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@2892dae4 : GET
+2022-03-02 17:51:09.374 INFO  - [DEFAULT HOST] - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-02 17:51:09.382 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload
+2022-03-02 17:51:09.383 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@29647f75 : POST
+2022-03-02 17:51:09.383 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-03-02 17:51:09.383 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@3315d2d7 : GET
+2022-03-02 17:51:09.384 INFO  - [VIRTUAL HOST] - Protocol: HTTPS_1_0   Server: leap1   Host: awesome   Port: 8082   Doc-Root: home1   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-02 17:51:09.388 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload
+2022-03-02 17:51:09.388 DEBUG - org.chaostocosmos.leap.http.services.LeapServiceDeploy@5fa07e12 : POST
+2022-03-02 17:51:09.388 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime
+2022-03-02 17:51:09.389 DEBUG - org.chaostocosmos.leap.http.services.TimeServiceImpl@55b53d44 : GET
+2022-03-02 17:51:09.389 INFO  - [VIRTUAL HOST] - Protocol: HTTP_1_0   Server: leap2   Host: www.leap1.org   Port: 8081   Doc-Root: home2   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-02 17:51:09.389 INFO  - --------------------------------------------------------------------------
+2022-03-02 17:51:09.393 INFO  - [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:8081
+2022-03-02 17:51:09.393 INFO  - [HTTP SERVER START] Address: localhost/127.0.0.1:8080
+2022-03-02 17:51:09.790 INFO  - [HTTPS SERVER START] Address: awesome/127.0.0.1:8082  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-03-02 17:51:59.697 INFO  - Leap WAS server starting......
+2022-03-02 17:51:59.701 INFO  - --------------------------------------------------------------------------
+2022-03-02 17:51:59.703 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-03-02 17:51:59.703 INFO  - verbose mode on
+2022-03-02 17:51:59.756 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-02 17:51:59.758 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-02 17:51:59.758 INFO  - [DEFAULT HOST] - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-02 17:51:59.766 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-02 17:51:59.767 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-02 17:51:59.768 INFO  - [VIRTUAL HOST] - Protocol: HTTPS_1_0   Server: leap1   Host: awesome   Port: 8082   Doc-Root: home1   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-02 17:51:59.776 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-02 17:51:59.777 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-02 17:51:59.777 INFO  - [VIRTUAL HOST] - Protocol: HTTP_1_0   Server: leap2   Host: www.leap1.org   Port: 8081   Doc-Root: home2   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-02 17:51:59.778 INFO  - --------------------------------------------------------------------------
+2022-03-02 17:51:59.783 INFO  - [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:8081
+2022-03-02 17:51:59.783 INFO  - [HTTP SERVER START] Address: localhost/127.0.0.1:8080
+2022-03-02 17:52:00.279 INFO  - [HTTPS SERVER START] Address: awesome/127.0.0.1:8082  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-03-02 17:53:09.496 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  63444
+2022-03-02 17:53:09.506 DEBUG - ------------------------------ REQ: POST /deploy/upload HTTP/1.1 ------------------------------
+package: org.chaostocosmos.leap.http.services
+classname: TimeServiceImpl
+Authorization: Basic bG9jYWxob3N0OjkzOTM=
+User-Agent: PostmanRuntime/7.29.0
+Accept: */*
+Postman-Token: 2858d181-331c-4938-beed-7c0f678c05f1
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Content-Type: multipart/form-data; boundary=--------------------------074491302198680972212926
+Content-Length: 2815
+2022-03-02 17:53:09.507 DEBUG - Context params: {}
+2022-03-02 17:53:09.509 DEBUG - Mime Type: MULTIPART_FORM_DATA
+2022-03-02 17:53:09.521 WARN  - Response body is Null: 500
+2022-03-02 17:54:45.958 INFO  - Leap WAS server starting......
+2022-03-02 17:54:45.961 INFO  - --------------------------------------------------------------------------
+2022-03-02 17:54:45.962 INFO  - ThreadPool initialized - CORE: 50 MAX: 50 KEEP-ALIVE WHEN IDLE(seconds): 30
+2022-03-02 17:54:45.962 INFO  - verbose mode on
+2022-03-02 17:54:46.005 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-02 17:54:46.007 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-02 17:54:46.007 INFO  - [DEFAULT HOST] - Protocol: HTTP_1_0   Server: leap   Host: localhost   Port: 8080   Doc-Root: home   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-02 17:54:46.055 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-02 17:54:46.056 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-02 17:54:46.057 INFO  - [VIRTUAL HOST] - Protocol: HTTPS_1_0   Server: leap1   Host: awesome   Port: 8082   Doc-Root: home1   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-02 17:54:46.108 INFO  - Add service: org.chaostocosmos.leap.http.services.LeapServiceDeploy  Mapping path: /deploy/upload   METHOD: POST
+2022-03-02 17:54:46.109 INFO  - Add service: org.chaostocosmos.leap.http.services.TimeServiceImpl  Mapping path: /time/GetTime   METHOD: GET
+2022-03-02 17:54:46.109 INFO  - [VIRTUAL HOST] - Protocol: HTTP_1_0   Server: leap2   Host: www.leap1.org   Port: 8081   Doc-Root: home2   Logging path: logs\leap.log   Level: [DEBUG]
+2022-03-02 17:54:46.109 INFO  - --------------------------------------------------------------------------
+2022-03-02 17:54:46.113 INFO  - [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:8081
+2022-03-02 17:54:46.113 INFO  - [HTTP SERVER START] Address: localhost/127.0.0.1:8080
+2022-03-02 17:54:46.483 INFO  - [HTTPS SERVER START] Address: awesome/127.0.0.1:8082  Protocol: TLS  KeyStore: leap-keystore.jks  Supported Protocol: [TLSv1.3, TLSv1.2, TLSv1.1, TLSv1, SSLv3, SSLv2Hello]
+2022-03-02 17:54:47.406 INFO  - [CLIENT DETECTED] Client request accepted....../127.0.0.1  ---  60678
+2022-03-02 17:54:47.419 DEBUG - ------------------------------ REQ: POST /deploy/upload HTTP/1.1 ------------------------------
+package: org.chaostocosmos.leap.http.services
+classname: TimeServiceImpl
+Authorization: Basic bG9jYWxob3N0OjkzOTM=
+User-Agent: PostmanRuntime/7.29.0
+Accept: */*
+Postman-Token: 01c87e97-a070-4f49-9a04-23c0f9489725
+Host: localhost:8080
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Content-Type: multipart/form-data; boundary=--------------------------496959169696232857259598
+Content-Length: 2815
+2022-03-02 17:54:47.422 DEBUG - Context params: {}
+2022-03-02 17:54:47.422 DEBUG - Mime Type: MULTIPART_FORM_DATA
+2022-03-02 17:54:47.433 WARN  - Response body is Null: 500

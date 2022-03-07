@@ -18,6 +18,8 @@ server:
         keystore: './config/ssl/leap-keystore.jks'
         passphrase: '939393'
 
+############################## Default Hosts ##############################
+
     default-host:
       server-name: leap
       protocol: HTTP/1.0
@@ -32,22 +34,19 @@ server:
           password: guest
           grant: GUEST
       dynamic-classpaths: './home/webapp/services'
-      resource-filters: 
-        allowed: ['*']
-        forbidden: ['']
+      resource:
+        in-memory-filters: ['*.html']
+        access-filters: ['*']
       error-filters: [
         javax.net.ssl.SSLHandshakeException,
         java.net.SocketException
       ]
       doc-root: ./home
       welcome: 'index.html'
-      static-resource:
-        'welcome': 'index.html'
-        'response': 'response.html'  
       logs: 'logs/leap.log'
       log-level: 'DEBUG'
 
-    ############################## Virtual Hosts ##############################
+############################## Virtual Hosts ##############################
 
     virtual-host:
     - server-name: leap1
@@ -63,9 +62,9 @@ server:
           password: guest1
           grant: GUEST
       dynamic-classpaths: ''
-      resource-filters: 
-        allowed: ['*']
-        forbidden: ['']
+      resource:
+        in-memory-filters: ['*.html']
+        access-filters: ['*']
       error-filters: [
         javax.net.ssl.SSLHandshakeException,
         java.net.SocketException
@@ -88,9 +87,9 @@ server:
           password: guest2
           grant: GUEST
       dynamic-classpaths: ''
-      resource-filters: 
-        allowed: ['*']
-        forbidden: ['']
+      resource:
+        in-memory-filters: ['*.html']
+        access-filters: ['*']
       error-filters: [
         javax.net.ssl.SSLHandshakeException,
         java.net.SocketException

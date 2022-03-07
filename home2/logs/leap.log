@@ -1,21 +1,34 @@
-2022-02-25 15:17:32.455 DEBUG - ------------------------------ REQ: GET / HTTP/1.1 ------------------------------
-Host: www.leap1.org:8081
-Connection: keep-alive
-Cache-Control: max-age=0
-Upgrade-Insecure-Requests: 1
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Accept-Encoding: gzip, deflate
-Accept-Language: ko,en-US;q=0.9,en;q=0.8
-2022-02-25 15:17:32.476 DEBUG - REQUEST RESOURCE: response.html   PATH: .\home2\webapp\WEB-INF\static
-2022-02-25 15:17:32.486 DEBUG - REQUEST CONTEXT: /   PATH: .\home2\webapp\WEB-INF\static
-2022-02-25 15:17:32.491 DEBUG - REQUEST RESOURCE: index.html   PATH: .\home2\webapp\WEB-INF\static
-2022-02-25 15:17:32.496 DEBUG - ============================== RES : HTTP/1.0 200 OK. - /127.0.0.1:54986 ==============================
-RES CODE: 200
-Content-Length: [660]
-Content-Type: [text/html]
-2022-02-25 15:17:32.527 INFO  - Client closing....../127.0.0.1
-2022-02-25 15:18:02.679 DEBUG - ============================== RES : HTTP/1.0 500 Internal Server Error. - /127.0.0.1:54985 ==============================
-RES CODE: 500
-Content-Length: [14]
-Content-Type: [text/html]
+2022-03-03 17:01:20.663 INFO  - Path: D:\0.github\Leap\home2\webapp\WEB-INF\static
+2022-03-03 17:01:20.691 INFO  - [RESOUCE INITIALIZED] Resource object for host: www.leap1.org started. Watching Paths: 
+2022-03-03 17:02:04.171 INFO  - Path: D:\0.github\Leap\home2\webapp\WEB-INF\static
+2022-03-03 17:02:04.172 INFO  - [RESOUCE INITIALIZED] Resource object for host: www.leap1.org started. Watching Paths: 
+2022-03-03 17:03:50.735 INFO  - Path: D:\0.github\Leap\home2\webapp\WEB-INF\static
+2022-03-03 17:03:50.737 INFO  - [RESOUCE INITIALIZED] Resource object for host: www.leap1.org started. Watching Paths: 
+2022-03-03 17:05:21.004 INFO  - Path: D:\0.github\Leap\home2\webapp\WEB-INF\static
+2022-03-03 17:05:21.005 INFO  - [RESOUCE INITIALIZED] Resource object for host: www.leap1.org started. Watching Paths: 
+2022-03-03 17:06:01.904 INFO  - Path: D:\0.github\Leap\home2\webapp\WEB-INF\static
+2022-03-03 17:06:01.906 INFO  - [RESOUCE INITIALIZED] Resource object for host: www.leap1.org started. Watching Paths: 
+2022-03-03 17:06:34.394 INFO  - Path: D:\0.github\Leap\home2\webapp\WEB-INF\static
+2022-03-03 17:06:34.395 INFO  - [RESOUCE INITIALIZED] Resource object for host: www.leap1.org started. Watching Paths: 
+2022-03-03 17:07:15.369 INFO  - Path: D:\0.github\Leap\home2\webapp\WEB-INF\static
+2022-03-03 17:07:15.370 INFO  - [RESOUCE INITIALIZED] Resource object for host: www.leap1.org started. Watching Paths: 
+2022-03-03 17:09:58.924 INFO  - Path: D:\0.github\Leap\home2\webapp\WEB-INF\static
+2022-03-03 17:09:58.927 INFO  - [RESOUCE INITIALIZED] Resource object for host: www.leap1.org started. Watching Paths: 
+2022-03-03 17:10:44.231 INFO  - Path: D:\0.github\Leap\home2\webapp\WEB-INF\static
+2022-03-03 17:10:44.235 INFO  - [RESOUCE INITIALIZED] Resource object for host: www.leap1.org started. Watching Paths: 
+2022-03-03 17:11:55.165 INFO  - Path: D:\0.github\Leap\home2\webapp\WEB-INF\static
+2022-03-03 17:11:55.167 INFO  - [RESOUCE INITIALIZED] Resource object for host: www.leap1.org started. Watching Paths: 
+2022-03-03 17:13:55.939 INFO  - Path: D:\0.github\Leap\home2\webapp\WEB-INF\static
+2022-03-03 17:13:55.942 INFO  - [RESOUCE INITIALIZED] Resource object for host: www.leap1.org started. Watching Paths: 
+2022-03-03 17:17:31.211 INFO  - Path: D:\0.github\Leap\home2\webapp\WEB-INF\static
+2022-03-03 17:17:31.212 INFO  - [RESOUCE INITIALIZED] Resource object for host: www.leap1.org started. Watching Paths: 
+2022-03-03 17:19:25.670 INFO  - Path: D:\0.github\Leap\home2\webapp\WEB-INF\static
+2022-03-03 17:19:25.672 INFO  - [RESOUCE INITIALIZED] Resource object for host: www.leap1.org started. Watching Paths: 
+2022-03-03 17:23:02.477 INFO  - Path: D:\0.github\Leap\home2\webapp\WEB-INF\static
+2022-03-03 17:23:02.480 INFO  - [RESOUCE INITIALIZED] Resource object for host: www.leap1.org started. Watching Paths: 
+2022-03-03 17:23:45.576 INFO  - Path: D:\0.github\Leap\home2\webapp\WEB-INF\static
+2022-03-03 17:23:45.578 INFO  - [RESOUCE INITIALIZED] Resource object for host: www.leap1.org started. Watching Paths: 
+2022-03-03 17:26:01.498 INFO  - Path: D:\0.github\Leap\home2\webapp\WEB-INF\static
+2022-03-03 17:26:01.499 INFO  - [RESOUCE INITIALIZED] Resource object for host: www.leap1.org started. Watching Paths: 
+2022-03-03 17:26:38.086 INFO  - Path: D:\0.github\Leap\home2\webapp\WEB-INF\static
+2022-03-03 17:26:38.088 INFO  - [RESOUCE INITIALIZED] Resource object for host: www.leap1.org started. Watching Paths: 
