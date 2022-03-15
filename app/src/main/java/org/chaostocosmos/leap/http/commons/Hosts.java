@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.http.StaticResourceManager.Resource;
+import org.chaostocosmos.leap.http.Resource;
 import org.chaostocosmos.leap.http.enums.PROTOCOL;
 import org.chaostocosmos.leap.http.user.GRANT;
 import org.chaostocosmos.leap.http.user.User;
@@ -84,6 +84,21 @@ public class Hosts {
     private Path docroot;
 
     /**
+     * webapp path
+     */
+    private Path webapp;
+
+    /**
+     * WEB-INF path
+     */
+    private Path webinf;
+
+    /**
+     * Static content path
+     */
+    private Path statics;
+
+    /**
      * Welcome file object
      */
     private File welcomeFile;
@@ -127,7 +142,10 @@ public class Hosts {
         (List<String>)((Map<?, ?>)map.get("resource")).get("access-filters"),
         ((List<?>)map.get("error-filters")).stream().map(f -> ClassUtils.getClass(ClassLoader.getSystemClassLoader(), f.toString().trim())).collect(Collectors.toList()),
         Paths.get((String)map.get("doc-root")),
-        Paths.get((String)map.get("doc-root")).resolve((String)map.get("welcome")).toFile(),
+        Paths.get((String)map.get("doc-root")).resolve("webapp"),
+        Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF"),
+        Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF").resolve("static"),
+        Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF").resolve("static").resolve("index.html").toFile(),
         Paths.get((String)map.get("logs")),
         UtilBox.getLogLevels((String)map.get("log-level"), ","),
         map,
@@ -148,6 +166,8 @@ public class Hosts {
      * @param accessFilters
      * @param errorFilters
      * @param docroot
+     * @param webinf
+     * @param statics
      * @param welcomeFile
      * @param logPath
      * @param logLevel
@@ -167,6 +187,9 @@ public class Hosts {
                  List<String> accessFilters, 
                  List<Class<?>> errorFilters, 
                  Path docroot, 
+                 Path webapp,
+                 Path webinf,
+                 Path statics,
                  File welcomeFile,
                  Path logPath,  
                  List<Level> logLevel,
@@ -185,6 +208,9 @@ public class Hosts {
         this.accessFilters = accessFilters;
         this.errorFilters = errorFilters;
         this.docroot = docroot.normalize();
+        this.webapp = webapp;
+        this.webinf = webinf;
+        this.statics = statics;
         this.welcomeFile = welcomeFile;
         this.logPath = logPath;
         this.logLevel = logLevel;
@@ -402,6 +428,54 @@ public class Hosts {
      */
     public void setDocroot(Path docroot) {
         this.docroot = docroot;
+    }
+
+    /**
+     * Get web app path
+     * @return
+     */
+    public Path getWebApp() {
+        return this.webapp;
+    }
+
+    /**
+     * Set web app path
+     * @param webapp
+     */
+    public void setWebapp(Path webapp) {
+        this.webapp = webapp;
+    }
+
+    /**
+     * Get web inf path
+     * @return
+     */
+    public Path getWebInf() {
+        return this.webinf;
+    }
+
+    /**
+     * Set web inf path
+     * @param webinf
+     */
+    public void setWebInf(Path webinf) {
+        this.webinf = webinf;
+    }
+
+    /**
+     * Get static content path
+     * @return
+     */
+    public Path getStatic() {
+        return this.statics;
+    }
+
+    /**
+     * Set static content path
+     * @param statics
+     */
+    public void setStatic(Path statics) {
+        this.statics = statics;
     }
 
     /**

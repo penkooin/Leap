@@ -35,7 +35,7 @@ server:
           grant: GUEST
       dynamic-classpaths: './home/webapp/services'
       resource:
-        in-memory-filters: ['*.html']
+        in-memory-filters: ['*']
         access-filters: ['*']
       error-filters: [
         javax.net.ssl.SSLHandshakeException,

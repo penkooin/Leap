@@ -1,7 +1,0 @@
-2022-02-09 10:13:35.364 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
-2022-02-09 10:13:35.375 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
-2022-02-09 10:13:35.381 INFO  - Client close....../127.0.0.1
-2022-02-09 10:13:35.448 INFO  - Client close....../127.0.0.1
-2022-02-09 10:13:35.611 INFO  - Host: localhost:8080  Client request accepted...... /127.0.0.1
-2022-02-09 10:13:38.624 WARN  - Type: ERROR Code: 45 Exception: org.chaostocosmos.leap.http.WASException: Error in request parsing process. Caused: java.net.SocketTimeoutException: Read timed out
-2022-02-09 10:13:38.627 INFO  - Client close....../127.0.0.1

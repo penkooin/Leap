@@ -100,7 +100,7 @@ public class LeapRequestHandler implements Runnable {
                         String resourceName = resourceFile.getName();
                         int responseCode = RES_CODE.RES200.getCode();
                         //Get requested resource data
-                        Object resource = hosts.getResource().getResourceData(resourcePath);
+                        Object resource = hosts.getResource().getResource(resourcePath);
                         if(resource != null) {
                             String mimeType = UtilBox.probeContentType(resourcePath);
                             if(mimeType == null) {
