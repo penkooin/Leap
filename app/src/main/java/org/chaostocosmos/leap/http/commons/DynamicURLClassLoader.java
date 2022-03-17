@@ -37,6 +37,7 @@ public class DynamicURLClassLoader extends URLClassLoader {
         this(urls.stream().map(p -> {
             try {      
                 URL url = p.toFile().toURI().toURL();          
+                System.out.println("Add dynamic classpath to ClassLoader: "+url.toString()+"  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
                 LoggerFactory.getLogger().info("Add dynamic classpath to ClassLoader: "+url.toString());
                 return url;
             } catch (MalformedURLException e) {

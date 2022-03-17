@@ -356,7 +356,7 @@ public class Context {
      * @return
      */
     public static String getMsg(MSG_TYPE type, int code, Object ... args) {
-        Object value = getMessagesValue("messages."+type.name().toLowerCase()+"."+type.name().toLowerCase()+code);
+        Object value = getMessagesValue("messages."+type.name().toLowerCase()+"."+type.name().toLowerCase()+code);        
         String msg = value == null ? "" : value.toString();
         return Arrays.stream(args).reduce(msg, (ap, a) -> ap.toString().replaceFirst("\\{\\}", a.toString())).toString();
     }    

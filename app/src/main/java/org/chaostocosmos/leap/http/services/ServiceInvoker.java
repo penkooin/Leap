@@ -45,6 +45,8 @@ public class ServiceInvoker {
             if(service.errorHandling(httpTransfer.getResponse(), e) != null) {
                 throw e;
             }
+            System.out.println(Context.getWarnMsg(2, serviceHolder.getService().getClass().getName(), e.getMessage()));
+            logger.warn(Context.getWarnMsg(2, serviceHolder.getService().getClass().getName(), e.getMessage()));
         }
         return response;
     }

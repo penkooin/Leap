@@ -48,7 +48,8 @@ messages:
     info2: ''
     info3: ''
   warn:
-    warn001: 'ServletDescriptor annotation not found in class: {}'
+    warn1: 'ServletDescriptor annotation not found in class: {}'
+    warn2: 'Some exception in service({}). System received Null value as exception value. Original error is : {}. Maybe service method must have HttpRequestDescriptor and HttpResponseDescriptor.'
   error:
     error1: 'Invalid request information. Wrong request'
     error2: 'Request or response build process failed. It is probably HTTP protocol or SSL/TLS issue: {}'
@@ -69,3 +70,4 @@ messages:
     error17: 'Password validation failed: (Password must have digit, lower case, upper case, special case at least once and no whilte space and more 8 places more)'
     error18: 'Not found mapping service exist with requested path: {}'
     error19: 'Deploy service process in error: {}'
+

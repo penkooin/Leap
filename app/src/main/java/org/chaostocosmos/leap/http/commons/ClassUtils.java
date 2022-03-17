@@ -243,7 +243,7 @@ public class ClassUtils {
         try {
             clazz = classLoader.loadClass(className);
         } catch (NoClassDefFoundError | ClassNotFoundException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         return clazz;
     }

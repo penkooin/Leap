@@ -54,7 +54,7 @@ public abstract class AbstractLeapService implements IGetService, IPostService, 
     protected HttpTransfer httpTransfer;
 
     @Override
-    public HttpResponseDescriptor serve(HttpTransfer httpTransfer, Method invokingMethod) throws Exception {
+    public HttpResponseDescriptor serve(HttpTransfer httpTransfer, Method invokingMethod) throws Exception {        
         this.logger = LoggerFactory.getLogger(httpTransfer.getRequest().getRequestedHost());
         this.httpTransfer = httpTransfer;
         this.invokingMethod = invokingMethod;

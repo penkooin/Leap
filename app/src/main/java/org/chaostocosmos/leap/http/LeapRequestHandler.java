@@ -142,7 +142,7 @@ public class LeapRequestHandler implements Runnable {
      * @throws IOException
      */
     public void processError(HttpTransfer httpTransfer, Throwable error) {
-        try {
+        try {            
             String requestedHost = httpTransfer.getHosts().getHost();
             Throwable t = getCaused(error);
             int resCode = -1;
@@ -162,8 +162,7 @@ public class LeapRequestHandler implements Runnable {
             Object body = t != null ? HttpTransferBuilder.buildErrorResponse(requestedHost, msgType, resCode, t.getMessage()) : Context.getHttpMsg(resCode);
             httpTransfer.sendResponse(requestedHost, resCode, headers, body);    
         } catch(Exception e) {
-            e.printStackTrace();
-            //LoggerFactory.getLogger(httpTransfer.getHosts().getHost()).error(e.getMessage(), e);
+            LoggerFactory.getLogger(httpTransfer.getHosts().getHost()).error(e.getMessage(), e);
         }
     }
 
@@ -174,14 +173,13 @@ public class LeapRequestHandler implements Runnable {
      */
     public Throwable getCaused(Throwable e) {
         Throwable throwable = e;
-        int cnt = 100;
         do {
-            if(throwable instanceof WASException || throwable instanceof NoClassDefFoundError || throwable == null) {
-                break;
+            if(throwable instanceof WASException || throwable == null) {
+                throwable = e;
+                break;                
             }
             throwable = e.getCause();
-            cnt--;
-        } while(cnt > 0);    
+        } while(true);    
         return throwable;   
     }
 }

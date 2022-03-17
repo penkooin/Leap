@@ -28,6 +28,10 @@ import org.chaostocosmos.leap.http.resources.Hosts;
 import org.chaostocosmos.leap.http.resources.HostsManager;
 import org.chaostocosmos.leap.http.resources.ResourceHelper;
 import org.chaostocosmos.leap.http.resources.StaticResourceManager;
+import org.chaostocosmos.leap.http.services.SimpleJPAService;
+import org.chaostocosmos.leap.http.services.entity.Users;
+import org.chaostocosmos.leap.http.services.repository.IUsersRespository;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
@@ -167,6 +171,18 @@ public class LeapWAS {
         }
         //instantiate virtual host object
         hostsManager = HostsManager.get(); 
+
+        AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext();
+        appContext.scan("org.chaostocosmos.leap.http.services", 
+                        "org.chaostocosmos.leap.http.services.datasource",
+                        "org.chaostocosmos.leap.http.services.entiry",
+                        "org.chaostocosmos.leap.http.services.repository");
+        appContext.refresh();        
+        //SimpleJPAService usersService = (SimpleJPAService) appContext.getBean("usersService");
+        //usersService.getUsers(null, null);
+        // IUsersRespository repo = appContext.getBean(IUsersRespository.class);
+        // Users users = repo.findByName("Kooin-Shin");
+        // System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ "+users.toString());
     }
 
     /**
