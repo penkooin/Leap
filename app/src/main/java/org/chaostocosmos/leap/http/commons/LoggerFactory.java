@@ -6,9 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.chaostocosmos.leap.http.Context;
-import org.chaostocosmos.leap.http.HostsManager;
 import org.chaostocosmos.leap.http.WASException;
+import org.chaostocosmos.leap.http.resources.Context;
+import org.chaostocosmos.leap.http.resources.Hosts;
+import org.chaostocosmos.leap.http.resources.HostsManager;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;

@@ -5,10 +5,10 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
 
-import org.chaostocosmos.leap.http.Context;
 import org.chaostocosmos.leap.http.commons.FileUtils;
 import org.chaostocosmos.leap.http.commons.StreamUtils;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
+import org.chaostocosmos.leap.http.resources.Context;
 
 /**
  * BinaryPart

@@ -14,11 +14,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.http.commons.Hosts;
+import org.apache.commons.io.input.TeeInputStream;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
+import org.chaostocosmos.leap.http.resources.Context;
+import org.chaostocosmos.leap.http.resources.Hosts;
+import org.chaostocosmos.leap.http.resources.HostsManager;
+import org.chaostocosmos.leap.http.resources.StaticResourceManager;
 
 /**
  * HttpResponseTransfer
@@ -37,7 +41,22 @@ public class HttpTransferBuilder {
      */
     public static String buildErrorResponse(String requestedHost, MSG_TYPE msgType, int errorCode, String errorMsg) throws IOException, InterruptedException {
         LoggerFactory.getLogger(requestedHost).error("["+msgType.name()+": "+errorCode+"] - "+errorMsg);
-        return buildHttpResponsePage(requestedHost, msgType, errorCode, errorMsg);
+        return buildHttpErrorPage(requestedHost, msgType, errorCode, errorMsg);
+    }
+
+    /**
+     * Build http error page
+     * @param host
+     * @param type
+     * @param errorCode
+     * @param message
+     * @return
+     * @throws IOException
+     */
+    public static String buildHttpErrorPage(String host, MSG_TYPE type, int errorCode, String message) throws IOException {
+        String title = Context.getHttpMsg(errorCode, "- "+type.name());        
+        Map<String, Object> map = Map.of("@code", errorCode, "@type", title, "@message", message);
+        return StaticResourceManager.get(host).getErrorPage(map);
     }
 
     /**
@@ -51,12 +70,7 @@ public class HttpTransferBuilder {
      * @throws InterruptedException
      */
     public static String buildHttpResponsePage(String host, MSG_TYPE type, int code, String message) throws IOException, InterruptedException {
-        Map<String, Object> map;
-        if(type != null) {
-            map = Map.of("@code", code, "@type", type.name(), "@message", message);
-        } else {
-            map = Map.of("@code", 0, "@type", "EXCEPTION", "@message", message);
-        }
+        Map<String, Object> map = Map.of("@code", code, "@type", type.name(), "@message", message);
         return StaticResourceManager.get(host).getResponsePage(map);
     }
 
@@ -249,7 +263,7 @@ public class HttpTransferBuilder {
             } else if(body instanceof File) {
                 contentLength = ((File)body).length();
             } else {
-                throw new WASException(MSG_TYPE.ERROR, 55, body.getClass().getName());
+                throw new WASException(MSG_TYPE.ERROR, 4, body.getClass().getName());
             }
             List<Object> values = new ArrayList<>();
             values.add(contentLength);

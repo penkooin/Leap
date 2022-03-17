@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.http.Context;
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.commons.ClassUtils;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
 import org.chaostocosmos.leap.http.filters.ILeapFilter;
+import org.chaostocosmos.leap.http.resources.Context;
 import org.chaostocosmos.leap.http.services.ILeapService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory; 
@@ -77,7 +77,7 @@ public class AnnotationHelper {
         if(serviceDescriptor != null) {
             String sPath = serviceDescriptor.path();
             if(sPath == null) {
-                throw new WASException(MSG_TYPE.ERROR, 35, sPath, service.getClass().getName());
+                throw new WASException(MSG_TYPE.ERROR, 6, sPath, service.getClass().getName());
             }
             Method[] methods = service.getClass().getDeclaredMethods();
             for(Method method : methods) {
@@ -85,11 +85,11 @@ public class AnnotationHelper {
                 if(methodDescriptor != null) {
                     String mPath = methodDescriptor.path();
                     if(mPath == null) {
-                        throw new WASException(MSG_TYPE.ERROR, 36, mPath, method.getName());
+                        throw new WASException(MSG_TYPE.ERROR, 7, mPath, method.getName());
                     }        
                     String fullPath = sPath + mPath;
                     if(methodMap.containsKey(fullPath)) {
-                        throw new WASException(MSG_TYPE.ERROR, 37, fullPath, methodMap.get(fullPath).getName());
+                        throw new WASException(MSG_TYPE.ERROR, 8, fullPath, methodMap.get(fullPath).getName());
                     }
                     methodMap.put(fullPath, method);
                 }
@@ -169,7 +169,7 @@ public class AnnotationHelper {
             if(serviceDescriptor != null) {
                 String sPath = serviceDescriptor.path();
                 if(!sPath.substring(0, 1).equals("/") || sPath.substring(sPath.length()-1).equals("/")) {
-                    throw new WASException(MSG_TYPE.ERROR, 28);
+                    throw new WASException(MSG_TYPE.ERROR, 9);
                 }
                 Method[] methods = service.getClass().getDeclaredMethods();
                 for(Method method : methods) {
@@ -177,11 +177,11 @@ public class AnnotationHelper {
                     if(methodDescriptor != null) {
                         String mPath = methodDescriptor.path();
                         if(!mPath.substring(0, 1).equals("/") || mPath.substring(mPath.length()-1).equals("/")) {
-                            throw new WASException(MSG_TYPE.ERROR, 29);
+                            throw new WASException(MSG_TYPE.ERROR, 10);
                         }        
                         String fullPath = sPath + mPath;
                         if(serviceContextMappings.containsKey(fullPath)) {
-                            throw new WASException(MSG_TYPE.ERROR, 21, new Object[]{service, fullPath});
+                            throw new WASException(MSG_TYPE.ERROR, 11, new Object[]{service, fullPath});
                         }
                         serviceContextMappings.put(fullPath, (ILeapService)ClassUtils.instantiate(ClassLoader.getSystemClassLoader().getSystemClassLoader(), service));
                     }
@@ -206,7 +206,7 @@ public class AnnotationHelper {
             if(serviceDescriptor != null) {
                 String sPath = serviceDescriptor.path();
                 if(!sPath.substring(0, 1).equals("/") || sPath.substring(sPath.length()-1).equals("/")) {
-                    throw new WASException(MSG_TYPE.ERROR, 28);
+                    throw new WASException(MSG_TYPE.ERROR, 9);
                 }
                 Method[] methods = service.getClass().getDeclaredMethods();
                 for(Method method : methods) {
@@ -214,11 +214,11 @@ public class AnnotationHelper {
                     if(methodDescriptor != null) {
                         String mPath = methodDescriptor.path();
                         if(!mPath.substring(0, 1).equals("/") || mPath.substring(mPath.length()-1).equals("/")) {
-                            throw new WASException(MSG_TYPE.ERROR, 29);
+                            throw new WASException(MSG_TYPE.ERROR, 10);
                         }        
                         String fullPath = sPath + mPath;
                         if(serviceContextMappings.containsKey(fullPath)) {
-                            throw new WASException(MSG_TYPE.ERROR, 21, new Object[]{service, fullPath});
+                            throw new WASException(MSG_TYPE.ERROR, 8, new Object[]{service, fullPath});
                         }
                         serviceContextMappings.put(fullPath, method);
                     }

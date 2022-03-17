@@ -9,12 +9,15 @@ import java.util.List;
 import java.util.Map;
 
 import org.chaostocosmos.leap.http.HttpTransferBuilder.HttpTransfer;
-import org.chaostocosmos.leap.http.commons.Hosts;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.commons.UtilBox;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
+import org.chaostocosmos.leap.http.resources.Context;
+import org.chaostocosmos.leap.http.resources.Hosts;
+import org.chaostocosmos.leap.http.resources.HostsManager;
+import org.chaostocosmos.leap.http.resources.ResourceHelper;
 import org.chaostocosmos.leap.http.services.ServiceHolder;
 import org.chaostocosmos.leap.http.services.ServiceInvoker;
 import org.chaostocosmos.leap.http.services.ServiceManager;
@@ -156,10 +159,11 @@ public class LeapRequestHandler implements Runnable {
                 requestedHost = Context.getDefaultHost();
             }
             Map<String, List<Object>> headers = HttpTransferBuilder.addHeader(new HashMap<String, List<Object>>(), "Content-Type", "text/html");
-            Object body = t != null ? HttpTransferBuilder.buildErrorResponse(requestedHost, msgType, resCode, t.getMessage()) : error.getMessage();
+            Object body = t != null ? HttpTransferBuilder.buildErrorResponse(requestedHost, msgType, resCode, t.getMessage()) : Context.getHttpMsg(resCode);
             httpTransfer.sendResponse(requestedHost, resCode, headers, body);    
         } catch(Exception e) {
-            LoggerFactory.getLogger(httpTransfer.getHosts().getHost()).error(e.getMessage(), e);
+            e.printStackTrace();
+            //LoggerFactory.getLogger(httpTransfer.getHosts().getHost()).error(e.getMessage(), e);
         }
     }
 
@@ -170,12 +174,14 @@ public class LeapRequestHandler implements Runnable {
      */
     public Throwable getCaused(Throwable e) {
         Throwable throwable = e;
+        int cnt = 100;
         do {
-            if(throwable instanceof WASException || throwable == null) {
+            if(throwable instanceof WASException || throwable instanceof NoClassDefFoundError || throwable == null) {
                 break;
             }
             throwable = e.getCause();
-        } while(true);
+            cnt--;
+        } while(cnt > 0);    
         return throwable;   
     }
 }

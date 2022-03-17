@@ -17,10 +17,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.http.Context;
-import org.chaostocosmos.leap.http.StaticResourceManager;
 import org.chaostocosmos.leap.http.enums.PROTOCOL;
 import org.chaostocosmos.leap.http.filters.ILeapFilter;
+import org.chaostocosmos.leap.http.resources.Context;
+import org.chaostocosmos.leap.http.resources.Hosts;
+import org.chaostocosmos.leap.http.resources.StaticResourceManager;
 import org.chaostocosmos.leap.http.services.ILeapService;
 import org.chaostocosmos.leap.http.user.GRANT;
 import org.chaostocosmos.leap.http.user.User;
@@ -83,7 +84,6 @@ public class ClassUtils {
                                                        .map(c -> (Class<? extends ILeapService>)c)
                                                        .collect(Collectors.toList());
         for(URL url : classLoader.getURLs()) {
-            System.out.println(url);
             services.addAll(findClasses(classLoader, ILeapService.class, url)
                             .stream()
                             .filter(f ->!Modifier.isAbstract(f.getModifiers()) && !Modifier.isInterface(f.getModifiers()))
@@ -239,12 +239,13 @@ public class ClassUtils {
      * @return
      */
     public static Class<?> getClass(ClassLoader classLoader, String className) { 
+        Class<?> clazz = null;
         try {
-            return classLoader.loadClass(className);
-        } catch (ClassNotFoundException e) {
+            clazz = classLoader.loadClass(className);
+        } catch (NoClassDefFoundError | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return null;
+        return clazz;
     }
 
     /**
@@ -296,6 +297,7 @@ public class ClassUtils {
             Paths.get((String)map.get("doc-root")).resolve("webapp"),
             Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF"),
             Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF").resolve("static"),
+            Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("services"),
             Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF").resolve("static").resolve("index.html").toFile(),
             Paths.get((String)map.get("logs")),
             UtilBox.getLogLevels((String)map.get("log-level"), ","),

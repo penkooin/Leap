@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.http.Context;
+import org.chaostocosmos.leap.http.resources.Context;
 
 /**
  * FileUtils

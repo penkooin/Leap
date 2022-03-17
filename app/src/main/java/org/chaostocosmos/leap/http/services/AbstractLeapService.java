@@ -4,7 +4,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import org.chaostocosmos.leap.http.Context;
 import org.chaostocosmos.leap.http.HttpRequestDescriptor;
 import org.chaostocosmos.leap.http.HttpResponseDescriptor;
 import org.chaostocosmos.leap.http.HttpTransferBuilder.HttpTransfer;
@@ -15,6 +14,7 @@ import org.chaostocosmos.leap.http.annotation.PreFilter;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.filters.ILeapFilter;
+import org.chaostocosmos.leap.http.resources.Context;
 
 import ch.qos.logback.classic.Logger;
 
@@ -96,39 +96,23 @@ public abstract class AbstractLeapService implements IGetService, IPostService, 
     }
 
     @Override
-    public void serveGet(HttpRequestDescriptor request, HttpResponseDescriptor response) throws WASException {
-        try {
-            this.invokingMethod.invoke(this, request, response);
-        } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            throw new WASException(e);
-        }
+    public void serveGet(HttpRequestDescriptor request, HttpResponseDescriptor response) throws Exception {
+        this.invokingMethod.invoke(this, request, response);
     }
 
     @Override
-    public void servePost(HttpRequestDescriptor request, HttpResponseDescriptor response) throws WASException {
-        try {
-            this.invokingMethod.invoke(this, request, response);
-        } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            throw new WASException(e);
-        }
+    public void servePost(HttpRequestDescriptor request, HttpResponseDescriptor response) throws Exception {
+        this.invokingMethod.invoke(this, request, response);
     }
 
     @Override
-    public void servePut(HttpRequestDescriptor request, HttpResponseDescriptor response) throws WASException {
-        try {
-            this.invokingMethod.invoke(this, request, response);
-        } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            throw new WASException(e);
-        }
+    public void servePut(HttpRequestDescriptor request, HttpResponseDescriptor response) throws Exception {
+        this.invokingMethod.invoke(this, request, response);
     }
 
     @Override
-    public void serveDelete(HttpRequestDescriptor request, HttpResponseDescriptor response) throws WASException {
-        try {
-            this.invokingMethod.invoke(this, request, response);
-        } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            throw new WASException(e);
-        }
+    public void serveDelete(HttpRequestDescriptor request, HttpResponseDescriptor response) throws Exception {
+        this.invokingMethod.invoke(this, request, response);
     }    
 
     @Override

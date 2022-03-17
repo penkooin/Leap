@@ -28,6 +28,7 @@ import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
 
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
+import org.chaostocosmos.leap.http.resources.Context;
 import org.chaostocosmos.leap.http.security.SecurityHandler;
 
 import ch.qos.logback.classic.Logger;

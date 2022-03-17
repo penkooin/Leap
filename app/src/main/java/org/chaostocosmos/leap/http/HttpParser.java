@@ -21,6 +21,7 @@ import org.chaostocosmos.leap.http.part.BodyPart;
 import org.chaostocosmos.leap.http.part.KeyValuePart;
 import org.chaostocosmos.leap.http.part.MultiPart;
 import org.chaostocosmos.leap.http.part.TextPart;
+import org.chaostocosmos.leap.http.resources.HostsManager;
 
 /**
  * Http parsing factory object
@@ -88,13 +89,13 @@ public class HttpParser {
         public HttpRequestDescriptor parseRequest(InputStream in) throws IOException {
             String requestLine = StreamUtils.readLine(in, StandardCharsets.ISO_8859_1);
             if(requestLine == null) {
-                throw new WASException(MSG_TYPE.ERROR, 9);
+                throw new WASException(MSG_TYPE.ERROR, 1);
             }
             requestLine = URLDecoder.decode(requestLine, StandardCharsets.UTF_8);
             System.out.println(requestLine);
             String method = requestLine.substring(0, requestLine.indexOf(" "));
             if(!Arrays.asList(REQUEST_TYPE.values()).stream().anyMatch(R -> R.name().equals(method))) {
-                throw new WASException(MSG_TYPE.ERROR, 50, method);
+                throw new WASException(MSG_TYPE.ERROR, 2, method);
             }
             String contextPath = requestLine.substring(requestLine.indexOf(" ")+1, requestLine.lastIndexOf(" "));
             String protocol = requestLine.substring(requestLine.lastIndexOf(" ")+1);
@@ -106,7 +107,7 @@ public class HttpParser {
                     break;
                 int idx = header.indexOf(":");
                 if (idx == -1) {
-                    throw new WASException(MSG_TYPE.ERROR, 7, header);
+                    throw new WASException(MSG_TYPE.ERROR, 3, header);
                 }
                 //System.out.println(header.substring(0, idx)+"   "+header.substring(idx + 1, header.length()).trim());
                 headerMap.put(header.substring(0, idx), header.substring(idx + 1, header.length()).trim());

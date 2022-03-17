@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.chaostocosmos.leap.http.Context;
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.annotation.FilterMapper;
 import org.chaostocosmos.leap.http.annotation.MethodMappper;
@@ -19,6 +18,7 @@ import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
 import org.chaostocosmos.leap.http.filters.ILeapFilter;
+import org.chaostocosmos.leap.http.resources.Context;
 import org.chaostocosmos.leap.http.user.UserManager;
 
 import ch.qos.logback.classic.Logger;
@@ -163,7 +163,7 @@ public class ServiceManager {
     public boolean vaildateRequestMethod(REQUEST_TYPE type, final String contextPath) throws Exception {
         ServiceHolder serviceHolder = serviceHolderMap.get(contextPath);
         if(serviceHolder.getRequestType() != type) {
-            throw new WASException(MSG_TYPE.ERROR, 34, type.name());
+            throw new WASException(MSG_TYPE.ERROR, 15, type.name());
         }
         return true;
     }

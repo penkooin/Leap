@@ -2,6 +2,8 @@ package org.chaostocosmos.leap.http;
 
 import java.io.IOException;
 
+import org.chaostocosmos.leap.http.resources.Resource;
+import org.chaostocosmos.leap.http.resources.StaticResourceManager;
 import org.junit.Before;
 import org.junit.Test;    
     

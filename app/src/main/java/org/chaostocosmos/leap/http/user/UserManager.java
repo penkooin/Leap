@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.http.Constants;
-import org.chaostocosmos.leap.http.Context;
-import org.chaostocosmos.leap.http.HostsManager;
 import org.chaostocosmos.leap.http.WASException;
+import org.chaostocosmos.leap.http.commons.Constants;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.filters.IAuthenticate;
+import org.chaostocosmos.leap.http.resources.Context;
+import org.chaostocosmos.leap.http.resources.HostsManager;
 
 /**
  * UserManager 
@@ -42,7 +42,7 @@ public class UserManager implements IAuthenticate {
         System.out.println(this.users.toString());
         User user = this.users.stream().filter(u -> u.getUsername().equals(username)).findAny().orElseThrow(() -> new WASException(MSG_TYPE.ERROR, 25, username));
         if(!user.getPassword().equals(password)) {
-            throw new WASException(MSG_TYPE.ERROR, 26, password);
+            throw new WASException(MSG_TYPE.ERROR, 16, password);
         }
         return true;
     }
@@ -50,10 +50,10 @@ public class UserManager implements IAuthenticate {
     @Override
     public void signUp(User user) throws WASException {
         if(this.users.stream().anyMatch(u -> u.getUsername().equals(user.getUsername()))) {
-            throw new WASException(MSG_TYPE.ERROR, 32, user.getUsername()); 
+            throw new WASException(MSG_TYPE.ERROR, 17, user.getUsername()); 
         }
         if(!Constants.PASSWORD_REGEX.matcher(user.getPassword()).matches()) {
-            throw new WASException(MSG_TYPE.ERROR, 33);
+            throw new WASException(MSG_TYPE.ERROR, 18);
         }
         this.users.add(user);
         save(this.users);

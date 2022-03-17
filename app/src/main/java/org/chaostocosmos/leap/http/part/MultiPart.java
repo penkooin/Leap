@@ -10,9 +10,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.http.Context;
 import org.chaostocosmos.leap.http.commons.StreamUtils;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
+import org.chaostocosmos.leap.http.resources.Context;
+import org.chaostocosmos.leap.http.resources.HostsManager;
 
 /**
  * Multi part descriptor
@@ -72,16 +73,23 @@ public class MultiPart extends BodyPart {
         return this.boundary;
     }
 
+    /**
+     * Delete all Multi-Part files
+     */
+    public void deleteFiles() {
+        this.filePaths.stream().forEach(p -> p.toFile().delete());
+    }
+
     @Override
     public void save(Path targetPath) throws IOException {
         if(super.isLoadedBody) {
-            this.filePaths = StreamUtils.saveMultiPart(this.host, new ByteArrayInputStream(super.body), targetPath, Context.getFileBufferSize(), this.boundary, super.charset);    
+            this.filePaths = StreamUtils.saveMultiPart(this.host, new ByteArrayInputStream(super.body), targetPath.normalize(), Context.getFileBufferSize(), this.boundary, super.charset);    
         } else if(!super.isClosedStream) {
-            this.filePaths = StreamUtils.saveMultiPart(this.host, super.requestStream, targetPath, Context.getFileBufferSize(), this.boundary, super.charset);    
+            this.filePaths = StreamUtils.saveMultiPart(this.host, super.requestStream, targetPath.normalize(), Context.getFileBufferSize(), this.boundary, super.charset);    
             this.isClosedStream = true;
         } else {
             throw new IOException(Context.getErrorMsg(48, super.isLoadedBody, super.isClosedStream));
         }
-        super.logger.debug(super.contentType.name()+" saved: "+targetPath.toString()+"  Size: "+filePaths.stream().map(p -> p.toFile()).map(f -> f.getName()+": "+f.length()).collect(Collectors.joining(", ")));
-    }
+        super.logger.debug(super.contentType.name()+" saved: "+targetPath.normalize().toString()+"  Size: "+filePaths.stream().map(p -> p.toFile()).map(f -> f.getName()+": "+f.length()).collect(Collectors.joining(", ")));
+    }    
 }

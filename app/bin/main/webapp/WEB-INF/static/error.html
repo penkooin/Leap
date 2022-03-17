@@ -1,5 +1,20 @@
-<html>
-    <h1>Error code: @code</h1>
-    <h2>Type: @type</h2>
-    <h4>Message @message</h4>
+<html>        
+    <head>
+        <style>
+            .jb-xx-small { font-size: xx-small; }
+            .jb-x-small { font-size: x-small; }
+            .jb-small { font-size: small; }
+            .jb-medium { font-size: medium; }
+            .jb-large { font-size: large; }
+            .jb-x-large { font-size: x-large; }
+            .jb-xx-large { font-size: xx-large; }
+            .bolded { font-weight: bold;}
+          </style>  
+    </head>
+    <body>        
+        <p class="jb-xx-large"><span class="bolded"><img src="/logo32.png"/> Error code: @code</span></p>
+        <p class="jb-medium">Type: <span class="bolded">@type</span></p>
+        <p class="jb-medium">Message: </p>
+        <p class="jb-small">@message</p>    
+    </body>
 </html>

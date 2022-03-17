@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.http.Constants;
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 
@@ -300,10 +299,10 @@ public class StreamUtils {
                             break;
                         }
                     }                        
-                    System.out.println("0."+line.trim());
+                    //System.out.println("0."+line.trim());
                 } while(true);
             } catch(IOException e) {
-                throw new WASException(MSG_TYPE.ERROR, 43, savePath.toString());
+                throw new WASException(MSG_TYPE.ERROR, 12, savePath.toString());
             }
         }
     }

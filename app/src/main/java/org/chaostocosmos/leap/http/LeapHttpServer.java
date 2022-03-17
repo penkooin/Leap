@@ -17,9 +17,12 @@ import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.SSLServerSocket;
 
+import org.chaostocosmos.leap.http.commons.Constants;
 import org.chaostocosmos.leap.http.commons.DynamicURLClassLoader;
-import org.chaostocosmos.leap.http.commons.Hosts;
 import org.chaostocosmos.leap.http.enums.PROTOCOL;
+import org.chaostocosmos.leap.http.resources.Context;
+import org.chaostocosmos.leap.http.resources.Hosts;
+import org.chaostocosmos.leap.http.resources.HostsManager;
 import org.chaostocosmos.leap.http.services.ServiceManager;
 import org.chaostocosmos.leap.http.user.UserManager;
 import org.slf4j.Logger;

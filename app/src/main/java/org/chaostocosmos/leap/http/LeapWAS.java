@@ -21,9 +21,13 @@ import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import org.chaostocosmos.leap.http.commons.Hosts;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
+import org.chaostocosmos.leap.http.resources.Context;
+import org.chaostocosmos.leap.http.resources.Hosts;
+import org.chaostocosmos.leap.http.resources.HostsManager;
+import org.chaostocosmos.leap.http.resources.ResourceHelper;
+import org.chaostocosmos.leap.http.resources.StaticResourceManager;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
@@ -101,6 +105,7 @@ public class LeapWAS {
         } catch (ParseException e) {
             throw new WASException(e);
         }
+
         //set HOME directory
         String optionH = cmdLine.getOptionValue("h");
         if(optionH != null) {
@@ -113,17 +118,18 @@ public class LeapWAS {
         } else {
             HOME_PATH = Paths.get("./"); 
         }
+
         //initialize environment and context
         this.context = Context.initialize(HOME_PATH);
-
-        //initialize static resource manager
-        this.staticResourceManager = StaticResourceManager.initialize();
 
         //build webapp environment
         List<Hosts> hosts = HostsManager.get().getAllHosts();
         for(Hosts host : hosts) {
             ResourceHelper.extractResource("webapp", host.getDocroot());
         }
+
+        //initialize static resource manager
+        this.staticResourceManager = StaticResourceManager.initialize();
 
         //set log level
         String optionL = cmdLine.getOptionValue("l");
@@ -132,9 +138,11 @@ public class LeapWAS {
             Level level = Level.toLevel(optionL); 
             logger.setLevel(level);
         }
+
         //print trade mark
         trademark();
         logger.info("Leap WAS server starting......");
+
         //initialize thread pool
         this.threadpool = new ThreadPoolExecutor(Context.getThreadPoolCoreSize(), 
                                                  Context.getThreadPoolMaxSize(), 
@@ -228,7 +236,7 @@ public class LeapWAS {
             System.out.println(ResourceHelper.getInstance().getTrademark());
             System.out.println();
         } catch (IOException e) {
-            throw new WASException(MSG_TYPE.ERROR, 22);
+            throw new WASException(MSG_TYPE.ERROR, 5);
         }
     }
     

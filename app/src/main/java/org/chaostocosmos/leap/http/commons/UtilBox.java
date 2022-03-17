@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.http.Constants;
 import org.chaostocosmos.leap.http.WASException;
 
 import ch.qos.logback.classic.Level;

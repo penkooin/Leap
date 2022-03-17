@@ -1,6 +1,7 @@
 package org.chaostocosmos.leap.http;
 
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
+import org.chaostocosmos.leap.http.resources.Context;
 
 /**
  * WAS exception object

@@ -3,11 +3,11 @@ package org.chaostocosmos.leap.http.services;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
-import org.chaostocosmos.leap.http.Context;
 import org.chaostocosmos.leap.http.HttpResponseDescriptor;
 import org.chaostocosmos.leap.http.HttpTransferBuilder.HttpTransfer;
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
+import org.chaostocosmos.leap.http.resources.Context;
 import org.slf4j.Logger;
 
 /**
@@ -31,11 +31,16 @@ public class ServiceInvoker {
     public static HttpResponseDescriptor invokeService(ServiceHolder serviceHolder, HttpTransfer httpTransfer, boolean doClone) throws Throwable {
         HttpResponseDescriptor response = httpTransfer.getResponse();
         AbstractLeapService service = (AbstractLeapService)serviceHolder.getService();
-        if(doClone) {
-            service = (AbstractLeapService) service.clone();
-        }
         try {
-            response = service.serve(httpTransfer, serviceHolder.getServiceMethod());
+            if(doClone) {
+                service = (AbstractLeapService) service.clone();
+                response = service.serve(httpTransfer, serviceHolder.getServiceMethod());
+            } else {
+                synchronized(service) {
+                    response = service.serve(httpTransfer, serviceHolder.getServiceMethod());
+                }                
+            }
+            
         } catch(Throwable e) {
             if(service.errorHandling(httpTransfer.getResponse(), e) != null) {
                 throw e;
