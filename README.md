@@ -1,5 +1,5 @@
 
-![leap-logo](./leap.png)
+![leap-logo](./img/leap.png)
 
 ## You wanna Leap?
 
