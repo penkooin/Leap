@@ -1,9 +1,10 @@
 
-![leap-logo](./img/leap.png)
 
-<h3> ![](./img/logo32.png) You wanna Leap? </h3>
+<img src="./img/leap.png"/>
 
-<h3> ![](./img/logo32.png) What is Leap? </h3>
+<h3> <img src="./img/logo32.png"/> You wanna Leap? </h3>
+
+<h3> <img src="./img/logo32.png"/> What is Leap? </h3>
 ---
 Leap? is alternatives of Http Servers or Web Application Servers  
 Leap provides sustainable and durable performance for Web Services.  
@@ -15,28 +16,28 @@ The remote deploy is to get achievement of varieties of service on active time i
 Also upload file instant saving could get to decrease of server memory throghtput for uploading when huge file is uploaded.
 And Enhanced Resource Manager will provides a resources of server to users more quickly and no waiting.
 
-<h3> ![](./img/logo32.png) Feathres of Leap? </h3>
+<h3> <img src="./img/logo32.png"/> Feathres of Leap? </h3>
 ---
 
-<h3> ![](./img/logo32.png) Preperation for using Leap? </h3>
+<h3> <img src="./img/logo32.png"/> Preperation for using Leap? </h3>
 ---
 
-<h3> ![](./img/logo32.png) Configuration for security </h3>
+<h3> <img src="./img/logo32.png"/> Configuration for security </h3>
 ---
 
-<h3> ![](./img/logo32.png) Configuration for filtering </h3>
+<h3> <img src="./img/logo32.png"/> Configuration for filtering </h3>
 ---
 
-<h3> ![](./img/logo32.png) How to make your own services </h3>
+<h3> <img src="./img/logo32.png"/> How to make your own services </h3>
 ---
 
-<h3> ![](./img/logo32.png) Remote deploy  </h3>
+<h3> <img src="./img/logo32.png"/> Remote deploy  </h3>
 ---
 
-<h3> ![](./img/logo32.png) How to communicate with RDBMS </h3>
+<h3> <img src="./img/logo32.png"/> How to communicate with RDBMS </h3>
 ---
 
-<h3> ![](./img/logo32.png) How to communicate with Big-Data infrastructure. </h3>
+<h3> <img src="./img/logo32.png"/> How to communicate with Big-Data infrastructure. </h3>
 ---
 
 
