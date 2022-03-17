@@ -15,28 +15,28 @@ The remote deploy is to get achievement of varieties of service on active time i
 Also upload file instant saving could get to decrease of server memory throghtput for uploading when huge file is uploaded.
 And Enhanced Resource Manager will provides a resources of server to users more quickly and no waiting.
 
-## Feathres of Leap?
+## ![](./img/logo32.png) Feathres of Leap?
 ---
 
-## Preperation for using Leap?
+## ![](./img/logo32.png) Preperation for using Leap?
 ---
 
-## Configuration for security
+## ![](./img/logo32.png) Configuration for security
 ---
 
-## Configuration for filtering
+## ![](./img/logo32.png) Configuration for filtering
 ---
 
-## How to make your own services
+## ![](./img/logo32.png) How to make your own services
 ---
 
-## Remote deploy 
+## ![](./img/logo32.png) Remote deploy 
 ---
 
-## How to communicate with RDBMS
+## ![](./img/logo32.png) How to communicate with RDBMS
 ---
 
-## How to communicate with Big-Data infrastructure.
+## ![](./img/logo32.png) How to communicate with Big-Data infrastructure.
 ---
 
 
