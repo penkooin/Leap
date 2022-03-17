@@ -15,7 +15,7 @@ The remote deploy is to get achievement of varieties of service on active time i
 Also upload file instant saving could get to decrease of server memory throghtput for uploading when huge file is uploaded.
 And Enhanced Resource Manager will provides a resources of server to users more quickly and no waiting.
 
-## ![](./img/logo32.png) Feathres of Leap?
+![](./img/logo32.png) ## Feathres of Leap?
 ---
 
 ## ![](./img/logo32.png) Preperation for using Leap?
