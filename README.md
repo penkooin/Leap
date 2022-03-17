@@ -1,9 +1,9 @@
 
 ![leap-logo](./img/leap.png)
 
-## You wanna Leap?
+![](./img/logo32.png) ## You wanna Leap?
 
-## What is Leap?
+![](./img/logo32.png) ## What is Leap?
 ---
 Leap? is alternatives of Http Servers or Web Application Servers  
 Leap provides sustainable and durable performance for Web Services.  
@@ -18,25 +18,25 @@ And Enhanced Resource Manager will provides a resources of server to users more 
 ![](./img/logo32.png) ## Feathres of Leap?
 ---
 
-## ![](./img/logo32.png) Preperation for using Leap?
+![](./img/logo32.png) ## Preperation for using Leap?
 ---
 
-## ![](./img/logo32.png) Configuration for security
+![](./img/logo32.png) ## Configuration for security
 ---
 
-## ![](./img/logo32.png) Configuration for filtering
+![](./img/logo32.png) ## Configuration for filtering
 ---
 
-## ![](./img/logo32.png) How to make your own services
+![](./img/logo32.png) ## How to make your own services
 ---
 
-## ![](./img/logo32.png) Remote deploy 
+![](./img/logo32.png) ## Remote deploy 
 ---
 
-## ![](./img/logo32.png) How to communicate with RDBMS
+![](./img/logo32.png) ## How to communicate with RDBMS
 ---
 
-## ![](./img/logo32.png) How to communicate with Big-Data infrastructure.
+![](./img/logo32.png) ## How to communicate with Big-Data infrastructure.
 ---
 
 
