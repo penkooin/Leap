@@ -1,4 +1,4 @@
-package org.chaostocosmos.leap.http.commons;
+package org.chaostocosmos.leap.http.resources;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -7,17 +7,19 @@ import java.net.URLClassLoader;
 import java.nio.file.Path;
 import java.util.List;
 
+import org.chaostocosmos.leap.http.commons.LoggerFactory;
+
 /**
  * To load classes dynamically
  * 
  * @author 9ins
  */
-public class DynamicURLClassLoader extends URLClassLoader {
+public class LeapURLClassLoader extends URLClassLoader {
 
     /**
      * Default constructor
      */
-    public DynamicURLClassLoader() { 
+    public LeapURLClassLoader() { 
         super(new URL[0], ClassLoader.getSystemClassLoader());
     }
 
@@ -25,27 +27,8 @@ public class DynamicURLClassLoader extends URLClassLoader {
      * Construct with URLs
      * @param urls
      */
-    public DynamicURLClassLoader(URL[] urls) {
+    public LeapURLClassLoader(URL[] urls) {
         super(urls, ClassLoader.getSystemClassLoader());
-    }
-
-    /**
-     * Construct with url paths
-     * @param urls
-     */
-    public DynamicURLClassLoader(List<Path> urls) {
-        this(urls.stream().map(p -> {
-            try {      
-                URL url = p.toFile().toURI().toURL();          
-                System.out.println("Add dynamic classpath to ClassLoader: "+url.toString()+"  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-                LoggerFactory.getLogger().info("Add dynamic classpath to ClassLoader: "+url.toString());
-                return url;
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-                LoggerFactory.getLogger().error(e.getMessage(), e);
-                return null;
-            }
-        }).toArray(URL[]::new));
     }
 
     /**
@@ -53,7 +36,7 @@ public class DynamicURLClassLoader extends URLClassLoader {
      * @param urls
      * @param parent
      */
-    public DynamicURLClassLoader(URL[] urls, ClassLoader parent) {
+    public LeapURLClassLoader(URL[] urls, ClassLoader parent) {
         super(urls, parent);
     }
 

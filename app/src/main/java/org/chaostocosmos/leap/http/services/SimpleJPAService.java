@@ -14,13 +14,14 @@ import org.springframework.stereotype.Service;
 
 
 @ServiceMapper(path = "/simple/jpa")
+@Service
 public class SimpleJPAService extends AbstractLeapService {
 
     @Autowired
     private IUsersRespository usersRepo;
 
     @MethodMappper(mappingMethod = REQUEST_TYPE.GET, path="/users")
-    @FilterMapper(preFilters = {BasicHttpFilter.class})
+    @FilterMapper(preFilters = {BasicHttpFilter.class})    
     public void getUsers(HttpRequestDescriptor request, HttpResponseDescriptor response) {
         System.out.println("Simple JPA Service called.......................................");
         System.out.println(usersRepo);

@@ -60,9 +60,19 @@ public class Hosts {
     private List<User> users;
 
     /**
-     * Dynamic class path object
+     * Dynamic class Path
      */
     private Path dynamicClasspaths;
+
+    /**
+     * Dynamic package filters
+     */
+    private List<String> dynamicPackageFilters;
+
+    /**
+     * Spring JPA packages
+     */
+    private List<String> springJpaPackages;
 
     /**
      * Resources filter to be in memory area
@@ -143,7 +153,9 @@ public class Hosts {
         (String)map.get("host"),
         (int)map.get("port"),
         (List<User>)((List<Map<?, ?>>)map.get("users")).stream().map(m -> new User(m.get("username").toString(), m.get("password").toString(), GRANT.valueOf(m.get("grant").toString()))).collect(Collectors.toList()),
-        !map.get("dynamic-classpaths").equals("") ? Paths.get((String)map.get("dynamic-classpaths")) : null,
+        !map.get("dynamic-classpath").equals("") ? Paths.get((String)map.get("dynamic-classpath")) : null,
+        (List<String>)map.get("dynamic-package-filters"),
+        (List<String>)map.get("spring-jpa-scan-packages"),
         (List<String>)((Map<?, ?>)map.get("resource")).get("in-memory-filters"),
         (List<String>)((Map<?, ?>)map.get("resource")).get("access-filters"),
         ((List<?>)map.get("error-filters")).stream().map(f -> ClassUtils.getClass(ClassLoader.getSystemClassLoader(), f.toString().trim())).collect(Collectors.toList()),
@@ -169,6 +181,8 @@ public class Hosts {
      * @param port
      * @param users
      * @param dynamicClasspaths
+     * @param dynamicPackageFilters
+     * @param springJpaScanPackages
      * @param inMemoryFilter
      * @param accessFilters
      * @param errorFilters
@@ -191,6 +205,8 @@ public class Hosts {
                  int port, 
                  List<User> users, 
                  Path dynamicClaspaths, 
+                 List<String> dynamicPackageFilters,
+                 List<String> springJpaScanPackages,
                  List<String> inMemoryFilter, 
                  List<String> accessFilters, 
                  List<Class<?>> errorFilters, 
@@ -213,6 +229,8 @@ public class Hosts {
         this.port = port;
         this.users = users;
         this.dynamicClasspaths = dynamicClaspaths;
+        this.dynamicPackageFilters = dynamicPackageFilters;
+        this.springJpaPackages = springJpaScanPackages;
         this.inMemoryFilter = inMemoryFilter;
         this.accessFilters = accessFilters;
         this.errorFilters = errorFilters;
@@ -346,6 +364,37 @@ public class Hosts {
      */
     public void setDynamicClasspaths(Path dynamicClaspaths) {
         this.dynamicClasspaths = dynamicClaspaths;
+    }
+
+    /**
+     * Get dynamic package filters
+     */
+    public List<String> getDynamicPackageFilters() {
+        return this.dynamicPackageFilters;
+    }
+
+    /**
+     * Set dynamic package filters
+     * @param dynamicPackageFilters
+     */
+    public void setDynamicPackageFilters(List<String> dynamicPackageFilters) {
+        this.dynamicPackageFilters = dynamicPackageFilters;
+    }
+
+    /**
+     * Get spring JPA scan packages
+     * @return
+     */
+    public List<String> getSpringJPAScanPackages() {
+        return this.springJpaPackages;
+    }
+
+    /**
+     * Set spring JPA scan packages
+     * @param springJpaPackages
+     */
+    public void setSpringJPAScanPackages(List<String> springJpaPackages) {
+        this.springJpaPackages = springJpaPackages;
     }
 
     /**

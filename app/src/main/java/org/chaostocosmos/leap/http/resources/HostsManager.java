@@ -98,7 +98,7 @@ public class HostsManager {
      * @return
      */
     public List<Path> getAllDynamicClasspaths() {
-        return this.hostsMap.values().stream().map(h -> h.getDynamicClasspaths()).collect(Collectors.toList());
+        return this.hostsMap.values().stream().map(h -> h.getDynamicClasspaths()).filter(cp -> cp != null).collect(Collectors.toList());
     }
 
     /**

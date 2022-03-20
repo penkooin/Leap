@@ -19,6 +19,8 @@ import java.util.Map.Entry;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import com.google.gson.Gson;
+
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.commons.Unit;
 
@@ -36,6 +38,7 @@ public class WatchResource extends Thread implements Resource {
     Map<String, Object> resourceTree;
     Map<WatchKey, Path> watchMap;
     WatchService watchService;
+    Gson gson = new Gson();
 
     /**
      * Create with Hosts object, Watch kinds
@@ -152,13 +155,9 @@ public class WatchResource extends Thread implements Resource {
                         String[] paths = p.subpath(this.watchPath.getNameCount(), p.getNameCount()).toString().split(Pattern.quote(File.separator));
                         removeResource(this.resourceTree, paths);
                     }
+                    
                 }
                 key.reset();
-                // ObjectMapper om = new ObjectMapper();
-                // String json = om.writerWithDefaultPrettyPrinter().writeValueAsString(this.resourceTree);
-                // System.out.println(json);
-                // System.out.println(this.watchMap);
-                System.out.println("================================================");
             }
             this.watchService.close();
         } catch (InterruptedException | IOException e) {

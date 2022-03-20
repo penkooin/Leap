@@ -5,6 +5,7 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.InetAddress;
 import java.net.URISyntaxException;
+import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -26,6 +27,7 @@ import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.resources.Context;
 import org.chaostocosmos.leap.http.resources.Hosts;
 import org.chaostocosmos.leap.http.resources.HostsManager;
+import org.chaostocosmos.leap.http.resources.LeapURLClassLoader;
 import org.chaostocosmos.leap.http.resources.ResourceHelper;
 import org.chaostocosmos.leap.http.resources.StaticResourceManager;
 import org.chaostocosmos.leap.http.services.SimpleJPAService;
@@ -41,7 +43,7 @@ import ch.qos.logback.classic.Logger;
  * 
  * @author 9ins
  */
-public class LeapWAS {
+public class LeapApplication {
     /**
      * Logger
      */
@@ -90,7 +92,7 @@ public class LeapWAS {
      * @throws WASException
      * @throws ParseException
      */
-    public LeapWAS(String[] args) throws Exception {
+    public LeapApplication(String[] args) throws Exception {
         //set commend line options
         this.leapServerMap = new HashMap<>();
         setup(args);
@@ -145,7 +147,9 @@ public class LeapWAS {
 
         //print trade mark
         trademark();
-        logger.info("Leap WAS server starting......");
+        logger.info("Leap starting......");
+
+
 
         //initialize thread pool
         this.threadpool = new ThreadPoolExecutor(Context.getThreadPoolCoreSize(), 
@@ -154,7 +158,9 @@ public class LeapWAS {
                                                  TimeUnit.SECONDS, 
                                                  new LinkedBlockingQueue<Runnable>());
         logger.info("--------------------------------------------------------------------------");
-        logger.info("ThreadPool initialized - CORE: "+Context.getThreadPoolCoreSize()+" MAX: "+Context.getThreadPoolMaxSize()+" KEEP-ALIVE WHEN IDLE(seconds): "+Context.getThreadPoolKeepAlive());
+        logger.info("ThreadPool initialized - CORE: "+Context.getThreadPoolCoreSize()
+                    +" MAX: "+Context.getThreadPoolMaxSize()
+                    +" KEEP-ALIVE WHEN IDLE(seconds): "+Context.getThreadPoolKeepAlive());
 
         //set verbose option to STD IO
         String optionV = cmdLine.getOptionValue("v");
@@ -171,18 +177,6 @@ public class LeapWAS {
         }
         //instantiate virtual host object
         hostsManager = HostsManager.get(); 
-
-        AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext();
-        appContext.scan("org.chaostocosmos.leap.http.services", 
-                        "org.chaostocosmos.leap.http.services.datasource",
-                        "org.chaostocosmos.leap.http.services.entiry",
-                        "org.chaostocosmos.leap.http.services.repository");
-        appContext.refresh();        
-        //SimpleJPAService usersService = (SimpleJPAService) appContext.getBean("usersService");
-        //usersService.getUsers(null, null);
-        // IUsersRespository repo = appContext.getBean(IUsersRespository.class);
-        // Users users = repo.findByName("Kooin-Shin");
-        // System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ "+users.toString());
     }
 
     /**
@@ -192,6 +186,7 @@ public class LeapWAS {
      */
     public void start() throws Exception {
         //NetworkInterfaces.getAllNetworkAddresses().stream().forEach(i -> System.out.println(i.getHostName()));
+        LeapURLClassLoader classLoader = new LeapURLClassLoader(HostsManager.get().getAllDynamicClasspathURLs());
         for(Hosts host : HostsManager.get().getAllHosts()) {
             InetAddress hostAddress = InetAddress.getByName(host.getHost());
             String hostName = hostAddress.getHostAddress()+":"+host.getPort();
@@ -199,7 +194,7 @@ public class LeapWAS {
                 String key = this.leapServerMap.keySet().stream().filter(k -> k.equals(hostName)).findAny().get();
                 throw new IllegalArgumentException("Mapping host address is collapse on network interace: "+hostAddress.toString()+":"+host.getPort()+" with "+key);
             }
-            LeapHttpServer server = new LeapHttpServer(Context.getLeapHomePath(), host, this.threadpool);
+            LeapHttpServer server = new LeapHttpServer(Context.getLeapHomePath(), host, this.threadpool, classLoader);
             this.leapServerMap.put(hostAddress.getHostAddress()+":"+host.getPort(), server);
             if(host.isDefaultHost()) {
                 logger.info("[DEFAULT HOST] - Protocol: "+host.getProtocol().name()+"   Server: "+host.getServerName()+"   Host: "+host.getHost()+"   Port: "+host.getPort()+"   Doc-Root: "+host.getDocroot()+"   Logging path: "+host.getLogPath()+"   Level: "+host.getLogLevel().toString());
@@ -257,7 +252,7 @@ public class LeapWAS {
     }
     
     public static void main(String[] args) throws Exception {        
-        LeapWAS leap = new LeapWAS(args);
+        LeapApplication leap = new LeapApplication(args);
         leap.start();
     }
 }

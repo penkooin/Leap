@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.http.LeapWAS;
+import org.chaostocosmos.leap.http.LeapApplication;
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.yaml.snakeyaml.Yaml;
@@ -80,10 +80,10 @@ public class Context {
      * @return
      */
     public static Context get() {
-        if(LeapWAS.HOME_PATH == null) {
+        if(LeapApplication.HOME_PATH == null) {
             return null;
         }
-        return initialize(LeapWAS.HOME_PATH);
+        return initialize(LeapApplication.HOME_PATH);
     }
 
     /**
@@ -358,7 +358,7 @@ public class Context {
     public static String getMsg(MSG_TYPE type, int code, Object ... args) {
         Object value = getMessagesValue("messages."+type.name().toLowerCase()+"."+type.name().toLowerCase()+code);        
         String msg = value == null ? "" : value.toString();
-        return Arrays.stream(args).reduce(msg, (ap, a) -> ap.toString().replaceFirst("\\{\\}", a.toString())).toString();
+        return Arrays.stream(args).filter(a -> a != null).reduce(msg, (ap, a) -> ap.toString().replaceFirst("\\{\\}", a.toString())).toString();
     }    
 
     /**

@@ -18,9 +18,9 @@ import java.util.concurrent.TimeUnit;
 import javax.net.ssl.SSLServerSocket;
 
 import org.chaostocosmos.leap.http.commons.Constants;
-import org.chaostocosmos.leap.http.commons.DynamicURLClassLoader;
 import org.chaostocosmos.leap.http.enums.PROTOCOL;
 import org.chaostocosmos.leap.http.resources.Context;
+import org.chaostocosmos.leap.http.resources.LeapURLClassLoader;
 import org.chaostocosmos.leap.http.resources.Hosts;
 import org.chaostocosmos.leap.http.resources.HostsManager;
 import org.chaostocosmos.leap.http.services.ServiceManager;
@@ -109,10 +109,12 @@ public class LeapHttpServer extends Thread {
         this(homePath, 
              HostsManager.get().getHosts(Context.getDefaultHost()),             
              new ThreadPoolExecutor(Context.getThreadPoolCoreSize(), 
-                        Context.getThreadPoolMaxSize(),                  
-                        Context.getThreadPoolKeepAlive(), 
-                        TimeUnit.SECONDS, 
-                        new LinkedBlockingQueue<Runnable>() ));
+                                    Context.getThreadPoolMaxSize(),                  
+                                    Context.getThreadPoolKeepAlive(), 
+                                    TimeUnit.SECONDS, 
+                                    new LinkedBlockingQueue<Runnable>()),
+            new LeapURLClassLoader(HostsManager.get().getAllDynamicClasspathURLs())
+        );
     }
 
     /**
@@ -120,10 +122,11 @@ public class LeapHttpServer extends Thread {
      * @param homePath
      * @param hosts
      * @param threadpool 
+     * @param classLoader
      * @throws UnknownHostException
      * @throws MalformedURLException
      */
-    public LeapHttpServer(Path homePath, Hosts hosts, ThreadPoolExecutor threadpool) throws UnknownHostException, MalformedURLException {
+    public LeapHttpServer(Path homePath, Hosts hosts, ThreadPoolExecutor threadpool, LeapURLClassLoader classLoader) throws UnknownHostException, MalformedURLException {
         this(
             true,
             Context.getLeapHomePath(),
@@ -132,10 +135,8 @@ public class LeapHttpServer extends Thread {
             new InetSocketAddress(InetAddress.getByName(hosts.getHost()), hosts.getPort()),
             Context.getBackLog(),
             threadpool,
-            new ServiceManager(
-                hosts.getDynamicClasspaths() != null ? new DynamicURLClassLoader(new URL[] {hosts.getDynamicClasspaths().toUri().toURL()}) : new DynamicURLClassLoader()
-                , new UserManager(hosts.getHost())),
-            hosts
+            hosts,
+            classLoader
         );        
     }
 
@@ -158,8 +159,8 @@ public class LeapHttpServer extends Thread {
                           InetSocketAddress inetSocketAddress, 
                           int backlog, 
                           ThreadPoolExecutor threadpool,
-                          ServiceManager serviceManager,
-                          Hosts hosts
+                          Hosts hosts,
+                          LeapURLClassLoader classLoader
                           ) {
         this.isDefaultHost = true;
         this.homePath = homePath;
@@ -168,8 +169,8 @@ public class LeapHttpServer extends Thread {
         this.docroot = docroot;
         this.threadpool = threadpool;
         this.inetSocketAddress = inetSocketAddress;
-        this.serviceManager = serviceManager;
         this.hosts = hosts;
+        this.serviceManager = new ServiceManager(hosts, new UserManager(hosts.getHost()), classLoader);
     }
 
     /**

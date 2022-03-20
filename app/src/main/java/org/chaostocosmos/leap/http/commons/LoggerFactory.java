@@ -72,28 +72,28 @@ public class LoggerFactory {
      * @return
      */
     public static Logger createLoggerFor(String loggerName, String loggerFile, List<Level> level) {
-        LoggerContext logCtx = (LoggerContext) org.slf4j.LoggerFactory.getILoggerFactory(); 
+        LoggerContext loggerContext = new LoggerContext();
         PatternLayoutEncoder logEncoder = new PatternLayoutEncoder();
-        logEncoder.setContext(logCtx);
+        logEncoder.setContext(loggerContext);
         logEncoder.setPattern("%-12date{YYYY-MM-dd HH:mm:ss.SSS} %-5level - %msg%n");
         logEncoder.start();    
         ConsoleAppender logConsoleAppender = new ConsoleAppender();
-        logConsoleAppender.setContext(logCtx);
+        logConsoleAppender.setContext(loggerContext);
         logConsoleAppender.setName("console");
         logConsoleAppender.setEncoder(logEncoder);
         logConsoleAppender.start();    
         logEncoder = new PatternLayoutEncoder();
-        logEncoder.setContext(logCtx);
+        logEncoder.setContext(loggerContext);
         logEncoder.setPattern("%-12date{YYYY-MM-dd HH:mm:ss.SSS} %-5level - %msg%n");
         logEncoder.start();    
         RollingFileAppender logFileAppender = new RollingFileAppender();
-        logFileAppender.setContext(logCtx);
+        logFileAppender.setContext(loggerContext);
         logFileAppender.setName("logFile");
         logFileAppender.setEncoder(logEncoder);
         logFileAppender.setAppend(true);
         logFileAppender.setFile(loggerFile);    
         TimeBasedRollingPolicy logFilePolicy = new TimeBasedRollingPolicy();
-        logFilePolicy.setContext(logCtx);
+        logFilePolicy.setContext(loggerContext);
         logFilePolicy.setParent(logFileAppender);
         logFilePolicy.setFileNamePattern(loggerFile+"-%d{yyyy-MM-dd_HH}.log");
         logFilePolicy.setMaxHistory(7);
@@ -101,7 +101,7 @@ public class LoggerFactory {
         logFileAppender.setRollingPolicy(logFilePolicy);
         logFileAppender.start();        
 
-        Logger logger = (Logger) org.slf4j.LoggerFactory.getLogger(loggerName);
+        Logger logger = loggerContext.getLogger(loggerName);
         logger.addAppender(logConsoleAppender);
         logger.addAppender(logFileAppender);
         level.stream().forEach(l -> logger.setLevel(l));

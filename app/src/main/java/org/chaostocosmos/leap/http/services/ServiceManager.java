@@ -13,12 +13,14 @@ import org.chaostocosmos.leap.http.annotation.FilterMapper;
 import org.chaostocosmos.leap.http.annotation.MethodMappper;
 import org.chaostocosmos.leap.http.annotation.ServiceMapper;
 import org.chaostocosmos.leap.http.commons.ClassUtils;
-import org.chaostocosmos.leap.http.commons.DynamicURLClassLoader;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
 import org.chaostocosmos.leap.http.filters.ILeapFilter;
 import org.chaostocosmos.leap.http.resources.Context;
+import org.chaostocosmos.leap.http.resources.Hosts;
+import org.chaostocosmos.leap.http.resources.HostsManager;
+import org.chaostocosmos.leap.http.resources.LeapURLClassLoader;
 import org.chaostocosmos.leap.http.user.UserManager;
 
 import ch.qos.logback.classic.Logger;
@@ -40,25 +42,37 @@ public class ServiceManager {
     private Map<String, ServiceHolder> serviceHolderMap = new HashMap<>();
 
     /**
-     * ClassLoder for host
+     * Hosts object 
      */
-    private DynamicURLClassLoader classLoader;
+    Hosts hosts;
+
+    /**
+     * Host manager object
+     */
+    private HostsManager hostManager;
 
     /**
      * Leap security manager object
      */
     private UserManager userManager;
- 
+
+    /**
+     * ClassLoder for host
+     */
+    private LeapURLClassLoader classLoader;
+
     /**
      * Constructor with 
+     * @param hosts
+     * @param userManager 
      * @param classLoader
-     * @param userManager_ 
      */
-    public ServiceManager(ClassLoader classLoader_, UserManager userManager_) {
-        classLoader = (DynamicURLClassLoader) classLoader_;
-        userManager  = userManager_;
+    public ServiceManager(Hosts hosts, UserManager userManager, LeapURLClassLoader classLoader) {
+        this.hosts = hosts;
+        this.userManager  = userManager;
+        this.classLoader = (LeapURLClassLoader) classLoader;
         try {
-            List<Class<? extends ILeapService>> services = ClassUtils.findAllLeapServices(classLoader, false);
+            List<Class<? extends ILeapService>> services = ClassUtils.findAllLeapServices(classLoader, false, hosts.getDynamicPackageFilters());
             //List<Class<? extends IFilter>> filters = ClassUtils.findAllLeapFilters(false); 
             initialize(services);
         } catch(IOException | URISyntaxException e) {
@@ -140,7 +154,7 @@ public class ServiceManager {
      * Get class loader object
      * @return
      */
-    public DynamicURLClassLoader getClassLoader() {
+    public LeapURLClassLoader getClassLoader() {
         return this.classLoader;
     }
 

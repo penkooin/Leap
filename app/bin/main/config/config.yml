@@ -33,7 +33,16 @@ server:
         - username: guest
           password: guest
           grant: GUEST
-      dynamic-classpaths: './home/webapp/services'
+      dynamic-classpath: 'd:/Github/leap/home/webapp/services'
+      dynamic-package-filters: [
+        "*"
+      ]
+      spring-jpa-scan-pakages: [
+        "org.chaostocosmos.leap.http.services", 
+        "org.chaostocosmos.leap.http.services.datasource",
+        "org.chaostocosmos.leap.http.services.entiry",
+        "org.chaostocosmos.leap.http.services.repository"
+      ]
       resource:
         in-memory-filters: ['*']
         access-filters: ['*']
@@ -61,7 +70,11 @@ server:
         - username: guest1
           password: guest1
           grant: GUEST
-      dynamic-classpaths: ''
+      dynamic-classpath: ''
+      dynamic-package-filters: [
+        "*"
+      ]
+      spring-jpa-scan-pakages: []
       resource:
         in-memory-filters: ['*.html']
         access-filters: ['*']
@@ -86,7 +99,11 @@ server:
         - username: guest2
           password: guest2
           grant: GUEST
-      dynamic-classpaths: ''
+      dynamic-classpath: ''
+      dynamic-package-filters: [
+        "*"
+      ]
+      spring-jpa-scan-pakages: []
       resource:
         in-memory-filters: ['*.html']
         access-filters: ['*']

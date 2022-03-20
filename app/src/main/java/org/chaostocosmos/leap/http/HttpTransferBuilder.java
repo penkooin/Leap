@@ -54,6 +54,7 @@ public class HttpTransferBuilder {
      */
     public static String buildHttpErrorPage(String host, MSG_TYPE type, int errorCode, String message) throws IOException {
         String title = Context.getHttpMsg(errorCode, "- "+type.name());        
+        System.out.println(title+"  "+message);
         Map<String, Object> map = Map.of("@code", errorCode, "@type", title, "@message", message);
         return StaticResourceManager.get(host).getErrorPage(map);
     }
