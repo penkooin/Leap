@@ -275,7 +275,7 @@ public class WatchResource extends Thread implements Resource {
     }
 
     @Override
-    public String getStaticPage(String resourcePath, Map<String, Object> params) throws IOException {
+    public String getStaticPage(String resourcePath, Map<String, Object> params) throws IOException {        
         Object data = getStaticContent(resourcePath);
         String page = "";
         if(data instanceof byte[]) {
@@ -284,9 +284,10 @@ public class WatchResource extends Thread implements Resource {
             page = Files.readString(((File)data).toPath());
         } else {
             return null;
-        }
+        }        
+        System.out.println(params.toString());
         for(Entry<String, Object> e : params.entrySet()) {
-            page = page.replace(e.getKey(), e.getValue().toString());
+            page = page.replace(e.getKey(), e.getValue()+"");
         }
         return page;
     }

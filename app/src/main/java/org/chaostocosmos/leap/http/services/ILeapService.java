@@ -13,7 +13,7 @@ import org.chaostocosmos.leap.http.filters.ILeapFilter;
  * @author Kooin-Shin
  * @since 2021.09.15
  */
-public interface ILeapService extends Cloneable {
+public interface ILeapService extends IJPAModel, Cloneable {
     /**
      * First entry point of client requets
      * @param httpTransfer

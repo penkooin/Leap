@@ -12,11 +12,11 @@ import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.annotation.FilterMapper;
 import org.chaostocosmos.leap.http.annotation.MethodMappper;
 import org.chaostocosmos.leap.http.annotation.ServiceMapper;
-import org.chaostocosmos.leap.http.commons.ClassUtils;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
 import org.chaostocosmos.leap.http.filters.ILeapFilter;
+import org.chaostocosmos.leap.http.resources.ClassUtils;
 import org.chaostocosmos.leap.http.resources.Context;
 import org.chaostocosmos.leap.http.resources.Hosts;
 import org.chaostocosmos.leap.http.resources.HostsManager;
@@ -72,7 +72,7 @@ public class ServiceManager {
         this.userManager  = userManager;
         this.classLoader = (LeapURLClassLoader) classLoader;
         try {
-            List<Class<? extends ILeapService>> services = ClassUtils.findAllLeapServices(classLoader, false, hosts.getDynamicPackageFilters());
+            List<Class<? extends ILeapService>> services = ClassUtils.findAllLeapServices(classLoader, false, hosts.getDynamicPackages());
             //List<Class<? extends IFilter>> filters = ClassUtils.findAllLeapFilters(false); 
             initialize(services);
         } catch(IOException | URISyntaxException e) {

@@ -7,7 +7,6 @@ import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.URL;
 import java.net.UnknownHostException;
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -20,9 +19,9 @@ import javax.net.ssl.SSLServerSocket;
 import org.chaostocosmos.leap.http.commons.Constants;
 import org.chaostocosmos.leap.http.enums.PROTOCOL;
 import org.chaostocosmos.leap.http.resources.Context;
-import org.chaostocosmos.leap.http.resources.LeapURLClassLoader;
 import org.chaostocosmos.leap.http.resources.Hosts;
 import org.chaostocosmos.leap.http.resources.HostsManager;
+import org.chaostocosmos.leap.http.resources.LeapURLClassLoader;
 import org.chaostocosmos.leap.http.services.ServiceManager;
 import org.chaostocosmos.leap.http.user.UserManager;
 import org.slf4j.Logger;
@@ -126,7 +125,10 @@ public class LeapHttpServer extends Thread {
      * @throws UnknownHostException
      * @throws MalformedURLException
      */
-    public LeapHttpServer(Path homePath, Hosts hosts, ThreadPoolExecutor threadpool, LeapURLClassLoader classLoader) throws UnknownHostException, MalformedURLException {
+    public LeapHttpServer(Path homePath, 
+                          Hosts hosts, 
+                          ThreadPoolExecutor threadpool, 
+                          LeapURLClassLoader classLoader) throws UnknownHostException, MalformedURLException {
         this(
             true,
             Context.getLeapHomePath(),
@@ -137,7 +139,7 @@ public class LeapHttpServer extends Thread {
             threadpool,
             hosts,
             classLoader
-        );        
+        );
     }
 
     /**
@@ -145,12 +147,12 @@ public class LeapHttpServer extends Thread {
      * @param isDefaultHost
      * @param homePath
      * @param docroot
-     * @param protocol1
+     * @param protocol
      * @param inetSocketAddress
      * @param backlog
-     * @param docroot
      * @param threadpool
-     * @param serviceManager
+     * @param hosts
+     * @param classLoader
      */
     public LeapHttpServer(boolean isDefaultHost, 
                           Path homePath, 
@@ -204,8 +206,6 @@ public class LeapHttpServer extends Thread {
     public Path getDocroot() {
         return this.docroot;
     }
-
-
 
     @Override
     public void run() {

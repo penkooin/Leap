@@ -11,14 +11,14 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableJpaRepositories(basePackages = {"org.chaostocosmos.leap.http.services", 
-"org.chaostocosmos.leap.http.services.datasource",
-"org.chaostocosmos.leap.http.services.entiry",
-"org.chaostocosmos.leap.http.services.repository"})
+@EnableJpaRepositories(basePackages = {"*"})
 public class AppConfig {
+
+    public AppConfig(String[] packages) {
+
+    }
 
     @Bean
     public DataSource getDataSource() {
@@ -26,7 +26,7 @@ public class AppConfig {
         dataSourceBuilder.driverClassName("org.mariadb.jdbc.Driver");
         dataSourceBuilder.url("jdbc:mariadb://localhost:3306/leap");
         dataSourceBuilder.username("root");
-        dataSourceBuilder.password("9292");
+        dataSourceBuilder.password("9393");
         return dataSourceBuilder.build();
     }
 

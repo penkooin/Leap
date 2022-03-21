@@ -5,7 +5,6 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.InetAddress;
 import java.net.URISyntaxException;
-import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -24,16 +23,14 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
+import org.chaostocosmos.leap.http.resources.ClassUtils;
 import org.chaostocosmos.leap.http.resources.Context;
 import org.chaostocosmos.leap.http.resources.Hosts;
 import org.chaostocosmos.leap.http.resources.HostsManager;
 import org.chaostocosmos.leap.http.resources.LeapURLClassLoader;
 import org.chaostocosmos.leap.http.resources.ResourceHelper;
+import org.chaostocosmos.leap.http.resources.SpringJPAManager;
 import org.chaostocosmos.leap.http.resources.StaticResourceManager;
-import org.chaostocosmos.leap.http.services.SimpleJPAService;
-import org.chaostocosmos.leap.http.services.entity.Users;
-import org.chaostocosmos.leap.http.services.repository.IUsersRespository;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
@@ -85,7 +82,7 @@ public class LeapApplication {
     ThreadPoolExecutor threadpool;
 
     /**
-     * Constructor 
+     * Constructor with arguments
      * @param args 
      * @throws IOException
      * @throws URISyntaxException
@@ -149,8 +146,6 @@ public class LeapApplication {
         trademark();
         logger.info("Leap starting......");
 
-
-
         //initialize thread pool
         this.threadpool = new ThreadPoolExecutor(Context.getThreadPoolCoreSize(), 
                                                  Context.getThreadPoolMaxSize(), 
@@ -159,8 +154,8 @@ public class LeapApplication {
                                                  new LinkedBlockingQueue<Runnable>());
         logger.info("--------------------------------------------------------------------------");
         logger.info("ThreadPool initialized - CORE: "+Context.getThreadPoolCoreSize()
-                    +" MAX: "+Context.getThreadPoolMaxSize()
-                    +" KEEP-ALIVE WHEN IDLE(seconds): "+Context.getThreadPoolKeepAlive());
+                   +" MAX: "+Context.getThreadPoolMaxSize()
+                   +" KEEP-ALIVE WHEN IDLE(seconds): "+Context.getThreadPoolKeepAlive());
 
         //set verbose option to STD IO
         String optionV = cmdLine.getOptionValue("v");
@@ -186,7 +181,11 @@ public class LeapApplication {
      */
     public void start() throws Exception {
         //NetworkInterfaces.getAllNetworkAddresses().stream().forEach(i -> System.out.println(i.getHostName()));
-        LeapURLClassLoader classLoader = new LeapURLClassLoader(HostsManager.get().getAllDynamicClasspathURLs());
+        //LeapClassLoader
+        LeapURLClassLoader classLoader = ClassUtils.getClassLoader();
+        //Spring JPA 
+        SpringJPAManager jpaManager = SpringJPAManager.get();
+
         for(Hosts host : HostsManager.get().getAllHosts()) {
             InetAddress hostAddress = InetAddress.getByName(host.getHost());
             String hostName = hostAddress.getHostAddress()+":"+host.getPort();

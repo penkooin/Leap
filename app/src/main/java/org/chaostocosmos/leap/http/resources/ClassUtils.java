@@ -1,8 +1,9 @@
-package org.chaostocosmos.leap.http.commons;
+package org.chaostocosmos.leap.http.resources;
 
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Modifier;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -19,11 +20,9 @@ import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import org.chaostocosmos.leap.http.commons.UtilBox;
 import org.chaostocosmos.leap.http.enums.PROTOCOL;
 import org.chaostocosmos.leap.http.filters.ILeapFilter;
-import org.chaostocosmos.leap.http.resources.Context;
-import org.chaostocosmos.leap.http.resources.Hosts;
-import org.chaostocosmos.leap.http.resources.StaticResourceManager;
 import org.chaostocosmos.leap.http.services.ILeapService;
 import org.chaostocosmos.leap.http.user.GRANT;
 import org.chaostocosmos.leap.http.user.User;
@@ -34,6 +33,24 @@ import org.chaostocosmos.leap.http.user.User;
  * @author 9ins
  */
 public class ClassUtils {
+
+    /**
+     * Leap class loader
+     */
+    private static LeapURLClassLoader classLoader = null;
+
+    /**
+     * Get class loader for Leap
+     * @return
+     * @throws MalformedURLException
+     */
+    public static LeapURLClassLoader getClassLoader() throws MalformedURLException {
+        if(classLoader == null) {
+            classLoader = new LeapURLClassLoader(HostsManager.get().getAllDynamicClasspathURLs());
+        }
+        return classLoader;
+    }
+
     /**
      * Find All Leap service instance
      * @param classLoader
@@ -47,7 +64,7 @@ public class ClassUtils {
         if(reloadConfig) {
             Context.get().loadConfig();
         }
-        List<Class<? extends ILeapService>> services = findClasses(classLoader, ILeapService.class, classLoader.getResource(""), filters)
+        List<Class<? extends ILeapService>> services = findClasses(classLoader, ILeapService.class, classLoader.getResource(""), null)
                                                        .stream()
                                                        .filter(f ->!Modifier.isAbstract(f.getModifiers()) && !Modifier.isInterface(f.getModifiers()))
                                                        .map(c -> (Class<? extends ILeapService>)c)
@@ -72,23 +89,22 @@ public class ClassUtils {
      * @throws IOException
      */
     public static List<Class<? extends ILeapFilter>> findAllLeapFilters(URLClassLoader classLoader, boolean reloadConfig, List<String> filters) throws IOException, URISyntaxException {
-        List<Class<? extends ILeapFilter>> filterClasses = findFilters(classLoader, ILeapFilter.class, classLoader.getResource(""), filters)
-                                                    .stream()
-                                                    .filter(f -> //f.isAssignableFrom(IFilter.class)
-                                                                !Modifier.isAbstract(f.getModifiers()) && !Modifier.isInterface(f.getModifiers())
-                                                            )
-                                                    .map(f -> (Class<? extends ILeapFilter>)f)
-                                                    .collect(Collectors.toList());
+        List<Class<? extends ILeapFilter>> filterClasses = findFilters(classLoader, ILeapFilter.class, classLoader.getResource(""), null)
+                                                          .stream()
+                                                          .filter(f -> //f.isAssignableFrom(IFilter.class)
+                                                                      !Modifier.isAbstract(f.getModifiers()) && !Modifier.isInterface(f.getModifiers())
+                                                                 )
+                                                          .map(f -> (Class<? extends ILeapFilter>)f)
+                                                          .collect(Collectors.toList());
         for(URL url : classLoader.getURLs()) {
             filterClasses.addAll(findFilters(classLoader, ILeapFilter.class, url, filters)
-                            .stream()
-                            .filter(f -> //f.isAssignableFrom(IFilter.class)
-                                !Modifier.isAbstract(f.getModifiers()) && !Modifier.isInterface(f.getModifiers()))
-                            .map(f -> (Class<? extends ILeapFilter>)f)
-                            .collect(Collectors.toList()));
+                                 .stream()
+                                 .filter(f -> //f.isAssignableFrom(IFilter.class)
+                                            !Modifier.isAbstract(f.getModifiers()) && !Modifier.isInterface(f.getModifiers()))
+                                 .map(f -> (Class<? extends ILeapFilter>)f)
+                                 .collect(Collectors.toList()));
 
         }
-        //System.out.println(filters.toString());
         return filterClasses;
     }
 
@@ -190,7 +206,7 @@ public class ClassUtils {
             classes = Files.walk(Paths.get(url.toURI()))
                            .filter(p -> !Files.isDirectory(p) && p.toString().endsWith(".class"))
                            .map(p -> p.toString().substring(new File(url.getFile()).getAbsolutePath().length()+1).replace(File.separator, "."))
-                           .filter(pkg -> filters.stream().anyMatch(f -> !f.trim().equals("") && pkg.matches(Arrays.asList(f.split(Pattern.quote("*"))).stream().map(s -> s.equals("") ? "" : Pattern.quote(s)).collect(Collectors.joining(".*"))+".*")))
+                           .filter(pkg -> filters == null || filters.stream().anyMatch(f -> !f.trim().equals("") && pkg.matches(Arrays.asList(f.split(Pattern.quote("*"))).stream().map(s -> s.equals("") ? "" : Pattern.quote(s)).collect(Collectors.joining(".*"))+".*")))
                            .map(c -> c.substring(0, c.lastIndexOf(".")))
                            .collect(Collectors.toList());
 
@@ -199,7 +215,7 @@ public class ClassUtils {
                 classes = Files.walk(filesystem.getPath(""))
                             .filter(p -> !Files.isDirectory(p) && p.toString().endsWith(".class"))
                             .map(p -> p.toString().replace(File.separator, "."))
-                            .filter(pkg -> filters.stream().anyMatch(f -> !f.trim().equals("") && pkg.matches(Arrays.asList(f.split(Pattern.quote("*"))).stream().map(s -> s.equals("") ? "" : Pattern.quote(s)).collect(Collectors.joining(".*"))+".*")))
+                            .filter(pkg -> filters == null || filters.stream().anyMatch(f -> !f.trim().equals("") && pkg.matches(Arrays.asList(f.split(Pattern.quote("*"))).stream().map(s -> s.equals("") ? "" : Pattern.quote(s)).collect(Collectors.joining(".*"))+".*")))
                             .map(c -> c.substring(0, c.lastIndexOf(".")))
                             .collect(Collectors.toList());
             }
@@ -267,8 +283,8 @@ public class ClassUtils {
             (int)map.get("port"),
             (List<User>)((List<Map<?, ?>>)map.get("users")).stream().map(m -> new User(m.get("username").toString(), m.get("password").toString(), GRANT.valueOf(m.get("grant").toString()))).collect(Collectors.toList()),
             !map.get("dynamic-classpath").equals("") ? Paths.get((String)map.get("dynamic-classpath")) : null,
-            (List<String>)map.get("dynamic-package-filters"),
-            (List<String>)map.get("spring-jpa-scan-packages"),
+            (List<String>)map.get("dynamic-packages"),
+            (List<String>)map.get("spring-jpa-packages"),
             ((List<?>)((Map<?, ?>)map.get("resource")).get("in-memory-filter")).stream().map(p -> p.toString()).collect(Collectors.toList()),
             (List<String>)((Map<?, ?>)map.get("resource.access-filters")),
             ((List<?>)map.get("error-filters")).stream().map(f -> ClassUtils.getClass(ClassLoader.getSystemClassLoader(), f.toString().trim())).collect(Collectors.toList()),
@@ -300,8 +316,8 @@ public class ClassUtils {
         map.put("port", host.getPort());
         map.put("users", host.getUsers().stream().map(user -> user.getUserMap()).collect(Collectors.toList()));
         map.put("dynamic-classpath", host.getDynamicClasspaths().toString());
-        map.put("dynamic-package-filters", host.getDynamicPackageFilters());
-        map.put("spring-jpa-scan-packages", host.getSpringJPAScanPackages());
+        map.put("dynamic-packages", host.getDynamicPackages());
+        map.put("spring-jpa-packages", host.getSpringJPAPackages());
         Map<Object, Object> filterMap = new HashMap<>();
         filterMap.put("in-memory-filters", host.getInMemoryFilters()); 
         filterMap.put("access-filters", host.getAccessFilters());

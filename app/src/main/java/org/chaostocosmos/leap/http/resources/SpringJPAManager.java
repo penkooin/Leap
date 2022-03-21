@@ -1,12 +1,7 @@
 package org.chaostocosmos.leap.http.resources;
 
-import java.util.List;
+import java.net.MalformedURLException;
 
-import org.chaostocosmos.leap.http.services.SimpleJPAService;
-import org.chaostocosmos.leap.http.services.entity.Users;
-import org.chaostocosmos.leap.http.services.repository.IUsersRespository;
-import org.springframework.context.ApplicationEvent;
-import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
@@ -14,12 +9,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  * 
  * @author 9ins
  */
-public class SpringJPAManager <T> implements ApplicationListener {
-
-    /**
-     * List of being scanned
-     */
-    List<String> scanPackages;
+public class SpringJPAManager {
 
     /**
      * Spring annotation context object
@@ -27,53 +17,79 @@ public class SpringJPAManager <T> implements ApplicationListener {
     AnnotationConfigApplicationContext jpaContext;
 
     /**
-     * Create object
-     * @param scanPackages
+     * Hosts manager
+     */
+    HostsManager hostsManager;
+
+    /**
+     * Leap class loader
+     */
+    ClassLoader classLoader;
+
+    /**
+     * Spring JPA Manager object
+     */
+    private static SpringJPAManager springJpaManager = null;
+
+    /**
+     * Create with HostsManager, ClassLoader
+     * @param hostsManager
      * @param classLoader
      */
-    public SpringJPAManager(String[] scanPackages, ClassLoader classLoader) {
-        this.jpaContext = new AnnotationConfigApplicationContext();
-        this.jpaContext.addApplicationListener(this);
-        this.jpaContext.setClassLoader(classLoader);
-        this.jpaContext.scan(scanPackages);
-        this.jpaContext.refresh();       
+    private SpringJPAManager(HostsManager hostsManager, ClassLoader classLoader) {
+        this.hostsManager = hostsManager;        
+        jpaContext = new AnnotationConfigApplicationContext();
+        jpaContext.setClassLoader(classLoader);
+        jpaContext.scan(hostsManager.getAllSpringPackages().toArray(new String[0]));
+        jpaContext.refresh();  
     }
 
+    /**
+     * Get SpringJPAManager instance
+     * @return
+     * @throws MalformedURLException
+     */
+    public static SpringJPAManager get() throws MalformedURLException {
+        if(springJpaManager == null) {
+            springJpaManager = new SpringJPAManager(HostsManager.get(), ClassUtils.getClassLoader());
+        }
+        return springJpaManager;
+    }
+
+    /**
+     * Get spring AnnotationConfigApplicationContext
+     * @return
+     */
     public AnnotationConfigApplicationContext getSpringContext() {
-        return this.jpaContext;
+        return jpaContext;
     }
 
-    public Object getBean(String name, Object ... params) {
-        return this.jpaContext.getBean(name, params);
+    /**
+     * Get bean by name
+     * @param host
+     * @param beanName
+     * @param params
+     * @return
+     */
+    public Object getBean(String host, String beanName, Object ... params) {
+        Object bean = jpaContext.getBean(beanName, params);
+        if(this.hostsManager.filteringSpringJPAPackages(host, bean.getClass().getName())) {
+            return bean;
+        }
+        return null;
     }
 
-    public T getBean(Class<T> clazz, Object ... params) {
-        return this.jpaContext.getBean(clazz, params);
-    }
-
-    @Override
-    public void onApplicationEvent(ApplicationEvent event) {
-        System.out.println(event.getSource());
-    }
-
-    public static class JPAConfiguration {
-
-        JPAConfiguration(String[] scanPackages) {}
-    }
-
-    public static void main(String[] args) {
-        String[] packages = {
-            "org.chaostocosmos.leap.http.services", 
-            "org.chaostocosmos.leap.http.services.datasource",
-            "org.chaostocosmos.leap.http.services.entiry",
-            "org.chaostocosmos.leap.http.services.repository"
-        };
-        SpringJPAManager<SimpleJPAService> config = new SpringJPAManager<SimpleJPAService> (packages, SimpleJPAService.class.getClassLoader());
-        AnnotationConfigApplicationContext ctx = config.getSpringContext();
-        SimpleJPAService usersService = config.getBean(SimpleJPAService.class, new Object[0]);
-        usersService.getUsers(null, null);
-        IUsersRespository repo = ctx.getBean(IUsersRespository.class, new Object[0]);
-        Users users = repo.findByName("Kooin-Shin");
-        System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ "+users.toString());
+    /**
+     * Get Bean by class object
+     * @param host
+     * @param clazz
+     * @param params
+     * @return
+     */
+    public Object getBean(String host, Class<?> clazz, Object ... params) {
+        if(this.hostsManager.filteringSpringJPAPackages(host, clazz.getName())) {
+            return jpaContext.getBean(clazz, params);
+        }
+        return null;        
     }
 }

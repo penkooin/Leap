@@ -102,6 +102,14 @@ public class HostsManager {
     }
 
     /**
+     * Get all of spring JPA packages
+     * @return
+     */
+    public List<String> getAllSpringPackages() {
+        return this.hostsMap.values().stream().filter(h -> h != null).flatMap(h -> h.getSpringJPAPackages().stream()).collect(Collectors.toList());
+    }
+
+    /**
      * Get all configured host names. It could be having same value.
      * @return
      */
@@ -275,6 +283,26 @@ public class HostsManager {
      */
     public List<String> getAccessFilters(String host) {
         return this.hostsMap.get(host).getAccessFilters();
+    }
+
+    /**
+     * Filtering dynamic packages
+     * @param host
+     * @param resourceName
+     * @return
+     */
+    public boolean filteringDynamicPackages(String host, String resourceName) {
+        return this.hostsMap.get(host).filteringDynamicPackages(resourceName);
+    }
+
+    /**
+     * Filtering Spring JPA packages
+     * @param host
+     * @param resourceName
+     * @return
+     */
+    public boolean filteringSpringJPAPackages(String host, String resourceName) {
+        return this.hostsMap.get(host).filteringSpringJPAPackages(resourceName);
     }
 
     /**

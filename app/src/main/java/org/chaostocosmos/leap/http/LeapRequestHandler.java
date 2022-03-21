@@ -144,7 +144,7 @@ public class LeapRequestHandler implements Runnable {
     public void processError(HttpTransfer httpTransfer, Throwable error) {
         try {            
             String requestedHost = httpTransfer.getHosts().getHost();
-            Throwable t = getCaused(error);
+            Throwable t = getCaused(requestedHost, error);
             int resCode = -1;
             MSG_TYPE msgType = null;
             if(t instanceof WASException) {
@@ -171,14 +171,17 @@ public class LeapRequestHandler implements Runnable {
      * @param e
      * @return
      */
-    public Throwable getCaused(Throwable e) {
-        Throwable throwable = e;
+    public Throwable getCaused(String host, Throwable e) {        
+        Throwable throwable = null;        
+        Throwable pre = e;
         do {
-            if(throwable instanceof WASException || throwable == null) {
+            throwable = e.getCause();
+            LoggerFactory.getLogger(host).debug("[FOUND CAUSED] "+throwable);
+            if(throwable instanceof WASException || throwable == null || pre.equals(throwable)) {
                 throwable = e;
                 break;                
             }
-            throwable = e.getCause();
+            pre = throwable;
         } while(true);    
         return throwable;   
     }

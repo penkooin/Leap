@@ -8,10 +8,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.WASException;
-import org.chaostocosmos.leap.http.commons.ClassUtils;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
 import org.chaostocosmos.leap.http.filters.ILeapFilter;
+import org.chaostocosmos.leap.http.resources.ClassUtils;
 import org.chaostocosmos.leap.http.resources.Context;
 import org.chaostocosmos.leap.http.services.ILeapService;
 import org.slf4j.Logger;
@@ -202,17 +202,17 @@ public class AnnotationHelper {
     public static Map<String, Method> getServiceHolderMap(List<String> classes) throws WASException {
         Map<String, Method> serviceContextMappings = new HashMap<>();
         for(String service : classes) {
-            ServiceMapper serviceDescriptor = service.getClass().getDeclaredAnnotation(ServiceMapper.class);
-            if(serviceDescriptor != null) {
-                String sPath = serviceDescriptor.path();
+            ServiceMapper serviceMapper = service.getClass().getDeclaredAnnotation(ServiceMapper.class);
+            if(serviceMapper != null) {
+                String sPath = serviceMapper.path();
                 if(!sPath.substring(0, 1).equals("/") || sPath.substring(sPath.length()-1).equals("/")) {
                     throw new WASException(MSG_TYPE.ERROR, 9);
                 }
                 Method[] methods = service.getClass().getDeclaredMethods();
                 for(Method method : methods) {
-                    MethodMappper methodDescriptor = method.getDeclaredAnnotation(MethodMappper.class);
-                    if(methodDescriptor != null) {
-                        String mPath = methodDescriptor.path();
+                    MethodMappper methodMapper = method.getDeclaredAnnotation(MethodMappper.class);
+                    if(methodMapper != null) {
+                        String mPath = methodMapper.path();
                         if(!mPath.substring(0, 1).equals("/") || mPath.substring(mPath.length()-1).equals("/")) {
                             throw new WASException(MSG_TYPE.ERROR, 10);
                         }        

@@ -1,6 +1,5 @@
 package org.chaostocosmos.leap.http.services;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 
@@ -9,6 +8,7 @@ import org.chaostocosmos.leap.http.HttpResponseDescriptor;
 import org.chaostocosmos.leap.http.HttpTransferBuilder.HttpTransfer;
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.annotation.AnnotationHelper;
+import org.chaostocosmos.leap.http.annotation.AnnotationOpr;
 import org.chaostocosmos.leap.http.annotation.PostFilter;
 import org.chaostocosmos.leap.http.annotation.PreFilter;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
@@ -68,6 +68,10 @@ public abstract class AbstractLeapService implements IGetService, IPostService, 
         }                
         HttpRequestDescriptor request = httpTransfer.getRequest();
         HttpResponseDescriptor response = httpTransfer.getResponse();
+
+        //setting JPA link
+        AnnotationOpr<ILeapService> aOpr = new AnnotationOpr<ILeapService>(httpTransfer.getHosts().getHost(), this);
+        aOpr.injectToAutowired();
         switch(httpTransfer.getRequest().getRequestType()) {
             case GET: 
             serveGet(request, response);

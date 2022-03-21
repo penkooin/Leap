@@ -2,7 +2,6 @@ package org.chaostocosmos.leap.http.services;
 
 import java.util.List;
 
-import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.filters.ILeapFilter;
 
 /**
