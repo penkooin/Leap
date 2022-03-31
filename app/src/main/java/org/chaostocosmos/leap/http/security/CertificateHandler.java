@@ -180,7 +180,6 @@ public class CertificateHandler {
         String alias = cert.getSubjectX500Principal().getName();
         KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
         trustStore.load(null);
-        System.out.println(alias);
         trustStore.setCertificateEntry(alias, cert);
         return trustStore;
     }    

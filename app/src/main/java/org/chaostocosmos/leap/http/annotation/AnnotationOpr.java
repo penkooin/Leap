@@ -30,9 +30,7 @@ public class AnnotationOpr <I> {
     /**
      * Inject autowired annation field with Spring Bean object
      */
-    public void injectToAutowired() throws IllegalArgumentException, 
-                                                                             IllegalAccessException, 
-                                                                             MalformedURLException {
+    public void injectToAutowired() throws IllegalArgumentException, IllegalAccessException, MalformedURLException {
         for(Field field : handleObject.getClass().getDeclaredFields()) {
             AutowiredJPA autowired = field.getAnnotation(AutowiredJPA.class);
             if(autowired != null) {                

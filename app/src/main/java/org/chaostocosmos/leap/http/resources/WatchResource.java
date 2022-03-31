@@ -63,7 +63,7 @@ public class WatchResource extends Thread implements Resource {
         this.host = host;
         this.watchPath = watchPath;
         this.watchKind = watchKinds;
-        this.accessFilters = accessFilters;        
+        this.accessFilters = accessFilters;
         this.inMemoryFilters = inMemoryFilters;
         this.inMemoryLimitSize = inMemoryLimitSize;
         this.resourceTree = new LinkedHashMap<>();
@@ -74,8 +74,8 @@ public class WatchResource extends Thread implements Resource {
             } catch (IOException e) {
                 e.printStackTrace();
                 return null;
-            }            
-        }).filter(arr -> arr != null).collect(Collectors.toMap(k -> (WatchKey)k[0], v -> (Path)v[1]));         
+            }
+        }).filter(arr -> arr != null).collect(Collectors.toMap(k -> (WatchKey)k[0], v -> (Path)v[1]));
         loadResoureTree(this.watchPath, this.resourceTree);
 
         //Have to set WatchResource to Hosts
@@ -89,7 +89,6 @@ public class WatchResource extends Thread implements Resource {
         try {
             while(this.watchService != null) {
                 final WatchKey key = this.watchService.take();   
-                boolean createdFlag = false;                
                 for(WatchEvent<?> event : key.pollEvents()) {
                     Path path = this.watchMap.get(key);
                     LoggerFactory.getLogger(this.host).debug("KIND: "+event.kind()+"   Context: "+event.context()+"   Path: "+this.watchMap.get(key)+"   CNT: "+event.count());
@@ -98,31 +97,33 @@ public class WatchResource extends Thread implements Resource {
                     } 
                     if(event.kind() == StandardWatchEventKinds.ENTRY_CREATE) {
                         path = path.resolve(event.context().toString());
+                        Object data = null;
                         if(path.toFile().isDirectory()) {
+                            System.out.println(path+" )))))))))))))))))))))"+path.subpath(this.watchPath.getNameCount(), path.getNameCount()).toString());
                             this.watchMap.put(path.register(this.watchService, this.watchKind), path);
+                            data = new LinkedHashMap<>();
                         } else {
-                            if(filtering(path.toFile().getName(), this.accessFilters)) {                                
-                                Object data = null;
+                            if(filtering(path.toFile().getName(), this.accessFilters)) {                  
                                 if(filtering(path.toFile().getName(), this.inMemoryFilters)) {
                                     try {
-                                        Files.move(path, path, StandardCopyOption.ATOMIC_MOVE);                                    
+                                        Files.move(path, path, StandardCopyOption.ATOMIC_MOVE);
                                         if(path.toFile().length() <= this.inMemoryLimitSize) {
-                                            data = Files.readAllBytes(path);
                                             LoggerFactory.getLogger(this.host).debug("Loaded to memory.........."+((byte[])data).length);
+                                            data = Files.readAllBytes(path);
                                         } else {
                                             LoggerFactory.getLogger(this.host).debug("In-Memory file size overflow. Limit: "+Unit.MB(this.inMemoryLimitSize, 2)+"  File size: "+Unit.MB(path.toFile().length(), 2));
                                             data = path.toFile();
-                                        }                                            
+                                        }
                                     } catch(Exception e) {
                                         continue;
                                     }
                                 } else {
                                     data = path.toFile();
                                 }
-                                String[] paths = path.subpath(this.watchPath.getNameCount(), path.getNameCount()).toString().split(Pattern.quote(File.separator));
-                                addResource(this.resourceTree, paths, data);
-                            }                                                            
+                            }
                         }
+                        String[] paths = path.subpath(this.watchPath.getNameCount(), path.getNameCount()).toString().split(Pattern.quote(File.separator));
+                        addResource(this.resourceTree, paths, data);
                     } else if(event.kind() == StandardWatchEventKinds.ENTRY_MODIFY) {                        
                         path = path.resolve(event.context().toString());
                         if(path.toFile().isFile() && filtering(path.toFile().getName(), this.accessFilters)) {
@@ -131,8 +132,8 @@ public class WatchResource extends Thread implements Resource {
                                 try {
                                     Files.move(path, path, StandardCopyOption.ATOMIC_MOVE);                                    
                                     if(path.toFile().length() <= this.inMemoryLimitSize) {
-                                        data = Files.readAllBytes(path);
                                         LoggerFactory.getLogger(this.host).debug("Loaded to memory.........."+((byte[])data).length);
+                                        data = Files.readAllBytes(path);
                                     } else {
                                         LoggerFactory.getLogger(this.host).debug("In-Memory file size overflow. Limit: "+Unit.MB(this.inMemoryLimitSize, 2)+"  File size: "+Unit.MB(path.toFile().length(), 2));
                                         data = path.toFile();
@@ -154,8 +155,7 @@ public class WatchResource extends Thread implements Resource {
                         }                            
                         String[] paths = p.subpath(this.watchPath.getNameCount(), p.getNameCount()).toString().split(Pattern.quote(File.separator));
                         removeResource(this.resourceTree, paths);
-                    }
-                    
+                    }                    
                 }
                 key.reset();
             }
@@ -202,7 +202,7 @@ public class WatchResource extends Thread implements Resource {
         if(!filtering(res[res.length-1], this.accessFilters)) {
             return;
         }        
-        if(res.length == 1) {            
+        if(res.length == 1) {
             tree.put(res[0], data);
         } else {
             Object val = tree.get(res[0]);
@@ -236,7 +236,6 @@ public class WatchResource extends Thread implements Resource {
         if(res.length == 1) {
             return tree.get(res[0]);
         } else {
-            System.out.println(tree.toString()+"  "+Arrays.toString(res));
             return getResource((Map<String, Object>)tree.get(res[0]), Arrays.copyOfRange(res, 1, res.length));
         }
     }
@@ -257,6 +256,11 @@ public class WatchResource extends Thread implements Resource {
         LoggerFactory.getLogger(this.host).debug("WATCH PATH: "+this.watchPath.toString()+"  REQUEST RESOURCE: "+path.toString());
         String[] paths = path.toString().split(Pattern.quote(File.separator));
         return getResource(this.resourceTree, paths);
+    }
+
+    @Override
+    public boolean exists(Path resourcePath) {
+        return resourcePath.toFile().exists();
     }
 
     @Override
@@ -284,12 +288,16 @@ public class WatchResource extends Thread implements Resource {
             page = Files.readString(((File)data).toPath());
         } else {
             return null;
-        }        
-        System.out.println(params.toString());
+        }       
         for(Entry<String, Object> e : params.entrySet()) {
             page = page.replace(e.getKey(), e.getValue()+"");
         }
         return page;
+    }
+
+    @Override
+    public String getResourcePage(Map<String, Object> params) throws IOException {        
+        return getStaticPage("resource.html", params);
     }
 
     @Override

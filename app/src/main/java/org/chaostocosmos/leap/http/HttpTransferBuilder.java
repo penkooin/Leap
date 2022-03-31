@@ -54,7 +54,6 @@ public class HttpTransferBuilder {
      */
     public static String buildHttpErrorPage(String host, MSG_TYPE type, int errorCode, String message) throws IOException {
         String title = Context.getHttpMsg(errorCode, "- "+type.name());        
-        System.out.println(title+"  "+message);
         Map<String, Object> map = new HashMap<>();
         map.put("@code", errorCode);
         map.put("@type", title);
@@ -259,7 +258,7 @@ public class HttpTransferBuilder {
             long contentLength = -1;
             if(body instanceof byte[]) {
                 contentLength = ((byte[])body).length;
-            } else if(body instanceof String) {
+            } else if(body instanceof String) {                
                 contentLength = ((String)body).getBytes(charset).length;
             } else if(body instanceof Path) {
                 contentLength = ((Path)body).toFile().length();

@@ -1,12 +1,14 @@
 package org.chaostocosmos.leap.http;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.HttpTransferBuilder.HttpTransfer;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
@@ -17,6 +19,7 @@ import org.chaostocosmos.leap.http.enums.RES_CODE;
 import org.chaostocosmos.leap.http.resources.Context;
 import org.chaostocosmos.leap.http.resources.Hosts;
 import org.chaostocosmos.leap.http.resources.HostsManager;
+import org.chaostocosmos.leap.http.resources.Html;
 import org.chaostocosmos.leap.http.resources.ResourceHelper;
 import org.chaostocosmos.leap.http.services.ServiceHolder;
 import org.chaostocosmos.leap.http.services.ServiceInvoker;
@@ -67,8 +70,8 @@ public class LeapRequestHandler implements Runnable {
     public void run() {
         HttpRequestDescriptor request = null;
         HttpResponseDescriptor response = null;
-        HttpTransfer httpTransfer = null;        
-        try {            
+        HttpTransfer httpTransfer = null;
+        try {
             httpTransfer = HttpTransferBuilder.buildHttpTransfer(httpServer.getHost(), this.client);
             request = httpTransfer.getRequest();
             response = httpTransfer.getResponse();
@@ -78,7 +81,7 @@ public class LeapRequestHandler implements Runnable {
             request.getReqHeader().put("@Client", hosts.getHost());
 
             ServiceManager serviceManager = httpServer.getServiceManager();
-            ServiceHolder serviceHolder = serviceManager.getMappingServiceHolder(request.getContextPath());    
+            ServiceHolder serviceHolder = serviceManager.getMappingServiceHolder(request.getContextPath());
             //If client request context path in Services.
             if (serviceHolder != null) {
                 // Request method validation
@@ -98,21 +101,28 @@ public class LeapRequestHandler implements Runnable {
                     response.setBody(body.getBytes());
                     response.setStatusCode(RES_CODE.RES200.getCode());
                 } else {
-                    if (resourcePath.toFile().exists()) {
-                        File resourceFile = resourcePath.toFile();
-                        String resourceName = resourceFile.getName();
-                        int responseCode = RES_CODE.RES200.getCode();
+                    if (hosts.getResource().exists(resourcePath)) {
                         //Get requested resource data
                         Object resource = hosts.getResource().getResource(resourcePath);
                         if(resource != null) {
-                            String mimeType = UtilBox.probeContentType(resourcePath);
-                            if(mimeType == null) {
-                                mimeType = MIME_TYPE.APPLICATION_OCTET_STREAM.getMimeType();
+                            if(resource instanceof LinkedHashMap) {
+                                LinkedHashMap<String, Object> resourceMap = (LinkedHashMap<String, Object>)resource;
+                                String body = Html.makeResourceHtml(request.getContextPath(), hosts, resourceMap.keySet().stream().collect(Collectors.toList()));
+                                String mimeType = MIME_TYPE.TEXT_HTML.getMimeType();
+                                response.setStatusCode(RES_CODE.RES200.getCode());
+                                response.addHeader("Content-Type", mimeType+"; charset="+hosts.charset());
+                                response.setBody(body);
+                                //LoggerFactory.getLogger(hosts.getHost()).debug("RESOURCE LIST REQUESTED: "+body);    
+                            } else {
+                                String mimeType = UtilBox.probeContentType(resourcePath);
+                                if(mimeType == null) {
+                                    mimeType = MIME_TYPE.APPLICATION_OCTET_STREAM.getMimeType();
+                                }
+                                response.setStatusCode(RES_CODE.RES200.getCode());
+                                response.addHeader("Content-Type", mimeType);
+                                response.setBody(resource);
+                                LoggerFactory.getLogger(hosts.getHost()).debug("DOWNLOAD RESOURCE MIME-TYPE: "+mimeType);    
                             }
-                            response.setStatusCode(responseCode);
-                            response.addHeader("Content-Type", mimeType);
-                            response.setBody(resource);
-                            LoggerFactory.getLogger(hosts.getHost()).debug("DOWNLOAD RESOURCE MIME-TYPE: "+mimeType);
                         } else {
                             throw new WASException(MSG_TYPE.HTTP, 403, request.getContextPath());
                         }
@@ -128,6 +138,8 @@ public class LeapRequestHandler implements Runnable {
             if(httpTransfer != null) {
                 httpTransfer.close();
             }                
+        } catch(SocketTimeoutException e) {
+            LoggerFactory.getLogger(httpTransfer.getHosts().getHost()).error("[SOCKET TIME OUT] Client socket timeout occurred...");
         } catch(Throwable e) {
             LoggerFactory.getLogger(httpTransfer.getHosts().getHost()).error(e.getMessage(), e);
             processError(httpTransfer, e);
@@ -158,7 +170,10 @@ public class LeapRequestHandler implements Runnable {
             if(!HostsManager.get().isExistHost(requestedHost)) {
                 requestedHost = Context.getDefaultHost();
             }
-            Map<String, List<Object>> headers = HttpTransferBuilder.addHeader(new HashMap<String, List<Object>>(), "Content-Type", "text/html");
+            Map<String, List<Object>> headers = HttpTransferBuilder
+                                                .addHeader(new HashMap<String, List<Object>>(), 
+                                                           "Content-Type", 
+                                                           "text/html; charset="+httpTransfer.getHosts().charset());
             Object body = t != null ? HttpTransferBuilder.buildErrorResponse(requestedHost, msgType, resCode, t.getMessage()) : Context.getHttpMsg(resCode);
             httpTransfer.sendResponse(requestedHost, resCode, headers, body);    
         } catch(Exception e) {
@@ -172,17 +187,19 @@ public class LeapRequestHandler implements Runnable {
      * @return
      */
     public Throwable getCaused(String host, Throwable e) {        
-        Throwable throwable = null;        
-        Throwable pre = e;
+        Throwable throwable = null;
+        Throwable top = e;
+        int level = 0;
         do {
             throwable = e.getCause();
             LoggerFactory.getLogger(host).debug("[FOUND CAUSED] "+throwable);
-            if(throwable instanceof WASException || throwable == null || pre.equals(throwable)) {
+            if(throwable instanceof WASException || throwable == null || top.equals(throwable)) {
                 throwable = e;
-                break;                
+                break;
             }
-            pre = throwable;
-        } while(true);    
+            top = throwable;
+            level++;
+        } while(level < 10);
         return throwable;   
     }
 }

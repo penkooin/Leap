@@ -45,7 +45,9 @@ server:
       ]
       resource:
         in-memory-filters: ['*']
-        access-filters: ['*']
+        access-filters: [
+          '*'
+        ]
       error-filters: [
         javax.net.ssl.SSLHandshakeException,
         java.net.SocketException

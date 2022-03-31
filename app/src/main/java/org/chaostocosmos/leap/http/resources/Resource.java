@@ -19,6 +19,13 @@ public interface Resource {
     public Object getResource(Path resourcePath);
 
     /**
+     * Whether resource exist in Resource
+     * @param resourcePath
+     * @return
+     */
+    public boolean exists(Path resourcePath);
+
+    /**
      * Get welcome page
      * @param params
      * @return
@@ -50,6 +57,14 @@ public interface Resource {
      * @throws IOException
      */
     public String getStaticPage(String resourceName, Map<String, Object> params) throws IOException;
+
+    /**
+     * Get resource page
+     * @param params
+     * @return
+     * @throws IOException
+     */
+    public String getResourcePage(Map<String, Object> params) throws IOException;
 
     /**
      * Get resource content

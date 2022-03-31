@@ -70,8 +70,8 @@ public abstract class AbstractLeapService implements IGetService, IPostService, 
         HttpResponseDescriptor response = httpTransfer.getResponse();
 
         //setting JPA link
-        AnnotationOpr<ILeapService> aOpr = new AnnotationOpr<ILeapService>(httpTransfer.getHosts().getHost(), this);
-        aOpr.injectToAutowired();
+        new AnnotationOpr<ILeapService>(httpTransfer.getHosts().getHost(), this).injectToAutowired();
+        //aOpr.injectToAutowired();
         switch(httpTransfer.getRequest().getRequestType()) {
             case GET: 
             serveGet(request, response);

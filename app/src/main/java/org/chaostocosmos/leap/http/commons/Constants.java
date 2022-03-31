@@ -1,5 +1,6 @@
 package org.chaostocosmos.leap.http.commons;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.regex.Pattern;
@@ -32,4 +33,14 @@ public class Constants {
      * Password vaildation pattern
      */
     public static final Pattern PASSWORD_REGEX = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
+
+    /**
+     * Line separator
+     */
+    public static final String LS = "\r\n";
+
+    /**
+     * File separator
+     */
+    public static final String FS = File.separator;
 }

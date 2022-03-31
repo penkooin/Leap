@@ -51,7 +51,7 @@ public class SpringJPAManager {
      */
     public static SpringJPAManager get() throws MalformedURLException {
         if(springJpaManager == null) {
-            springJpaManager = new SpringJPAManager(HostsManager.get(), ClassUtils.getClassLoader());
+            //springJpaManager = new SpringJPAManager(HostsManager.get(), ClassUtils.getClassLoader());
         }
         return springJpaManager;
     }
