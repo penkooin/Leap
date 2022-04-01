@@ -120,7 +120,7 @@ public class StreamUtils {
                             len -= 2;
                             break;
                         }
-                        len += lineData.length;                        
+                        len += lineData.length;         
                         data.writeBytes(lineData);
                         lineStream.reset();
                     }
@@ -192,7 +192,7 @@ public class StreamUtils {
                             if(line.trim().equals(boundaryStart) || line.trim().equals(boundaryEnd)) {
                                 //System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&"+line);
                                 break;
-                            }                            
+                            }
                             len += lineData.length;
                             out.write(lineData);
                             baos.reset();
@@ -356,7 +356,7 @@ public class StreamUtils {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         do {
             c = is.read();
-            //CR
+            //LF : \n
             if(c == 0x0A) {
                 break;
             }

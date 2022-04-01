@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 import org.chaostocosmos.leap.http.commons.StreamUtils;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.resources.Context;
-import org.chaostocosmos.leap.http.resources.HostsManager;
 
 /**
  * Multi part descriptor

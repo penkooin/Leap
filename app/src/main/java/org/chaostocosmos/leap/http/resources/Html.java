@@ -17,7 +17,7 @@ import org.chaostocosmos.leap.http.commons.Constants;
  * @author 9ins
  */
 public class Html {
-
+    
     /**
      * Make resources html page
      * @param path
@@ -44,7 +44,7 @@ public class Html {
                             String type = f.isFile() ? "file" : "dir";
                             String resource = type.equals("file") ? f.getName() : f.getName()+"/";
                             String size = type.equals("file") ? f.length()+"" : "-";
-                            return "<img style=\"vertical-align:middle\" src=\"/"+type.toLowerCase()+".png\" alt=\"["+type.toUpperCase()+"]\">"
+                            return "<img style=\"vertical-align:middle\" src=\"../img/"+type.toLowerCase()+".png\" alt=\"["+type.toUpperCase()+"]\">"
                                     +"<span class=\"label\"> <a href=\""+path+"/"+f.getName()+"\">"+resource+"</a></span>"
                                     +"<span class=\"lastModi\">"+new Date(f.lastModified())+"</span>"
                                     +"<span class=\"fileSize\">"+size+"</span>"

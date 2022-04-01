@@ -31,7 +31,7 @@ import org.chaostocosmos.leap.http.services.ServiceManager;
  * @author 9ins
  * @since 2021.09.16
  */
-public class LeapRequestHandler implements Runnable {
+public class LeapRequestProcessor implements Runnable {
     /**
      * Leap server home path
      */
@@ -53,13 +53,13 @@ public class LeapRequestHandler implements Runnable {
     Hosts hosts;
 
     /**
-     * Constructor with HeapHttpServer, root direcotry, index.html file, client socket 
+     * Constructor with HeapHttpServer, root direcotry, index.html file, client socket
      * @param httpServer
      * @param rootPath
      * @param client
      * @param hosts
      */
-    public LeapRequestHandler(LeapHttpServer httpServer, Path LEAP_HOME, Socket client, Hosts hosts) {
+    public LeapRequestProcessor(LeapHttpServer httpServer, Path LEAP_HOME, Socket client, Hosts hosts) {
         this.httpServer = httpServer;
         this.LEAP_HOME = LEAP_HOME;
         this.client = client;
@@ -82,6 +82,7 @@ public class LeapRequestHandler implements Runnable {
 
             ServiceManager serviceManager = httpServer.getServiceManager();
             ServiceHolder serviceHolder = serviceManager.getMappingServiceHolder(request.getContextPath());
+
             //If client request context path in Services.
             if (serviceHolder != null) {
                 // Request method validation
@@ -106,7 +107,7 @@ public class LeapRequestHandler implements Runnable {
                         Object resource = hosts.getResource().getResource(resourcePath);
                         if(resource != null) {
                             if(resource instanceof LinkedHashMap) {
-                                LinkedHashMap<String, Object> resourceMap = (LinkedHashMap<String, Object>)resource;
+                                LinkedHashMap<String, Object> resourceMap = (LinkedHashMap<String, Object>) resource;
                                 String body = Html.makeResourceHtml(request.getContextPath(), hosts, resourceMap.keySet().stream().collect(Collectors.toList()));
                                 String mimeType = MIME_TYPE.TEXT_HTML.getMimeType();
                                 response.setStatusCode(RES_CODE.RES200.getCode());
@@ -139,7 +140,7 @@ public class LeapRequestHandler implements Runnable {
                 httpTransfer.close();
             }                
         } catch(SocketTimeoutException e) {
-            LoggerFactory.getLogger(httpTransfer.getHosts().getHost()).error("[SOCKET TIME OUT] Client socket timeout occurred...");
+            LoggerFactory.getLogger(httpTransfer.getHosts().getHost()).error("[SOCKET TIME OUT] Client socket timeout occurred.");
         } catch(Throwable e) {
             LoggerFactory.getLogger(httpTransfer.getHosts().getHost()).error(e.getMessage(), e);
             processError(httpTransfer, e);
@@ -172,8 +173,8 @@ public class LeapRequestHandler implements Runnable {
             }
             Map<String, List<Object>> headers = HttpTransferBuilder
                                                 .addHeader(new HashMap<String, List<Object>>(), 
-                                                           "Content-Type", 
-                                                           "text/html; charset="+httpTransfer.getHosts().charset());
+                                                "Content-Type", 
+                                                "text/html; charset="+httpTransfer.getHosts().charset());
             Object body = t != null ? HttpTransferBuilder.buildErrorResponse(requestedHost, msgType, resCode, t.getMessage()) : Context.getHttpMsg(resCode);
             httpTransfer.sendResponse(requestedHost, resCode, headers, body);    
         } catch(Exception e) {

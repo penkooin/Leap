@@ -45,15 +45,14 @@ server:
       ]
       resource:
         in-memory-filters: ['*']
-        access-filters: [
-          '*'
-        ]
+        access-filters: ['*']
+        forbidden-filters: []
       error-filters: [
         javax.net.ssl.SSLHandshakeException,
         java.net.SocketException
       ]
       doc-root: ./home
-      welcome: 'index.html'
+      welcome: 'welcome.html'
       logs: 'logs/leap.log'
       log-level: 'DEBUG'
 
@@ -80,12 +79,15 @@ server:
       resource:
         in-memory-filters: ['*.html']
         access-filters: ['*']
+        forbidden-filters: [
+          ''
+        ]
       error-filters: [
         javax.net.ssl.SSLHandshakeException,
         java.net.SocketException
       ]
       doc-root: ./home1    
-      welcome: 'index.html'
+      welcome: 'welcome.html'
       logs: 'logs/leap.log'
       log-level: 'DEBUG'
 
@@ -108,12 +110,13 @@ server:
       spring-jpa-pakages: []
       resource:
         in-memory-filters: ['*.html']
-        access-filters: ['*']
+        access-filters: ['']
+        forbidden-filters: []
       error-filters: [
         javax.net.ssl.SSLHandshakeException,
         java.net.SocketException
       ]
       doc-root: ./home2
-      welcome: 'index.html'
+      welcome: 'welcome.html'
       logs: 'logs/leap.log'
       log-level: 'DEBUG'

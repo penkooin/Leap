@@ -29,6 +29,7 @@ import org.chaostocosmos.leap.http.resources.StaticResourceManager;
  * @author 9ins
  */
 public class HttpTransferBuilder {
+
     /**
      * Build error response messasge
      * @param requestedHost
@@ -254,7 +255,7 @@ public class HttpTransferBuilder {
             if(body == null) {
                 LoggerFactory.getLogger(host).warn("Response body is Null: "+resCode);
                 return ;
-            }            
+            }
             long contentLength = -1;
             if(body instanceof byte[]) {
                 contentLength = ((byte[])body).length;

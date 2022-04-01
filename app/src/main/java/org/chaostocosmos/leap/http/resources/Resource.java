@@ -12,18 +12,32 @@ import java.util.Map;
 public interface Resource {
 
     /**
-     * Get resource matching with context path
+     * Add resource 
+     * @param resourcePath
+     */
+    public void addResource(Path resourcePath) throws IOException;
+
+    /**
+     * Get resource matching with path
      * @param resourcePath
      * @return
      */
-    public Object getResource(Path resourcePath);
+    public Object getResource(Path resourcePath) throws IOException;
+
+    /**
+     * Get resource content
+     * @param contentName
+     * @return
+     * @throws IOException
+     */
+    public Object getContextResource(String contextPath) throws IOException;
 
     /**
      * Whether resource exist in Resource
      * @param resourcePath
      * @return
      */
-    public boolean exists(Path resourcePath);
+    public boolean exists(Path resourcePath) throws IOException;
 
     /**
      * Get welcome page
@@ -59,19 +73,19 @@ public interface Resource {
     public String getStaticPage(String resourceName, Map<String, Object> params) throws IOException;
 
     /**
+     * Get template page
+     * @param resourceName
+     * @param params
+     * @return
+     * @throws IOException
+     */
+    public String getTemplatePage(String resourceName, Map<String, Object> params) throws IOException;
+
+    /**
      * Get resource page
      * @param params
      * @return
      * @throws IOException
      */
     public String getResourcePage(Map<String, Object> params) throws IOException;
-
-    /**
-     * Get resource content
-     * @param contentName
-     * @return
-     * @throws IOException
-     */
-    public Object getStaticContent(String contextPath) throws IOException;
-    
 }

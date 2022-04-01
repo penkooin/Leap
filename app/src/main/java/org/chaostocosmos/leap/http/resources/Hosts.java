@@ -80,9 +80,14 @@ public class Hosts {
     private List<String> inMemoryFilter;
 
     /**
-     * Allowed resource filter string
+     * Allowed resource filters
      */
     private List<String> accessFilters;
+
+    /**
+     * Forbidden resource filters
+     */
+    private List<String> forbiddenFilters;
 
     /**
      * Error filter classes
@@ -113,6 +118,11 @@ public class Hosts {
      * Dynamic services path
      */
     private Path services;
+
+    /**
+     * Template path
+     */
+    private Path template;
 
     /**
      * Welcome file object
@@ -146,29 +156,32 @@ public class Hosts {
      */
     public Hosts(Map<Object, Object> map) throws IOException {
         this(
-        map.get("default") != null ? (boolean)map.get("default") : false,
-        (String)map.get("server-name"),
-        PROTOCOL.getProtocol((String)map.get("protocol")),
-        Charset.forName((String)map.get("charset")),
-        (String)map.get("host"),
-        (int)map.get("port"),
-        (List<User>)((List<Map<?, ?>>)map.get("users")).stream().map(m -> new User(m.get("username").toString(), m.get("password").toString(), GRANT.valueOf(m.get("grant").toString()))).collect(Collectors.toList()),
-        !map.get("dynamic-classpath").equals("") ? Paths.get((String)map.get("dynamic-classpath")) : null,
-        map.get("dynamic-packages") == null ? new ArrayList<>() : (List<String>)map.get("dynamic-packages"),
-        map.get("spring-jpa-packages")== null ? new ArrayList<>() : (List<String>)map.get("spring-jpa-packages"),
-        (List<String>)((Map<?, ?>)map.get("resource")).get("in-memory-filters"),
-        (List<String>)((Map<?, ?>)map.get("resource")).get("access-filters"),
-        ((List<?>)map.get("error-filters")).stream().map(f -> ClassUtils.getClass(ClassLoader.getSystemClassLoader(), f.toString().trim())).collect(Collectors.toList()),
-        Paths.get((String)map.get("doc-root")),
-        Paths.get((String)map.get("doc-root")).resolve("webapp"),
-        Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF"),
-        Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF").resolve("static"),
-        Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("services"),
-        Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF").resolve("static").resolve("index.html").toFile(),
-        Paths.get((String)map.get("logs")),
-        UtilBox.getLogLevels((String)map.get("log-level"), ","),
-        map,
-        null);
+            map.get("default") != null ? (boolean)map.get("default") : false,
+            (String)map.get("server-name"),
+            PROTOCOL.getProtocol((String)map.get("protocol")),
+            Charset.forName((String)map.get("charset")),
+            (String)map.get("host"),
+            (int)map.get("port"),
+            (List<User>)((List<Map<?, ?>>)map.get("users")).stream().map(m -> new User(m.get("username").toString(), m.get("password").toString(), GRANT.valueOf(m.get("grant").toString()))).collect(Collectors.toList()),
+            !map.get("dynamic-classpath").equals("") ? Paths.get((String)map.get("dynamic-classpath")) : null,
+            map.get("dynamic-packages") == null ? new ArrayList<>() : (List<String>)map.get("dynamic-packages"),
+            map.get("spring-jpa-packages")== null ? new ArrayList<>() : (List<String>)map.get("spring-jpa-packages"),
+            (List<String>)((Map<?, ?>)map.get("resource")).get("in-memory-filters"),
+            (List<String>)((Map<?, ?>)map.get("resource")).get("access-filters"),
+            (List<String>)((Map<?, ?>)map.get("resource")).get("forbidden-filters"),
+            ((List<?>)map.get("error-filters")).stream().map(f -> ClassUtils.getClass(ClassLoader.getSystemClassLoader(), f.toString().trim())).collect(Collectors.toList()),
+            Paths.get((String)map.get("doc-root")),
+            Paths.get((String)map.get("doc-root")).resolve("webapp"),
+            Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF"),
+            Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF").resolve("static"),
+            Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("services"),
+            Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF").resolve("template"),
+            Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF").resolve("template").resolve(map.get("welcome")+"").toFile(),
+            Paths.get((String)map.get("logs")),
+            UtilBox.getLogLevels((String)map.get("log-level"), ","),
+            map,
+            null
+        );
     }
 
     /**
@@ -185,11 +198,13 @@ public class Hosts {
      * @param springJpaPackages
      * @param inMemoryFilter
      * @param accessFilters
+     * @param forbiddenFilters
      * @param errorFilters
      * @param docroot
      * @param webinf
      * @param statics
      * @param services
+     * @param template
      * @param welcomeFile
      * @param logPath
      * @param logLevel
@@ -209,12 +224,14 @@ public class Hosts {
                  List<String> springJpaPackages,
                  List<String> inMemoryFilter, 
                  List<String> accessFilters, 
+                 List<String> forbiddenFilters,
                  List<Class<?>> errorFilters, 
                  Path docroot, 
                  Path webapp,
                  Path webinf,
                  Path statics,
                  Path services,
+                 Path template,
                  File welcomeFile,
                  Path logPath,  
                  List<Level> logLevel,
@@ -233,12 +250,14 @@ public class Hosts {
         this.springJpaPackages = springJpaPackages;
         this.inMemoryFilter = inMemoryFilter;
         this.accessFilters = accessFilters;
+        this.forbiddenFilters = forbiddenFilters;
         this.errorFilters = errorFilters;
         this.docroot = docroot.toAbsolutePath().normalize();
         this.webapp = webapp.toAbsolutePath().normalize();
         this.webinf = webinf.toAbsolutePath().normalize();
         this.statics = statics.toAbsolutePath().normalize();
         this.services = services.toAbsolutePath().normalize();
+        this.template = template.toAbsolutePath().normalize();
         this.welcomeFile = welcomeFile;
         this.logPath = logPath;
         this.logLevel = logLevel;
@@ -430,6 +449,22 @@ public class Hosts {
     }
 
     /**
+     * Get forbidden filters
+     * @return
+     */
+    public List<String> getForbiddenFilters() {
+        return this.forbiddenFilters;
+    }
+
+    /**
+     * Set forbidden filters
+     * @param forbiddenFilters
+     */
+    public void setForbiddenFilters(List<String> forbiddenFilters) {
+        this.forbiddenFilters = forbiddenFilters;
+    }
+
+    /**
      * Get error filters
      * @return
      */
@@ -479,6 +514,15 @@ public class Hosts {
      */
     public boolean filteringInAccess(String resourceName) {
         return filtering(resourceName, this.accessFilters);
+    }
+
+    /**
+     * Filtering forbidden resources
+     * @param resourceName
+     * @return
+     */
+    public boolean filteringInForbidden(String resourceName) {
+        return filtering(resourceName, this.forbiddenFilters);
     }
 
     /**
@@ -669,12 +713,14 @@ public class Hosts {
             ", springJpaPackages='" + springJpaPackages + "'" +
             ", inMemoryFilter='" + inMemoryFilter + "'" +
             ", accessFilters='" + accessFilters + "'" +
+            ", forbiddenFilters='" + forbiddenFilters + "'" +
             ", errorFilters='" + errorFilters + "'" +
             ", docroot='" + docroot + "'" +
             ", webapp='" + webapp + "'" +
             ", webinf='" + webinf + "'" +
             ", statics='" + statics + "'" +
             ", services='" + services + "'" +
+            ", template='" + template + "'" +
             ", welcomeFile='" + welcomeFile + "'" +
             ", logPath='" + logPath + "'" +
             ", logLevel='" + logLevel + "'" +

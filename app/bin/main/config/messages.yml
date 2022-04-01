@@ -70,4 +70,5 @@ messages:
     error17: 'Password validation failed: (Password must have digit, lower case, upper case, special case at least once and no whilte space and more 8 places more)'
     error18: 'Not found mapping service exist with requested path: {}'
     error19: 'Deploy service process in error: {}'
+    error20: 'Resource not found: {}'
 

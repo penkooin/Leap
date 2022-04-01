@@ -125,6 +125,18 @@ public class LeapApplication {
         //initialize environment and context
         this.context = Context.initialize(HOME_PATH);
 
+        //set log level
+        String optionL = cmdLine.getOptionValue("l");
+        logger = LoggerFactory.getLogger(Context.getDefaultHost());
+        if(optionL != null) {
+            Level level = Level.toLevel(optionL); 
+            logger.setLevel(level);
+        }
+        logger.info("Leap starting......");
+
+        //print trade mark
+        trademark();
+
         //build webapp environment
         List<Hosts> hosts = HostsManager.get().getAllHosts();
         for(Hosts host : hosts) {
@@ -134,24 +146,13 @@ public class LeapApplication {
         //initialize static resource manager
         this.staticResourceManager = StaticResourceManager.initialize();
 
-        //set log level
-        String optionL = cmdLine.getOptionValue("l");
-        logger = LoggerFactory.getLogger(Context.getDefaultHost());
-        if(optionL != null) {
-            Level level = Level.toLevel(optionL); 
-            logger.setLevel(level);
-        }
-
-        //print trade mark
-        trademark();
-        logger.info("Leap starting......");
-
         //initialize thread pool
         this.threadpool = new ThreadPoolExecutor(Context.getThreadPoolCoreSize(), 
                                                  Context.getThreadPoolMaxSize(), 
                                                  Context.getThreadPoolKeepAlive(), 
                                                  TimeUnit.SECONDS, 
                                                  new LinkedBlockingQueue<Runnable>());
+
         logger.info("--------------------------------------------------------------------------");
         logger.info("ThreadPool initialized - CORE: "+Context.getThreadPoolCoreSize()
                    +" MAX: "+Context.getThreadPoolMaxSize()

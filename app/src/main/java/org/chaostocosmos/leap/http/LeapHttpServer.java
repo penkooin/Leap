@@ -226,7 +226,7 @@ public class LeapHttpServer extends Thread {
                 connection.setSoTimeout(Context.getConnectionTimeout());
                 //connection.setSoLinger(true, 10);
                 logger.info("[CLIENT DETECTED] Client request accepted......"+connection.getLocalAddress().toString()+"  ---  "+connection.getPort());
-                this.threadpool.submit(new LeapRequestHandler(this, this.docroot, connection, this.hosts));
+                this.threadpool.submit(new LeapRequestProcessor(this, this.docroot, connection, this.hosts));
             } 
         } catch(Exception e) {
             logger.error(e.getMessage(), e);

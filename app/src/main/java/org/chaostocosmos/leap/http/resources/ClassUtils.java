@@ -287,13 +287,15 @@ public class ClassUtils {
             (List<String>)map.get("spring-jpa-packages"),
             ((List<?>)((Map<?, ?>)map.get("resource")).get("in-memory-filter")).stream().map(p -> p.toString()).collect(Collectors.toList()),
             (List<String>)((Map<?, ?>)map.get("resource.access-filters")),
+            (List<String>)((Map<?, ?>)map.get("resource")).get("forbidden-filters"),
             ((List<?>)map.get("error-filters")).stream().map(f -> ClassUtils.getClass(ClassLoader.getSystemClassLoader(), f.toString().trim())).collect(Collectors.toList()),
             Paths.get((String)map.get("doc-root")),
             Paths.get((String)map.get("doc-root")).resolve("webapp"),
             Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF"),
             Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF").resolve("static"),
             Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("services"),
-            Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF").resolve("static").resolve("index.html").toFile(),
+            Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF").resolve("template"),
+            Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF").resolve("template").resolve(map.get("welcome")+"").toFile(),
             Paths.get((String)map.get("logs")),
             UtilBox.getLogLevels((String)map.get("log-level"), ","),
             map,
@@ -318,9 +320,10 @@ public class ClassUtils {
         map.put("dynamic-classpath", host.getDynamicClasspaths().toString());
         map.put("dynamic-packages", host.getDynamicPackages());
         map.put("spring-jpa-packages", host.getSpringJPAPackages());
-        Map<Object, Object> filterMap = new HashMap<>();
-        filterMap.put("in-memory-filters", host.getInMemoryFilters()); 
-        filterMap.put("access-filters", host.getAccessFilters());
+            Map<Object, Object> filterMap = new HashMap<>();
+            filterMap.put("in-memory-filters", host.getInMemoryFilters()); 
+            filterMap.put("access-filters", host.getAccessFilters());
+            filterMap.put("forbidden-filters", host.getForbiddenFilters());
         map.put("resource", filterMap);
         map.put("error-filters", host.getErrorFilters());
         map.put("doc-root", host.getDocroot().toString());
