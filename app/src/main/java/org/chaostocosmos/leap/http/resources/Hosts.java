@@ -7,12 +7,11 @@ import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import org.chaostocosmos.leap.http.commons.Filtering;
 import org.chaostocosmos.leap.http.commons.UtilBox;
 import org.chaostocosmos.leap.http.enums.PROTOCOL;
 import org.chaostocosmos.leap.http.user.GRANT;
@@ -65,36 +64,6 @@ public class Hosts {
     private Path dynamicClasspaths;
 
     /**
-     * Dynamic package filters
-     */
-    private List<String> dynamicPackages;
-
-    /**
-     * Spring JPA packages
-     */
-    private List<String> springJpaPackages;
-
-    /**
-     * Resources filter to be in memory area
-     */
-    private List<String> inMemoryFilter;
-
-    /**
-     * Allowed resource filters
-     */
-    private List<String> accessFilters;
-
-    /**
-     * Forbidden resource filters
-     */
-    private List<String> forbiddenFilters;
-
-    /**
-     * Error filter classes
-     */
-    private List<Class<?>> errorFilters;
-
-    /**
      * Document root path object
      */
     private Path docroot;
@@ -140,6 +109,23 @@ public class Hosts {
     private List<Level> logLevel;
 
     /**
+     * Each Filtering
+     */
+    private Filtering inMemoryFiltering, 
+                      accessFiltering, 
+                      forbiddenFiltering, 
+                      ipAllowedFiltering, 
+                      ipForbiddenFiltering, 
+                      dynamicPackagesFiltering, 
+                      springJpaPackagesFiltering
+                      ;
+    
+    /**
+     * Error Filtering
+     */
+    private List<Class<?>> errorFilters;
+
+    /**
      * Host map object
      */
     private Map<Object, Object> hostsMap;
@@ -164,11 +150,13 @@ public class Hosts {
             (int)map.get("port"),
             (List<User>)((List<Map<?, ?>>)map.get("users")).stream().map(m -> new User(m.get("username").toString(), m.get("password").toString(), GRANT.valueOf(m.get("grant").toString()))).collect(Collectors.toList()),
             !map.get("dynamic-classpath").equals("") ? Paths.get((String)map.get("dynamic-classpath")) : null,
-            map.get("dynamic-packages") == null ? new ArrayList<>() : (List<String>)map.get("dynamic-packages"),
-            map.get("spring-jpa-packages")== null ? new ArrayList<>() : (List<String>)map.get("spring-jpa-packages"),
-            (List<String>)((Map<?, ?>)map.get("resource")).get("in-memory-filters"),
-            (List<String>)((Map<?, ?>)map.get("resource")).get("access-filters"),
-            (List<String>)((Map<?, ?>)map.get("resource")).get("forbidden-filters"),
+            new Filtering(map.get("dynamic-packages") == null ? new ArrayList<>() : (List<String>)map.get("dynamic-packages")),
+            new Filtering(map.get("spring-jpa-packages") == null ? new ArrayList<>() : (List<String>)map.get("spring-jpa-packages")),
+            new Filtering((List<String>)((Map<?, ?>)map.get("resource")).get("in-memory-filters")),
+            new Filtering((List<String>)((Map<?, ?>)map.get("resource")).get("access-filters")),
+            new Filtering((List<String>)((Map<?, ?>)map.get("resource")).get("forbidden-filters")),
+            new Filtering((List<String>)((Map<?, ?>)map.get("ip-filter")).get("allowed")),
+            new Filtering((List<String>)((Map<?, ?>)map.get("ip-filter")).get("forbidden")),
             ((List<?>)map.get("error-filters")).stream().map(f -> ClassUtils.getClass(ClassLoader.getSystemClassLoader(), f.toString().trim())).collect(Collectors.toList()),
             Paths.get((String)map.get("doc-root")),
             Paths.get((String)map.get("doc-root")).resolve("webapp"),
@@ -194,12 +182,14 @@ public class Hosts {
      * @param port
      * @param users
      * @param dynamicClasspaths
-     * @param dynamicPackages
-     * @param springJpaPackages
-     * @param inMemoryFilter
-     * @param accessFilters
-     * @param forbiddenFilters
-     * @param errorFilters
+     * @param dynamicPackagesFiltering
+     * @param springJpaPackagesFiltering
+     * @param inMemoryFiltering
+     * @param accessFiltering
+     * @param forbiddenFiltering
+     * @param errorFiltering
+     * @param ipAllowedFiltering
+     * @param ipForbiddenFiltering
      * @param docroot
      * @param webinf
      * @param statics
@@ -220,12 +210,14 @@ public class Hosts {
                  int port, 
                  List<User> users, 
                  Path dynamicClaspaths, 
-                 List<String> dynamicPackages,
-                 List<String> springJpaPackages,
-                 List<String> inMemoryFilter, 
-                 List<String> accessFilters, 
-                 List<String> forbiddenFilters,
-                 List<Class<?>> errorFilters, 
+                 Filtering dynamicPackagesFiltering,
+                 Filtering springJpaPackagesFiltering,
+                 Filtering inMemoryFiltering, 
+                 Filtering accessFiltering, 
+                 Filtering forbiddenFiltering,
+                 Filtering ipAllowedFiltering,
+                 Filtering ipForbiddenFiltering,
+                 List<Class<?>> errorFiltering, 
                  Path docroot, 
                  Path webapp,
                  Path webinf,
@@ -246,11 +238,13 @@ public class Hosts {
         this.port = port;
         this.users = users;
         this.dynamicClasspaths = dynamicClaspaths;
-        this.dynamicPackages = dynamicPackages;
-        this.springJpaPackages = springJpaPackages;
-        this.inMemoryFilter = inMemoryFilter;
-        this.accessFilters = accessFilters;
-        this.forbiddenFilters = forbiddenFilters;
+        this.dynamicPackagesFiltering = dynamicPackagesFiltering;
+        this.springJpaPackagesFiltering = springJpaPackagesFiltering;
+        this.inMemoryFiltering = inMemoryFiltering;
+        this.accessFiltering = accessFiltering;
+        this.forbiddenFiltering = forbiddenFiltering;
+        this.ipAllowedFiltering = ipAllowedFiltering;
+        this.ipForbiddenFiltering = ipForbiddenFiltering;
         this.errorFilters = errorFilters;
         this.docroot = docroot.toAbsolutePath().normalize();
         this.webapp = webapp.toAbsolutePath().normalize();
@@ -386,86 +380,63 @@ public class Hosts {
     }
 
     /**
-     * Get dynamic package filters
+     * Get dynamic package Filtering
+     * @return
      */
-    public List<String> getDynamicPackages() {
-        return this.dynamicPackages;
-    }
-
-    /**
-     * Set dynamic package filters
-     * @param dynamicPackages
-     */
-    public void setDynamicPackages(List<String> dynamicPackages) {
-        this.dynamicPackages = dynamicPackages;
+    public Filtering getDynamicPackages() {
+        return this.dynamicPackagesFiltering;
     }
 
     /**
      * Get spring JPA scan packages
      * @return
      */
-    public List<String> getSpringJPAPackages() {
-        return this.springJpaPackages;
+    public Filtering getSpringJPAPackages() {
+        return this.springJpaPackagesFiltering;
     }
 
     /**
-     * Set spring JPA scan packages
-     * @param springJpaPackages
-     */
-    public void setSpringJPAPackages(List<String> springJpaPackages) {
-        this.springJpaPackages = springJpaPackages;
-    }
-
-    /**
-     * Get filters for being loaded resources to memory
+     * Get Filtering for being loaded resources to memory
      * @return
      */
-    public List<String> getInMemoryFilters() {
-        return this.inMemoryFilter;
-    }
-
-    /**
-     * Set filters for being loaded resources to memory
-     * @param resourcesInMemory
-     */
-    public void setInMemoryFilter(List<String> inMemoryFilter) {
-        this.inMemoryFilter = inMemoryFilter;
+    public Filtering getInMemoryFiltering() {
+        return this.inMemoryFiltering;
     }
 
     /**
      * Get allowed resource filters
      * @return
      */
-    public List<String> getAccessFilters() {
-        return this.accessFilters;
+    public Filtering getAccessFiltering() {
+        return this.accessFiltering;
     }
 
     /**
-     * Set allowed resource filters
-     * @param allowedResourceFilters
-     */
-    public void setAccessFilters(List<String> accessFilters) {
-        this.accessFilters = accessFilters;
-    }
-
-    /**
-     * Get forbidden filters
+     * Get forbidden Filtering
      * @return
      */
-    public List<String> getForbiddenFilters() {
-        return this.forbiddenFilters;
+    public Filtering getForbiddenFiltering() {
+        return this.forbiddenFiltering;
     }
 
     /**
-     * Set forbidden filters
-     * @param forbiddenFilters
+     * Get IP allowed Filtering
+     * @return
      */
-    public void setForbiddenFilters(List<String> forbiddenFilters) {
-        this.forbiddenFilters = forbiddenFilters;
+    public Filtering getIpAllowedFiltering() {
+        return this.ipAllowedFiltering;
     }
 
     /**
-     * Get error filters
+     * Get IP forbidden Filtering
+     * @return
+     */
+    public Filtering getIpForbiddenFiltering() {
+        return this.ipForbiddenFiltering;
+    }
+
+    /**
+     * Get error Filtering
      * @return
      */
     public List<Class<?>> getErrorFilters() {
@@ -473,7 +444,7 @@ public class Hosts {
     }
 
     /**
-     * Set error filters
+     * Set error Filtering
      * @param errorFilters
      */
     public void setErrorFilters(List<Class<?>> errorFilters) {
@@ -486,7 +457,7 @@ public class Hosts {
      * @return
      */
     public boolean filteringDynamicPackages(String resourceName) {
-        return filtering(resourceName, this.dynamicPackages);
+        return this.dynamicPackagesFiltering.include(resourceName);
     }
 
     /**
@@ -495,7 +466,7 @@ public class Hosts {
      * @return
      */
     public boolean filteringSpringJPAPackages(String resourceName) {
-        return filtering(resourceName, this.springJpaPackages);
+        return this.springJpaPackagesFiltering.include(resourceName);
     }
 
     /**
@@ -504,7 +475,7 @@ public class Hosts {
      * @return
      */
     public boolean filteringInMemory(String resourceName) {
-        return filtering(resourceName, this.inMemoryFilter);
+        return this.inMemoryFiltering.include(resourceName);
     }
 
     /**
@@ -513,7 +484,7 @@ public class Hosts {
      * @return
      */
     public boolean filteringInAccess(String resourceName) {
-        return filtering(resourceName, this.accessFilters);
+        return this.accessFiltering.include(resourceName);
     }
 
     /**
@@ -522,17 +493,7 @@ public class Hosts {
      * @return
      */
     public boolean filteringInForbidden(String resourceName) {
-        return filtering(resourceName, this.forbiddenFilters);
-    }
-
-    /**
-     * Whether resource name is corresponded with in-memory filters
-     * @param resourceName
-     * @param filters
-     * @return
-     */
-    public boolean filtering(String resourceName, List<String> filters) {
-        return filters.stream().anyMatch(f -> !f.trim().equals("") && resourceName.matches(Arrays.asList(f.split(Pattern.quote("*"))).stream().map(s -> s.equals("") ? "" : Pattern.quote(s)).collect(Collectors.joining(".*"))+".*"));
+        return this.forbiddenFiltering.include(resourceName);
     }
 
     /**
@@ -709,11 +670,13 @@ public class Hosts {
             ", port='" + port + "'" +
             ", users='" + users + "'" +
             ", dynamicClasspaths='" + dynamicClasspaths + "'" +
-            ", dynamicPackages='" + dynamicPackages + "'" +
-            ", springJpaPackages='" + springJpaPackages + "'" +
-            ", inMemoryFilter='" + inMemoryFilter + "'" +
-            ", accessFilters='" + accessFilters + "'" +
-            ", forbiddenFilters='" + forbiddenFilters + "'" +
+            ", dynamicPackages='" + dynamicPackagesFiltering + "'" +
+            ", springJpaPackages='" + springJpaPackagesFiltering + "'" +
+            ", inMemoryFilter='" + inMemoryFiltering + "'" +
+            ", accessFiltering='" + accessFiltering + "'" +
+            ", forbiddenFiltering='" + forbiddenFiltering + "'" +
+            ", ipAllowedFiltering='" + ipAllowedFiltering + "'" +
+            ", ipForbiddenFiltering='" + ipForbiddenFiltering + "'" +
             ", errorFilters='" + errorFilters + "'" +
             ", docroot='" + docroot + "'" +
             ", webapp='" + webapp + "'" +

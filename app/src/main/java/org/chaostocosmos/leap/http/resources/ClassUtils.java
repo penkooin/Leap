@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import org.chaostocosmos.leap.http.commons.Filtering;
 import org.chaostocosmos.leap.http.commons.UtilBox;
 import org.chaostocosmos.leap.http.enums.PROTOCOL;
 import org.chaostocosmos.leap.http.filters.ILeapFilter;
@@ -283,11 +284,13 @@ public class ClassUtils {
             (int)map.get("port"),
             (List<User>)((List<Map<?, ?>>)map.get("users")).stream().map(m -> new User(m.get("username").toString(), m.get("password").toString(), GRANT.valueOf(m.get("grant").toString()))).collect(Collectors.toList()),
             !map.get("dynamic-classpath").equals("") ? Paths.get((String)map.get("dynamic-classpath")) : null,
-            (List<String>)map.get("dynamic-packages"),
-            (List<String>)map.get("spring-jpa-packages"),
-            ((List<?>)((Map<?, ?>)map.get("resource")).get("in-memory-filter")).stream().map(p -> p.toString()).collect(Collectors.toList()),
-            (List<String>)((Map<?, ?>)map.get("resource.access-filters")),
-            (List<String>)((Map<?, ?>)map.get("resource")).get("forbidden-filters"),
+            new Filtering((List<String>)map.get("dynamic-packages")),
+            new Filtering((List<String>)map.get("spring-jpa-packages")),
+            new Filtering(((List<?>)((Map<?, ?>)map.get("resource")).get("in-memory-filter")).stream().map(p -> p.toString()).collect(Collectors.toList())),
+            new Filtering((List<String>)((Map<?, ?>)map.get("resource.access-filters"))),
+            new Filtering((List<String>)((Map<?, ?>)map.get("resource")).get("forbidden-filters")),
+            new Filtering((List<String>)((Map<?, ?>)map.get("ip-filter")).get("allowed")),
+            new Filtering((List<String>)((Map<?, ?>)map.get("ip-filter")).get("forbidden")),
             ((List<?>)map.get("error-filters")).stream().map(f -> ClassUtils.getClass(ClassLoader.getSystemClassLoader(), f.toString().trim())).collect(Collectors.toList()),
             Paths.get((String)map.get("doc-root")),
             Paths.get((String)map.get("doc-root")).resolve("webapp"),
@@ -321,10 +324,14 @@ public class ClassUtils {
         map.put("dynamic-packages", host.getDynamicPackages());
         map.put("spring-jpa-packages", host.getSpringJPAPackages());
             Map<Object, Object> filterMap = new HashMap<>();
-            filterMap.put("in-memory-filters", host.getInMemoryFilters()); 
-            filterMap.put("access-filters", host.getAccessFilters());
-            filterMap.put("forbidden-filters", host.getForbiddenFilters());
+            filterMap.put("in-memory-filters", host.getInMemoryFiltering()); 
+            filterMap.put("access-filters", host.getAccessFiltering());
+            filterMap.put("forbidden-filters", host.getForbiddenFiltering());
         map.put("resource", filterMap);
+            Map<Object, Object> ipFilterMap = new HashMap<>();
+            ipFilterMap.put("allowed", host.getIpAllowedFiltering());
+            ipFilterMap.put("forbidden", host.getIpForbiddenFiltering());
+        map.put("ip-filter", ipFilterMap);
         map.put("error-filters", host.getErrorFilters());
         map.put("doc-root", host.getDocroot().toString());
         map.put("welcome", host.getWelcomeFile().toPath().toString());

@@ -270,4 +270,5 @@ public class ResourceHelper {
     public static Path getStaticPath(String host) throws WASException {
         return getWebInfPath(host).resolve("static");
     }
+
 }

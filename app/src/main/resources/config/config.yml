@@ -1,6 +1,7 @@
 ############################## Leap Server Configuration ##############################
+
 server:
-    version: 1.0
+    version: 1.0.0
     connection: 
       connection-timeout: 30000
       backlog: 50
@@ -8,9 +9,13 @@ server:
     performance: 
       file-buffer-size: 1024
       threadpool:
-        core: 50
-        max: 50
+        core: 1
+        max: 1
         keep-alive: 30
+        queue-size: 1
+      redirect:
+        http://awesome:8082 : 20
+        http://www.leap1.org:8081 : 80
 
     security:
       ssl:
@@ -22,10 +27,14 @@ server:
 
     default-host:
       server-name: leap
-      protocol: HTTP/1.0
+      protocol: HTTP/1.1
       charset: 'utf-8'
       host: localhost
       port: 8080
+      doc-root: ./home
+      welcome: 'welcome.html'
+      logs: 'logs/leap.log'
+      log-level: 'DEBUG'
       users:
         - username: localhost
           password: 9393
@@ -33,6 +42,13 @@ server:
         - username: guest
           password: guest
           grant: GUEST
+      ip-filter: 
+        allowed : ['*']
+        forbidden : []
+      resource:
+        in-memory-filters: ['*.html']
+        access-filters: ['*']
+        forbidden-filters: []
       dynamic-classpath: 'd:/0.Github/leap/home/webapp/services'
       dynamic-packages: [
         "org.chaostocosmos.leap.http.services"
@@ -43,27 +59,23 @@ server:
         "org.chaostocosmos.leap.http.services.entiry",
         "org.chaostocosmos.leap.http.services.repository"
       ]
-      resource:
-        in-memory-filters: ['*']
-        access-filters: ['*']
-        forbidden-filters: []
       error-filters: [
         javax.net.ssl.SSLHandshakeException,
         java.net.SocketException
       ]
-      doc-root: ./home
-      welcome: 'welcome.html'
-      logs: 'logs/leap.log'
-      log-level: 'DEBUG'
 
 ############################## Virtual Hosts ##############################
 
     virtual-host:
     - server-name: leap1
-      protocol: HTTPS/1.0
+      protocol: HTTP/1.1
       charset: 'utf-8'
       host: awesome
       port: 8082
+      doc-root: ./home1    
+      welcome: 'welcome.html'
+      logs: 'logs/leap.log'
+      log-level: 'DEBUG'
       users:
         - username: awesome
           password: 9393
@@ -71,31 +83,30 @@ server:
         - username: guest1
           password: guest1
           grant: GUEST
-      dynamic-classpath: ''
-      dynamic-packages: [
-        "*"
-      ]
-      spring-jpa-pakages: []
+      ip-filter: 
+        allowed : ['*']
+        forbidden : []
       resource:
-        in-memory-filters: ['*.html']
+        in-memory-filters: ['*']
         access-filters: ['*']
-        forbidden-filters: [
-          ''
-        ]
+        forbidden-filters: []
+      dynamic-classpath: ''
+      dynamic-packages: ["*"]
+      spring-jpa-pakages: []
       error-filters: [
         javax.net.ssl.SSLHandshakeException,
         java.net.SocketException
       ]
-      doc-root: ./home1    
-      welcome: 'welcome.html'
-      logs: 'logs/leap.log'
-      log-level: 'DEBUG'
 
     - server-name: leap2
-      protocol: HTTP/1.0
+      protocol: HTTP/1.1
       charset: 'utf-8'
       host: www.leap1.org
       port: 8081
+      doc-root: ./home2
+      welcome: 'welcome.html'
+      logs: 'logs/leap.log'
+      log-level: 'DEBUG'
       users:
         - username: leap1
           password: 9393
@@ -103,20 +114,17 @@ server:
         - username: guest2
           password: guest2
           grant: GUEST
-      dynamic-classpath: ''
-      dynamic-packages: [
-        "*"
-      ]
-      spring-jpa-pakages: []
+      ip-filter: 
+        allowed : ['*']
+        forbidden : []
       resource:
-        in-memory-filters: ['*.html']
-        access-filters: ['']
+        in-memory-filters: ['*']
+        access-filters: ['*']
         forbidden-filters: []
+      dynamic-classpath: ''
+      dynamic-packages: ["*"]
+      spring-jpa-pakages: []
       error-filters: [
         javax.net.ssl.SSLHandshakeException,
         java.net.SocketException
       ]
-      doc-root: ./home2
-      welcome: 'welcome.html'
-      logs: 'logs/leap.log'
-      log-level: 'DEBUG'

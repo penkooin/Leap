@@ -265,6 +265,22 @@ public class Context {
     }
 
     /**
+     * Get threadpool queue size
+     * @return
+     */
+    public static int getThreadQueueSize() {
+        return (int)getConfigValue("server.performance.threadpool.queue-size");
+    }
+
+    /**
+     * Get Load-Balance redirect Map
+     * @return
+     */
+    public static Map<String, Integer> getLoadBalanceRedirects() {
+        return (Map<String, Integer>)getConfigValue("server.performance.redirect");
+    }
+
+    /**
      * Get SSL protocol
      * @return
      */

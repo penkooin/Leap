@@ -31,7 +31,7 @@ import org.chaostocosmos.leap.http.services.ServiceManager;
  * @author 9ins
  * @since 2021.09.16
  */
-public class LeapRequestProcessor implements Runnable {
+public class LeapRequestHandler implements Runnable {
     /**
      * Leap server home path
      */
@@ -59,7 +59,7 @@ public class LeapRequestProcessor implements Runnable {
      * @param client
      * @param hosts
      */
-    public LeapRequestProcessor(LeapHttpServer httpServer, Path LEAP_HOME, Socket client, Hosts hosts) {
+    public LeapRequestHandler(LeapHttpServer httpServer, Path LEAP_HOME, Socket client, Hosts hosts) {
         this.httpServer = httpServer;
         this.LEAP_HOME = LEAP_HOME;
         this.client = client;
@@ -79,7 +79,6 @@ public class LeapRequestProcessor implements Runnable {
 
             //Put requested host to request header Map for ip filter
             request.getReqHeader().put("@Client", hosts.getHost());
-
             ServiceManager serviceManager = httpServer.getServiceManager();
             ServiceHolder serviceHolder = serviceManager.getMappingServiceHolder(request.getContextPath());
 

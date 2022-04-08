@@ -22,6 +22,7 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
+import org.chaostocosmos.leap.http.commons.Unit;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.resources.ClassUtils;
 import org.chaostocosmos.leap.http.resources.Context;
@@ -29,6 +30,7 @@ import org.chaostocosmos.leap.http.resources.Hosts;
 import org.chaostocosmos.leap.http.resources.HostsManager;
 import org.chaostocosmos.leap.http.resources.LeapURLClassLoader;
 import org.chaostocosmos.leap.http.resources.ResourceHelper;
+import org.chaostocosmos.leap.http.resources.ResourceMonitor;
 import org.chaostocosmos.leap.http.resources.SpringJPAManager;
 import org.chaostocosmos.leap.http.resources.StaticResourceManager;
 
@@ -79,7 +81,17 @@ public class LeapApplication {
     /**
      * Thread pool
      */
-    ThreadPoolExecutor threadpool;
+    public ThreadPoolExecutor threadpool;
+
+    /**
+     * Thread Queue
+     */
+    public LinkedBlockingQueue<Runnable> threadQueue;
+
+    /**
+     * Resource monitor
+     */
+    public ResourceMonitor resourceMonitor;
 
     /**
      * Constructor with arguments
@@ -132,7 +144,7 @@ public class LeapApplication {
             Level level = Level.toLevel(optionL); 
             logger.setLevel(level);
         }
-        logger.info("Leap starting......");
+        logger.info("Leap starting.");
 
         //print trade mark
         trademark();
@@ -146,17 +158,22 @@ public class LeapApplication {
         //initialize static resource manager
         this.staticResourceManager = StaticResourceManager.initialize();
 
+        //initialize thread queue
+        this.threadQueue = new LinkedBlockingQueue<Runnable>();
+
         //initialize thread pool
         this.threadpool = new ThreadPoolExecutor(Context.getThreadPoolCoreSize(), 
                                                  Context.getThreadPoolMaxSize(), 
                                                  Context.getThreadPoolKeepAlive(), 
                                                  TimeUnit.SECONDS, 
-                                                 new LinkedBlockingQueue<Runnable>());
+                                                 this.threadQueue
+                                                 );        
 
-        logger.info("--------------------------------------------------------------------------");
-        logger.info("ThreadPool initialized - CORE: "+Context.getThreadPoolCoreSize()
-                   +" MAX: "+Context.getThreadPoolMaxSize()
-                   +" KEEP-ALIVE WHEN IDLE(seconds): "+Context.getThreadPoolKeepAlive());
+        logger.info("----------------------------------------------------------------------------------------------------");
+        logger.info("ThreadPool initialized - CORE: "+Context.getThreadPoolCoreSize()+"   MAX: "+Context.getThreadPoolMaxSize()+"   KEEP-ALIVE WHEN IDLE(seconds): "+Context.getThreadPoolKeepAlive());
+
+        this.resourceMonitor = new ResourceMonitor(this.threadpool, 10000, true, Unit.MB, 2, logger);
+        resourceMonitor.start();
 
         //set verbose option to STD IO
         String optionV = cmdLine.getOptionValue("v");
@@ -194,15 +211,21 @@ public class LeapApplication {
                 String key = this.leapServerMap.keySet().stream().filter(k -> k.equals(hostName)).findAny().get();
                 throw new IllegalArgumentException("Mapping host address is collapse on network interace: "+hostAddress.toString()+":"+host.getPort()+" with "+key);
             }
-            LeapHttpServer server = new LeapHttpServer(Context.getLeapHomePath(), host, this.threadpool, classLoader);
-            this.leapServerMap.put(hostAddress.getHostAddress()+":"+host.getPort(), server);
+            if(host.getHost().equals(Context.getDefaultHost())) {
+                LeapHttpServer server = new LeapHttpServer(Context.getLeapHomePath(), host, this.threadpool, classLoader, this.resourceMonitor);
+                this.leapServerMap.put(hostAddress.getHostAddress()+":"+host.getPort(), server);    
+            } else {
+                ThreadPoolExecutor threadpool = new ThreadPoolExecutor(20, 20, 10, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>()); 
+                LeapHttpServer server = new LeapHttpServer(Context.getLeapHomePath(), host, threadpool, classLoader, this.resourceMonitor);
+                this.leapServerMap.put(hostAddress.getHostAddress()+":"+host.getPort(), server);    
+            }
             if(host.isDefaultHost()) {
                 logger.info("[DEFAULT HOST] - Protocol: "+host.getProtocol().name()+"   Server: "+host.getServerName()+"   Host: "+host.getHost()+"   Port: "+host.getPort()+"   Doc-Root: "+host.getDocroot()+"   Logging path: "+host.getLogPath()+"   Level: "+host.getLogLevel().toString());
             } else {
                 logger.info("[VIRTUAL HOST] - Protocol: "+host.getProtocol().name()+"   Server: "+host.getServerName()+"   Host: "+host.getHost()+"   Port: "+host.getPort()+"   Doc-Root: "+host.getDocroot()+"   Logging path: "+host.getLogPath()+"   Level: "+host.getLogLevel().toString());
             }
         }
-        logger.info("--------------------------------------------------------------------------");
+        logger.info("----------------------------------------------------------------------------------------------------");
         for(LeapHttpServer server : this.leapServerMap.values()) {
             server.setDaemon(false);
             server.start();
@@ -215,6 +238,7 @@ public class LeapApplication {
      * @throws InterruptedException
      */
     public void shutdown() throws InterruptedException, IOException { 
+        this.resourceMonitor.stop();
         for(LeapHttpServer server : this.leapServerMap.values()) {
             server.close();
             server.join();

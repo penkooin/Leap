@@ -1,5 +1,7 @@
 package org.chaostocosmos.leap.http.services;
 
+import java.util.List;
+
 import org.chaostocosmos.leap.http.HttpRequestDescriptor;
 import org.chaostocosmos.leap.http.HttpResponseDescriptor;
 import org.chaostocosmos.leap.http.annotation.AutowiredJPA;
@@ -19,24 +21,27 @@ public class SimpleJPAService extends AbstractLeapService {
     @AutowiredJPA
     private IUsersRespository usersRepo;
 
+    @AutowiredJPA
+    private SimpleSpringService springService;
+
     @MethodMappper(mappingMethod = REQUEST_TYPE.GET, path="/users")
     @FilterMapper(preFilters = {BasicHttpFilter.class})    
     public void getUsers(HttpRequestDescriptor request, HttpResponseDescriptor response) {
         System.out.println("Simple JPA Service called.......................................");
-        System.out.println(usersRepo);        
-        Users users = usersRepo.findByName("Tim");
-        if(users == null) {
-            users = new Users();
+        System.out.println(usersRepo);
+        List<Users> userList = usersRepo.findByName("Tim");
+        if(userList == null) {
+            Users users = new Users();
             users.setName("Tim");
             users.setAge(55);
             users.setAddress("Seoul, West Side");
             users.setJob("Developer");    
             usersRepo.save(users);
         }
-        Users user = usersRepo.findByName("Tim");
-        System.out.println(user.toString()+" ((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((");
+        System.out.println(userList.toString()+" ((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((");
         response.setStatusCode(200);
-        response.setBody(user.toString());
+        //response.setBody(userList.toString());
+        response.setBody(springService.helloLeap());
     }    
 
     @Override

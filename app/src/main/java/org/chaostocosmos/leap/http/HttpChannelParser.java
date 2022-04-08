@@ -91,8 +91,6 @@ public class HttpChannelParser {
             ByteBuffer inBuffer = ByteBuffer.allocate(1024);
             int cnt = channel.read(inBuffer);
             
-            
-            
             String requestLine = StreamUtils.readLine(in, StandardCharsets.ISO_8859_1);
             if(requestLine == null) {
                 throw new WASException(MSG_TYPE.ERROR, 1);

@@ -10,6 +10,8 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -17,11 +19,16 @@ import java.util.concurrent.TimeUnit;
 import javax.net.ssl.SSLServerSocket;
 
 import org.chaostocosmos.leap.http.commons.Constants;
+import org.chaostocosmos.leap.http.commons.Filtering;
+import org.chaostocosmos.leap.http.commons.RedirectHostSelection;
 import org.chaostocosmos.leap.http.enums.PROTOCOL;
+import org.chaostocosmos.leap.http.enums.RES_CODE;
 import org.chaostocosmos.leap.http.resources.Context;
 import org.chaostocosmos.leap.http.resources.Hosts;
 import org.chaostocosmos.leap.http.resources.HostsManager;
+import org.chaostocosmos.leap.http.resources.Html;
 import org.chaostocosmos.leap.http.resources.LeapURLClassLoader;
+import org.chaostocosmos.leap.http.resources.ResourceMonitor;
 import org.chaostocosmos.leap.http.services.ServiceManager;
 import org.chaostocosmos.leap.http.user.UserManager;
 import org.slf4j.Logger;
@@ -42,7 +49,7 @@ public class LeapHttpServer extends Thread {
     /**
      * Whether default host
      */
-    boolean isDefaultHost;    
+    boolean isDefaultHost;
 
     /**
      * Protocol
@@ -70,6 +77,11 @@ public class LeapHttpServer extends Thread {
     Path homePath;
 
     /**
+     * Hosts
+     */
+    Hosts hosts;
+
+    /**
      * Server socket
      */
     ServerSocket server;
@@ -80,14 +92,24 @@ public class LeapHttpServer extends Thread {
     ServiceManager serviceManager;
 
     /**
+     * Resource monitor
+     */
+    ResourceMonitor resourceMonitor;
+
+    /**
      * thread pool
      */
     ThreadPoolExecutor threadpool;
 
     /**
-     * Hosts
+     * Redirect host object
      */
-    Hosts hosts;
+    RedirectHostSelection redirectHostSelection;
+
+    /**
+     * IP filtering object
+     */
+    Filtering ipAllowedFilters, ipForbiddenFilters; 
 
     /**
      * Default constructor 
@@ -106,13 +128,14 @@ public class LeapHttpServer extends Thread {
      */
     public LeapHttpServer(Path homePath) throws UnknownHostException, MalformedURLException {
         this(homePath, 
-             HostsManager.get().getHosts(Context.getDefaultHost()),             
+             HostsManager.get().getHosts(Context.getDefaultHost()), 
              new ThreadPoolExecutor(Context.getThreadPoolCoreSize(), 
-                                    Context.getThreadPoolMaxSize(),                  
+                                    Context.getThreadPoolMaxSize(), 
                                     Context.getThreadPoolKeepAlive(), 
                                     TimeUnit.SECONDS, 
                                     new LinkedBlockingQueue<Runnable>()),
-            new LeapURLClassLoader(HostsManager.get().getAllDynamicClasspathURLs())
+            new LeapURLClassLoader(HostsManager.get().getAllDynamicClasspathURLs()),
+            null
         );
     }
 
@@ -122,13 +145,16 @@ public class LeapHttpServer extends Thread {
      * @param hosts
      * @param threadpool 
      * @param classLoader
+     * @param resourceMonitor
      * @throws UnknownHostException
      * @throws MalformedURLException
      */
     public LeapHttpServer(Path homePath, 
                           Hosts hosts, 
                           ThreadPoolExecutor threadpool, 
-                          LeapURLClassLoader classLoader) throws UnknownHostException, MalformedURLException {
+                          LeapURLClassLoader classLoader,
+                          ResourceMonitor resourceMonitor
+                          ) throws UnknownHostException {
         this(
             true,
             Context.getLeapHomePath(),
@@ -138,7 +164,8 @@ public class LeapHttpServer extends Thread {
             Context.getBackLog(),
             threadpool,
             hosts,
-            classLoader
+            classLoader,
+            resourceMonitor
         );
     }
 
@@ -153,6 +180,7 @@ public class LeapHttpServer extends Thread {
      * @param threadpool
      * @param hosts
      * @param classLoader
+     * @param resourceMonitor
      */
     public LeapHttpServer(boolean isDefaultHost, 
                           Path homePath, 
@@ -162,16 +190,21 @@ public class LeapHttpServer extends Thread {
                           int backlog, 
                           ThreadPoolExecutor threadpool,
                           Hosts hosts,
-                          LeapURLClassLoader classLoader
+                          LeapURLClassLoader classLoader,
+                          ResourceMonitor resourceMonitor
                           ) {
         this.isDefaultHost = true;
         this.homePath = homePath;
         this.protocol = protocol;
         this.backlog = backlog;
         this.docroot = docroot;
+        this.hosts = hosts;
         this.threadpool = threadpool;
         this.inetSocketAddress = inetSocketAddress;
-        this.hosts = hosts;
+        this.resourceMonitor = resourceMonitor;
+        this.ipAllowedFilters = new Filtering(Context.getAllowedIpFilter());
+        this.ipForbiddenFilters = new Filtering(Context.getForbiddenIpfilter()); 
+        this.redirectHostSelection = new RedirectHostSelection(Context.getLoadBalanceRedirects());
         this.serviceManager = new ServiceManager(hosts, new UserManager(hosts.getHost()), classLoader);
     }
 
@@ -200,6 +233,14 @@ public class LeapHttpServer extends Thread {
     }
 
     /**
+     * Get resource monitor
+     * @return
+     */
+    protected ResourceMonitor getResourceMonitor() {
+        return this.resourceMonitor;
+    }
+
+    /**
      * Get root directory
      * @return
      */
@@ -225,8 +266,29 @@ public class LeapHttpServer extends Thread {
                 Socket connection = server.accept();
                 connection.setSoTimeout(Context.getConnectionTimeout());
                 //connection.setSoLinger(true, 10);
-                logger.info("[CLIENT DETECTED] Client request accepted......"+connection.getLocalAddress().toString()+"  ---  "+connection.getPort());
-                this.threadpool.submit(new LeapRequestProcessor(this, this.docroot, connection, this.hosts));
+                int queueSize = this.threadpool.getQueue().size();
+                String ipAddress = connection.getLocalAddress().toString();
+                if(this.ipAllowedFilters.include(ipAddress) && this.ipForbiddenFilters.exclude(ipAddress)) {
+                    if(queueSize < Context.getThreadQueueSize()) {
+                        logger.info("[CLIENT DETECTED] Client request accepted. Submitting thread. "+ipAddress+" - "+connection.getPort()+"  Thread queue size - "+queueSize);
+                        this.threadpool.submit(new LeapRequestHandler(this, this.docroot, connection, this.hosts));    
+                    } else {
+                        String redirectHost = redirectHostSelection.getSelectedHost();
+                        String redirectPage = Html.makeRedirect(this.protocol.getProtocol(), 0, redirectHost);
+                        logger.info("[CLIENT DETECTED] Thread pool queue size limit reached: "+queueSize+".  Send redirect to Load-Balance URL: "+redirectHost+"\n"+redirectPage);
+                        connection.getOutputStream().write(redirectPage.getBytes());
+                        connection.close();
+                    }
+                } else {
+                    logger.info("[CLIENT CANCELED] Rquested IP address is not in allowed filters or exist in forbidden filters: "+ipAddress);
+                    Map<String, Object> params = new HashMap<>();
+                    params.put("@code", RES_CODE.RES500);
+                    params.put("@type", "Not in allowed IP or forbidden IP.");
+                    params.put("@message", "Rquested IP address is not in allowed filters or exist in forbidden filters: "+ipAddress);
+                    String resPage = this.hosts.getResource().getResourcePage(params);
+                    connection.getOutputStream().write(resPage.getBytes());
+                    connection.close();                                    
+                }
             } 
         } catch(Exception e) {
             logger.error(e.getMessage(), e);

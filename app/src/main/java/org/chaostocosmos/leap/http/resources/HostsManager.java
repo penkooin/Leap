@@ -106,7 +106,7 @@ public class HostsManager {
      * @return
      */
     public List<String> getAllSpringPackages() {
-        return this.hostsMap.values().stream().filter(h -> h != null).flatMap(h -> h.getSpringJPAPackages().stream()).collect(Collectors.toList());
+        return this.hostsMap.values().stream().filter(h -> h != null).flatMap(h -> h.getSpringJPAPackages().getFilters().stream()).collect(Collectors.toList());
     }
 
     /**
