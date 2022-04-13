@@ -33,6 +33,7 @@ import org.chaostocosmos.leap.http.resources.ResourceHelper;
 import org.chaostocosmos.leap.http.resources.ResourceMonitor;
 import org.chaostocosmos.leap.http.resources.SpringJPAManager;
 import org.chaostocosmos.leap.http.resources.StaticResourceManager;
+import org.chaostocosmos.leap.http.resources.SystemMonitor;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
@@ -120,7 +121,6 @@ public class LeapApplication {
         } catch (ParseException e) {
             throw new WASException(e);
         }
-
         //set HOME directory
         String optionH = cmdLine.getOptionValue("h");
         if(optionH != null) {
@@ -166,14 +166,15 @@ public class LeapApplication {
                                                  Context.getThreadPoolMaxSize(), 
                                                  Context.getThreadPoolKeepAlive(), 
                                                  TimeUnit.SECONDS, 
-                                                 this.threadQueue
+                                                 this.threadQueue 
                                                  );        
 
         logger.info("----------------------------------------------------------------------------------------------------");
         logger.info("ThreadPool initialized - CORE: "+Context.getThreadPoolCoreSize()+"   MAX: "+Context.getThreadPoolMaxSize()+"   KEEP-ALIVE WHEN IDLE(seconds): "+Context.getThreadPoolKeepAlive());
 
-        this.resourceMonitor = new ResourceMonitor(this.threadpool, 10000, true, Unit.MB, 2, logger);
-        resourceMonitor.start();
+        //this.resourceMonitor = new ResourceMonitor(this.threadpool, 30000, true, Unit.MB, 2, logger);
+        //resourceMonitor.start();
+        new SystemMonitor(this.threadpool, 30000, true, Unit.MB, 2, logger).start();
 
         //set verbose option to STD IO
         String optionV = cmdLine.getOptionValue("v");
@@ -201,6 +202,7 @@ public class LeapApplication {
         //NetworkInterfaces.getAllNetworkAddresses().stream().forEach(i -> System.out.println(i.getHostName()));
         //LeapClassLoader
         LeapURLClassLoader classLoader = ClassUtils.getClassLoader();
+
         //Spring JPA 
         SpringJPAManager jpaManager = SpringJPAManager.get();
 
@@ -213,11 +215,11 @@ public class LeapApplication {
             }
             if(host.getHost().equals(Context.getDefaultHost())) {
                 LeapHttpServer server = new LeapHttpServer(Context.getLeapHomePath(), host, this.threadpool, classLoader, this.resourceMonitor);
-                this.leapServerMap.put(hostAddress.getHostAddress()+":"+host.getPort(), server);    
+                this.leapServerMap.put(hostAddress.getHostAddress()+":"+host.getPort(), server);
             } else {
                 ThreadPoolExecutor threadpool = new ThreadPoolExecutor(20, 20, 10, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>()); 
                 LeapHttpServer server = new LeapHttpServer(Context.getLeapHomePath(), host, threadpool, classLoader, this.resourceMonitor);
-                this.leapServerMap.put(hostAddress.getHostAddress()+":"+host.getPort(), server);    
+                this.leapServerMap.put(hostAddress.getHostAddress()+":"+host.getPort(), server); 
             }
             if(host.isDefaultHost()) {
                 logger.info("[DEFAULT HOST] - Protocol: "+host.getProtocol().name()+"   Server: "+host.getServerName()+"   Host: "+host.getHost()+"   Port: "+host.getPort()+"   Doc-Root: "+host.getDocroot()+"   Logging path: "+host.getLogPath()+"   Level: "+host.getLogLevel().toString());

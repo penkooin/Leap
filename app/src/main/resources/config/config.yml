@@ -12,7 +12,7 @@ server:
         core: 1
         max: 1
         keep-alive: 30
-        queue-size: 1
+        queue-size: 10
       redirect:
         http://awesome:8082 : 20
         http://www.leap1.org:8081 : 80
@@ -32,7 +32,7 @@ server:
       host: localhost
       port: 8080
       doc-root: ./home
-      welcome: 'welcome.html'
+      welcome: 'index.html'
       logs: 'logs/leap.log'
       log-level: 'DEBUG'
       users:

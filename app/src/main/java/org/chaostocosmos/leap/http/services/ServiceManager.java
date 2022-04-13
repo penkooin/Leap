@@ -116,7 +116,7 @@ public class ServiceManager {
                         for(Class<? extends ILeapFilter> clazz : preFilterClasses) {
                             ILeapFilter f = (ILeapFilter)newFilterInstance(clazz.getName());
                             f.setUserManager(userManager);
-                            preFilters.add(f);                            
+                            preFilters.add(f);
                         }
                         List<ILeapFilter> postFilters = new ArrayList<>();
                         Class<? extends ILeapFilter>[] postFilterClasses = fm.postFilters();
@@ -124,7 +124,7 @@ public class ServiceManager {
                             ILeapFilter f = (ILeapFilter)newFilterInstance(clazz.getName());
                             f.setUserManager(userManager);
                             postFilters.add(f);
-                        }                     
+                        }
                         service.setFilters(preFilters, postFilters);
                         service.setServiceManager(this);
                         serviceHolder = new ServiceHolder(sKey, service, rType, method);

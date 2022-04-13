@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 /**
  * Random selection of host in ratio Map<String, Integer> redirectMap
- * 
  * @author 9ins 
  */
 public class RedirectHostSelection {

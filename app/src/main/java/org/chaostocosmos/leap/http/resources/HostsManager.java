@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.chaostocosmos.leap.http.commons.Filtering;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.enums.PROTOCOL;
 import org.chaostocosmos.leap.http.user.User;
@@ -37,7 +38,7 @@ public class HostsManager {
     /**
      * Constructor
      */
-    private HostsManager() {        
+    private HostsManager() {
         this.hostsMap = Context.getHostsMap();
         System.out.println("HostsManager Initialized... "+new Date().toString());
     }
@@ -272,8 +273,8 @@ public class HostsManager {
      * @param host
      * @return
      */
-    public List<String> getInMemoryFilters(String host) {
-        return this.hostsMap.get(host).getInMemoryFilters();
+    public Filtering getInMemoryFilters(String host) {
+        return this.hostsMap.get(host).getInMemoryFiltering();
     }
 
     /**
@@ -281,8 +282,8 @@ public class HostsManager {
      * @param host
      * @return
      */
-    public List<String> getAccessFilters(String host) {
-        return this.hostsMap.get(host).getAccessFilters();
+    public Filtering getAccessFilters(String host) {
+        return this.hostsMap.get(host).getAccessFiltering();
     }
 
     /**

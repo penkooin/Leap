@@ -202,8 +202,8 @@ public class LeapHttpServer extends Thread {
         this.threadpool = threadpool;
         this.inetSocketAddress = inetSocketAddress;
         this.resourceMonitor = resourceMonitor;
-        this.ipAllowedFilters = new Filtering(Context.getAllowedIpFilter());
-        this.ipForbiddenFilters = new Filtering(Context.getForbiddenIpfilter()); 
+        this.ipAllowedFilters = hosts.getIpAllowedFiltering();
+        this.ipForbiddenFilters = hosts.getIpForbiddenFiltering();
         this.redirectHostSelection = new RedirectHostSelection(Context.getLoadBalanceRedirects());
         this.serviceManager = new ServiceManager(hosts, new UserManager(hosts.getHost()), classLoader);
     }

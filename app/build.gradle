@@ -17,6 +17,13 @@ repositories {
 }
 
 dependencies {
+
+    // https://mvnrepository.com/artifact/org.openjdk.jmh/jmh-core
+    implementation 'org.openjdk.jmh:jmh-core:1.35'
+
+    // https://mvnrepository.com/artifact/org.openjdk.jmh/jmh-generator-annprocess
+    testImplementation 'org.openjdk.jmh:jmh-generator-annprocess:1.35'
+
     // https://mvnrepository.com/artifact/junit/junit
     testImplementation 'junit:junit:4.4'
 

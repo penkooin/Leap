@@ -24,6 +24,9 @@ import org.chaostocosmos.leap.http.resources.ResourceHelper;
 import org.chaostocosmos.leap.http.services.ServiceHolder;
 import org.chaostocosmos.leap.http.services.ServiceInvoker;
 import org.chaostocosmos.leap.http.services.ServiceManager;
+import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.State;
 
 /**
  * Client request processor object
@@ -31,6 +34,7 @@ import org.chaostocosmos.leap.http.services.ServiceManager;
  * @author 9ins
  * @since 2021.09.16
  */
+@State(Scope.Thread)
 public class LeapRequestHandler implements Runnable {
     /**
      * Leap server home path
@@ -67,6 +71,7 @@ public class LeapRequestHandler implements Runnable {
     }
 
     @Override
+    @Benchmark
     public void run() {
         HttpRequestDescriptor request = null;
         HttpResponseDescriptor response = null;
@@ -129,7 +134,7 @@ public class LeapRequestHandler implements Runnable {
                     } else {
                         throw new WASException(MSG_TYPE.HTTP, 404, request.getContextPath());
                     }
-                }   
+                }
             }                 
             if(response != null) {
                 //Send response to client

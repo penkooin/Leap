@@ -13,7 +13,6 @@ import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.regex.Pattern;
@@ -37,7 +36,6 @@ public class WatchResource extends Thread implements Resource {
     String host;
     Path watchPath;
     Kind<?>[] watchKind;
-    List<String> accessFilters, forbiddenFilters, inMemoryFilters;
     Filtering accessFiltering, forbiddenFiltering, inMemoryFiltering;
     int inMemoryLimitSize;
     Map<String, Object> resourceTree;
@@ -52,7 +50,7 @@ public class WatchResource extends Thread implements Resource {
      * @throws IOException
      */
     public WatchResource(Hosts hosts, Kind<?>[] watchKinds) throws IOException {
-        this(hosts.getHost(), hosts.getStatic(), watchKinds, hosts.getAccessFilters(), hosts.getForbiddenFilters(), hosts.getInMemoryFilters(), 1024 * 1000);
+        this(hosts.getHost(), hosts.getStatic(), watchKinds, hosts.getAccessFiltering(), hosts.getForbiddenFiltering(), hosts.getInMemoryFiltering(), 1024 * 1000);
     }
 
     /**
@@ -65,18 +63,16 @@ public class WatchResource extends Thread implements Resource {
      * @param inMemoryFilters
      * @throws IOException
      */
-    public WatchResource(String host, Path watchPath, Kind<?>[] watchKinds, List<String> accessFilters, List<String> forbiddenFilters, List<String> inMemoryFilters, int inMemoryLimitSize) throws IOException {
+    public WatchResource(String host, Path watchPath, Kind<?>[] watchKinds, Filtering accessFiltering, Filtering forbiddenFiltering, Filtering inMemoryFiltering, int inMemoryLimitSize) throws IOException {
         this.host = host;
         this.watchPath = watchPath;
         this.watchKind = watchKinds;
-        this.accessFilters = accessFilters;
-        this.forbiddenFilters = forbiddenFilters;
-        this.inMemoryFilters = inMemoryFilters;
+        this.accessFiltering = accessFiltering;
+        this.forbiddenFiltering = forbiddenFiltering;
+        this.inMemoryFiltering = inMemoryFiltering;
         this.inMemoryLimitSize = inMemoryLimitSize;
         this.resourceTree = new LinkedHashMap<>();
-        this.accessFiltering = new Filtering(this.accessFilters);
-        this.forbiddenFiltering = new Filtering(this.forbiddenFilters);
-        this.inMemoryFiltering = new Filtering(this.inMemoryFilters);
+        this.accessFiltering = accessFiltering;
         this.watchService = FileSystems.getDefault().newWatchService();
         this.watchMap = Files.walk(this.watchPath).sorted().filter(p -> p.toFile().isDirectory()).map(p -> {
             try {

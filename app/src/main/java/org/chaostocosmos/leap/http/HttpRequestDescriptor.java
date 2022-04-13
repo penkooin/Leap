@@ -109,6 +109,10 @@ public class HttpRequestDescriptor {
         return this.contextParam;
     }
 
+    public String getParameter(String name) {
+        return this.contextParam.get(name);
+    }
+
     public BodyPart getBodyPart() {
         return this.bodyPart;
     }
