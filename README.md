@@ -1,15 +1,26 @@
 
 <img src="./img/leap.png"/>
 
-<h3> <img src="./img/logo16.png"/> You wanna Leap? </h3>
+<h2> You wanna Leap? </h2>
+ 
+<h3> Just being server for web services! </h3>  
+
+* <h4>For alternatives of Web Server</h4>  
+* <h4>For alternatives of WAS</h4>  
+* <h4>For alternatives of RESTful Service</h4>
+* <h4>For alternatives of Video / Audio Streaming Service</h4>  
+* <h4>For versatile / multi-purpose / high-performance / rapid response services</h4>  
+
 
 <h3> <img src="./img/logo16.png"/> What is Leap? </h3>
----
-Leap? is alternatives of Http Servers or Web Application Servers  
-Leap provides sustainable and durable performance for Web Services.  
-It just works like Http Server but can be used to heavy-duty services accoding to you wanna do for your needs.  
+
+---  
+Leap? is alternatives of Http Server or Web Application Server and powerful alternatives of Spring-Boot.
+Leap provides sustainable, durable and performance guaranteed for Web Services.  
+It just looks like web server but can be used to heavy-duty service, rapid response needed service or quranteed WWW/App back-end service accoding to what you need, even Video/Audio streaming service.
 Leap? provides simple ways to build your web-based services and easy to configurate.  
-You can easily build up your services using to be making service classes for your purpose.  
+You can easily build up your service using to be making service classes for your purpose.  
+
 Leap? can have a various filters for security, parsing and authenticating, It will be enhancing your Web Service more powerful and Secured.  
 The remote deploy is to get achievement of varieties of service on active time in server, so that user do not need to stop server for new service deployments.  
 Also upload file instant saving could get to decrease of server memory throghtput for uploading when huge file is uploaded.
