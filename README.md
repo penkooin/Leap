@@ -1,7 +1,7 @@
 
 <img src="./img/leap.png"/>
 
-<h2> You wanna Leap? </h2>
+<h2> <img src="./img/logo16.png"/> You wanna Leap? </h2>
  
 <h3> Just being server for web services! </h3>  
 
@@ -15,18 +15,24 @@
 <h3> <img src="./img/logo16.png"/> What is Leap? </h3>
 
 ---  
-Leap? is alternatives of Http Server or Web Application Server and powerful alternatives of Spring-Boot.
+Leap? is alternatives of Web Server or Web Application Server and powerful alternatives of Spring-Boot.
 Leap provides sustainable, durable and performance guaranteed for Web Services.  
-It just looks like web server but can be used to heavy-duty service, rapid response needed service or quranteed WWW/App back-end service accoding to what you need, even Video/Audio streaming service.
-Leap? provides simple ways to build your web-based services and easy to configurate.  
-You can easily build up your service using to be making service classes for your purpose.  
+It just looks like web server but can be used to heavy-duty service, rapid response needed service or quranteed Web / App back-end service accoding to what you need, even Video/Audio(HTML 5) streaming service.  
+
+Leap? provides simple ways to build your web-based service and easy to configurate by well formatted method.
+You can easily build up your services by just developping service classes.
 
 Leap? can have a various filters for security, parsing and authenticating, It will be enhancing your Web Service more powerful and Secured.  
-The remote deploy is to get achievement of varieties of service on active time in server, so that user do not need to stop server for new service deployments.  
-Also upload file instant saving could get to decrease of server memory throghtput for uploading when huge file is uploaded.
-And Enhanced Resource Manager will provides a resources of server to users more quickly and no waiting.
+The remote deploy is to get achieving of varieties of service functionalities on running time in server, don't need to shutdown and start-up, so that user do not need to be down server for new service deployment.  
 
-<h3> <img src="./img/logo16.png"/> Feathres of Leap? </h3>
+Also MultiPart or Binary streaming save could get to achive decrease of server memory and increase server performance when huge file is uploaded.  
+And Enhanced Resource Manager will provides a resources of server to users more quickly and no waiting by holding resource on memory if system can privide a capacities.  
+Especially supporting Video/Audio streaming service makes you can build up excellent streaming server by following Web standard.
+
+So now, you can leap up with Leap?
+  
+  
+<h3> <img src="./img/logo16.png"/> Features of Leap? </h3>
 ---
 1. 
 
