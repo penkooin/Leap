@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.chaostocosmos.leap.http.HttpRequestDescriptor;
-import org.chaostocosmos.leap.http.LeapApplication;
+import org.chaostocosmos.leap.http.LeapApp;
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.commons.UtilBox;
@@ -56,7 +56,7 @@ public class ResourceHelper {
      * @return
      */
     public static ResourceHelper getInstance() {
-        return getInstance(LeapApplication.HOME_PATH);
+        return getInstance(LeapApp.HOME_PATH);
     }
 
     /**

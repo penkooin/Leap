@@ -2,7 +2,9 @@ package org.chaostocosmos.leap.http;
 
 import java.io.IOException;
 
-import org.chaostocosmos.leap.http.resources.Resource;
+import com.drew.imaging.ImageProcessingException;
+
+import org.chaostocosmos.leap.http.resources.Resources;
 import org.chaostocosmos.leap.http.resources.StaticResourceManager;
 import org.junit.Before;
 import org.junit.Test;    
@@ -14,13 +16,13 @@ public class StaticResourceManagerTest {
     }
         
     @Test
-    public void test() throws IOException, InterruptedException {
-        Resource manager = StaticResourceManager.get("localhost");
+    public void test() throws IOException, InterruptedException, ImageProcessingException {
+        Resources manager = StaticResourceManager.get("localhost");
         //manager.watch(Paths.get("D:\\0.github\\Leap\\home\\webapp\\WEB-INF\\static"));
     }
 
-    public static void main(String[] args) throws IOException, InterruptedException {
-        Resource manager = StaticResourceManager.get("localhost");
+    public static void main(String[] args) throws IOException, InterruptedException, ImageProcessingException {
+        Resources manager = StaticResourceManager.get("localhost");
         //manager.watch(Paths.get("D:\\0.github\\Leap\\home\\webapp\\WEB-INF\\static"));        
     }
 }

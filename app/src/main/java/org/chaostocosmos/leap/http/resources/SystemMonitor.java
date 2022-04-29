@@ -15,8 +15,7 @@ import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
 import javax.management.ReflectionException;
 
-import org.chaostocosmos.leap.http.commons.Unit;
-import org.chaostocosmos.leap.http.enums.UNIT;
+import org.chaostocosmos.leap.http.commons.UNIT;
 
 import ch.qos.logback.classic.Logger;
 
@@ -50,7 +49,7 @@ public class SystemMonitor {
     /**
      * Unit of quantity
      */
-    private Unit unit;
+    private UNIT unit;
 
     /**
      * Fraction point of digit
@@ -86,7 +85,7 @@ public class SystemMonitor {
 	 * @param fractionPoint
 	 * @param logger
 	 */
-	public SystemMonitor(ThreadPoolExecutor threadpool_, long interval, boolean isDaemon, Unit unit, int fractionPoint, Logger logger) {
+	public SystemMonitor(ThreadPoolExecutor threadpool_, long interval, boolean isDaemon, UNIT unit, int fractionPoint, Logger logger) {
 		threadpool = threadpool_;
 		this.interval = interval;
 		this.isDaemon = isDaemon;
@@ -117,17 +116,17 @@ public class SystemMonitor {
                         + "  Task completed: "+threadpool.getCompletedTaskCount()
                     );
                     logger.info(
-                        "[MEMORY-MONITOR] Memory - "
-						+ "Total Mem : "+SystemMonitor.getTotalPhysicalMemorySize(UNIT.GB)
-						+ "Physical Mem : "+SystemMonitor.getFreePhysicalMemorySize(UNIT.GB)
-						+ "Virtual Mem : "+SystemMonitor.getCommittedVirtualMemorySize(UNIT.GB)
-						+ "System CPU : "+SystemMonitor.getSystemCpuLoad(UNIT.PCT)
-						+ "Process CPU : "+SystemMonitor.getProcessCpuLoad(UNIT.PCT)
-						+ "Process Time : "+SystemMonitor.getProcessCpuTime(UNIT.SEC)
-						+ "Init : "+getProcessHeapInit(UNIT.MB)
-						+ "Used : "+getProcessHeapUsed(UNIT.MB)
-						+ "Committed : "+getProcessHeapCommitted(UNIT.MB)
-						+ "Max : "+getProcessHeapMax(UNIT.MB)
+                        "[PERFORMANCE-MONITOR] CPU & MEM - "
+						+ "  Total Mem : "+SystemMonitor.getTotalPhysicalMemorySize(UNIT.GB)
+						+ "  Physical Mem : "+SystemMonitor.getFreePhysicalMemorySize(UNIT.GB)
+						+ "  Virtual Mem : "+SystemMonitor.getCommittedVirtualMemorySize(UNIT.GB)
+						+ "  System CPU : "+SystemMonitor.getSystemCpuLoad(UNIT.PCT)
+						+ "  Process CPU : "+SystemMonitor.getProcessCpuLoad(UNIT.PCT)
+						+ "  Process Time : "+SystemMonitor.getProcessCpuTime(UNIT.SE)
+						+ "  Init : "+getProcessHeapInit(UNIT.MB)
+						+ "  Used : "+getProcessHeapUsed(UNIT.MB)
+						+ "  Committed : "+getProcessHeapCommitted(UNIT.MB)
+						+ "  Max : "+getProcessHeapMax(UNIT.MB)
                     );    
                 } catch (Exception e) {
                     logger.error(e.getMessage(), e);
@@ -165,62 +164,9 @@ public class SystemMonitor {
 		Object attribute = mBeanServer.getAttribute(new ObjectName("java.lang","type","OperatingSystem"), attr);
 		if(attribute != null) {
 			double value = Double.parseDouble(attribute+"");
-			return applyUnit(value, unit.toString());
+			return UNIT.MB.applyUnit(value, 2);
 		}
 		return 0d;
-	}
-	
-	/**
-	 * Apply unit.
-	 * @param value
-	 * @param unit
-	 * @return
-	 */
-	public static double applyUnit(double value, String unit) {
-		double retValue = 0d; 
-		if(unit.equalsIgnoreCase("%") || unit.equalsIgnoreCase("PCT") || unit.equalsIgnoreCase("PERCENT")) {
-			retValue = Math.round(value*PCT*PCT)/PCT;
-		} else if(unit.equalsIgnoreCase("QTY")) {
-			retValue = value;
-		} else if(unit.equalsIgnoreCase("NO")) {
-			retValue = value;
-		} else if(unit.equalsIgnoreCase("B")) {
-			retValue = value;
-		} else if(unit.equalsIgnoreCase("KB")) {
-			retValue = Math.round(value/KB*1000d)/1000d;
-		} else if(unit.equalsIgnoreCase("MB")) {
-			retValue = Math.round(value/MB*1000d)/1000d;
-		} else if(unit.equalsIgnoreCase("GB")) {
-			retValue = Math.round(value/GB*1000d)/1000d;
-		} else if(unit.equalsIgnoreCase("TB")) {
-			retValue = Math.round(value/TB*1000d)/1000d;
-		} else if(unit.equalsIgnoreCase("PB")) {
-			retValue = Math.round(value/PB*1000d)/1000d;
-		} else if(unit.equalsIgnoreCase("NS")) {
-			retValue = Math.round(value/1000000000d*1000d)/1000d;
-		} else if(unit.equalsIgnoreCase("MS")) {
-			retValue = Math.round(value/1000000d*1000d)/1000d;
-		} else if(unit.equalsIgnoreCase("ML")) {
-			retValue = Math.round(value/1000d*1000d)/1000d;
-		} else if(unit.equalsIgnoreCase("SEC")) {
-			retValue = value;
-		} else if(unit.equalsIgnoreCase("MIN")) {
-			retValue = Math.round(value/60d*1000d)/1000d;
-		} else if(unit.equalsIgnoreCase("HR")) {
-			retValue = Math.round(value/60d/60d*1000d)/1000d;
-		} else if(unit.equalsIgnoreCase("DY")) {
-			retValue = Math.round(value/60d/60d/24d*1000d)/1000d;
-		} else if(unit.equalsIgnoreCase("WK")) {
-			retValue = Math.round(value/60d/60d/24d/7d*1000d)/1000d;
-		} else if(unit.equalsIgnoreCase("MO")) {
-			retValue = Math.round(value/60d/60d/24d/7d/30d*1000d)/1000d;
-		} else if(unit.equalsIgnoreCase("YR")) {
-			retValue = Math.round(value/60d/60d/24d/7d/30d/365d*1000d)/1000d;
-		} else {
-			throw new IllegalArgumentException("UNIT param is wrong value : "+unit);
-		}
-		retValue = (retValue < 0)?retValue*-1:retValue;
-		return retValue;
 	}
 
 	/**
@@ -358,7 +304,7 @@ public class SystemMonitor {
 	 */
 	public static float getProcessHeapInit(UNIT unit) {
 		long value = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getInit();
-		return (float) applyUnit(value, unit.name());
+		return (float) UNIT.MB.applyUnit(value, 2);
 	}
 	
 	/**
@@ -368,7 +314,7 @@ public class SystemMonitor {
 	 */
 	public static float getProcessHeapUsed(UNIT unit) {
 		long value = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getUsed();
-		return (float) applyUnit(value, unit.name());
+		return (float) UNIT.MB.applyUnit(value, 2);
 	}
 
 	/**
@@ -378,7 +324,7 @@ public class SystemMonitor {
 	 */
 	public static float getProcessHeapCommitted(UNIT unit) {
 		long value = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getCommitted();
-		return (float) applyUnit(value, unit.name());		
+		return (float) UNIT.MB.applyUnit(value, 2);
 	}
 	
 	/**
@@ -388,7 +334,7 @@ public class SystemMonitor {
 	 */
 	public static float getProcessHeapMax(UNIT unit) {
 		long value = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getMax();
-		return (float) applyUnit(value, unit.name());		
+		return (float) UNIT.MB.applyUnit(value, 2);
 	}
 
 	/**
@@ -399,7 +345,7 @@ public class SystemMonitor {
 	public static float getProcessMemoryUsed(UNIT unit) {
 		Runtime runtime = Runtime.getRuntime();
 		float value = runtime.totalMemory() - runtime.freeMemory();
-		return (float) applyUnit(value, unit.name());
+		return (float) UNIT.MB.applyUnit(value, 2);
 	}
 
 	public static int getThreadPoolActiveCount() {

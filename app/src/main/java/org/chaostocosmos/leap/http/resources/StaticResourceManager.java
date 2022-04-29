@@ -6,6 +6,8 @@ import java.nio.file.WatchEvent.Kind;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.drew.imaging.ImageProcessingException;
+
 /**
  * StaticResourceManager
  * 
@@ -23,7 +25,7 @@ public class StaticResourceManager {
     /**
      * WatchResource object Map by Hosts
      */
-    Map<String, Resource> resourceMap;
+    Map<String, Resources> resourceMap;
 
     /**
      * StaticResourceManager object
@@ -33,11 +35,12 @@ public class StaticResourceManager {
     /**
      * Default constructor
      * @throws IOException
+     * @throws ImageProcessingException
      */
-    private StaticResourceManager() throws IOException {
+    private StaticResourceManager() throws IOException, ImageProcessingException {
         this.resourceMap = new HashMap<>();
         for(Hosts hosts : Context.getHostsMap().values()) {
-            this.resourceMap.put(hosts.getHost(), new WatchResource(hosts, WATCH_KIND));
+            this.resourceMap.put(hosts.getHost(), new WatchResources(hosts, WATCH_KIND));
         }
     }
 
@@ -45,8 +48,9 @@ public class StaticResourceManager {
      * Initialize StaticResourceManager
      * @throws IOException
      * @return
+     * @throws ImageProcessingException
      */
-    public static StaticResourceManager initialize() throws IOException {
+    public static StaticResourceManager initialize() throws IOException, ImageProcessingException {
         manager = new StaticResourceManager();
         return manager;
     }
@@ -55,8 +59,9 @@ public class StaticResourceManager {
      * Get static WatchResource object
      * @return
      * @throws IOException
+     * @throws ImageProcessingException
      */
-    public static Resource get(String host) throws IOException {
+    public static Resources get(String host) throws IOException, ImageProcessingException {
         if(manager == null) {
             manager = new StaticResourceManager();
         }
@@ -68,10 +73,11 @@ public class StaticResourceManager {
      * @param host
      * @return
      * @throws IOException
+     * @throws ImageProcessingException
      */
-    public Resource getResource(String host) throws IOException {
+    public Resources getResource(String host) throws IOException, ImageProcessingException {
         if(!this.resourceMap.containsKey(host)) {
-            this.resourceMap.put(host, new WatchResource(Context.getHosts(host), WATCH_KIND));
+            this.resourceMap.put(host, new WatchResources(Context.getHosts(host), WATCH_KIND));
         }
         return this.resourceMap.get(host);
     }
@@ -80,7 +86,7 @@ public class StaticResourceManager {
      * Get Resources Map
      * @return
      */
-    public Map<String, Resource> getResourceMap() {
+    public Map<String, Resources> getResourceMap() {
         return this.resourceMap;
     } 
 }

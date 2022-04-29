@@ -1,5 +1,6 @@
 package org.chaostocosmos.leap.http.services;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -11,9 +12,9 @@ import org.chaostocosmos.leap.http.HttpRequestDescriptor;
 import org.chaostocosmos.leap.http.HttpResponseDescriptor;
 import org.chaostocosmos.leap.http.annotation.MethodMappper;
 import org.chaostocosmos.leap.http.annotation.ServiceMapper;
+import org.chaostocosmos.leap.http.commons.UNIT;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
-import org.chaostocosmos.leap.http.enums.UNIT;
 import org.chaostocosmos.leap.http.resources.SystemMonitor;
 
 @ServiceMapper(path = "")
@@ -52,21 +53,42 @@ public class ResourceUsageService extends AbstractLeapService {
     @MethodMappper(mappingMethod = REQUEST_TYPE.GET, path = "/session")
     public void getSession(HttpRequestDescriptor request, HttpResponseDescriptor response) {
         String typeParam = request.getParameter("type");
-        String sessionName = request.getParameter("sessionName");
-
+        Object json = null;
+        System.out.println(typeParam+" --------------------------");
         Map<String, Map<Object, Object>> sessions = new HashMap<>();
         String[] names = new String[] {"oracle", "kafka", "mysql"};
         for(String name : names) {
             Map<Object, Object> map = new LinkedHashMap<>();
-            map.put("NAME", name);
-            map.put("SESSION_MODE", "LOAD_BALANCE");
-            map.put("SESSION_TOTAL_SUCCESS", 30);
-            map.put("SESSION_TOTAL_FAIL", 20);
-            map.put("SESSION_SEND_SIZE_TOTAL", 30);
-            map.put("SESSION_RECEIVE_SIZE_TOTAL", 60);
+            map.put("allowedHosts", new ArrayList<>());
+            map.put("forbiddenHosts", new ArrayList<>());
+            map.put("keepAlive", true);
+            map.put("tcpNoDelay", true);
+            map.put("bindAddress", "localhost");
+            map.put("remoteHosts", new ArrayList<>());
+            map.put("sessionMode", "LOAD_BALANCE");
+            map.put("loadBalanceRatio", "10:10:80");
+            map.put("retry", 20);
+            map.put("retryInterval", 30);
+            map.put("bufferSize", 60);
+            map.put("connectionTimeout", 60);
+            map.put("soTimeout", 60);
             sessions.put(name, map);
-        }
-        String json = this.gson.toJson(sessions, sessions.getClass());
+            Map<Object, Object> map1 = new LinkedHashMap<>();
+            map1.put("NAME", name);
+            map1.put("SESSION_MODE", "LOAD_BALANCE");
+            map1.put("SESSION_RECEIVE_FAIL_COUNT", 30);
+            map1.put("SESSION_RECEIVE_SIZE", 20);
+            map1.put("SESSION_RECEIVE_SIZE_TOTAL", 30);
+            map1.put("SESSION_RECEIVE_SUCCESS_COUNT", 60);
+            map1.put("SESSION_SEND_FAIL_COUNT", 90);
+            map1.put("SESSION_SEND_SIZE", 30);
+            map1.put("SESSION_SEND_SIZE_TOTAL", 20);
+            map1.put("SESSION_SEND_SUCCESS_COUNT", 30);
+            map1.put("SESSION_TOTAL_FAIL", 60);
+            map1.put("SESSION_TOTAL_SUCCESS", 60);
+            map.put("statisticsMap", map1);
+        }    
+        json = this.gson.toJson(sessions, sessions.getClass());
         response.setStatusCode(200);
         response.addHeader("Content-Type", MIME_TYPE.APPLICATION_JSON.getMimeType());
         response.setBody(json);
@@ -133,5 +155,4 @@ public class ResourceUsageService extends AbstractLeapService {
 
     public void setMaximumPoolSize(int size) throws Exception {
     }
-
 }

@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import com.drew.imaging.ImageProcessingException;
+
 import org.chaostocosmos.leap.http.commons.Filtering;
 import org.chaostocosmos.leap.http.commons.UtilBox;
 import org.chaostocosmos.leap.http.enums.PROTOCOL;
@@ -276,8 +278,9 @@ public class ClassUtils {
      * @param map
      * @return
      * @throws IOException
+     * @throws ImageProcessingException
      */
-    public static Hosts mappingToHosts(Map<Object, Object> map) throws IOException {
+    public static Hosts mappingToHosts(Map<Object, Object> map) throws IOException, ImageProcessingException {
         return new Hosts(
             map.get("default") != null ? (boolean)map.get("default") : false,
             (String)map.get("server-name"),

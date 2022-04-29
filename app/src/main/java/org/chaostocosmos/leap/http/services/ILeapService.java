@@ -7,6 +7,7 @@ import org.chaostocosmos.leap.http.HttpResponseDescriptor;
 import org.chaostocosmos.leap.http.HttpTransferBuilder.HttpTransfer;
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.filters.ILeapFilter;
+import org.chaostocosmos.leap.http.resources.Resources;
 
 /**
  * Interface for servlet
@@ -35,6 +36,17 @@ public interface ILeapService extends IJPAModel, Cloneable {
      * @param serviceManager
      */
     public void setServiceManager(ServiceManager serviceManager);
+
+    /**
+     * Get Resource object
+     */
+    public Resources getResource();
+
+    /**
+     * Get ServiceManager
+     * @return
+     */
+    public ServiceManager getServiceManager();
 
     /**
      * Service error handle method

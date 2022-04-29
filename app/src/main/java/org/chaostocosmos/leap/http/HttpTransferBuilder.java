@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import com.drew.imaging.ImageProcessingException;
+
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
@@ -35,11 +37,11 @@ public class HttpTransferBuilder {
      * @param requestedHost
      * @param e
      * @return
-     * @throws IOException
-     * @throws InterruptedException
+     * @throws Exception
+     * @throws ImageProcessingException
      * @throws WASException
      */
-    public static String buildErrorResponse(String requestedHost, MSG_TYPE msgType, int errorCode, String errorMsg) throws IOException, InterruptedException {
+    public static String buildErrorResponse(String requestedHost, MSG_TYPE msgType, int errorCode, String errorMsg) throws ImageProcessingException, Exception {
         LoggerFactory.getLogger(requestedHost).error("["+msgType.name()+": "+errorCode+"] - "+errorMsg);
         return buildHttpErrorPage(requestedHost, msgType, errorCode, errorMsg);
     }
@@ -51,9 +53,10 @@ public class HttpTransferBuilder {
      * @param errorCode
      * @param message
      * @return
-     * @throws IOException
+     * @throws Exception
+     * @throws ImageProcessingException
      */
-    public static String buildHttpErrorPage(String host, MSG_TYPE type, int errorCode, String message) throws IOException {
+    public static String buildHttpErrorPage(String host, MSG_TYPE type, int errorCode, String message) throws ImageProcessingException, Exception {
         String title = Context.getHttpMsg(errorCode, "- "+type.name());        
         Map<String, Object> map = new HashMap<>();
         map.put("@code", errorCode);
@@ -69,10 +72,10 @@ public class HttpTransferBuilder {
      * @param code
      * @param message
      * @return
-     * @throws IOException
-     * @throws InterruptedException
+     * @throws Exception
+     * @throws ImageProcessingException
      */
-    public static String buildHttpResponsePage(String host, MSG_TYPE type, int code, String message) throws IOException, InterruptedException {
+    public static String buildHttpResponsePage(String host, MSG_TYPE type, int code, String message) throws ImageProcessingException, Exception {
         Map<String, Object> map = Map.of("@code", code, "@type", type.name(), "@message", message);
         return StaticResourceManager.get(host).getResponsePage(map);
     }
@@ -195,10 +198,10 @@ public class HttpTransferBuilder {
         /**
          * Get HttpResponseDescriptor
          * @return
-         * @throws IOException
-         * @throws InterruptedException
+         * @throws Exception
+         * @throws ImageProcessingException
          */
-        public HttpResponseDescriptor getResponse() throws IOException, InterruptedException {
+        public HttpResponseDescriptor getResponse() throws ImageProcessingException, Exception {
             if(this.httpResponseDescriptor == null) {
                 String msg = buildHttpResponsePage(this.httpRequestDescriptor.getRequestedHost(), MSG_TYPE.HTTP, 200, Context.getHttpMsg(200));
                 Map<String, List<Object>> headers = addHeader(new HashMap<>(), "Content-Type", MIME_TYPE.TEXT_HTML.getMimeType());

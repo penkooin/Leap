@@ -1,30 +1,14 @@
 package org.chaostocosmos.leap.http;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URLDecoder;
+import java.net.Socket;
 import java.nio.ByteBuffer;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.HashMap;
+import java.nio.channels.SocketChannel;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.http.commons.LoggerFactory;
-import org.chaostocosmos.leap.http.commons.StreamUtils;
-import org.chaostocosmos.leap.http.enums.MIME_TYPE;
-import org.chaostocosmos.leap.http.enums.MSG_TYPE;
+import org.chaostocosmos.leap.http.commons.ChannelUtils;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
-import org.chaostocosmos.leap.http.part.BinaryPart;
-import org.chaostocosmos.leap.http.part.BodyPart;
-import org.chaostocosmos.leap.http.part.KeyValuePart;
-import org.chaostocosmos.leap.http.part.MultiPart;
-import org.chaostocosmos.leap.http.part.TextPart;
-import org.chaostocosmos.leap.http.resources.HostsManager;
 
 /**
  * HttpChannelParser
@@ -86,11 +70,12 @@ public class HttpChannelParser {
          * Parse request
          * @throws IOException
          */
-        public HttpRequestDescriptor parseRequest(InputStream in) throws IOException {
-            ReadableByteChannel channel = Channels.newChannel(in);
-            ByteBuffer inBuffer = ByteBuffer.allocate(1024);
-            int cnt = channel.read(inBuffer);
+        public HttpRequestDescriptor parseRequest(Socket socket) throws IOException {
+            SocketChannel channel = socket.getChannel();
+            Map<String, List<String>> lines = ChannelUtils.readHeaders(channel, ByteBuffer.allocate(1024)); 
+            lines.values().stream().forEach(System.out::println);
             
+            /* 
             String requestLine = StreamUtils.readLine(in, StandardCharsets.ISO_8859_1);
             if(requestLine == null) {
                 throw new WASException(MSG_TYPE.ERROR, 1);
@@ -187,6 +172,8 @@ public class HttpChannelParser {
             }
             HttpRequestDescriptor desc = new HttpRequestDescriptor(protocol, requestType, host, headerMap, contentType, new byte[0], contextPath, contextParam, bodyPart, contentLength);
             return desc;
+        */
+        return null;
         }
     }
 

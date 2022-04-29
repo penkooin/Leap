@@ -22,7 +22,6 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
-import org.chaostocosmos.leap.http.commons.Unit;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.resources.ClassUtils;
 import org.chaostocosmos.leap.http.resources.Context;
@@ -33,7 +32,6 @@ import org.chaostocosmos.leap.http.resources.ResourceHelper;
 import org.chaostocosmos.leap.http.resources.ResourceMonitor;
 import org.chaostocosmos.leap.http.resources.SpringJPAManager;
 import org.chaostocosmos.leap.http.resources.StaticResourceManager;
-import org.chaostocosmos.leap.http.resources.SystemMonitor;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
@@ -43,7 +41,7 @@ import ch.qos.logback.classic.Logger;
  * 
  * @author 9ins
  */
-public class LeapApplication {
+public class LeapApp {
     /**
      * Logger
      */
@@ -102,7 +100,7 @@ public class LeapApplication {
      * @throws WASException
      * @throws ParseException
      */
-    public LeapApplication(String[] args) throws Exception {
+    public LeapApp(String[] args) throws Exception {
         //set commend line options
         this.leapServerMap = new HashMap<>();
         setup(args);
@@ -174,7 +172,7 @@ public class LeapApplication {
 
         //this.resourceMonitor = new ResourceMonitor(this.threadpool, 30000, true, Unit.MB, 2, logger);
         //resourceMonitor.start();
-        new SystemMonitor(this.threadpool, 30000, true, Unit.MB, 2, logger).start();
+        //new SystemMonitor(this.threadpool, 30000, true, UNIT.MB, 2, logger).start();
 
         //set verbose option to STD IO
         String optionV = cmdLine.getOptionValue("v");
@@ -278,7 +276,7 @@ public class LeapApplication {
     }
     
     public static void main(String[] args) throws Exception {        
-        LeapApplication leap = new LeapApplication(args);
+        LeapApp leap = new LeapApp(args);
         leap.start();
     }
 }

@@ -21,6 +21,7 @@ import org.chaostocosmos.leap.http.resources.Hosts;
 import org.chaostocosmos.leap.http.resources.HostsManager;
 import org.chaostocosmos.leap.http.resources.Html;
 import org.chaostocosmos.leap.http.resources.ResourceHelper;
+import org.chaostocosmos.leap.http.resources.WatchResources.ResourceInfo;
 import org.chaostocosmos.leap.http.services.ServiceHolder;
 import org.chaostocosmos.leap.http.services.ServiceInvoker;
 import org.chaostocosmos.leap.http.services.ServiceManager;
@@ -108,7 +109,7 @@ public class LeapRequestHandler implements Runnable {
                 } else {
                     if (hosts.getResource().exists(resourcePath)) {
                         //Get requested resource data
-                        Object resource = hosts.getResource().getResource(resourcePath);
+                        Object resource = hosts.getResource().getResourceInfo(resourcePath);
                         if(resource != null) {
                             if(resource instanceof LinkedHashMap) {
                                 LinkedHashMap<String, Object> resourceMap = (LinkedHashMap<String, Object>) resource;
@@ -119,13 +120,14 @@ public class LeapRequestHandler implements Runnable {
                                 response.setBody(body);
                                 //LoggerFactory.getLogger(hosts.getHost()).debug("RESOURCE LIST REQUESTED: "+body);    
                             } else {
-                                String mimeType = UtilBox.probeContentType(resourcePath);
+                                ResourceInfo resourceInfo = (ResourceInfo)resource;
+                                String mimeType = UtilBox.probeContentType(resourceInfo.getResourcePath());
                                 if(mimeType == null) {
                                     mimeType = MIME_TYPE.APPLICATION_OCTET_STREAM.getMimeType();
                                 }
                                 response.setStatusCode(RES_CODE.RES200.getCode());
                                 response.addHeader("Content-Type", mimeType);
-                                response.setBody(resource);
+                                response.setBody(resourceInfo.getBytes());
                                 LoggerFactory.getLogger(hosts.getHost()).debug("DOWNLOAD RESOURCE MIME-TYPE: "+mimeType);    
                             }
                         } else {

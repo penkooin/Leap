@@ -133,7 +133,7 @@ public class Hosts {
     /**
      * Resource object for host
      */
-    private Resource resource;
+    private Resources resource;
 
     /**
      * Default constructor
@@ -228,7 +228,7 @@ public class Hosts {
                  Path logPath,  
                  List<Level> logLevel,
                  Map<Object, Object> hostsMap,
-                 Resource resource
+                 Resources resource
                  )  {
         this.isDefaultHost = isDefaultHost;
         this.serverName = serverName;
@@ -634,14 +634,14 @@ public class Hosts {
      * Get resource for host object
      * @return
      */
-    public Resource getResource() {
+    public Resources getResource() {
         return this.resource;
     }
 
     /**
      * Set resource for host object
      */
-    public void setResource(Resource resource) {
+    public void setResource(Resources resource) {
         this.resource = resource;
     }
 

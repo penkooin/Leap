@@ -118,12 +118,11 @@ public class HttpParser {
             if(paramsIndex != -1) {
                 String paramString = contextPath.substring(paramsIndex+1);
                 contextPath = contextPath.substring(0, paramsIndex);
-                if(paramString.indexOf("&") != -1) {
-                    String[] params = paramString.split("&", -1);
-                    for(String param : params) {
-                        String[] keyValue = param.split("=", -1);
-                        contextParam.put(keyValue[0], keyValue[1]);
-                    }
+                String[] params = paramString.split("&", -1);
+                for(String param : params) {
+                    String[] keyValue = param.split("=", -1);
+                    System.out.println(Arrays.toString(keyValue));
+                    contextParam.put(keyValue[0], keyValue[1]);
                 }
             }
             String host = requestedHost.indexOf(":") != -1 ? requestedHost.substring(0, requestedHost.indexOf(":")) : requestedHost;

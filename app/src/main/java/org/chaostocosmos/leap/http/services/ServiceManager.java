@@ -19,7 +19,6 @@ import org.chaostocosmos.leap.http.filters.ILeapFilter;
 import org.chaostocosmos.leap.http.resources.ClassUtils;
 import org.chaostocosmos.leap.http.resources.Context;
 import org.chaostocosmos.leap.http.resources.Hosts;
-import org.chaostocosmos.leap.http.resources.HostsManager;
 import org.chaostocosmos.leap.http.resources.LeapURLClassLoader;
 import org.chaostocosmos.leap.http.user.UserManager;
 
@@ -45,11 +44,6 @@ public class ServiceManager {
      * Hosts object 
      */
     Hosts hosts;
-
-    /**
-     * Host manager object
-     */
-    private HostsManager hostManager;
 
     /**
      * Leap security manager object
@@ -148,6 +142,14 @@ public class ServiceManager {
      */
     public UserManager getUserManager() {
         return this.userManager;
+    }
+
+    /**
+     * Get Hosts
+     * @return
+     */
+    public Hosts getHosts() {
+        return this.hosts;
     }
 
     /**

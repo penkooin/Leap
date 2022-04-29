@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.transaction.NotSupportedException;
 
-import org.chaostocosmos.leap.http.commons.Unit;
+import org.chaostocosmos.leap.http.commons.UNIT;
 
 import ch.qos.logback.classic.Logger;
 
@@ -26,7 +26,7 @@ public class ResourceMonitor {
     /**
      * Unit of quantity
      */
-    private static Unit unit;
+    private static UNIT unit;
 
     /**
      * Fraction point of digit
@@ -62,7 +62,7 @@ public class ResourceMonitor {
      * @param fractionPoint_
      * @param logger
      */
-    public ResourceMonitor(ThreadPoolExecutor threadpool_, long interval_, boolean isDaemon, Unit unit_, int fractionPoint_, Logger logger) {
+    public ResourceMonitor(ThreadPoolExecutor threadpool_, long interval_, boolean isDaemon, UNIT unit_, int fractionPoint_, Logger logger) {
         unit = unit_;
         threadpool = threadpool_;
         fractionPoint = fractionPoint_;
@@ -97,10 +97,10 @@ public class ResourceMonitor {
                         + "  Free: "+getFreeMemory()+" "+unit.name()
                         + "  Total physical: "+getTotalPhysicalMemory()+" "+unit.name()
                         + "  Free physical: "+getFreePhysicalMemory()+" "+unit.name()
-                        + "  Process CPU load: "+getProcessCpuLoad()+" "+Unit.PER.name()
-                        + "  Process CPU time: "+getProcessCpuTime()+" "+Unit.SE.name()
-                        + "  System CPU load: "+getSystemCpuLoad()+" "+Unit.PER.name()
-                        + "  System CPU load AVG: "+getSystemLoadAverage()+" "+Unit.PER.name()
+                        + "  Process CPU load: "+getProcessCpuLoad()+" "+UNIT.PCT.name()
+                        + "  Process CPU time: "+getProcessCpuTime()+" "+UNIT.SE.name()
+                        + "  System CPU load: "+getSystemCpuLoad()+" "+UNIT.PCT.name()
+                        + "  System CPU load AVG: "+getSystemLoadAverage()+" "+UNIT.PCT.name()
                     );    
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -15,6 +15,7 @@ import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.filters.ILeapFilter;
 import org.chaostocosmos.leap.http.resources.Context;
+import org.chaostocosmos.leap.http.resources.Resources;
 
 import ch.qos.logback.classic.Logger;
 
@@ -49,6 +50,10 @@ public abstract class AbstractLeapService implements IGetService, IPostService, 
      */
     protected ServiceManager serviceManager;
     /**
+     * Resource object
+     */
+    protected Resources resource;
+    /**
      * HttpTransfer object
      */
     protected HttpTransfer httpTransfer;
@@ -58,6 +63,7 @@ public abstract class AbstractLeapService implements IGetService, IPostService, 
         this.logger = LoggerFactory.getLogger(httpTransfer.getRequest().getRequestedHost());
         this.httpTransfer = httpTransfer;
         this.invokingMethod = invokingMethod;
+        this.resource = this.httpTransfer.getHosts().getResource();
         if(this.preFilters != null) {
             for(ILeapFilter filter : this.preFilters) {
                 List<Method> methods = AnnotationHelper.getFilterMethods(filter, PreFilter.class); 
@@ -65,10 +71,9 @@ public abstract class AbstractLeapService implements IGetService, IPostService, 
                     ServiceInvoker.invokeMethod(filter, method, this.httpTransfer.getRequest());
                 }
             }
-        }                
+        }        
         HttpRequestDescriptor request = httpTransfer.getRequest();
         HttpResponseDescriptor response = httpTransfer.getResponse();
-
         //setting JPA link
         new AnnotationOpr<ILeapService>(httpTransfer.getHosts().getHost(), this).injectToAutowired();
         //aOpr.injectToAutowired();
@@ -124,6 +129,16 @@ public abstract class AbstractLeapService implements IGetService, IPostService, 
         this.preFilters = preFilters;
         this.postFilters = postFilters;
     } 
+
+    @Override
+    public Resources getResource() {
+        return this.resource;
+    }
+
+    @Override
+    public ServiceManager getServiceManager() {
+        return this.serviceManager;
+    }
 
     @Override
     public void setServiceManager(ServiceManager serviceManager) {

@@ -1,7 +1,6 @@
 package org.chaostocosmos.leap.http.resources;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -24,9 +23,9 @@ public class Html {
      * @param hosts
      * @param resNames
      * @return
-     * @throws IOException
+     * @throws Exception
      */
-    public static String makeResourceHtml(String path_, Hosts hosts, List<String> resNames) throws IOException {
+    public static String makeResourceHtml(String path_, Hosts hosts, List<String> resNames) throws Exception {
         final String path = path_.charAt(path_.length() - 1) == '/' ? path_.substring(0, path_.length() - 1) : path_;        
         Stream<File> fstream = resNames.stream()
                                        .map(s -> hosts.getStatic().resolve(path_.charAt(0) == '/' ? path_.substring(1) : path_).resolve(s).toFile())

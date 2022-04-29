@@ -9,10 +9,10 @@ server:
     performance: 
       file-buffer-size: 1024
       threadpool:
-        core: 1
-        max: 1
+        core: 30
+        max: 30
         keep-alive: 30
-        queue-size: 10
+        queue-size: 100
       redirect:
         http://awesome:8082 : 20
         http://www.leap1.org:8081 : 80
@@ -46,18 +46,18 @@ server:
         allowed : ['*']
         forbidden : []
       resource:
-        in-memory-filters: ['*.html']
+        in-memory-filters: ['*']
         access-filters: ['*']
         forbidden-filters: []
-      dynamic-classpath: 'd:/0.Github/leap/home/webapp/services'
+      dynamic-classpath: ''
       dynamic-packages: [
-        "org.chaostocosmos.leap.http.services"
+        "*"
       ]
       spring-jpa-packages: [
         "org.chaostocosmos.leap.http.services", 
-        "org.chaostocosmos.leap.http.services.datasource",
-        "org.chaostocosmos.leap.http.services.entiry",
-        "org.chaostocosmos.leap.http.services.repository"
+        "org.chaostocosmos.leap.http.services.datasource", 
+        "org.chaostocosmos.leap.http.services.entiry", 
+        "org.chaostocosmos.leap.http.services.repository" 
       ]
       error-filters: [
         javax.net.ssl.SSLHandshakeException,
