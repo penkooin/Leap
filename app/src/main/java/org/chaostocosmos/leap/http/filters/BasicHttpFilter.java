@@ -1,7 +1,7 @@
 package org.chaostocosmos.leap.http.filters;
 
-import org.chaostocosmos.leap.http.HttpRequestDescriptor;
-import org.chaostocosmos.leap.http.HttpResponseDescriptor;
+import org.chaostocosmos.leap.http.Request;
+import org.chaostocosmos.leap.http.Response;
 import org.chaostocosmos.leap.http.annotation.PostFilter;
 import org.chaostocosmos.leap.http.annotation.PreFilter;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
@@ -16,8 +16,8 @@ public class BasicHttpFilter<R, S> extends AbstractHttpFilter<R, S> {
     @PreFilter
     public void filterRequest(R r) throws Exception { 
         super.filterRequest(r);
-        if(r.getClass().isAssignableFrom(HttpRequestDescriptor.class)) {
-            HttpRequestDescriptor request = (HttpRequestDescriptor)r;
+        if(r.getClass().isAssignableFrom(Request.class)) {
+            Request request = (Request)r;
             LoggerFactory.getLogger(request.getRequestedHost()).debug("Basic Http request filter processing......");
         }
     }
@@ -26,8 +26,8 @@ public class BasicHttpFilter<R, S> extends AbstractHttpFilter<R, S> {
     @PostFilter
     public void filterResponse(S s) throws Exception {
         super.filterResponse(s);
-        if(s.getClass().isAssignableFrom(HttpResponseDescriptor.class)) {
-            HttpResponseDescriptor response = (HttpResponseDescriptor)s;
+        if(s.getClass().isAssignableFrom(Response.class)) {
+            Response response = (Response)s;
             LoggerFactory.getLogger(response.getRequestedHost()).debug("Basic Http response filter processing......");
         }
     }

@@ -1,7 +1,7 @@
 package org.chaostocosmos.leap.http.services;
 
-import org.chaostocosmos.leap.http.HttpRequestDescriptor;
-import org.chaostocosmos.leap.http.HttpResponseDescriptor;
+import org.chaostocosmos.leap.http.Request;
+import org.chaostocosmos.leap.http.Response;
 
 /**
  * Delete Servlet
@@ -13,5 +13,5 @@ public interface IDeleteService extends ILeapService {
      * @param response
      * @throws Exception
      */
-    public void serveDelete(HttpRequestDescriptor request, HttpResponseDescriptor response) throws Exception;
+    public void serveDelete(final Request request, final Response response) throws Exception;
 }

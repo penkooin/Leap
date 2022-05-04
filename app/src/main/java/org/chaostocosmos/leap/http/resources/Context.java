@@ -311,7 +311,7 @@ public class Context {
      */
     public static String getHttpMsg(int code) {
         String str = getMsg(MSG_TYPE.HTTP, code);
-        return str.substring(0, str.lastIndexOf(" "));
+        return str;
     }
 
     /**

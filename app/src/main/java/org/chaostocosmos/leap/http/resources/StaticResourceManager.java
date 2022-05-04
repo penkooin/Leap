@@ -6,8 +6,6 @@ import java.nio.file.WatchEvent.Kind;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.drew.imaging.ImageProcessingException;
-
 /**
  * StaticResourceManager
  * 
@@ -37,7 +35,7 @@ public class StaticResourceManager {
      * @throws IOException
      * @throws ImageProcessingException
      */
-    private StaticResourceManager() throws IOException, ImageProcessingException {
+    private StaticResourceManager() throws IOException {
         this.resourceMap = new HashMap<>();
         for(Hosts hosts : Context.getHostsMap().values()) {
             this.resourceMap.put(hosts.getHost(), new WatchResources(hosts, WATCH_KIND));
@@ -50,7 +48,7 @@ public class StaticResourceManager {
      * @return
      * @throws ImageProcessingException
      */
-    public static StaticResourceManager initialize() throws IOException, ImageProcessingException {
+    public static StaticResourceManager initialize() throws IOException {
         manager = new StaticResourceManager();
         return manager;
     }
@@ -61,7 +59,7 @@ public class StaticResourceManager {
      * @throws IOException
      * @throws ImageProcessingException
      */
-    public static Resources get(String host) throws IOException, ImageProcessingException {
+    public static Resources get(String host) throws IOException {
         if(manager == null) {
             manager = new StaticResourceManager();
         }
@@ -75,7 +73,7 @@ public class StaticResourceManager {
      * @throws IOException
      * @throws ImageProcessingException
      */
-    public Resources getResource(String host) throws IOException, ImageProcessingException {
+    public Resources getResource(String host) throws IOException {
         if(!this.resourceMap.containsKey(host)) {
             this.resourceMap.put(host, new WatchResources(Context.getHosts(host), WATCH_KIND));
         }

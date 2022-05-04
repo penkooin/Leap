@@ -19,7 +19,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.chaostocosmos.leap.http.HttpRequestDescriptor;
+import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.LeapApp;
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
@@ -75,7 +75,7 @@ public class ResourceHelper {
      * @param request
      * @return
      */
-    public static  String getMimeType(HttpRequestDescriptor request) {
+    public static  String getMimeType(Request request) {
         return UtilBox.probeContentType(getResourcePath(request));
     }
 
@@ -84,7 +84,7 @@ public class ResourceHelper {
      * @param request
      * @return
      */
-    public static Path getResourcePath(HttpRequestDescriptor request) {
+    public static Path getResourcePath(Request request) {
         return getResourcePath(request.getRequestedHost(), request.getContextPath());
     }
 

@@ -6,8 +6,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
 
-import org.chaostocosmos.leap.http.HttpRequestDescriptor;
-import org.chaostocosmos.leap.http.HttpResponseDescriptor;
+import org.chaostocosmos.leap.http.Request;
+import org.chaostocosmos.leap.http.Response;
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.annotation.FilterMapper;
 import org.chaostocosmos.leap.http.annotation.MethodMappper;
@@ -26,7 +26,7 @@ public class LeapDeployService extends AbstractLeapService implements IDeploy {
     
     @MethodMappper(mappingMethod = REQUEST_TYPE.POST, path = "/upload")
     @FilterMapper(preFilters = BasicAuthFilter.class)
-    public void deploy(HttpRequestDescriptor request, HttpResponseDescriptor response) throws WASException, IOException {
+    public void deploy(Request request, Response response) throws WASException, IOException {
         Map<String, String> headers = request.getReqHeader();
         BodyPart bodyPart = request.getBodyPart();        
         if(bodyPart == null) {
@@ -87,7 +87,7 @@ public class LeapDeployService extends AbstractLeapService implements IDeploy {
     }
 
     @Override
-    public Throwable errorHandling(HttpResponseDescriptor response, Throwable throwable) {
+    public Throwable errorHandling(Response response, Throwable throwable) {
         //response.setStatusCode(response.getStatusCode());
         //response.setBody(throwable.getMessage());
         return throwable;

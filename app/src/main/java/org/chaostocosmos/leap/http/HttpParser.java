@@ -86,7 +86,7 @@ public class HttpParser {
          * @throws IOException
          * @throws WASException
          */
-        public HttpRequestDescriptor parseRequest(InputStream in) throws IOException {
+        public Request parseRequest(InputStream in) throws IOException {
             String requestLine = StreamUtils.readLine(in, StandardCharsets.ISO_8859_1);
             if(requestLine == null) {
                 throw new WASException(MSG_TYPE.ERROR, 1);
@@ -95,7 +95,7 @@ public class HttpParser {
             System.out.println(requestLine);
             String method = requestLine.substring(0, requestLine.indexOf(" "));
             if(!Arrays.asList(REQUEST_TYPE.values()).stream().anyMatch(R -> R.name().equals(method))) {
-                throw new WASException(MSG_TYPE.ERROR, 2, method);
+                throw new WASException(MSG_TYPE.HTTP, 500, method);
             }
             String contextPath = requestLine.substring(requestLine.indexOf(" ")+1, requestLine.lastIndexOf(" "));
             String protocol = requestLine.substring(requestLine.lastIndexOf(" ")+1);
@@ -122,7 +122,9 @@ public class HttpParser {
                 for(String param : params) {
                     String[] keyValue = param.split("=", -1);
                     System.out.println(Arrays.toString(keyValue));
-                    contextParam.put(keyValue[0], keyValue[1]);
+                    if(keyValue.length > 1) {
+                        contextParam.put(keyValue[0], keyValue[1]);
+                    }                    
                 }
             }
             String host = requestedHost.indexOf(":") != -1 ? requestedHost.substring(0, requestedHost.indexOf(":")) : requestedHost;
@@ -185,7 +187,7 @@ public class HttpParser {
                     }
                 }
             }
-            HttpRequestDescriptor desc = new HttpRequestDescriptor(protocol, requestType, host, headerMap, contentType, new byte[0], contextPath, contextParam, bodyPart, contentLength);
+            Request desc = new Request(protocol, requestType, host, headerMap, contentType, new byte[0], contextPath, contextParam, bodyPart, contentLength);
             return desc;
         }
     }
@@ -199,11 +201,11 @@ public class HttpParser {
          * @return
          * @throws WASException
          */
-        public HttpResponseDescriptor buildResponse(final HttpRequestDescriptor request, 
+        public Response buildResponse(final Request request, 
                                                     final int statusCode, 
                                                     final Object body, 
                                                     final Map<String, List<Object>> headers) {
-            return new HttpResponseDescriptor(request, statusCode, body, headers);
+            return new Response(request, statusCode, body, headers);
         }
     }    
 }

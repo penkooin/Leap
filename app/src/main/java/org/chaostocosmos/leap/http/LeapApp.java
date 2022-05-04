@@ -160,12 +160,7 @@ public class LeapApp {
         this.threadQueue = new LinkedBlockingQueue<Runnable>();
 
         //initialize thread pool
-        this.threadpool = new ThreadPoolExecutor(Context.getThreadPoolCoreSize(), 
-                                                 Context.getThreadPoolMaxSize(), 
-                                                 Context.getThreadPoolKeepAlive(), 
-                                                 TimeUnit.SECONDS, 
-                                                 this.threadQueue 
-                                                 );        
+        this.threadpool = new ThreadPoolExecutor(Context.getThreadPoolCoreSize(), Context.getThreadPoolMaxSize(), Context.getThreadPoolKeepAlive(), TimeUnit.SECONDS, this.threadQueue);        
 
         logger.info("----------------------------------------------------------------------------------------------------");
         logger.info("ThreadPool initialized - CORE: "+Context.getThreadPoolCoreSize()+"   MAX: "+Context.getThreadPoolMaxSize()+"   KEEP-ALIVE WHEN IDLE(seconds): "+Context.getThreadPoolKeepAlive());

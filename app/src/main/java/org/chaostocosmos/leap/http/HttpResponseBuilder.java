@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class HttpResponseBuilder {
 
-    HttpResponseDescriptor httpResponse;
+    Response httpResponse;
 
     private static HttpResponseBuilder httpResponseBuilder;
 
@@ -26,13 +26,13 @@ public class HttpResponseBuilder {
         return httpResponseBuilder;
     }
 
-    public HttpResponseBuilder build(HttpRequestDescriptor httpRequest) throws WASException {
+    public HttpResponseBuilder build(Request httpRequest) throws WASException {
         this.httpResponse =  HttpParser.buildResponseParser().buildResponse(httpRequest, -1, null, new HashMap<String, List<Object>>()); 
         return httpResponseBuilder;
     }
 
     public HttpResponseBuilder setStatusCode(int statusCode) {
-        this.httpResponse.setStatusCode(statusCode);
+        this.httpResponse.setResponseCode(statusCode);
         return httpResponseBuilder;
     }
 
@@ -51,7 +51,7 @@ public class HttpResponseBuilder {
         return httpResponseBuilder;
     }
 
-    public HttpResponseDescriptor get() {
+    public Response get() {
         return httpResponse;
     }
 }

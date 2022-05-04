@@ -71,4 +71,5 @@ messages:
     error18: 'Not found mapping service exist with requested path: {}'
     error19: 'Deploy service process in error: {}'
     error20: 'Resource not found: {}'
+    error21: 'Service method must have two parameter which is Request and Response. Called method: {}'
 

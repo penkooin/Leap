@@ -1,7 +1,7 @@
 package org.chaostocosmos.leap.http.services;
 
-import org.chaostocosmos.leap.http.HttpRequestDescriptor;
-import org.chaostocosmos.leap.http.HttpResponseDescriptor;
+import org.chaostocosmos.leap.http.Request;
+import org.chaostocosmos.leap.http.Response;
 
 /**
  * Get Servlet interface
@@ -13,5 +13,5 @@ public interface IGetService extends ILeapService {
      * @param response
      * @throws Exception
      */
-    public void serveGet(HttpRequestDescriptor request, HttpResponseDescriptor response) throws Exception;    
+    public void serveGet(final Request request, final Response response) throws Exception;    
 }

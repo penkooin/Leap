@@ -7,12 +7,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.drew.imaging.ImageProcessingException;
-import com.drew.imaging.mp4.Mp4MetadataReader;
-import com.drew.metadata.Directory;
-import com.drew.metadata.Metadata;
-import com.drew.metadata.Tag;
-
 import org.junit.Before;
 import org.junit.Test;    
     
@@ -24,7 +18,7 @@ public class MediaStreamerTest {
     }
         
     @Test
-    public void test() throws ImageProcessingException, IOException {
+    public void test() throws IOException {
     }
 
     MediaStreamerTest(Path resourcePath) throws IOException {
@@ -85,23 +79,10 @@ public class MediaStreamerTest {
         return bytes;
     }
 
-    public void printFileMetadata() throws ImageProcessingException, IOException{
-        //Metadata metadata = Mp4MetadataReader.readMetadata(new File("D:\\0.github\\Leap\\home\\webapp\\WEB-INF\\static\\img\\porta.png"));
-        Metadata metadata = Mp4MetadataReader.readMetadata(this.resourcePath.toFile());
-        for (Directory directory : metadata.getDirectories()) {
-            System.out.println(directory.toString());
-            for (Tag tag : directory.getTags()) {
-                System.out.format("[%s] - %s = %s", directory.getName(), tag.getTagName(), tag.getDescription());
-                System.out.println();
-            }
-        }          
-    }
-
-    public static void main(String[] args) throws ImageProcessingException, IOException {
+    public static void main(String[] args) throws IOException {
         Path resourcePath = Paths.get("D:\\0.github\\Leap\\home\\webapp\\WEB-INF\\static\\video\\video.mp4");
         // System.out.println(resourcePath.toFile().length());
         MediaStreamerTest test = new MediaStreamerTest(resourcePath);
-        test.printFileMetadata();        
         
         // test.inMemoryFlag = false;
         // byte[] bytes = test.getBytes(7445, 20);

@@ -70,7 +70,7 @@ public class HttpChannelParser {
          * Parse request
          * @throws IOException
          */
-        public HttpRequestDescriptor parseRequest(Socket socket) throws IOException {
+        public Request parseRequest(Socket socket) throws IOException {
             SocketChannel channel = socket.getChannel();
             Map<String, List<String>> lines = ChannelUtils.readHeaders(channel, ByteBuffer.allocate(1024)); 
             lines.values().stream().forEach(System.out::println);
@@ -186,11 +186,11 @@ public class HttpChannelParser {
          * @return
          * @throws WASException
          */
-        public HttpResponseDescriptor buildResponse(final HttpRequestDescriptor request, 
+        public Response buildResponse(final Request request, 
                                                     final int statusCode, 
                                                     final Object body, 
                                                     final Map<String, List<Object>> headers) {
-            return new HttpResponseDescriptor(request, statusCode, body, headers);
+            return new Response(request, statusCode, body, headers);
         }
     }       
 }

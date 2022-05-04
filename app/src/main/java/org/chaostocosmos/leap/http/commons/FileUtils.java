@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import com.coremedia.iso.IsoFile;
+
 import org.chaostocosmos.leap.http.resources.Context;
 
 /**
@@ -102,4 +104,15 @@ public class FileUtils {
         }
         return searchFiles;
     }    
+
+    /**
+     * Get MP4 media file duration in seconds
+     * @param mp4Path
+     * @return
+     * @throws IOException
+     */
+    public static double getMp4DurationSeconds(Path mp4Path) throws IOException {
+        IsoFile isoFile = new IsoFile(mp4Path.toAbsolutePath().toString());
+        return (double)isoFile.getMovieBox().getMovieHeaderBox().getDuration() / isoFile.getMovieBox().getMovieHeaderBox().getTimescale();
+    }
 }

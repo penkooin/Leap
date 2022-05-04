@@ -8,8 +8,8 @@ import java.util.Map;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import org.chaostocosmos.leap.http.HttpRequestDescriptor;
-import org.chaostocosmos.leap.http.HttpResponseDescriptor;
+import org.chaostocosmos.leap.http.Request;
+import org.chaostocosmos.leap.http.Response;
 import org.chaostocosmos.leap.http.annotation.MethodMappper;
 import org.chaostocosmos.leap.http.annotation.ServiceMapper;
 import org.chaostocosmos.leap.http.commons.UNIT;
@@ -23,7 +23,7 @@ public class ResourceUsageService extends AbstractLeapService {
     Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 
     @MethodMappper(mappingMethod = REQUEST_TYPE.GET, path = "/resources")
-    public void getResources(HttpRequestDescriptor request, HttpResponseDescriptor response) {
+    public void getResources(Request request, Response response) {
         String type = request.getContextParam().get("type");
         System.out.println(request.getContextParam().get("unit"));
         UNIT unit = UNIT.valueOf(request.getContextParam().get("unit"));
@@ -45,13 +45,13 @@ public class ResourceUsageService extends AbstractLeapService {
         } catch (Exception e) {
             super.logger.error(e.getMessage(), e);
         }
-        response.setStatusCode(200);
+        response.setResponseCode(200);
         response.addHeader("Content-Type", MIME_TYPE.APPLICATION_JSON.getMimeType());
         response.setBody(this.gson.toJson(resMap));
     }
 
     @MethodMappper(mappingMethod = REQUEST_TYPE.GET, path = "/session")
-    public void getSession(HttpRequestDescriptor request, HttpResponseDescriptor response) {
+    public void getSession(Request request, Response response) {
         String typeParam = request.getParameter("type");
         Object json = null;
         System.out.println(typeParam+" --------------------------");
@@ -89,13 +89,13 @@ public class ResourceUsageService extends AbstractLeapService {
             map.put("statisticsMap", map1);
         }    
         json = this.gson.toJson(sessions, sessions.getClass());
-        response.setStatusCode(200);
+        response.setResponseCode(200);
         response.addHeader("Content-Type", MIME_TYPE.APPLICATION_JSON.getMimeType());
         response.setBody(json);
     }
 
     @Override
-    public Throwable errorHandling(HttpResponseDescriptor response, Throwable throwable) throws Throwable {
+    public Throwable errorHandling(Response response, Throwable throwable) throws Throwable {
         throwable.printStackTrace();
         return null;
     }

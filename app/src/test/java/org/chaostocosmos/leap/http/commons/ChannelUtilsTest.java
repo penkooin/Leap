@@ -1,7 +1,9 @@
 package org.chaostocosmos.leap.http.commons;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -94,9 +96,15 @@ public class ChannelUtilsTest {
         //new ChannelUtilsTest().testReadLines1();
         //byte[] bytes = Files.readAllBytes(Paths.get("D:\\0.github\\Leap\\home\\webapp\\WEB-INF\\static\\video\\video1.mp4"));
         //System.out.println(bytes.length);
-        long file = 1024 * 1000;
-        long elapse = 5;
-        System.out.println(file / elapse);
+        File file = new File("D:\\1.iq-designer\\designer\\release\\IQD_BD-V7.3.1.20220112.zip");
+        byte[] buffer = new byte[1024*1000*5];
+        FileInputStream fis = new FileInputStream(file);
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        int len;
+        while((len=fis.read(buffer)) > 0) {
+            bos.write(buffer, 0, len);
+        }
+        fis.close();
     }
 
 }

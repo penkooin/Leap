@@ -18,7 +18,7 @@ import ch.qos.logback.classic.Logger;
  * @author 9ins
  * @since 2021.09.18
  */
-public class HttpRequestDescriptor {
+public class Request {
 
     private REQUEST_TYPE requestType;
     private String requestedHost;
@@ -45,7 +45,7 @@ public class HttpRequestDescriptor {
      * @param bodyPart
      * @param contentLength
      */
-    public HttpRequestDescriptor(
+    public Request(
                                 String httpVersion, 
                                 REQUEST_TYPE requestType, 
                                 String requestHost,

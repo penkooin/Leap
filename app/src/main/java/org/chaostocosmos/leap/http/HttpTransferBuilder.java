@@ -14,8 +14,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import com.drew.imaging.ImageProcessingException;
-
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
@@ -41,7 +39,7 @@ public class HttpTransferBuilder {
      * @throws ImageProcessingException
      * @throws WASException
      */
-    public static String buildErrorResponse(String requestedHost, MSG_TYPE msgType, int errorCode, String errorMsg) throws ImageProcessingException, Exception {
+    public static String buildErrorResponse(String requestedHost, MSG_TYPE msgType, int errorCode, String errorMsg) throws Exception {
         LoggerFactory.getLogger(requestedHost).error("["+msgType.name()+": "+errorCode+"] - "+errorMsg);
         return buildHttpErrorPage(requestedHost, msgType, errorCode, errorMsg);
     }
@@ -56,7 +54,7 @@ public class HttpTransferBuilder {
      * @throws Exception
      * @throws ImageProcessingException
      */
-    public static String buildHttpErrorPage(String host, MSG_TYPE type, int errorCode, String message) throws ImageProcessingException, Exception {
+    public static String buildHttpErrorPage(String host, MSG_TYPE type, int errorCode, String message) throws Exception {
         String title = Context.getHttpMsg(errorCode, "- "+type.name());        
         Map<String, Object> map = new HashMap<>();
         map.put("@code", errorCode);
@@ -75,7 +73,7 @@ public class HttpTransferBuilder {
      * @throws Exception
      * @throws ImageProcessingException
      */
-    public static String buildHttpResponsePage(String host, MSG_TYPE type, int code, String message) throws ImageProcessingException, Exception {
+    public static String buildHttpResponsePage(String host, MSG_TYPE type, int code, String message) throws Exception {
         Map<String, Object> map = Map.of("@code", code, "@type", type.name(), "@message", message);
         return StaticResourceManager.get(host).getResponsePage(map);
     }
@@ -139,12 +137,17 @@ public class HttpTransferBuilder {
         /**
          * Http request
          */
-        HttpRequestDescriptor httpRequestDescriptor;
+        Request httpRequestDescriptor;
 
         /**
          * Http response
          */
-        HttpResponseDescriptor httpResponseDescriptor;
+        Response httpResponseDescriptor;
+
+        /**
+         * Whether closed
+         */
+        boolean isClosed = false;
 
         /**
          * Construct with request host and client socket
@@ -188,7 +191,7 @@ public class HttpTransferBuilder {
          * @return
          * @throws IOException
          */
-        public HttpRequestDescriptor getRequest() throws IOException {
+        public Request getRequest() throws IOException {
             if(this.httpRequestDescriptor == null) {
                 this.httpRequestDescriptor = parseRequest();
             }
@@ -201,7 +204,7 @@ public class HttpTransferBuilder {
          * @throws Exception
          * @throws ImageProcessingException
          */
-        public HttpResponseDescriptor getResponse() throws ImageProcessingException, Exception {
+        public Response getResponse() throws Exception {
             if(this.httpResponseDescriptor == null) {
                 String msg = buildHttpResponsePage(this.httpRequestDescriptor.getRequestedHost(), MSG_TYPE.HTTP, 200, Context.getHttpMsg(200));
                 Map<String, List<Object>> headers = addHeader(new HashMap<>(), "Content-Type", MIME_TYPE.TEXT_HTML.getMimeType());
@@ -221,7 +224,7 @@ public class HttpTransferBuilder {
          * @return
          * @throws IOException
          */
-        private HttpRequestDescriptor parseRequest() throws IOException {
+        private Request parseRequest() throws IOException {
             return HttpParser.buildRequestParser().parseRequest(clientInputStream);
         }
 
@@ -230,8 +233,8 @@ public class HttpTransferBuilder {
          * @param response
          * @throws IOException
          */
-        public void sendResponse(HttpResponseDescriptor response) throws IOException {
-            sendResponse(response.getRequestedHost(), response.getStatusCode(), response.getHeaders(), response.getBody());
+        public void sendResponse(Response response) throws IOException {
+            sendResponse(response.getRequestedHost(), response.getResponseCode(), response.getHeaders(), response.getBody());
         }
 
         /**
@@ -331,13 +334,24 @@ public class HttpTransferBuilder {
                 if(this.clientOutputStream != null) {
                     this.clientOutputStream.close();
                 }
-                if(this.socket != null) {
+                if(this.socket != null && !this.socket.isClosed()) {
                     this.socket.close();
                 }    
             } catch(Exception e) {
                 LoggerFactory.getLogger(this.hosts.getHost()).error(e.getMessage(), e);
             }
             LoggerFactory.getLogger(this.hosts.getHost()).info("Client closing......"+socket.getInetAddress().toString());
+        }
+
+        /**
+         * Whether client socket is closed
+         * @return
+         */
+        public boolean isClosed() {
+            if(this.socket != null) {
+                return this.socket.isClosed();
+            }
+            return false;
         }
     }
 }

@@ -4,6 +4,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,6 +15,7 @@ import java.nio.file.WatchEvent;
 import java.nio.file.WatchEvent.Kind;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
+import java.nio.file.attribute.FileTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -20,20 +23,17 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import com.drew.imaging.ImageProcessingException;
-import com.drew.imaging.mp4.Mp4MetadataReader;
-import com.drew.metadata.Directory;
-import com.drew.metadata.Metadata;
-import com.drew.metadata.Tag;
 import com.google.gson.Gson;
 
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.commons.Filtering;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.commons.UNIT;
+import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
 
@@ -60,7 +60,7 @@ public class WatchResources extends Thread implements Resources {
      * @throws IOException
      * @throws ImageProcessingException
      */
-    public WatchResources(Hosts hosts, Kind<?>[] watchKinds) throws IOException, ImageProcessingException {
+    public WatchResources(Hosts hosts, Kind<?>[] watchKinds) throws IOException {
         this(hosts.getHost(), hosts.getStatic(), watchKinds, hosts.getAccessFiltering(), hosts.getForbiddenFiltering(), hosts.getInMemoryFiltering(), 1024 * 1000 * 1000);
     }
 
@@ -75,7 +75,7 @@ public class WatchResources extends Thread implements Resources {
      * @throws IOException
      * @throws ImageProcessingException
      */
-    public WatchResources(String host, Path watchPath, Kind<?>[] watchKinds, Filtering accessFiltering, Filtering forbiddenFiltering, Filtering inMemoryFiltering, int inMemoryLimitSize) throws IOException, ImageProcessingException {
+    public WatchResources(String host, Path watchPath, Kind<?>[] watchKinds, Filtering accessFiltering, Filtering forbiddenFiltering, Filtering inMemoryFiltering, int inMemoryLimitSize) throws IOException {
         this.host = host;
         this.watchPath = watchPath;
         this.watchKind = watchKinds;
@@ -150,24 +150,26 @@ public class WatchResources extends Thread implements Resources {
                             Object data = null;
                             try {
                                 //When In-Memory resource
-                                if(this.accessFiltering.include(path.toFile().getName()) && this.forbiddenFiltering.exclude(path.toFile().getName())) {
-                                    Files.move(path, path, StandardCopyOption.ATOMIC_MOVE);                                          
+                                if(this.inMemoryFiltering.include(path.toFile().getName())) {
+                                    Files.move(path, path, StandardCopyOption.ATOMIC_MOVE);
                                     if(path.toFile().length() <= this.inMemoryLimitSize) {
-                                        LoggerFactory.getLogger(this.host).debug("[IN-MEMORY CREATED] Loaded to memory: "+((byte[])data).length);
+                                        LoggerFactory.getLogger(this.host).debug("[IN-MEMORY CREATED] Loaded to memory: "+path.toAbsolutePath());
                                         data = new ResourceInfo(path, true);
                                     } else {
                                         //When In-Memory limit and reject
                                         LoggerFactory.getLogger(this.host).debug("[IN-MEMORY CREATED] In-Memory file size overflow. Limit: "+UNIT.MB.get(this.inMemoryLimitSize, 2)+"  File size: "+UNIT.MB.get(path.toFile().length(), 2));
                                         data = new ResourceInfo(path, false);
-                                    }                                    
+                                    }
                                 } else {
                                     // When File resource   
+                                    LoggerFactory.getLogger(this.host).debug("[EXCLUDE IN-MEMORY FILTER] Exclude on In-Memory resources: "+path.toAbsolutePath());
                                     data = new ResourceInfo(path, false);
                                 }
                             } catch(Exception e) {
+                                e.printStackTrace();
                                 continue;
                             }
-                        String[] paths = path.subpath(this.watchPath.getNameCount(), path.getNameCount()).toString().split(Pattern.quote(File.separator));
+                            String[] paths = path.subpath(this.watchPath.getNameCount(), path.getNameCount()).toString().split(Pattern.quote(File.separator));
                             addResource(this.resourceTree, paths, data);
                         }
                     } else if(event.kind() == StandardWatchEventKinds.ENTRY_DELETE) {
@@ -196,7 +198,7 @@ public class WatchResources extends Thread implements Resources {
      * @throws IOException
      * @throws ImageProcessingException
      */
-    protected Map<String, Object> loadResoureTree(Path path, Map<String, Object> tree) throws IOException, ImageProcessingException {
+    protected Map<String, Object> loadResoureTree(Path path, Map<String, Object> tree) throws IOException {
         File[] files = path.toFile().listFiles();
         for(File file : files) {
             if(file.isDirectory()) {
@@ -207,13 +209,13 @@ public class WatchResources extends Thread implements Resources {
                     if(file.getParentFile().getName().equals("template") || this.accessFiltering.include(file.getName())) {
                         if(this.forbiddenFiltering.exclude(file.getName())) {
                             if(file.length() <= this.inMemoryLimitSize && this.inMemoryFiltering.include(file.getName())) {
-                                System.out.println(file.getAbsolutePath());
+                                //System.out.println(file.getAbsolutePath());
                                 tree.put(file.getName(), new ResourceInfo(file.toPath(), true));
                                 LoggerFactory.getLogger(this.host).debug("[HOST:"+this.host+"][LOAD] In-Memory resource loaded: "+file.getName()+"  Size: "+fileSize+"  Bytes: "+file.length());
                             } else {
                                 tree.put(file.getName(), new ResourceInfo(file.toPath(), false));
                                 LoggerFactory.getLogger(this.host).debug("[HOST:"+this.host+"][LOAD] File resource loaded: "+file.getName()+"  Size: "+fileSize+"  Bytes: "+file.length());
-                            }    
+                            }
                         } else {
                             LoggerFactory.getLogger(this.host).debug("[HOST:"+this.host+"][EXCLUDING] Forbidden resource: "+file.getName()+"  Size: "+fileSize+"  Bytes: "+file.length());
                         }
@@ -258,6 +260,36 @@ public class WatchResources extends Thread implements Resources {
     }
 
     /**
+     * Filtering resource tree and get filtered resource List
+     * @param resourceTree
+     * @param mimeType
+     * @return
+     */
+    private Map<String, ResourceInfo> filterResourceTree(Map<String, Object> resourceTree, MIME_TYPE mimeType) {
+        Map<String, ResourceInfo> infos = new HashMap<String, ResourceInfo>();
+        for(Object obj : resourceTree.values()) {
+            if(obj instanceof ResourceInfo) {
+                ResourceInfo info = (ResourceInfo) obj;
+                if(info.getMimeType() == mimeType) {
+                    infos.put(info.getContextPath(), info);
+                }
+            } else if(obj instanceof Map) {
+                infos.putAll(filterResourceTree((Map<String, Object>)obj, mimeType));
+            }
+        }
+        return infos;
+    }
+
+    /**
+     * Filtering and get resource List by mime-type
+     * @param mimeType
+     * @return
+     */
+    public Map<String, ResourceInfo> filter(MIME_TYPE mimeType) {
+        return filterResourceTree(this.resourceTree, mimeType);
+    }
+
+    /**
      * Get resource data
      * @param tree
      * @param res
@@ -272,7 +304,7 @@ public class WatchResources extends Thread implements Resources {
     }
 
     @Override
-    public void addResource(Path resourcePath) throws IOException, ImageProcessingException { 
+    public void addResource(Path resourcePath) throws IOException { 
         if(resourcePath.toFile().isFile() && this.accessFiltering.include(resourcePath.toFile().getName()) && this.forbiddenFiltering.exclude(resourcePath.toFile().getName())) {            
             Path path = resourcePath.subpath(this.watchPath.getNameCount(), resourcePath.getNameCount());
             if(this.inMemoryFiltering.include(resourcePath.toFile().getName())) {
@@ -291,6 +323,11 @@ public class WatchResources extends Thread implements Resources {
     }
 
     @Override
+    public String getContextPath(Path resourcePath) {
+        return resourcePath.subpath(this.watchPath.getNameCount(), resourcePath.getNameCount()).toString().replace("\\", "/");
+    }
+
+    @Override
     public ResourceInfo getResourceInfo(Path resourcePath) {
         if(this.accessFiltering.include(resourcePath.toFile().getName()) && this.forbiddenFiltering.exclude(resourcePath.toFile().getName())) {    
             Path path = resourcePath.subpath(this.watchPath.getNameCount(), resourcePath.getNameCount());
@@ -302,15 +339,11 @@ public class WatchResources extends Thread implements Resources {
 
     @Override
     public String getStaticPage(String contextPath, Map<String, Object> params) throws IOException {        
-        Object data = getContextResourceInfo(contextPath);
-        String page = "";
-        if(data instanceof byte[]) {
-            page = new String((byte[])data, HostsManager.get().getHosts(this.host).charset());
-        } else if(data instanceof File) {
-            page = Files.readString(((File)data).toPath());
-        } else {
-            new WASException(MSG_TYPE.HTTP, RES_CODE.RES404.getCode(), " Static page not found in Resource manager.");
+        ResourceInfo resourceInfo = getContextResourceInfo(contextPath);
+        if(resourceInfo == null) {
+            new WASException(MSG_TYPE.HTTP, RES_CODE.RES404.getCode(), " Static page not found in Resource manager: "+contextPath);
         }
+        String page = new String(resourceInfo.getBytes(), HostsManager.get().getHosts(this.host).charset());
         for(Entry<String, Object> e : params.entrySet()) {
             page = page.replace(e.getKey(), e.getValue()+"");
         }
@@ -349,35 +382,15 @@ public class WatchResources extends Thread implements Resources {
     }
 
     /**
-     * Extract resource metadata
-     * @param resourcePath
-     * @return
-     * @throws ImageProcessingException
-     * @throws IOException
-     */
-    public Map<String, Map<String, String>> extractMetadata(Path resourcePath) throws ImageProcessingException, IOException {
-        Map<String, Map<String, String>> metadataMap = new HashMap<>();
-        Metadata metadata = Mp4MetadataReader.readMetadata(resourcePath.toFile());
-        for (Directory directory : metadata.getDirectories()) {
-            if(directory.getTagCount() > 0) {
-                Map<String, String> tagMap = new HashMap<>();
-                for (Tag tag : directory.getTags()) {
-                    tagMap.put(tag.getTagName(), tag.getDescription());
-                }    
-                metadataMap.put(directory.getName(), tagMap);
-            }
-        }      
-        return metadataMap;
-    }
-
-    /**
      * ResourceInfo
      * 
      * @author 9ins
      */
     public class ResourceInfo {
 
-        final int BYTE_LIMIT = 1024 * 1000;
+        final int SPLIT_AMOUNT = 1024 * 1000;
+
+        String contextPath;
 
         Path resourcePath;
 
@@ -385,37 +398,45 @@ public class WatchResources extends Thread implements Resources {
 
         List<byte[]> resourceData;
 
-        Map<String, Map<String, String>> metadata;
-        
+        MIME_TYPE mimeType;
+
+        FileTime lastModified;
+
         /**
-         * Constructor
+         * Constructs with resource path & in-memory flag
          * @param resourcePath
          * @param inMemoryFlag
          * @throws IOException
          * @throws ImageProcessingException
          */
-        public ResourceInfo(Path resourcePath, boolean inMemoryFlag) throws IOException, ImageProcessingException {
+        public ResourceInfo(Path resourcePath, boolean inMemoryFlag) throws IOException {
             this.resourcePath = resourcePath;
             this.inMemoryFlag = inMemoryFlag;
-            System.out.println(resourcePath);
-            this.metadata = extractMetadata(this.resourcePath);
+            this.mimeType = MIME_TYPE.getMimeType(Files.probeContentType(this.resourcePath));
             if(this.inMemoryFlag) {
                 this.resourceData = new ArrayList<>();
-                FileInputStream fis = new FileInputStream(resourcePath.toFile());
-                long fileSize = this.resourcePath.toFile().length();
-                int cnt = (int)(fileSize / BYTE_LIMIT);
-                int rest = (int)(fileSize % BYTE_LIMIT);                
-                for(int i=0; i<cnt; i++) {
-                    byte[] part = new byte[BYTE_LIMIT];
+                try(FileInputStream fis = new FileInputStream(resourcePath.toFile())) {
+                    long fileSize = this.resourcePath.toFile().length();
+                    int cnt = (int)(fileSize / SPLIT_AMOUNT);
+                    int rest = (int)(fileSize % SPLIT_AMOUNT);
+                    for(int i=0; i<cnt; i++) {
+                        byte[] part = new byte[SPLIT_AMOUNT];
+                        fis.read(part);
+                        this.resourceData.add(part);
+                    }
+                    byte[] part = new byte[rest];
                     fis.read(part);
-                    this.resourceData.add(part);
-                }
-                byte[] part = new byte[rest];
-                fis.read(part);
-                this.resourceData.add(part);  
+                    this.resourceData.add(part);  
+                };
             }
+            this.lastModified = Files.getLastModifiedTime(this.resourcePath);
         }
 
+        /**
+         * Get all bytes on resource
+         * @return
+         * @throws IOException
+         */
         public byte[] getBytes() throws IOException {
             if(this.inMemoryFlag) {
                 ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -428,60 +449,166 @@ public class WatchResources extends Thread implements Resources {
             }
         }
 
-        public byte[] getBytes(long offset, int length) throws IOException {
+        /**
+         * Get partitial bytes of File resource by position & length
+         * @param position
+         * @param length
+         * @return
+         * @throws IOException
+         */
+        public byte[] getFileBytes(long position, int length) throws IOException {
+            ByteBuffer buffer = ByteBuffer.allocate(length);
+            try(FileInputStream fis = new FileInputStream(this.resourcePath.toFile())) {
+                FileChannel channel = fis.getChannel();
+                channel.position(position);
+                channel.read(buffer);
+                channel.close();
+                return buffer.array();    
+            }
+        }
+
+        /**
+         * Get bytes of resource(file or memory) with position & length
+         * @param position
+         * @param length
+         * @return
+         * @throws IOException
+         */
+        public byte[] getBytes(long position, int length) throws IOException {
             byte[] bytes = new byte[length];
             if(this.inMemoryFlag) {
-                if(offset < 0) {
+                if(position < 0) {
                     throw new IllegalArgumentException("Offset position must be on positive side of the digit.");
                 }
-                int len = 0;                
-                int start = (int)offset;
-                int end  = (int)(offset + length);
+                int start = (int)position;
+                int end  = (int)(position + length);
+                int posStart = 0, posEnd = 0;
                 for(int i=0; i<this.resourceData.size(); i++) {
                     byte[] data = this.resourceData.get(i);
-                    System.out.println("start: "+start+" end: "+end+"  range: "+(i*data.length)+" - "+(i + 1)*data.length);
-                    if(start >= i * data.length && start < (i + 1)*data.length) {
-                        if(end < (i + 1)*data.length) {
-                            System.out.println("begin exit "+start+"  "+length);
-                            System.arraycopy(data, start - i*data.length, bytes, 0, length);
+                    posEnd += data.length;
+                    posStart = posEnd - data.length;
+                    //System.out.println("start: "+start+" end: "+end+"  range: "+posStart+" - "+posEnd+"  i: "+i);
+                    if(start >= posStart && start < posEnd) {
+                        if(end <= posEnd) {
+                            //System.out.println("being exit "+start+"  "+length);
+                            System.arraycopy(data, start - posStart, bytes, 0, length);
                             break;
                         } else {
-                            len += (i + 1)*data.length - start;
-                            System.out.println("begin "+start+"  "+len);
-                            System.arraycopy(data, start - i*data.length, bytes, 0, len);
-                        }   
-                    } else if(end >= i * data.length  && end < (i + 1)*data.length) {
-                        System.out.println("end  len: "+len);
-                        System.arraycopy(data, 0, bytes, len, bytes.length - len);
-                        break;
-                    } else if(start < i * data.length  && end > (i + 1)*data.length) {
-                        System.out.println("middle ");
-                        System.arraycopy(data, 0, bytes, i * data.length , data.length);
-                        len += data.length;
+                            System.arraycopy(data, start - posStart, bytes, 0, posEnd - start);
+                            byte[] data1 = this.resourceData.get(i+1);
+                            //System.out.println("begin "+start+"  data: "+data1.length+"  len: "+(data.length - (start - posStart)));
+                            System.arraycopy(data1, 0, bytes, posEnd - start, end - start - (posEnd - start));
+                            break;
+                        }
                     }
                 }
             } else {
-                FileInputStream fis = new FileInputStream(this.resourcePath.toFile());
-                fis.skip(offset);
-                fis.read(bytes);
+                bytes = getFileBytes(position, length);
             }
             return bytes;
         }
-        
-        public String getMetadataValue(String type, String key) {
-            return this.metadata.get(type).get(key);
+
+        /**
+         * Get bytes of resource(file or memory) with position & length
+         * @param position
+         * @param length
+         * @return
+         * @throws IOException
+         */
+        public byte[] getBytes2(long position, int length) throws IOException {
+            byte[] data = new byte[length];
+            if(this.inMemoryFlag) {
+                if(position < 0) {
+                    throw new IllegalArgumentException("Offset position must be on positive side of the digit.");
+                }
+                long totalLen = this.resourcePath.toFile().length();
+                int partCnt = this.resourceData.size();
+                int partSize = (int)(totalLen / partCnt);
+                int partIdx1 = (int)(position / partSize);
+                
+                partIdx1 = position % partSize > 0 ? partIdx1++ : partIdx1;
+                int partIdx2 = (int)((position + partSize) / partSize);    
+                partIdx2 = 
+                int buffSize = (int)(totalLen / length);
+                int buffIdx1 = (int)(position / length);
+                System.out.println("partIdx1: "+partIdx1+"  partIdx2: "+partIdx2+"  buffSize: "+buffSize+"  buffIdx1: "+buffIdx1);
+                if(partIdx1 == partIdx2) {
+                    byte[] part = this.resourceData.get(partIdx1);
+                    int idx = (int)position;
+                    System.arraycopy(part, idx, data, 0, length);
+                } else {
+                    if(partIdx2 - partIdx1 == 1) {
+                        byte[] part = this.resourceData.get(partIdx1);
+                        int idx = (int)(position % buffSize);
+                        System.arraycopy(part, idx, data, 0, length - idx);
+                        part = this.resourceData.get(partIdx2 - 1);
+                        System.arraycopy(part, 0, data, length - idx, length - (length - idx));
+                    } else {
+                        byte[] part = this.resourceData.get(partIdx1 - 1);
+                        int idx = (int)(position % buffSize);
+                        System.arraycopy(part, idx, data, 0, length - idx);
+                        for(int i=partIdx1+1; i<partIdx2; i++) {
+                            part = this.resourceData.get(i);
+                            System.arraycopy(part, 0, data, 0, length);
+                        }
+                        part = this.resourceData.get(partIdx2 - 1);
+                        idx = (int)((position + length) % buffSize);
+                        System.arraycopy(part, 0, data, 0, length - idx);
+                    }
+                }
+            } else {
+                data = getFileBytes(position, length);
+            }
+            return data;     
         }
 
+        /**
+         * Get resource Path object
+         * @return
+         */
         public Path getResourcePath() {
             return this.resourcePath;
         }
 
+        /**
+         * Get context path of resource
+         * @return
+         */
+        public String getContextPath() {
+            return this.contextPath;
+        }
+
+        /**
+         * Get resource name
+         * @return
+         */
         public String getResourceName() {
             return this.resourcePath.getFileName().toString();
         }
 
+        /**
+         * Get resurce size
+         * @return
+         */
         public long getResourceSize() {
             return this.resourcePath.toFile().length();
+        }
+
+        /**
+         * Get mime-type of resource
+         * @return
+         */
+        public MIME_TYPE getMimeType() {
+            return this.mimeType;
+        }
+
+        /**
+         * Get last modified time of specfied unit
+         * @param timeUnit
+         * @return
+         */
+        public long getTime(TimeUnit timeUnit) {
+            return this.lastModified.to(timeUnit);
         }
     }
 }

@@ -3,8 +3,8 @@ package org.chaostocosmos.leap.http.services;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
-import org.chaostocosmos.leap.http.HttpResponseDescriptor;
 import org.chaostocosmos.leap.http.HttpTransferBuilder.HttpTransfer;
+import org.chaostocosmos.leap.http.Response;
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.resources.Context;
@@ -28,8 +28,8 @@ public class ServiceInvoker {
      * @throws Exception
      * @throws CloneNotSupportedException
      */
-    public static HttpResponseDescriptor invokeService(ServiceHolder serviceHolder, HttpTransfer httpTransfer, boolean doClone) throws Throwable {
-        HttpResponseDescriptor response = httpTransfer.getResponse();
+    public static Response invokeService(ServiceHolder serviceHolder, HttpTransfer httpTransfer, boolean doClone) throws Throwable {
+        Response response = httpTransfer.getResponse();
         AbstractLeapService service = (AbstractLeapService)serviceHolder.getService();
         try {
             if(doClone) {
@@ -38,9 +38,8 @@ public class ServiceInvoker {
             } else {
                 synchronized(service) {
                     response = service.serve(httpTransfer, serviceHolder.getServiceMethod());
-                }                
+                }
             }
-            
         } catch(Throwable e) {
             if(service.errorHandling(httpTransfer.getResponse(), e) != null) {
                 throw e;

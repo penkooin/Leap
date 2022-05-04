@@ -3,7 +3,7 @@ package org.chaostocosmos.leap.http.filters;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
-import org.chaostocosmos.leap.http.HttpRequestDescriptor;
+import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.annotation.PreFilter;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
@@ -20,8 +20,8 @@ public class BasicAuthFilter<R, S> extends AbstractHttpFilter<R, S> implements I
     @PreFilter
     public void filterRequest(R r) throws Exception { 
         super.filterRequest(r);
-        if(r.getClass().isAssignableFrom(HttpRequestDescriptor.class)) {
-            HttpRequestDescriptor request = (HttpRequestDescriptor)r;
+        if(r.getClass().isAssignableFrom(Request.class)) {
+            Request request = (Request)r;
             final String authorization = request.getReqHeader().get("Authorization");
             if (authorization != null && authorization.trim().startsWith("Basic")) {
                 String base64Credentials = authorization.trim().substring("Basic".length()).trim();
@@ -44,7 +44,6 @@ public class BasicAuthFilter<R, S> extends AbstractHttpFilter<R, S> implements I
         if(super.userManager == null) {
             throw new IllegalStateException("Leap security manager not set. Can not sing in with "+username+"/"+password);
         }   
-        //System.out.println(username + ":" + password+" "+super.userManager);
         return super.userManager.signIn(username, password);
     }
 

@@ -1,7 +1,6 @@
 package org.chaostocosmos.leap.http;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.URISyntaxException;

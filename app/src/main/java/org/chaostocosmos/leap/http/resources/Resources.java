@@ -3,6 +3,7 @@ package org.chaostocosmos.leap.http.resources;
 import java.nio.file.Path;
 import java.util.Map;
 
+import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.resources.WatchResources.ResourceInfo;
 
 /**
@@ -11,6 +12,20 @@ import org.chaostocosmos.leap.http.resources.WatchResources.ResourceInfo;
  * @author 9ins
  */
 public interface Resources {
+
+    /**
+     * Filtering and get resource List by mime-type
+     * @param mimeType
+     * @return
+     */
+    public Map<String, ResourceInfo> filter(MIME_TYPE mimeType);
+
+    /**
+     * Get context mapping with local Path
+     * @param resourcePath
+     * @return
+     */
+    public String getContextPath(Path resourcePath);
 
     /**
      * Add resource 

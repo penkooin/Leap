@@ -2,8 +2,8 @@ package org.chaostocosmos.leap.http.services;
 
 import java.util.List;
 
-import org.chaostocosmos.leap.http.HttpRequestDescriptor;
-import org.chaostocosmos.leap.http.HttpResponseDescriptor;
+import org.chaostocosmos.leap.http.Request;
+import org.chaostocosmos.leap.http.Response;
 import org.chaostocosmos.leap.http.annotation.AutowiredJPA;
 import org.chaostocosmos.leap.http.annotation.FilterMapper;
 import org.chaostocosmos.leap.http.annotation.MethodMappper;
@@ -26,7 +26,7 @@ public class SimpleJPAService extends AbstractLeapService {
 
     @MethodMappper(mappingMethod = REQUEST_TYPE.GET, path="/users")
     @FilterMapper(preFilters = {BasicHttpFilter.class})    
-    public void getUsers(HttpRequestDescriptor request, HttpResponseDescriptor response) {
+    public void getUsers(Request request, Response response) {
         System.out.println("Simple JPA Service called.......................................");
         System.out.println(usersRepo);
         List<Users> userList = usersRepo.findByName("Tim");
@@ -39,13 +39,13 @@ public class SimpleJPAService extends AbstractLeapService {
             usersRepo.save(users);
         }
         System.out.println(userList.toString()+" ((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((");
-        response.setStatusCode(200);
+        response.setResponseCode(200);
         //response.setBody(userList.toString());
         response.setBody(springService.helloLeap());
     }    
 
     @Override
-    public Throwable errorHandling(HttpResponseDescriptor response, Throwable throwable) throws Throwable {
+    public Throwable errorHandling(Response response, Throwable throwable) throws Throwable {
         return throwable;
     }    
 }

@@ -11,39 +11,42 @@ import java.util.Map;
  * @author 9ins
  * @since 2021.09.18
  */
-public class HttpResponseDescriptor {
+public class Response {
     /**
      * Http request descriptor
      */
-    private HttpRequestDescriptor httpRequestDescriptor;
+    private Request httpRequestDescriptor;
+    
     /**
      * Response code
      */
-    private int statusCode;    
+    private int responseCode;    
+    
     /**
      * Response body
      */
     private Object responseBody;
+    
     /**
      * Body length
      */
     private long contentLength;
+    
     /**
      * Response header map
      */
     private Map<String, List<Object>> headers;
+
     /**
      * Construct with parameters
      * @param httpRequestDescriptor
-     * @param response
-     */
-    public HttpResponseDescriptor(HttpRequestDescriptor httpRequestDescriptor, 
-                                  int statusCode,
-                                  Object responseBody,                                   
-                                  Map<String, List<Object>> headers
-                                  ) {
+     * @param statusCode
+     * @param responseBody
+     * @param headers
+     */ 
+    public Response(Request httpRequestDescriptor, int statusCode, Object responseBody, Map<String, List<Object>> headers) {
         this.httpRequestDescriptor = httpRequestDescriptor;
-        this.statusCode = statusCode;
+        this.responseCode = statusCode;
         this.responseBody = responseBody;
         this.headers = headers;
         if(responseBody != null) {
@@ -55,11 +58,11 @@ public class HttpResponseDescriptor {
      * Get HttpRequestDescriptor object
      * @return
      */
-    public HttpRequestDescriptor getHttpRequestDescriptor() {
+    public Request getHttpRequestDescriptor() {
         return this.httpRequestDescriptor;
     }
 
-    public void setHttpRequestDescriptor(HttpRequestDescriptor httpRequestDescriptor) {
+    public void setHttpRequestDescriptor(Request httpRequestDescriptor) {
         this.httpRequestDescriptor = httpRequestDescriptor;
     }
 
@@ -74,12 +77,12 @@ public class HttpResponseDescriptor {
         this.httpRequestDescriptor.setRequestedHost(requestedHost);
     }
 
-    public int getStatusCode() {
-        return this.statusCode;
+    public int getResponseCode() {
+        return this.responseCode;
     }
 
-    public void setStatusCode(int statusCode) {
-        this.statusCode = statusCode;
+    public void setResponseCode(int responseCode) {
+        this.responseCode = responseCode;
     }
 
     public Object getBody() {
@@ -132,11 +135,11 @@ public class HttpResponseDescriptor {
     @Override
     public String toString() {
         return "{" +
-            " httpRequestDescriptor='" + getHttpRequestDescriptor() + "'" +
-            ", statusCode='" + getStatusCode() + "'" +
-            ", responseBody='" + getBody() + "'" +
-            ", contentLength='" + getContentLength() + "'" +
-            ", headers='" + getHeaders() + "'" +
+            " httpRequestDescriptor='" + httpRequestDescriptor + "'" +
+            ", responseCode='" + responseCode + "'" +
+            ", responseBody='" + responseBody + "'" +
+            ", contentLength='" + contentLength + "'" +
+            ", headers='" + headers + "'" +
             "}";
-    }
+    }    
 }

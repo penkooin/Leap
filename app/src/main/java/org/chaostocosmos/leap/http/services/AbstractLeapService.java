@@ -3,9 +3,9 @@ package org.chaostocosmos.leap.http.services;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import org.chaostocosmos.leap.http.HttpRequestDescriptor;
-import org.chaostocosmos.leap.http.HttpResponseDescriptor;
 import org.chaostocosmos.leap.http.HttpTransferBuilder.HttpTransfer;
+import org.chaostocosmos.leap.http.Request;
+import org.chaostocosmos.leap.http.Response;
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.annotation.AnnotationHelper;
 import org.chaostocosmos.leap.http.annotation.AnnotationOpr;
@@ -13,6 +13,7 @@ import org.chaostocosmos.leap.http.annotation.PostFilter;
 import org.chaostocosmos.leap.http.annotation.PreFilter;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
+import org.chaostocosmos.leap.http.enums.RES_CODE;
 import org.chaostocosmos.leap.http.filters.ILeapFilter;
 import org.chaostocosmos.leap.http.resources.Context;
 import org.chaostocosmos.leap.http.resources.Resources;
@@ -59,11 +60,12 @@ public abstract class AbstractLeapService implements IGetService, IPostService, 
     protected HttpTransfer httpTransfer;
 
     @Override
-    public HttpResponseDescriptor serve(HttpTransfer httpTransfer, Method invokingMethod) throws Exception {        
+    public Response serve(final HttpTransfer httpTransfer, final Method invokingMethod) throws Exception {        
         this.logger = LoggerFactory.getLogger(httpTransfer.getRequest().getRequestedHost());
         this.httpTransfer = httpTransfer;
         this.invokingMethod = invokingMethod;
         this.resource = this.httpTransfer.getHosts().getResource();
+
         if(this.preFilters != null) {
             for(ILeapFilter filter : this.preFilters) {
                 List<Method> methods = AnnotationHelper.getFilterMethods(filter, PreFilter.class); 
@@ -72,8 +74,15 @@ public abstract class AbstractLeapService implements IGetService, IPostService, 
                 }
             }
         }        
-        HttpRequestDescriptor request = httpTransfer.getRequest();
-        HttpResponseDescriptor response = httpTransfer.getResponse();
+        Request request = httpTransfer.getRequest();
+        Response response = httpTransfer.getResponse();
+
+        Class<?>[] paramTypes = this.invokingMethod.getParameterTypes();
+        if(paramTypes.length != 2 || paramTypes[0] != request.getClass() || paramTypes[1] != response.getClass()) {
+            //org.chaostocosmos.leap.http.WASException: Not Implemented.
+            throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES501.getCode(), Context.getErrorMsg(201, this.invokingMethod.getName()));
+        }
+
         //setting JPA link
         new AnnotationOpr<ILeapService>(httpTransfer.getHosts().getHost(), this).injectToAutowired();
         //aOpr.injectToAutowired();
@@ -105,30 +114,36 @@ public abstract class AbstractLeapService implements IGetService, IPostService, 
     }
 
     @Override
-    public void serveGet(HttpRequestDescriptor request, HttpResponseDescriptor response) throws Exception {
+    public void serveGet(final Request request, final Response response) throws Exception {        
         this.invokingMethod.invoke(this, request, response);
     }
 
     @Override
-    public void servePost(HttpRequestDescriptor request, HttpResponseDescriptor response) throws Exception {
+    public void servePost(final Request request, final Response response) throws Exception {
         this.invokingMethod.invoke(this, request, response);
     }
 
     @Override
-    public void servePut(HttpRequestDescriptor request, HttpResponseDescriptor response) throws Exception {
+    public void servePut(final Request request, final Response response) throws Exception {
         this.invokingMethod.invoke(this, request, response);
     }
 
     @Override
-    public void serveDelete(HttpRequestDescriptor request, HttpResponseDescriptor response) throws Exception {
+    public void serveDelete(final Request request, final Response response) throws Exception {
         this.invokingMethod.invoke(this, request, response);
     }    
 
     @Override
-    public void setFilters(List<ILeapFilter> preFilters, List<ILeapFilter> postFilters) {
+    public void setFilters(final List<ILeapFilter> preFilters, final List<ILeapFilter> postFilters) {
         this.preFilters = preFilters;
         this.postFilters = postFilters;
     } 
+
+    @Override
+    public void sendResponse(final Response response) throws Throwable {
+        this.httpTransfer.sendResponse(response);
+        this.httpTransfer.close();     
+    }
 
     @Override
     public Resources getResource() {
@@ -141,7 +156,7 @@ public abstract class AbstractLeapService implements IGetService, IPostService, 
     }
 
     @Override
-    public void setServiceManager(ServiceManager serviceManager) {
+    public void setServiceManager(final ServiceManager serviceManager) {
         this.serviceManager = serviceManager;
     }
 

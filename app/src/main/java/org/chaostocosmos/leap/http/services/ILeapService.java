@@ -3,8 +3,8 @@ package org.chaostocosmos.leap.http.services;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import org.chaostocosmos.leap.http.HttpResponseDescriptor;
 import org.chaostocosmos.leap.http.HttpTransferBuilder.HttpTransfer;
+import org.chaostocosmos.leap.http.Response;
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.filters.ILeapFilter;
 import org.chaostocosmos.leap.http.resources.Resources;
@@ -21,7 +21,7 @@ public interface ILeapService extends IJPAModel, Cloneable {
      * @param serviceMethod
      * @throws Exception
      */
-    public HttpResponseDescriptor serve(HttpTransfer httpTransfer, Method serviceMethod) throws Throwable;
+    public Response serve(final HttpTransfer httpTransfer, final Method serviceMethod) throws Throwable;
 
     /**
      * Set filters
@@ -29,13 +29,13 @@ public interface ILeapService extends IJPAModel, Cloneable {
      * @param postFilters
      * @throws WASException
      */
-    public void setFilters(List<ILeapFilter> preFilters, List<ILeapFilter> postFilters);
+    public void setFilters(final List<ILeapFilter> preFilters, final List<ILeapFilter> postFilters);
 
     /**
      * Set Leap security manager object
      * @param serviceManager
      */
-    public void setServiceManager(ServiceManager serviceManager);
+    public void setServiceManager(final ServiceManager serviceManager);
 
     /**
      * Get Resource object
@@ -49,9 +49,16 @@ public interface ILeapService extends IJPAModel, Cloneable {
     public ServiceManager getServiceManager();
 
     /**
+     * Send response to client
+     * @param response
+     * @throws Throwable
+     */
+    public void sendResponse(final Response response) throws Throwable;
+
+    /**
      * Service error handle method
      * @param response
-     * @param throwable
+     * @param t
      */
-    public Throwable errorHandling(HttpResponseDescriptor response, Throwable throwable) throws Throwable;
+    public Throwable errorHandling(final Response response, Throwable t) throws Throwable;
 }

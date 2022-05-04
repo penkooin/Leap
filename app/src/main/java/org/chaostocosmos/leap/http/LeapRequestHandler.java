@@ -74,8 +74,8 @@ public class LeapRequestHandler implements Runnable {
     @Override
     @Benchmark
     public void run() {
-        HttpRequestDescriptor request = null;
-        HttpResponseDescriptor response = null;
+        Request request = null;
+        Response response = null;
         HttpTransfer httpTransfer = null;
         try {
             httpTransfer = HttpTransferBuilder.buildHttpTransfer(httpServer.getHost(), this.client);
@@ -105,7 +105,7 @@ public class LeapRequestHandler implements Runnable {
                     String body = hosts.getResource().getWelcomePage(Map.of("@serverName", hosts.getHost()));
                     response.addHeader("Content-Type", MIME_TYPE.TEXT_HTML.getMimeType());
                     response.setBody(body.getBytes());
-                    response.setStatusCode(RES_CODE.RES200.getCode());
+                    response.setResponseCode(RES_CODE.RES200.getCode());
                 } else {
                     if (hosts.getResource().exists(resourcePath)) {
                         //Get requested resource data
@@ -115,7 +115,7 @@ public class LeapRequestHandler implements Runnable {
                                 LinkedHashMap<String, Object> resourceMap = (LinkedHashMap<String, Object>) resource;
                                 String body = Html.makeResourceHtml(request.getContextPath(), hosts, resourceMap.keySet().stream().collect(Collectors.toList()));
                                 String mimeType = MIME_TYPE.TEXT_HTML.getMimeType();
-                                response.setStatusCode(RES_CODE.RES200.getCode());
+                                response.setResponseCode(RES_CODE.RES200.getCode());
                                 response.addHeader("Content-Type", mimeType+"; charset="+hosts.charset());
                                 response.setBody(body);
                                 //LoggerFactory.getLogger(hosts.getHost()).debug("RESOURCE LIST REQUESTED: "+body);    
@@ -125,7 +125,7 @@ public class LeapRequestHandler implements Runnable {
                                 if(mimeType == null) {
                                     mimeType = MIME_TYPE.APPLICATION_OCTET_STREAM.getMimeType();
                                 }
-                                response.setStatusCode(RES_CODE.RES200.getCode());
+                                response.setResponseCode(RES_CODE.RES200.getCode());
                                 response.addHeader("Content-Type", mimeType);
                                 response.setBody(resourceInfo.getBytes());
                                 LoggerFactory.getLogger(hosts.getHost()).debug("DOWNLOAD RESOURCE MIME-TYPE: "+mimeType);    
@@ -138,18 +138,25 @@ public class LeapRequestHandler implements Runnable {
                     }
                 }
             }                 
-            if(response != null) {
+            if(!httpTransfer.isClosed()) {
                 //Send response to client
                 httpTransfer.sendResponse(response);
             }
-            if(httpTransfer != null) {
-                httpTransfer.close();
-            }                
         } catch(SocketTimeoutException e) {
             LoggerFactory.getLogger(httpTransfer.getHosts().getHost()).error("[SOCKET TIME OUT] Client socket timeout occurred.");
         } catch(Throwable e) {
-            LoggerFactory.getLogger(httpTransfer.getHosts().getHost()).error(e.getMessage(), e);
-            processError(httpTransfer, e);
+            e.printStackTrace();
+            try {
+                if(!httpTransfer.isClosed()) {
+                    processError(httpTransfer, e);
+                }
+            } catch (Exception ex) {
+                LoggerFactory.getLogger(httpTransfer.getHosts().getHost()).error(e.getMessage(), ex);
+            }
+        } finally {
+            if(httpTransfer != null) {
+                httpTransfer.close();
+            }
         }
     }
 
@@ -160,32 +167,29 @@ public class LeapRequestHandler implements Runnable {
      * @throws WASException
      * @throws IOException
      */
-    public void processError(HttpTransfer httpTransfer, Throwable error) {
-        try {            
-            String requestedHost = httpTransfer.getHosts().getHost();
-            Throwable t = getCaused(requestedHost, error);
-            int resCode = -1;
-            MSG_TYPE msgType = null;
-            if(t instanceof WASException) {
-                WASException w = (WASException)t;
-                resCode = w.getCode();
-                msgType = w.getMessageType();
-            } else {
-                resCode = 500;
-                msgType = MSG_TYPE.HTTP;
-            }
-            if(!HostsManager.get().isExistHost(requestedHost)) {
-                requestedHost = Context.getDefaultHost();
-            }
-            Map<String, List<Object>> headers = HttpTransferBuilder
-                                                .addHeader(new HashMap<String, List<Object>>(), 
-                                                "Content-Type", 
-                                                "text/html; charset="+httpTransfer.getHosts().charset());
-            Object body = t != null ? HttpTransferBuilder.buildErrorResponse(requestedHost, msgType, resCode, t.getMessage()) : Context.getHttpMsg(resCode);
-            httpTransfer.sendResponse(requestedHost, resCode, headers, body);    
-        } catch(Exception e) {
-            LoggerFactory.getLogger(httpTransfer.getHosts().getHost()).error(e.getMessage(), e);
+    public void processError(HttpTransfer httpTransfer, Throwable error) throws Exception {        
+        String requestedHost = httpTransfer.getHosts().getHost();
+        Throwable t = getCaused(requestedHost, error);
+        int resCode = -1;
+        MSG_TYPE msgType = null;
+        if(t instanceof WASException) {
+            WASException w = (WASException)t;
+            resCode = w.getCode();
+            msgType = w.getMessageType();
+        } else {
+            resCode = 500;
+            msgType = MSG_TYPE.HTTP;
         }
+        if(!HostsManager.get().isExistHost(requestedHost)) {
+            requestedHost = Context.getDefaultHost();
+        }
+        System.out.println(requestedHost+"/error?code="+resCode+"&type="+msgType+"&message="+Context.getHttpMsg(resCode));
+
+        Map<String, List<Object>> headers = new HashMap<String, List<Object>>();
+        headers = HttpTransferBuilder.addHeader(headers, "Content-Type", "text/html; charset="+httpTransfer.getHosts().charset());
+        headers = HttpTransferBuilder.addHeader(headers, "Location", "/error?code="+resCode+"&type="+msgType+"&message="+Context.getHttpMsg(resCode));
+        //Object body = t != null ? HttpTransferBuilder.buildErrorResponse(requestedHost, msgType, resCode, t.getMessage()) : Context.getHttpMsg(resCode);
+        httpTransfer.sendResponse(requestedHost, RES_CODE.RES307.getCode(), headers, "Redirect");            
     }
 
     /**
@@ -194,19 +198,16 @@ public class LeapRequestHandler implements Runnable {
      * @return
      */
     public Throwable getCaused(String host, Throwable e) {        
-        Throwable throwable = null;
         Throwable top = e;
         int level = 0;
         do {
-            throwable = e.getCause();
-            LoggerFactory.getLogger(host).debug("[FOUND CAUSED] "+throwable);
-            if(throwable instanceof WASException || throwable == null || top.equals(throwable)) {
-                throwable = e;
+            LoggerFactory.getLogger(host).debug("[FOUND CAUSED] "+e);
+            if(e instanceof WASException || e == null) {
                 break;
             }
-            top = throwable;
+            e = e.getCause();
             level++;
-        } while(level < 10);
-        return throwable;   
+        } while(level < 5);
+        return e;   
     }
 }
