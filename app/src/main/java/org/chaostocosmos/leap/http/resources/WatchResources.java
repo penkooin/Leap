@@ -467,6 +467,21 @@ public class WatchResources extends Thread implements Resources {
             }
         }
 
+        public byte[] getBytes(long position, int length) throws IOException {
+            byte[] bytes = new byte[length];
+            if(this.inMemoryFlag) {
+                if(position < 0) {
+                    //throw new IllegalArgumentException("Offset position must be on positive side of the digit.");
+                    position = 0;
+                }
+                int start = 0, end = 0;
+
+            } else {
+                bytes = getFileBytes(position, length);
+            }
+            return bytes;            
+        }
+
         /**
          * Get bytes of resource(file or memory) with position & length
          * @param position
@@ -474,7 +489,7 @@ public class WatchResources extends Thread implements Resources {
          * @return
          * @throws IOException
          */
-        public byte[] getBytes(long position, int length) throws IOException {
+        public byte[] getBytes1(long position, int length) throws IOException {
             byte[] bytes = new byte[length];
             if(this.inMemoryFlag) {
                 if(position < 0) {
@@ -483,6 +498,7 @@ public class WatchResources extends Thread implements Resources {
                 int start = (int)position;
                 int end  = (int)(position + length);
                 int posStart = 0, posEnd = 0;
+                int idx = 0;
                 for(int i=0; i<this.resourceData.size(); i++) {
                     byte[] data = this.resourceData.get(i);
                     posEnd += data.length;
@@ -490,15 +506,27 @@ public class WatchResources extends Thread implements Resources {
                     //System.out.println("start: "+start+" end: "+end+"  range: "+posStart+" - "+posEnd+"  i: "+i);
                     if(start >= posStart && start < posEnd) {
                         if(end <= posEnd) {
-                            //System.out.println("being exit "+start+"  "+length);
                             System.arraycopy(data, start - posStart, bytes, 0, length);
                             break;
                         } else {
-                            System.arraycopy(data, start - posStart, bytes, 0, posEnd - start);
-                            byte[] data1 = this.resourceData.get(i+1);
-                            //System.out.println("begin "+start+"  data: "+data1.length+"  len: "+(data.length - (start - posStart)));
-                            System.arraycopy(data1, 0, bytes, posEnd - start, end - start - (posEnd - start));
-                            break;
+                            idx = posEnd - start;
+                            System.arraycopy(data, start - posStart, bytes, 0, idx);
+                            continue;
+                        }
+                    } else if(start < posStart) {
+                        if(end < posEnd) {
+                            //System.out.println("begin "+start+"  end: "+end+" data: "+data.length+"  posStart: "+posStart+"  posEnd: "+posEnd);
+                            int len = posStart + (posEnd - end);
+                            if(idx + len < end) {
+                                System.arraycopy(data, 0, bytes, idx, len);
+                            } else {
+                                System.arraycopy(data, 0, bytes, idx, posEnd - len);
+                            }
+                            break;    
+                        } else {
+                            System.arraycopy(data, 0, bytes, idx, data.length);
+                            //System.out.println("idx: "+idx);
+                            idx += data.length;
                         }
                     }
                 }
