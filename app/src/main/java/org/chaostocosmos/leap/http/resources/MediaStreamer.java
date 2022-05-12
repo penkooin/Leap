@@ -61,7 +61,7 @@ public class MediaStreamer {
      * @throws IOException
      */
     public byte[] getProgress(long offset, int amount) throws IOException {        
-        return this.resourceInfo.getBytes2(offset, amount);    
+        return this.resourceInfo.getBytes(offset, amount);    
     }
 }
 

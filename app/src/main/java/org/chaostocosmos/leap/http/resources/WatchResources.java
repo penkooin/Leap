@@ -528,7 +528,6 @@ public class WatchResources extends Thread implements Resources {
                 
                 partIdx1 = position % partSize > 0 ? partIdx1++ : partIdx1;
                 int partIdx2 = (int)((position + partSize) / partSize);    
-                partIdx2 = 
                 int buffSize = (int)(totalLen / length);
                 int buffIdx1 = (int)(position / length);
                 System.out.println("partIdx1: "+partIdx1+"  partIdx2: "+partIdx2+"  buffSize: "+buffSize+"  buffIdx1: "+buffIdx1);

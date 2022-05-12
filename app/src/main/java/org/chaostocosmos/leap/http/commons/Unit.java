@@ -1,9 +1,9 @@
 package org.chaostocosmos.leap.http.commons;
 
-import javax.transaction.NotSupportedException;
-
 /**
  * Unit enum
+ * 
+ * @author 9ins
  */
 public enum UNIT {
     MS(1),
@@ -45,9 +45,8 @@ public enum UNIT {
      * Get time by unit
      * @param time
      * @return
-     * @throws NotSupportedException
      */
-    public long get(long time) throws NotSupportedException {
+    public long get(long time) {
         if(!name().equals("MS") 
             && !name().equals("SE") 
             && !name().equals("MI") 
@@ -56,7 +55,7 @@ public enum UNIT {
             && !name().equals("WK") 
             && !name().equals("MO") 
             && !name().equals("YR")) {
-            throw new NotSupportedException("This method is only support time unit.");
+            throw new RuntimeException("This method is only support time unit.");
         }
         return (long)(this.unit * time);
     }
@@ -66,16 +65,15 @@ public enum UNIT {
      * @param bytes
      * @param fractionPoint
      * @return
-     * @throws NotSupportedException
      */
-    public double get(long bytes, int fractionPoint) throws NotSupportedException {        
+    public double get(long bytes, int fractionPoint) {        
         if(!name().equals("BYTE")
             && !name().equals("KB") 
             && !name().equals("MB") 
             && !name().equals("GB") 
             && !name().equals("TB") 
             && !name().equals("PB")) {
-            throw new NotSupportedException("This method not supported to percent calculation.");
+            throw new RuntimeException("This method not supported to percent calculation.");
         }
         return Math.round((bytes / (double)this.unit) * Math.pow(10, fractionPoint)) / Math.pow(10, fractionPoint);
     }
@@ -86,11 +84,10 @@ public enum UNIT {
      * @param bytes
      * @param franctionPoint
      * @return
-     * @throws NotSupportedException
      */
-    public double get(long total, long bytes, int franctionPoint) throws NotSupportedException {
+    public double get(long total, long bytes, int franctionPoint) {
         if(!name().equals("PER")) {
-            throw new NotSupportedException("This method is only used for percent calculation");
+            throw new RuntimeException("This method is only used for percent calculation");
         }
         return Math.round((total / (double)bytes) * unit * Math.pow(10, franctionPoint)) / Math.pow(10, franctionPoint);
     }
@@ -104,10 +101,5 @@ public enum UNIT {
 	public double applyUnit(double value, int fractalPoint) {
 		return (double)(Math.round(value / this.unit * Math.pow(10d, fractalPoint)) / Math.pow(10d, fractalPoint));
 	}    
-
-    public static void main(String[] args) throws Exception {
-        System.out.println(Math.pow(10, 2));
-        System.out.println(UNIT.YR.get(1));
-    }
 }
 
