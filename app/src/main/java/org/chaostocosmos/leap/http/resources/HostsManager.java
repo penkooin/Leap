@@ -56,11 +56,11 @@ public class HostsManager {
 
     /**
      * Get host object by name
-     * @param host
+     * @param hostId
      * @return
      */
-    public Hosts getHosts(String host) {
-        return this.hostsMap.get(host);
+    public Hosts getHosts(String hostId) {
+        return this.hostsMap.get(hostId);
     }
 
     /**
@@ -87,11 +87,11 @@ public class HostsManager {
 
     /**
      * Get dynamic classpath list
-     * @param host
+     * @param hostId
      * @return
      */
-    public Path getDynamicClaspaths(String host) {        
-        return this.hostsMap.get(host).getDynamicClasspaths();
+    public Path getDynamicClaspaths(String hostId) {        
+        return this.hostsMap.get(hostId).getDynamicClasspaths();
     }
 
     /**
@@ -114,9 +114,18 @@ public class HostsManager {
      * Get all configured host names. It could be having same value.
      * @return
      */
-    public List<String> getAllHostNames() {
-        return this.hostsMap.keySet().stream().collect(Collectors.toList()); 
+    public List<String> getAllHost() {
+        return this.hostsMap.values().stream().map(v -> v.getHost()).collect(Collectors.toList()); 
     }    
+
+    /**
+     * Get host name matching with host 
+     * @param hostId
+     * @return
+     */
+    public String getHostId(String host) {
+        return this.hostsMap.values().stream().filter(h -> h.getHost().equals(host)).findFirst().orElse(null).getHostId();
+    }
 
     /**
      * Whether the host is existing in this server
@@ -124,16 +133,16 @@ public class HostsManager {
      * @return
      */
     public boolean isExistHost(final String host) {
-        return getAllHostNames().stream().anyMatch(h -> h.equals(host));
+        return getAllHost().stream().anyMatch(h -> h.equals(host));
     }
 
     /**
      * Get host user object
-     * @param host
+     * @param hostId
      * @return
      */
-    public List<User> getUsers(String host) {
-        return this.hostsMap.get(host).getUsers();
+    public List<User> getUsers(String hostId) {
+        return this.hostsMap.get(hostId).getUsers();
     }
 
     /**
@@ -146,11 +155,11 @@ public class HostsManager {
 
     /**
      * Load error filters from config
-     * @param host
+     * @param hostId
      * @return
      */
-    public List<Class<?>> loadErrorFilters(String host) {
-        return this.hostsMap.get(host).getErrorFilters();
+    public List<Class<?>> loadErrorFilters(String hostId) {
+        return this.hostsMap.get(hostId).getErrorFilters();
     }
 
     /**
@@ -172,20 +181,20 @@ public class HostsManager {
 
     /**
      * Get docroot path by host name
-     * @param host
+     * @param hostId
      * @return
      */
-    public Path getDocroot(String host) {
-        return this.hostsMap.get(host).getDocroot();
+    public Path getDocroot(String hostId) {
+        return this.hostsMap.get(hostId).getDocroot();
     }
 
     /**
      * Whether virtual host
-     * @param host
+     * @param hostId
      * @return
      */
-    public boolean isVirtualHost(String host) {
-        return !this.hostsMap.get(host).isDefaultHost();
+    public boolean isVirtualHost(String hostId) {
+        return !this.hostsMap.get(hostId).isDefaultHost();
     }
 
     /**
@@ -198,83 +207,83 @@ public class HostsManager {
 
     /**
      * Get web protocol of Host or vHost
-     * @param host
+     * @param hostId
      * @return
      */
-    public PROTOCOL getProtocol(String host) {
-        return this.hostsMap.get(host).getProtocol();
+    public PROTOCOL getProtocol(String hostId) {
+        return this.hostsMap.get(hostId).getProtocol();
     }
 
     /**
      * Get welcome file
-     * @param host
+     * @param hostId
      * @return
      */
-    public File getWelcomeFile(String host) {
-        return this.hostsMap.get(host).getWelcomeFile();
+    public File getWelcomeFile(String hostId) {
+        return this.hostsMap.get(hostId).getWelcomeFile();
     }
 
     /**
      * Get server name by host
-     * @param host
+     * @param hostId
      * @return
      */
-    public String getServerName(String host) {
-        return this.hostsMap.get(host).getServerName();
+    public String getServerName(String hostId) {
+        return this.hostsMap.get(hostId).getHostId();
     }
 
     /**
      * Get host's port
-     * @param host
+     * @param hostId
      * @return
      */
-    public int getPort(String host) {
-        return this.hostsMap.get(host).getPort();
+    public int getPort(String hostId) {
+        return this.hostsMap.get(hostId).getPort();
     }
 
     /**
      * Get logger by host
-     * @param host
+     * @param hostId
      * @return
      */
-    public Logger getLogger(String host) {
-        return LoggerFactory.getLogger(host);
+    public Logger getLogger(String hostId) {
+        return LoggerFactory.getLogger(hostId);
     }
 
     /**
      * Get log path
-     * @param host
+     * @param hostId
      * @return
      */
-    public Path getLogPath(String host) {
-        return this.hostsMap.get(host).getLogPath();
+    public Path getLogPath(String hostId) {
+        return this.hostsMap.get(hostId).getLogPath();
     }
 
     /**
      * Get log level
-     * @param host
+     * @param hostId
      * @return
      */
-    public List<Level> getLogLevel(String host) {
-        return this.hostsMap.get(host).getLogLevel();
+    public List<Level> getLogLevel(String hostId) {
+        return this.hostsMap.get(hostId).getLogLevel();
     }
 
     /**
      * Get charset by the host
-     * @param host
+     * @param hostId
      * @return
      */
-    public Charset charset(String host) {
-        return this.hostsMap.get(host).charset();
+    public Charset charset(String hostId) {
+        return this.hostsMap.get(hostId).charset();
     }
 
     /**
      * Get in-memory filters
-     * @param host
+     * @param hostId
      * @return
      */
-    public Filtering getInMemoryFilters(String host) {
-        return this.hostsMap.get(host).getInMemoryFiltering();
+    public Filtering getInMemoryFilters(String hostId) {
+        return this.hostsMap.get(hostId).getInMemoryFiltering();
     }
 
     /**
