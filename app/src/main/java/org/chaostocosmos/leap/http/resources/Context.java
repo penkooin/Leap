@@ -3,9 +3,11 @@ package org.chaostocosmos.leap.http.resources;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,7 +17,12 @@ import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.LeapApp;
 import org.chaostocosmos.leap.http.WASException;
+import org.chaostocosmos.leap.http.commons.Filtering;
+import org.chaostocosmos.leap.http.commons.UtilBox;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
+import org.chaostocosmos.leap.http.enums.PROTOCOL;
+import org.chaostocosmos.leap.http.user.GRANT;
+import org.chaostocosmos.leap.http.user.User;
 import org.yaml.snakeyaml.Yaml;
 
 /**
@@ -109,7 +116,8 @@ public class Context {
             }
             String lines = Files.readAllLines(configPath).stream().collect(Collectors.joining(System.lineSeparator()));
             Yaml yaml = new Yaml(); 
-            return ((Map<?, ?>)yaml.load(lines)).entrySet().stream().collect(Collectors.toMap(k -> k.getKey().toString(), v -> v.getValue()));
+            Map<String, Object> configMap = ((Map<?, ?>)yaml.load(lines)).entrySet().stream().collect(Collectors.toMap(k -> k.getKey().toString(), v -> v.getValue()));
+            return configMap;
         } catch(Exception e) {
             throw new WASException(e);
         }
@@ -156,15 +164,70 @@ public class Context {
      * @return
      * @throws IOException
      */
-    private static Map<String, Hosts> getAllHostsMap() throws IOException {
-        Map<String, Hosts> hostsMap = new HashMap<>();
-        Map<Object, Object> map = (Map<Object, Object>)getConfigValue("server.default-host");
-        map.put("default", true);
-        hostsMap.put(map.get("host").toString(), new Hosts(map)); 
-        for(Map<Object, Object> vmap : ((List<Map<Object, Object>>)getConfigValue("server.virtual-host"))) {
-            hostsMap.put(vmap.get("host").toString(), new Hosts(vmap));
+    private static Map<String, Hosts> getAllHostsMap() throws IOException {        
+        if(hostsMap == null) {
+            hostsMap = getHostIds().stream().map(n -> new Object[]{n, newHosts(n)}).collect(Collectors.toMap(k -> (String)k[0], v -> (Hosts)v[1]));
+            if(hostsMap.values().stream().filter(h -> h.isDefaultHost()).count() != 1) {
+                throw new IllegalArgumentException("Default host must be defined only one in config.");
+            }
         }
         return hostsMap;
+    }
+
+    /**
+     * New Hosts from config
+     * @param hostId
+     * @return
+     */
+    public static Hosts newHosts(String hostId) {        
+        return new Hosts((boolean)getConfigValue("hosts."+hostId+".default"), 
+                        hostId, 
+                        PROTOCOL.getProtocol((String)getConfigValue("hosts."+hostId+".protocol")),
+                        Charset.forName((String)getConfigValue("hosts."+hostId+".charset")),
+                        (String)getConfigValue("hosts."+hostId+".host"), 
+                        (int)getConfigValue("hosts."+hostId+".port"), 
+                        (List<User>)((List<Map<?, ?>>)getConfigValue("hosts."+hostId+".users")).stream().map(m -> new User(m.get("username").toString(), m.get("password").toString(), GRANT.valueOf(m.get("grant").toString()))).collect(Collectors.toList()),
+                        !getConfigValue("hosts."+hostId+".dynamic-classpath").equals("") ? Paths.get((String)getConfigValue("hosts."+hostId+".dynamic-classpath")) : null,
+                        new Filtering(getConfigValue("hosts."+hostId+".dynamic-packages") == null ? new ArrayList<>() : (List<String>)getConfigValue("hosts."+hostId+".dynamic-packages")), 
+                        new Filtering(getConfigValue("hosts."+hostId+".spring-jpa-packages") == null ? new ArrayList<>() : (List<String>)getConfigValue("hosts."+hostId+".spring-jpa-packages")), 
+                        new Filtering((List<String>)((Map<?, ?>)getConfigValue("hosts."+hostId+".resource")).get("in-memory-filters")),
+                        new Filtering((List<String>)((Map<?, ?>)getConfigValue("hosts."+hostId+".resource")).get("access-filters")),
+                        new Filtering((List<String>)((Map<?, ?>)getConfigValue("hosts."+hostId+".resource")).get("forbidden-filters")),
+                        new Filtering((List<String>)((Map<?, ?>)getConfigValue("hosts."+hostId+".ip-filter")).get("allowed")),
+                        new Filtering((List<String>)((Map<?, ?>)getConfigValue("hosts."+hostId+".ip-filter")).get("forbidden")), 
+                        ((List<?>)getConfigValue("hosts."+hostId+".error-filters")).stream().map(f -> ClassUtils.getClass(ClassLoader.getSystemClassLoader(), f.toString().trim())).collect(Collectors.toList()), 
+                        Paths.get((String)getConfigValue("hosts."+hostId+".doc-root")), 
+                        Paths.get((String)getConfigValue("hosts."+hostId+".doc-root")).resolve("webapp"), 
+                        Paths.get((String)getConfigValue("hosts."+hostId+".doc-root")).resolve("webapp").resolve("WEB-INF"), 
+                        Paths.get((String)getConfigValue("hosts."+hostId+".doc-root")).resolve("webapp").resolve("WEB-INF").resolve("static"), 
+                        Paths.get((String)getConfigValue("hosts."+hostId+".doc-root")).resolve("webapp").resolve("services"), 
+                        Paths.get((String)getConfigValue("hosts."+hostId+".doc-root")).resolve("webapp").resolve("WEB-INF").resolve("template"), 
+                        Paths.get((String)getConfigValue("hosts."+hostId+".doc-root")).resolve("webapp").resolve("WEB-INF").resolve("template").resolve((String)getConfigValue("hosts."+hostId+".welcome")).toFile(), 
+                        Paths.get((String)getConfigValue("hosts."+hostId+".logs")), 
+                        UtilBox.getLogLevels((String)getConfigValue("hosts."+hostId+".log-level"), ","), 
+                        null
+                    );
+    }
+
+    /**
+     * Get hosts object
+     * @param hostId
+     * @return
+     */
+    public static Hosts getHosts(String hostId) {
+        return hostsMap.get(hostId);
+    }
+
+    /**
+     * Get all of host name in config
+     * @return
+     */
+    public static List<String> getHostIds() {
+        return ((Map<Object, Object>)getConfigValue("hosts"))
+                                    .entrySet()
+                                    .stream()
+                                    .map(e -> (String)e.getKey())
+                                    .collect(Collectors.toList());
     }
 
     /**
@@ -184,12 +247,11 @@ public class Context {
     }
 
     /**
-     * Get hosts object
-     * @param host
+     * Get default Hosts object
      * @return
      */
-    public static Hosts getHosts(String host) {
-        return hostsMap.get(host);
+    public static Hosts getDefaultHosts() {
+        return hostsMap.entrySet().stream().filter(e -> e.getValue().isDefaultHost()).findFirst().orElse(null).getValue();
     }
 
     /**
@@ -197,7 +259,13 @@ public class Context {
      * @return
      */
     public static String getDefaultHost() {
-        return (String)getConfigValue("server.default-host.host");
+        return hostsMap.entrySet()
+                       .stream()
+                       .filter(e -> e.getValue().isDefaultHost())
+                       .findFirst()
+                       .orElseThrow(() -> new RuntimeException("There isn't default host in configuration. Please check Leap config.yml"))
+                       .getValue()
+                       .getHost();
     }
 
     /**
@@ -205,7 +273,13 @@ public class Context {
      * @return
      */
     public static int getDefaultPort() {
-        return (int)getConfigValue("server.default-host.port");
+        return hostsMap.entrySet()
+                       .stream()
+                       .filter(e -> e.getValue().isDefaultHost())
+                       .findFirst()
+                       .orElseThrow(() -> new RuntimeException("There isn't default host in configuration. Please check Leap config.yml"))
+                       .getValue()
+                       .getPort();
     }
 
     /**
@@ -445,7 +519,7 @@ public class Context {
 				if (keys[0] instanceof Integer && list.size() > (int) keys[0]) {
 					return list.get((int) keys[0]);
 				} else {
-					return null;
+					throw new IllegalArgumentException("There isn't exist value of key: "+Arrays.asList(keys).stream().map(o -> o+"").collect(Collectors.joining(".")));
 				}
 			} else if (keys.length > 1 && list.size() > 0) {
 				Object[] subKeys = new Object[keys.length - 1];
@@ -462,7 +536,7 @@ public class Context {
 				return findValue(map.get(keys[0]), subKeys);
 			}
 		}
-		return null;
+		throw new IllegalArgumentException("There isn't exist value of key: "+Arrays.asList(keys).stream().map(o -> o+"").collect(Collectors.joining(".")));
 	}    
 
     /**

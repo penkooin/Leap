@@ -280,34 +280,33 @@ public class ClassUtils {
      */
     public static Hosts mappingToHosts(Map<Object, Object> map) throws IOException {
         return new Hosts(
-            map.get("default") != null ? (boolean)map.get("default") : false,
-            (String)map.get("server-name"),
+            (boolean)map.get("default"),
+            (String)map.get("hostname"), 
             PROTOCOL.getProtocol((String)map.get("protocol")),
             Charset.forName((String)map.get("charset")),
-            (String)map.get("host"),
-            (int)map.get("port"),
+            (String)map.get("host"), 
+            (int)map.get("port"), 
             (List<User>)((List<Map<?, ?>>)map.get("users")).stream().map(m -> new User(m.get("username").toString(), m.get("password").toString(), GRANT.valueOf(m.get("grant").toString()))).collect(Collectors.toList()),
             !map.get("dynamic-classpath").equals("") ? Paths.get((String)map.get("dynamic-classpath")) : null,
-            new Filtering((List<String>)map.get("dynamic-packages")),
-            new Filtering((List<String>)map.get("spring-jpa-packages")),
-            new Filtering(((List<?>)((Map<?, ?>)map.get("resource")).get("in-memory-filter")).stream().map(p -> p.toString()).collect(Collectors.toList())),
-            new Filtering((List<String>)((Map<?, ?>)map.get("resource.access-filters"))),
+            new Filtering(map.get("dynamic-packages") == null ? new ArrayList<>() : (List<String>)map.get("dynamic-packages")), 
+            new Filtering(map.get("spring-jpa-packages") == null ? new ArrayList<>() : (List<String>)map.get("spring-jpa-packages")), 
+            new Filtering((List<String>)((Map<?, ?>)map.get("resource")).get("in-memory-filters")),
+            new Filtering((List<String>)((Map<?, ?>)map.get("resource")).get("access-filters")),
             new Filtering((List<String>)((Map<?, ?>)map.get("resource")).get("forbidden-filters")),
             new Filtering((List<String>)((Map<?, ?>)map.get("ip-filter")).get("allowed")),
-            new Filtering((List<String>)((Map<?, ?>)map.get("ip-filter")).get("forbidden")),
-            ((List<?>)map.get("error-filters")).stream().map(f -> ClassUtils.getClass(ClassLoader.getSystemClassLoader(), f.toString().trim())).collect(Collectors.toList()),
-            Paths.get((String)map.get("doc-root")),
-            Paths.get((String)map.get("doc-root")).resolve("webapp"),
-            Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF"),
-            Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF").resolve("static"),
-            Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("services"),
-            Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF").resolve("template"),
-            Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF").resolve("template").resolve(map.get("welcome")+"").toFile(),
-            Paths.get((String)map.get("logs")),
-            UtilBox.getLogLevels((String)map.get("log-level"), ","),
-            map,
-            StaticResourceManager.get((String)map.get("host"))
-            );
+            new Filtering((List<String>)((Map<?, ?>)map.get("ip-filter")).get("forbidden")), 
+            ((List<?>)map.get("error-filters")).stream().map(f -> ClassUtils.getClass(ClassLoader.getSystemClassLoader(), f.toString().trim())).collect(Collectors.toList()), 
+            Paths.get((String)map.get("doc-root")), 
+            Paths.get((String)map.get("doc-root")).resolve("webapp"), 
+            Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF"), 
+            Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF").resolve("static"), 
+            Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("services"), 
+            Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF").resolve("template"), 
+            Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF").resolve("template").resolve("welcome").toFile(), 
+            Paths.get((String)map.get("logs")), 
+            UtilBox.getLogLevels((String)map.get("log-level"), ","), 
+            null            
+        );
     }
 
     /**
@@ -318,7 +317,7 @@ public class ClassUtils {
     public static Map<Object, Object> mappingToMap(Hosts host) {
         Map<Object, Object> map = new HashMap<>();
         map.put("default", host.isDefaultHost());
-        map.put("server-name", host.getServerName());
+        map.put("hostname", host.getHostId());
         map.put("protocol", host.getProtocol().name());
         map.put("charset", host.charset().name());
         map.put("host", host.getHost());

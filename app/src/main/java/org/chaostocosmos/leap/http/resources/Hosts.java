@@ -1,20 +1,14 @@
 package org.chaostocosmos.leap.http.resources;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.commons.Filtering;
-import org.chaostocosmos.leap.http.commons.UtilBox;
 import org.chaostocosmos.leap.http.enums.PROTOCOL;
-import org.chaostocosmos.leap.http.user.GRANT;
 import org.chaostocosmos.leap.http.user.User;
 
 import ch.qos.logback.classic.Level;
@@ -29,9 +23,9 @@ public class Hosts {
     private boolean isDefaultHost;
 
     /**
-     * Server name
+     * Host id
      */
-    private String serverName;
+    private String hostId;
 
     /**
      * Web protocol type
@@ -126,11 +120,6 @@ public class Hosts {
     private List<Class<?>> errorFilters;
 
     /**
-     * Host map object
-     */
-    private Map<Object, Object> hostsMap;
-
-    /**
      * Resource object for host
      */
     private Resources resource;
@@ -140,42 +129,42 @@ public class Hosts {
      * @param map
      * @throws IOException
      */
-    public Hosts(Map<Object, Object> map) throws IOException {
-        this(
-            map.get("default") != null ? (boolean)map.get("default") : false,
-            (String)map.get("server-name"),
-            PROTOCOL.getProtocol((String)map.get("protocol")),
-            Charset.forName((String)map.get("charset")),
-            (String)map.get("host"),
-            (int)map.get("port"),
-            (List<User>)((List<Map<?, ?>>)map.get("users")).stream().map(m -> new User(m.get("username").toString(), m.get("password").toString(), GRANT.valueOf(m.get("grant").toString()))).collect(Collectors.toList()),
-            !map.get("dynamic-classpath").equals("") ? Paths.get((String)map.get("dynamic-classpath")) : null,
-            new Filtering(map.get("dynamic-packages") == null ? new ArrayList<>() : (List<String>)map.get("dynamic-packages")),
-            new Filtering(map.get("spring-jpa-packages") == null ? new ArrayList<>() : (List<String>)map.get("spring-jpa-packages")),
-            new Filtering((List<String>)((Map<?, ?>)map.get("resource")).get("in-memory-filters")),
-            new Filtering((List<String>)((Map<?, ?>)map.get("resource")).get("access-filters")),
-            new Filtering((List<String>)((Map<?, ?>)map.get("resource")).get("forbidden-filters")),
-            new Filtering((List<String>)((Map<?, ?>)map.get("ip-filter")).get("allowed")),
-            new Filtering((List<String>)((Map<?, ?>)map.get("ip-filter")).get("forbidden")),
-            ((List<?>)map.get("error-filters")).stream().map(f -> ClassUtils.getClass(ClassLoader.getSystemClassLoader(), f.toString().trim())).collect(Collectors.toList()),
-            Paths.get((String)map.get("doc-root")),
-            Paths.get((String)map.get("doc-root")).resolve("webapp"),
-            Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF"),
-            Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF").resolve("static"),
-            Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("services"),
-            Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF").resolve("template"),
-            Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF").resolve("template").resolve(map.get("welcome")+"").toFile(),
-            Paths.get((String)map.get("logs")),
-            UtilBox.getLogLevels((String)map.get("log-level"), ","),
-            map,
-            null
-        );
-    }
+    // public Hosts(Map<Object, Object> map) throws IOException {
+    //     this(            
+    //         map.get("default") != null ? (boolean)map.get("default") : false,
+    //         (String)map.get("server-name"),
+    //         PROTOCOL.getProtocol((String)map.get("protocol")),
+    //         Charset.forName((String)map.get("charset")),
+    //         (String)map.get("host"),
+    //         (int)map.get("port"),
+    //         (List<User>)((List<Map<?, ?>>)map.get("users")).stream().map(m -> new User(m.get("username").toString(), m.get("password").toString(), GRANT.valueOf(m.get("grant").toString()))).collect(Collectors.toList()),
+    //         !map.get("dynamic-classpath").equals("") ? Paths.get((String)map.get("dynamic-classpath")) : null,
+    //         new Filtering(map.get("dynamic-packages") == null ? new ArrayList<>() : (List<String>)map.get("dynamic-packages")),
+    //         new Filtering(map.get("spring-jpa-packages") == null ? new ArrayList<>() : (List<String>)map.get("spring-jpa-packages")),
+    //         new Filtering((List<String>)((Map<?, ?>)map.get("resource")).get("in-memory-filters")),
+    //         new Filtering((List<String>)((Map<?, ?>)map.get("resource")).get("access-filters")),
+    //         new Filtering((List<String>)((Map<?, ?>)map.get("resource")).get("forbidden-filters")),
+    //         new Filtering((List<String>)((Map<?, ?>)map.get("ip-filter")).get("allowed")),
+    //         new Filtering((List<String>)((Map<?, ?>)map.get("ip-filter")).get("forbidden")),
+    //         ((List<?>)map.get("error-filters")).stream().map(f -> ClassUtils.getClass(ClassLoader.getSystemClassLoader(), f.toString().trim())).collect(Collectors.toList()),
+    //         Paths.get((String)map.get("doc-root")),
+    //         Paths.get((String)map.get("doc-root")).resolve("webapp"),
+    //         Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF"),
+    //         Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF").resolve("static"),
+    //         Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("services"),
+    //         Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF").resolve("template"),
+    //         Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF").resolve("template").resolve(map.get("welcome")+"").toFile(),
+    //         Paths.get((String)map.get("logs")),
+    //         UtilBox.getLogLevels((String)map.get("log-level"), ","),
+    //         map,
+    //         null
+    //     );
+    // }
 
     /**
      * Constructor
      * @param isDefaultHost
-     * @param serverName
+     * @param hostId
      * @param protocol
      * @param charset
      * @param host
@@ -198,12 +187,11 @@ public class Hosts {
      * @param welcomeFile
      * @param logPath
      * @param logLevel
-     * @param hostsMap
      * @param resource
      */
     public Hosts(
                  boolean isDefaultHost, 
-                 String serverName, 
+                 String hostId, 
                  PROTOCOL protocol,
                  Charset charset,
                  String host, 
@@ -227,11 +215,10 @@ public class Hosts {
                  File welcomeFile,
                  Path logPath,  
                  List<Level> logLevel,
-                 Map<Object, Object> hostsMap,
                  Resources resource
                  )  {
         this.isDefaultHost = isDefaultHost;
-        this.serverName = serverName;
+        this.hostId = hostId;
         this.protocol = protocol;
         this.charset = charset;
         this.host = host;
@@ -245,7 +232,7 @@ public class Hosts {
         this.forbiddenFiltering = forbiddenFiltering;
         this.ipAllowedFiltering = ipAllowedFiltering;
         this.ipForbiddenFiltering = ipForbiddenFiltering;
-        this.errorFilters = errorFilters;
+        this.errorFilters = errorFiltering;
         this.docroot = docroot.toAbsolutePath().normalize();
         this.webapp = webapp.toAbsolutePath().normalize();
         this.webinf = webinf.toAbsolutePath().normalize();
@@ -255,7 +242,6 @@ public class Hosts {
         this.welcomeFile = welcomeFile;
         this.logPath = logPath;
         this.logLevel = logLevel;
-        this.hostsMap = hostsMap;
         this.resource = resource;
     }
 
@@ -271,16 +257,16 @@ public class Hosts {
      * Get server name
      * @return
      */
-    public String getServerName() {
-        return this.serverName;
+    public String getHostId() {
+        return this.hostId;
     }
 
     /**
      * Get server name
-     * @param serverName
+     * @param hostId
      */
-    public void setServerName(String serverName) {
-        this.serverName = serverName;
+    public void setHostId(String hostId) {
+        this.hostId = hostId;
     }
 
     /**
@@ -623,14 +609,6 @@ public class Hosts {
     }
 
     /**
-     * Get hosts Map
-     * @return
-     */
-    public Map<Object, Object> getHostsMap() {
-        return this.hostsMap;
-    }
-
-    /**
      * Get resource for host object
      * @return
      */
@@ -663,7 +641,7 @@ public class Hosts {
     public String toString() {
         return "{" +
             " isDefaultHost='" + isDefaultHost + "'" +
-            ", serverName='" + serverName + "'" +
+            ", serverName='" + hostId + "'" +
             ", protocol='" + protocol + "'" +
             ", charset='" + charset + "'" +
             ", host='" + host + "'" +
@@ -687,7 +665,6 @@ public class Hosts {
             ", welcomeFile='" + welcomeFile + "'" +
             ", logPath='" + logPath + "'" +
             ", logLevel='" + logLevel + "'" +
-            ", hostsMap='" + hostsMap + "'" +
             ", resource='" + resource + "'" +
             "}";
     }

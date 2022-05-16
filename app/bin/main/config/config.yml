@@ -25,8 +25,9 @@ server:
 
 ############################## Default Hosts ##############################
 
-    default-host:
-      server-name: leap
+hosts:
+    leap:
+      default: true
       protocol: HTTP/1.1
       charset: 'utf-8'
       host: localhost
@@ -66,8 +67,8 @@ server:
 
 ############################## Virtual Hosts ##############################
 
-    virtual-host:
-    - server-name: leap1
+    leap1:
+      default : false
       protocol: HTTP/1.1
       charset: 'utf-8'
       host: awesome
@@ -92,13 +93,14 @@ server:
         forbidden-filters: []
       dynamic-classpath: ''
       dynamic-packages: ["*"]
-      spring-jpa-pakages: []
+      spring-jpa-packages: []
       error-filters: [
         javax.net.ssl.SSLHandshakeException,
         java.net.SocketException
       ]
 
-    - server-name: leap2
+    leap2:
+      default: false
       protocol: HTTP/1.1
       charset: 'utf-8'
       host: www.leap1.org
@@ -123,7 +125,7 @@ server:
         forbidden-filters: []
       dynamic-classpath: ''
       dynamic-packages: ["*"]
-      spring-jpa-pakages: []
+      spring-jpa-packages: []
       error-filters: [
         javax.net.ssl.SSLHandshakeException,
         java.net.SocketException

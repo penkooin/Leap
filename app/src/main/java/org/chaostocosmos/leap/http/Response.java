@@ -13,9 +13,13 @@ import java.util.Map;
  */
 public class Response {
     /**
-     * Http request descriptor
+     * Reponse host ID
      */
-    private Request httpRequestDescriptor;
+    final String hostId;
+    /**
+     * Http request
+     */
+    final private Request request;
     
     /**
      * Response code
@@ -39,13 +43,14 @@ public class Response {
 
     /**
      * Construct with parameters
-     * @param httpRequestDescriptor
+     * @param request
      * @param statusCode
      * @param responseBody
      * @param headers
      */ 
-    public Response(Request httpRequestDescriptor, int statusCode, Object responseBody, Map<String, List<Object>> headers) {
-        this.httpRequestDescriptor = httpRequestDescriptor;
+    public Response(final Request request, int statusCode, Object responseBody, Map<String, List<Object>> headers) {
+        this.request = request;
+        this.hostId = request.getHostId();
         this.responseCode = statusCode;
         this.responseBody = responseBody;
         this.headers = headers;
@@ -55,26 +60,26 @@ public class Response {
     }
 
     /**
+     * Get host ID
+     * @return
+     */
+    public final String getHostId() {
+        return this.hostId;
+    }
+
+    /**
      * Get HttpRequestDescriptor object
      * @return
      */
-    public Request getHttpRequestDescriptor() {
-        return this.httpRequestDescriptor;
+    public final Request getRequest() {
+        return this.request;
     }
 
-    public void setHttpRequestDescriptor(Request httpRequestDescriptor) {
-        this.httpRequestDescriptor = httpRequestDescriptor;
-    }
-
-    public String getRequestedHost() {
-        if(this.httpRequestDescriptor != null) {
-            return this.httpRequestDescriptor.getRequestedHost();
+    public final String getRequestedHost() {
+        if(this.request != null) {
+            return this.request.getRequestedHost();
         }
         return null;
-    }
-
-    public void setRequestedHost(String requestedHost) {
-        this.httpRequestDescriptor.setRequestedHost(requestedHost);
     }
 
     public int getResponseCode() {
@@ -135,7 +140,7 @@ public class Response {
     @Override
     public String toString() {
         return "{" +
-            " httpRequestDescriptor='" + httpRequestDescriptor + "'" +
+            " httpRequestDescriptor='" + request + "'" +
             ", responseCode='" + responseCode + "'" +
             ", responseBody='" + responseBody + "'" +
             ", contentLength='" + contentLength + "'" +

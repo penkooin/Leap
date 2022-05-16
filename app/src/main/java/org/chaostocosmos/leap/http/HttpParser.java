@@ -128,6 +128,7 @@ public class HttpParser {
                 }
             }
             String host = requestedHost.indexOf(":") != -1 ? requestedHost.substring(0, requestedHost.indexOf(":")) : requestedHost;
+
             String debug = "";
             debug += "------------------------------ REQ: "+requestLine+" ------------------------------"+System.lineSeparator();
             debug += headerLines.stream().collect(Collectors.joining(System.lineSeparator()));
@@ -139,26 +140,29 @@ public class HttpParser {
             System.out.println(new String(bytes));
             */
             if(!HostsManager.get().isExistHost(host)) {
-                throw new WASException(MSG_TYPE.HTTP, 400, "Requested host not exist in this server: "+host);
+                throw new WASException(MSG_TYPE.HTTP, 400, "Requested host ID not exist in this server: "+host);
             }
-            Charset charset = HostsManager.get().charset(host);
-            LoggerFactory.getLogger(host).debug(debug);
+            //Get host ID from request host name
+            String hostId = HostsManager.get().getHostId(host);
+            debug += "========== Host ID traslation --- Request Host: "+host+"  Host ID: "+hostId+" ==========";
+            Charset charset = HostsManager.get().charset(hostId);
+            LoggerFactory.getLogger(hostId).debug(debug);
             BodyPart bodyPart = null;
             if(contentType != null) {
                 MIME_TYPE mimeType = contentType.indexOf(";") != -1 ? MIME_TYPE.getMimeType(contentType.substring(0, contentType.indexOf(";"))) : MIME_TYPE.getMimeType(contentType);
                 String boundary = contentType != null ? contentType.substring(contentType.indexOf(";")+1) : null;
-                LoggerFactory.getLogger(host).debug("Context params: "+contextParam.toString());
-                LoggerFactory.getLogger(host).debug("Mime Type: "+mimeType);
+                LoggerFactory.getLogger(hostId).debug("Context params: "+contextParam.toString());
+                LoggerFactory.getLogger(hostId).debug("Mime Type: "+mimeType);
                 if(contentLength > 0) {
                     switch(mimeType) {
                         case MULTIPART_FORM_DATA:
                             String[] splited = contentType.split("\\;");
                             contentType = splited[0].trim();
                             boundary = splited[1].substring(splited[1].indexOf("=") + 1).trim();
-                            bodyPart = new MultiPart(host, mimeType, boundary, contentLength, in, false, charset);
+                            bodyPart = new MultiPart(hostId, mimeType, boundary, contentLength, in, false, charset);
                             break;
                         case APPLICATION_X_WWW_FORM_URLENCODED:
-                            bodyPart = new KeyValuePart(host, mimeType, contentLength, in, false, charset);
+                            bodyPart = new KeyValuePart(hostId, mimeType, contentLength, in, false, charset);
                             break;
                         case IMAGE_GIF:
                         case IMAGE_PNG:
@@ -172,7 +176,7 @@ public class HttpParser {
                         case AUDIO_WAV:
                         case VIDEO_WEBM:
                         case VIDEO_OGG:
-                            bodyPart = new BinaryPart(host, mimeType, contentLength, in, false, charset);
+                            bodyPart = new BinaryPart(hostId, mimeType, contentLength, in, false, charset);
                             break;
                         case TEXT_PLAIN:
                         case TEXT_CSS:
@@ -182,12 +186,12 @@ public class HttpParser {
                         case TEXT_HTML:
                         case TEXT_XML:
                         case TEXT_JSON:
-                            bodyPart = new TextPart(host, mimeType, contentLength, in, false, charset);
+                            bodyPart = new TextPart(hostId, mimeType, contentLength, in, false, charset);
                         default:
                     }
                 }
             }
-            Request desc = new Request(protocol, requestType, host, headerMap, contentType, new byte[0], contextPath, contextParam, bodyPart, contentLength);
+            Request desc = new Request(hostId, host, protocol, requestType, headerMap, contentType, new byte[0], contextPath, contextParam, bodyPart, contentLength);
             return desc;
         }
     }

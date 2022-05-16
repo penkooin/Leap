@@ -78,7 +78,7 @@ public class LeapRequestHandler implements Runnable {
         Response response = null;
         HttpTransfer httpTransfer = null;
         try {
-            httpTransfer = HttpTransferBuilder.buildHttpTransfer(httpServer.getHost(), this.client);
+            httpTransfer = HttpTransferBuilder.buildHttpTransfer(httpServer.getHostId(), this.client);
             request = httpTransfer.getRequest();
             response = httpTransfer.getResponse();
             Hosts hosts = httpTransfer.getHosts();
@@ -143,7 +143,7 @@ public class LeapRequestHandler implements Runnable {
                 httpTransfer.sendResponse(response);
             }
         } catch(SocketTimeoutException e) {
-            LoggerFactory.getLogger(httpTransfer.getHosts().getHost()).error("[SOCKET TIME OUT] Client socket timeout occurred.");
+            LoggerFactory.getLogger(httpTransfer.getHosts().getHostId()).error("[SOCKET TIME OUT] Client socket timeout occurred.");
         } catch(Throwable e) {
             e.printStackTrace();
             try {
@@ -168,8 +168,8 @@ public class LeapRequestHandler implements Runnable {
      * @throws IOException
      */
     public void processError(HttpTransfer httpTransfer, Throwable error) throws Exception {        
-        String requestedHost = httpTransfer.getHosts().getHost();
-        Throwable t = getCaused(requestedHost, error);
+        String hostId = httpTransfer.getHosts().getHostId();
+        Throwable t = getCaused(hostId, error);
         int resCode = -1;
         MSG_TYPE msgType = null;
         if(t instanceof WASException) {
@@ -180,16 +180,14 @@ public class LeapRequestHandler implements Runnable {
             resCode = 500;
             msgType = MSG_TYPE.HTTP;
         }
-        if(!HostsManager.get().isExistHost(requestedHost)) {
-            requestedHost = Context.getDefaultHost();
+        if(!HostsManager.get().isExistHost(httpTransfer.getRequest().getRequestedHost())) {
+            hostId = Context.getDefaultHosts().getHostId();
         }
-        System.out.println(requestedHost+"/error?code="+resCode+"&type="+msgType+"&message="+Context.getHttpMsg(resCode));
-
         Map<String, List<Object>> headers = new HashMap<String, List<Object>>();
         headers = HttpTransferBuilder.addHeader(headers, "Content-Type", "text/html; charset="+httpTransfer.getHosts().charset());
         headers = HttpTransferBuilder.addHeader(headers, "Location", "/error?code="+resCode+"&type="+msgType+"&message="+Context.getHttpMsg(resCode));
         //Object body = t != null ? HttpTransferBuilder.buildErrorResponse(requestedHost, msgType, resCode, t.getMessage()) : Context.getHttpMsg(resCode);
-        httpTransfer.sendResponse(requestedHost, RES_CODE.RES307.getCode(), headers, "Redirect");            
+        httpTransfer.sendResponse(hostId, RES_CODE.RES307.getCode(), headers, "Redirect");            
     }
 
     /**

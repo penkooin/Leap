@@ -85,7 +85,7 @@ public class ResourceHelper {
      * @return
      */
     public static Path getResourcePath(Request request) {
-        return getResourcePath(request.getRequestedHost(), request.getContextPath());
+        return getResourcePath(request.getHostId(), request.getContextPath());
     }
 
     /**
@@ -94,40 +94,40 @@ public class ResourceHelper {
      * @param path
      * @return
      */
-    public static Path getResourcePath(String host, String path) {
+    public static Path getResourcePath(String hostId, String path) {
         path = path.charAt(0) == '/' ? path.substring(1) : path;
-        Hosts hosts = HostsManager.get().getHosts(host);
+        Hosts hosts = HostsManager.get().getHosts(hostId);
         Path docroot = hosts.getDocroot().toAbsolutePath();
-        Path reqPath = getStaticPath(host).resolve(path).toAbsolutePath();
+        Path reqPath = getStaticPath(hostId).resolve(path).toAbsolutePath();        
         if(!validatePath(docroot, reqPath)) {
-            throw new WASException(MSG_TYPE.HTTP, 403, host, path);
+            throw new WASException(MSG_TYPE.HTTP, 403, hostId, path);
         }
-        LoggerFactory.getLogger(host).debug("REQUEST PATH: "+reqPath.toString()); 
+        LoggerFactory.getLogger(hostId).debug("REQUEST PATH: "+reqPath.toString()); 
         return reqPath;
     }
 
     /**
      * Get response html file contents
-     * @param host
+     * @param hostId
      * @param code
      * @return
      */
-    public static Path getResponseResourcePath(String host, int code) {
+    public static Path getResponseResourcePath(String hostId, int code) {
         Object msg = Context.getConfigValue("message.http."+code);
         if(msg == null) {
             throw new WASException(MSG_TYPE.HTTP, 500);
         }
-        return getStaticPath(host).resolve(Context.getConfigValue("static-resource.response").toString());
+        return getStaticPath(hostId).resolve(Context.getConfigValue("static-resource.response").toString());
     }    
 
     /**
      * Get static resource path
-     * @param host
+     * @param hostId
      * @param resourceName
      * @return
      */
-    public static Path getStaticResourcePath(String host, String resourceName) {
-        return getResourcePath(host, resourceName);
+    public static Path getStaticResourcePath(String hostId, String resourceName) {
+        return getResourcePath(hostId, resourceName);
     }
 
     /**
@@ -233,42 +233,42 @@ public class ResourceHelper {
 
     /**
      * Get WAS Home path
-     * @param host
+     * @param hostId
      * @return
      * @throws WASException
      */
-    public static Path getDocroot(String host) throws WASException {
-        return HostsManager.get().getDocroot(host).toAbsolutePath();
+    public static Path getDocroot(String hostId) throws WASException {
+        return HostsManager.get().getDocroot(hostId).toAbsolutePath();
     }
 
     /**
      * Get webapp path
-     * @param host
+     * @param hostId
      * @return
      * @throws WASException
      */
-    public static Path getWebAppPath(String host) throws WASException {
-        return getDocroot(host).resolve("webapp");
+    public static Path getWebAppPath(String hostId) throws WASException {
+        return getDocroot(hostId).resolve("webapp");
     }
 
     /**
      * Get webapp/WEB-INF path
-     * @param host
+     * @param hostId
      * @return
      * @throws WASException
      */
-    public static Path getWebInfPath(String host) throws WASException {
-        return getWebAppPath(host).resolve("WEB-INF");
+    public static Path getWebInfPath(String hostId) throws WASException {
+        return getWebAppPath(hostId).resolve("WEB-INF");
     }
 
     /**
      * Get webapp/WEB-INF/static path
-     * @param host
+     * @param hostId
      * @return
      * @throws WASException
      */
-    public static Path getStaticPath(String host) throws WASException {
-        return getWebInfPath(host).resolve("static");
+    public static Path getStaticPath(String hostId) throws WASException {
+        return getWebInfPath(hostId).resolve("static");
     }
 
 }

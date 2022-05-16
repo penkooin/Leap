@@ -205,15 +205,15 @@ public class LeapHttpServer extends Thread {
         this.ipAllowedFilters = hosts.getIpAllowedFiltering();
         this.ipForbiddenFilters = hosts.getIpForbiddenFiltering();
         this.redirectHostSelection = new RedirectHostSelection(Context.getLoadBalanceRedirects());
-        this.serviceManager = new ServiceManager(hosts, new UserManager(hosts.getHost()), classLoader);
+        this.serviceManager = new ServiceManager(hosts, new UserManager(hosts.getHostId()), classLoader);
     }
 
     /**
-     * Get service host
+     * Get service host ID
      * @return
      */
-    public String getHost() {
-        return this.inetSocketAddress.getHostName();
+    public String getHostId() {
+        return this.hosts.getHostId();
     }
 
     /**
@@ -259,8 +259,8 @@ public class LeapHttpServer extends Thread {
                 File keyStore = Context.getKeyStore().toFile();
                 String passphrase = Context.getPassphrase();
                 String sslProtocol = Context.getEncryptionMethod();
-                this.server = HttpsServerSocketFactory.getSSLServerSocket(keyStore, passphrase, sslProtocol, this.inetSocketAddress, this.backlog);
-                logger.info("[HTTPS SERVER START] Address: "+this.inetSocketAddress.toString()+"  Protocol: "+sslProtocol+"  KeyStore: "+keyStore.getName()+"  Supported Protocol: "+Arrays.toString(((SSLServerSocket)server).getSupportedProtocols()));
+                this.server = HttpsServerSocketFactory.getSSLServerSocket(keyStore, passphrase, sslProtocol, this.inetSocketAddress, this.backlog);                
+                logger.info("[HTTPS SERVER START] Address: "+this.inetSocketAddress.toString()+"  Protocol: "+sslProtocol+"  KeyStore: "+keyStore.getName()+"  Supported Protocol: "+Arrays.toString(((SSLServerSocket)server).getSupportedProtocols())+"  KeyStore: "+keyStore.getName());
             }
             while (true) { 
                 Socket connection = server.accept();

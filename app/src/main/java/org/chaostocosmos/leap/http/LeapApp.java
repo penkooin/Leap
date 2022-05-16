@@ -137,7 +137,7 @@ public class LeapApp {
 
         //set log level
         String optionL = cmdLine.getOptionValue("l");
-        logger = LoggerFactory.getLogger(Context.getDefaultHost());
+        logger = LoggerFactory.getLogger(Context.getDefaultHosts().getHostId());
         if(optionL != null) {
             Level level = Level.toLevel(optionL); 
             logger.setLevel(level);
@@ -199,25 +199,25 @@ public class LeapApp {
         //Spring JPA 
         SpringJPAManager jpaManager = SpringJPAManager.get();
 
-        for(Hosts host : HostsManager.get().getAllHosts()) {
-            InetAddress hostAddress = InetAddress.getByName(host.getHost());
-            String hostName = hostAddress.getHostAddress()+":"+host.getPort();
+        for(Hosts hosts : HostsManager.get().getAllHosts()) {
+            InetAddress hostAddress = InetAddress.getByName(hosts.getHost());
+            String hostName = hostAddress.getHostAddress()+":"+hosts.getPort();
             if(this.leapServerMap.containsKey(hostName)) {
                 String key = this.leapServerMap.keySet().stream().filter(k -> k.equals(hostName)).findAny().get();
-                throw new IllegalArgumentException("Mapping host address is collapse on network interace: "+hostAddress.toString()+":"+host.getPort()+" with "+key);
+                throw new IllegalArgumentException("Mapping host address is collapse on network interace: "+hostAddress.toString()+":"+hosts.getPort()+" with "+key);
             }
-            if(host.getHost().equals(Context.getDefaultHost())) {
-                LeapHttpServer server = new LeapHttpServer(Context.getLeapHomePath(), host, this.threadpool, classLoader, this.resourceMonitor);
-                this.leapServerMap.put(hostAddress.getHostAddress()+":"+host.getPort(), server);
+            //if(hosts.getHost().equals(Context.getDefaultHost())) {
+                LeapHttpServer server = new LeapHttpServer(Context.getLeapHomePath(), hosts, this.threadpool, classLoader, this.resourceMonitor);
+                this.leapServerMap.put(hostAddress.getHostAddress()+":"+hosts.getPort(), server);
+            //} else {
+            //    ThreadPoolExecutor threadpool = new ThreadPoolExecutor(20, 20, 10, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>()); 
+            //    LeapHttpServer server = new LeapHttpServer(Context.getLeapHomePath(), hosts, this.threadpool, classLoader, this.resourceMonitor);
+            //    this.leapServerMap.put(hostAddress.getHostAddress()+":"+hosts.getPort(), server); 
+            //}
+            if(hosts.isDefaultHost()) {
+                logger.info("[DEFAULT HOST] - Protocol: "+hosts.getProtocol().name()+"   Server: "+hosts.getHostId()+"   Host: "+hosts.getHost()+"   Port: "+hosts.getPort()+"   Doc-Root: "+hosts.getDocroot()+"   Logging path: "+hosts.getLogPath()+"   Level: "+hosts.getLogLevel().toString());                
             } else {
-                ThreadPoolExecutor threadpool = new ThreadPoolExecutor(20, 20, 10, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>()); 
-                LeapHttpServer server = new LeapHttpServer(Context.getLeapHomePath(), host, threadpool, classLoader, this.resourceMonitor);
-                this.leapServerMap.put(hostAddress.getHostAddress()+":"+host.getPort(), server); 
-            }
-            if(host.isDefaultHost()) {
-                logger.info("[DEFAULT HOST] - Protocol: "+host.getProtocol().name()+"   Server: "+host.getServerName()+"   Host: "+host.getHost()+"   Port: "+host.getPort()+"   Doc-Root: "+host.getDocroot()+"   Logging path: "+host.getLogPath()+"   Level: "+host.getLogLevel().toString());
-            } else {
-                logger.info("[VIRTUAL HOST] - Protocol: "+host.getProtocol().name()+"   Server: "+host.getServerName()+"   Host: "+host.getHost()+"   Port: "+host.getPort()+"   Doc-Root: "+host.getDocroot()+"   Logging path: "+host.getLogPath()+"   Level: "+host.getLogLevel().toString());
+                logger.info("[VIRTUAL HOST] - Protocol: "+hosts.getProtocol().name()+"   Server: "+hosts.getHostId()+"   Host: "+hosts.getHost()+"   Port: "+hosts.getPort()+"   Doc-Root: "+hosts.getDocroot()+"   Logging path: "+hosts.getLogPath()+"   Level: "+hosts.getLogLevel().toString());
             }
         }
         logger.info("----------------------------------------------------------------------------------------------------");

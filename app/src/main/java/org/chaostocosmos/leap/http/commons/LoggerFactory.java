@@ -57,7 +57,7 @@ public class LoggerFactory {
         if(!loggerMap.containsKey(host)) {
             HostsManager manager = HostsManager.get();
             Hosts hosts = manager.getHosts(host.trim());
-            Logger logger = createLoggerFor(hosts.getHost(), hosts.getDocroot().resolve(hosts.getLogPath()).toAbsolutePath().toString(), hosts.getLogLevel());
+            Logger logger = createLoggerFor(hosts.getHostId(), hosts.getDocroot().resolve(hosts.getLogPath()).toAbsolutePath().toString(), hosts.getLogLevel());
             loggerMap.put(hosts.getHost(), logger);
             return logger;
         }

@@ -46,7 +46,7 @@ public class HttpTransferBuilder {
 
     /**
      * Build http error page
-     * @param host
+     * @param hostId
      * @param type
      * @param errorCode
      * @param message
@@ -54,18 +54,18 @@ public class HttpTransferBuilder {
      * @throws Exception
      * @throws ImageProcessingException
      */
-    public static String buildHttpErrorPage(String host, MSG_TYPE type, int errorCode, String message) throws Exception {
+    public static String buildHttpErrorPage(String hostId, MSG_TYPE type, int errorCode, String message) throws Exception {
         String title = Context.getHttpMsg(errorCode, "- "+type.name());        
         Map<String, Object> map = new HashMap<>();
         map.put("@code", errorCode);
         map.put("@type", title);
         map.put("@message", message);
-        return StaticResourceManager.get(host).getErrorPage(map);
+        return StaticResourceManager.get(hostId).getErrorPage(map);
     }
 
     /**
      * Create http response page
-     * @param host
+     * @param hostId
      * @param type
      * @param code
      * @param message
@@ -73,20 +73,20 @@ public class HttpTransferBuilder {
      * @throws Exception
      * @throws ImageProcessingException
      */
-    public static String buildHttpResponsePage(String host, MSG_TYPE type, int code, String message) throws Exception {
+    public static String buildHttpResponsePage(String hostId, MSG_TYPE type, int code, String message) throws Exception {
         Map<String, Object> map = Map.of("@code", code, "@type", type.name(), "@message", message);
-        return StaticResourceManager.get(host).getResponsePage(map);
+        return StaticResourceManager.get(hostId).getResponsePage(map);
     }
 
     /**
      * Build HttpTransfer object
-     * @param vHost
+     * @param hostId
      * @param client
      * @throws IOException
      * @throws Exception
      */
-    public static HttpTransfer buildHttpTransfer(String vHost, Socket client) throws IOException {
-        return new HttpTransfer(vHost, client);
+    public static HttpTransfer buildHttpTransfer(String hostId, Socket client) throws IOException {
+        return new HttpTransfer(hostId, client);
     } 
 
     /**
@@ -151,12 +151,12 @@ public class HttpTransferBuilder {
 
         /**
          * Construct with request host and client socket
-         * @param host
+         * @param hostId
          * @param client
          * @throws IOException
          */
-        public HttpTransfer(String host, Socket client) throws IOException {
-            this.hosts = HostsManager.get().getHosts(host);
+        public HttpTransfer(String hostId, Socket client) throws IOException {
+            this.hosts = HostsManager.get().getHosts(hostId);
             this.socket = client;
             this.clientInputStream = client.getInputStream();
             this.clientOutputStream = client.getOutputStream();
@@ -234,32 +234,32 @@ public class HttpTransferBuilder {
          * @throws IOException
          */
         public void sendResponse(Response response) throws IOException {
-            sendResponse(response.getRequestedHost(), response.getResponseCode(), response.getHeaders(), response.getBody());
+            sendResponse(response.getHostId(), response.getResponseCode(), response.getHeaders(), response.getBody());
         }
 
         /**
          * Send response to client by requested host, status code, reponse headers, body object
-         * @param host
+         * @param hostId
          * @param resCode
          * @param headers
          * @param body
          * @throws IOException
          */
-        public void sendResponse(String host, int resCode, Map<String, List<Object>> headers, Object body) throws IOException {
-            Charset charset = HostsManager.get().charset(host);
-            String str = HostsManager.get().getHosts(host).getProtocol().name();
+        public void sendResponse(String hostId, int resCode, Map<String, List<Object>> headers, Object body) throws IOException {
+            Charset charset = HostsManager.get().charset(hostId);
+            String str = HostsManager.get().getHosts(hostId).getProtocol().name();
             String protocol = str.substring(0, str.indexOf("_"));
             String version = str.substring(str.indexOf("_")+1).replace("_", ".");
             String resMsg = null;
             if(resCode >= 200 && resCode <= 600) {
                 resMsg = RES_CODE.valueOf("RES"+resCode).getMessage();
             } else {
-                resMsg = Context.getErrorMsg(resCode, host);
+                resMsg = Context.getErrorMsg(resCode, hostId);
             }
             String res = protocol+"/"+version+" "+resCode+" "+resMsg+"\r\n"; 
             this.clientOutputStream.write(res.getBytes());
             if(body == null) {
-                LoggerFactory.getLogger(host).warn("Response body is Null: "+resCode);
+                LoggerFactory.getLogger(hostId).warn("Response body is Null: "+resCode);
                 return ;
             }
             long contentLength = -1;
@@ -286,7 +286,7 @@ public class HttpTransferBuilder {
                 this.clientOutputStream.write((e.getKey()+": "+e.getValue().stream().map(v -> v.toString()).collect(Collectors.joining("; "))+"\r\n").getBytes());
                 resStr.append(e.getKey()+": "+e.getValue()+System.lineSeparator());
             }
-            LoggerFactory.getLogger(host).debug(resStr.substring(0, resStr.length()-1));
+            LoggerFactory.getLogger(hostId).debug(resStr.substring(0, resStr.length()-1));
             this.clientOutputStream.write("\r\n".getBytes());
             this.clientOutputStream.flush(); 
             if(body instanceof byte[]) {

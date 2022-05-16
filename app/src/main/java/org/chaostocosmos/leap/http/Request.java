@@ -20,23 +20,25 @@ import ch.qos.logback.classic.Logger;
  */
 public class Request {
 
-    private REQUEST_TYPE requestType;
-    private String requestedHost;
-    private String contentType;
-    private String httpVersion;
-    private Map<String, String> reqHeader;
-    private byte[] reqBody; 
-    private String contextPath;
-    private Map<String, String> contextParam;
-    private BodyPart bodyPart;
-    private long contentLength;
+    final private REQUEST_TYPE requestType;
+    final private String hostId;
+    final private String requestedHost;
+    final private String contentType;
+    final private String httpVersion;
+    final private Map<String, String> reqHeader;
+    final private byte[] reqBody; 
+    final private String contextPath;
+    final private Map<String, String> contextParam;
+    final private BodyPart bodyPart;
+    final private long contentLength;
     
     /**
      * Constructor
      * 
+     * @param hostId
+     * @param requestHost
      * @param httpVersion
      * @param requestType
-     * @param requestHost
      * @param reqHeader
      * @param reqBody
      * @param contextPath
@@ -46,78 +48,75 @@ public class Request {
      * @param contentLength
      */
     public Request(
-                                String httpVersion, 
-                                REQUEST_TYPE requestType, 
-                                String requestHost,
-                                Map<String,String> reqHeader, 
-                                String contentType,
-                                byte[] reqBody, 
-                                String contextPath, 
-                                Map<String,String> contextParam,
-                                BodyPart bodyPart,
-                                long contentLength
-                                ) {
-        this.httpVersion = httpVersion;
-        this.requestType = requestType;
-        this.requestedHost = requestHost;
-        this.reqHeader = reqHeader;
-        this.contentType = contentType;
-        this.reqBody = reqBody;
-        this.contextPath = contextPath;
-        this.contextParam = contextParam;
-        this.bodyPart = bodyPart;
-        this.contentLength = contentLength;
+            String hostId,
+            String requestHost,
+            String httpVersion, 
+            REQUEST_TYPE requestType, 
+            Map<String,String> reqHeader, 
+            String contentType,
+            byte[] reqBody, 
+            String contextPath, 
+            Map<String,String> contextParam,
+            BodyPart bodyPart,
+            long contentLength
+        ) {
+            this.hostId = hostId;
+            this.requestedHost = requestHost;
+            this.httpVersion = httpVersion;
+            this.requestType = requestType;
+            this.reqHeader = reqHeader;
+            this.contentType = contentType;
+            this.reqBody = reqBody;
+            this.contextPath = contextPath;
+            this.contextParam = contextParam;
+            this.bodyPart = bodyPart;
+            this.contentLength = contentLength;
     }
 
-    public String getHttpVersion() {
-        return this.httpVersion;
+    public final String getHostId() {
+        return this.hostId;
     }
 
-    public REQUEST_TYPE getRequestType() {
-        return this.requestType;
-    }
-
-    public String getRequestedHost() {
+    public final String getRequestedHost() {
         return this.requestedHost;
     }
 
-    public void setRequestedHost(String requestedHost) {
-        this.requestedHost = requestedHost;
+    public final String getHttpVersion() {
+        return this.httpVersion;
     }
 
-    public Map<String,String> getReqHeader() {
+    public final REQUEST_TYPE getRequestType() {
+        return this.requestType;
+    }
+
+    public final Map<String,String> getReqHeader() {
         return this.reqHeader;
     }
 
-    public String getContentType() {
+    public final String getContentType() {
         return this.contentType;
     }
-
-    public void setContentType(String contentType) {
-        this.contentType = contentType;
-    }
-
-    public byte[] getReqBody() {
+    public final byte[] getReqBody() {
         return this.reqBody;
     }
 
-    public String getContextPath() {
+    public final String getContextPath() {
         return this.contextPath;
     }
 
-    public Map<String, String> getContextParam() {
+    public final Map<String, String> getContextParam() {
         return this.contextParam;
     }
 
-    public String getParameter(String name) {
+    public final String getParameter(String name) {
         return this.contextParam.get(name);
     }
 
-    public BodyPart getBodyPart() {
+    public final BodyPart getBodyPart() {
         return this.bodyPart;
     }
 
-    public long getContentLength() {
+    public final long getContentLength() {
         return this.contentLength;
     }
 
