@@ -1,7 +1,7 @@
 package org.chaostocosmos.leap.http;
 
+import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
-import org.chaostocosmos.leap.http.resources.Context;
 
 /**
  * WAS exception object
@@ -68,7 +68,7 @@ public class WASException extends RuntimeException {
         }
         this.type = type;
         this.code = code;
-        this.message = Context.getMsg(type, code, args);
+        this.message = Context.getMessages().getMsg(type, code, args);
     }
 
     /**

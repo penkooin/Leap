@@ -28,7 +28,7 @@ import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
 
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
-import org.chaostocosmos.leap.http.resources.Context;
+import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.security.SecurityHandler;
 
 import ch.qos.logback.classic.Logger;
@@ -42,7 +42,7 @@ public class HttpsServerSocketFactory {
     /**
      * Logger
      */
-    Logger logger = LoggerFactory.getLogger(Context.getDefaultHost());
+    Logger logger = LoggerFactory.getLogger(Context.getHosts().getDefaultHost().getHostId());
 
     /**
      * Get SSL ServerSocket or if type isn't TLS, return normal ServerSocket

@@ -19,11 +19,13 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.LeapApp;
+import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.commons.UtilBox;
+import org.chaostocosmos.leap.http.context.Context;
+import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 
 /**
@@ -91,16 +93,16 @@ public class ResourceHelper {
     /**
      * Get resource Path
      * @param serverName
-     * @param path
+     * @param contextPath
      * @return
      */
-    public static Path getResourcePath(String hostId, String path) {
-        path = path.charAt(0) == '/' ? path.substring(1) : path;
-        Hosts hosts = HostsManager.get().getHosts(hostId);
+    public static Path getResourcePath(String hostId, String contextPath) {
+        contextPath = contextPath.charAt(0) == '/' ? contextPath.substring(1) : contextPath;
+        Host<?> hosts = Context.getHosts().getHost(hostId);
         Path docroot = hosts.getDocroot().toAbsolutePath();
-        Path reqPath = getStaticPath(hostId).resolve(path).toAbsolutePath();        
+        Path reqPath = getStaticPath(hostId).resolve(contextPath).toAbsolutePath();        
         if(!validatePath(docroot, reqPath)) {
-            throw new WASException(MSG_TYPE.HTTP, 403, hostId, path);
+            throw new WASException(MSG_TYPE.HTTP, 403, hostId, contextPath);
         }
         LoggerFactory.getLogger(hostId).debug("REQUEST PATH: "+reqPath.toString()); 
         return reqPath;
@@ -112,12 +114,8 @@ public class ResourceHelper {
      * @param code
      * @return
      */
-    public static Path getResponseResourcePath(String hostId, int code) {
-        Object msg = Context.getConfigValue("message.http."+code);
-        if(msg == null) {
-            throw new WASException(MSG_TYPE.HTTP, 500);
-        }
-        return getStaticPath(hostId).resolve(Context.getConfigValue("static-resource.response").toString());
+    public static Path getResponseResourcePath(String hostId) {
+        return Context.getHosts().getHost(hostId).getTemplates().resolve("response.html");
     }    
 
     /**
@@ -175,7 +173,7 @@ public class ResourceHelper {
      * @throws IOException
      */
     public String getTrademark() throws FileNotFoundException, IOException {
-        File file = Context.getLeapHomePath().resolve("config").resolve("trademark").toFile();
+        File file = Context.getHomePath().resolve("config").resolve("trademark").toFile();
         return UtilBox.readAllString(new FileInputStream(file)); 
     }
 
@@ -238,7 +236,7 @@ public class ResourceHelper {
      * @throws WASException
      */
     public static Path getDocroot(String hostId) throws WASException {
-        return HostsManager.get().getDocroot(hostId).toAbsolutePath();
+        return Context.getHosts().getDocroot(hostId).toAbsolutePath();
     }
 
     /**

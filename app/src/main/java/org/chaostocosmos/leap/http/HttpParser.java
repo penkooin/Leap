@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.commons.StreamUtils;
+import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
@@ -21,7 +22,6 @@ import org.chaostocosmos.leap.http.part.BodyPart;
 import org.chaostocosmos.leap.http.part.KeyValuePart;
 import org.chaostocosmos.leap.http.part.MultiPart;
 import org.chaostocosmos.leap.http.part.TextPart;
-import org.chaostocosmos.leap.http.resources.HostsManager;
 
 /**
  * Http parsing factory object
@@ -139,13 +139,13 @@ public class HttpParser {
             in.read(bytes);
             System.out.println(new String(bytes));
             */
-            if(!HostsManager.get().isExistHost(host)) {
+            //Get host ID from request host name
+            String hostId = Context.getHosts().getHostId(host);
+            if(!Context.getHosts().isExistHost(hostId)) {
                 throw new WASException(MSG_TYPE.HTTP, 400, "Requested host ID not exist in this server: "+host);
             }
-            //Get host ID from request host name
-            String hostId = HostsManager.get().getHostId(host);
             debug += "========== Host ID traslation --- Request Host: "+host+"  Host ID: "+hostId+" ==========";
-            Charset charset = HostsManager.get().charset(hostId);
+            Charset charset = Context.getHosts().charset(hostId);
             LoggerFactory.getLogger(hostId).debug(debug);
             BodyPart bodyPart = null;
             if(contentType != null) {

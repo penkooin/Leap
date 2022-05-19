@@ -6,6 +6,9 @@ import java.nio.file.WatchEvent.Kind;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.chaostocosmos.leap.http.context.Context;
+import org.chaostocosmos.leap.http.context.Host;
+
 /**
  * StaticResourceManager
  * 
@@ -37,8 +40,8 @@ public class StaticResourceManager {
      */
     private StaticResourceManager() throws IOException {
         this.resourceMap = new HashMap<>();
-        for(Hosts hosts : Context.getHostsMap().values()) {
-            this.resourceMap.put(hosts.getHost(), new WatchResources(hosts, WATCH_KIND));
+        for(Host<?> host : Context.getHosts().getHostMap().values()) {
+            this.resourceMap.put(host.getHost(), new WatchResources(host, WATCH_KIND));
         }
     }
 
@@ -59,25 +62,25 @@ public class StaticResourceManager {
      * @throws IOException
      * @throws ImageProcessingException
      */
-    public static Resources get(String host) throws IOException {
+    public static Resources get(String hostId) throws IOException {
         if(manager == null) {
             manager = new StaticResourceManager();
         }
-        return manager.getResource(host);
+        return manager.getResource(hostId);
     }
 
     /**
      * Get Resource object for host
-     * @param host
+     * @param hostId
      * @return
      * @throws IOException
      * @throws ImageProcessingException
      */
-    public Resources getResource(String host) throws IOException {
-        if(!this.resourceMap.containsKey(host)) {
-            this.resourceMap.put(host, new WatchResources(Context.getHosts(host), WATCH_KIND));
+    public Resources getResource(String hostId) throws IOException {
+        if(!this.resourceMap.containsKey(hostId)) {
+            this.resourceMap.put(hostId, new WatchResources(Context.getHosts().getHost(hostId), WATCH_KIND));
         }
-        return this.resourceMap.get(host);
+        return this.resourceMap.get(hostId);
     }
 
     /**

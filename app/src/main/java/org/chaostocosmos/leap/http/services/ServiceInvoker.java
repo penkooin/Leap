@@ -7,7 +7,7 @@ import org.chaostocosmos.leap.http.HttpTransferBuilder.HttpTransfer;
 import org.chaostocosmos.leap.http.Response;
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
-import org.chaostocosmos.leap.http.resources.Context;
+import org.chaostocosmos.leap.http.context.Context;
 import org.slf4j.Logger;
 
 /**
@@ -18,7 +18,7 @@ public class ServiceInvoker {
     /**
      * logger
      */
-    public static final Logger logger = LoggerFactory.getLogger(Context.getDefaultHost()); 
+    public static final Logger logger = LoggerFactory.getLogger(Context.getHosts().getDefaultHost().getHostId()); 
     
     /**
      * Call service method on servlet
@@ -44,7 +44,7 @@ public class ServiceInvoker {
             if(service.errorHandling(httpTransfer.getResponse(), e) != null) {
                 throw e;
             }
-            logger.warn(Context.getWarnMsg(2, serviceHolder.getService().getClass().getName(), e.getMessage()));
+            logger.warn(Context.getMessages().getWarnMsg(2, serviceHolder.getService().getClass().getName(), e.getMessage()));
         }
         return response;
     }
@@ -57,12 +57,8 @@ public class ServiceInvoker {
      * @throws WASException
      */
     public static void invokeMethod(Object object, String methodName, Object... params) throws Exception {
-        try {
-            Method method = object.getClass().getDeclaredMethod(methodName, Arrays.asList(params).stream().map(o -> o.getClass()).toArray(Class[]::new));
-            invokeMethod(object, method, params);
-        } catch (NoSuchMethodException | SecurityException e) {
-            throw new WASException(e);
-        }
+        Method method = object.getClass().getDeclaredMethod(methodName, Arrays.asList(params).stream().map(o -> o.getClass()).toArray(Class[]::new));
+        invokeMethod(object, method, params);
     }
 
     /**

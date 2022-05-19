@@ -15,14 +15,22 @@ public class Filtering {
     /**
      * Filter list
      */
-    List<String> filters;
+    List<Object> filters;
 
     /**
      * Creates with filters
      * @param filters
      */
-    public Filtering(List<String> filters) {
-        this.filters = filters;
+    public Filtering(Object filters) {
+        this.filters = ((List<?>)filters).stream().filter(o -> o != null && !o.equals("")).collect(Collectors.toList());
+    }
+
+    /**
+     * Add filter pattern
+     * @param pattern
+     */
+    public void addFilter(String pattern) {
+        this.filters.add(pattern);
     }
 
     /**
@@ -31,8 +39,8 @@ public class Filtering {
      * @return
      */
     public boolean filter(String resourceName) {
-        for(String keyword : this.filters) {
-            String regex = Arrays.asList(keyword.split(Pattern.quote("*"))).stream().map(s -> s.equals("") ? "" : Pattern.quote(s)).collect(Collectors.joining(".*"))+".*";
+        for(Object keyword : this.filters) {
+            String regex = Arrays.asList(keyword.toString().split(Pattern.quote("*"))).stream().map(s -> s.equals("") ? "" : Pattern.quote(s)).collect(Collectors.joining(".*"))+".*";
             if(resourceName.matches(regex)) {
                 return true;
             }   
@@ -62,7 +70,7 @@ public class Filtering {
      * Get filters
      * @return
      */
-    public List<String> getFilters() {
+    public List<Object> getFilters() {
         return this.filters;
     }    
 }

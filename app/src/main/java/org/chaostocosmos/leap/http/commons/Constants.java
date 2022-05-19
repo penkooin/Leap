@@ -10,6 +10,14 @@ import java.util.regex.Pattern;
  */
 public class Constants {
     /**
+     * In-Memory limit resource size
+     */
+    public static final long IN_MEMORY_LIMIT_SIZE = Integer.MAX_VALUE * 10;
+    /**
+     * default fraction point
+     */
+    public static final int DEFAULT_FRACTION_POINT = 3;
+    /**
      * separator for string property value
      */
     public static final String PROPERTY_SEPARATOR = ",";

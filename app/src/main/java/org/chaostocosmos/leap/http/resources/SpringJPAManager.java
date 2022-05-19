@@ -2,6 +2,7 @@ package org.chaostocosmos.leap.http.resources;
 
 import java.net.MalformedURLException;
 
+import org.chaostocosmos.leap.http.context.Hosts;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
@@ -19,7 +20,7 @@ public class SpringJPAManager {
     /**
      * Hosts manager
      */
-    HostsManager hostsManager;
+    Hosts<?> hosts;
 
     /**
      * Leap class loader
@@ -33,14 +34,14 @@ public class SpringJPAManager {
 
     /**
      * Create with HostsManager, ClassLoader
-     * @param hostsManager
+     * @param hosts
      * @param classLoader
      */
-    private SpringJPAManager(HostsManager hostsManager, ClassLoader classLoader) {
-        this.hostsManager = hostsManager;        
+    private SpringJPAManager(Hosts<?> hosts, ClassLoader classLoader) {
+        this.hosts = hosts;        
         jpaContext = new AnnotationConfigApplicationContext();
         jpaContext.setClassLoader(classLoader);
-        jpaContext.scan(hostsManager.getAllSpringPackages().toArray(new String[0]));
+        jpaContext.scan(this.hosts.getAllSpringPackages().toArray(new String[0]));
         jpaContext.refresh();  
     }
 
@@ -73,7 +74,7 @@ public class SpringJPAManager {
      */
     public Object getBean(String host, String beanName, Object ... params) {
         Object bean = jpaContext.getBean(beanName, params);
-        if(this.hostsManager.filteringSpringJPAPackages(host, bean.getClass().getName())) {
+        if(this.hosts.filteringSpringJPAPackages(host, bean.getClass().getName())) {
             return bean;
         }
         return null;
@@ -87,7 +88,7 @@ public class SpringJPAManager {
      * @return
      */
     public Object getBean(String host, Class<?> clazz, Object ... params) {
-        if(this.hostsManager.filteringSpringJPAPackages(host, clazz.getName())) {
+        if(this.hosts.filteringSpringJPAPackages(host, clazz.getName())) {
             return jpaContext.getBean(clazz, params);
         }
         return null;        

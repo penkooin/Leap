@@ -37,7 +37,7 @@ public class MediaStreamer {
      * @throws IOException
      */
     public byte[] getForword(long offset, int seconds) throws IOException {        
-        return this.resourceInfo.getBytes(offset, this.bytePerSeconds * seconds);
+        return this.resourceInfo.getBytes1(offset, this.bytePerSeconds * seconds);
     }
 
     /**
@@ -50,7 +50,7 @@ public class MediaStreamer {
     public byte[] getBackword(long offset, int seconds) throws IOException {
         offset = offset - (this.bytePerSeconds * seconds);
         offset = offset < 0 ? 0 : offset;
-        return this.resourceInfo.getBytes(offset, this.bytePerSeconds * seconds);
+        return this.resourceInfo.getBytes1(offset, this.bytePerSeconds * seconds);
     }
 
     /**

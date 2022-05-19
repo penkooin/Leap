@@ -12,10 +12,10 @@ import org.chaostocosmos.leap.http.annotation.AnnotationOpr;
 import org.chaostocosmos.leap.http.annotation.PostFilter;
 import org.chaostocosmos.leap.http.annotation.PreFilter;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
+import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
 import org.chaostocosmos.leap.http.filters.ILeapFilter;
-import org.chaostocosmos.leap.http.resources.Context;
 import org.chaostocosmos.leap.http.resources.Resources;
 
 import ch.qos.logback.classic.Logger;
@@ -30,10 +30,6 @@ public abstract class AbstractLeapService implements IGetService, IPostService, 
      * Logger
      */
     protected Logger logger;
-    /**
-     * Context
-     */
-    protected static final Context context = Context.get();
     /**
      * Method to be called for request
      */
@@ -64,7 +60,7 @@ public abstract class AbstractLeapService implements IGetService, IPostService, 
         this.logger = LoggerFactory.getLogger(httpTransfer.getRequest().getRequestedHost());
         this.httpTransfer = httpTransfer;
         this.invokingMethod = invokingMethod;
-        this.resource = this.httpTransfer.getHosts().getResource();
+        this.resource = this.httpTransfer.getHost().getResource();
 
         if(this.preFilters != null) {
             for(ILeapFilter filter : this.preFilters) {
@@ -80,11 +76,11 @@ public abstract class AbstractLeapService implements IGetService, IPostService, 
         Class<?>[] paramTypes = this.invokingMethod.getParameterTypes();
         if(paramTypes.length != 2 || paramTypes[0] != request.getClass() || paramTypes[1] != response.getClass()) {
             //org.chaostocosmos.leap.http.WASException: Not Implemented.
-            throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES501.getCode(), Context.getErrorMsg(201, this.invokingMethod.getName()));
+            throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES501.getCode(), Context.getMessages().getErrorMsg(201, this.invokingMethod.getName()));
         }
 
         //setting JPA link
-        new AnnotationOpr<ILeapService>(httpTransfer.getHosts().getHost(), this).injectToAutowired();
+        new AnnotationOpr<ILeapService>(httpTransfer.getHost().getHost(), this).injectToAutowired();
         //aOpr.injectToAutowired();
         switch(httpTransfer.getRequest().getRequestType()) {
             case GET: 

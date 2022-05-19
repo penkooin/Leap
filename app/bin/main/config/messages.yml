@@ -72,4 +72,5 @@ messages:
     error19: 'Deploy service process in error: {}'
     error20: 'Resource not found: {}'
     error21: 'Service method must have two parameter which is Request and Response. Called method: {}'
+    error22: 'Can not read template file: {}'
 

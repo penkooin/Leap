@@ -1,6 +1,6 @@
 package org.chaostocosmos.leap.http.enums;
 
-import org.chaostocosmos.leap.http.resources.Context;
+import org.chaostocosmos.leap.http.context.Context;
 
 public enum RES_CODE {
     RES200(200),
@@ -58,6 +58,6 @@ public enum RES_CODE {
 
     RES_CODE(int code) {
         this.code = code;
-        this.resMsg = Context.getHttpMsg(code).trim();
+        this.resMsg = Context.getMessages().getHttpMsg(code).trim();
     }    
 }

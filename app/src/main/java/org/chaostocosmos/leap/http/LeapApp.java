@@ -9,7 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -22,11 +21,10 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
+import org.chaostocosmos.leap.http.context.Context;
+import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.resources.ClassUtils;
-import org.chaostocosmos.leap.http.resources.Context;
-import org.chaostocosmos.leap.http.resources.Hosts;
-import org.chaostocosmos.leap.http.resources.HostsManager;
 import org.chaostocosmos.leap.http.resources.LeapURLClassLoader;
 import org.chaostocosmos.leap.http.resources.ResourceHelper;
 import org.chaostocosmos.leap.http.resources.ResourceMonitor;
@@ -61,11 +59,6 @@ public class LeapApp {
      * Context
      */
     public Context context;
-
-    /**
-     * Virtual host manager
-     */
-    public HostsManager hostsManager;
 
     /**
      * Static resource manager
@@ -137,7 +130,7 @@ public class LeapApp {
 
         //set log level
         String optionL = cmdLine.getOptionValue("l");
-        logger = LoggerFactory.getLogger(Context.getDefaultHosts().getHostId());
+        logger = LoggerFactory.getLogger(Context.getHosts().getDefaultHost().getHostId());
         if(optionL != null) {
             Level level = Level.toLevel(optionL); 
             logger.setLevel(level);
@@ -148,8 +141,7 @@ public class LeapApp {
         trademark();
 
         //build webapp environment
-        List<Hosts> hosts = HostsManager.get().getAllHosts();
-        for(Hosts host : hosts) {
+        for(Host<?> host : Context.getHostMap().values()) {
             ResourceHelper.extractResource("webapp", host.getDocroot());
         }
 
@@ -160,10 +152,10 @@ public class LeapApp {
         this.threadQueue = new LinkedBlockingQueue<Runnable>();
 
         //initialize thread pool
-        this.threadpool = new ThreadPoolExecutor(Context.getThreadPoolCoreSize(), Context.getThreadPoolMaxSize(), Context.getThreadPoolKeepAlive(), TimeUnit.SECONDS, this.threadQueue);        
+        this.threadpool = new ThreadPoolExecutor(Context.getServer().getThreadPoolCoreSize(), Context.getServer().getThreadPoolMaxSize(), Context.getServer().getThreadPoolKeepAlive(), TimeUnit.SECONDS, this.threadQueue);        
 
         logger.info("----------------------------------------------------------------------------------------------------");
-        logger.info("ThreadPool initialized - CORE: "+Context.getThreadPoolCoreSize()+"   MAX: "+Context.getThreadPoolMaxSize()+"   KEEP-ALIVE WHEN IDLE(seconds): "+Context.getThreadPoolKeepAlive());
+        logger.info("ThreadPool initialized - CORE: "+Context.getServer().getThreadPoolCoreSize()+"   MAX: "+Context.getServer().getThreadPoolMaxSize()+"   KEEP-ALIVE WHEN IDLE(seconds): "+Context.getServer().getThreadPoolKeepAlive());
 
         //this.resourceMonitor = new ResourceMonitor(this.threadpool, 30000, true, Unit.MB, 2, logger);
         //resourceMonitor.start();
@@ -182,8 +174,6 @@ public class LeapApp {
         } else {
             logger.info("verbose mode on");
         }
-        //instantiate virtual host object
-        hostsManager = HostsManager.get(); 
     }
 
     /**
@@ -199,25 +189,25 @@ public class LeapApp {
         //Spring JPA 
         SpringJPAManager jpaManager = SpringJPAManager.get();
 
-        for(Hosts hosts : HostsManager.get().getAllHosts()) {
-            InetAddress hostAddress = InetAddress.getByName(hosts.getHost());
-            String hostName = hostAddress.getHostAddress()+":"+hosts.getPort();
+        for(Host<?> host : Context.getHostMap().values()) {
+            InetAddress hostAddress = InetAddress.getByName(host.getHost());
+            String hostName = hostAddress.getHostAddress()+":"+host.getPort();
             if(this.leapServerMap.containsKey(hostName)) {
                 String key = this.leapServerMap.keySet().stream().filter(k -> k.equals(hostName)).findAny().get();
-                throw new IllegalArgumentException("Mapping host address is collapse on network interace: "+hostAddress.toString()+":"+hosts.getPort()+" with "+key);
+                throw new IllegalArgumentException("Mapping host address is collapse on network interace: "+hostAddress.toString()+":"+host.getPort()+" with "+key);
             }
             //if(hosts.getHost().equals(Context.getDefaultHost())) {
-                LeapHttpServer server = new LeapHttpServer(Context.getLeapHomePath(), hosts, this.threadpool, classLoader, this.resourceMonitor);
-                this.leapServerMap.put(hostAddress.getHostAddress()+":"+hosts.getPort(), server);
+                LeapHttpServer server = new LeapHttpServer(Context.getHomePath(), host, this.threadpool, classLoader, this.resourceMonitor);
+                this.leapServerMap.put(hostAddress.getHostAddress()+":"+host.getPort(), server);
             //} else {
             //    ThreadPoolExecutor threadpool = new ThreadPoolExecutor(20, 20, 10, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>()); 
             //    LeapHttpServer server = new LeapHttpServer(Context.getLeapHomePath(), hosts, this.threadpool, classLoader, this.resourceMonitor);
             //    this.leapServerMap.put(hostAddress.getHostAddress()+":"+hosts.getPort(), server); 
             //}
-            if(hosts.isDefaultHost()) {
-                logger.info("[DEFAULT HOST] - Protocol: "+hosts.getProtocol().name()+"   Server: "+hosts.getHostId()+"   Host: "+hosts.getHost()+"   Port: "+hosts.getPort()+"   Doc-Root: "+hosts.getDocroot()+"   Logging path: "+hosts.getLogPath()+"   Level: "+hosts.getLogLevel().toString());                
+            if(host.isDefaultHost()) {
+                logger.info("[DEFAULT HOST] - Protocol: "+host.getProtocol().name()+"   Server: "+host.getHostId()+"   Host: "+host.getHost()+"   Port: "+host.getPort()+"   Doc-Root: "+host.getDocroot()+"   Logging path: "+host.getLogPath()+"   Level: "+host.getLogLevel().toString());                
             } else {
-                logger.info("[VIRTUAL HOST] - Protocol: "+hosts.getProtocol().name()+"   Server: "+hosts.getHostId()+"   Host: "+hosts.getHost()+"   Port: "+hosts.getPort()+"   Doc-Root: "+hosts.getDocroot()+"   Logging path: "+hosts.getLogPath()+"   Level: "+hosts.getLogLevel().toString());
+                logger.info("[VIRTUAL HOST] - Protocol: "+host.getProtocol().name()+"   Server: "+host.getHostId()+"   Host: "+host.getHost()+"   Port: "+host.getPort()+"   Doc-Root: "+host.getDocroot()+"   Logging path: "+host.getLogPath()+"   Level: "+host.getLogLevel().toString());
             }
         }
         logger.info("----------------------------------------------------------------------------------------------------");
@@ -269,7 +259,7 @@ public class LeapApp {
             throw new WASException(MSG_TYPE.ERROR, 5);
         }
     }
-    
+
     public static void main(String[] args) throws Exception {        
         LeapApp leap = new LeapApp(args);
         leap.start();

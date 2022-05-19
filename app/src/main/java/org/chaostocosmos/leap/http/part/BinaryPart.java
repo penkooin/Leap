@@ -7,8 +7,8 @@ import java.nio.file.Path;
 
 import org.chaostocosmos.leap.http.commons.FileUtils;
 import org.chaostocosmos.leap.http.commons.StreamUtils;
+import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
-import org.chaostocosmos.leap.http.resources.Context;
 
 /**
  * BinaryPart
@@ -33,12 +33,12 @@ public class BinaryPart extends BodyPart {
     @Override
     public void save(Path targetPath) throws IOException {
         if(super.isLoadedBody) {
-            FileUtils.saveBinary(super.body, targetPath, Context.getFileBufferSize());
+            FileUtils.saveBinary(super.body, targetPath, Context.getServer().getFileBufferSize());
         } else if(!super.isClosedStream) {
-            StreamUtils.saveBinary(super.host, super.requestStream, super.contentLength, targetPath, Context.getFileBufferSize());
+            StreamUtils.saveBinary(super.host, super.requestStream, super.contentLength, targetPath, Context.getServer().getFileBufferSize());
             this.isClosedStream = true;
         } else {
-            throw new IOException(Context.getErrorMsg(48, super.isLoadedBody, super.isClosedStream));
+            throw new IOException(Context.getMessages().getErrorMsg(48, super.isLoadedBody, super.isClosedStream));
         }
         super.logger.debug(super.contentType.name()+" saved: "+targetPath.toString()+"  Size: "+targetPath.toFile().length());
     }

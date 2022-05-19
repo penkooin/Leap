@@ -13,8 +13,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.commons.StreamUtils;
+import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
-import org.chaostocosmos.leap.http.resources.Context;
 
 /**
  * KeyValuePart
@@ -54,7 +54,7 @@ public class KeyValuePart extends BodyPart {
             keyVal = new String(super.body, super.charset);
             super.isClosedStream = true;
         } else {
-            throw new IOException(Context.getErrorMsg(48, super.isLoadedBody, super.isClosedStream));
+            throw new IOException(Context.getMessages().getErrorMsg(48, super.isLoadedBody, super.isClosedStream));
         }
         return Arrays.asList(keyVal.split("&")).stream().map(t -> t.split("=", -1)).collect(Collectors.toMap(k -> k[0], v -> v[1]));
     }

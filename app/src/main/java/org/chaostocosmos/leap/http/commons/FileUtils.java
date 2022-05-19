@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 import com.coremedia.iso.IsoFile;
 
-import org.chaostocosmos.leap.http.resources.Context;
+import org.chaostocosmos.leap.http.context.Context;
 
 /**
  * FileUtils
@@ -31,7 +31,7 @@ public class FileUtils {
      * @throws IOException
      */
     public static void saveBinary(byte[] data, Path target) throws IOException {
-        saveBinary(data, target, Context.getFileBufferSize());
+        saveBinary(data, target, Context.getServer().getFileBufferSize());
     }
 
     /**
@@ -68,7 +68,7 @@ public class FileUtils {
      * @throws IOException
      */
     public static void saveText(byte[] data, Path taget, Charset charset) throws IOException {
-        saveText(data, taget, charset, Context.getFileBufferSize());
+        saveText(data, taget, charset, Context.getServer().getFileBufferSize());
     }
 
     /**

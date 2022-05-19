@@ -1,25 +1,93 @@
-mime-type:
-  text/plain:
-  text/html:
-  text/css :
-  text/javascript:
-  image/gif:
-  image/png:
-  image/jpeg:
-  image/bmp:
-  image/webp:
-  audio/midi:
-  audio/mpeg:
-  audio/webm:
-  audio/ogg:
-  audio/wav:
-  video/webm:
-  video/ogg:
-  application/octet-stream:
-  application/pkcs12:
-  application/vnd.mspowerpoint:
-  application/xhtml+xml:
-  application/xml:
-  application/pdf:
-  form-data:
-  byteranges:
+mime:
+    application/octet-stream: APPLICATION_OCTET_STREAM
+    application/pkcs12: APPLICATION_PKCS12
+    application/vnd.mspowerpoint: APPLICATION_VND_MSPOWERPOINT
+    application/vnd.openxmlformats-officedocument.wordprocessingml.document: APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_DOCUMENT
+    application/x-www-form-urlencoded: APPLICATION_X_WWW_FORM_URLENCODED
+    multipart/form-data: MULTIPART_FORM_DATA
+    multipart/byteranges: MULTIPART_BYTERANGES
+    application/vnd.apple.installer+xml: APPLICATION_VND_APPLE_INSTALLER_XML
+    application/ogg: APPLICATION_OGG
+    application/x-shar: APPLICATION_X_SHAR
+
+    #compressed
+    application/zip: APPLICATION_ZIP
+    application/java-archive: APPLICATION_JAVA_ARCHIVE
+    application/x-bzip: APPLICATION_X_BZIP
+    application/x-bzip2: APPLICATION_X_BZIP2
+    application/epub+zip: APPLICATION_EPUB_ZIP
+    application/x-rar-compressed: APPLICATION_X_RAR_COMPRESSED
+    application/x-tar: APPLICATION_X_TAR
+    application/x-zip-compressed: APPLICATION_X_ZIP_COMPRESSED
+    application/x-7z-compressed: APPLICATION_X_7Z_COMPRESSED
+
+    #document
+    application/pdf: APPLICATION_PDF
+    application/x-msdownload: APPLICATION_X_MSDOWNLOAD
+    application/vnd.ms-powerpoint: APPLICATION_VND_MS_POWERPOINT
+    application/vnd.ms-excel: APPLICATION_VND_MS_EXCEL
+    application/vnd.visio: APPLICATION_VND_VISIO
+    application/rtf: APPLICATION_RTF
+    application/x-abiword: APPLICATION_X_ABIWORD
+    application/vnd.amazon.ebook: APPLICATION_VND_AMAZON_EBOOK
+    application/msword: APPLICATION_MSWORD
+    application/vnd.oasis.opendocument.presentation: APPLICATION_VND_OASIS_OPENDOCUMENT_PRESENTATION
+    application/vnd.oasis.opendocument.spreadsheet: APPLICATION_VND_OASIS_OPENDOCUMENT_SPREADSHEET
+    application/vnd.oasis.opendocument.text: APPLICATION_VND_OASIS_OPENDOCUMENT_TEXT
+
+    #script
+    application/x-csh: APPLICATION_X_CSH
+    application/x-sh: APPLICATION_X_SH
+    application/json: APPLICATION_JSON
+    application/xml: APPLICATION_XML
+    application/vnd.mozilla.xul+xml: APPLICATION_VND_MOZILLA_XUL_XML
+    application/xhtml+xml: APPLICATION_XHTML_XML
+    application/javascript: APPLICATION_JAVASCRIPT
+
+    #text
+    text/plain: TEXT_PLAIN
+    text/html: TEXT_HTML
+    text/xml: TEXT_XML
+    text/json: TEXT_JSON
+    text/css: TEXT_CSS
+    text/csv: TEXT_CSV
+    text/javascript: TEXT_JAVASCRIPT
+    application/js: APPLICATION_JS
+    text/calendar: TEXT_CALENDAR
+
+    #image
+    image/x-icon: IMAGE_X_ICON
+    image/gif: IMAGE_GIF
+    image/png: IMAGE_PNG
+    image/jpeg: IMAGE_JPEG
+    image/bmp: IMAGE_BMP
+    image/webp: IMAGE_WEBP
+    image/svg+xml: IMAGE_SVG_XML
+    image/tiff: IMAGE_TIFF
+    application/x-shockwave-flash: APPLICATION_X_SHOCKWAVE_FLASH
+
+    #audio
+    audio/aac: AUDIO_AAC
+    audio/midi: AUDIO_MIDI
+    audio/mpeg: AUDIO_MPEG
+    audio/webm: AUDIO_WEBM
+    audio/ogg: AUDIO_OGG
+    audio/x-wav: AUDIO_X_WAV
+
+    #video
+    video/mp4: VIDEO_MP4
+    video/x-flv: VIDEO_X_FLV
+    video/quicktime: VIDEO_QUICKTIME
+    video/x-msvideo: VIDEO_X_MSVIDEO
+    video/x-ms-wmv: VIDEO_X_MS_WMV
+    application/x-mpegURL: APPLICATION_X_MPEGURL
+    audio/wav: AUDIO_WAV
+    video/webm: VIDEO_WEBM
+    video/ogg: VIDEO_OGG
+    video/mpeg: VIDEO_MPEG
+    video/3gpp: VIDEO_3GPP
+    video/3gpp2: VIDEO_3GPP2
+
+    #etc stuff
+    application/x-font-woff: APPLICATION_X_FONT_WOFF
+    application/x-font-ttf: APPLICATION_X_FONT_TTF

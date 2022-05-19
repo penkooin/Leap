@@ -7,9 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.chaostocosmos.leap.http.WASException;
-import org.chaostocosmos.leap.http.resources.Context;
-import org.chaostocosmos.leap.http.resources.Hosts;
-import org.chaostocosmos.leap.http.resources.HostsManager;
+import org.chaostocosmos.leap.http.context.Context;
+import org.chaostocosmos.leap.http.context.Host;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
@@ -39,29 +38,28 @@ public class LoggerFactory {
      * @return
      */
     public static Logger getLogger() {
-        return getLogger(Context.getDefaultHost());
+        return getLogger(Context.getHosts().getDefaultHost().getHostId());
     }
 
     /**
      * Get logger object
-     * @param host
+     * @param hostId
      * @return
      * @throws WASException
      * @throws IOException
      * @throws URISyntaxException
      */
-    public static Logger getLogger(String host) {
+    public static Logger getLogger(String hostId) {
         if(loggerMap == null) {            
             loggerMap = new HashMap<String, Logger>();
         }
-        if(!loggerMap.containsKey(host)) {
-            HostsManager manager = HostsManager.get();
-            Hosts hosts = manager.getHosts(host.trim());
+        if(!loggerMap.containsKey(hostId)) {
+            Host<?> hosts = Context.getHosts().getHost(hostId);
             Logger logger = createLoggerFor(hosts.getHostId(), hosts.getDocroot().resolve(hosts.getLogPath()).toAbsolutePath().toString(), hosts.getLogLevel());
             loggerMap.put(hosts.getHost(), logger);
             return logger;
         }
-        return loggerMap.get(host);
+        return loggerMap.get(hostId);
     }
 
     /**
@@ -71,6 +69,7 @@ public class LoggerFactory {
      * @param level
      * @return
      */
+    @SuppressWarnings("unchecked")
     public static Logger createLoggerFor(String loggerName, String loggerFile, List<Level> level) {
         LoggerContext loggerContext = new LoggerContext();
         PatternLayoutEncoder logEncoder = new PatternLayoutEncoder();

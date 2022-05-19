@@ -11,8 +11,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.commons.StreamUtils;
+import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
-import org.chaostocosmos.leap.http.resources.Context;
 
 /**
  * Multi part descriptor
@@ -82,12 +82,12 @@ public class MultiPart extends BodyPart {
     @Override
     public void save(Path targetPath) throws IOException {
         if(super.isLoadedBody) {
-            this.filePaths = StreamUtils.saveMultiPart(this.host, new ByteArrayInputStream(super.body), targetPath.normalize(), Context.getFileBufferSize(), this.boundary, super.charset);    
+            this.filePaths = StreamUtils.saveMultiPart(this.host, new ByteArrayInputStream(super.body), targetPath.normalize(), Context.getServer().getFileBufferSize(), this.boundary, super.charset);    
         } else if(!super.isClosedStream) {
-            this.filePaths = StreamUtils.saveMultiPart(this.host, super.requestStream, targetPath.normalize(), Context.getFileBufferSize(), this.boundary, super.charset);    
+            this.filePaths = StreamUtils.saveMultiPart(this.host, super.requestStream, targetPath.normalize(), Context.getServer().getFileBufferSize(), this.boundary, super.charset);    
             this.isClosedStream = true;
         } else {
-            throw new IOException(Context.getErrorMsg(48, super.isLoadedBody, super.isClosedStream));
+            throw new IOException(Context.getMessages().getErrorMsg(48, super.isLoadedBody, super.isClosedStream));
         }
         super.logger.debug(super.contentType.name()+" saved: "+targetPath.normalize().toString()+"  Size: "+filePaths.stream().map(p -> p.toFile()).map(f -> f.getName()+": "+f.length()).collect(Collectors.joining(", ")));
     }    

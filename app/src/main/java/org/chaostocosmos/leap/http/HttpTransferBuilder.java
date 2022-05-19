@@ -15,12 +15,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
+import org.chaostocosmos.leap.http.context.Context;
+import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
-import org.chaostocosmos.leap.http.resources.Context;
-import org.chaostocosmos.leap.http.resources.Hosts;
-import org.chaostocosmos.leap.http.resources.HostsManager;
 import org.chaostocosmos.leap.http.resources.StaticResourceManager;
 
 /**
@@ -55,7 +54,7 @@ public class HttpTransferBuilder {
      * @throws ImageProcessingException
      */
     public static String buildHttpErrorPage(String hostId, MSG_TYPE type, int errorCode, String message) throws Exception {
-        String title = Context.getHttpMsg(errorCode, "- "+type.name());        
+        String title = Context.getMessages().getHttpMsg(errorCode, "- "+type.name());        
         Map<String, Object> map = new HashMap<>();
         map.put("@code", errorCode);
         map.put("@type", title);
@@ -117,7 +116,7 @@ public class HttpTransferBuilder {
         /**
          * Hosts, Information configured in config.yml
          */
-        Hosts hosts;
+        Host<?> hosts;
         
         /**
          * Client Socket
@@ -156,7 +155,7 @@ public class HttpTransferBuilder {
          * @throws IOException
          */
         public HttpTransfer(String hostId, Socket client) throws IOException {
-            this.hosts = HostsManager.get().getHosts(hostId);
+            this.hosts = Context.getHosts().getHost(hostId);
             this.socket = client;
             this.clientInputStream = client.getInputStream();
             this.clientOutputStream = client.getOutputStream();
@@ -166,7 +165,7 @@ public class HttpTransferBuilder {
          * Get requested host
          * @return
          */
-        public Hosts getHosts() {
+        public Host<?> getHost() {
             return this.hosts;
         }
 
@@ -206,7 +205,7 @@ public class HttpTransferBuilder {
          */
         public Response getResponse() throws Exception {
             if(this.httpResponseDescriptor == null) {
-                String msg = buildHttpResponsePage(this.httpRequestDescriptor.getRequestedHost(), MSG_TYPE.HTTP, 200, Context.getHttpMsg(200));
+                String msg = buildHttpResponsePage(this.httpRequestDescriptor.getRequestedHost(), MSG_TYPE.HTTP, 200, Context.getMessages().getHttpMsg(200));
                 Map<String, List<Object>> headers = addHeader(new HashMap<>(), "Content-Type", MIME_TYPE.TEXT_HTML.getMimeType());
                 headers = addHeader(new HashMap<>(), "Content-Length", msg.getBytes().length);
                 this.httpResponseDescriptor = HttpResponseBuilder.getBuilder()
@@ -246,15 +245,15 @@ public class HttpTransferBuilder {
          * @throws IOException
          */
         public void sendResponse(String hostId, int resCode, Map<String, List<Object>> headers, Object body) throws IOException {
-            Charset charset = HostsManager.get().charset(hostId);
-            String str = HostsManager.get().getHosts(hostId).getProtocol().name();
+            Charset charset = Context.getHosts().charset(hostId);
+            String str = Context.getHosts().getHost(hostId).getProtocol().name();
             String protocol = str.substring(0, str.indexOf("_"));
             String version = str.substring(str.indexOf("_")+1).replace("_", ".");
             String resMsg = null;
             if(resCode >= 200 && resCode <= 600) {
                 resMsg = RES_CODE.valueOf("RES"+resCode).getMessage();
             } else {
-                resMsg = Context.getErrorMsg(resCode, hostId);
+                resMsg = Context.getMessages().getErrorMsg(resCode, hostId);
             }
             String res = protocol+"/"+version+" "+resCode+" "+resMsg+"\r\n"; 
             this.clientOutputStream.write(res.getBytes());
@@ -295,9 +294,9 @@ public class HttpTransferBuilder {
                 if(body instanceof String) {                                        
                     this.clientOutputStream.write(body.toString().getBytes(charset));
                 } else if(body instanceof File) {
-                    writeToStream((File)body, this.clientOutputStream, Context.getFileBufferSize());
+                    writeToStream((File)body, this.clientOutputStream, Context.getServer().getFileBufferSize());
                 } else if(body instanceof Path) {
-                    writeToStream(((Path)body).toFile(), this.clientOutputStream, Context.getFileBufferSize());
+                    writeToStream(((Path)body).toFile(), this.clientOutputStream, Context.getServer().getFileBufferSize());
                 } else {
                     throw new IllegalArgumentException("Not supported response body type: "+body.getClass().getName());
                 }

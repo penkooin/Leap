@@ -8,11 +8,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.WASException;
+import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
 import org.chaostocosmos.leap.http.filters.ILeapFilter;
 import org.chaostocosmos.leap.http.resources.ClassUtils;
-import org.chaostocosmos.leap.http.resources.Context;
 import org.chaostocosmos.leap.http.services.ILeapService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory; 
@@ -27,7 +27,7 @@ public class AnnotationHelper {
     /**
      * logger
      */
-    public static final Logger logger = LoggerFactory.getLogger(Context.getDefaultHost());
+    public static final Logger logger = LoggerFactory.getLogger(Context.getHosts().getDefaultHost().getHostId());
 
     /**
      * Servlet context mapping Map
@@ -121,7 +121,7 @@ public class AnnotationHelper {
                     }
                 }
             } else {
-                logger.info(Context.getInfoMsg(1, service.getClass().getName()));
+                logger.info(Context.getMessages().getInfoMsg(1, service.getClass().getName()));
             }            
         }
         return null;
@@ -150,7 +150,7 @@ public class AnnotationHelper {
                     }
                 }
             } else {
-                logger.info(Context.getInfoMsg(1, servlet.getClass().getName()));
+                logger.info(Context.getMessages().getInfoMsg(1, servlet.getClass().getName()));
             }            
         }
         return null;
@@ -187,7 +187,7 @@ public class AnnotationHelper {
                     }
                 }
             } else {
-                logger.info(Context.getInfoMsg(1, service.getClass().getName()));
+                logger.info(Context.getMessages().getInfoMsg(1, service.getClass().getName()));
             }                 
         }
         return serviceContextMappings;
@@ -224,7 +224,7 @@ public class AnnotationHelper {
                     }
                 }
             } else {
-                logger.info(Context.getInfoMsg(1, service.getClass().getName()));
+                logger.info(Context.getMessages().getInfoMsg(1, service.getClass().getName()));
             }                 
         }
         return serviceContextMappings;

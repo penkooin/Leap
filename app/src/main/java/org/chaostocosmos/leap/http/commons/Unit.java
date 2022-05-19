@@ -46,7 +46,7 @@ public enum UNIT {
      * @param time
      * @return
      */
-    public long get(long time) {
+    public long getTime(long time) {
         if(!name().equals("MS") 
             && !name().equals("SE") 
             && !name().equals("MI") 
@@ -58,6 +58,15 @@ public enum UNIT {
             throw new RuntimeException("This method is only support time unit.");
         }
         return (long)(this.unit * time);
+    }
+
+    /**
+     * Get byte size by default fraction point
+     * @param bytes
+     * @return
+     */
+    public double get(long bytes) {
+        return get(bytes, Constants.DEFAULT_FRACTION_POINT);
     }
 
     /**

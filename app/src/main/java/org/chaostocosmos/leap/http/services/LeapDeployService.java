@@ -12,14 +12,13 @@ import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.annotation.FilterMapper;
 import org.chaostocosmos.leap.http.annotation.MethodMappper;
 import org.chaostocosmos.leap.http.annotation.ServiceMapper;
+import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
 import org.chaostocosmos.leap.http.filters.BasicAuthFilter;
 import org.chaostocosmos.leap.http.part.BodyPart;
 import org.chaostocosmos.leap.http.part.MultiPart;
-import org.chaostocosmos.leap.http.resources.Context;
-import org.chaostocosmos.leap.http.resources.HostsManager;
 
 @ServiceMapper(path="/deploy")
 public class LeapDeployService extends AbstractLeapService implements IDeploy {
@@ -41,7 +40,7 @@ public class LeapDeployService extends AbstractLeapService implements IDeploy {
             }
             
             super.logger.debug("Deploying service... "+request.getReqHeader().toString());
-            Path serviceClassesPath = HostsManager.get().getDynamicClaspaths(request.getRequestedHost());
+            Path serviceClassesPath = super.serviceManager.getHost().getDynamicClasspaths();
             
             Path packagePath = Paths.get(packages.replace(".", File.separator));
             System.out.println("-----------------------------------------------------------------"+serviceClassesPath.resolve(packagePath).toAbsolutePath().toString());
@@ -58,7 +57,7 @@ public class LeapDeployService extends AbstractLeapService implements IDeploy {
                 super.serviceManager.addService(deployService);
             } catch(NoClassDefFoundError | Exception e) {
                 multipart.getFilePaths().stream().forEach(p -> deleteClean(serviceClassesPath.getFileName().toString(), p));
-                super.logger.error(Context.getErrorMsg(19, e.getMessage()), e);
+                super.logger.error(Context.getMessages().getErrorMsg(19, e.getMessage()), e);
                 super.logger.debug("Uploaded service delteed: "+serviceClassesPath.resolve(packagePath).toString());
             }
         } else {

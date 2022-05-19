@@ -7,7 +7,6 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.nio.charset.Charset;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -19,12 +18,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.commons.Filtering;
-import org.chaostocosmos.leap.http.commons.UtilBox;
-import org.chaostocosmos.leap.http.enums.PROTOCOL;
+import org.chaostocosmos.leap.http.context.Context;
+import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.filters.ILeapFilter;
 import org.chaostocosmos.leap.http.services.ILeapService;
-import org.chaostocosmos.leap.http.user.GRANT;
-import org.chaostocosmos.leap.http.user.User;
 
 /**
  * ClassUtils object
@@ -50,7 +47,7 @@ public class ClassUtils {
      */
     public static LeapURLClassLoader getClassLoader() throws MalformedURLException {
         if(classLoader == null) {
-            classLoader = new LeapURLClassLoader(HostsManager.get().getAllDynamicClasspathURLs());
+            classLoader = new LeapURLClassLoader(Context.getHosts().getAllDynamicClasspathURLs());
         }
         return classLoader;
     }
@@ -66,7 +63,7 @@ public class ClassUtils {
      */
     public static List<Class<? extends ILeapService>> findAllLeapServices(URLClassLoader classLoader, boolean reloadConfig, Filtering filters) throws IOException, URISyntaxException {
         if(reloadConfig) {
-            Context.get().loadConfig();
+            Context.initialize(null);
         }
         List<Class<? extends ILeapService>> services = findClasses(classLoader, ILeapService.class, classLoader.getResource(""), null)
                                                        .stream()
@@ -274,39 +271,13 @@ public class ClassUtils {
     /**
      * Get Hosts object mapping with Map
      * @param map
+     * @param isDefaultHost     * 
      * @return
      * @throws IOException
      * @throws ImageProcessingException
      */
-    public static Hosts mappingToHosts(Map<Object, Object> map) throws IOException {
-        return new Hosts(
-            (boolean)map.get("default"),
-            (String)map.get("hostname"), 
-            PROTOCOL.getProtocol((String)map.get("protocol")),
-            Charset.forName((String)map.get("charset")),
-            (String)map.get("host"), 
-            (int)map.get("port"), 
-            (List<User>)((List<Map<?, ?>>)map.get("users")).stream().map(m -> new User(m.get("username").toString(), m.get("password").toString(), GRANT.valueOf(m.get("grant").toString()))).collect(Collectors.toList()),
-            !map.get("dynamic-classpath").equals("") ? Paths.get((String)map.get("dynamic-classpath")) : null,
-            new Filtering(map.get("dynamic-packages") == null ? new ArrayList<>() : (List<String>)map.get("dynamic-packages")), 
-            new Filtering(map.get("spring-jpa-packages") == null ? new ArrayList<>() : (List<String>)map.get("spring-jpa-packages")), 
-            new Filtering((List<String>)((Map<?, ?>)map.get("resource")).get("in-memory-filters")),
-            new Filtering((List<String>)((Map<?, ?>)map.get("resource")).get("access-filters")),
-            new Filtering((List<String>)((Map<?, ?>)map.get("resource")).get("forbidden-filters")),
-            new Filtering((List<String>)((Map<?, ?>)map.get("ip-filter")).get("allowed")),
-            new Filtering((List<String>)((Map<?, ?>)map.get("ip-filter")).get("forbidden")), 
-            ((List<?>)map.get("error-filters")).stream().map(f -> ClassUtils.getClass(ClassLoader.getSystemClassLoader(), f.toString().trim())).collect(Collectors.toList()), 
-            Paths.get((String)map.get("doc-root")), 
-            Paths.get((String)map.get("doc-root")).resolve("webapp"), 
-            Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF"), 
-            Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF").resolve("static"), 
-            Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("services"), 
-            Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF").resolve("template"), 
-            Paths.get((String)map.get("doc-root")).resolve("webapp").resolve("WEB-INF").resolve("template").resolve("welcome").toFile(), 
-            Paths.get((String)map.get("logs")), 
-            UtilBox.getLogLevels((String)map.get("log-level"), ","), 
-            null            
-        );
+    public static Host<?> mappingToHost(Map<String, Object> map, boolean isDefaultHost) throws IOException {
+        return new Host<Map<String, Object>>(map, isDefaultHost);
     }
 
     /**
@@ -314,18 +285,18 @@ public class ClassUtils {
      * @param host
      * @return
      */
-    public static Map<Object, Object> mappingToMap(Hosts host) {
-        Map<Object, Object> map = new HashMap<>();
+    public static Map<String, Object> mappingToMap(Host<Map<String, Object>> host) {
+        Map<String, Object> map = new HashMap<>();
         map.put("default", host.isDefaultHost());
         map.put("hostname", host.getHostId());
         map.put("protocol", host.getProtocol().name());
         map.put("charset", host.charset().name());
         map.put("host", host.getHost());
         map.put("port", host.getPort());
-        map.put("users", host.getUsers().stream().map(user -> user.getUserMap()).collect(Collectors.toList()));
+        map.put("users", host.getValue("users"));
         map.put("dynamic-classpath", host.getDynamicClasspaths().toString());
         map.put("dynamic-packages", host.getDynamicPackages());
-        map.put("spring-jpa-packages", host.getSpringJPAPackages());
+        map.put("spring-jpa-packages", host.getSpringJPAPackageFilters());
             Map<Object, Object> filterMap = new HashMap<>();
             filterMap.put("in-memory-filters", host.getInMemoryFiltering()); 
             filterMap.put("access-filters", host.getAccessFiltering());

@@ -47,13 +47,12 @@ public abstract class AbstractStreamingService extends AbstractLeapService imple
 
     @Override
     public void serveGet(final Request request, final Response response) throws Exception {        
-        System.out.println("****************************************************************************");
         String videoFilename = request.getParameter("file");
         if(videoFilename == null || videoFilename.equals("")) {
             throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES412.getCode(), "Parameter not found(file). Streaming request must have field of file.");
         }
-        Path video = super.serviceManager.getHosts().getStatic().resolve("video").resolve(videoFilename);
-        ResourceInfo info = super.resource.getResourceInfo(video);
+        Path video = super.serviceManager.getHost().getStatic().resolve("video").resolve(videoFilename);
+        ResourceInfo info = (ResourceInfo) super.resource.getResourceInfo(video);
         if(!video.toFile().exists()) {
             throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES404.getCode(), "Specified resource not found: "+video.toAbsolutePath().toString().replace("\\", "/"));
         }

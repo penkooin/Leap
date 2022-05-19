@@ -10,6 +10,7 @@ import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface MethodMappper {
+
     /**
      * Servelt mapped path of uri
      * @return
