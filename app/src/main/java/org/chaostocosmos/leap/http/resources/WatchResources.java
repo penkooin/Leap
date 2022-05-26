@@ -40,7 +40,6 @@ import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
-import org.chaostocosmos.leap.http.enums.TEMPLATE;
 
 /**
  * WatchResource object
@@ -353,6 +352,14 @@ public class WatchResources extends Thread implements Resources {
     }
 
     @Override
+    public Path resolveRealPath(String contextPath) {
+        Path staticPath = this.host.getStatic();
+        contextPath = contextPath.charAt(0) == '/' ? contextPath.substring(0) : contextPath;
+        contextPath = contextPath.charAt(contextPath.length() - 1) == '/' ? contextPath.substring(0, contextPath.lastIndexOf('/')) : contextPath;
+        return staticPath.resolve(contextPath);
+    }
+
+    @Override
     public Object getContextResourceInfo(String contextPath) throws IOException { 
         return getResourceInfo(this.watchPath.resolve(contextPath));
     }
@@ -365,9 +372,10 @@ public class WatchResources extends Thread implements Resources {
     @Override
     public Object getResourceInfo(Path resourcePath) {
         resourcePath = resourcePath.normalize();
-        System.out.println(resourcePath+" ((((((((((((( "+this.watchPath);
         if(resourcePath.getNameCount() == watchPath.getNameCount()) {
             return this.resourceTree;
+        } else if(resourcePath.getNameCount() < watchPath.getNameCount()) {
+            throw new WASException(MSG_TYPE.HTTP, 403, "Requested path is not allowed.");
         }
         Path path = resourcePath.subpath(this.watchPath.getNameCount(), resourcePath.getNameCount());        
         String[] paths = path.toString().split(Pattern.quote(File.separator));
@@ -381,8 +389,8 @@ public class WatchResources extends Thread implements Resources {
             throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES404.getCode(), " Static page not found in Resource manager: "+contextPath);
         }
         String page = new String(((ResourceInfo)resourceInfo).getBytes(), Context.getHosts().getHost(this.hostId).charset());
-        for(Entry<String, Object> e : params.entrySet()) {
-            page = page.replace(e.getKey(), e.getValue()+"");
+        if(params != null) {
+            page = resolvePage(page, params);
         }
         return page;
     }
@@ -393,27 +401,37 @@ public class WatchResources extends Thread implements Resources {
     }
 
     @Override
-    public String getTemplatePage(TEMPLATE template, Map<String, Object> params) throws IOException {
-        String page = template.getTemplatePage(template, Context.getHost(this.hostId).charset());
-        for(Entry<String, Object> e : params.entrySet()) {
-            page = page.replace(e.getKey(), e.getValue()+"");
+    public String getTemplatePage(String templatePath, Map<String, Object> params) throws IOException {
+        String page = getStaticPage(templatePath, params);
+        if(params != null) {
+            for(Entry<String, Object> e : params.entrySet()) {
+                page = page.replace(e.getKey(), e.getValue()+"");
+            }    
         }
         return page;
     }
 
     @Override
     public String getResponsePage(Map<String, Object> params) throws IOException {
-        return getTemplatePage(TEMPLATE.RESPONSE, params);
+        return getTemplatePage("templates/response.html", params);
     }
 
     @Override
     public String getErrorPage(Map<String, Object> params) throws IOException {
-        return getTemplatePage(TEMPLATE.ERROR, params);
+        return getTemplatePage("templates/error.html", params);
     }
 
     @Override
     public String getResourcePage(Map<String, Object> params) throws IOException {        
-        return getTemplatePage(TEMPLATE.RESOURCE, params);
+        return getTemplatePage("templates/resource.html", params);
+    }
+
+    @Override
+    public String resolvePage(String html, Map<String, Object> params) {
+        for(Map.Entry<String, Object> entry : params.entrySet()) {
+            html = html.replaceAll(Constants.TAG_REGEX_PREFIX+entry.getKey()+Constants.TAG_REGEX_SUFFIX, entry.getValue()+"");
+        }
+        return html;
     }
 
     @Override
@@ -451,7 +469,14 @@ public class WatchResources extends Thread implements Resources {
          * Resource last modified time
          */
         FileTime lastModified;
-
+        /**
+         * Resource File
+         */
+        File resourceFile;
+        /**
+         * Resource size
+         */
+        long resourceSize;
         /**
          * Constructs with resource path & in-memory flag
          * @param resourcePath
@@ -461,6 +486,8 @@ public class WatchResources extends Thread implements Resources {
          */
         public ResourceInfo(Path resourcePath, boolean inMemoryFlag) throws IOException {
             this.resourcePath = resourcePath;
+            this.resourceFile = resourcePath.toFile();
+            this.resourceSize = resourcePath.toFile().length();
             this.inMemoryFlag = inMemoryFlag;
             this.mimeType = MIME_TYPE.getMimeType(Files.probeContentType(this.resourcePath));
             if(this.inMemoryFlag) {
@@ -481,8 +508,7 @@ public class WatchResources extends Thread implements Resources {
                 };
             }
             this.lastModified = Files.getLastModifiedTime(this.resourcePath);
-        }
-        
+        }        
         /**
          * Get all bytes on resource
          * @return
@@ -499,7 +525,6 @@ public class WatchResources extends Thread implements Resources {
                 return Files.readAllBytes(this.resourcePath);
             }
         }
-
         /**
          * Get partitial bytes of File resource by position & length
          * @param position
@@ -517,7 +542,6 @@ public class WatchResources extends Thread implements Resources {
                 return buffer.array();    
             }
         }
-
         /**
          * Get bytes of resource(file or memory) with position & length
          * @param position
@@ -571,7 +595,6 @@ public class WatchResources extends Thread implements Resources {
             }
             return bytes;
         }
-
         /**
          * Get bytes of resource(file or memory) with position & length
          * @param position
@@ -624,7 +647,6 @@ public class WatchResources extends Thread implements Resources {
             }
             return data;     
         }
-
         /**
          * Get resource Path object
          * @return
@@ -632,7 +654,6 @@ public class WatchResources extends Thread implements Resources {
         public Path getResourcePath() {
             return this.resourcePath;
         }
-
         /**
          * Get context path of resource
          * @return
@@ -640,7 +661,6 @@ public class WatchResources extends Thread implements Resources {
         public String getContextPath() {
             return this.contextPath;
         }
-
         /**
          * Get resource name
          * @return
@@ -648,15 +668,20 @@ public class WatchResources extends Thread implements Resources {
         public String getResourceName() {
             return this.resourcePath.getFileName().toString();
         }
-
+        /**
+         * Get resource File
+         * @return
+         */
+        public File getResourceFile() {
+            return this.resourceFile;
+        }
         /**
          * Get resurce size
          * @return
          */
         public long getResourceSize() {
-            return this.resourcePath.toFile().length();
+            return this.resourceSize;
         }
-
         /**
          * Get mime-type of resource
          * @return
@@ -664,7 +689,6 @@ public class WatchResources extends Thread implements Resources {
         public MIME_TYPE getMimeType() {
             return this.mimeType;
         }
-
         /**
          * Get last modified time of specfied unit
          * @param timeUnit

@@ -44,9 +44,7 @@ class UtilBoxTest {
     }
 
     public static void main(String[] args) {
-        String ctx = "/dir";
-        String[] sp = ctx.split("[/]");
-        System.out.println(sp.length);
+        System.out.println((long)Integer.MAX_VALUE * 100);
     }
 
 }

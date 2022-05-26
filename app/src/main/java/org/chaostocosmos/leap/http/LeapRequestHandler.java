@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.HttpTransferBuilder.HttpTransfer;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
@@ -18,8 +17,8 @@ import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
-import org.chaostocosmos.leap.http.resources.Html;
 import org.chaostocosmos.leap.http.resources.ResourceHelper;
+import org.chaostocosmos.leap.http.resources.TemplateFactory;
 import org.chaostocosmos.leap.http.resources.WatchResources.ResourceInfo;
 import org.chaostocosmos.leap.http.services.ServiceHolder;
 import org.chaostocosmos.leap.http.services.ServiceInvoker;
@@ -101,8 +100,7 @@ public class LeapRequestHandler implements Runnable {
             } else { // When client request static resources
                 Path resourcePath = ResourceHelper.getResourcePath(request);
                 if(request.getContextPath().equals("/")) {
-                    LinkedHashMap<String, Object> resourceMap = (LinkedHashMap<String, Object>)host.getResource().getResourceInfo(resourcePath);
-                    String body = Html.makeWelcomeResourceHtml(request.getContextPath(), host, resourceMap.keySet().stream().collect(Collectors.toList()));
+                    String body = TemplateFactory.getWelcomeResourceHtml(request.getContextPath(), host);
                     response.addHeader("Content-Type", MIME_TYPE.TEXT_HTML.getMimeType());
                     response.setBody(body.getBytes());
                     response.setResponseCode(RES_CODE.RES200.getCode());
@@ -112,8 +110,7 @@ public class LeapRequestHandler implements Runnable {
                         Object resource = host.getResource().getResourceInfo(resourcePath);
                         if(resource != null) {
                             if(resource instanceof LinkedHashMap) {
-                                LinkedHashMap<String, Object> resourceMap = (LinkedHashMap<String, Object>) resource;
-                                String body = Html.makeResourceHtml(request.getContextPath(), host, resourceMap.keySet().stream().collect(Collectors.toList()));
+                                String body = TemplateFactory.getResourceHtml(request.getContextPath(), host);
                                 String mimeType = MIME_TYPE.TEXT_HTML.getMimeType();
                                 response.setResponseCode(RES_CODE.RES200.getCode());
                                 response.addHeader("Content-Type", mimeType+"; charset="+host.charset());

@@ -4,19 +4,24 @@ import java.nio.file.Path;
 import java.util.Map;
 
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
-import org.chaostocosmos.leap.http.enums.TEMPLATE;
 
 /**
  * Resource model
  * @author 9ins
  */
-public interface Resources {
+public interface Resources {    
     /**
      * Filtering and get resource List by mime-type
      * @param mimeType
      * @return
      */
     public Map<String, Object> filter(MIME_TYPE mimeType);
+    /**
+     * Resolve real path
+     * @param contextPath
+     * @return
+     */
+    public Path resolveRealPath(String contextPath);
     /**
      * Get context mapping with local Path
      * @param resourcePath
@@ -77,12 +82,13 @@ public interface Resources {
     public String getResourcePage(Map<String, Object> params) throws Exception;
     /**
      * Get template page
-     * @param template
+     * @param hostId
+     * @parma templatePath
      * @param params
      * @return
      * @throws Exception
      */
-    public String getTemplatePage(TEMPLATE template, Map<String, Object> params) throws Exception;
+    public String getTemplatePage(String templatePath, Map<String, Object> params) throws Exception;
     /**
      * Get static page
      * @param resourceName
@@ -91,4 +97,12 @@ public interface Resources {
      * @throws Exception
      */
     public String getStaticPage(String resourceName, Map<String, Object> params) throws Exception;
+    /**
+     * Resolve HTML page between comment replacement id and params
+     * @param htmlPage
+     * @param params
+     * @return
+     * @throws Exception
+     */
+    public String resolvePage(String htmlPage, Map<String, Object> params) throws Exception;
 }

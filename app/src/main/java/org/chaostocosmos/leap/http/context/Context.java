@@ -11,8 +11,8 @@ import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
-import org.chaostocosmos.leap.http.enums.TEMPLATE;
 import org.chaostocosmos.leap.http.resources.ResourceHelper;
+import org.chaostocosmos.leap.http.resources.TemplateFactory;
 import org.yaml.snakeyaml.Yaml;
 
 /**
@@ -61,14 +61,13 @@ public class Context {
     /**
      * Template Map
      */
-    private static Map<TEMPLATE, byte[]> templateMap;
+    private static Map<TemplateFactory, byte[]> templateMap;
     /**
      * Constructor with home path
      * @param homePath
      */
     private Context(Path homePath) {        
         HOME_PATH = homePath;
-        templatePath = HOME_PATH.resolve("config").resolve("templates");
         serverPath = HOME_PATH.resolve("config").resolve("server.yml");
         hostsPath = HOME_PATH.resolve("config").resolve("hosts.yml");
         messagesPath = HOME_PATH.resolve("config").resolve("messages.yml");
@@ -130,8 +129,8 @@ public class Context {
      * Get template path
      * @return
      */
-    public static Path getTemplatePath() {
-        return templatePath;
+    public static Path getTemplates(String hostId) {
+        return hosts.getTemplates(hostId);
     }
     /**
      * Get Server context

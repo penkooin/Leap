@@ -224,6 +224,15 @@ public class Hosts <M> extends Metadata <M> {
     }
 
     /**
+     * Get template path by host getNameCount
+     * @param hostId
+     * @return
+     */
+    public Path getTemplates(String hostId) {
+        return this.hostMap.get(hostId).getTemplates();
+    }
+
+    /**
      * Whether virtual host
      * @param hostId
      * @return
