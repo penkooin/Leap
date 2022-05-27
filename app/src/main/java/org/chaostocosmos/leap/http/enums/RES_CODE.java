@@ -2,6 +2,9 @@ package org.chaostocosmos.leap.http.enums;
 
 import org.chaostocosmos.leap.http.context.Context;
 
+/**
+ * HTTP response code enum
+ */
 public enum RES_CODE {
     RES200(200),
     RES201(201),
@@ -44,20 +47,34 @@ public enum RES_CODE {
     RES508(508),
     RES510(510),
     RES511(511);
-
+    /**
+     * Response code
+     */
     int code;
-    String resMsg;
-
-    public int getCode() {
+    /**
+     * Response message
+     */
+    String msg;
+    /**
+     * Get response code
+     * @return
+     */
+    public int code() {
         return code;
     }
-
-    public String getMessage() {
-        return this.resMsg;
+    /**
+     * Get response message
+     * @return
+     */
+    public String msg() {
+        return this.msg;
     }
-
+    /**
+     * Initializer
+     * @param code
+     */
     RES_CODE(int code) {
         this.code = code;
-        this.resMsg = Context.getMessages().getHttpMsg(code).trim();
+        this.msg = Context.getMessages().getHttpMsg(code).trim();
     }    
 }

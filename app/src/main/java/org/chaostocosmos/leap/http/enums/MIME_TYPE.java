@@ -23,7 +23,6 @@ public enum MIME_TYPE {
     APPLICATION_VND_APPLE_INSTALLER_XML(Context.getMime().getMime("application/vnd.apple.installer+xml")),
     APPLICATION_OGG(Context.getMime().getMime("application/ogg")),
     APPLICATION_X_SHAR(Context.getMime().getMime("application/x-shar")),
-
     //compressed
     APPLICATION_ZIP(Context.getMime().getMime("application/zip")),
     APPLICATION_JAVA_ARCHIVE(Context.getMime().getMime("application/java-archive")),
@@ -34,7 +33,6 @@ public enum MIME_TYPE {
     APPLICATION_X_TAR(Context.getMime().getMime("application/x-tar")),
     APPLICATION_X_ZIP_COMPRESSED(Context.getMime().getMime("application/x-zip-compressed")),
     APPLICATION_X_7Z_COMPRESSED(Context.getMime().getMime("application/x-7z-compressed")),
-
     //document
     APPLICATION_PDF(Context.getMime().getMime("application/pdf")),
     APPLICATION_X_MSDOWNLOAD(Context.getMime().getMime("application/x-msdownload")),
@@ -48,7 +46,6 @@ public enum MIME_TYPE {
     APPLICATION_VND_OASIS_OPENDOCUMENT_PRESENTATION(Context.getMime().getMime("application/vnd.oasis.opendocument.presentation")),
     APPLICATION_VND_OASIS_OPENDOCUMENT_SPREADSHEET(Context.getMime().getMime("application/vnd.oasis.opendocument.spreadsheet")),
     APPLICATION_VND_OASIS_OPENDOCUMENT_TEXT(Context.getMime().getMime("application/vnd.oasis.opendocument.text")),
-
     APPLICATION_X_CSH(Context.getMime().getMime("application/x-csh")),
     APPLICATION_X_SH(Context.getMime().getMime("application/x-sh")),
     APPLICATION_JSON(Context.getMime().getMime("application/json")),
@@ -56,7 +53,7 @@ public enum MIME_TYPE {
     APPLICATION_VND_MOZILLA_XUL_XML(Context.getMime().getMime("application/vnd.mozilla.xul+xml")),
     APPLICATION_XHTML_XML(Context.getMime().getMime("application/xhtml+xml")),
     APPLICATION_JAVASCRIPT(Context.getMime().getMime("application/javascript")),
-
+    //text
     TEXT_PLAIN(Context.getMime().getMime("text/plain")),
     TEXT_HTML(Context.getMime().getMime("text/html")),
     TEXT_XML(Context.getMime().getMime("text/xml")),
@@ -104,9 +101,10 @@ public enum MIME_TYPE {
     APPLICATION_X_FONT_WOFF(Context.getMime().getMime("application/x-font-woff")),
     APPLICATION_X_FONT_TTF(Context.getMime().getMime("application/x-font-ttf"))
     ;
-
+    /**
+     * Mime type String
+     */
     String mimeType;
-
     /**
      * Initializer
      * @param mimeType
@@ -114,21 +112,19 @@ public enum MIME_TYPE {
     MIME_TYPE(String mimeType) {
         this.mimeType = mimeType;
     }
-
     /**
      * Get mime type
      * @return
      */
-    public String getMimeType() {
+    public String mimeType() {
         return this.mimeType;
     }
-
     /**
      * Get mime type from content type string
      * @param mimeType
      * @return
      */
-    public static MIME_TYPE getMimeType(String mimeType) {
+    public static MIME_TYPE mimeType(String mimeType) {
         
         return mimeType == null ? null : MIME_TYPE.valueOf(mimeType.toUpperCase()
                                          .replace("/", "_")
@@ -137,13 +133,12 @@ public enum MIME_TYPE {
                                          .replace("+", "_")
                                          );
     }
-
     /**
      * Get mime type list of specfied parameter
      * @param type
      * @return
      */
-    public List<MIME_TYPE> getMimeTypes(String type) {
+    public List<MIME_TYPE> mimeTypes(String type) {
         return Arrays.asList(MIME_TYPE.values()).stream().filter(m -> m.name().startsWith(type)).collect(Collectors.toList());
     }
 }

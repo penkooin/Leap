@@ -9,14 +9,14 @@ import org.chaostocosmos.leap.http.annotation.FilterMapper;
 import org.chaostocosmos.leap.http.annotation.MethodMappper;
 import org.chaostocosmos.leap.http.annotation.ServiceMapper;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
-import org.chaostocosmos.leap.http.filters.BasicHttpFilter;
 import org.chaostocosmos.leap.http.services.entity.Users;
+import org.chaostocosmos.leap.http.services.filters.BasicHttpFilter;
 import org.chaostocosmos.leap.http.services.repository.IUsersRespository;
 import org.springframework.stereotype.Service;
 
 @ServiceMapper(path = "/simple/jpa")
 @Service
-public class SimpleJPAService extends AbstractLeapService {
+public class SimpleJPAService extends AbstractService {
 
     @AutowiredJPA
     private IUsersRespository usersRepo;

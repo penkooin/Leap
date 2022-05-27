@@ -2,7 +2,7 @@ package org.chaostocosmos.leap.http.resources;
 
 import java.net.MalformedURLException;
 
-import org.chaostocosmos.leap.http.context.Hosts;
+import org.chaostocosmos.leap.http.context.Context;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
@@ -18,11 +18,6 @@ public class SpringJPAManager {
     AnnotationConfigApplicationContext jpaContext;
 
     /**
-     * Hosts manager
-     */
-    Hosts<?> hosts;
-
-    /**
      * Leap class loader
      */
     ClassLoader classLoader;
@@ -34,14 +29,12 @@ public class SpringJPAManager {
 
     /**
      * Create with HostsManager, ClassLoader
-     * @param hosts
      * @param classLoader
      */
-    private SpringJPAManager(Hosts<?> hosts, ClassLoader classLoader) {
-        this.hosts = hosts;        
+    private SpringJPAManager(ClassLoader classLoader) {
         jpaContext = new AnnotationConfigApplicationContext();
         jpaContext.setClassLoader(classLoader);
-        jpaContext.scan(this.hosts.getAllSpringPackages().toArray(new String[0]));
+        jpaContext.scan(Context.getServer().getSpringJPAPackage().toArray(new String[0]));
         jpaContext.refresh();  
     }
 
@@ -52,7 +45,7 @@ public class SpringJPAManager {
      */
     public static SpringJPAManager get() throws MalformedURLException {
         if(springJpaManager == null) {
-            //springJpaManager = new SpringJPAManager(HostsManager.get(), ClassUtils.getClassLoader());
+            springJpaManager = new SpringJPAManager(ClassUtils.getClassLoader());
         }
         return springJpaManager;
     }
@@ -67,30 +60,23 @@ public class SpringJPAManager {
 
     /**
      * Get bean by name
-     * @param host
      * @param beanName
-     * @param params
+     * @param args
      * @return
      */
-    public Object getBean(String host, String beanName, Object ... params) {
-        Object bean = jpaContext.getBean(beanName, params);
-        if(this.hosts.filteringSpringJPAPackages(host, bean.getClass().getName())) {
-            return bean;
-        }
-        return null;
+    @SuppressWarnings("unchecked")
+    public <T> T getBean(String beanName, Object ... args) {
+        return (T)jpaContext.getBean(beanName, args);
     }
 
     /**
      * Get Bean by class object
-     * @param host
      * @param clazz
-     * @param params
+     * @param args
      * @return
      */
-    public Object getBean(String host, Class<?> clazz, Object ... params) {
-        if(this.hosts.filteringSpringJPAPackages(host, clazz.getName())) {
-            return jpaContext.getBean(clazz, params);
-        }
-        return null;        
+    @SuppressWarnings("unchecked")
+    public <T> T getBean(Class<?> clazz, Object ... args) {
+        return (T)jpaContext.getBean(clazz, args);
     }
 }

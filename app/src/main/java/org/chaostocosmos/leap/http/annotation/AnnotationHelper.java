@@ -11,9 +11,9 @@ import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
-import org.chaostocosmos.leap.http.filters.ILeapFilter;
 import org.chaostocosmos.leap.http.resources.ClassUtils;
-import org.chaostocosmos.leap.http.services.ILeapService;
+import org.chaostocosmos.leap.http.services.filters.IFilter;
+import org.chaostocosmos.leap.http.services.model.ServiceModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory; 
 
@@ -71,7 +71,7 @@ public class AnnotationHelper {
      * @return
      * @throws WASException
      */
-    public static Map<String, Method> getServiceMethodMap(ILeapService service) throws WASException {
+    public static Map<String, Method> getServiceMethodMap(ServiceModel service) throws WASException {
         Map<String, Method> methodMap = new HashMap<>();
         ServiceMapper serviceDescriptor = service.getClass().getDeclaredAnnotation(ServiceMapper.class);
         if(serviceDescriptor != null) {
@@ -162,8 +162,8 @@ public class AnnotationHelper {
      * @return
      * @throws WASException
      */
-    public static Map<String, ILeapService> getServiceContextMappings(List<String> classes) throws WASException {
-        Map<String, ILeapService> serviceContextMappings = new HashMap<>();
+    public static Map<String, ServiceModel> getServiceContextMappings(List<String> classes) throws WASException {
+        Map<String, ServiceModel> serviceContextMappings = new HashMap<>();
         for(String service : classes) {
             ServiceMapper serviceDescriptor = service.getClass().getDeclaredAnnotation(ServiceMapper.class);
             if(serviceDescriptor != null) {
@@ -183,7 +183,7 @@ public class AnnotationHelper {
                         if(serviceContextMappings.containsKey(fullPath)) {
                             throw new WASException(MSG_TYPE.ERROR, 11, new Object[]{service, fullPath});
                         }
-                        serviceContextMappings.put(fullPath, (ILeapService)ClassUtils.instantiate(ClassLoader.getSystemClassLoader().getSystemClassLoader(), service));
+                        serviceContextMappings.put(fullPath, (ServiceModel)ClassUtils.instantiate(ClassLoader.getSystemClassLoader().getSystemClassLoader(), service));
                     }
                 }
             } else {
@@ -236,7 +236,7 @@ public class AnnotationHelper {
      * @param annotationClass
      * @return
      */
-    public static List<Method> getFilterMethods(ILeapFilter filter, Class annotationClass) {
+    public static List<Method> getFilterMethods(IFilter filter, Class annotationClass) {
         return Arrays.asList(filter.getClass().getDeclaredMethods()).stream().filter(m -> m.getDeclaredAnnotation(annotationClass) != null).collect(Collectors.toList());
     }
 }

@@ -15,7 +15,7 @@ import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
  * @author 9ins
  */
 @ServiceMapper(path = "")
-public class TemplatePageService extends AbstractLeapService {
+public class TemplatePageService extends AbstractService {
 
     @Override
     public Throwable errorHandling(Response response, Throwable throwable) throws Throwable {
@@ -27,7 +27,7 @@ public class TemplatePageService extends AbstractLeapService {
         System.out.println(request.getContextParam().toString());
         String errorPage = super.resource.getErrorPage(request.getContextParam().entrySet().stream().collect(Collectors.toMap(k -> "@"+k.getKey(), v -> v.getValue())));
         response.setResponseCode(Integer.parseInt(request.getParameter("code")));
-        response.addHeader("Content-Type", MIME_TYPE.TEXT_HTML.getMimeType());
+        response.addHeader("Content-Type", MIME_TYPE.TEXT_HTML.mimeType());
         response.setBody(errorPage);
     }
     

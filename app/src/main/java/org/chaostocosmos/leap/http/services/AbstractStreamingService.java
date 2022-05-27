@@ -16,13 +16,14 @@ import org.chaostocosmos.leap.http.enums.RES_CODE;
 import org.chaostocosmos.leap.http.resources.MediaStreamer;
 import org.chaostocosmos.leap.http.resources.Resources;
 import org.chaostocosmos.leap.http.resources.WatchResources.ResourceInfo;
+import org.chaostocosmos.leap.http.services.model.StreamingModel;
 
 /**
  * AbstractStreamingService
  * 
  * @author 9ins
  */
-public abstract class AbstractStreamingService extends AbstractLeapService implements IStreaming {
+public abstract class AbstractStreamingService extends AbstractService implements StreamingModel {
 
     private final Pattern RANGE_PATTERN = Pattern.compile("bytes=(?<start>\\d*)-(?<end>\\d*)");
     private int bufferSize;
@@ -43,7 +44,7 @@ public abstract class AbstractStreamingService extends AbstractLeapService imple
            && mimeType != MIME_TYPE.APPLICATION_OCTET_STREAM
            && mimeType != MIME_TYPE.APPLICATION_ZIP
            ) {
-           throw new WASException(MSG_TYPE.ERROR, 22, "Specified media type is not supported: "+mimeType.getMimeType());
+           throw new WASException(MSG_TYPE.ERROR, 22, "Specified media type is not supported: "+mimeType.mimeType());
         }
         this.bufferSize = bufferSize;        
     }
@@ -53,16 +54,16 @@ public abstract class AbstractStreamingService extends AbstractLeapService imple
         String reqFile = request.getParameter("file");
         reqFile = reqFile.charAt(0) == '/' ? reqFile.substring(1) : reqFile;
         if(reqFile == null || reqFile.equals("")) {
-            throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES412.getCode(), "Parameter not found(file). Streaming request must have field of file.");
+            throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES412.code(), "Parameter not found(file). Streaming request must have field of file.");
         }
         Path file = super.serviceManager.getHost().getStatic().resolve(reqFile);
         if(!file.toFile().exists()) {
-            throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES404.getCode(), "Specified resource not found: "+file.toAbsolutePath().toString().replace("\\", "/"));
+            throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES404.code(), "Specified resource not found: "+file.toAbsolutePath().toString().replace("\\", "/"));
         }
         ResourceInfo info = (ResourceInfo) super.resource.getResourceInfo(file);
         String range = request.getReqHeader().get("Range");
         if(range == null || range.equals("")) {
-            throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES412.getCode(), "Header field not found(Range). Streaming request header must have field of Range");
+            throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES412.code(), "Header field not found(Range). Streaming request header must have field of Range");
         }
         Matcher matcher = RANGE_PATTERN.matcher(range);
         long fileLength = file.toFile().length();
@@ -88,7 +89,7 @@ public abstract class AbstractStreamingService extends AbstractLeapService imple
         response.addHeader("Accept-Ranges", "bytes");
         response.addHeader("Last-Modified", lastModified);
         response.addHeader("Expires", expire);
-        response.addHeader("Content-Type", mimeType.getMimeType());
+        response.addHeader("Content-Type", mimeType.mimeType());
         response.addHeader("Content-Range", String.format("bytes %s-%s/%s", start, start + len -1, fileLength));
         response.addHeader("Content-Length", String.format("%s", contentLength));
         response.setResponseCode(206);

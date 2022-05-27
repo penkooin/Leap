@@ -1,10 +1,10 @@
 package org.chaostocosmos.leap.http.enums;
 
-import org.chaostocosmos.leap.http.services.IDeleteService;
-import org.chaostocosmos.leap.http.services.IGetService;
-import org.chaostocosmos.leap.http.services.ILeapService;
-import org.chaostocosmos.leap.http.services.IPostService;
-import org.chaostocosmos.leap.http.services.IPutService;
+import org.chaostocosmos.leap.http.services.model.DeleteServiceModel;
+import org.chaostocosmos.leap.http.services.model.GetServiceModel;
+import org.chaostocosmos.leap.http.services.model.PostServiceModel;
+import org.chaostocosmos.leap.http.services.model.PutServiceModel;
+import org.chaostocosmos.leap.http.services.model.ServiceModel;
 
 /**
  * Http request type
@@ -14,43 +14,37 @@ public enum REQUEST_TYPE {
     /**
      * Get type for IGetServlet
      */
-    GET(IGetService.class),
-
+    GET(GetServiceModel.class),
     /**
      * Post type for IPostServlet
      */
-    POST(IPostService.class),
-
+    POST(PostServiceModel.class),
     /**
      * Put type for IPutServelt
      */
-    PUT(IPutService.class),
-
+    PUT(PutServiceModel.class),
     /**
      * Delete type for IDeleteServlet
      */
-    DELETE(IDeleteService.class);
-
+    DELETE(DeleteServiceModel.class);
     /**
      * Request type mananging class
      */
-    Class<? extends ILeapService> oprClass;
-
+    Class<? extends ServiceModel> oprClass;
     /**
      * Request type initializer
      * @param requestType
      * @param oprClass
      */
-    REQUEST_TYPE(Class<? extends ILeapService> oprClass) {
+    REQUEST_TYPE(Class<? extends ServiceModel> oprClass) {
         this.oprClass = oprClass;
     }
-
     /**
      * Get type
      * @param requestType
      * @return
      */
-    public REQUEST_TYPE getType(String requestType) {
+    public REQUEST_TYPE type(String requestType) {
         return REQUEST_TYPE.valueOf(requestType);
     }
 }

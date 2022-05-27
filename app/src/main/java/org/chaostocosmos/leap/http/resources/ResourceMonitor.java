@@ -8,7 +8,11 @@ import java.util.concurrent.TimeUnit;
 
 import javax.transaction.NotSupportedException;
 
+import org.chaostocosmos.leap.http.LeapApp;
+import org.chaostocosmos.leap.http.commons.Constants;
+import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.commons.UNIT;
+import org.chaostocosmos.leap.http.context.Context;
 
 import ch.qos.logback.classic.Logger;
 
@@ -21,56 +25,57 @@ public class ResourceMonitor {
     /**
      * ThreadPool
      */
-    private static ThreadPoolExecutor threadpool;
-
+    private ThreadPoolExecutor threadpool;
     /**
-     * Unit of quantity
+     * Unit of data size
      */
-    private static UNIT unit;
-
+    private UNIT unit;
     /**
      * Fraction point of digit
      */
-    private static int fractionPoint;
-
+    private int fractionPoint;
     /**
      * Logger
      */
     private Logger logger;
-
     /**
      * Interval
      */
     private long interval;
-
     /**
      * Timer
      */
     private Timer timer;
-
     /**
      * Whether daemon thread
      */
     private boolean isDaemon;
-
     /**
-     * Creates with ThreadPool
-     * @param threadpool_
-     * @param interval_
-     * @param isDaemon
-     * @param unit_
-     * @param fractionPoint_
-     * @param logger
+     * Resource monitor instance
      */
-    public ResourceMonitor(ThreadPoolExecutor threadpool_, long interval_, boolean isDaemon, UNIT unit_, int fractionPoint_, Logger logger) {
-        unit = unit_;
-        threadpool = threadpool_;
-        fractionPoint = fractionPoint_;
-        this.interval = interval_;
-        this.isDaemon = isDaemon;
-        this.logger = logger;
+    private static ResourceMonitor resourceMonitor = null;
+    /**
+     * Get resource monitor
+     * @return
+     */
+    public static ResourceMonitor get() {
+        if(resourceMonitor == null) {
+            resourceMonitor = new ResourceMonitor();
+        }                
+        return resourceMonitor;
     }
-
+    /**
+     * Default constructor
+     */
+    private ResourceMonitor() {
+        this.threadpool = LeapApp.getThreadPool();
+        this.unit = Context.getServer().getMonitoringUnit();
+        this.fractionPoint = Constants.DEFAULT_FRACTION_POINT;
+        this.interval = Context.getServer().getMonitoringInterval();
+        this.logger = LoggerFactory.createLoggerFor("monitoring", 
+                                    LeapApp.getHomePath().resolve(Context.getServer().getMonitoringLogs()).normalize().toString(), 
+                                    Context.getServer().getMonitoringLogLevel());
+    }
     /**
      * Start monitor timer
      */
@@ -81,7 +86,7 @@ public class ResourceMonitor {
             public void run() {
                 try {
                     logger.info(
-                        "[THREAD-MONITOR] ThreadPool - "
+                        "[THREAD-MONITOR] "
                         + "  Core: " + getCorePoolSize()
                         + "  Max: " + getMaximumPoolSize()
                         + "  Active: "+getActiveCount()
@@ -90,17 +95,16 @@ public class ResourceMonitor {
                         + "  Task completed: "+getCompletedTaskCount()
                     );
                     logger.info(
-                        "[MEMORY-MONITOR] Memory - "
-                        + "  Total: "+getTotalMemory()+" "+unit.name()
-                        + "  Max: "+getMaxMemory()+" "+unit.name()
-                        + "  Used: "+getUsedMemory()+" "+unit.name()
-                        + "  Free: "+getFreeMemory()+" "+unit.name()
-                        + "  Total physical: "+getTotalPhysicalMemory()+" "+unit.name()
-                        + "  Free physical: "+getFreePhysicalMemory()+" "+unit.name()
+                        "[MEMORY-MONITOR] "
+                        + "  Process Max: "+getMaxMemory()+" "+unit.name()
+                        + "  Process Total: "+getTotalMemory()+" "+unit.name()
+                        + "  Process Used: "+getUsedMemory()+" "+unit.name()
+                        + "  Process Free: "+getFreeMemory()+" "+unit.name()
+                        + "  Physical Total: "+getTotalPhysicalMemory()+" "+unit.name()
+                        + "  Physical Free: "+getFreePhysicalMemory()+" "+unit.name()
                         + "  Process CPU load: "+getProcessCpuLoad()+" "+UNIT.PCT.name()
                         + "  Process CPU time: "+getProcessCpuTime()+" "+UNIT.SE.name()
                         + "  System CPU load: "+getSystemCpuLoad()+" "+UNIT.PCT.name()
-                        + "  System CPU load AVG: "+getSystemLoadAverage()+" "+UNIT.PCT.name()
                     );    
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -108,7 +112,6 @@ public class ResourceMonitor {
             }
         }, this.interval, this.interval);
     }
-
     /**
      * Stop timer
      */
@@ -117,100 +120,221 @@ public class ResourceMonitor {
             this.timer.cancel();
         }
     }
-
-    public static int getCorePoolSize() {
+    /**
+     * Get thread pool core pool size
+     * @return
+     */
+    public int getCorePoolSize() {
         return threadpool.getCorePoolSize();
     }
-
-    public static int getActiveCount() {
+    /**
+     * Get thread pool active count
+     * @return
+     */
+    public int getActiveCount() {
         return threadpool.getActiveCount();
     }
-
-    public static int getLargestPoolSize() {
+    /**
+     * Get thread pool largest size
+     * @return
+     */
+    public int getLargestPoolSize() {
         return threadpool.getLargestPoolSize();
     }
-
-    public static int getMaximumPoolSize() {
+    /**
+     * Get thread pool maximum size
+     * @return
+     */
+    public int getMaximumPoolSize() {
         return threadpool.getMaximumPoolSize();
     }
-
-    public static long getCompletedTaskCount() {
+    /**
+     * Get thread pool complated task count
+     * @return
+     */
+    public long getCompletedTaskCount() {
         return threadpool.getCompletedTaskCount();
     }
-
-    public static int getQueuedTaskCount() {
+    /**
+     * Get current queued task count in thread pool
+     * @return
+     */
+    public int getQueuedTaskCount() {
         return threadpool.getQueue().size();
     }
-
-    public static long getMaxMemoryBytes() {
+    /**
+     * Get max memory bytes
+     * @return
+     */
+    public long getMaxMemoryBytes() {
         return Runtime.getRuntime().maxMemory();
     }
-
-    public static double getMaxMemory() throws NotSupportedException {
+    /**
+     * Get max memory bytes applied with fraction ImageProcessingException
+     * @return
+     * @throws NotSupportedException
+     */
+    public double getMaxMemory() throws NotSupportedException {
         return unit.get(getMaxMemoryBytes(), fractionPoint);
     }
-    
-    public static long getUsedMemoryBytes() {
-        return getMaxMemoryBytes() - getFreeMemoryBytes();
+    /**
+     * Get used memory bytes
+     * @return
+     */
+    public long getUsedMemoryBytes() {
+        return getTotalMemoryBytes() - getFreeMemoryBytes();
     }
-
-    public static double getUsedMemory() throws NotSupportedException {
+    /**
+     * Get used memory size
+     * @return
+     * @throws NotSupportedException
+     */
+    public double getUsedMemory() throws NotSupportedException {
         return unit.get(getUsedMemoryBytes(), fractionPoint);
     }
-    
-    public static long getTotalMemoryBytes() {
+    /**
+     * Get total memory bytes
+     * @return
+     */
+    public long getTotalMemoryBytes() {
         return Runtime.getRuntime().totalMemory();
     }
-
-    public static double getTotalMemory() throws NotSupportedException {
+    /**
+     * Get total memory size
+     * @return
+     * @throws NotSupportedException
+     */
+    public double getTotalMemory() throws NotSupportedException {
         return unit.get(getTotalMemoryBytes(), fractionPoint);
     }
-    
-    public static long getFreeMemoryBytes() {
+    /**
+     * Get free memory bytes
+     * @return
+     */
+    public long getFreeMemoryBytes() {
         return Runtime.getRuntime().freeMemory();
     }  
-
-    public static double getFreeMemory() throws NotSupportedException {
+    /**
+     * Get free memory size
+     * @return
+     * @throws NotSupportedException
+     */
+    public double getFreeMemory() throws NotSupportedException {
         return unit.get(getFreeMemoryBytes(), fractionPoint);
     }
-
-    public static long getTotalPhysicalMemoryBytes() {
+    /**
+     * Get total physical memory bytes
+     * @return
+     */
+    public long getTotalPhysicalMemoryBytes() {
         return ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getTotalPhysicalMemorySize();
     }
-
-    public static double getTotalPhysicalMemory() throws NotSupportedException {
+    /**
+     * Get total physical memory size
+     * @return
+     * @throws NotSupportedException
+     */
+    public double getTotalPhysicalMemory() throws NotSupportedException {
         return unit.get(getTotalPhysicalMemoryBytes(), fractionPoint);
     }
-
-    public static long getFreePhysicalMemoryBytes() {
+    /**
+     * Get free physical memory bytes
+     * @return
+     */
+    public long getFreePhysicalMemoryBytes() {
         return ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getFreePhysicalMemorySize();
     }
-
-    public static double getFreePhysicalMemory() throws NotSupportedException {
+    /**
+     * Get free physical memory size
+     * @return
+     * @throws NotSupportedException
+     */
+    public double getFreePhysicalMemory() throws NotSupportedException {
         return unit.get(getFreePhysicalMemoryBytes(), fractionPoint);
     }
-
-    public static long getAvailableProcessors() {
+    /**
+     * Get available processors
+     * @return
+     */
+    public long getAvailableProcessors() {
         return ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getAvailableProcessors();
     }
-
-    public static double getProcessCpuLoad() {
+    /**
+     * Get process CPU load
+     * @return
+     */
+    public double getProcessCpuLoad() {
         double load = ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getProcessCpuLoad();
         return (Math.round(load * 100d) * 100d) / 100d;
     }
-
-    public static double getProcessCpuTime() throws NotSupportedException {
+    /**
+     * Get process CPU time
+     * @return
+     * @throws NotSupportedException
+     */
+    public double getProcessCpuTime() throws NotSupportedException {
         long nano = ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getProcessCpuTime();
         return TimeUnit.SECONDS.convert(nano, TimeUnit.NANOSECONDS);
     }
-
-    public static double getSystemCpuLoad() {
+    /**
+     * Get system CPU load
+     * @return
+     */
+    public double getSystemCpuLoad() {
         double load = ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getSystemCpuLoad();
         return (Math.round(load * 100d) * 100d) / 100d;
     }
-
-    public static double getSystemLoadAverage() {
+    /**
+     * Get system CPU load average
+     * @return
+     */
+    public double getSystemLoadAverage() {
         return ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getSystemLoadAverage();
     }
-
+	/**
+     * Get heap memory init amout
+	 * @param unit
+	 * @return
+	 */
+	public float getProcessHeapInit() {
+		long value = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getInit();
+		return (float) this.unit.applyUnit(value, this.fractionPoint);
+	}	
+	/**
+     * Get heap memory usage
+	 * @param unit
+	 * @return
+	 */
+	public float getProcessHeapUsed(UNIT unit) {
+		long value = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getUsed();
+		return (float) UNIT.MB.applyUnit(value, this.fractionPoint);
+	}
+	/**
+     * Get commited heap memory amount
+	 * @param unit
+	 * @return
+	 */
+	public float getProcessHeapCommitted(UNIT unit) {
+		long value = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getCommitted();
+		return (float) UNIT.MB.applyUnit(value, this.fractionPoint);
+	}	
+	/**
+     * Get heap memory max amount
+	 * @param unit
+	 * @return
+	 */
+	public float getProcessHeapMax(UNIT unit) {
+		long value = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getMax();
+		return (float) UNIT.MB.applyUnit(value, this.fractionPoint);
+	}
+	/**
+	 * Get process memory usage
+	 * @param unit
+	 * @return
+	 */
+	public float getProcessMemoryUsed(UNIT unit) {
+		Runtime runtime = Runtime.getRuntime();
+		float value = runtime.totalMemory() - runtime.freeMemory();
+		return (float) UNIT.MB.applyUnit(value, this.fractionPoint);
+	}
 }

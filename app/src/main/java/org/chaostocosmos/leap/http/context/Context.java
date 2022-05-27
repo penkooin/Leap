@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.resources.ResourceHelper;
-import org.chaostocosmos.leap.http.resources.TemplateFactory;
+import org.chaostocosmos.leap.http.resources.TemplateBuilder;
 import org.yaml.snakeyaml.Yaml;
 
 /**
@@ -61,7 +61,7 @@ public class Context {
     /**
      * Template Map
      */
-    private static Map<TemplateFactory, byte[]> templateMap;
+    private static Map<TemplateBuilder, byte[]> templateMap;
     /**
      * Constructor with home path
      * @param homePath

@@ -149,7 +149,7 @@ public class HttpParser {
             LoggerFactory.getLogger(hostId).debug(debug);
             BodyPart bodyPart = null;
             if(contentType != null) {
-                MIME_TYPE mimeType = contentType.indexOf(";") != -1 ? MIME_TYPE.getMimeType(contentType.substring(0, contentType.indexOf(";"))) : MIME_TYPE.getMimeType(contentType);
+                MIME_TYPE mimeType = contentType.indexOf(";") != -1 ? MIME_TYPE.mimeType(contentType.substring(0, contentType.indexOf(";"))) : MIME_TYPE.mimeType(contentType);
                 String boundary = contentType != null ? contentType.substring(contentType.indexOf(";")+1) : null;
                 LoggerFactory.getLogger(hostId).debug("Context params: "+contextParam.toString());
                 LoggerFactory.getLogger(hostId).debug("Mime Type: "+mimeType);

@@ -28,8 +28,6 @@ import org.chaostocosmos.leap.http.enums.RES_CODE;
 import org.chaostocosmos.leap.http.resources.Html;
 import org.chaostocosmos.leap.http.resources.LeapURLClassLoader;
 import org.chaostocosmos.leap.http.resources.ResourceMonitor;
-import org.chaostocosmos.leap.http.services.ServiceManager;
-import org.chaostocosmos.leap.http.user.UserManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory; 
 
@@ -273,7 +271,7 @@ public class LeapHttpServer extends Thread {
                         this.threadpool.submit(new LeapRequestHandler(this, this.docroot, connection, this.host));    
                     } else {
                         String redirectHost = redirectHostSelection.getSelectedHost();
-                        String redirectPage = Html.makeRedirect(this.protocol.getProtocol(), 0, redirectHost);
+                        String redirectPage = Html.makeRedirect(this.protocol.protocol(), 0, redirectHost);
                         logger.info("[CLIENT DETECTED] Thread pool queue size limit reached: "+queueSize+".  Send redirect to Load-Balance URL: "+redirectHost+"\n"+redirectPage);
                         connection.getOutputStream().write(redirectPage.getBytes());
                         connection.close();

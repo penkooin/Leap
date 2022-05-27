@@ -128,7 +128,7 @@ public class WatchResources extends Thread implements Resources {
                             this.watchMap.put(path.register(this.watchService, this.watchKind), path);
                             data = new LinkedHashMap<>();
                         } else {
-                            if(this.accessFiltering.include(path.toFile().getName()) || this.forbiddenFiltering.exclude(path.toFile().getName())) {                                
+                            if(this.forbiddenFiltering.exclude(path.toFile().getName())) {                                
                                 try {
                                     if(this.inMemoryFiltering.include(path.toFile().getName())) {
                                         //When In-Memory resource
@@ -155,7 +155,7 @@ public class WatchResources extends Thread implements Resources {
                         addResource(this.resourceTree, paths, data);
                     } else if(event.kind() == StandardWatchEventKinds.ENTRY_MODIFY) {
                         path = path.resolve(event.context().toString());
-                        if(path.toFile().isFile() && this.accessFiltering.include(path.toFile().getName())) {
+                        if(path.toFile().isFile() && this.forbiddenFiltering.exclude(path.toFile().getName())) {
                             Object data = null;
                             try {
                                 //When In-Memory resource
@@ -216,7 +216,7 @@ public class WatchResources extends Thread implements Resources {
             } else {
                 if(file.isFile()) {
                     String fileSize = (float)UNIT.MB.get(file.length())+" MB";
-                    if(this.accessFiltering.include(file.getName()) || this.forbiddenFiltering.exclude(file.getName())) {
+                    if(this.forbiddenFiltering.exclude(file.getName())) {
                         if(file.length() <= this.inMemoryLimitSize && this.inMemoryFiltering.include(file.getName())) {
                             //System.out.println(file.getAbsolutePath());
                             tree.put(file.getName(), new ResourceInfo(file.toPath(), true));
@@ -386,7 +386,7 @@ public class WatchResources extends Thread implements Resources {
     public String getStaticPage(String contextPath, Map<String, Object> params) throws IOException {                
         Object resourceInfo = getContextResourceInfo(contextPath);
         if(resourceInfo == null) {            
-            throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES404.getCode(), " Static page not found in Resource manager: "+contextPath);
+            throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES404.code(), " Static page not found in Resource manager: "+contextPath);
         }
         String page = new String(((ResourceInfo)resourceInfo).getBytes(), Context.getHosts().getHost(this.hostId).charset());
         if(params != null) {
@@ -489,7 +489,7 @@ public class WatchResources extends Thread implements Resources {
             this.resourceFile = resourcePath.toFile();
             this.resourceSize = resourcePath.toFile().length();
             this.inMemoryFlag = inMemoryFlag;
-            this.mimeType = MIME_TYPE.getMimeType(Files.probeContentType(this.resourcePath));
+            this.mimeType = MIME_TYPE.mimeType(Files.probeContentType(this.resourcePath));
             if(this.inMemoryFlag) {
                 this.resourceData = new ArrayList<>();
                 int splitSize = Context.getHosts().getHost(hostId).getInMemorySplitUnit();

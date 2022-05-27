@@ -18,11 +18,8 @@ import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
 import org.chaostocosmos.leap.http.resources.ResourceHelper;
-import org.chaostocosmos.leap.http.resources.TemplateFactory;
+import org.chaostocosmos.leap.http.resources.TemplateBuilder;
 import org.chaostocosmos.leap.http.resources.WatchResources.ResourceInfo;
-import org.chaostocosmos.leap.http.services.ServiceHolder;
-import org.chaostocosmos.leap.http.services.ServiceInvoker;
-import org.chaostocosmos.leap.http.services.ServiceManager;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
@@ -90,29 +87,30 @@ public class LeapRequestHandler implements Runnable {
             if (serviceHolder != null) {
                 // Request method validation
                 if(serviceHolder.getRequestType() != request.getRequestType()) {
-                    throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES405.getCode(), "Not supported: "+request.getRequestType().name());
+                    throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES405.code(), "Not supported: "+request.getRequestType().name());
                 } else if (serviceManager.vaildateRequestMethod(request.getRequestType(), request.getContextPath())) {
                     // Do requested service to execute by cloned service of request
                     response = ServiceInvoker.invokeService(serviceHolder, httpTransfer, true);
                 } else {
-                    throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES405.getCode(), Context.getMessages().getHttpMsg(405));
+                    throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES405.code(), Context.getMessages().getHttpMsg(405));
                 }
             } else { // When client request static resources
                 Path resourcePath = ResourceHelper.getResourcePath(request);
                 if(request.getContextPath().equals("/")) {
-                    String body = TemplateFactory.getWelcomeResourceHtml(request.getContextPath(), host);
-                    response.addHeader("Content-Type", MIME_TYPE.TEXT_HTML.getMimeType());
+                    String body = TemplateBuilder.buildWelcomeResourceHtml(request.getContextPath(), host);
+                    response.addHeader("Content-Type", MIME_TYPE.TEXT_HTML.mimeType());
                     response.setBody(body.getBytes());
-                    response.setResponseCode(RES_CODE.RES200.getCode());
+                    response.setResponseCode(RES_CODE.RES200.code());
                 } else {
+                    System.out.println(resourcePath);
                     if (host.getResource().exists(resourcePath)) {
                         //Get requested resource data
                         Object resource = host.getResource().getResourceInfo(resourcePath);
                         if(resource != null) {
                             if(resource instanceof LinkedHashMap) {
-                                String body = TemplateFactory.getResourceHtml(request.getContextPath(), host);
-                                String mimeType = MIME_TYPE.TEXT_HTML.getMimeType();
-                                response.setResponseCode(RES_CODE.RES200.getCode());
+                                String body = TemplateBuilder.buildResourceHtml(request.getContextPath(), host);
+                                String mimeType = MIME_TYPE.TEXT_HTML.mimeType();
+                                response.setResponseCode(RES_CODE.RES200.code());
                                 response.addHeader("Content-Type", mimeType+"; charset="+host.charset());
                                 response.setBody(body);
                                 //LoggerFactory.getLogger(hosts.getHost()).debug("RESOURCE LIST REQUESTED: "+body);    
@@ -120,18 +118,18 @@ public class LeapRequestHandler implements Runnable {
                                 ResourceInfo resourceInfo = (ResourceInfo)resource;
                                 String mimeType = UtilBox.probeContentType(resourceInfo.getResourcePath());
                                 if(mimeType == null) {
-                                    mimeType = MIME_TYPE.APPLICATION_OCTET_STREAM.getMimeType();
+                                    mimeType = MIME_TYPE.APPLICATION_OCTET_STREAM.mimeType();
                                 }
-                                response.setResponseCode(RES_CODE.RES200.getCode());
+                                response.setResponseCode(RES_CODE.RES200.code());
                                 response.addHeader("Content-Type", mimeType);
                                 response.setBody(resourceInfo.getBytes());
                                 LoggerFactory.getLogger(host.getHost()).debug("DOWNLOAD RESOURCE MIME-TYPE: "+mimeType);    
                             }
                         } else {
-                            throw new WASException(MSG_TYPE.HTTP, 403, request.getContextPath());
+                            throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES403.code(), request.getContextPath());
                         }
                     } else {
-                        throw new WASException(MSG_TYPE.HTTP, 404, request.getContextPath());
+                        throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES404.code(), request.getContextPath());
                     }
                 }
             }                 
@@ -182,9 +180,8 @@ public class LeapRequestHandler implements Runnable {
         }
         Map<String, List<Object>> headers = new HashMap<String, List<Object>>();
         headers = HttpTransferBuilder.addHeader(headers, "Content-Type", "text/html; charset="+httpTransfer.getHost().charset());
-        //headers = HttpTransferBuilder.addHeader(headers, "Location", "/error?code="+resCode+"&type="+msgType+"&message="+Context.getMessages().getHttpMsg(resCode));
-        Object body = t != null ? HttpTransferBuilder.buildErrorResponse(httpTransfer.getHost().getHost(), msgType, resCode, t.getMessage()) : Context.getMessages().getHttpMsg(resCode);
-        httpTransfer.sendResponse(hostId, RES_CODE.RES307.getCode(), headers, body);            
+        Object body = t != null ? TemplateBuilder.buildErrorHtml(httpTransfer.getHost(), msgType, resCode, t.getMessage()) : Context.getMessages().getHttpMsg(resCode);
+        httpTransfer.sendResponse(hostId, resCode, headers, body);            
     }
 
     /**

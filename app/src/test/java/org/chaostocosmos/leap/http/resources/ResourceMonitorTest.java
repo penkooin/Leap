@@ -4,7 +4,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import org.chaostocosmos.leap.http.commons.UNIT;
 import org.junit.Before;
 import org.junit.Test;    
     
@@ -16,7 +15,7 @@ public class ResourceMonitorTest {
     @Before
     public void setup(){
         this.threadpool = new ThreadPoolExecutor(30, 50, 10, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());        
-        this.resourceMonitor = new ResourceMonitor(this.threadpool, 3000, false, UNIT.MB, 2, null);
+        this.resourceMonitor = ResourceMonitor.get();
     }
         
     @Test

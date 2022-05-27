@@ -20,7 +20,7 @@ import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
-import org.chaostocosmos.leap.http.resources.StaticResourceManager;
+import org.chaostocosmos.leap.http.resources.TemplateBuilder;
 
 /**
  * HttpResponseTransfer
@@ -28,54 +28,6 @@ import org.chaostocosmos.leap.http.resources.StaticResourceManager;
  * @author 9ins
  */
 public class HttpTransferBuilder {
-
-    /**
-     * Build error response messasge
-     * @param requestedHost
-     * @param e
-     * @return
-     * @throws Exception
-     * @throws ImageProcessingException
-     * @throws WASException
-     */
-    public static String buildErrorResponse(String requestedHost, MSG_TYPE msgType, int errorCode, String errorMsg) throws Exception {
-        LoggerFactory.getLogger(requestedHost).error("["+msgType.name()+": "+errorCode+"] - "+errorMsg);
-        return buildHttpErrorPage(requestedHost, msgType, errorCode, errorMsg);
-    }
-
-    /**
-     * Build http error page
-     * @param hostId
-     * @param type
-     * @param errorCode
-     * @param message
-     * @return
-     * @throws Exception
-     * @throws ImageProcessingException
-     */
-    public static String buildHttpErrorPage(String hostId, MSG_TYPE type, int errorCode, String message) throws Exception {
-        String title = Context.getMessages().getHttpMsg(errorCode, "- "+type.name());        
-        Map<String, Object> map = new HashMap<>();
-        map.put("@code", errorCode);
-        map.put("@type", title);
-        map.put("@message", message);
-        return StaticResourceManager.get(hostId).getErrorPage(map);
-    }
-
-    /**
-     * Create http response page
-     * @param hostId
-     * @param type
-     * @param code
-     * @param message
-     * @return
-     * @throws Exception
-     * @throws ImageProcessingException
-     */
-    public static String buildHttpResponsePage(String hostId, MSG_TYPE type, int code, String message) throws Exception {
-        Map<String, Object> map = Map.of("@code", code, "@type", type.name(), "@message", message);
-        return StaticResourceManager.get(hostId).getResponsePage(map);
-    }
 
     /**
      * Build HttpTransfer object
@@ -116,7 +68,7 @@ public class HttpTransferBuilder {
         /**
          * Hosts, Information configured in config.yml
          */
-        Host<?> hosts;
+        Host<?> host;
         
         /**
          * Client Socket
@@ -155,7 +107,7 @@ public class HttpTransferBuilder {
          * @throws IOException
          */
         public HttpTransfer(String hostId, Socket client) throws IOException {
-            this.hosts = Context.getHosts().getHost(hostId);
+            this.host = Context.getHosts().getHost(hostId);
             this.socket = client;
             this.clientInputStream = client.getInputStream();
             this.clientOutputStream = client.getOutputStream();
@@ -166,7 +118,7 @@ public class HttpTransferBuilder {
          * @return
          */
         public Host<?> getHost() {
-            return this.hosts;
+            return this.host;
         }
 
         /**
@@ -205,8 +157,8 @@ public class HttpTransferBuilder {
          */
         public Response getResponse() throws Exception {
             if(this.httpResponseDescriptor == null) {
-                String msg = buildHttpResponsePage(this.httpRequestDescriptor.getRequestedHost(), MSG_TYPE.HTTP, 200, Context.getMessages().getHttpMsg(200));
-                Map<String, List<Object>> headers = addHeader(new HashMap<>(), "Content-Type", MIME_TYPE.TEXT_HTML.getMimeType());
+                String msg = TemplateBuilder.buildResponseHtml(this.host, MSG_TYPE.HTTP, 200, Context.getMessages().getHttpMsg(200));
+                Map<String, List<Object>> headers = addHeader(new HashMap<>(), "Content-Type", MIME_TYPE.TEXT_HTML.mimeType());
                 headers = addHeader(new HashMap<>(), "Content-Length", msg.getBytes().length);
                 this.httpResponseDescriptor = HttpResponseBuilder.getBuilder()
                                                                 .build(this.httpRequestDescriptor)
@@ -251,7 +203,7 @@ public class HttpTransferBuilder {
             String version = str.substring(str.indexOf("_")+1).replace("_", ".");
             String resMsg = null;
             if(resCode >= 200 && resCode <= 600) {
-                resMsg = RES_CODE.valueOf("RES"+resCode).getMessage();
+                resMsg = RES_CODE.valueOf("RES"+resCode).msg();
             } else {
                 resMsg = Context.getMessages().getErrorMsg(resCode, hostId);
             }
@@ -337,9 +289,9 @@ public class HttpTransferBuilder {
                     this.socket.close();
                 }    
             } catch(Exception e) {
-                LoggerFactory.getLogger(this.hosts.getHost()).error(e.getMessage(), e);
+                LoggerFactory.getLogger(this.host.getHost()).error(e.getMessage(), e);
             }
-            LoggerFactory.getLogger(this.hosts.getHost()).info("Client closing......"+socket.getInetAddress().toString());
+            LoggerFactory.getLogger(this.host.getHost()).info("Client closing......"+socket.getInetAddress().toString());
         }
 
         /**

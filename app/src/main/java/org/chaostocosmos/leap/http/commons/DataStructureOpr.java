@@ -35,7 +35,7 @@ public class DataStructureOpr {
 			if (keys.length == 1) {
 				int idx = Integer.parseInt(keys[0]+"");
 				if (list.size() > idx) {
-					return list.get(idx);
+					return (T) list.get(idx);
 				} else {
 					throw new IllegalArgumentException("There isn't exist value of key: "+Arrays.asList(keys).stream().map(o -> o+"").collect(Collectors.joining(".")));
 				}
@@ -48,7 +48,7 @@ public class DataStructureOpr {
 		} else if (obj instanceof Map) {
 			Map<String, T> map = (Map<String, T>) obj;
 			if (keys.length == 1 && map.containsKey(keys[0])) {
-				return map.get(keys[0]);
+				return (T) map.get(keys[0]);
 			} else if (keys.length > 1 && map.containsKey(keys[0])) {
 				Object[] subKeys = new Object[keys.length - 1];
 				System.arraycopy(keys, 1, subKeys, 0, subKeys.length);

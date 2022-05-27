@@ -139,14 +139,6 @@ public class Hosts <M> extends Metadata <M> {
     }
 
     /**
-     * Get all of spring JPA packages
-     * @return
-     */
-    public List<String> getAllSpringPackages() {
-        return this.hostMap.values().stream().filter(h -> h != null).flatMap(h -> h.getSpringJPAPackageFilters().stream()).collect(Collectors.toList());
-    }
-
-    /**
      * Get all configured host names. It could be having same value.
      * @return
      */
@@ -338,16 +330,6 @@ public class Hosts <M> extends Metadata <M> {
      */
     public boolean filteringDynamicPackages(String hostId, String resourceName) {
         return this.hostMap.get(hostId).getDynamicPackageFiltering().include(resourceName);
-    }
-
-    /**
-     * Filtering Spring JPA packages
-     * @param hostId
-     * @param resourceName
-     * @return
-     */
-    public boolean filteringSpringJPAPackages(String hostId, String resourceName) {
-        return this.hostMap.get(hostId).getSpringJPAPackageFiltering().include(resourceName);
     }
 
     /**

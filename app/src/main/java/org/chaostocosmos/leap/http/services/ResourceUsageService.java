@@ -15,10 +15,11 @@ import org.chaostocosmos.leap.http.annotation.ServiceMapper;
 import org.chaostocosmos.leap.http.commons.UNIT;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
+import org.chaostocosmos.leap.http.resources.ResourceMonitor;
 import org.chaostocosmos.leap.http.resources.SystemMonitor;
 
 @ServiceMapper(path = "")
-public class ResourceUsageService extends AbstractLeapService {
+public class ResourceUsageService extends AbstractService {
 
     Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 
@@ -46,7 +47,7 @@ public class ResourceUsageService extends AbstractLeapService {
             super.logger.error(e.getMessage(), e);
         }
         response.setResponseCode(200);
-        response.addHeader("Content-Type", MIME_TYPE.APPLICATION_JSON.getMimeType());
+        response.addHeader("Content-Type", MIME_TYPE.APPLICATION_JSON.mimeType());
         response.setBody(this.gson.toJson(resMap));
     }
 
@@ -90,7 +91,7 @@ public class ResourceUsageService extends AbstractLeapService {
         }    
         json = this.gson.toJson(sessions, sessions.getClass());
         response.setResponseCode(200);
-        response.addHeader("Content-Type", MIME_TYPE.APPLICATION_JSON.getMimeType());
+        response.addHeader("Content-Type", MIME_TYPE.APPLICATION_JSON.mimeType());
         response.setBody(json);
     }
 
@@ -104,21 +105,21 @@ public class ResourceUsageService extends AbstractLeapService {
         Map<Object, Object> map = new LinkedHashMap<>();
         map.put("type", "CPU");
         map.put("unit", unit);
-        map.put("cpuLoad", SystemMonitor.getProcessCpuLoad(unit));
-        map.put("cpuTime", SystemMonitor.getProcessCpuTime(unit));
-        map.put("systemCpuLoad", SystemMonitor.getSystemCpuLoad(unit));    
+        map.put("cpuLoad", ResourceMonitor.get().getProcessCpuLoad());
+        map.put("cpuTime", ResourceMonitor.get().getProcessCpuTime());
+        map.put("systemCpuLoad", ResourceMonitor.get().getSystemCpuLoad());    
         return map;
     }
 
     public Map<Object, Object> getMemoryUsage(UNIT unit) throws Exception {
         Map<Object, Object> map = new LinkedHashMap<>();
-        float totalPhysicalMemory = SystemMonitor.getTotalPhysicalMemorySize(unit);
-        float freePhysicalMemory = SystemMonitor.getFreePhysicalMemorySize(unit);
-        float usedPhysicalMemory = totalPhysicalMemory - freePhysicalMemory;
-        float maxHeapMemory = SystemMonitor.getProcessHeapMax(unit);
-        float usedHeapMemory = SystemMonitor.getProcessHeapUsed(unit);
-        float freeHeapMemory = maxHeapMemory - usedHeapMemory;
-        float usedMemory = SystemMonitor.getProcessMemoryUsed(unit);
+        double totalPhysicalMemory = ResourceMonitor.get().getTotalPhysicalMemory();
+        double freePhysicalMemory = ResourceMonitor.get().getFreePhysicalMemory();
+        double usedPhysicalMemory = totalPhysicalMemory - freePhysicalMemory;
+        double maxHeapMemory = ResourceMonitor.get().getProcessHeapMax(UNIT.MB);
+        double usedHeapMemory = SystemMonitor.get().getProcessHeapUsed(UNIT.MB);
+        double freeHeapMemory = maxHeapMemory - usedHeapMemory;
+        double usedMemory = SystemMonitor.get().getProcessMemoryUsed(unit);
         map.put("systemTotal", totalPhysicalMemory);
         map.put("systemFree", freePhysicalMemory);
         map.put("systemUsed", usedPhysicalMemory);
@@ -131,14 +132,14 @@ public class ResourceUsageService extends AbstractLeapService {
 
     public Map<Object, Object> getThreadPoolUsage(UNIT unit) throws Exception {
         Map<Object, Object> map = new LinkedHashMap<>();
-        int activeCount = SystemMonitor.getThreadPoolActiveCount();
-        int corePoolSize = SystemMonitor.getThreadPoolCoreSize();
-        int largestPoolSize = SystemMonitor.getThreadPoolLargestSize();
-        int maxinumPoolSize = SystemMonitor.getThreadPoolMaxSize();
+        int activeCount = SystemMonitor.get().getThreadPoolActiveCount();
+        int corePoolSize = SystemMonitor.get().getThreadPoolCoreSize();
+        int largestPoolSize = SystemMonitor.get().getThreadPoolLargestSize();
+        int maxinumPoolSize = SystemMonitor.get().getThreadPoolMaxSize();
         int threadPoolLimitSize = 30;
-        long completedTaskCount = SystemMonitor.getThreadPoolCompletedTask();
+        long completedTaskCount = SystemMonitor.get().getThreadPoolCompletedTask();
         long taskCount = 10;
-        int queueSize = SystemMonitor.getThreadPoolQueuedTask();
+        int queueSize = SystemMonitor.get().getThreadPoolQueuedTask();
         map.put("activeCount", activeCount);
         map.put("corePoolSize", corePoolSize);
         map.put("largestPoolSize", largestPoolSize);

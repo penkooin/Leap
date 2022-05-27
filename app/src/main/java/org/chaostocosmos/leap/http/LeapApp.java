@@ -28,8 +28,7 @@ import org.chaostocosmos.leap.http.resources.ClassUtils;
 import org.chaostocosmos.leap.http.resources.LeapURLClassLoader;
 import org.chaostocosmos.leap.http.resources.ResourceHelper;
 import org.chaostocosmos.leap.http.resources.ResourceMonitor;
-import org.chaostocosmos.leap.http.resources.SpringJPAManager;
-import org.chaostocosmos.leap.http.resources.StaticResourceManager;
+import org.chaostocosmos.leap.http.resources.ResourceManager;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
@@ -58,32 +57,32 @@ public class LeapApp {
     /**
      * Context
      */
-    public Context context;
+    public static Context context;
 
     /**
      * Static resource manager
      */
-    public StaticResourceManager staticResourceManager;
+    public static ResourceManager staticResourceManager;
 
     /**
      * Server Map
      */
-    public Map<String, LeapHttpServer> leapServerMap;
+    public static Map<String, LeapHttpServer> leapServerMap;
 
     /**
      * Thread pool
      */
-    public ThreadPoolExecutor threadpool;
+    public static ThreadPoolExecutor threadpool;
 
     /**
      * Thread Queue
      */
-    public LinkedBlockingQueue<Runnable> threadQueue;
+    public static LinkedBlockingQueue<Runnable> threadQueue;
 
     /**
      * Resource monitor
      */
-    public ResourceMonitor resourceMonitor;
+    public static ResourceMonitor resourceMonitor;
 
     /**
      * Constructor with arguments
@@ -95,7 +94,7 @@ public class LeapApp {
      */
     public LeapApp(String[] args) throws Exception {
         //set commend line options
-        this.leapServerMap = new HashMap<>();
+        leapServerMap = new HashMap<>();
         setup(args);
     }
 
@@ -126,7 +125,7 @@ public class LeapApp {
         }
 
         //initialize environment and context
-        this.context = Context.initialize(HOME_PATH);
+        context = Context.initialize(HOME_PATH);
 
         //set log level
         String optionL = cmdLine.getOptionValue("l");
@@ -146,20 +145,19 @@ public class LeapApp {
         }
 
         //initialize static resource manager
-        this.staticResourceManager = StaticResourceManager.initialize();
+        staticResourceManager = ResourceManager.initialize();
 
         //initialize thread queue
-        this.threadQueue = new LinkedBlockingQueue<Runnable>();
+        threadQueue = new LinkedBlockingQueue<Runnable>();
 
         //initialize thread pool
-        this.threadpool = new ThreadPoolExecutor(Context.getServer().getThreadPoolCoreSize(), Context.getServer().getThreadPoolMaxSize(), Context.getServer().getThreadPoolKeepAlive(), TimeUnit.SECONDS, this.threadQueue);        
+        threadpool = new ThreadPoolExecutor(Context.getServer().getThreadPoolCoreSize(), Context.getServer().getThreadPoolMaxSize(), Context.getServer().getThreadPoolKeepAlive(), TimeUnit.SECONDS, this.threadQueue);        
 
-        logger.info("----------------------------------------------------------------------------------------------------");
+        logger.info("====================================================================================================");
         logger.info("ThreadPool initialized - CORE: "+Context.getServer().getThreadPoolCoreSize()+"   MAX: "+Context.getServer().getThreadPoolMaxSize()+"   KEEP-ALIVE WHEN IDLE(seconds): "+Context.getServer().getThreadPoolKeepAlive());
 
-        //this.resourceMonitor = new ResourceMonitor(this.threadpool, 30000, true, Unit.MB, 2, logger);
-        //resourceMonitor.start();
-        //new SystemMonitor(this.threadpool, 30000, true, UNIT.MB, 2, logger).start();
+        resourceMonitor = ResourceMonitor.get();
+        resourceMonitor.start();
 
         //set verbose option to STD IO
         String optionV = cmdLine.getOptionValue("v");
@@ -185,9 +183,8 @@ public class LeapApp {
         //NetworkInterfaces.getAllNetworkAddresses().stream().forEach(i -> System.out.println(i.getHostName()));
         //LeapClassLoader
         LeapURLClassLoader classLoader = ClassUtils.getClassLoader();
-
         //Spring JPA 
-        SpringJPAManager jpaManager = SpringJPAManager.get();
+        //SpringJPAManager jpaManager = SpringJPAManager.get();
 
         for(Host<?> host : Context.getHostMap().values()) {
             InetAddress hostAddress = InetAddress.getByName(host.getHost());
@@ -223,16 +220,32 @@ public class LeapApp {
      * @throws InterruptedException
      */
     public void shutdown() throws InterruptedException, IOException { 
-        this.resourceMonitor.stop();
-        for(LeapHttpServer server : this.leapServerMap.values()) {
+        resourceMonitor.stop();
+        for(LeapHttpServer server : leapServerMap.values()) {
             server.close();
             server.join();
         }
-        this.threadpool.shutdown();
-        while(!this.threadpool.awaitTermination(3, TimeUnit.SECONDS)) {
+        threadpool.shutdown();
+        while(!threadpool.awaitTermination(3, TimeUnit.SECONDS)) {
             logger.info("Waiting for termination server...");
         }
         logger.info("Leap server terminated...");
+    }
+
+    /**
+     * Get home path
+     * @return
+     */
+    public static Path getHomePath() {
+        return HOME_PATH;
+    }
+
+    /**
+     * Get thread pool
+     * @return
+     */
+    public static ThreadPoolExecutor getThreadPool() {
+        return threadpool;
     }
 
     /**

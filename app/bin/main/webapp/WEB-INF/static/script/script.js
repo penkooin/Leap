@@ -24,10 +24,10 @@ function generateResource(resJson) {
     var dir = document.getElementById("resource-list");
     var resList = "";
     for(let i = 0; i < elements.length; i++) {
-        resList += '<span class=\"file-name\" style="width:30%"><img class=\"img\" src=\"'+elements[i].img+'\"><a href=\"'+elements[i].uri+'\">'+elements[i].file+'</a></span>'
-              +'<span class=\"last-modified\" style="width:30%">'+elements[i].lastModified+'</span>'
-              +'<span class=\"file-size\" style="width:20%">'+elements[i].size+'</span>'
-              +'<span class=\"desc\" style="width:20%">-</span>'
+        resList += '<span class=\"file-name\" style="width:30%;display:inline-block;"><img class=\"img\" src=\"'+elements[i].img+'\"><a href=\"'+elements[i].uri+'\">'+elements[i].file+'</a></span>'
+              +'<span class=\"last-modified\" style="width:30%;display:inline-block;">'+elements[i].lastModified+'</span>'
+              +'<span class=\"file-size\" style="width:20%;display:inline-block;">'+elements[i].size+'</span>'
+              +'<span class=\"desc\" style="width:20%;display:inline-block;">-</span>'
               +'<br>';
     }
     dir.insertAdjacentHTML("afterbegin", resList);

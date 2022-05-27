@@ -31,67 +31,77 @@ import ch.qos.logback.classic.Logger;
  * @since 2018.10.16
  * @version 1.0
  */
-public class SystemMonitor {
-	
-	public static final double PCT = 100d;
-	public static final long SEC = 1000000000L; //nano sec
-	public static final long KB = 1024;
-	public static final long MB = 1024*1024;	
-	public static final long GB = 1024*1024*1024;
-	public static final long TB = 1024*1024*1024*1024;
-	public static final long PB = 1024*1024*1024*1024*1024;
-
+public class SystemMonitor {	
     /**
      * ThreadPool
      */
-    private static ThreadPoolExecutor threadpool;
-
+    private ThreadPoolExecutor threadpool;
     /**
      * Unit of quantity
      */
-    private UNIT unit;
-
+    private UNIT sizeUnit;
+	/**
+	 * Unit of time
+	 */
+	private UNIT timeUnit;
     /**
      * Fraction point of digit
      */
     private int fractionPoint;
-
     /**
      * Logger
      */
     private Logger logger;
-
     /**
      * Interval
      */
     private long interval;
-
     /**
      * Timer
      */
     private Timer timer;
-
     /**
      * Whether daemon thread
      */
     private boolean isDaemon;
+	/**
+	 * System monitor instance
+	 */
+	private static SystemMonitor systemMonitor;
+	/**
+	 * Get system monitor instance
+	 * @return
+	 */
+	public static SystemMonitor get() {
+		if(systemMonitor == null) {
+			systemMonitor = new SystemMonitor();
+		}
+		return systemMonitor;
+	}
+	/**
+	 * initialize 
+	 * @param threadpool
+	 * @param interval
+	 * @param isDaemon
+	 * @param sizeUnit
+	 * @param fractionPoint
+	 * @param timeUnit
+	 * @param logger
+	 */
+	public void initialize(ThreadPoolExecutor threadpool, long interval, boolean isDaemon, UNIT sizeUnit, int fractionPoint, UNIT timeUnit,Logger logger) {
+		this.threadpool = threadpool;
+		this.interval = interval;
+		this.isDaemon = isDaemon;
+		this.sizeUnit = sizeUnit;
+		this.timeUnit = timeUnit;
+		this.fractionPoint = fractionPoint;
+		this.logger = logger;		
+	}
 
 	/**
 	 * Constructs
-	 * @param threadpool_
-	 * @param interval
-	 * @param isDaemon
-	 * @param unit
-	 * @param fractionPoint
-	 * @param logger
 	 */
-	public SystemMonitor(ThreadPoolExecutor threadpool_, long interval, boolean isDaemon, UNIT unit, int fractionPoint, Logger logger) {
-		threadpool = threadpool_;
-		this.interval = interval;
-		this.isDaemon = isDaemon;
-		this.unit = unit;
-		this.fractionPoint = fractionPoint;
-		this.logger = logger;		
+	public SystemMonitor() {
 	}
 
 	/**
@@ -106,28 +116,8 @@ public class SystemMonitor {
             @Override
             public void run() {
                 try {
-                    logger.info(
-                        "[THREAD-MONITOR] ThreadPool - "
-                        + "  Core: " + threadpool.getCorePoolSize()
-                        + "  Max: " + threadpool.getMaximumPoolSize()
-                        + "  Active: "+threadpool.getActiveCount()
-                        + "  Largest: "+threadpool.getLargestPoolSize()
-                        + "  Queued size: "+threadpool.getQueue().size()
-                        + "  Task completed: "+threadpool.getCompletedTaskCount()
-                    );
-                    logger.info(
-                        "[PERFORMANCE-MONITOR] CPU & MEM - "
-						+ "  Total Mem : "+SystemMonitor.getTotalPhysicalMemorySize(UNIT.GB)
-						+ "  Physical Mem : "+SystemMonitor.getFreePhysicalMemorySize(UNIT.GB)
-						+ "  Virtual Mem : "+SystemMonitor.getCommittedVirtualMemorySize(UNIT.GB)
-						+ "  System CPU : "+SystemMonitor.getSystemCpuLoad(UNIT.PCT)
-						+ "  Process CPU : "+SystemMonitor.getProcessCpuLoad(UNIT.PCT)
-						+ "  Process Time : "+SystemMonitor.getProcessCpuTime(UNIT.SE)
-						+ "  Init : "+getProcessHeapInit(UNIT.MB)
-						+ "  Used : "+getProcessHeapUsed(UNIT.MB)
-						+ "  Committed : "+getProcessHeapCommitted(UNIT.MB)
-						+ "  Max : "+getProcessHeapMax(UNIT.MB)
-                    );    
+                    logger.info("[THREAD-MONITOR] ThreadPool - Core: " + threadpool.getCorePoolSize()+"  Max: " + threadpool.getMaximumPoolSize()+"  Active: "+threadpool.getActiveCount()+"  Largest: "+threadpool.getLargestPoolSize()+"  Queued size: "+threadpool.getQueue().size()+"  Task completed: "+threadpool.getCompletedTaskCount());
+                    logger.info("[SYSTEM-MONITOR] CPU & MEM - Total Mem : "+getTotalPhysicalMemorySize(sizeUnit)+"  Physical Mem : "+getFreePhysicalMemorySize(sizeUnit)+"  Virtual Mem : "+getCommittedVirtualMemorySize(sizeUnit)+"  System CPU : "+getSystemCpuLoad(timeUnit)+"  Process CPU : "+getProcessCpuLoad(timeUnit)+"  Process Time : "+getProcessCpuTime(timeUnit)+"  Init : "+getProcessHeapInit(sizeUnit)+"  Used : "+getProcessHeapUsed(sizeUnit)+"  Committed : "+getProcessHeapCommitted(sizeUnit)+ "  Max : "+getProcessHeapMax(sizeUnit));    
                 } catch (Exception e) {
                     logger.error(e.getMessage(), e);
                 }
@@ -155,7 +145,7 @@ public class SystemMonitor {
 	 * @throws MBeanException
 	 * @throws ReflectionException
 	 */
-	public static double getPlatformMBeanAttribute(String attr, UNIT unit) throws AttributeNotFoundException, 
+	public double getPlatformMBeanAttribute(String attr, UNIT unit) throws AttributeNotFoundException, 
 																				  InstanceNotFoundException, 
 																				  MalformedObjectNameException, 
 																				  MBeanException, 
@@ -164,7 +154,7 @@ public class SystemMonitor {
 		Object attribute = mBeanServer.getAttribute(new ObjectName("java.lang","type","OperatingSystem"), attr);
 		if(attribute != null) {
 			double value = Double.parseDouble(attribute+"");
-			return UNIT.MB.applyUnit(value, 2);
+			return UNIT.MB.applyUnit(value, fractionPoint);
 		}
 		return 0d;
 	}
@@ -179,7 +169,7 @@ public class SystemMonitor {
 	 * @throws MBeanException
 	 * @throws ReflectionException
 	 */
-	public static float getFreePhysicalMemorySize(UNIT unit) throws AttributeNotFoundException, InstanceNotFoundException, MalformedObjectNameException, MBeanException, ReflectionException {
+	public float getFreePhysicalMemorySize(UNIT unit) throws AttributeNotFoundException, InstanceNotFoundException, MalformedObjectNameException, MBeanException, ReflectionException {
 		//OperatingSystemMXBean mxBean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
 		//return Math.round((float)mxBean.getFreePhysicalMemorySize()/(MB)*100f)/100f;
 		return (float) getPlatformMBeanAttribute("FreePhysicalMemorySize", unit);
@@ -195,7 +185,7 @@ public class SystemMonitor {
 	 * @throws MBeanException
 	 * @throws ReflectionException
 	 */
-	public static float getCommittedVirtualMemorySize(UNIT unit) throws AttributeNotFoundException, InstanceNotFoundException, MalformedObjectNameException, MBeanException, ReflectionException {
+	public float getCommittedVirtualMemorySize(UNIT unit) throws AttributeNotFoundException, InstanceNotFoundException, MalformedObjectNameException, MBeanException, ReflectionException {
 		//OperatingSystemMXBean mxBean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
 		//return Math.round((float)mxBean.getCommittedVirtualMemorySize()/(MB)*100f)/100f;
 		return (float) getPlatformMBeanAttribute("CommittedVirtualMemorySize", unit);
@@ -211,7 +201,7 @@ public class SystemMonitor {
 	 * @throws MBeanException
 	 * @throws ReflectionException
 	 */
-	public static float getFreeSwapSpaceSize(UNIT unit) throws AttributeNotFoundException, InstanceNotFoundException, MalformedObjectNameException, MBeanException, ReflectionException {
+	public float getFreeSwapSpaceSize(UNIT unit) throws AttributeNotFoundException, InstanceNotFoundException, MalformedObjectNameException, MBeanException, ReflectionException {
 		//OperatingSystemMXBean mxBean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
 		//return Math.round((float)mxBean.getFreeSwapSpaceSize()/(MB)*100f)/100f;
 		return (float) getPlatformMBeanAttribute("FreeSwapSpaceSize", unit);
@@ -227,7 +217,7 @@ public class SystemMonitor {
 	 * @throws MBeanException
 	 * @throws ReflectionException
 	 */
-	public static float getTotalPhysicalMemorySize(UNIT unit) throws AttributeNotFoundException, InstanceNotFoundException, MalformedObjectNameException, MBeanException, ReflectionException {
+	public float getTotalPhysicalMemorySize(UNIT unit) throws AttributeNotFoundException, InstanceNotFoundException, MalformedObjectNameException, MBeanException, ReflectionException {
 		//OperatingSystemMXBean mxBean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
 		//return Math.round((float)mxBean.getTotalPhysicalMemorySize()/(MB)*100f)/100f;		
 		return (float) getPlatformMBeanAttribute("TotalPhysicalMemorySize", unit);
@@ -243,7 +233,7 @@ public class SystemMonitor {
 	 * @throws MBeanException
 	 * @throws ReflectionException
 	 */
-	public static float getTotalSwapSpaceSize(UNIT unit) throws AttributeNotFoundException, InstanceNotFoundException, MalformedObjectNameException, MBeanException, ReflectionException {
+	public float getTotalSwapSpaceSize(UNIT unit) throws AttributeNotFoundException, InstanceNotFoundException, MalformedObjectNameException, MBeanException, ReflectionException {
 		//OperatingSystemMXBean mxBean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
 		//return Math.round((float)mxBean.getTotalSwapSpaceSize()/(MB)*100f)/100f;
 		return (float) getPlatformMBeanAttribute("TotalSwapSpaceSize", unit);
@@ -259,7 +249,7 @@ public class SystemMonitor {
 	 * @throws MBeanException
 	 * @throws ReflectionException
 	 */
-	public static double getProcessCpuLoad(UNIT unit) throws AttributeNotFoundException, InstanceNotFoundException, MalformedObjectNameException, MBeanException, ReflectionException {
+	public double getProcessCpuLoad(UNIT unit) throws AttributeNotFoundException, InstanceNotFoundException, MalformedObjectNameException, MBeanException, ReflectionException {
 		//OperatingSystemMXBean mxBean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
 		//return Math.round(mxBean.getProcessCpuLoad()*10000d)/100d;
 		return getPlatformMBeanAttribute("ProcessCpuLoad", unit);
@@ -275,7 +265,7 @@ public class SystemMonitor {
 	 * @throws MBeanException
 	 * @throws ReflectionException
 	 */
-	public static double getProcessCpuTime(UNIT unit) throws AttributeNotFoundException, InstanceNotFoundException, MalformedObjectNameException, MBeanException, ReflectionException {
+	public double getProcessCpuTime(UNIT unit) throws AttributeNotFoundException, InstanceNotFoundException, MalformedObjectNameException, MBeanException, ReflectionException {
 		//OperatingSystemMXBean mxBean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
 		//return mxBean.getProcessCpuTime();
 		return getPlatformMBeanAttribute("ProcessCpuTime", unit); //nano sec 
@@ -291,7 +281,7 @@ public class SystemMonitor {
 	 * @throws MBeanException
 	 * @throws ReflectionException
 	 */
-	public static double getSystemCpuLoad(UNIT unit) throws AttributeNotFoundException, InstanceNotFoundException, MalformedObjectNameException, MBeanException, ReflectionException {
+	public double getSystemCpuLoad(UNIT unit) throws AttributeNotFoundException, InstanceNotFoundException, MalformedObjectNameException, MBeanException, ReflectionException {
 		//OperatingSystemMXBean mxBean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
 		//return Math.round(mxBean.getSystemCpuLoad()*10000d)/100d;
 		return getPlatformMBeanAttribute("SystemCpuLoad", unit);
@@ -302,7 +292,7 @@ public class SystemMonitor {
 	 * @param unit
 	 * @return
 	 */
-	public static float getProcessHeapInit(UNIT unit) {
+	public float getProcessHeapInit(UNIT unit) {
 		long value = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getInit();
 		return (float) UNIT.MB.applyUnit(value, 2);
 	}
@@ -312,7 +302,7 @@ public class SystemMonitor {
 	 * @param unit
 	 * @return
 	 */
-	public static float getProcessHeapUsed(UNIT unit) {
+	public float getProcessHeapUsed(UNIT unit) {
 		long value = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getUsed();
 		return (float) UNIT.MB.applyUnit(value, 2);
 	}
@@ -322,7 +312,7 @@ public class SystemMonitor {
 	 * @param unit
 	 * @return
 	 */
-	public static float getProcessHeapCommitted(UNIT unit) {
+	public float getProcessHeapCommitted(UNIT unit) {
 		long value = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getCommitted();
 		return (float) UNIT.MB.applyUnit(value, 2);
 	}
@@ -332,7 +322,7 @@ public class SystemMonitor {
 	 * @param unit
 	 * @return
 	 */
-	public static float getProcessHeapMax(UNIT unit) {
+	public float getProcessHeapMax(UNIT unit) {
 		long value = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getMax();
 		return (float) UNIT.MB.applyUnit(value, 2);
 	}
@@ -342,37 +332,37 @@ public class SystemMonitor {
 	 * @param unit
 	 * @return
 	 */
-	public static float getProcessMemoryUsed(UNIT unit) {
+	public float getProcessMemoryUsed(UNIT unit) {
 		Runtime runtime = Runtime.getRuntime();
 		float value = runtime.totalMemory() - runtime.freeMemory();
 		return (float) UNIT.MB.applyUnit(value, 2);
 	}
 
-	public static int getThreadPoolActiveCount() {
+	public int getThreadPoolActiveCount() {
 		return threadpool.getActiveCount();
 	}
 
-	public static int getThreadPoolCoreSize() {
+	public int getThreadPoolCoreSize() {
 		return threadpool.getCorePoolSize();
 	}
 
-	public static int getThreadPoolMaxSize() {
+	public int getThreadPoolMaxSize() {
 		return threadpool.getMaximumPoolSize();
 	}
 
-	public static long getThreadPoolCompletedTask() {
+	public long getThreadPoolCompletedTask() {
 		return threadpool.getCompletedTaskCount();
 	}
 
-	public static int getThreadPoolLargestSize() {
+	public int getThreadPoolLargestSize() {
 		return threadpool.getLargestPoolSize();
 	}
 
-	public static int getThreadPoolQueuedTask() {
+	public int getThreadPoolQueuedTask() {
 		return threadpool.getQueue().size();
 	}
 
-	public static long getThreadPoolKeepAlive(TimeUnit unit) {
+	public long getThreadPoolKeepAlive(TimeUnit unit) {
 		return threadpool.getKeepAliveTime(unit);
 	}
 }
