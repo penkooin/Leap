@@ -1,0 +1,44 @@
+############################## Leap Server Configuration ##############################
+server:
+    version: 1.0.0
+    connection-timeout: 5000
+    backlog: 50
+    file-buffer-size: 1024
+    streaming-buffer-size: 102400
+
+    threadpool:
+      core: 30
+      max: 30
+      keep-alive: 30
+      queue-size: 100
+
+    monitoring:      
+      interval: 10000
+      unit: MB
+      logs: ./logs/monitor.log
+      log-level: INFO
+
+    redirect:
+      http://awesome:8082 : 20
+      http://www.leap1.org:8081 : 80
+
+    security:
+      encryption: 'TLS'
+      keystore: './config/ssl/leap-keystore.jks'
+      passphrase: '939393'
+
+    spring-jpa:
+      datasource: 
+        driver-class: "org.mariadb.jdbc.Driver"
+        url: "jdbc:mariadb://localhost:3306"
+        schema: leap
+        user: "root"
+        password: "9393"
+
+      spring-jpa-packages: [
+        "org.chaostocosmos.leap.http.services", 
+        "org.chaostocosmos.leap.http.services.datasource", 
+        "org.chaostocosmos.leap.http.services.entity", 
+        "org.chaostocosmos.leap.http.services.repository" 
+      ]
+
