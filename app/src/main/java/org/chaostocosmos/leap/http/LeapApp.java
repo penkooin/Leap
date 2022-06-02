@@ -27,8 +27,8 @@ import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.resources.ClassUtils;
 import org.chaostocosmos.leap.http.resources.LeapURLClassLoader;
 import org.chaostocosmos.leap.http.resources.ResourceHelper;
-import org.chaostocosmos.leap.http.resources.ResourceMonitor;
 import org.chaostocosmos.leap.http.resources.ResourceManager;
+import org.chaostocosmos.leap.http.resources.ResourceMonitor;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
@@ -156,8 +156,8 @@ public class LeapApp {
         logger.info("====================================================================================================");
         logger.info("ThreadPool initialized - CORE: "+Context.getServer().getThreadPoolCoreSize()+"   MAX: "+Context.getServer().getThreadPoolMaxSize()+"   KEEP-ALIVE WHEN IDLE(seconds): "+Context.getServer().getThreadPoolKeepAlive());
 
-        resourceMonitor = ResourceMonitor.get();
-        resourceMonitor.start();
+        //resourceMonitor = ResourceMonitor.get();
+        //resourceMonitor.start();
 
         //set verbose option to STD IO
         String optionV = cmdLine.getOptionValue("v");

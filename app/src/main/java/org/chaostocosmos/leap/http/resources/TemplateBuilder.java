@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import com.google.gson.Gson;
-
 import org.chaostocosmos.leap.http.commons.UNIT;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
+
+import com.google.gson.Gson;
 
 /**
  * TEMPLATE
@@ -86,6 +86,7 @@ public class TemplateBuilder {
     public static String buildResourceJson(String contextPath, Host<?> host) throws Exception {
         String path = contextPath.charAt(contextPath.length() - 1) == '/' ? contextPath.substring(0, contextPath.lastIndexOf('/')) : contextPath;
         final String path1 = path.equals("") ? "/" : path;
+        System.out.println(host.getStatic().resolve(path1.substring(1))+"____________________________");
         List<File> resourceInfos = Arrays.asList(host.getStatic().resolve(path1.substring(1)).toFile().listFiles())
                                          .stream()
                                          .sorted(Comparator.comparing(f -> f.isDirectory() ? -1 : 1))

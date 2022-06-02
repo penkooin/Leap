@@ -16,6 +16,7 @@ import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
+import org.chaostocosmos.leap.http.enums.RES_CODE;
 import org.chaostocosmos.leap.http.resources.ClassUtils;
 import org.chaostocosmos.leap.http.resources.LeapURLClassLoader;
 import org.chaostocosmos.leap.http.services.filters.IFilter;
@@ -212,6 +213,14 @@ public class ServiceManager {
     public Method getMappingServiceMethod(String contextPath) throws Exception {
         return serviceHolderMap.get(contextPath).getServiceMethod();
     }
+
+    /**
+     * Remove service instance by service qualifiedClassName
+     * @param qualifiedClassName
+     */
+    public void removeServiceInstance(final String qualifiedClassName) {
+        serviceHolderMap.entrySet().stream().filter(e -> e.getValue().getService().getClass().getName().equals(qualifiedClassName)).findFirst().orElseThrow(() -> new WASException(MSG_TYPE.HTTP, RES_CODE.RES412.code(), "There isn't exist service: " + qualifiedClassName));
+    }    
 
     /**
      * Get service instance

@@ -265,7 +265,7 @@ public class LeapHttpServer extends Thread {
                 //connection.setSoLinger(true, 10);
                 int queueSize = this.threadpool.getQueue().size();
                 String ipAddress = connection.getLocalAddress().toString();
-                if(this.ipAllowedFilters.include(ipAddress) && this.ipForbiddenFilters.exclude(ipAddress)) {
+                if(this.ipAllowedFilters.include(ipAddress) || this.ipForbiddenFilters.exclude(ipAddress)) {
                     if(queueSize < Context.getServer().getThreadQueueSize()) {
                         logger.info("[CLIENT DETECTED] Client request accepted. Submitting thread. "+ipAddress+" - "+connection.getPort()+"  Thread queue size - "+queueSize);
                         this.threadpool.submit(new LeapRequestHandler(this, this.docroot, connection, this.host));    

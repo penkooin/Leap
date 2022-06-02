@@ -19,7 +19,6 @@ import java.nio.file.WatchService;
 import java.nio.file.attribute.FileTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,8 +26,6 @@ import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-
-import com.google.gson.Gson;
 
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.commons.Constants;
@@ -40,6 +37,8 @@ import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
+
+import com.google.gson.Gson;
 
 /**
  * WatchResource object
@@ -53,7 +52,7 @@ public class WatchResources extends Thread implements Resources {
     Kind<?>[] watchKind;
     Filtering accessFiltering, forbiddenFiltering, inMemoryFiltering;
     long inMemoryLimitSize;
-    Map<String, Object> resourceTree;
+    ResourceInfo<String, ResourceInfo<String, ?>> resourceTree;
     Map<WatchKey, Path> watchMap;
     WatchService watchService;
     Gson gson = new Gson();
@@ -89,7 +88,7 @@ public class WatchResources extends Thread implements Resources {
         this.inMemoryFiltering = host.getInMemoryFiltering();
         this.watchKind = watchKinds;
         this.inMemoryLimitSize = inMemoryLimitSize;
-        this.resourceTree = new LinkedHashMap<>();
+        this.resourceTree = new ResourceInfo<String, ResourceInfo<String, ?>>(true, this.watchPath, false);
         this.watchService = FileSystems.getDefault().newWatchService();
         this.watchMap = Files.walk(this.watchPath).sorted().filter(p -> p.toFile().isDirectory()).map(p -> {
             try {
@@ -122,11 +121,11 @@ public class WatchResources extends Thread implements Resources {
                         path = path.resolve(event.context().toString());
                         LoggerFactory.getLogger(this.hostId).debug("[RESOURCE EVENT] KIND: "+event.kind()+" EVENT RESOURCE SIZE: "+UNIT.MB.get(path.toFile().length())+"  TOTAL RESOURCE SIZE: "+getResourceTotalSize(UNIT.MB));
 
-                        Object data = null;
+                        ResourceInfo<String, ?> data = null;
                         if(path.toFile().isDirectory()) {
                             LoggerFactory.getLogger(this.hostId).debug("[RESOURCE CREATED] Directory resource created: "+path.toAbsolutePath());
                             this.watchMap.put(path.register(this.watchService, this.watchKind), path);
-                            data = new LinkedHashMap<>();
+                            data = new ResourceInfo<String, ResourceInfo<String, ?>>(true, path, false);
                         } else {
                             if(this.forbiddenFiltering.exclude(path.toFile().getName())) {                                
                                 try {
@@ -134,16 +133,16 @@ public class WatchResources extends Thread implements Resources {
                                         //When In-Memory resource
                                         Files.move(path, path, StandardCopyOption.ATOMIC_MOVE);                                        
                                         if(path.toFile().length() <= this.inMemoryLimitSize) {
-                                            data = new ResourceInfo(path, true);
+                                            data = new ResourceInfo<String, ResourceInfo<?, ?>>(false, path, true);
                                             LoggerFactory.getLogger(this.hostId).debug("[IN-MEMORY CREATED] Loaded to memory: "+path.toAbsolutePath()+"  [SIZE: "+UNIT.MB.get(size)+"]");
                                         } else {
                                             //When In-Memory limit and reject
-                                            data = new ResourceInfo(path, false);
+                                            data = new ResourceInfo<String, ResourceInfo<?, ?>>(false, path, false);
                                             LoggerFactory.getLogger(this.hostId).debug("[IN-MEMORY CREATED] In-Memory file size overflow. Limit: "+UNIT.MB.get(this.inMemoryLimitSize)+"  File size: "+UNIT.MB.get(path.toFile().length()));
                                         }
                                     } else {                        
                                         // When File resource            
-                                        data = new ResourceInfo(path, false);                                
+                                        data = new ResourceInfo<String, ResourceInfo<?, ?>>(false, path, false);                                
                                     }
                                 } catch(FileSystemException e) {
                                     LoggerFactory.getLogger(this.hostId).warn("[FILE SYSTEM ALERT] "+e.getMessage());
@@ -156,23 +155,23 @@ public class WatchResources extends Thread implements Resources {
                     } else if(event.kind() == StandardWatchEventKinds.ENTRY_MODIFY) {
                         path = path.resolve(event.context().toString());
                         if(path.toFile().isFile() && this.forbiddenFiltering.exclude(path.toFile().getName())) {
-                            Object data = null;
+                            ResourceInfo<String, ?> data  = null;
                             try {
                                 //When In-Memory resource
                                 if(this.inMemoryFiltering.include(path.toFile().getName())) {
                                     Files.move(path, path, StandardCopyOption.ATOMIC_MOVE);
                                     if(path.toFile().length() <= this.inMemoryLimitSize) {
                                         LoggerFactory.getLogger(this.hostId).debug("[IN-MEMORY CREATED] Loaded to memory: "+path.toAbsolutePath()+"  [SIZE: "+UNIT.MB.get(path.toFile().length())+"]");
-                                        data = new ResourceInfo(path, true);
+                                        data = new ResourceInfo<String, ResourceInfo<?, ?>>(false, path, true);
                                     } else {
                                         //When In-Memory limit and reject
                                         LoggerFactory.getLogger(this.hostId).debug("[IN-MEMORY CREATED] In-Memory file size overflow. Limit: "+UNIT.MB.get(this.inMemoryLimitSize)+"  File size: "+UNIT.MB.get(path.toFile().length()));
-                                        data = new ResourceInfo(path, false);
+                                        data = new ResourceInfo<String, ResourceInfo<?, ?>>(false, path, false);
                                     }
                                 } else {
                                     // When File resource   
                                     LoggerFactory.getLogger(this.hostId).debug("[EXCLUDE IN-MEMORY FILTER] Exclude on In-Memory resources: "+path.toAbsolutePath());
-                                    data = new ResourceInfo(path, false);
+                                    data = new ResourceInfo<String, ResourceInfo<?, ?>>(false, path, false);
                                 }
                             } catch(FileSystemException e) {
                                 LoggerFactory.getLogger(this.hostId).warn("[FILE SYSTEM ALERT] "+e.getMessage());
@@ -208,21 +207,21 @@ public class WatchResources extends Thread implements Resources {
      * @throws IOException
      * @throws ImageProcessingException
      */
-    protected Map<String, Object> loadResoureTree(Path path, Map<String, Object> tree) throws IOException {
+    protected ResourceInfo<String, ?> loadResoureTree(Path path, ResourceInfo<String, ResourceInfo<String, ?>> tree) throws IOException {
         File[] files = path.toFile().listFiles();
         for(File file : files) {
             if(file.isDirectory()) {
-                tree.put(file.getName(), loadResoureTree(file.toPath(), new LinkedHashMap<String, Object>()));
+                tree.put(file.getName(), loadResoureTree(file.toPath(), new ResourceInfo<String, ResourceInfo<String, ?>>(true, file.toPath(), false)));
             } else {
                 if(file.isFile()) {
                     String fileSize = (float)UNIT.MB.get(file.length())+" MB";
                     if(this.forbiddenFiltering.exclude(file.getName())) {
                         if(file.length() <= this.inMemoryLimitSize && this.inMemoryFiltering.include(file.getName())) {
                             //System.out.println(file.getAbsolutePath());
-                            tree.put(file.getName(), new ResourceInfo(file.toPath(), true));
+                            tree.put(file.getName(), new ResourceInfo<String, ResourceInfo<?, ?>>(false, file.toPath(), true));
                             LoggerFactory.getLogger(this.hostId).debug("[HOST:"+this.hostId+"][LOAD] In-Memory resource loaded: "+file.getName()+"  Size: "+fileSize+"  Bytes: "+file.length());
                         } else {
-                            tree.put(file.getName(), new ResourceInfo(file.toPath(), false));
+                            tree.put(file.getName(), new ResourceInfo<String, ResourceInfo<?, ?>>(false, file.toPath(), false));
                             LoggerFactory.getLogger(this.hostId).debug("[HOST:"+this.hostId+"][LOAD] File resource loaded: "+file.getName()+"  Size: "+fileSize+"  Bytes: "+file.length());
                         }
                     } else {
@@ -235,20 +234,21 @@ public class WatchResources extends Thread implements Resources {
     }
 
     /**
-     * Add resource to resurce tree
+     * Add resource to resource tree
      * @param tree
      * @param res
      * @throws IOException
      */
-    private void addResource(Map<String, Object> tree, String[] res, Object data) throws IOException {        
+    @SuppressWarnings("unchecked")
+    private void addResource(ResourceInfo<String, ResourceInfo<String, ?>> resourceTree, String[] res, ResourceInfo<String, ?> data) throws IOException {        
         if(res.length == 1) {            
-            tree.put(res[0], data);
+            resourceTree.put(res[0], data);
         } else {
-            Object val = tree.get(res[0]);
+            ResourceInfo<String, ?> val = (ResourceInfo<String, ?>)resourceTree.get(res[0]);
             if(val == null) {
-                tree.put(res[0], new LinkedHashMap<>());
+                resourceTree.put(res[0], new ResourceInfo<String, ResourceInfo<String, ?>>(true, this.watchPath.resolve(res[0]), false));
             }
-            addResource((Map<String, Object>)tree.get(res[0]), Arrays.copyOfRange(res, 1, res.length), data);
+            addResource((ResourceInfo<String, ResourceInfo<String, ?>>)resourceTree.get(res[0]), Arrays.copyOfRange(res, 1, res.length), data);
         }
     }
 
@@ -257,11 +257,12 @@ public class WatchResources extends Thread implements Resources {
      * @param tree
      * @param res
      */
-    protected void removeResource(Map<String, Object> tree, String[] res) {
+    @SuppressWarnings("unchecked")
+    protected void removeResource(ResourceInfo<String, ?> resourceTree, String[] res) {
         if(res.length == 1) {
-            tree.remove(res[0]);
+            resourceTree.remove(res[0]);
         } else {
-            removeResource((Map<String, Object>)tree.get(res[0]), Arrays.copyOfRange(res, 1, res.length));
+            removeResource((ResourceInfo<String, ?>)resourceTree.get(res[0]), Arrays.copyOfRange(res, 1, res.length));
         }
     }
 
@@ -270,29 +271,22 @@ public class WatchResources extends Thread implements Resources {
      * @param resourceTree
      * @param mimeType
      * @return
+     * @throws IOException
      */
-    private Map<String, Object> filterResourceTree(Map<String, Object> resourceTree, MIME_TYPE mimeType) {
-        Map<String, Object> infos = new HashMap<String, Object>();
+    @SuppressWarnings("unchecked")
+    private ResourceInfo<String, ResourceInfo<String, ?>> filterResourceTree(ResourceInfo<String, ResourceInfo<String, ?>> resourceTree, MIME_TYPE mimeType) throws IOException {
+        ResourceInfo<String, ResourceInfo<String, ?>> infos = new ResourceInfo<String, ResourceInfo<String, ?>>(true, resourceTree.getResourcePath(), false);
         for(Object obj : resourceTree.values()) {
-            if(obj instanceof ResourceInfo) {
-                ResourceInfo info = (ResourceInfo) obj;
+            ResourceInfo<String, ResourceInfo<String, ?>> info = (ResourceInfo<String, ResourceInfo<String, ?>>) obj;
+            if(!info.isNode()) {
                 if(info.getMimeType() == mimeType) {
                     infos.put(info.getContextPath(), info);
                 }
-            } else if(obj instanceof Map) {
-                infos.putAll(filterResourceTree((Map<String, Object>)obj, mimeType));
+            } else {
+                infos.putAll(filterResourceTree(info, mimeType));
             }
         }
         return infos;
-    }
-
-    /**
-     * Filtering and get resource List by mime-type
-     * @param mimeType
-     * @return
-     */
-    public Map<String, Object> filter(MIME_TYPE mimeType) {
-        return filterResourceTree(this.resourceTree, mimeType);
     }
 
     /**
@@ -301,11 +295,12 @@ public class WatchResources extends Thread implements Resources {
      * @param res
      * @return
      */
-    private Object getResource(Map<String, Object> tree, String[] res) {
+    @SuppressWarnings("unchecked")
+    private ResourceInfo<String, ?> getResource(ResourceInfo<String, ResourceInfo<String, ?>> tree, String[] res) {
         if(res.length == 1) {
             return tree.get(res[0]);
         } else {
-            return getResource((Map<String, Object>)tree.get(res[0]), Arrays.copyOfRange(res, 1, res.length));
+            return getResource((ResourceInfo<String, ResourceInfo<String, ?>>)tree.get(res[0]), Arrays.copyOfRange(res, 1, res.length));
         }
     }
 
@@ -323,16 +318,15 @@ public class WatchResources extends Thread implements Resources {
      * @param res
      * @return
      */
-    public long getResourceTotalSize(Map res) {
+    public long getResourceTotalSize(ResourceInfo<String, ?> tree) {
         long size = 0;
-        for(Object obj : res.values()) {
-            if(obj instanceof ResourceInfo) {
-                size += ((ResourceInfo)obj).getResourceSize();
-            } else if (obj instanceof Map) {
-                size += getResourceTotalSize((Map)obj);
+        for(Object obj : tree.values()) {
+            ResourceInfo<String, ?> info = (ResourceInfo<String, ?>) obj;
+            if(!info.isNode()) {
+                size += info.getResourceSize();
             } else {
-                throw new IllegalArgumentException("Resource isn't allowed this type: "+obj.getClass().getName());
-            }
+                size += getResourceTotalSize(info);
+            } 
         }
         return size;
     }
@@ -343,12 +337,23 @@ public class WatchResources extends Thread implements Resources {
             Path path = resourcePath.subpath(this.watchPath.getNameCount(), resourcePath.getNameCount());
             if(this.inMemoryFiltering.include(resourcePath.toFile().getName())) {
                 LoggerFactory.getLogger(this.hostId).debug("[ADD IN-MEMORY RESOURCE] Watch: "+this.watchPath.toString()+"  Resource: "+path.toString());
-                addResource(this.resourceTree, path.toString().split(Pattern.quote(File.separator)), new ResourceInfo(path, true));
+                addResource(this.resourceTree, path.toString().split(Pattern.quote(File.separator)), new ResourceInfo<String, ResourceInfo<String, ?>>(false, path, true));
             } else {
                 LoggerFactory.getLogger(this.hostId).debug("[ADD FILE RESOURCE] Watch: "+this.watchPath.toString()+"  Resource: "+path.toString());
-                addResource(this.resourceTree, path.toString().split(Pattern.quote(File.separator)), new ResourceInfo(path, false));
+                addResource(this.resourceTree, path.toString().split(Pattern.quote(File.separator)), new ResourceInfo<String, ResourceInfo<String, ?>>(false, path, false));
             }
         }
+    }
+
+    /**
+     * Filtering and get resource List by mime-type
+     * @param mimeType
+     * @return
+     * @throws IOException
+     */
+    @Override
+    public ResourceInfo<String, ?> filter(MIME_TYPE mimeType) throws IOException {
+        return filterResourceTree(this.resourceTree, mimeType);
     }
 
     @Override
@@ -360,7 +365,7 @@ public class WatchResources extends Thread implements Resources {
     }
 
     @Override
-    public Object getContextResourceInfo(String contextPath) throws IOException { 
+    public ResourceInfo<String, ?> getContextResourceInfo(String contextPath) throws IOException { 
         return getResourceInfo(this.watchPath.resolve(contextPath));
     }
 
@@ -370,7 +375,7 @@ public class WatchResources extends Thread implements Resources {
     }
 
     @Override
-    public Object getResourceInfo(Path resourcePath) {
+    public ResourceInfo<String, ?> getResourceInfo(Path resourcePath) {
         resourcePath = resourcePath.normalize();
         if(resourcePath.getNameCount() == watchPath.getNameCount()) {
             return this.resourceTree;
@@ -384,11 +389,11 @@ public class WatchResources extends Thread implements Resources {
 
     @Override
     public String getStaticPage(String contextPath, Map<String, Object> params) throws IOException {                
-        Object resourceInfo = getContextResourceInfo(contextPath);
+        ResourceInfo<String, ?> resourceInfo = getContextResourceInfo(contextPath);
         if(resourceInfo == null) {            
             throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES404.code(), " Static page not found in Resource manager: "+contextPath);
         }
-        String page = new String(((ResourceInfo)resourceInfo).getBytes(), Context.getHosts().getHost(this.hostId).charset());
+        String page = new String((resourceInfo).getBytes(), Context.getHosts().getHost(this.hostId).charset());
         if(params != null) {
             page = resolvePage(page, params);
         }
@@ -444,7 +449,11 @@ public class WatchResources extends Thread implements Resources {
      * 
      * @author 9ins
      */
-    public class ResourceInfo {
+    public class ResourceInfo <T, V> extends LinkedHashMap<T, V> {
+        /**
+         * Whether node resource
+         */
+        boolean isNode;
         /**
          * Mapping context path
          */
@@ -479,12 +488,15 @@ public class WatchResources extends Thread implements Resources {
         long resourceSize;
         /**
          * Constructs with resource path & in-memory flag
+         * 
+         * @param isNode
          * @param resourcePath
          * @param inMemoryFlag
          * @throws IOException
          * @throws ImageProcessingException
          */
-        public ResourceInfo(Path resourcePath, boolean inMemoryFlag) throws IOException {
+        public ResourceInfo(boolean isNode, Path resourcePath, boolean inMemoryFlag) throws IOException {
+            this.isNode = isNode;
             this.resourcePath = resourcePath;
             this.resourceFile = resourcePath.toFile();
             this.resourceSize = resourcePath.toFile().length();
@@ -646,6 +658,13 @@ public class WatchResources extends Thread implements Resources {
                 data = getFileBytes(position, length);
             }
             return data;     
+        }
+        /**
+         * Get whether node resource 
+         * @return
+         */
+        public boolean isNode() {
+            return this.isNode;
         }
         /**
          * Get resource Path object

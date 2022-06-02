@@ -87,12 +87,17 @@ public class HttpParser {
          * @throws WASException
          */
         public Request parseRequest(InputStream in) throws IOException {
+            // BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+            // String line;
+            // while((line = reader.readLine()) != null) {
+            //     System.out.println(line);
+            // }
+            // in.close();
             String requestLine = StreamUtils.readLine(in, StandardCharsets.ISO_8859_1);
             if(requestLine == null) {
                 throw new WASException(MSG_TYPE.ERROR, 1);
             }
             requestLine = URLDecoder.decode(requestLine, StandardCharsets.UTF_8);
-            System.out.println(requestLine);
             String method = requestLine.substring(0, requestLine.indexOf(" "));
             if(!Arrays.asList(REQUEST_TYPE.values()).stream().anyMatch(R -> R.name().equals(method))) {
                 throw new WASException(MSG_TYPE.HTTP, 500, method);
@@ -101,7 +106,7 @@ public class HttpParser {
             String protocol = requestLine.substring(requestLine.lastIndexOf(" ")+1);
             List<String> headerLines = StreamUtils.readHeaders(in);
             Map<String, String> headerMap = new HashMap<>();
-            REQUEST_TYPE requestType = REQUEST_TYPE.valueOf(method);
+            REQUEST_TYPE requestType = REQUEST_TYPE.valueOf(method);            
             for(String header : headerLines) {
                 if(header == null || header.length() == 0)
                     break;
@@ -109,7 +114,7 @@ public class HttpParser {
                 if (idx == -1) {
                     throw new WASException(MSG_TYPE.ERROR, 3, header);
                 }
-                //System.out.println(header.substring(0, idx)+"   "+header.substring(idx + 1, header.length()).trim());
+                System.out.println(header.substring(0, idx)+"   "+header.substring(idx + 1, header.length()).trim());
                 headerMap.put(header.substring(0, idx), header.substring(idx + 1, header.length()).trim());
             }
             String requestedHost = headerMap.get("Host").toString().trim();
@@ -121,16 +126,14 @@ public class HttpParser {
                 String[] params = paramString.split("&", -1);
                 for(String param : params) {
                     String[] keyValue = param.split("=", -1);
-                    System.out.println(Arrays.toString(keyValue));
                     if(keyValue.length > 1) {
                         contextParam.put(keyValue[0], keyValue[1]);
                     }                    
                 }
             }
             String host = requestedHost.indexOf(":") != -1 ? requestedHost.substring(0, requestedHost.indexOf(":")) : requestedHost;
-
             String debug = "";
-            debug += "------------------------------ REQ: "+requestLine+" ------------------------------"+System.lineSeparator();
+            debug += "========== [REQUEST] "+requestLine+" =========="+System.lineSeparator();
             debug += headerLines.stream().collect(Collectors.joining(System.lineSeparator()));
             String contentType = headerMap.get("Content-Type");
             long contentLength = headerMap.get("Content-Length") != null ? Long.parseLong(headerMap.get("Content-Length")) : 0L;
@@ -144,7 +147,7 @@ public class HttpParser {
             if(!Context.getHosts().isExistHost(hostId)) {
                 throw new WASException(MSG_TYPE.HTTP, 400, "Requested host ID not exist in this server: "+host);
             }
-            debug += "========== Host ID traslation --- Request Host: "+host+"  Host ID: "+hostId+" ==========";
+            debug += System.lineSeparator()+"========== Request Host: "+host+"  Host ID: "+hostId+" ==========";
             Charset charset = Context.getHosts().charset(hostId);
             LoggerFactory.getLogger(hostId).debug(debug);
             BodyPart bodyPart = null;

@@ -1,6 +1,9 @@
 package org.chaostocosmos.leap.http.resources;
 
+import java.io.IOException;
 import java.lang.management.ManagementFactory;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -8,11 +11,14 @@ import java.util.concurrent.TimeUnit;
 
 import javax.transaction.NotSupportedException;
 
+import org.chaostocosmos.chaosgraph.NotSuppotedEncodingFormatException;
 import org.chaostocosmos.leap.http.LeapApp;
 import org.chaostocosmos.leap.http.commons.Constants;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.commons.UNIT;
 import org.chaostocosmos.leap.http.context.Context;
+
+import com.google.gson.Gson;
 
 import ch.qos.logback.classic.Logger;
 
@@ -50,6 +56,7 @@ public class ResourceMonitor {
      * Whether daemon thread
      */
     private boolean isDaemon;
+    private Gson gson = new Gson();
     /**
      * Resource monitor instance
      */
@@ -74,7 +81,7 @@ public class ResourceMonitor {
         this.interval = Context.getServer().getMonitoringInterval();
         this.logger = LoggerFactory.createLoggerFor("monitoring", 
                                     LeapApp.getHomePath().resolve(Context.getServer().getMonitoringLogs()).normalize().toString(), 
-                                    Context.getServer().getMonitoringLogLevel());
+                                    Context.getServer().getMonitoringLogLevel());        
     }
     /**
      * Start monitor timer
@@ -106,11 +113,12 @@ public class ResourceMonitor {
                         + "  Process CPU time: "+getProcessCpuTime()+" "+UNIT.SE.name()
                         + "  System CPU load: "+getSystemCpuLoad()+" "+UNIT.PCT.name()
                     );    
+                    requestMonitoringImage();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-        }, this.interval, this.interval);
+        }, 0, this.interval);
     }
     /**
      * Stop timer
@@ -119,6 +127,57 @@ public class ResourceMonitor {
         if(this.timer != null) {
             this.timer.cancel();
         }
+    }
+    public void requestMonitoringImage() throws IOException, NotSuppotedEncodingFormatException {
+        Map<String, Object> montoringMap = new HashMap<>() {{
+            put("CPU", new HashMap<String, Object>() {{
+                put("GRAPH", "LINE");
+                put("INTERPOLATE", "SPLINE");
+                put("WIDTH", 800);
+                put("HEIGHT", 600);
+                put("XINDEX", new String[] {"0", "", "2", "", "3", "", "4", "", "5", "", "6", "", "7", "", "8", "", "9", "", "10"});
+                put("YINDEX", new Double[]{50, 80, 500});
+                put("ELEMENTS", new Map<String, Object>[] {
+                    new Map<String, Object>() {{
+                        put("ELEMENT", )
+                    }}
+                });                    
+            }});            
+        }}
+
+        Map<String, Object> memoryMap = new HashMap<>();
+        Map<String, Object> threadMap = new HashMap<>();
+        GraphElement ge = this.threadPoolGe.getGraphElement("Core");
+        List<Double> values = ge.getValues();
+        if(values.size() > 10) {
+            values.remove(0);
+        }
+        values.add((double)getCorePoolSize());
+        ge = this.threadPoolGe.getGraphElement("Max");
+        values  = ge.getValues();
+        if(values.size() > 10) {
+            values.remove(0);
+        }
+        values.add((double)getMaximumPoolSize());
+        ge = this.threadPoolGe.getGraphElement("Active");
+        values  = ge.getValues();
+        if(values.size() > 10) {
+            values.remove(0);
+        }
+        values.add((double)getActiveCount());
+        ge = this.threadPoolGe.getGraphElement("Queued");
+        values  = ge.getValues();
+        if(values.size() > 10) {
+            values.remove(0);
+        }
+        values.add((double)getQueuedTaskCount());
+        GraphUtility.saveBufferedImage(this.threadGraph.getBufferedImage(), Context.getHost("leap").getStatic().resolve("img").resolve("threadpool.png").toFile(), CODEC.PNG);
+    }
+    public synchronized void saveMemoryImage() {
+
+    }
+    public synchronized void saveCPUImage() {
+
     }
     /**
      * Get thread pool core pool size

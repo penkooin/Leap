@@ -170,10 +170,8 @@ public class ChannelUtils {
         }                
         List<String> list = new ArrayList<>(Arrays.asList(lines.split("\r\n")));
         list.removeIf(e -> e.trim().equals(""));
-        System.out.println(list.remove(0));
         return list.stream()
                    .map(l -> {          
-                       System.out.println(l);   
                        String key = l.substring(0, l.indexOf(":")).trim();
                        List<String> value = Arrays.asList(l.substring(l.indexOf(":") + 1).split(";")).stream().map(t -> t.trim()).collect(Collectors.toList());
                        return new Object[]{key, value};

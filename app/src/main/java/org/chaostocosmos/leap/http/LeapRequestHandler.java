@@ -5,7 +5,6 @@ import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.nio.file.Path;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +15,7 @@ import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
+import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
 import org.chaostocosmos.leap.http.resources.ResourceHelper;
 import org.chaostocosmos.leap.http.resources.TemplateBuilder;
@@ -95,6 +95,9 @@ public class LeapRequestHandler implements Runnable {
                     throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES405.code(), Context.getMessages().getHttpMsg(405));
                 }
             } else { // When client request static resources
+                if(request.getRequestType() != REQUEST_TYPE.GET) {
+                    throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES405.code(), "Static content can't be provided by "+request.getRequestType().name());
+                }
                 Path resourcePath = ResourceHelper.getResourcePath(request);
                 if(request.getContextPath().equals("/")) {
                     String body = TemplateBuilder.buildWelcomeResourceHtml(request.getContextPath(), host);
@@ -102,12 +105,11 @@ public class LeapRequestHandler implements Runnable {
                     response.setBody(body.getBytes());
                     response.setResponseCode(RES_CODE.RES200.code());
                 } else {
-                    System.out.println(resourcePath);
                     if (host.getResource().exists(resourcePath)) {
                         //Get requested resource data
-                        Object resource = host.getResource().getResourceInfo(resourcePath);
-                        if(resource != null) {
-                            if(resource instanceof LinkedHashMap) {
+                        ResourceInfo<String, ?> resourceInfo = host.getResource().getResourceInfo(resourcePath);
+                        if(resourceInfo != null) {
+                            if(resourceInfo.isNode()) {
                                 String body = TemplateBuilder.buildResourceHtml(request.getContextPath(), host);
                                 String mimeType = MIME_TYPE.TEXT_HTML.mimeType();
                                 response.setResponseCode(RES_CODE.RES200.code());
@@ -115,7 +117,6 @@ public class LeapRequestHandler implements Runnable {
                                 response.setBody(body);
                                 //LoggerFactory.getLogger(hosts.getHost()).debug("RESOURCE LIST REQUESTED: "+body);    
                             } else {
-                                ResourceInfo resourceInfo = (ResourceInfo)resource;
                                 String mimeType = UtilBox.probeContentType(resourceInfo.getResourcePath());
                                 if(mimeType == null) {
                                     mimeType = MIME_TYPE.APPLICATION_OCTET_STREAM.mimeType();

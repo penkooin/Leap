@@ -10,10 +10,43 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
 class UtilBoxTest {
+
+    private static final Map<String, String> date_format_regexps = new HashMap<String, String>() {{
+		put("^\\d{4}\\d{1,2}\\d{1,2}$", "yyyyMMdd");
+		put("^\\d{1,2}-\\d{1,2}-\\d{2}$", "yy-MM-dd");
+		put("^\\d{1,2}\\d{1,2}\\d{1,2}$", "yyMMdd");	
+		put("^\\d{1,2}/\\d{1,2}/\\d{2}$", "yy/MM/dd");
+		put("^\\d{1,2}-\\d{1,2}-\\d{4}$", "dd-MM-yyyy");
+		put("^\\d{4}-\\d{1,2}-\\d{1,2}$", "yyyy-MM-dd");
+		put("^\\d{1,2}/\\d{1,2}/\\d{4}$", "MM/dd/yyyy");
+		put("^\\d{4}/\\d{1,2}/\\d{1,2}$", "yyyy/MM/dd");
+		put("^\\d{1,2}\\s[a-z]{3}\\s\\d{4}$", "dd MMM yyyy");
+		put("^\\d{1,2}\\s[a-z]{4,}\\s\\d{4}$", "dd MMMM yyyy");
+		put("^\\d{1,2}-\\d{1,2}-\\d{4}\\s\\d{1,2}:\\d{2}$", "dd-MM-yyyy HH:mm");
+		put("^\\d{4}-\\d{1,2}-\\d{1,2}\\s\\d{1,2}:\\d{2}$", "yyyy-MM-dd HH:mm");
+		put("^\\d{1,2}/\\d{1,2}/\\d{4}\\s\\d{1,2}:\\d{2}$", "MM/dd/yyyy HH:mm");
+		put("^\\d{4}/\\d{1,2}/\\d{1,2}\\s\\d{1,2}:\\d{2}$", "yyyy/MM/dd HH:mm");
+		put("^\\d{1,2}\\s[a-z]{3}\\s\\d{4}\\s\\d{1,2}:\\d{2}$", "dd MMM yyyy HH:mm");
+		put("^\\d{1,2}\\s[a-z]{4,}\\s\\d{4}\\s\\d{1,2}:\\d{2}$", "dd MMMM yyyy HH:mm");
+		put("^\\d{4}\\d{1,2}\\d{1,2}\\d{1,2}\\d{2}$", "yyyyMMddHHmm");
+		put("^\\d{4}\\d{1,2}\\d{1,2}\\d{1,2}\\d{2}\\d{2}$", "yyyyMMddHHmmss");
+		put("^\\d{4}\\d{1,2}\\d{1,2}\\s\\d{1,2}\\d{2}$", "yyyyMMdd HHmm");
+		put("^\\d{4}\\d{1,2}\\d{1,2}\\s\\d{1,2}\\d{2}\\d{2}$", "yyyyMMdd HHmmss");
+		put("^\\d{1,2}-\\d{1,2}-\\d{4}\\s\\d{1,2}:\\d{2}:\\d{2}$", "dd-MM-yyyy HH:mm:ss");
+		put("^\\d{4}-\\d{1,2}-\\d{1,2}\\s\\d{1,2}:\\d{2}:\\d{2}$", "yyyy-MM-dd HH:mm:ss");
+		put("^\\d{1,2}/\\d{1,2}/\\d{4}\\s\\d{1,2}:\\d{2}:\\d{2}$", "MM/dd/yyyy HH:mm:ss");
+		put("^\\d{4}/\\d{1,2}/\\d{1,2}\\s\\d{1,2}:\\d{2}:\\d{2}$", "yyyy/MM/dd HH:mm:ss");
+		put("^\\d{1,2}\\s[a-z]{3}\\s\\d{4}\\s\\d{1,2}:\\d{2}:\\d{2}$", "dd MMM yyyy HH:mm:ss");
+		put("^\\d{1,2}\\s[a-z]{4,}\\s\\d{4}\\s\\d{1,2}:\\d{2}:\\d{2}$", "dd MMMM yyyy HH:mm:ss");
+		put("^\\d{4}-\\d{1,2}-\\d{1,2}\\s[가-힝]{2}\\s\\d{1,2}:\\d{2}:\\d{2}$", "yyyy-MM-dd a KK:mm:ss");
+		put("^\\d{4}/\\d{1,2}/\\d{1,2}\\s[가-힝]{2}\\s\\d{1,2}:\\d{2}:\\d{2}$", "yyyy/MM/dd a KK:mm:ss");    
+	}};    
 
     @Test
     public void testSomting() throws UnknownHostException {
@@ -44,7 +77,7 @@ class UtilBoxTest {
     }
 
     public static void main(String[] args) {
-        System.out.println((long)Integer.MAX_VALUE * 100);
+        System.out.println(date_format_regexps.get("^\\d{4}\\d{1,2}\\d{1,2}\\d{1,2}\\d{2}$"));
     }
 
 }

@@ -43,7 +43,7 @@ public class StreamUtils {
      * @param flushSize
      * @throws IOException
      */
-    public static void saveBinary(String host, InputStream requestStream, long contentLength, Path savePath, int flushSize) throws IOException {
+    public static synchronized void saveBinary(String host, InputStream requestStream, long contentLength, Path savePath, int flushSize) throws IOException {
         Logger logger = LoggerFactory.getLogger(host);
         //String line = readLine(requestStream, StandardCharsets.ISO_8859_1);
         FileOutputStream target = new FileOutputStream(savePath.toFile());
@@ -69,7 +69,7 @@ public class StreamUtils {
      * @param charset
      * @throws IOException
      */
-    public static void saveText(String host, InputStream requestStream, long contentLength, Path savePath, Charset charset) throws IOException {
+    public static synchronized void saveText(String host, InputStream requestStream, long contentLength, Path savePath, Charset charset) throws IOException {
         BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(savePath.toFile()), charset));
         ByteArrayOutputStream line = new ByteArrayOutputStream();
         int total = 0;        
@@ -147,7 +147,7 @@ public class StreamUtils {
      * @param boundary
      * @throws IOException
      */
-    public static List<Path> saveMultiPart(String host, InputStream inputStream, Path savePath, int flushSize, String boundary, Charset charset) throws IOException {
+    public static synchronized List<Path> saveMultiPart(String host, InputStream inputStream, Path savePath, int flushSize, String boundary, Charset charset) throws IOException {
         Logger logger = LoggerFactory.getLogger(host);
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.ISO_8859_1));
         String line = reader.readLine();
@@ -251,7 +251,7 @@ public class StreamUtils {
      * @param boundary
      * @throws WASException
      */
-    private void saveMultiPart1(String host, InputStream inputStream, Path savePath, int bufferSize, String boundary, Charset charset) throws WASException {            
+    private synchronized void saveMultiPart1(String host, InputStream inputStream, Path savePath, int bufferSize, String boundary, Charset charset) throws WASException {            
         if(inputStream != null) {
             InputStreamReader reader = new InputStreamReader(inputStream, StandardCharsets.ISO_8859_1);
             boundary = "--"+boundary;
@@ -317,6 +317,8 @@ public class StreamUtils {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         int read;
         while((read=is.read()) != -1) {
+            if(read ==  0x1A)
+                break;
             baos.write(read);
         }
         return baos.toByteArray();
@@ -340,7 +342,7 @@ public class StreamUtils {
             }
             baos.write(c);
             n = c;
-        } while(c != -1);
+        } while(c != -1 || c == 0x1A);
         return new String(baos.toByteArray(), charset).trim();
     }
 
@@ -352,20 +354,18 @@ public class StreamUtils {
      * @throws IOException
      */
     public static String readLine(InputStream is, Charset charset) throws IOException {
-        int c, n = 0x00;
+        int c;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        do {
-            c = is.read();
+        while((c = is.read()) > 0) {
             //LF : \n
             if(c == 0x0A) {
                 break;
             }
             baos.write(c);
-            n = c;
-        } while(c != -1);
+        } ;
         byte[] data = baos.toByteArray();
-        String line = new String(data, charset);
-        return line.trim().equals("") ? null : line;
+        String line = new String(Arrays.copyOfRange(data, 0, data.length -1), charset);
+        return line.equals("") ? null : line;
     }
 
     /**
@@ -377,8 +377,8 @@ public class StreamUtils {
     public static List<String> readHeaders(InputStream is) throws IOException {
         String allLines = "";
         String line;
-        while((line=readLine(is, StandardCharsets.ISO_8859_1)) != null) {
-            allLines += line + System.lineSeparator();
+        while((line=readLine(is, StandardCharsets.ISO_8859_1)) != null) {            
+            allLines += line + System.lineSeparator();            
         }
         return Arrays.asList(allLines.split(System.lineSeparator())).stream().collect(Collectors.toList());
     }

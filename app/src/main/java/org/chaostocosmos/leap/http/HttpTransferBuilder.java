@@ -68,38 +68,31 @@ public class HttpTransferBuilder {
         /**
          * Hosts, Information configured in config.yml
          */
-        Host<?> host;
-        
+        Host<?> host;        
         /**
          * Client Socket
          */
         Socket socket;
-
         /**
          * InputStream
          */
         InputStream clientInputStream;
-
         /**
          * OutputStream
          */
         OutputStream clientOutputStream;
-
         /**
          * Http request
          */
         Request httpRequestDescriptor;
-
         /**
          * Http response
          */
         Response httpResponseDescriptor;
-
         /**
          * Whether closed
          */
         boolean isClosed = false;
-
         /**
          * Construct with request host and client socket
          * @param hostId
@@ -112,7 +105,6 @@ public class HttpTransferBuilder {
             this.clientInputStream = client.getInputStream();
             this.clientOutputStream = client.getOutputStream();
         }
-
         /**
          * Get requested host
          * @return
@@ -120,7 +112,6 @@ public class HttpTransferBuilder {
         public Host<?> getHost() {
             return this.host;
         }
-
         /**
          * Get client InputStream
          * @return
@@ -128,7 +119,6 @@ public class HttpTransferBuilder {
         public InputStream getClientInputStream() {
             return clientInputStream;
         }
-
         /**
          * Get client OutputStream
          * @return
@@ -136,7 +126,6 @@ public class HttpTransferBuilder {
         public OutputStream getClientOutputStream() {
             return clientOutputStream;
         }
-
         /**
          * Get HttpRequestDescriptor
          * @return
@@ -148,7 +137,6 @@ public class HttpTransferBuilder {
             }
             return this.httpRequestDescriptor;
         }
-
         /**
          * Get HttpResponseDescriptor
          * @return
@@ -169,7 +157,6 @@ public class HttpTransferBuilder {
             }
             return this.httpResponseDescriptor;
         }
-
         /**
          * Get HttpRequestDescriptor object
          * @return
@@ -178,7 +165,6 @@ public class HttpTransferBuilder {
         private Request parseRequest() throws IOException {
             return HttpParser.buildRequestParser().parseRequest(clientInputStream);
         }
-
         /**
          * Send response to client by HttpResponseDescriptor object
          * @param response
@@ -187,7 +173,6 @@ public class HttpTransferBuilder {
         public void sendResponse(Response response) throws IOException {
             sendResponse(response.getHostId(), response.getResponseCode(), response.getHeaders(), response.getBody());
         }
-
         /**
          * Send response to client by requested host, status code, reponse headers, body object
          * @param hostId
@@ -238,7 +223,7 @@ public class HttpTransferBuilder {
                 resStr.append(e.getKey()+": "+e.getValue()+System.lineSeparator());
             }
             LoggerFactory.getLogger(hostId).debug(resStr.substring(0, resStr.length()-1));
-            this.clientOutputStream.write("\r\n".getBytes());
+            this.clientOutputStream.write("\r\n".getBytes()); 
             this.clientOutputStream.flush(); 
             if(body instanceof byte[]) {
                 this.clientOutputStream.write((byte[]) body);
@@ -255,7 +240,6 @@ public class HttpTransferBuilder {
             }
             this.clientOutputStream.flush();
         }
-
         /**
          * Write resource to OutputStream for client
          * @param resource
@@ -272,7 +256,6 @@ public class HttpTransferBuilder {
             }
             in.close();
         }
-
         /**
          * Close client connection
          * @throws IOException

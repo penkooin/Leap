@@ -14,22 +14,18 @@ public class ServiceMethodBean {
      * Service object
      */
     protected ServiceModel service;
-
     /**
      * Service method
      */
     protected Method serviceMethod;
-
     /**
      * Service filter for pre process
      */
     protected List<IFilter> preFilters;
-
     /**
      * Service filter for post process
      */
     protected List<IFilter> postFilters;
-
     /**
      * Constructor with attributes
      * @param service
