@@ -12,7 +12,6 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -346,7 +345,7 @@ public class LeapClient {
      * @return
      * @throws IOException
      */
-    public LeapClient get(String contextPath, Map<String, String> contextParams, Path responseContentPath) throws IOException {
+    public LeapClient get(String contextPath, Map<String, String> contextParams) throws IOException {
         this.requestHeaders.put("Host", this.host+":"+this.port);
         connect();
         writeContextParams(REQUEST.GET, contextPath, contextParams);
@@ -364,7 +363,7 @@ public class LeapClient {
      * @return
      * @throws IOException
      */
-    public LeapClient post(String contextPath, Map<String, String> contextParams, Map<String, FormData<?>> formDataMap, Path responseContentPath) throws IOException {
+    public LeapClient post(String contextPath, Map<String, String> contextParams, Map<String, FormData<?>> formDataMap) throws IOException {
         connect();
         writeContextParams(REQUEST.POST, contextPath, contextParams);
 
@@ -380,8 +379,8 @@ public class LeapClient {
     }    
 
     public static void main(String[] args) throws UnknownHostException, IOException {
-        Map<String, FormData<?>> map = Map.of("code", new FormData<File>(MIME.APPLICATION_ZIP, Paths.get("./code.zip").toFile()));
-        LeapClient client = LeapClient.build("localhost", 8080).post("/aaa", null, map, Paths.get("./response.html"));       
+        //Map<String, FormData<?>> map = Map.of("code", new FormData<File>(MIME.APPLICATION_ZIP, Paths.get("./code.zip").toFile()));
+        //LeapClient client = LeapClient.build("localhost", 8080).post("/aaa", null, map, Paths.get("./response.html"));       
         System.out.println(new String(client.getResponseMsg()));        
     }
 }

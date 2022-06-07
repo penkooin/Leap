@@ -2,7 +2,10 @@ package org.chaostocosmos.leap.http.resources;
 
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -11,14 +14,18 @@ import java.util.concurrent.TimeUnit;
 
 import javax.transaction.NotSupportedException;
 
-import org.chaostocosmos.chaosgraph.NotSuppotedEncodingFormatException;
 import org.chaostocosmos.leap.http.LeapApp;
+import org.chaostocosmos.leap.http.client.FormData;
+import org.chaostocosmos.leap.http.client.LeapClient;
+import org.chaostocosmos.leap.http.client.MIME;
 import org.chaostocosmos.leap.http.commons.Constants;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.commons.UNIT;
 import org.chaostocosmos.leap.http.context.Context;
+import org.chaostocosmos.leap.http.context.Metadata;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import ch.qos.logback.classic.Logger;
 
@@ -27,7 +34,7 @@ import ch.qos.logback.classic.Logger;
  * 
  * @author 9ins
  */
-public class ResourceMonitor {
+public class ResourceMonitor extends Metadata<Map<String, Object>> {
     /**
      * ThreadPool
      */
@@ -56,7 +63,10 @@ public class ResourceMonitor {
      * Whether daemon thread
      */
     private boolean isDaemon;
-    private Gson gson = new Gson();
+    /**
+     * Gson parser
+     */
+    private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
     /**
      * Resource monitor instance
      */
@@ -64,8 +74,9 @@ public class ResourceMonitor {
     /**
      * Get resource monitor
      * @return
+     * @throws NotSupportedException
      */
-    public static ResourceMonitor get() {
+    public static ResourceMonitor get() throws NotSupportedException {
         if(resourceMonitor == null) {
             resourceMonitor = new ResourceMonitor();
         }                
@@ -73,8 +84,95 @@ public class ResourceMonitor {
     }
     /**
      * Default constructor
+     * @throws NotSupportedException
      */
-    private ResourceMonitor() {
+    private ResourceMonitor() throws NotSupportedException {
+        super(new HashMap<>() {{ 
+            put("CPU", new HashMap<String, Object>() {{
+                put("GRAPH", "LINE");
+                put("INTERPOLATE", "SPLINE");
+                put("WIDTH", 800);
+                put("HEIGHT", 600);
+                put("XINDEX", Arrays.asList("0", "", "2", "", "3", "", "4", "", "5", "", "6", "", "7", "", "8", "", "9", "", "10"));
+                put("YINDEX", Arrays.asList(50, 80, 500));
+                put("ELEMENTS", new HashMap<String, Object>() {{
+                    put("PROCESS", new HashMap<String, Object>() {{ 
+                        put("ELEMENT", "Leap CPU load");
+                        put("LABEL", "Leap CPU load");
+                        put("COLOR", Arrays.asList(180,130,130));
+                        put("VALUES", new ArrayList());
+                    }});
+                    put("SYSTEM", new HashMap<String, Object>() {{ 
+                        put("ELEMENT", "System CPU load");
+                        put("LABEL", "System CPU load");
+                        put("COLOR", Arrays.asList(180,180,140));
+                        put("VALUES", new ArrayList());
+                    }});                  
+                }});
+            }});            
+            // put("MEMORY", new HashMap<String, Object>() {{
+            //     put("GRAPH", "AREA");
+            //     put("INTERPOLATE", "SPLINE");
+            //     put("WIDTH", 800);
+            //     put("HEIGHT", 600);
+            //     put("XINDEX", Arrays.asList("0", "", "2", "", "3", "", "4", "", "5", "", "6", "", "7", "", "8", "", "9", "", "10"));
+            //     put("YINDEX", Arrays.asList(1024*1000*500, 1024*1000*1000, 1024*1000*5000, 1024*1000*10000, 1024*1000*15000, 1024*1000*30000));
+            //     put("ELEMENTS", new HashMap<String, Object>() {{
+            //         put("PHYSICAL", new HashMap<String, Object>() {{ 
+            //             put("ELEMENT", "Physical memory");
+            //             put("LABEL", "Physical memory");
+            //             put("COLOR", Arrays.asList(180,130,130));
+            //             put("VALUES", new ArrayList());
+            //         }});
+            //         put("USED", new HashMap<String, Object>() {{ 
+            //             put("ELEMENT", "Physical used");
+            //             put("LABEL", "Physical used");
+            //             put("COLOR", Arrays.asList(150,200,158));
+            //             put("VALUES", new ArrayList());
+            //         }});
+            //         put("PROCESS", new HashMap<String, Object>() {{ 
+            //             put("ELEMENT", "Process used");
+            //             put("LABEL", "Physical used");
+            //             put("COLOR", Arrays.asList(150,200,158));
+            //             put("VALUES", new ArrayList());
+            //         }});
+            //     }});
+            // }});            
+            // put("THREAD", new HashMap<String, Object>() {{
+            //     put("GRAPH", "LINE");
+            //     put("INTERPOLATE", "SPLINE");
+            //     put("WIDTH", 800);
+            //     put("HEIGHT", 600);
+            //     put("XINDEX", Arrays.asList("0", "", "2", "", "3", "", "4", "", "5", "", "6", "", "7", "", "8", "", "9", "", "10"));
+            //     put("YINDEX", Arrays.asList(50, 0));
+            //     put("ELEMENTS", new HashMap<String, Object>() {{
+            //         put("MAX", new HashMap<String, Object>() {{ 
+            //             put("ELEMENT", "Leap thread max");
+            //             put("LABEL", "max");
+            //             put("COLOR", Arrays.asList(180,130,130));
+            //             put("VALUES", new ArrayList());
+            //         }});
+            //         put("CORE", new HashMap<String, Object>() {{ 
+            //             put("ELEMENT", "Leap thread core");
+            //             put("LABEL", "core");
+            //             put("COLOR", Arrays.asList(150,200,158));
+            //             put("VALUES", new ArrayList());
+            //         }});
+            //         put("ACTIVE", new HashMap<String, Object>() {{ 
+            //             put("ELEMENT", "Leap thread active");
+            //             put("LABEL", "active");
+            //             put("COLOR", Arrays.asList(150,130,158));
+            //             put("VALUES", new ArrayList());
+            //         }});
+            //         put("QUEUED", new HashMap<String, Object>() {{ 
+            //             put("ELEMENT", "Leap thread queued");
+            //             put("LABEL", "queued");
+            //             put("COLOR", Arrays.asList(130,180,110));
+            //             put("VALUES", new ArrayList());
+            //         }});
+            //     }});
+            // }});            
+        }});
         this.threadpool = LeapApp.getThreadPool();
         this.unit = Context.getServer().getMonitoringUnit();
         this.fractionPoint = Constants.DEFAULT_FRACTION_POINT;
@@ -112,8 +210,9 @@ public class ResourceMonitor {
                         + "  Process CPU load: "+getProcessCpuLoad()+" "+UNIT.PCT.name()
                         + "  Process CPU time: "+getProcessCpuTime()+" "+UNIT.SE.name()
                         + "  System CPU load: "+getSystemCpuLoad()+" "+UNIT.PCT.name()
-                    );    
-                    requestMonitoringImage();
+                    );             
+                    setProbingValues();           
+                    requestMonitorings();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -128,51 +227,25 @@ public class ResourceMonitor {
             this.timer.cancel();
         }
     }
-    public void requestMonitoringImage() throws IOException, NotSuppotedEncodingFormatException {
-        Map<String, Object> montoringMap = new HashMap<>() {{
-            put("CPU", new HashMap<String, Object>() {{
-                put("GRAPH", "LINE");
-                put("INTERPOLATE", "SPLINE");
-                put("WIDTH", 800);
-                put("HEIGHT", 600);
-                put("XINDEX", new String[] {"0", "", "2", "", "3", "", "4", "", "5", "", "6", "", "7", "", "8", "", "9", "", "10"});
-                put("YINDEX", new Double[]{50, 80, 500});
-                put("ELEMENTS", new Map<String, Object>[] {
-                    new Map<String, Object>() {{
-                        put("ELEMENT", )
-                    }}
-                });                    
-            }});            
-        }}
 
-        Map<String, Object> memoryMap = new HashMap<>();
-        Map<String, Object> threadMap = new HashMap<>();
-        GraphElement ge = this.threadPoolGe.getGraphElement("Core");
-        List<Double> values = ge.getValues();
-        if(values.size() > 10) {
-            values.remove(0);
-        }
-        values.add((double)getCorePoolSize());
-        ge = this.threadPoolGe.getGraphElement("Max");
-        values  = ge.getValues();
-        if(values.size() > 10) {
-            values.remove(0);
-        }
-        values.add((double)getMaximumPoolSize());
-        ge = this.threadPoolGe.getGraphElement("Active");
-        values  = ge.getValues();
-        if(values.size() > 10) {
-            values.remove(0);
-        }
-        values.add((double)getActiveCount());
-        ge = this.threadPoolGe.getGraphElement("Queued");
-        values  = ge.getValues();
-        if(values.size() > 10) {
-            values.remove(0);
-        }
-        values.add((double)getQueuedTaskCount());
-        GraphUtility.saveBufferedImage(this.threadGraph.getBufferedImage(), Context.getHost("leap").getStatic().resolve("img").resolve("threadpool.png").toFile(), CODEC.PNG);
+    private void setProbingValues() {
+        List<Object> values = super.getValue("CPU.ELEMENTS.PROCESS.VALUES");
+        if(values.size() > 20) values.remove(0);
+        values.add(getProcessCpuLoad());
+        values = super.getValue("CPU.ELEMENTS.SYSTEM.VALUES");
+        if(values.size() > 20) values.remove(0);
+        values.add(getSystemCpuLoad());
     }
+
+    private void requestMonitorings() throws IOException {
+        String monitorJson = this.gson.toJson(super.getMeta(), Map.class);
+        System.out.println(monitorJson);
+        Map<String, FormData<?>> formDatas = Map.of("monitor", new FormData<byte[]>(MIME.TEXT_JSON, monitorJson.getBytes()));
+        LeapClient.build(Context.getHosts().getDefaultHost().getHost(), Context.getHosts().getDefaultHost().getPort())
+                  .addHeader("charset", "utf-8")
+                  .post("/monitor/chart/image", null, formDatas);
+    }
+    
     public synchronized void saveMemoryImage() {
 
     }
@@ -295,6 +368,20 @@ public class ResourceMonitor {
      */
     public double getTotalPhysicalMemory() throws NotSupportedException {
         return unit.get(getTotalPhysicalMemoryBytes(), fractionPoint);
+    }
+    /**
+     * Get total physical used memory bytes
+     * @return
+     */
+    public long getTotalPhysicalUsedMemoryBytes() {
+        return getTotalPhysicalMemoryBytes() - getFreePhysicalMemoryBytes();
+    }
+    /**
+     * Get total physical used memory
+     * @return
+     */
+    public double getTotalPhysicalUsedMemory() {
+        return unit.get(getTotalPhysicalUsedMemoryBytes(), fractionPoint);
     }
     /**
      * Get free physical memory bytes

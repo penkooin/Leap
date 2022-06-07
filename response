@@ -1,0 +1,18 @@
+    <head>
+        <title>Welcome Leap - localhost</title>
+        <meta charset="utf-8">
+        <title>Leap?</title>
+        <link rel="stylesheet" href="/css/style.css">
+        <script>
+            
+        </script>
+    </head>
+    <body class="content">
+        
+<p ><a href="/"><img style="vertical-align:bottom" src="/img/logo32.png"/></a><span class="font-x-large font-bold"> Error code: 404</span></p> 
+<p class="font-large"><span class="font-bold">Resource Not Found.   - HTTP</span></p>
+<p class="font-medium">Message: </p>  
+<p class="font-small">Resource Not Found.   /aaa</p>    
+
+    </body>
+</html>

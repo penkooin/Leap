@@ -4,6 +4,8 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import javax.transaction.NotSupportedException;
+
 import org.junit.Before;
 import org.junit.Test;    
     
@@ -13,7 +15,7 @@ public class ResourceMonitorTest {
     ResourceMonitor resourceMonitor;
 
     @Before
-    public void setup(){
+    public void setup() throws NotSupportedException{
         this.threadpool = new ThreadPoolExecutor(30, 50, 10, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());        
         this.resourceMonitor = ResourceMonitor.get();
     }
@@ -23,7 +25,7 @@ public class ResourceMonitorTest {
         this.resourceMonitor.start();                
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NotSupportedException {
         ResourceMonitorTest test =  new ResourceMonitorTest();
         test.setup();
         test.test();

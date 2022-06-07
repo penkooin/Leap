@@ -156,8 +156,8 @@ public class LeapApp {
         logger.info("====================================================================================================");
         logger.info("ThreadPool initialized - CORE: "+Context.getServer().getThreadPoolCoreSize()+"   MAX: "+Context.getServer().getThreadPoolMaxSize()+"   KEEP-ALIVE WHEN IDLE(seconds): "+Context.getServer().getThreadPoolKeepAlive());
 
-        //resourceMonitor = ResourceMonitor.get();
-        //resourceMonitor.start();
+        resourceMonitor = ResourceMonitor.get();
+        resourceMonitor.start();
 
         //set verbose option to STD IO
         String optionV = cmdLine.getOptionValue("v");
