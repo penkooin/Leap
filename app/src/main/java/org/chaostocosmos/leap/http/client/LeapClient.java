@@ -12,6 +12,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -200,21 +201,6 @@ public class LeapClient {
         return this.socket;
     }
     /**
-     * Close stream and socket
-     * @throws IOException
-     */
-    private void close() throws IOException {
-        if(this.outputStream != null) {
-            this.outputStream.close();
-        }
-        if(this.inputStream != null) {
-            this.inputStream.close();
-        }
-        if(this.socket != null) {
-            this.socket.close();
-        }
-    }
-    /**
      * Write context with params
      * @param contextPath
      * @param contextParams
@@ -290,8 +276,11 @@ public class LeapClient {
      * @throws IOException
      */
     @SuppressWarnings("unchecked")
-    private byte[] processResponse() throws IOException {
-        byte[] bytes = readLine(this.inputStream);
+    private byte[] processResponse(InputStream is) throws IOException {
+        byte[] bytes = readLine(is);
+        if(bytes == null) {
+            return null;
+        }
         String line = new String(bytes, StandardCharsets.ISO_8859_1);
         List<String> list = Arrays.asList(line.split(" "));
         String protocol = list.get(0).trim();
@@ -299,7 +288,7 @@ public class LeapClient {
         this.responseMsg = list.get(2);        
         this.responseHeaders = new HashMap<>();
         int contentLength = 0;
-        while(!(line = new String(readLine(this.inputStream)).trim()).equals("")) {
+        while(!(line = new String(readLine(is)).trim()).equals("")) {
             System.out.println(line);
             String key = line.substring(0, line.indexOf(":")).trim();
             List<String> values = Arrays.asList(line.substring(line.indexOf(":")+1).trim().split(";")).stream().map(t -> t.trim()).collect(Collectors.toList());
@@ -313,7 +302,7 @@ public class LeapClient {
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             byte[] buffer = new byte[this.receiveBufferSize];
             int len;
-            while((len = this.inputStream.read(buffer)) > 0) {
+            while((len = is.read(buffer)) > 0) {
                 out.write(buffer, 0, len);
             }
             this.responseBody = out.toByteArray();
@@ -350,8 +339,7 @@ public class LeapClient {
         connect();
         writeContextParams(REQUEST.GET, contextPath, contextParams);
         writeHeaders(this.requestHeaders);
-        processResponse();
-        close();        
+        processResponse(this.inputStream);
         return client;
     }
     /**
@@ -368,19 +356,24 @@ public class LeapClient {
         writeContextParams(REQUEST.POST, contextPath, contextParams);
 
         long contentLength = formDataMap.values().stream().mapToInt(f -> f.getContentLength()).sum();
+        System.out.println(contentLength+"))))))))))))))))))))))))))))");
         this.requestHeaders.put("Content-Type", "multipart/form-data; boundary=--------------------------LeapClient");
         this.requestHeaders.put("Content-Length", contentLength);
 
         writeHeaders(this.requestHeaders);
         writeFormData(formDataMap);
-        processResponse();
-        close();
+        processResponse(this.inputStream);
+        this.outputStream.close();
+        this.inputStream.close();
+        this.socket.close();
         return client;
     }    
 
     public static void main(String[] args) throws UnknownHostException, IOException {
-        //Map<String, FormData<?>> map = Map.of("code", new FormData<File>(MIME.APPLICATION_ZIP, Paths.get("./code.zip").toFile()));
-        //LeapClient client = LeapClient.build("localhost", 8080).post("/aaa", null, map, Paths.get("./response.html"));       
+        Map<String, FormData<?>> map = Map.of("code", new FormData<File>(MIME.APPLICATION_ZIP, Paths.get("./LICENSE").toFile()));
+        LeapClient client = LeapClient.build("localhost", 8080)
+                                      .addHeader("charset", "utf-8")
+                                      .post("/monitor/chart/image", null, map);       
         System.out.println(new String(client.getResponseMsg()));        
     }
 }

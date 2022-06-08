@@ -47,6 +47,7 @@ public class FormData <T> {
         } else {
             throw new IllegalArgumentException("Not supported content type: "+this.content.getClass().getName());
         }
+        this.contentLength = this.contentBytes.length;
     }    
     /**
      * Get content type

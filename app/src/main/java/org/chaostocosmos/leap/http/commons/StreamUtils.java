@@ -321,6 +321,7 @@ public class StreamUtils {
                 break;
             baos.write(read);
         }
+        System.out.println(read+"     &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
         return baos.toByteArray();
     }
     

@@ -24,6 +24,7 @@ import org.chaostocosmos.leap.http.commons.UNIT;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Metadata;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -68,6 +69,10 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
      */
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
     /**
+     * Jackson Json 
+     */
+    private final ObjectMapper mapper = new ObjectMapper();
+    /**
      * Resource monitor instance
      */
     private static ResourceMonitor resourceMonitor = null;
@@ -87,8 +92,24 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
      * @throws NotSupportedException
      */
     private ResourceMonitor() throws NotSupportedException {
-        super(new HashMap<>() {{ 
+        super(buildMonitorSchema());
+        this.threadpool = LeapApp.getThreadPool();
+        this.unit = Context.getServer().getMonitoringUnit();
+        this.fractionPoint = Constants.DEFAULT_FRACTION_POINT;
+        this.interval = Context.getServer().getMonitoringInterval();
+        this.logger = LoggerFactory.createLoggerFor("monitoring", 
+                                    LeapApp.getHomePath().resolve(Context.getServer().getMonitoringLogs()).normalize().toString(), 
+                                    Context.getServer().getMonitoringLogLevel());        
+    }
+    /**
+     * Build monitor schema Map
+     * @return
+     */
+    private static Map<String, Object> buildMonitorSchema() {
+        return new HashMap<>() {{ 
             put("CPU", new HashMap<String, Object>() {{
+                put("CODEC", "PNG");
+                put("SAVE_PATH", "/config/monitor");
                 put("GRAPH", "LINE");
                 put("INTERPOLATE", "SPLINE");
                 put("WIDTH", 800);
@@ -108,78 +129,75 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
                         put("COLOR", Arrays.asList(180,180,140));
                         put("VALUES", new ArrayList());
                     }});                  
+                }});                
+            }});            
+            put("MEMORY", new HashMap<String, Object>() {{
+                put("CODEC", "PNG");
+                put("SAVE_PATH", "/config/monitor");
+                put("GRAPH", "AREA");
+                put("INTERPOLATE", "SPLINE");
+                put("WIDTH", 800);
+                put("HEIGHT", 600);
+                put("XINDEX", Arrays.asList("0", "", "2", "", "3", "", "4", "", "5", "", "6", "", "7", "", "8", "", "9", "", "10"));
+                put("YINDEX", Arrays.asList(1024*1000*500, 1024*1000*1000, 1024*1000*5000, 1024*1000*10000, 1024*1000*15000, 1024*1000*30000));
+                put("ELEMENTS", new HashMap<String, Object>() {{
+                    put("PHYSICAL", new HashMap<String, Object>() {{ 
+                        put("ELEMENT", "Physical memory");
+                        put("LABEL", "Physical memory");
+                        put("COLOR", Arrays.asList(180,130,130));
+                        put("VALUES", new ArrayList());
+                    }});
+                    put("USED", new HashMap<String, Object>() {{ 
+                        put("ELEMENT", "Physical used");
+                        put("LABEL", "Physical used");
+                        put("COLOR", Arrays.asList(150,200,158));
+                        put("VALUES", new ArrayList());
+                    }});
+                    put("PROCESS", new HashMap<String, Object>() {{ 
+                        put("ELEMENT", "Process used");
+                        put("LABEL", "Physical used");
+                        put("COLOR", Arrays.asList(150,200,158));
+                        put("VALUES", new ArrayList());
+                    }});
                 }});
             }});            
-            // put("MEMORY", new HashMap<String, Object>() {{
-            //     put("GRAPH", "AREA");
-            //     put("INTERPOLATE", "SPLINE");
-            //     put("WIDTH", 800);
-            //     put("HEIGHT", 600);
-            //     put("XINDEX", Arrays.asList("0", "", "2", "", "3", "", "4", "", "5", "", "6", "", "7", "", "8", "", "9", "", "10"));
-            //     put("YINDEX", Arrays.asList(1024*1000*500, 1024*1000*1000, 1024*1000*5000, 1024*1000*10000, 1024*1000*15000, 1024*1000*30000));
-            //     put("ELEMENTS", new HashMap<String, Object>() {{
-            //         put("PHYSICAL", new HashMap<String, Object>() {{ 
-            //             put("ELEMENT", "Physical memory");
-            //             put("LABEL", "Physical memory");
-            //             put("COLOR", Arrays.asList(180,130,130));
-            //             put("VALUES", new ArrayList());
-            //         }});
-            //         put("USED", new HashMap<String, Object>() {{ 
-            //             put("ELEMENT", "Physical used");
-            //             put("LABEL", "Physical used");
-            //             put("COLOR", Arrays.asList(150,200,158));
-            //             put("VALUES", new ArrayList());
-            //         }});
-            //         put("PROCESS", new HashMap<String, Object>() {{ 
-            //             put("ELEMENT", "Process used");
-            //             put("LABEL", "Physical used");
-            //             put("COLOR", Arrays.asList(150,200,158));
-            //             put("VALUES", new ArrayList());
-            //         }});
-            //     }});
-            // }});            
-            // put("THREAD", new HashMap<String, Object>() {{
-            //     put("GRAPH", "LINE");
-            //     put("INTERPOLATE", "SPLINE");
-            //     put("WIDTH", 800);
-            //     put("HEIGHT", 600);
-            //     put("XINDEX", Arrays.asList("0", "", "2", "", "3", "", "4", "", "5", "", "6", "", "7", "", "8", "", "9", "", "10"));
-            //     put("YINDEX", Arrays.asList(50, 0));
-            //     put("ELEMENTS", new HashMap<String, Object>() {{
-            //         put("MAX", new HashMap<String, Object>() {{ 
-            //             put("ELEMENT", "Leap thread max");
-            //             put("LABEL", "max");
-            //             put("COLOR", Arrays.asList(180,130,130));
-            //             put("VALUES", new ArrayList());
-            //         }});
-            //         put("CORE", new HashMap<String, Object>() {{ 
-            //             put("ELEMENT", "Leap thread core");
-            //             put("LABEL", "core");
-            //             put("COLOR", Arrays.asList(150,200,158));
-            //             put("VALUES", new ArrayList());
-            //         }});
-            //         put("ACTIVE", new HashMap<String, Object>() {{ 
-            //             put("ELEMENT", "Leap thread active");
-            //             put("LABEL", "active");
-            //             put("COLOR", Arrays.asList(150,130,158));
-            //             put("VALUES", new ArrayList());
-            //         }});
-            //         put("QUEUED", new HashMap<String, Object>() {{ 
-            //             put("ELEMENT", "Leap thread queued");
-            //             put("LABEL", "queued");
-            //             put("COLOR", Arrays.asList(130,180,110));
-            //             put("VALUES", new ArrayList());
-            //         }});
-            //     }});
-            // }});            
-        }});
-        this.threadpool = LeapApp.getThreadPool();
-        this.unit = Context.getServer().getMonitoringUnit();
-        this.fractionPoint = Constants.DEFAULT_FRACTION_POINT;
-        this.interval = Context.getServer().getMonitoringInterval();
-        this.logger = LoggerFactory.createLoggerFor("monitoring", 
-                                    LeapApp.getHomePath().resolve(Context.getServer().getMonitoringLogs()).normalize().toString(), 
-                                    Context.getServer().getMonitoringLogLevel());        
+            put("THREAD", new HashMap<String, Object>() {{
+                put("CODEC", "PNG");
+                put("SAVE_PATH", "/config/monitor");
+                put("GRAPH", "LINE");
+                put("INTERPOLATE", "SPLINE");
+                put("WIDTH", 800);
+                put("HEIGHT", 600);
+                put("XINDEX", Arrays.asList("0", "", "2", "", "3", "", "4", "", "5", "", "6", "", "7", "", "8", "", "9", "", "10"));
+                put("YINDEX", Arrays.asList(50, 0));
+                put("ELEMENTS", new HashMap<String, Object>() {{
+                    put("MAX", new HashMap<String, Object>() {{ 
+                        put("ELEMENT", "Leap thread max");
+                        put("LABEL", "max");
+                        put("COLOR", Arrays.asList(180,130,130));
+                        put("VALUES", new ArrayList());
+                    }});
+                    put("CORE", new HashMap<String, Object>() {{ 
+                        put("ELEMENT", "Leap thread core");
+                        put("LABEL", "core");
+                        put("COLOR", Arrays.asList(150,200,158));
+                        put("VALUES", new ArrayList());
+                    }});
+                    put("ACTIVE", new HashMap<String, Object>() {{ 
+                        put("ELEMENT", "Leap thread active");
+                        put("LABEL", "active");
+                        put("COLOR", Arrays.asList(150,130,158));
+                        put("VALUES", new ArrayList());
+                    }});
+                    put("QUEUED", new HashMap<String, Object>() {{ 
+                        put("ELEMENT", "Leap thread queued");
+                        put("LABEL", "queued");
+                        put("COLOR", Arrays.asList(130,180,110));
+                        put("VALUES", new ArrayList());
+                    }});
+                }});
+            }});            
+        }};        
     }
     /**
      * Start monitor timer
@@ -212,7 +230,7 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
                         + "  System CPU load: "+getSystemCpuLoad()+" "+UNIT.PCT.name()
                     );             
                     setProbingValues();           
-                    requestMonitorings();
+                    //requestMonitorings();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -238,11 +256,11 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
     }
 
     private void requestMonitorings() throws IOException {
-        String monitorJson = this.gson.toJson(super.getMeta(), Map.class);
-        System.out.println(monitorJson);
+        String monitorJson = this.mapper.writerWithDefaultPrettyPrinter().writeValueAsString(super.getMeta());
         Map<String, FormData<?>> formDatas = Map.of("monitor", new FormData<byte[]>(MIME.TEXT_JSON, monitorJson.getBytes()));
         LeapClient.build(Context.getHosts().getDefaultHost().getHost(), Context.getHosts().getDefaultHost().getPort())
                   .addHeader("charset", "utf-8")
+                  .addHeader("body-in-stream", false)
                   .post("/monitor/chart/image", null, formDatas);
     }
     

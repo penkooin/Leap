@@ -129,9 +129,9 @@ public class HttpTransferBuilder {
         /**
          * Get HttpRequestDescriptor
          * @return
-         * @throws IOException
+         * @throws Exception
          */
-        public Request getRequest() throws IOException {
+        public Request getRequest() throws Exception {
             if(this.httpRequestDescriptor == null) {
                 this.httpRequestDescriptor = parseRequest();
             }
@@ -160,9 +160,9 @@ public class HttpTransferBuilder {
         /**
          * Get HttpRequestDescriptor object
          * @return
-         * @throws IOException
+         * @throws Exception
          */
-        private Request parseRequest() throws IOException {
+        private Request parseRequest() throws Exception {
             return HttpParser.buildRequestParser().parseRequest(clientInputStream);
         }
         /**
@@ -170,7 +170,7 @@ public class HttpTransferBuilder {
          * @param response
          * @throws IOException
          */
-        public void sendResponse(Response response) throws IOException {
+        public void sendResponse(Response response) throws Exception {
             sendResponse(response.getHostId(), response.getResponseCode(), response.getHeaders(), response.getBody());
         }
         /**

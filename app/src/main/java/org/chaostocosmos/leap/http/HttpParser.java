@@ -86,7 +86,7 @@ public class HttpParser {
          * @throws IOException
          * @throws WASException
          */
-        public Request parseRequest(InputStream in) throws IOException {
+        public Request parseRequest(InputStream in) throws Exception {
             // BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
             // String line;
             // while((line = reader.readLine()) != null) {
@@ -151,21 +151,24 @@ public class HttpParser {
             Charset charset = Context.getHosts().charset(hostId);
             LoggerFactory.getLogger(hostId).debug(debug);
             BodyPart bodyPart = null;
+            MIME_TYPE mimeType = null;
             if(contentType != null) {
-                MIME_TYPE mimeType = contentType.indexOf(";") != -1 ? MIME_TYPE.mimeType(contentType.substring(0, contentType.indexOf(";"))) : MIME_TYPE.mimeType(contentType);
+                mimeType = contentType.indexOf(";") != -1 ? MIME_TYPE.mimeType(contentType.substring(0, contentType.indexOf(";"))) : MIME_TYPE.mimeType(contentType);
                 String boundary = contentType != null ? contentType.substring(contentType.indexOf(";")+1) : null;
                 LoggerFactory.getLogger(hostId).debug("Context params: "+contextParam.toString());
                 LoggerFactory.getLogger(hostId).debug("Mime Type: "+mimeType);
+                String bodyInStream = headerMap.get("body-in-stream");
+                boolean preLoadBody = bodyInStream == null ? false : !Boolean.valueOf(bodyInStream);
                 if(contentLength > 0) {
                     switch(mimeType) {
                         case MULTIPART_FORM_DATA:
                             String[] splited = contentType.split("\\;");
                             contentType = splited[0].trim();
-                            boundary = splited[1].substring(splited[1].indexOf("=") + 1).trim();
-                            bodyPart = new MultiPart(hostId, mimeType, boundary, contentLength, in, false, charset);
+                            boundary = splited[1].substring(splited[1].indexOf("=") + 1).trim();                            
+                            bodyPart = new MultiPart(hostId, mimeType, boundary, contentLength, in, preLoadBody, charset);
                             break;
                         case APPLICATION_X_WWW_FORM_URLENCODED:
-                            bodyPart = new KeyValuePart(hostId, mimeType, contentLength, in, false, charset);
+                            bodyPart = new KeyValuePart(hostId, mimeType, contentLength, in, preLoadBody, charset);
                             break;
                         case IMAGE_GIF:
                         case IMAGE_PNG:
@@ -194,7 +197,7 @@ public class HttpParser {
                     }
                 }
             }
-            Request desc = new Request(hostId, host, protocol, requestType, headerMap, contentType, new byte[0], contextPath, contextParam, bodyPart, contentLength);
+            Request desc = new Request(hostId, host, protocol, requestType, headerMap, mimeType, null, contextPath, contextParam, bodyPart, contentLength);
             return desc;
         }
     }
@@ -209,9 +212,9 @@ public class HttpParser {
          * @throws WASException
          */
         public Response buildResponse(final Request request, 
-                                                    final int statusCode, 
-                                                    final Object body, 
-                                                    final Map<String, List<Object>> headers) {
+                                      final int statusCode, 
+                                      final Object body, 
+                                      final Map<String, List<Object>> headers) {
             return new Response(request, statusCode, body, headers);
         }
     }    

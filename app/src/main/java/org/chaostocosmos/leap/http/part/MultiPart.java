@@ -20,7 +20,6 @@ import org.chaostocosmos.leap.http.enums.MIME_TYPE;
  * @author 9ins
  */
 public class MultiPart extends BodyPart {
-
     /**
      * Multipart saved files
      */
@@ -29,7 +28,6 @@ public class MultiPart extends BodyPart {
      * Multipart boundary
      */
     String boundary;
-
     /**
      * Constructor of Multipart
      * @param host
@@ -46,7 +44,6 @@ public class MultiPart extends BodyPart {
         this.filePaths = new ArrayList<>();
         this.boundary = boundary;
     }
-
     /**
      * Get contents Map
      * @return
@@ -55,7 +52,6 @@ public class MultiPart extends BodyPart {
     public Map<String, byte[]> getMultiPartContents() throws IOException {
         return StreamUtils.getMultiPartContents(this.host, this.requestStream, this.boundary, super.charset);
     }
-
     /**
      * Get saved file Paths
      * @return
@@ -63,7 +59,6 @@ public class MultiPart extends BodyPart {
     public List<Path> getFilePaths() {
         return this.filePaths;
     }
-
     /**
      * Get boundary String
      * @return
@@ -71,14 +66,13 @@ public class MultiPart extends BodyPart {
     public String getBoundary() {
         return this.boundary;
     }
-
     /**
      * Delete all Multi-Part files
      */
     public void deleteFiles() {
         this.filePaths.stream().forEach(p -> p.toFile().delete());
     }
-
+    
     @Override
     public void save(Path targetPath) throws IOException {
         if(super.isLoadedBody) {

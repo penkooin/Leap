@@ -7,6 +7,7 @@ import java.net.URL;
 import java.util.Map;
 
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
+import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
 import org.chaostocosmos.leap.http.part.BodyPart;
 
@@ -23,7 +24,7 @@ public class Request {
     final private REQUEST_TYPE requestType;
     final private String hostId;
     final private String requestedHost;
-    final private String contentType;
+    final private MIME_TYPE contentType;
     final private String httpVersion;
     final private Map<String, String> reqHeader;
     final private byte[] reqBody; 
@@ -53,7 +54,7 @@ public class Request {
             String httpVersion, 
             REQUEST_TYPE requestType, 
             Map<String,String> reqHeader, 
-            String contentType,
+            MIME_TYPE contentType,
             byte[] reqBody, 
             String contextPath, 
             Map<String,String> contextParam,
@@ -93,9 +94,10 @@ public class Request {
         return this.reqHeader;
     }
 
-    public final String getContentType() {
+    public final MIME_TYPE getContentType() {
         return this.contentType;
     }
+
     public final byte[] getReqBody() {
         return this.reqBody;
     }

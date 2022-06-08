@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.commons.Constants;
 import org.chaostocosmos.leap.http.context.Context;
+import org.chaostocosmos.leap.http.context.META;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.services.filters.IAuthenticate;
 import org.chaostocosmos.leap.http.user.User;
@@ -60,6 +61,6 @@ public class UserManager implements IAuthenticate {
     public void save(List<User> users) throws WASException {
         List<Map<String, Object>> list = users.stream().map(u -> u.getUserMap()).collect(Collectors.toList());
         Context.getServer().setValue("server.users", list);
-        Context.saveServer();
+        Context.save(META.SERVER);
     }    
 }

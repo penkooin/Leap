@@ -71,7 +71,8 @@ public abstract class BodyPart {
         this.contentLength = contentLength;
         this.requestStream = requestStream;
         if(loadBody) {
-            body = getAllBody();
+            this.body = readBody();
+            System.out.println(new String(this.body));
             this.isClosedStream = true;
             this.isLoadedBody = true;
         }
@@ -119,11 +120,19 @@ public abstract class BodyPart {
     }
 
     /**
+     * Get body bytes
+     * @return
+     */
+    public byte[] getBody() {
+        return this.body;
+    }
+
+    /**
      * Get contents
      * @return
      * @throws IOException
      */
-    public byte[] getAllBody() throws IOException {
+    public byte[] readBody() throws IOException {
         this.body = StreamUtils.readAll(this.requestStream);
         this.requestStream.close();
         return this.body;

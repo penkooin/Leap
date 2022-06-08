@@ -1,19 +1,12 @@
 package org.chaostocosmos.leap.http.context;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.WASException;
-import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.resources.ResourceHelper;
 import org.chaostocosmos.leap.http.resources.TemplateBuilder;
-import org.yaml.snakeyaml.Yaml;
 
 /**
  * Context management object
@@ -30,10 +23,6 @@ public class Context {
      * Document root path
      */
     private static Path HOME_PATH;
-    /**
-     * Yaml configuration Path
-     */
-    private static Path serverPath, hostsPath, messagesPath, mimePath;
     /**
      * Template Path
      */
@@ -55,6 +44,10 @@ public class Context {
      */
     private static Hosts<Map<String, Object>> hosts;
     /**
+     * Chart schema Map
+     */
+    private static Map<String, Object> chart;
+    /**
      * Default & Virtual host Map
      */
     private static Map<String, Host<?>> hostMap;
@@ -68,10 +61,6 @@ public class Context {
      */
     private Context(Path homePath) {        
         HOME_PATH = homePath;
-        serverPath = HOME_PATH.resolve("config").resolve("server.yml");
-        hostsPath = HOME_PATH.resolve("config").resolve("hosts.yml");
-        messagesPath = HOME_PATH.resolve("config").resolve("messages.yml");
-        mimePath = HOME_PATH.resolve("config").resolve("mime.yml");
         try {            
             if(!HOME_PATH.toFile().isDirectory() || !HOME_PATH.toFile().exists()) {
                 throw new FileNotFoundException("Resource path must be directory and exist : "+HOME_PATH.toAbsolutePath().toString());
@@ -79,11 +68,11 @@ public class Context {
             //build config environment
             ResourceHelper.extractResource("config", homePath); 
             //load configuration files
-            server = new Server<Map<String, Object>>(load(serverPath));
-            System.out.println(hostsPath);
-            hosts = new Hosts<Map<String, Object>>(load(hostsPath));
-            messages = new Messages<Map<String, Object>>(load(messagesPath));
-            mime = new Mime<Map<String, Object>>(load(mimePath));
+            server = new Server<Map<String, Object>>(META.SERVER.getMetaMap());
+            hosts = new Hosts<Map<String, Object>>(META.HOSTS.getMetaMap());
+            messages = new Messages<Map<String, Object>>(META.MESSAGES.getMetaMap());
+            mime = new Mime<Map<String, Object>>(META.MIME.getMetaMap());
+            chart = META.CHART.getMetaMap();
             hostMap = hosts.getHostMap();
         } catch(Exception e) {
             throw new WASException(e);
@@ -99,24 +88,6 @@ public class Context {
             context = new Context(homePath);
         }
         return context;
-    }
-    /**
-     * Load config.yml
-     * @param metaPath
-     * @return
-     */
-    private Map<String, Object> load(Path metaPath) {
-        try {            
-            if(metaPath == null) {
-                throw new UnsupportedOperationException("Path is not set.");
-            } else if(!metaPath.toFile().exists()) {
-                throw new FileNotFoundException(metaPath.toFile().getName()+" not found. Please check your configuration : "+metaPath.toAbsolutePath().toString());
-            }
-            String lines = Files.readAllLines(metaPath).stream().collect(Collectors.joining(System.lineSeparator()));
-            return ((Map<?, ?>)new Yaml().load(lines)).entrySet().stream().collect(Collectors.toMap(k -> k.getKey().toString(), v -> v.getValue()));
-        } catch(Exception e) {
-            throw new WASException(e);
-        }
     }
     /**
      * Get home path
@@ -197,42 +168,13 @@ public class Context {
         }
     }
     /**
-     * Save server meta
-     */
-    public static void saveServer() {
-        save(server.getMeta(), serverPath.toFile());
-    }
-    /**
-     * Save hosts meta
-     */
-    public static void saveHosts() {
-        save(server.getMeta(), hostsPath.toFile());
-    }
-    /**
-     * Save messages meta
-     */
-    public static void saveMessages() {
-        save(server.getMeta(), messagesPath.toFile());
-    }
-    /**
-     * Save mime meta
-     */
-    public static void saveMime() {
-        save(server.getMeta(), mimePath.toFile());
-    }
-    /**
      * Save config
      * 
      * @param map
      * @param targetFile
      * @throws WASException
      */
-    public static void save(Map<String, Object> map, File targetFile) throws WASException {
-        Yaml yaml = new Yaml(); 
-            try (FileWriter writer = new FileWriter(targetFile)) {
-        } catch (IOException e) {
-            throw new WASException(MSG_TYPE.ERROR, 13, e.getMessage());
-        }
-        yaml.dump(map);
+    public static void save(META meta) throws WASException {
+        meta.save();        
     }   
 }

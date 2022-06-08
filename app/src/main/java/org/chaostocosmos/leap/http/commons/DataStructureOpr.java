@@ -76,7 +76,8 @@ public class DataStructureOpr {
 	 * @param keys
 	 * @param value
 	 */
+	@SuppressWarnings("unchecked")
     public static <T> void putValue(Object obj, Object[] keys, T value) {
-        ((Map)findValue(obj, Arrays.copyOfRange(keys, 0, keys.length-1))).put(keys[keys.length-1], value); 
+        ((Map<Object, T>)findValue(obj, Arrays.copyOfRange(keys, 0, keys.length-1))).put(keys[keys.length-1], value); 
     }    
 }
