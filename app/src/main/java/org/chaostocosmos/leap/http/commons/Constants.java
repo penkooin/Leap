@@ -16,7 +16,7 @@ public class Constants {
     /**
      * default fraction point
      */
-    public static final int DEFAULT_FRACTION_POINT = 3;
+    public static final int DEFAULT_FRACTION_POINT = 2;
     /**
      * separator for string property value
      */

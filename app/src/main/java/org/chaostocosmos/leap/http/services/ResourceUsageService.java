@@ -1,15 +1,16 @@
 package org.chaostocosmos.leap.http.services;
 
-import java.nio.file.Paths;
-import java.util.HashMap;
 import java.util.Map;
 
+import org.chaostocosmos.chaosgraph.Graph;
 import org.chaostocosmos.chaosgraph.GraphUtility.CODEC;
 import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.Response;
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.annotation.MethodMappper;
 import org.chaostocosmos.leap.http.annotation.ServiceMapper;
+import org.chaostocosmos.leap.http.commons.DataStructureOpr;
+import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
@@ -36,22 +37,22 @@ public class ResourceUsageService extends AbstractChartService {
             throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES415.code(), "Requested content type is not allowed on this service.");
         }
         MultiPart multiPart = (MultiPart)request.getBodyPart();
-        byte[] body = multiPart.getMultiPartContents().get("monitor");
-        System.out.println("==================================="+new String(body));
+        byte[] body = multiPart.getBody().get("CHART");
         if(body == null) {
             throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES404.code(), "Request has no body data. Chart service must have JSON chart data.");
         }
         String chartJson = new String(body, charset);
-        Map<String, Object> chartMap = (Map<String, Object>)gson.fromJson(chartJson, HashMap.class);
+        Map<String, Object> map = gson.fromJson(chartJson, Map.class);
+        Graph cpuChart = super.lineChart((Map<String, Object>)map.get("CPU"));
+        Graph memoryChart = super.areaChart((Map<String, Object>)map.get("MEMORY"));
+        Graph threadChart = super.lineChart((Map<String, Object>)map.get("THREAD"));
+        String cpuPath = DataStructureOpr.<String>getValue(map, "CPU.SAVE_PATH");
+        String memoryPath = DataStructureOpr.<String>getValue(map, "MEMORY.SAVE_PATH");
+        String threadPath = DataStructureOpr.<String>getValue(map, "THREAD.SAVE_PATH");
 
-        Map<String, Object> cpuMap = (Map<String, Object>)chartMap.get("CPU");
-        super.saveImage(super.lineChart(cpuMap).getBufferedImage(), Paths.get("SAVE_PATH"), CODEC.valueOf(cpuMap.get("CODEC")+""));
-    
-        Map<String, Object> memoryMap = (Map<String, Object>)chartMap.get("MEMORY");
-        super.saveImage(super.areaChart(memoryMap).getBufferedImage(), Paths.get("SAVE_PATH"), CODEC.valueOf(cpuMap.get("CODEC")+""));
-        
-        Map<String, Object> threadMap = (Map<String, Object>)chartMap.get("THREAD");        
-        super.saveImage(super.areaChart(threadMap).getBufferedImage(), Paths.get("SAVE_PATH"), CODEC.valueOf(cpuMap.get("CODEC")+""));
+        if(cpuChart != null) super.saveImage(cpuChart.getBufferedImage(), Context.getHomePath().resolve(cpuPath), CODEC.PNG);    
+        if(memoryChart != null) super.saveImage(memoryChart.getBufferedImage(), Context.getHomePath().resolve(memoryPath), CODEC.PNG);
+        if(threadChart != null) super.saveImage(threadChart.getBufferedImage(), Context.getHomePath().resolve(threadPath), CODEC.PNG);
     }
 
     @Override

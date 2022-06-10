@@ -15,8 +15,7 @@ import org.chaostocosmos.leap.http.enums.MIME_TYPE;
  * 
  * @authon 9ins
  */
-public class TextPart extends BodyPart {
-    
+public class TextPart extends BodyPart {    
     /**
      * Constructor
      * @param host
@@ -34,13 +33,10 @@ public class TextPart extends BodyPart {
     @Override
     public void save(Path targetPath) throws IOException {
         if(super.isLoadedBody) {
-            FileUtils.saveText(super.body, targetPath, super.charset, Context.getServer().getFileBufferSize());
-        } else if(!super.isClosedStream) {
-            StreamUtils.saveText(super.host, super.requestStream, super.contentLength, targetPath, super.charset);
-            super.isClosedStream = true;
+            FileUtils.saveText(new String(super.body.get("BODY"), super.charset), targetPath, Context.getServer().getFileBufferSize());
         } else {
-            throw new IOException(Context.getMessages().getErrorMsg(48, super.isLoadedBody, super.isClosedStream));
+            StreamUtils.saveStream(super.host, super.requestStream, super.contentLength, targetPath, super.charset);
         }
-        super.logger.debug(super.contentType.name()+" saved: "+targetPath.toString()+"  Size: "+targetPath.toFile().length());
+        super.logger.debug("[TEXT-PART] "+super.contentType.name()+" saved: "+targetPath.toString()+"  Size: "+targetPath.toFile().length());
     }
 }

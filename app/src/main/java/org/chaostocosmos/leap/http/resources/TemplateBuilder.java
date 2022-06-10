@@ -22,6 +22,12 @@ import com.google.gson.Gson;
  * @author 9ins
  */
 public class TemplateBuilder {
+
+    public static String buildMonitoringPage(String contextPath, Host<?> host) {
+        host.getResource().getTemplatePage("templates/monitor.html", null);
+        
+        String monitoringPage = host.get
+    }
     /**
      * Make welcome page with directory view
      * @param contextPath

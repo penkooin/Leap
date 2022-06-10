@@ -4,10 +4,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.commons.StreamUtils;
+import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
+import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 
 import ch.qos.logback.classic.Logger;
 
@@ -16,7 +21,7 @@ import ch.qos.logback.classic.Logger;
  * 
  * @author 9ins
  */
-public abstract class BodyPart {
+public class BodyPart implements Part {
     /**
      * Logger
      */
@@ -38,22 +43,17 @@ public abstract class BodyPart {
      */
     InputStream requestStream;
     /**
-     * whether stream closed
-     */
-    boolean isClosedStream = false;
-    /**
      * Whether body loaded
      */
     boolean isLoadedBody = false; 
     /**
      * body data
      */
-    byte[] body;
+    Map<String, byte[]> body;
     /**
      * body charset
      */
     Charset charset;
-
     /**
      * Constructor
      * @param host
@@ -69,14 +69,12 @@ public abstract class BodyPart {
         this.host = host;
         this.contentType = contentType;
         this.contentLength = contentLength;
-        this.requestStream = requestStream;
-        if(loadBody) {
-            this.body = readBody();
-            System.out.println(new String(this.body));
-            this.isClosedStream = true;
-            this.isLoadedBody = true;
-        }
+        this.requestStream = requestStream;        
         this.charset = charset;
+        this.isLoadedBody = loadBody;
+        if(this.isLoadedBody) {
+            this.body = readBody();
+        }
     }
 
     /**
@@ -88,68 +86,73 @@ public abstract class BodyPart {
     }
 
     /**
-     * Get Mime type
-     * @return
-     */
-    public MIME_TYPE getContentType() {
-        return this.contentType;
-    }
-    
-    /**
-     * Get content length
-     * @return
-     */
-    public long getContentLength() {
-        return this.contentLength;
-    }
-
-    /**
-     * whether body closed
-     * @return
-     */
-    public boolean isClosedStream() {
-        return this.isClosedStream;
-    }
-
-    /**
-     * whether body loaded
-     * @return
-     */
-    public boolean isLoadedBody() {
-        return this.isLoadedBody;
-    }
-
-    /**
-     * Get body bytes
-     * @return
-     */
-    public byte[] getBody() {
-        return this.body;
-    }
-
-    /**
      * Get contents
      * @return
      * @throws IOException
      */
-    public byte[] readBody() throws IOException {
-        this.body = StreamUtils.readAll(this.requestStream);
-        this.requestStream.close();
-        return this.body;
+    private Map<String, byte[]> readBody() throws IOException {
+        if(contentType == MIME_TYPE.MULTIPART_FORM_DATA || contentType == MIME_TYPE.MULTIPART_BYTERANGES) {
+            throw new WASException(MSG_TYPE.ERROR, 23, "Method not supported on MultiPart operation: readBody()");
+        }
+        Map<String, byte[]> map = new HashMap<>();
+        byte[] data = StreamUtils.readLength(this.requestStream, (int)this.contentLength);        
+        map.put("BODY", data);
+        return map;
     }
 
-    /**
-     * Get body charset
-     * @return
-     */
-    public Charset getBodyCharset() {
+    @Override
+    public Charset getCharset() {
         return this.charset;
     }
 
-    /**
-     * Save binary data
-     * @param targetPath
-     * @throws IOException
-     */
-    public abstract void save(Path targetPath) throws IOException;
+    @Override
+    public MIME_TYPE getContentType() {
+        return this.contentType;
+    }
+
+    @Override
+    public long getContentLength() {
+        return this.contentLength;
+    }
+
+    @Override
+    public boolean isContentRead() {
+        return this.isLoadedBody;
+    }
+
+    @Override
+    public Map<String, byte[]> getBody() throws IOException {
+        if(this.isLoadedBody) {
+            return this.body;
+        }
+        readBody();
+        return this.body;
+    }
+
+    @Override
+    public void save(Path targetPath) throws IOException {        
+        if(contentType == MIME_TYPE.MULTIPART_FORM_DATA || contentType == MIME_TYPE.MULTIPART_BYTERANGES) {
+            throw new WASException(MSG_TYPE.ERROR, 23, "Can not save content. Not supported on Multi Part Operation.");
+        }        
+        if(this.isLoadedBody) {
+            StreamUtils.saveBinary(this.host, this.body.get("BODY"), targetPath, Context.getServer().getFileBufferSize());
+        } else {
+            StreamUtils.saveBinary(this.host, this.requestStream, getContentLength(), targetPath, Context.getServer().getFileBufferSize());
+        }        
+        this.logger.debug("[BODY-PART] "+contentType.name()+" saved: "+targetPath.normalize().toString()+"  Path: "+targetPath.toString());
+    }    
+
+    @Override
+    public String toString() {
+        return "{" +
+            " logger='" + logger + "'" +
+            ", host='" + host + "'" +
+            ", contentType='" + contentType + "'" +
+            ", contentLength='" + contentLength + "'" +
+            ", requestStream='" + requestStream + "'" +
+            ", isLoadedBody='" + isLoadedBody + "'" +
+            ", body='" + body + "'" +
+            ", charset='" + charset + "'" +
+            "}";
+    }
 }

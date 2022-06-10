@@ -9,7 +9,7 @@ import java.util.Map;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
-import org.chaostocosmos.leap.http.part.BodyPart;
+import org.chaostocosmos.leap.http.part.Part;
 
 import ch.qos.logback.classic.Logger;
 
@@ -27,10 +27,9 @@ public class Request {
     final private MIME_TYPE contentType;
     final private String httpVersion;
     final private Map<String, String> reqHeader;
-    final private byte[] reqBody; 
     final private String contextPath;
     final private Map<String, String> contextParam;
-    final private BodyPart bodyPart;
+    final private Part bodyPart;
     final private long contentLength;
     
     /**
@@ -41,7 +40,6 @@ public class Request {
      * @param httpVersion
      * @param requestType
      * @param reqHeader
-     * @param reqBody
      * @param contextPath
      * @param url
      * @param contextParam
@@ -55,10 +53,9 @@ public class Request {
             REQUEST_TYPE requestType, 
             Map<String,String> reqHeader, 
             MIME_TYPE contentType,
-            byte[] reqBody, 
             String contextPath, 
             Map<String,String> contextParam,
-            BodyPart bodyPart,
+            Part bodyPart,
             long contentLength
         ) {
             this.hostId = hostId;
@@ -67,7 +64,6 @@ public class Request {
             this.requestType = requestType;
             this.reqHeader = reqHeader;
             this.contentType = contentType;
-            this.reqBody = reqBody;
             this.contextPath = contextPath;
             this.contextParam = contextParam;
             this.bodyPart = bodyPart;
@@ -98,10 +94,6 @@ public class Request {
         return this.contentType;
     }
 
-    public final byte[] getReqBody() {
-        return this.reqBody;
-    }
-
     public final String getContextPath() {
         return this.contextPath;
     }
@@ -114,7 +106,7 @@ public class Request {
         return this.contextParam.get(name);
     }
 
-    public final BodyPart getBodyPart() {
+    public final Part getBodyPart() {
         return this.bodyPart;
     }
 
@@ -147,7 +139,6 @@ public class Request {
             ", requestedHost='" + getRequestedHost() + "'" +
             ", reqHeader='" + getReqHeader() + "'" +
             ", contentType='" + getContentType() + "'" +
-            ", reqBody='" + getReqBody() + "'" +
             ", contextPath='" + getContextPath() + "'" +
             ", contextParam='" + getContextParam() + "'" +
             ", bodyPart='" + getBodyPart() + "'" +

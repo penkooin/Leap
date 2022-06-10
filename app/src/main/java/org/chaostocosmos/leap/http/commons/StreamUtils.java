@@ -1,15 +1,14 @@
 package org.chaostocosmos.leap.http.commons;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
 import java.io.Reader;
 import java.nio.charset.Charset;
@@ -35,6 +34,22 @@ import ch.qos.logback.classic.Logger;
  */
 public class StreamUtils {
     /**
+     * Save byte data 
+     * @param host
+     * @param data
+     * @param savePath
+     * @param flushSize
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
+    public static synchronized void saveBinary(String host, byte[] data, Path savePath, int flushSize) throws FileNotFoundException, IOException {
+        Logger logger = LoggerFactory.getLogger(host);
+        try(FileOutputStream target = new FileOutputStream(savePath.toFile())) {
+            target.write(data);
+        }
+        logger.debug("Save bytes Data To: "+savePath.toString()+"   Size: "+savePath.toFile().length());
+    }
+    /**
      * Save binary body
      * @param host
      * @param requestStream
@@ -46,17 +61,17 @@ public class StreamUtils {
     public static synchronized void saveBinary(String host, InputStream requestStream, long contentLength, Path savePath, int flushSize) throws IOException {
         Logger logger = LoggerFactory.getLogger(host);
         //String line = readLine(requestStream, StandardCharsets.ISO_8859_1);
-        FileOutputStream target = new FileOutputStream(savePath.toFile());
-        byte[] buffer = new byte[flushSize];
-        int len;
-        long total = 0;
-        while((len=requestStream.read(buffer)) > 0) {
-            target.write(buffer, 0, len);
-            total += len;
-            if(total >= contentLength) 
-                break;
+        try(FileOutputStream target = new FileOutputStream(savePath.toFile())) {
+            byte[] buffer = new byte[flushSize];
+            int len;
+            long total = 0;
+            while((len=requestStream.read(buffer)) > 0) {
+                target.write(buffer, 0, len);
+                total += len;
+                if(total >= contentLength) 
+                    break;
+            }    
         }
-        target.close();
         logger.debug("Save Binary Data To: "+savePath.toString()+"   Size: "+savePath.toFile().length());
     }
 
@@ -69,15 +84,18 @@ public class StreamUtils {
      * @param charset
      * @throws IOException
      */
-    public static synchronized void saveText(String host, InputStream requestStream, long contentLength, Path savePath, Charset charset) throws IOException {
-        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(savePath.toFile()), charset));
-        ByteArrayOutputStream line = new ByteArrayOutputStream();
-        int total = 0;        
-        while(total > contentLength) {
-            line.write(requestStream.read());
-            total++;
+    public static synchronized void saveStream(String host, InputStream requestStream, long contentLength, Path savePath, Charset charset) throws IOException {
+        try(FileOutputStream fos = new FileOutputStream(savePath.toFile())) {
+            int total =0;
+            int read;
+            while((read = requestStream.read()) != -1) {
+                fos.write(read);
+                total++;
+                if(total >= contentLength) {
+                    break;
+                }                
+            }    
         }
-        out.close();
     }
 
     /**
@@ -127,12 +145,12 @@ public class StreamUtils {
                     d = c;
                 }
                 float elapseSec = Math.round(((System.currentTimeMillis() - startMillis) / 1000f) * 100f) / 100f;
-                logger.debug("Save uploaded file - filename: {}, size: {}, content-type: {}, upload elpase seconds: {}", map.get("filename"), len, contentType, elapseSec);
+                logger.debug("Uploaded - name: {}, filename: {}, size: {}, content-type: {}, upload elpase seconds: {}", map.get("name"), map.get("filename"), len, contentType, elapseSec);
                 if(line.trim().endsWith(boundaryEnd)) {
                     isLast = true;
                 }
                 byte[] dataBytes = data.toByteArray();
-                multiPartMap.put(map.get("filename"), Arrays.copyOfRange(dataBytes, 0, dataBytes.length-2));
+                multiPartMap.put(map.get("name"), Arrays.copyOfRange(dataBytes, 0, dataBytes.length-2));
             }
         } while(!isLast);
         return multiPartMap;
@@ -308,24 +326,6 @@ public class StreamUtils {
     }
 
     /**
-     * Read all bytes from InputStream
-     * @param is
-     * @return
-     * @throws IOException
-     */
-    public static byte[] readAll(InputStream is) throws IOException {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        int read;
-        while((read=is.read()) != -1) {
-            if(read ==  0x1A)
-                break;
-            baos.write(read);
-        }
-        System.out.println(read+"     &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-        return baos.toByteArray();
-    }
-    
-    /**
      * Read line from stream
      * @param is
      * @param charset
@@ -385,32 +385,13 @@ public class StreamUtils {
     }
 
     /**
-     * Read lines from request
-     * @param is
-     * @param charset
-     * @return
-     * @throws IOException
-     */
-    public static List<String> readLines(InputStream is, Charset charset) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(is, charset));
-        String line;
-        List<String> lines = new ArrayList<>();
-        while((line=br.readLine()) != null) {
-            if(line.trim().equals(""))
-                break;
-            lines.add(line);
-        }
-        return lines;
-    }
-
-    /**
      * Read data from InputStream as much as the length
      * @param is
      * @param length
      * @return
      * @throws IOException
      */
-    public static byte[] readStream(InputStream is, int length) throws IOException {
+    public static byte[] readLength(InputStream is, int length) throws IOException {
         byte[] data = new byte[length];
         is.read(data, 0, length);
         return data;

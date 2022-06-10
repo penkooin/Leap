@@ -18,6 +18,8 @@ repositories {
 
 dependencies {
 
+    implementation fileTree(dir: 'libs', include: '*.jar')
+
     // https://mvnrepository.com/artifact/org.openjdk.jmh/jmh-core
     implementation 'org.openjdk.jmh:jmh-core:1.35'
 
@@ -61,6 +63,7 @@ dependencies {
     implementation 'org.mariadb.jdbc:mariadb-java-client:3.0.3'
 
     implementation 'io.github.9ins:chaosgraph:2.0.0'  
+
 }
 
 application {

@@ -1,19 +1,14 @@
 package org.chaostocosmos.leap.http.part;
 
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
-import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.commons.StreamUtils;
-import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 
 /**
@@ -48,24 +43,11 @@ public class KeyValuePart extends BodyPart {
     public Map<String, String> getKeyValueMap() throws IOException {        
         String keyVal = null;
         if(super.isLoadedBody) {
-            keyVal = new String(super.body, super.charset);
-        } else if(!super.isClosedStream) {
-            super.body = StreamUtils.readAll(super.requestStream);
-            keyVal = new String(super.body, super.charset);
-            super.isClosedStream = true;
+            keyVal = new String(super.body.get("BODY"), super.charset);
         } else {
-            throw new IOException(Context.getMessages().getErrorMsg(48, super.isLoadedBody, super.isClosedStream));
+            byte[] body = StreamUtils.readLength(super.requestStream, (int)super.contentLength);
+            keyVal = new String(body, super.charset);
         }
         return Arrays.asList(keyVal.split("&")).stream().map(t -> t.split("=", -1)).collect(Collectors.toMap(k -> k[0], v -> v[1]));
-    }
-
-    @Override
-    public void save(Path targetPath) throws IOException {
-        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(targetPath.toFile()), super.charset));
-        for(String key : this.keyValueMap.keySet()) {
-            out.write(key+"="+this.keyValueMap.get(key));
-        }
-        out.close();
-        super.logger.debug(super.contentType.name()+" saved: "+targetPath.toString()+"  Size: "+targetPath.toFile().length());
     }
 }

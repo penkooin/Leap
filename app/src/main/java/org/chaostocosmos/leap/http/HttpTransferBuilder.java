@@ -148,6 +148,7 @@ public class HttpTransferBuilder {
                 String msg = TemplateBuilder.buildResponseHtml(this.host, MSG_TYPE.HTTP, 200, Context.getMessages().getHttpMsg(200));
                 Map<String, List<Object>> headers = addHeader(new HashMap<>(), "Content-Type", MIME_TYPE.TEXT_HTML.mimeType());
                 headers = addHeader(new HashMap<>(), "Content-Length", msg.getBytes().length);
+                headers = addHeader(new HashMap<>(), "Charset", this.host.charset().name());
                 this.httpResponseDescriptor = HttpResponseBuilder.getBuilder()
                                                                 .build(this.httpRequestDescriptor)
                                                                 .setStatusCode(200)

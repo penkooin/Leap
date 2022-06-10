@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -13,9 +12,9 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import com.coremedia.iso.IsoFile;
-
 import org.chaostocosmos.leap.http.context.Context;
+
+import com.coremedia.iso.IsoFile;
 
 /**
  * FileUtils
@@ -63,25 +62,14 @@ public class FileUtils {
     /**
      * Save text
      * @param data
-     * @param taget
-     * @param charset
-     * @throws IOException
-     */
-    public static void saveText(byte[] data, Path taget, Charset charset) throws IOException {
-        saveText(data, taget, charset, Context.getServer().getFileBufferSize());
-    }
-
-    /**
-     * Save text
-     * @param data
      * @param target
      * @param charset
      * @param bufferSize
      * @throws IOException
      */
-    public static void saveText(byte[] data, Path target, Charset charset, int bufferSize) throws IOException {
+    public static void saveText(String data, Path target, int bufferSize) throws IOException {
         FileWriter out = new FileWriter(target.toFile());
-        out.write(new String(data, charset));
+        out.write(data);
         out.close();        
     }    
 

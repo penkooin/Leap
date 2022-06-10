@@ -21,8 +21,8 @@ import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
-import org.chaostocosmos.leap.http.part.BodyPart;
 import org.chaostocosmos.leap.http.part.MultiPart;
+import org.chaostocosmos.leap.http.part.Part;
 import org.chaostocosmos.leap.http.services.filters.BasicAuthFilter;
 import org.chaostocosmos.leap.http.services.model.DeployModel;
 import org.chaostocosmos.leap.http.services.model.ServiceModel;
@@ -34,7 +34,7 @@ public class DeployService extends AbstractService implements DeployModel {
     @FilterMapper(preFilters = BasicAuthFilter.class)
     public void add(Request request, Response response) throws WASException, IOException {
         final Map<String, String> headers = request.getReqHeader();
-        final BodyPart bodyPart = request.getBodyPart();        
+        final Part bodyPart = request.getBodyPart();
         if(bodyPart == null) {
             throw new WASException(MSG_TYPE.HTTP, 400, "Service class file data is missing in request.");
         } else if(bodyPart.getContentType() == MIME_TYPE.MULTIPART_FORM_DATA) {            

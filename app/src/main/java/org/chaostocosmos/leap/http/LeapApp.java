@@ -34,7 +34,7 @@ import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 
 /**
- * LeapWAS main
+ * Leap main
  * 
  * @author 9ins
  */
@@ -43,49 +43,41 @@ public class LeapApp {
      * Logger
      */
     public static Logger logger;
-
     /**
      * Standard IO
      */
     public static PrintStream systemOut;
-
     /**
      * Home path
      */
     public static Path HOME_PATH;
-
     /**
      * Context
      */
     public static Context context;
-
     /**
      * Static resource manager
      */
     public static ResourceManager staticResourceManager;
-
     /**
      * Server Map
      */
     public static Map<String, LeapHttpServer> leapServerMap;
-
     /**
      * Thread pool
      */
     public static ThreadPoolExecutor threadpool;
-
     /**
      * Thread Queue
      */
     public static LinkedBlockingQueue<Runnable> threadQueue;
-
     /**
      * Resource monitor
      */
     public static ResourceMonitor resourceMonitor;
-
     /**
      * Constructor with arguments
+     * 
      * @param args 
      * @throws IOException
      * @throws URISyntaxException
@@ -97,7 +89,6 @@ public class LeapApp {
         leapServerMap = new HashMap<>();
         setup(args);
     }
-
     /** 
      * Apply command line options
      * @param args
@@ -121,7 +112,7 @@ public class LeapApp {
                 throw new WASException(e);
             }
         } else {
-            HOME_PATH = Paths.get("./"); 
+            HOME_PATH = Paths.get("./").toAbsolutePath().normalize(); 
         }
 
         //initialize environment and context
@@ -173,15 +164,14 @@ public class LeapApp {
             logger.info("verbose mode on");
         }
     }
-
     /**
      * Start environment
-     *  
+     * 
      * @throws WASException
      */
     public void start() throws Exception {
-        //NetworkInterfaces.getAllNetworkAddresses().stream().forEach(i -> System.out.println(i.getHostName()));
-        //LeapClassLoader
+        //NetworkInterfaces.getAllNetworkAddresses().stream().forEach(i -> System.out.println(i.getHostName())); 
+        //LeapClassLoader 
         LeapURLClassLoader classLoader = ClassUtils.getClassLoader();
         //Spring JPA 
         //SpringJPAManager jpaManager = SpringJPAManager.get();
@@ -189,18 +179,12 @@ public class LeapApp {
         for(Host<?> host : Context.getHostMap().values()) {
             InetAddress hostAddress = InetAddress.getByName(host.getHost());
             String hostName = hostAddress.getHostAddress()+":"+host.getPort();
-            if(this.leapServerMap.containsKey(hostName)) {
-                String key = this.leapServerMap.keySet().stream().filter(k -> k.equals(hostName)).findAny().get();
+            if(leapServerMap.containsKey(hostName)) {
+                String key = leapServerMap.keySet().stream().filter(k -> k.equals(hostName)).findAny().get();
                 throw new IllegalArgumentException("Mapping host address is collapse on network interace: "+hostAddress.toString()+":"+host.getPort()+" with "+key);
             }
-            //if(hosts.getHost().equals(Context.getDefaultHost())) {
-                LeapHttpServer server = new LeapHttpServer(Context.getHomePath(), host, this.threadpool, classLoader, this.resourceMonitor);
-                this.leapServerMap.put(hostAddress.getHostAddress()+":"+host.getPort(), server);
-            //} else {
-            //    ThreadPoolExecutor threadpool = new ThreadPoolExecutor(20, 20, 10, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>()); 
-            //    LeapHttpServer server = new LeapHttpServer(Context.getLeapHomePath(), hosts, this.threadpool, classLoader, this.resourceMonitor);
-            //    this.leapServerMap.put(hostAddress.getHostAddress()+":"+hosts.getPort(), server); 
-            //}
+            LeapHttpServer server = new LeapHttpServer(Context.getHomePath(), host, threadpool, classLoader, resourceMonitor);
+            leapServerMap.put(hostAddress.getHostAddress()+":"+host.getPort(), server);
             if(host.isDefaultHost()) {
                 logger.info("[DEFAULT HOST] - Protocol: "+host.getProtocol().name()+"   Server: "+host.getHostId()+"   Host: "+host.getHost()+"   Port: "+host.getPort()+"   Doc-Root: "+host.getDocroot()+"   Logging path: "+host.getLogPath()+"   Level: "+host.getLogLevel().toString());                
             } else {
@@ -208,12 +192,11 @@ public class LeapApp {
             }
         }
         logger.info("----------------------------------------------------------------------------------------------------");
-        for(LeapHttpServer server : this.leapServerMap.values()) {
+        for(LeapHttpServer server : leapServerMap.values()) {
             server.setDaemon(false);
             server.start();
         }
     }
-
     /**
      * Shut down Leap WAS
      * @throws IOException
@@ -231,7 +214,6 @@ public class LeapApp {
         }
         logger.info("Leap server terminated...");
     }
-
     /**
      * Get home path
      * @return
@@ -239,7 +221,6 @@ public class LeapApp {
     public static Path getHomePath() {
         return HOME_PATH;
     }
-
     /**
      * Get thread pool
      * @return
@@ -247,7 +228,6 @@ public class LeapApp {
     public static ThreadPoolExecutor getThreadPool() {
         return threadpool;
     }
-
     /**
      * Get execution parameter options
      * @return
@@ -258,8 +238,7 @@ public class LeapApp {
         options.addOption(new Option("v", "verbose", true, "run with verbose mode"));
         options.addOption(new Option("l", "logLevel", true, "log level setting"));
         return options;
-    }
- 
+    } 
     /**
      * Print trademark 
      * @throws WASException

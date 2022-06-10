@@ -307,21 +307,23 @@ public class LeapClient {
             }
             this.responseBody = out.toByteArray();
             List<String> ctxTypeList = (List<String>)this.responseHeaders.get("Content-Type");
-            String charset = ctxTypeList.get(1);
-            if(charset.startsWith("charset")) {
-                this.responseMsg = new String(this.responseBody, Charset.forName(charset.substring(charset.indexOf("=")+1)));
-            } else {
-                this.responseMsg = null;
-            }
-            if(this.saveResponseFile != null) {
-                if(!this.saveResponseFile.getParentFile().exists()) {
-                    this.saveResponseFile.mkdirs();
-                }
-                if(this.responseMsg != null) {
-                    Files.writeString(this.saveResponseFile.toPath(), this.responseMsg, Charset.forName(charset.substring(charset.indexOf("=")+1)), StandardOpenOption.TRUNCATE_EXISTING);
+            if(ctxTypeList != null) {
+                String charset = ctxTypeList.size() > 0 ? ctxTypeList.get(1).substring(ctxTypeList.get(1).indexOf("=")+1) : this.responseHeaders.get("Charset") != null ? this.responseHeaders.get("Charset").get(0) : "utf-8";
+                if(charset != null) {
+                    this.responseMsg = new String(this.responseBody, Charset.forName(charset.trim()));
                 } else {
-                    Files.write(this.saveResponseFile.toPath(), this.responseBody, StandardOpenOption.TRUNCATE_EXISTING);
-                }                
+                    this.responseMsg = null;
+                }    
+                if(this.saveResponseFile != null) {
+                    if(!this.saveResponseFile.getParentFile().exists()) {
+                        this.saveResponseFile.mkdirs();
+                    }
+                    if(this.responseMsg != null) {
+                        Files.writeString(this.saveResponseFile.toPath(), this.responseMsg, Charset.forName(charset), StandardOpenOption.TRUNCATE_EXISTING);
+                    } else {
+                        Files.write(this.saveResponseFile.toPath(), this.responseBody, StandardOpenOption.TRUNCATE_EXISTING);
+                    }                
+                }
             }
         }
         return responseBody;    
@@ -340,6 +342,9 @@ public class LeapClient {
         writeContextParams(REQUEST.GET, contextPath, contextParams);
         writeHeaders(this.requestHeaders);
         processResponse(this.inputStream);
+        this.outputStream.close();
+        this.inputStream.close();
+        this.socket.close();
         return client;
     }
     /**
@@ -356,7 +361,6 @@ public class LeapClient {
         writeContextParams(REQUEST.POST, contextPath, contextParams);
 
         long contentLength = formDataMap.values().stream().mapToInt(f -> f.getContentLength()).sum();
-        System.out.println(contentLength+"))))))))))))))))))))))))))))");
         this.requestHeaders.put("Content-Type", "multipart/form-data; boundary=--------------------------LeapClient");
         this.requestHeaders.put("Content-Length", contentLength);
 
@@ -371,9 +375,8 @@ public class LeapClient {
 
     public static void main(String[] args) throws UnknownHostException, IOException {
         Map<String, FormData<?>> map = Map.of("code", new FormData<File>(MIME.APPLICATION_ZIP, Paths.get("./LICENSE").toFile()));
-        LeapClient client = LeapClient.build("localhost", 8080)
-                                      .addHeader("charset", "utf-8")
-                                      .post("/monitor/chart/image", null, map);       
+        LeapClient client = LeapClient.build("localhost", 8080).addHeader("charset", "utf-8").post("/monitor/chart/image", null, map);       
+        //LeapClient client = LeapClient.build("localhost", 8080).addHeader("charset", "utf-8").get("/", null);
         System.out.println(new String(client.getResponseMsg()));        
     }
 }

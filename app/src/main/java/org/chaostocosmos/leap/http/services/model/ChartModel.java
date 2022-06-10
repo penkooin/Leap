@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.chaostocosmos.chaosgraph.Graph;
-import org.chaostocosmos.chaosgraph.GraphConstants.GRAPH;
 import org.chaostocosmos.chaosgraph.GraphElement;
 import org.chaostocosmos.chaosgraph.GraphUtility.CODEC;
 
@@ -45,6 +44,7 @@ public interface ChartModel {
     /**
      * Create Graph object
      * @param graphType
+     * @param title
      * @param width
      * @param height
      * @param xIndex
@@ -53,7 +53,7 @@ public interface ChartModel {
      * @return
      * @throws Exception
      */
-    public Graph createGraph(GRAPH graphType, int width, int height, List<Object> xIndex, List<Double> yIndex, List<GraphElement> elements) throws Exception;
+    public Map<Object, GraphElement> createGraphElements(List<Object> elements) throws Exception;
     /**
      * Save image
      * @param image

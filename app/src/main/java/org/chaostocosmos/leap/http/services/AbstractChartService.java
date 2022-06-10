@@ -2,13 +2,16 @@ package org.chaostocosmos.leap.http.services;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.chaostocosmos.chaosgraph.Graph;
-import org.chaostocosmos.chaosgraph.GraphConstants.GRAPH;
+import org.chaostocosmos.chaosgraph.GraphConstants;
+import org.chaostocosmos.chaosgraph.GraphConstants.GRID;
 import org.chaostocosmos.chaosgraph.GraphElement;
 import org.chaostocosmos.chaosgraph.GraphElements;
 import org.chaostocosmos.chaosgraph.GraphUtility;
@@ -16,6 +19,7 @@ import org.chaostocosmos.chaosgraph.GraphUtility.CODEC;
 import org.chaostocosmos.chaosgraph.INTERPOLATE;
 import org.chaostocosmos.chaosgraph.awt2d.AreaGraph;
 import org.chaostocosmos.chaosgraph.awt2d.BarGraph;
+import org.chaostocosmos.chaosgraph.awt2d.BarRatioGraph;
 import org.chaostocosmos.chaosgraph.awt2d.CircleGraph;
 import org.chaostocosmos.chaosgraph.awt2d.LineGraph;
 import org.chaostocosmos.leap.http.commons.DataStructureOpr;
@@ -23,7 +27,10 @@ import org.chaostocosmos.leap.http.services.model.ChartModel;
 
 public abstract class AbstractChartService extends AbstractService implements ChartModel {
 
+    Map<String, Graph> graphMap;
+
     public AbstractChartService() {
+        this.graphMap = new HashMap<String, Graph>();
     }
     
     @Override
@@ -46,45 +53,83 @@ public abstract class AbstractChartService extends AbstractService implements Ch
         return createGraph(graphAttributes);
     }
 
+    /**
+     * Create graph object with given map object
+     * @param map
+     * @return
+     * @throws InvocationTargetException 
+     * @throws IllegalArgumentException 
+     * @throws IllegalAccessException 
+     * @throws SecurityException 
+     * @throws NoSuchMethodException 
+     */
     @Override
-    public Graph createGraph(Map<String, Object> graphAttributes) throws Exception {
-        GRAPH graph = GRAPH.valueOf(graphAttributes.get("GRAPH")+"");
-        final String interpolate = DataStructureOpr.<String>getValue(graphAttributes, "INTERPOLATE");
-        final int width = DataStructureOpr.<Integer>getValue(graphAttributes, "WIDTH");
-        final int height = DataStructureOpr.<Integer>getValue(graphAttributes, "HEIGHT");
-        List<Object> xIndex = DataStructureOpr.<List<Object>>getValue(graphAttributes, "XINDEX");
-        List<Double> yIndex = DataStructureOpr.<List<Double>>getValue(graphAttributes,"YINDEX");
-        List<GraphElement> elementList = DataStructureOpr.<List<Map<String, Object>>>getValue(graphAttributes, "ELEMENTS").stream().map(a -> {
-            String name = a.get("ELEMENT")+"";
-            String label = a.get("LABEL")+"";
-            List<Integer> colors = (List<Integer>)a.get("COLOR");
-            Color color = new Color(colors.get(0), colors.get(1), colors.get(2));
-            List<Double> values = (List<Double>)a.get("VALUES");
-            return new GraphElement(name, color, label, color, values, INTERPOLATE.valueOf(interpolate));
-        }).collect(Collectors.toList());
-        GraphElements elements = new GraphElements(graph, elementList, xIndex, yIndex);
-        return createGraph(graph, width, height, xIndex, yIndex, elementList);
-    }
-
-    @Override
-    public Graph createGraph(GRAPH graphType, int width, int height, List<Object> xIndex, List<Double> yIndex, List<GraphElement> elements) throws Exception {
-        GraphElements graphElements = new GraphElements(graphType, elements, xIndex, yIndex);
-        switch(graphType.name()) {
-            case "LINE":
-                return new LineGraph(graphElements, width, height);
-            case "AREA":
-                return new AreaGraph(graphElements, width, height);
-            case "BAR":
-                return new BarGraph(graphElements, width, height);
-            case "CIRCLE":
-                return new CircleGraph(graphElements, width, height);
-            default:
-                throw new IllegalArgumentException("Not exist graph type: "+graphType.name());
+    @SuppressWarnings("unchecked")
+    public Graph createGraph(Map<String, Object> map) throws Exception {
+        String id = (String) map.get("ID");
+        Graph graph = graphMap.get(id);
+        double limit = (double)map.get("LIMIT");
+        String unit = map.get("UNIT")+"";
+        if(DataStructureOpr.<List<Double>>getValue(map, "ELEMENTS.0.VALUES").size() < 3) {
+            return null;                        
         }
+        if(graph == null) {
+            GraphConstants.GRAPH type = GraphConstants.GRAPH.valueOf(map.get("GRAPH")+"");            
+            String title = map.get("TITLE")+"";
+            int width = (int)Double.parseDouble(map.get("WIDTH")+"");
+            int height = (int)Double.parseDouble(map.get("HEIGHT")+"");
+            
+            List<Object> xIndex = (List<Object>)map.get("XINDEX");  
+            List<Double> yIndex = (List<Double>)map.get("YINDEX");  
+            List<Map<String, Object>> elementList = (List<Map<String, Object>>)map.get("ELEMENTS"); 
+            GraphElements graphElements = new GraphElements(type, xIndex, yIndex);            
+            graphElements.setGraphElementMap(createGraphElements((List<Object>)map.get("ELEMENTS")));    	
+            switch(type) {
+                case LINE :
+                    graph = new LineGraph(graphElements, title, width, height);                    
+                    break;
+                case AREA :
+                    graph = new AreaGraph(graphElements, title, width, height);
+                    break;
+                case CIRCLE :
+                    graph = new CircleGraph(graphElements, title, width, height);
+                    break;
+                case BAR : 
+                    graph = new BarGraph(graphElements, title, width, height);
+                    break;
+                case BAR_RATIO :
+                    graph = new BarRatioGraph(graphElements, title, width, height);
+                    break;
+            }
+            graph.setShowGraphXY(false);
+            graph.setInterpolateType(INTERPOLATE.valueOf(map.get("INTERPOLATE")+""));
+            graph.setGridStyle(GRID.DOT);
+            graph.setGraphBorderSize(2f);
+            graphMap.put(id, graph);
+        }        
+        GraphElements graphElements = graph.getGraphElements();
+        graphElements.setGraphElementMap(createGraphElements((List<Object>)map.get("ELEMENTS")));
+        graph.setLimit(limit);        
+        graph.setUnit(unit);        
+        graph.setGraphAlpha(0.5f);
+        graph.setTitleFontAlpha(0.3f);                
+        return graph;
+    }       
+
+    @Override
+    public Map<Object, GraphElement> createGraphElements(List<Object> elements) throws Exception {
+        return elements.stream().map(o -> (Map<String, Object>)o).map(m -> {
+            String elementName = m.get("ELEMENT")+"";
+            String label = m.get("LABEL")+"";
+            List<Integer> colorList = ((List<Object>)m.get("COLOR")).stream().map(v -> (int)Double.parseDouble(v+"")).collect(Collectors.toList());
+            Color elementColor = new Color((int)colorList.get(0), (int)colorList.get(1), (int)colorList.get(2));
+            List<Double> valueList = ((List<Object>)m.get("VALUES")).stream().map(v -> Double.parseDouble(v+"")).collect(Collectors.toList());
+            return new GraphElement(elementName, elementColor, label, elementColor, valueList);
+        }).filter(el -> el != null).collect(Collectors.toMap(k -> k.getElementName(), v -> v)); 
     }
 
     @Override
-    public void saveImage(BufferedImage image, Path savePath, CODEC codec) throws Exception {
-        GraphUtility.saveBufferedImage(image, savePath.toFile(), codec);
+    public synchronized void saveImage(BufferedImage image, Path savePath, CODEC codec) throws Exception {       
+        GraphUtility.saveBufferedImage(image, savePath.toFile(), CODEC.PNG);
     }
 }
