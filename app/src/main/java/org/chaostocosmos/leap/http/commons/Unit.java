@@ -1,11 +1,11 @@
 package org.chaostocosmos.leap.http.commons;
 
 /**
- * Unit enum
+ * UNIT enum
  * 
  * @author 9ins
  */
-public enum UNIT  { 
+public enum UNIT  {  
     MS(1),
     SE(1000),
     MI(1000*60),

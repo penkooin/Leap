@@ -12,7 +12,7 @@
 * <h4>For versatile / multi-purpose / high-performance / rapid response services</h4>  
 
 
-<h3> <img src="./img/logo16.png"/> What is Leap? </h3>
+<h3> <img src="./app/src/main/resources/webapp/WEB-INF/static/img/logo16.png"/> What is Leap? </h3>
 
 ---  
 Leap? is alternatives of Web Server or Web Application Server and powerful alternatives of Spring-Boot.
@@ -32,29 +32,29 @@ Especially supporting Video/Audio streaming service makes you can build up excel
 So now, you can leap up with Leap?
   
   
-<h3> <img src="./img/logo16.png"/> Features of Leap? </h3>
+<h3> <img src="./app/src/main/resources/webapp/WEB-INF/static/img/logo16.png"/> Features of Leap? </h3>
 ---
 1. 
 
-<h3> <img src="./img/logo16.png"/> Preperation for using Leap? </h3>
+<h3> <img src="./app/src/main/resources/webapp/WEB-INF/static/img/logo16.png"/> Preperation for using Leap? </h3>
 ---
 
-<h3> <img src="./img/logo16.png"/> Configuration for security </h3>
+<h3> <img src="./app/src/main/resources/webapp/WEB-INF/static/img/logo16.png"/> Configuration for security </h3>
 ---
 
-<h3> <img src="./img/logo16.png"/> Configuration for filtering </h3>
+<h3> <img src="./app/src/main/resources/webapp/WEB-INF/static/img/logo16.png"/> Configuration for filtering </h3>
 ---
 
-<h3> <img src="./img/logo16.png"/> How to make your own services </h3>
+<h3> <img src="./app/src/main/resources/webapp/WEB-INF/static/img/logo16.png"/> How to make your own services </h3>
 ---
 
-<h3> <img src="./img/logo16.png"/> Remote deploy  </h3>
+<h3> <img src="./app/src/main/resources/webapp/WEB-INF/static/img/logo16.png"/> Remote deploy  </h3>
 ---
 
-<h3> <img src="./img/logo16.png"/> How to communicate with RDBMS </h3>
+<h3> <img src="./app/src/main/resources/webapp/WEB-INF/static/img/logo16.png"/> How to communicate with RDBMS </h3>
 ---
 
-<h3> <img src="./img/logo16.png"/> How to communicate with Big-Data infrastructure. </h3>
+<h3> <img src="./app/src/main/resources/webapp/WEB-INF/static/img/logo16.png"/> How to communicate with Big-Data infrastructure. </h3>
 ---
 
 
