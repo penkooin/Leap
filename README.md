@@ -1,7 +1,7 @@
 
-<img src="./img/leap.png"/>
+<img src="./app/src/main/resources/webapp/WEB-INF/static/img/leap.png"/>
 
-<h2> <img src="./img/logo16.png"/> You wanna Leap? </h2>
+<h2> <img src="./app/src/main/resources/webapp/WEB-INF/static/img/logo16.png"/> You wanna Leap? </h2>
  
 <h3> Just being server for web services! </h3>  
 
