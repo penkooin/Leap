@@ -22,14 +22,20 @@ import com.google.gson.Gson;
  * @author 9ins
  */
 public class TemplateBuilder {
-
-    public static String buildMonitoringPage(String contextPath, Host<?> host) {
-        host.getResource().getTemplatePage("templates/monitor.html", null);
-        
-        String monitoringPage = host.get
+    /**
+     * Make monitoring page 
+     * @param contextPath
+     * @param host
+     * @return
+     * @throws Exception
+     */
+    public static String buildMonitoringPage(String contextPath, Host<?> host) throws Exception {
+        String monitorPage = host.getResource().getTemplatePage("templates/monitor.html", null);
+        String scriptPage = host.getResource().getTemplatePage("script/script.js", null);
+        return host.getResource().getTemplatePage("templates/default.html", Map.of("@serverName", host.getHost(), "@javascript", scriptPage, "@body", monitorPage));
     }
     /**
-     * Make welcome page with directory view
+     * Make welcome page for directory view
      * @param contextPath
      * @param host
      * @return
@@ -38,8 +44,8 @@ public class TemplateBuilder {
     public static String buildWelcomeResourceHtml(String contextPath, Host<?> host) throws Exception {
         String resourcePage = host.getResource().getResourcePage(Map.of("@resourceList", buildResourceJson(contextPath, host)));
         String welcomePage = host.getResource().getWelcomePage(Map.of("@serverName", host.getHost(), "@body", resourcePage));
-        String javascript = host.getResource().getTemplatePage("script/script.js", null);
-        return host.getResource().getTemplatePage("templates/default.html", Map.of("@serverName", host.getHost(), "@javascript", javascript, "@body", welcomePage));
+        String scriptPage = host.getResource().getTemplatePage("script/script.js", null);
+        return host.getResource().getTemplatePage("templates/default.html", Map.of("@serverName", host.getHost(), "@javascript", scriptPage, "@body", welcomePage));
     }
     /**
      * Make resources page

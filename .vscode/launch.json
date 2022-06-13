@@ -1,5 +1,14 @@
 {
     "vmArgs" : [
         "-Xms8g"
+    ],
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch LeapApp",
+            "request": "launch",
+            "mainClass": "org.chaostocosmos.leap.http.LeapApp",
+            "projectName": "app"
+        }
     ]
 }

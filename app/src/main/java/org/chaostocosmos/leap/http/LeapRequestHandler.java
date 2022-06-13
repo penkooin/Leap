@@ -100,7 +100,8 @@ public class LeapRequestHandler implements Runnable {
                 }
                 Path resourcePath = ResourceHelper.getResourcePath(request);
                 if(request.getContextPath().equals("/")) {
-                    String body = TemplateBuilder.buildWelcomeResourceHtml(request.getContextPath(), host);
+                    //String body = TemplateBuilder.buildWelcomeResourceHtml(request.getContextPath(), host);
+                    String body = TemplateBuilder.buildMonitoringPage(request.getContextPath(), host);
                     response.addHeader("Content-Type", MIME_TYPE.TEXT_HTML.mimeType()+"; charset="+host.charset().name());
                     response.setBody(body.getBytes());
                     response.setResponseCode(RES_CODE.RES200.code());

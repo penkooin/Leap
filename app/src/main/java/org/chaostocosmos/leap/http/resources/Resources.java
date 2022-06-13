@@ -34,6 +34,14 @@ public interface Resources {
      * @param resourcePath
      */
     public void addResource(Path resourcePath) throws Exception;
+
+    /**
+     * Remove resource
+     * @param resourcePath
+     * @throws Exception
+     */
+    public void removeResource(Path resourcePath) throws Exception;
+    
     /**
      * Get resource matching with path
      * @param resourcePath

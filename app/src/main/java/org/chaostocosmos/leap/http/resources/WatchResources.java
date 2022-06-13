@@ -151,7 +151,8 @@ public class WatchResources extends Thread implements Resources {
                             }
                         }
                         String[] paths = path.subpath(this.watchPath.getNameCount(), path.getNameCount()).toString().split(Pattern.quote(File.separator));
-                        addResource(this.resourceTree, paths, data);
+                        //addResource(this.resourceTree, paths, data);
+                        addResource(path);
                     } else if(event.kind() == StandardWatchEventKinds.ENTRY_MODIFY) {
                         path = path.resolve(event.context().toString());
                         if(path.toFile().isFile() && this.forbiddenFiltering.exclude(path.toFile().getName())) {
@@ -178,7 +179,8 @@ public class WatchResources extends Thread implements Resources {
                                 continue;
                             }
                             String[] paths = path.subpath(this.watchPath.getNameCount(), path.getNameCount()).toString().split(Pattern.quote(File.separator));
-                            addResource(this.resourceTree, paths, data);
+                            //addResource(this.resourceTree, paths, data);
+                            addResource(path);
                         }
                     } else if(event.kind() == StandardWatchEventKinds.ENTRY_DELETE) {
                         final Path p = path.resolve(event.context().toString());
@@ -194,7 +196,7 @@ public class WatchResources extends Thread implements Resources {
 
             }
             this.watchService.close();
-        } catch (InterruptedException | IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -233,106 +235,8 @@ public class WatchResources extends Thread implements Resources {
         return tree;
     }
 
-    /**
-     * Add resource to resource tree
-     * @param tree
-     * @param res
-     * @throws IOException
-     */
-    @SuppressWarnings("unchecked")
-    private void addResource(ResourceInfo<String, ResourceInfo<String, ?>> resourceTree, String[] res, ResourceInfo<String, ?> data) throws IOException {        
-        if(res.length == 1) {            
-            resourceTree.put(res[0], data);
-        } else {
-            ResourceInfo<String, ?> val = (ResourceInfo<String, ?>)resourceTree.get(res[0]);
-            if(val == null) {
-                resourceTree.put(res[0], new ResourceInfo<String, ResourceInfo<String, ?>>(true, this.watchPath.resolve(res[0]), false));
-            }
-            addResource((ResourceInfo<String, ResourceInfo<String, ?>>)resourceTree.get(res[0]), Arrays.copyOfRange(res, 1, res.length), data);
-        }
-    }
-
-    /**
-     * Remove resource
-     * @param tree
-     * @param res
-     */
-    @SuppressWarnings("unchecked")
-    protected void removeResource(ResourceInfo<String, ?> resourceTree, String[] res) {
-        if(res.length == 1) {
-            resourceTree.remove(res[0]);
-        } else {
-            removeResource((ResourceInfo<String, ?>)resourceTree.get(res[0]), Arrays.copyOfRange(res, 1, res.length));
-        }
-    }
-
-    /**
-     * Filtering resource tree and get filtered resource List
-     * @param resourceTree
-     * @param mimeType
-     * @return
-     * @throws IOException
-     */
-    @SuppressWarnings("unchecked")
-    private ResourceInfo<String, ResourceInfo<String, ?>> filterResourceTree(ResourceInfo<String, ResourceInfo<String, ?>> resourceTree, MIME_TYPE mimeType) throws IOException {
-        ResourceInfo<String, ResourceInfo<String, ?>> infos = new ResourceInfo<String, ResourceInfo<String, ?>>(true, resourceTree.getResourcePath(), false);
-        for(Object obj : resourceTree.values()) {
-            ResourceInfo<String, ResourceInfo<String, ?>> info = (ResourceInfo<String, ResourceInfo<String, ?>>) obj;
-            if(!info.isNode()) {
-                if(info.getMimeType() == mimeType) {
-                    infos.put(info.getContextPath(), info);
-                }
-            } else {
-                infos.putAll(filterResourceTree(info, mimeType));
-            }
-        }
-        return infos;
-    }
-
-    /**
-     * Get resource data
-     * @param tree
-     * @param res
-     * @return
-     */
-    @SuppressWarnings("unchecked")
-    private ResourceInfo<String, ?> getResource(ResourceInfo<String, ResourceInfo<String, ?>> tree, String[] res) {
-        if(res.length == 1) {
-            return tree.get(res[0]);
-        } else {
-            return getResource((ResourceInfo<String, ResourceInfo<String, ?>>)tree.get(res[0]), Arrays.copyOfRange(res, 1, res.length));
-        }
-    }
-
-    /**
-     * Get resource total size
-     * @param sizeUnit
-     * @return
-     */
-    public double getResourceTotalSize(UNIT sizeUnit) {
-        return sizeUnit.get(getResourceTotalSize(resourceTree));
-    }
-
-    /**
-     * Get total resource size
-     * @param res
-     * @return
-     */
-    public long getResourceTotalSize(ResourceInfo<String, ?> tree) {
-        long size = 0;
-        for(Object obj : tree.values()) {
-            ResourceInfo<String, ?> info = (ResourceInfo<String, ?>) obj;
-            if(!info.isNode()) {
-                size += info.getResourceSize();
-            } else {
-                size += getResourceTotalSize(info);
-            } 
-        }
-        return size;
-    }
-
     @Override
-    public void addResource(Path resourcePath) throws IOException { 
+    public synchronized void addResource(Path resourcePath) throws Exception { 
         if(resourcePath.toFile().isFile() && this.accessFiltering.include(resourcePath.toFile().getName()) && this.forbiddenFiltering.exclude(resourcePath.toFile().getName())) {            
             Path path = resourcePath.subpath(this.watchPath.getNameCount(), resourcePath.getNameCount());
             if(this.inMemoryFiltering.include(resourcePath.toFile().getName())) {
@@ -343,6 +247,25 @@ public class WatchResources extends Thread implements Resources {
                 addResource(this.resourceTree, path.toString().split(Pattern.quote(File.separator)), new ResourceInfo<String, ResourceInfo<String, ?>>(false, path, false));
             }
         }
+    }
+
+    @Override
+    public synchronized void removeResource(Path resourcePath) throws Exception {
+        String[] paths = resourcePath.subpath(this.watchPath.getNameCount(), resourcePath.getNameCount()).toString().split(Pattern.quote(File.separator));
+        removeResource(this.resourceTree, paths);        
+    }
+
+    @Override
+    public synchronized ResourceInfo<String, ?> getResourceInfo(Path resourcePath) {
+        resourcePath = resourcePath.normalize();
+        if(resourcePath.getNameCount() == watchPath.getNameCount()) {
+            return this.resourceTree;
+        } else if(resourcePath.getNameCount() < watchPath.getNameCount()) {
+            throw new WASException(MSG_TYPE.HTTP, 403, "Requested path is not allowed.");
+        }
+        Path path = resourcePath.subpath(this.watchPath.getNameCount(), resourcePath.getNameCount());        
+        String[] paths = path.toString().split(Pattern.quote(File.separator));
+        return getResource(this.resourceTree, paths);
     }
 
     /**
@@ -372,19 +295,6 @@ public class WatchResources extends Thread implements Resources {
     @Override
     public String getContextPath(Path resourcePath) {
         return resourcePath.subpath(this.watchPath.getNameCount(), resourcePath.getNameCount()).toString().replace("\\", "/");
-    }
-
-    @Override
-    public ResourceInfo<String, ?> getResourceInfo(Path resourcePath) {
-        resourcePath = resourcePath.normalize();
-        if(resourcePath.getNameCount() == watchPath.getNameCount()) {
-            return this.resourceTree;
-        } else if(resourcePath.getNameCount() < watchPath.getNameCount()) {
-            throw new WASException(MSG_TYPE.HTTP, 403, "Requested path is not allowed.");
-        }
-        Path path = resourcePath.subpath(this.watchPath.getNameCount(), resourcePath.getNameCount());        
-        String[] paths = path.toString().split(Pattern.quote(File.separator));
-        return getResource(this.resourceTree, paths);
     }
 
     @Override
@@ -443,6 +353,104 @@ public class WatchResources extends Thread implements Resources {
     public boolean exists(Path resourcePath) {
         return resourcePath.toFile().exists();
     }
+
+    /**
+     * Add resource to resource tree
+     * @param tree
+     * @param res
+     * @throws IOException
+     */
+    @SuppressWarnings("unchecked")
+    private void addResource(ResourceInfo<String, ResourceInfo<String, ?>> resourceTree, String[] res, ResourceInfo<String, ?> data) throws IOException {        
+        if(res.length == 1) {            
+            resourceTree.put(res[0], data);
+        } else {
+            ResourceInfo<String, ?> val = (ResourceInfo<String, ?>)resourceTree.get(res[0]);
+            if(val == null) {
+                resourceTree.put(res[0], new ResourceInfo<String, ResourceInfo<String, ?>>(true, this.watchPath.resolve(res[0]), false));
+            }
+            addResource((ResourceInfo<String, ResourceInfo<String, ?>>)resourceTree.get(res[0]), Arrays.copyOfRange(res, 1, res.length), data);
+        }
+    }
+
+    /**
+     * Remove resource
+     * @param tree
+     * @param res
+     */
+    @SuppressWarnings("unchecked")
+    protected void removeResource(ResourceInfo<String, ?> resourceTree, String[] res) {
+        if(res.length == 1) {
+            resourceTree.remove(res[0]);
+        } else {
+            removeResource((ResourceInfo<String, ?>)resourceTree.get(res[0]), Arrays.copyOfRange(res, 1, res.length));
+        }
+    }    
+
+    /**
+     * Filtering resource tree and get filtered resource List
+     * @param resourceTree
+     * @param mimeType
+     * @return
+     * @throws IOException
+     */
+    @SuppressWarnings("unchecked")
+    private ResourceInfo<String, ResourceInfo<String, ?>> filterResourceTree(ResourceInfo<String, ResourceInfo<String, ?>> resourceTree, MIME_TYPE mimeType) throws IOException {
+        ResourceInfo<String, ResourceInfo<String, ?>> infos = new ResourceInfo<String, ResourceInfo<String, ?>>(true, resourceTree.getResourcePath(), false);
+        for(Object obj : resourceTree.values()) {
+            ResourceInfo<String, ResourceInfo<String, ?>> info = (ResourceInfo<String, ResourceInfo<String, ?>>) obj;
+            if(!info.isNode()) {
+                if(info.getMimeType() == mimeType) {
+                    infos.put(info.getContextPath(), info);
+                }
+            } else {
+                infos.putAll(filterResourceTree(info, mimeType));
+            }
+        }
+        return infos;
+    }
+
+    /**
+     * Get resource data
+     * @param tree
+     * @param res
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    private synchronized ResourceInfo<String, ?> getResource(ResourceInfo<String, ResourceInfo<String, ?>> tree, String[] res) {
+        if(res.length == 1) {
+            return tree.get(res[0]);
+        } else {
+            return getResource((ResourceInfo<String, ResourceInfo<String, ?>>)tree.get(res[0]), Arrays.copyOfRange(res, 1, res.length));
+        }
+    }
+
+    /**
+     * Get resource total size
+     * @param sizeUnit
+     * @return
+     */
+    public double getResourceTotalSize(UNIT sizeUnit) {
+        return sizeUnit.get(getResourceTotalSize(resourceTree));
+    }
+
+    /**
+     * Get total resource size
+     * @param res
+     * @return
+     */
+    public long getResourceTotalSize(ResourceInfo<String, ?> tree) {
+        long size = 0;
+        for(Object obj : tree.values()) {
+            ResourceInfo<String, ?> info = (ResourceInfo<String, ?>) obj;
+            if(!info.isNode()) {
+                size += info.getResourceSize();
+            } else {
+                size += getResourceTotalSize(info);
+            } 
+        }
+        return size;
+    }    
 
     /**
      * ResourceInfo

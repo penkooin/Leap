@@ -128,7 +128,7 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
                 put("ID", "CPU");
                 put("TITLE", "Leap CPU Statistics");
                 put("CODEC", "PNG");
-                put("SAVE_PATH", "config/monitor/cpu.png");
+                put("SAVE_PATH", "monitor/cpu.png");
                 put("GRAPH", "LINE");
                 put("INTERPOLATE", "LINEAR");
                 put("WIDTH", 800);
@@ -157,7 +157,7 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
                 put("ID", "MEMORY");
                 put("TITLE", "Leap Memory Statistics");
                 put("CODEC", "PNG");
-                put("SAVE_PATH", "config/monitor/memory.png");
+                put("SAVE_PATH", "monitor/memory.png");
                 put("GRAPH", "AREA");
                 put("INTERPOLATE", "SPLINE");
                 put("WIDTH", 800);
@@ -198,7 +198,7 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
                 put("ID", "THREAD");
                 put("TITLE", "Leap Thread Pool Statistics");
                 put("CODEC", "PNG");
-                put("SAVE_PATH", "config/monitor/thread.png");
+                put("SAVE_PATH", "monitor/thread.png");
                 put("GRAPH", "LINE");
                 put("INTERPOLATE", "SPLINE");
                 put("WIDTH", 800);
