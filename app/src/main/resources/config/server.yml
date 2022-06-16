@@ -13,7 +13,7 @@ server:
       queue-size: 100
 
     monitoring:      
-      interval: 5000
+      interval: 3000
       unit: MB
       logs: ./logs/monitor.log
       log-level: INFO

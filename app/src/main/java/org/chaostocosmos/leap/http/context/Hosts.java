@@ -30,7 +30,7 @@ public class Hosts <M> extends Metadata <M> {
     Host<?> defaultHost;
     List<Host<?>> virtualHost;
     List<Host<?>> allHost;
-    Map<String, Host<?>> hostMap;
+    Map<String, Host<?>> hostMap;    
 
     /**
      * Constructor

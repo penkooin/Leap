@@ -1,8 +1,9 @@
+
 /**
  * Generate resource list
  * @param {*} resJson 
  */
-function generateResource(resJson) {            
+function genDir(resJson) {            
     var data = JSON.parse(resJson);
     var host = data.host.substring(0, data.host.lastIndexOf('/'));
     var path = data.path.substring(1, data.path.length);
@@ -32,4 +33,3 @@ function generateResource(resJson) {
     }
     dir.insertAdjacentHTML("afterbegin", resList);
 }
-

@@ -14,6 +14,8 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import javax.transaction.NotSupportedException;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -72,10 +74,6 @@ public class LeapApp {
      */
     public static LinkedBlockingQueue<Runnable> threadQueue;
     /**
-     * Resource monitor
-     */
-    public static ResourceMonitor resourceMonitor;
-    /**
      * Constructor with arguments
      * 
      * @param args 
@@ -125,10 +123,11 @@ public class LeapApp {
             Level level = Level.toLevel(optionL); 
             logger.setLevel(level);
         }
-        logger.info("Leap starting.");
+        logger.info("Leap starting.........");
 
         //print trade mark
         trademark();
+        logger.info("====================================================================================================");
 
         //build webapp environment
         for(Host<?> host : Context.getHostMap().values()) {
@@ -142,13 +141,10 @@ public class LeapApp {
         threadQueue = new LinkedBlockingQueue<Runnable>();
 
         //initialize thread pool
-        threadpool = new ThreadPoolExecutor(Context.getServer().getThreadPoolCoreSize(), Context.getServer().getThreadPoolMaxSize(), Context.getServer().getThreadPoolKeepAlive(), TimeUnit.SECONDS, this.threadQueue);        
+        threadpool = new ThreadPoolExecutor(Context.getServer().getThreadPoolCoreSize(), Context.getServer().getThreadPoolMaxSize(), Context.getServer().getThreadPoolKeepAlive(), TimeUnit.SECONDS, threadQueue);        
 
         logger.info("====================================================================================================");
         logger.info("ThreadPool initialized - CORE: "+Context.getServer().getThreadPoolCoreSize()+"   MAX: "+Context.getServer().getThreadPoolMaxSize()+"   KEEP-ALIVE WHEN IDLE(seconds): "+Context.getServer().getThreadPoolKeepAlive());
-
-        resourceMonitor = ResourceMonitor.get();
-        resourceMonitor.start();
 
         //set verbose option to STD IO
         String optionV = cmdLine.getOptionValue("v");
@@ -173,6 +169,12 @@ public class LeapApp {
         //NetworkInterfaces.getAllNetworkAddresses().stream().forEach(i -> System.out.println(i.getHostName())); 
         //LeapClassLoader 
         LeapURLClassLoader classLoader = ClassUtils.getClassLoader();
+
+        System.out.println("***************************************"+LeapApp.getThreadPool());
+
+        ResourceMonitor resourceMonitor = ResourceMonitor.get();
+        resourceMonitor.start();
+
         //Spring JPA 
         //SpringJPAManager jpaManager = SpringJPAManager.get();
 
@@ -201,16 +203,20 @@ public class LeapApp {
      * Shut down Leap WAS
      * @throws IOException
      * @throws InterruptedException
+     * @throws NotSupportedException
      */
-    public void shutdown() throws InterruptedException, IOException { 
-        resourceMonitor.stop();
+    public void shutdown() throws InterruptedException, IOException, NotSupportedException { 
+        ResourceMonitor.get().stop();
         for(LeapHttpServer server : leapServerMap.values()) {
             server.close();
             server.join();
         }
         threadpool.shutdown();
-        while(!threadpool.awaitTermination(3, TimeUnit.SECONDS)) {
-            logger.info("Waiting for termination server...");
+        int countDown = 0;
+        while(!threadpool.isTerminated()) {            
+            TimeUnit.SECONDS.sleep(1);
+            logger.info("Waiting for termination server..."+countDown);
+            countDown += 1;            
         }
         logger.info("Leap server terminated...");
     }

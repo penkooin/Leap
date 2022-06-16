@@ -36,9 +36,10 @@ public class ResourceManager {
     /**
      * Default constructor
      * @throws IOException
+     * @throws InterruptedException
      * @throws ImageProcessingException
      */
-    private ResourceManager() throws IOException {
+    private ResourceManager() throws IOException, InterruptedException {
         this.resourceMap = new HashMap<>();
         for(Host<?> host : Context.getHosts().getHostMap().values()) {
             this.resourceMap.put(host.getHost(), new WatchResources(host, WATCH_KIND));
@@ -49,9 +50,10 @@ public class ResourceManager {
      * Initialize StaticResourceManager
      * @throws IOException
      * @return
+     * @throws InterruptedException
      * @throws ImageProcessingException
      */
-    public static ResourceManager initialize() throws IOException {
+    public static ResourceManager initialize() throws IOException, InterruptedException {
         manager = new ResourceManager();
         return manager;
     }
@@ -60,9 +62,10 @@ public class ResourceManager {
      * Get static WatchResource object
      * @return
      * @throws IOException
+     * @throws InterruptedException
      * @throws ImageProcessingException
      */
-    public static Resources get(String hostId) throws IOException {
+    public static Resources get(String hostId) throws IOException, InterruptedException {
         if(manager == null) {
             manager = new ResourceManager();
         }
@@ -74,9 +77,10 @@ public class ResourceManager {
      * @param hostId
      * @return
      * @throws IOException
+     * @throws InterruptedException
      * @throws ImageProcessingException
      */
-    public Resources getResource(String hostId) throws IOException {
+    public Resources getResource(String hostId) throws IOException, InterruptedException {
         if(!this.resourceMap.containsKey(hostId)) {
             this.resourceMap.put(hostId, new WatchResources(Context.getHosts().getHost(hostId), WATCH_KIND));
         }

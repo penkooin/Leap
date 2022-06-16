@@ -16,7 +16,7 @@ public interface Resources {
      * @param mimeType
      * @return
      */
-    public ResourceInfo<String, ?> filter(MIME_TYPE mimeType) throws Exception;
+    public ResourceInfo filter(MIME_TYPE mimeType) throws Exception;
     /**
      * Resolve real path
      * @param contextPath
@@ -47,14 +47,14 @@ public interface Resources {
      * @param resourcePath
      * @return
      */
-    public ResourceInfo<String, ?> getResourceInfo(Path resourcePath) throws Exception;
+    public ResourceInfo getResourceInfo(Path resourcePath) throws Exception;
     /**
      * Get resource content
      * @param contentName
      * @return
      * @throws Exception
      */
-    public ResourceInfo<String, ?> getContextResourceInfo(String contextPath) throws Exception;
+    public ResourceInfo getContextResourceInfo(String contextPath) throws Exception;
     /**
      * Whether resource exist in Resource
      * @param resourcePath

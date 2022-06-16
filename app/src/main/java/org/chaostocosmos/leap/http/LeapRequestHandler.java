@@ -100,15 +100,14 @@ public class LeapRequestHandler implements Runnable {
                 }
                 Path resourcePath = ResourceHelper.getResourcePath(request);
                 if(request.getContextPath().equals("/")) {
-                    //String body = TemplateBuilder.buildWelcomeResourceHtml(request.getContextPath(), host);
-                    String body = TemplateBuilder.buildMonitoringPage(request.getContextPath(), host);
+                    String body = TemplateBuilder.buildWelcomeResourceHtml(request.getContextPath(), host);                    
                     response.addHeader("Content-Type", MIME_TYPE.TEXT_HTML.mimeType()+"; charset="+host.charset().name());
                     response.setBody(body.getBytes());
                     response.setResponseCode(RES_CODE.RES200.code());
                 } else {
                     if (host.getResource().exists(resourcePath)) {
                         //Get requested resource data
-                        ResourceInfo<String, ?> resourceInfo = host.getResource().getResourceInfo(resourcePath);
+                        ResourceInfo resourceInfo = host.getResource().getResourceInfo(resourcePath);
                         if(resourceInfo != null) {
                             if(resourceInfo.isNode()) {
                                 String body = TemplateBuilder.buildResourceHtml(request.getContextPath(), host);
@@ -118,7 +117,7 @@ public class LeapRequestHandler implements Runnable {
                                 response.setBody(body);
                                 //LoggerFactory.getLogger(hosts.getHost()).debug("RESOURCE LIST REQUESTED: "+body);    
                             } else {
-                                String mimeType = UtilBox.probeContentType(resourceInfo.getResourcePath());
+                                String mimeType = UtilBox.probeContentType(resourceInfo.getPath());
                                 if(mimeType == null) {
                                     mimeType = MIME_TYPE.APPLICATION_OCTET_STREAM.mimeType();
                                 }

@@ -24,7 +24,7 @@ public class MediaStreamer {
      */
     public MediaStreamer(ResourceInfo resourceInfo) throws IOException {
         this.resourceInfo = resourceInfo;
-        double duration = FileUtils.getMp4DurationSeconds(this.resourceInfo.getResourcePath());
+        double duration = FileUtils.getMp4DurationSeconds(this.resourceInfo.getPath());
         double totalSize = this.resourceInfo.getResourceSize() * 1.0d;        
         bytePerSeconds = (int)(totalSize / duration);
     }

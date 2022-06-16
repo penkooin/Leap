@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -38,10 +37,6 @@ import ch.qos.logback.classic.Logger;
  * @author 9ins
  */
 public class ResourceMonitor extends Metadata<Map<String, Object>> {
-    /**
-     * ThreadPool
-     */
-    private ThreadPoolExecutor threadpool;
     /**
      * Unit of data size
      */
@@ -95,13 +90,12 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
      */
     private ResourceMonitor() throws NotSupportedException {
         super(buildMonitorSchema());
-        this.threadpool = LeapApp.getThreadPool();
         this.unit = Context.getServer().getMonitoringUnit();
         this.fractionPoint = Constants.DEFAULT_FRACTION_POINT;
         this.interval = Context.getServer().getMonitoringInterval();
         this.logger = LoggerFactory.createLoggerFor("monitoring", 
-                                    LeapApp.getHomePath().resolve(Context.getServer().getMonitoringLogs()).normalize().toString(), 
-                                    Context.getServer().getMonitoringLogLevel());        
+                      LeapApp.getHomePath().resolve(Context.getServer().getMonitoringLogs()).normalize().toString(), 
+                      Context.getServer().getMonitoringLogLevel());        
     }
     /**
      * Build monitor schema Map
@@ -116,14 +110,12 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
             // INTERPOLATE.NEVILLE
             // INTERPOLATE.SPLINE
             // INTERPOLATE.NONE
-
             UNIT unit = Context.getServer().getMonitoringUnit();
             double totalMemory = unit.get(((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getTotalPhysicalMemorySize(), Constants.DEFAULT_FRACTION_POINT);
             double usedMemory = unit.get(((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getTotalPhysicalMemorySize() - ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getFreePhysicalMemorySize(), Constants.DEFAULT_FRACTION_POINT);
             double processMemory = unit.get(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory(), Constants.DEFAULT_FRACTION_POINT);
             int threadMax = Context.getServer().getThreadPoolMaxSize();
             int threadCore = Context.getServer().getThreadPoolCoreSize();
-            System.out.println("max mem: "+totalMemory);
             put("CPU", new HashMap<String, Object>() {{
                 put("ID", "CPU");
                 put("TITLE", "Leap CPU Statistics");
@@ -338,42 +330,42 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
      * @return
      */
     public int getCorePoolSize() {
-        return threadpool.getCorePoolSize();
+        return LeapApp.getThreadPool().getCorePoolSize();
     }
     /**
      * Get thread pool active count
      * @return
      */
     public int getActiveCount() {
-        return threadpool.getActiveCount();
+        return LeapApp.getThreadPool().getActiveCount();
     }
     /**
      * Get thread pool largest size
      * @return
      */
     public int getLargestPoolSize() {
-        return threadpool.getLargestPoolSize();
+        return LeapApp.getThreadPool().getLargestPoolSize();
     }
     /**
      * Get thread pool maximum size
      * @return
      */
     public int getMaximumPoolSize() {
-        return threadpool.getMaximumPoolSize();
+        return LeapApp.getThreadPool().getMaximumPoolSize();
     }
     /**
      * Get thread pool complated task count
      * @return
      */
     public long getCompletedTaskCount() {
-        return threadpool.getCompletedTaskCount();
+        return LeapApp.getThreadPool().getCompletedTaskCount();
     }
     /**
      * Get current queued task count in thread pool
      * @return
      */
     public int getQueuedTaskCount() {
-        return threadpool.getQueue().size();
+        return LeapApp.getThreadPool().getQueue().size();
     }
     /**
      * Get max memory bytes applied with fraction ImageProcessingException

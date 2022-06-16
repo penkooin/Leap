@@ -27,6 +27,7 @@ import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
 import org.chaostocosmos.leap.http.part.MultiPart;
+import org.chaostocosmos.leap.http.resources.TemplateBuilder;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -37,6 +38,14 @@ import com.sun.media.jai.codec.ImageEncoder;
 public class ResourceUsageService extends AbstractChartService {
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+    @MethodMappper(mappingMethod = REQUEST_TYPE.GET, path = "")
+    public void getMonitorWebpage(Request request, Response response) throws Exception {
+        String body = TemplateBuilder.buildMonitoringPage(request.getContextPath(), super.httpTransfer.getHost());        
+        response.setBody(body);
+        response.addHeader("Content-Type", MIME_TYPE.TEXT_HTML.mimeType());
+        response.setResponseCode(RES_CODE.RES200.code());
+    }
 
     @MethodMappper(mappingMethod = REQUEST_TYPE.POST, path = "/chart/image")
     @SuppressWarnings("unchecked")

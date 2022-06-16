@@ -31,8 +31,8 @@ public class TemplateBuilder {
      */
     public static String buildMonitoringPage(String contextPath, Host<?> host) throws Exception {
         String monitorPage = host.getResource().getTemplatePage("templates/monitor.html", null);
-        String scriptPage = host.getResource().getTemplatePage("script/script.js", null);
-        return host.getResource().getTemplatePage("templates/default.html", Map.of("@serverName", host.getHost(), "@javascript", scriptPage, "@body", monitorPage));
+        String script = host.getResource().getTemplatePage("script/refreshImage.js", Map.of("@interval", Context.getServer().getMonitoringInterval()));
+        return host.getResource().getTemplatePage("templates/default.html", Map.of("@serverName", host.getHost(), "@script", script, "@body", monitorPage));
     }
     /**
      * Make welcome page for directory view
@@ -44,8 +44,8 @@ public class TemplateBuilder {
     public static String buildWelcomeResourceHtml(String contextPath, Host<?> host) throws Exception {
         String resourcePage = host.getResource().getResourcePage(Map.of("@resourceList", buildResourceJson(contextPath, host)));
         String welcomePage = host.getResource().getWelcomePage(Map.of("@serverName", host.getHost(), "@body", resourcePage));
-        String scriptPage = host.getResource().getTemplatePage("script/script.js", null);
-        return host.getResource().getTemplatePage("templates/default.html", Map.of("@serverName", host.getHost(), "@javascript", scriptPage, "@body", welcomePage));
+        String script = host.getResource().getTemplatePage("script/genDir.js", null);
+        return host.getResource().getTemplatePage("templates/default.html", Map.of("@serverName", host.getHost(), "@script", script, "@body", welcomePage));
     }
     /**
      * Make resources page
@@ -56,8 +56,8 @@ public class TemplateBuilder {
      */
     public static String buildResourceHtml(String contextPath, Host<?> host) throws Exception {
         String resourcePage = host.getResource().getResourcePage(Map.of("@resourceList", buildResourceJson(contextPath, host)));
-        String javascript = host.getResource().getTemplatePage("script/script.js", null);
-        return host.getResource().getTemplatePage("templates/default.html", Map.of("@serverName", host.getHost(), "@javascript", javascript, "@body", resourcePage));
+        String script = host.getResource().getTemplatePage("script/genDir.js", null);
+        return host.getResource().getTemplatePage("templates/default.html", Map.of("@serverName", host.getHost(), "@script", script, "@body", resourcePage));
     }
     /**
      * Build http error page
@@ -72,7 +72,7 @@ public class TemplateBuilder {
     public static String buildErrorHtml(Host<?> host, MSG_TYPE type, int errorCode, String message) throws Exception {
         String title = Context.getMessages().getHttpMsg(errorCode, "- "+type.name());        
         String errorPage = host.getResource().getErrorPage(Map.of("@code", errorCode, "@type", title, "@message", message));;
-        return host.getResource().getTemplatePage("templates/default.html", Map.of("@serverName", host.getHost(), "@javascript", "", "@body", errorPage));
+        return host.getResource().getTemplatePage("templates/default.html", Map.of("@serverName", host.getHost(), "@script", "", "@body", errorPage));
     }
     /**
      * Create http response page

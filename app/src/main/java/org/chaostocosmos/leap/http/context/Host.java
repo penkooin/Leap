@@ -14,12 +14,14 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.commons.Filtering;
+import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.enums.PROTOCOL;
 import org.chaostocosmos.leap.http.resources.Resources;
 import org.chaostocosmos.leap.http.user.GRANT;
 import org.chaostocosmos.leap.http.user.User;
 
 import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
 
 /**
  * Host object
@@ -39,6 +41,10 @@ public class Host <M> extends Metadata <M> {
      * weather host is default;
      */
     private boolean isDefaultHost;
+    /**
+     * Logger for Host
+     */
+    private Logger logger;
     /**
      * Default constructor
      * 
@@ -435,6 +441,13 @@ public class Host <M> extends Metadata <M> {
      */
     public InetSocketAddress getInetAddress() {
         return new InetSocketAddress(getHost(), getPort());
+    }
+    /**
+     * Get Logger
+     * @return
+     */
+    public Logger getLogger() {
+        return LoggerFactory.getLogger(getHostId());
     }
     @Override
     public String toString() {
