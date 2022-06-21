@@ -28,7 +28,6 @@ import org.chaostocosmos.leap.http.resources.TemplateBuilder;
  * @author 9ins
  */
 public class HttpTransferBuilder {
-
     /**
      * Build HttpTransfer object
      * @param hostId
@@ -68,7 +67,7 @@ public class HttpTransferBuilder {
         /**
          * Hosts, Information configured in config.yml
          */
-        Host<?> host;        
+        Host<?> host;
         /**
          * Client Socket
          */
@@ -96,14 +95,14 @@ public class HttpTransferBuilder {
         /**
          * Construct with request host and client socket
          * @param hostId
-         * @param client
+         * @param socket
          * @throws IOException
          */
-        public HttpTransfer(String hostId, Socket client) throws IOException {
+        public HttpTransfer(String hostId, Socket socket) throws IOException {
             this.host = Context.getHosts().getHost(hostId);
-            this.socket = client;
-            this.clientInputStream = client.getInputStream();
-            this.clientOutputStream = client.getOutputStream();
+            this.socket = socket;
+            this.clientInputStream = socket.getInputStream();
+            this.clientOutputStream = socket.getOutputStream();
         }
         /**
          * Get requested host
@@ -164,7 +163,7 @@ public class HttpTransferBuilder {
          * @throws Exception
          */
         private Request parseRequest() throws Exception {
-            return HttpParser.buildRequestParser().parseRequest(clientInputStream);
+            return HttpParser.buildRequestParser().parseRequest(socket.getInetAddress(), clientInputStream);
         }
         /**
          * Send response to client by HttpResponseDescriptor object
@@ -228,8 +227,8 @@ public class HttpTransferBuilder {
             this.clientOutputStream.flush(); 
             if(body instanceof byte[]) {
                 this.clientOutputStream.write((byte[]) body);
-            } else {
-                if(body instanceof String) {                                        
+            } else { 
+                if(body instanceof String) {                                       
                     this.clientOutputStream.write(body.toString().getBytes(charset));
                 } else if(body instanceof File) {
                     writeToStream((File)body, this.clientOutputStream, Context.getServer().getFileBufferSize());

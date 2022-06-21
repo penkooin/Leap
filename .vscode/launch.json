@@ -6,7 +6,7 @@
             "request": "launch",
             "mainClass": "org.chaostocosmos.leap.http.LeapApp",
             "projectName": "app",
-            "vmArgs" : "-Xms8G"
+            //"vmArgs" : "-Xms8G"
         }
     ]
 }

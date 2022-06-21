@@ -26,8 +26,6 @@ import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
-import org.chaostocosmos.leap.http.resources.ClassUtils;
-import org.chaostocosmos.leap.http.resources.LeapURLClassLoader;
 import org.chaostocosmos.leap.http.resources.ResourceHelper;
 import org.chaostocosmos.leap.http.resources.ResourceManager;
 import org.chaostocosmos.leap.http.resources.ResourceMonitor;
@@ -168,12 +166,8 @@ public class LeapApp {
     public void start() throws Exception {
         //NetworkInterfaces.getAllNetworkAddresses().stream().forEach(i -> System.out.println(i.getHostName())); 
         //LeapClassLoader 
-        LeapURLClassLoader classLoader = ClassUtils.getClassLoader();
 
         System.out.println("***************************************"+LeapApp.getThreadPool());
-
-        ResourceMonitor resourceMonitor = ResourceMonitor.get();
-        resourceMonitor.start();
 
         //Spring JPA 
         //SpringJPAManager jpaManager = SpringJPAManager.get();
@@ -185,7 +179,7 @@ public class LeapApp {
                 String key = leapServerMap.keySet().stream().filter(k -> k.equals(hostName)).findAny().get();
                 throw new IllegalArgumentException("Mapping host address is collapse on network interace: "+hostAddress.toString()+":"+host.getPort()+" with "+key);
             }
-            LeapHttpServer server = new LeapHttpServer(Context.getHomePath(), host, threadpool, classLoader, resourceMonitor);
+            LeapHttpServer server = new LeapHttpServer(Context.getHomePath(), host, threadpool);
             leapServerMap.put(hostAddress.getHostAddress()+":"+host.getPort(), server);
             if(host.isDefaultHost()) {
                 logger.info("[DEFAULT HOST] - Protocol: "+host.getProtocol().name()+"   Server: "+host.getHostId()+"   Host: "+host.getHost()+"   Port: "+host.getPort()+"   Doc-Root: "+host.getDocroot()+"   Logging path: "+host.getLogPath()+"   Level: "+host.getLogLevel().toString());                

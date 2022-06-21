@@ -98,13 +98,11 @@ public class TemplateBuilder {
     public static String buildResourceJson(String contextPath, Host<?> host) throws Exception {
         String path = contextPath.charAt(contextPath.length() - 1) == '/' ? contextPath.substring(0, contextPath.lastIndexOf('/')) : contextPath;
         final String path1 = path.equals("") ? "/" : path;
-        System.out.println(host.getStatic().resolve(path1.substring(1))+"____________________________");
         List<File> resourceInfos = Arrays.asList(host.getStatic().resolve(path1.substring(1)).toFile().listFiles())
                                          .stream()
                                          .sorted(Comparator.comparing(f -> f.isDirectory() ? -1 : 1))
                                          .filter(f -> host.getForbiddenFiltering().exclude(f.getName()))
                                          .collect(Collectors.toList());
-        System.out.println(resourceInfos);
         int pathCnt = path.length() - path.replace("/", "").length();
         Map<String, Object> params = new HashMap<>();
         params.put("path", path);

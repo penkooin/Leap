@@ -47,7 +47,14 @@ public class Server <T> extends Metadata <T> {
      */
     public int getBackLog() {
         return super.getValue("server.backlog");
-    } 
+    }
+    /**
+     * Get client request interval for blocking client that be has malicuous.
+     * @return
+     */ 
+    public long getRequestBlockingInterval() {
+        return (long)super.<Integer>getValue("server.request-blocking-interval");
+    }
     /**
      * Get upload file buffer flush size
      * @return

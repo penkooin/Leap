@@ -54,7 +54,6 @@
     width: 20%;
 }
 .content {
-    margin-left: 10%;
     width: 80%;
     text-align: left;
     align-items: center;
@@ -85,7 +84,7 @@ td {
 hr {
     position: relative;
     border: none;
-    height: 5px;
+    height: 0px;
     background: lightskyblue;
     margin-bottom: 20px;
 }

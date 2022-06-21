@@ -51,7 +51,6 @@ public class LeapRequestHandler implements Runnable {
      * Hosts
      */
     Host<?> host;
-
     /**
      * Constructor with HeapHttpServer, root direcotry, index.html file, client socket
      * @param httpServer
@@ -115,7 +114,7 @@ public class LeapRequestHandler implements Runnable {
                                 response.setResponseCode(RES_CODE.RES200.code());
                                 response.addHeader("Content-Type", mimeType+"; charset="+host.charset());
                                 response.setBody(body);
-                                //LoggerFactory.getLogger(hosts.getHost()).debug("RESOURCE LIST REQUESTED: "+body);    
+                                //LoggerFactory.getLogger(hosts.getHost()).debug("RESOURCE LIST REQUESTED: "+body);
                             } else {
                                 String mimeType = UtilBox.probeContentType(resourceInfo.getPath());
                                 if(mimeType == null) {
@@ -146,7 +145,7 @@ public class LeapRequestHandler implements Runnable {
                 if(!httpTransfer.isClosed()) {
                     processError(httpTransfer, e);
                 }
-            } catch (Exception ex) {
+            } catch (Exception ex) {                
                 LoggerFactory.getLogger(httpTransfer.getHost().getHost()).error(e.getMessage(), ex);
             }
         } finally {
@@ -164,8 +163,7 @@ public class LeapRequestHandler implements Runnable {
      * @throws IOException
      */
     public void processError(HttpTransfer httpTransfer, Throwable error) throws Exception {        
-        String hostId = httpTransfer.getHost().getHostId();
-        Throwable t = getCaused(hostId, error);
+        Throwable t = getCaused(httpTransfer.getHost().getHostId(), error);
         int resCode = -1;
         MSG_TYPE msgType = null;
         if(t instanceof WASException) {
@@ -176,7 +174,8 @@ public class LeapRequestHandler implements Runnable {
             resCode = 500;
             msgType = MSG_TYPE.HTTP;
         }
-        if(!Context.getHosts().isExistHost(httpTransfer.getRequest().getRequestedHost())) {
+        String hostId = httpTransfer.getHost().getHostId();
+        if(!Context.getHosts().isExistHost(hostId)) {
             hostId = Context.getHosts().getDefaultHost().getHostId();
         }
         if(msgType == MSG_TYPE.ERROR) {
@@ -184,8 +183,8 @@ public class LeapRequestHandler implements Runnable {
             resCode = 500;
         }
         Map<String, List<Object>> headers = new HashMap<String, List<Object>>();
-        headers = HttpTransferBuilder.addHeader(headers, "Content-Type", "text/html; charset="+httpTransfer.getHost().charset());
-        Object body = t != null ? TemplateBuilder.buildErrorHtml(httpTransfer.getHost(), msgType, resCode, t.getMessage()) : Context.getMessages().getHttpMsg(resCode);
+        headers = HttpTransferBuilder.addHeader(headers, "Content-Type", "text/html; charset="+Context.getHost(hostId).charset());
+        Object body = t != null ? TemplateBuilder.buildErrorHtml(Context.getHost(hostId), msgType, resCode, t.getMessage()) : Context.getMessages().getHttpMsg(resCode);
         httpTransfer.sendResponse(hostId, resCode, headers, body);            
     }
 
@@ -198,13 +197,13 @@ public class LeapRequestHandler implements Runnable {
         Throwable top = e;
         int level = 0;
         do {
-            LoggerFactory.getLogger(host).debug("[FOUND CAUSED] "+e);
             if(e instanceof WASException || e == null) {
                 break;
             }
             e = e.getCause();
             level++;
         } while(level < 5);
+        LoggerFactory.getLogger(host).debug("[FOUND CAUSED] "+e);
         return e;   
     }
 }

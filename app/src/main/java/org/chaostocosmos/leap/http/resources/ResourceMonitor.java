@@ -81,7 +81,8 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
     public static ResourceMonitor get() throws NotSupportedException {
         if(resourceMonitor == null) {
             resourceMonitor = new ResourceMonitor();
-        }                
+            //resourceMonitor.start();
+        }
         return resourceMonitor;
     }
     /**
@@ -114,6 +115,10 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
             double totalMemory = unit.get(((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getTotalPhysicalMemorySize(), Constants.DEFAULT_FRACTION_POINT);
             double usedMemory = unit.get(((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getTotalPhysicalMemorySize() - ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getFreePhysicalMemorySize(), Constants.DEFAULT_FRACTION_POINT);
             double processMemory = unit.get(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory(), Constants.DEFAULT_FRACTION_POINT);
+            double heapUsed = unit.get(ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getUsed(), Constants.DEFAULT_FRACTION_POINT);
+            double heapInit = unit.get(ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getInit(), Constants.DEFAULT_FRACTION_POINT);
+            double heapMax = unit.get(ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getMax(), Constants.DEFAULT_FRACTION_POINT);
+            double heapCommitted = unit.get(ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getCommitted(), Constants.DEFAULT_FRACTION_POINT);
             int threadMax = Context.getServer().getThreadPoolMaxSize();
             int threadCore = Context.getServer().getThreadPoolCoreSize();
             put("CPU", new HashMap<String, Object>() {{
@@ -122,6 +127,7 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
                 put("CODEC", "PNG");
                 put("SAVE_PATH", "monitor/cpu.png");
                 put("GRAPH", "LINE");
+                put("ALPHA", 0.5);
                 put("INTERPOLATE", "LINEAR");
                 put("WIDTH", 800);
                 put("HEIGHT", 500);
@@ -134,13 +140,13 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
                         put("ELEMENT", "Leap CPU load");
                         put("LABEL", "Leap CPU load");
                         put("COLOR", Arrays.asList(180,130,130));
-                        put("VALUES", new ArrayList());
+                        put("VALUES", new ArrayList<>());
                     }},
                     new HashMap<String, Object>() {{ 
                         put("ELEMENT", "System CPU load");
                         put("LABEL", "System CPU load");
                         put("COLOR", Arrays.asList(180,180,140));
-                        put("VALUES", new ArrayList());
+                        put("VALUES", new ArrayList<>());
                     }}
                     )
                 );                
@@ -151,6 +157,7 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
                 put("CODEC", "PNG");
                 put("SAVE_PATH", "monitor/memory.png");
                 put("GRAPH", "AREA");
+                put("ALPHA", 0.5);
                 put("INTERPOLATE", "SPLINE");
                 put("WIDTH", 800);
                 put("HEIGHT", 500);
@@ -163,25 +170,67 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
                         put("ELEMENT", "Physical used");
                         put("LABEL", "Physical used");
                         put("COLOR", Arrays.asList(133, 193, 233));
-                        put("VALUES", new ArrayList());
+                        put("VALUES", new ArrayList<>());
                     }},
                     new HashMap<String, Object>() {{ 
                         put("ELEMENT", "Process commited");
                         put("LABEL", "Process commited");
                         put("COLOR", Arrays.asList(82, 190, 128));
-                        put("VALUES", new ArrayList());
+                        put("VALUES", new ArrayList<>());
                     }},
                     new HashMap<String, Object>() {{ 
                         put("ELEMENT", "Process free");
                         put("LABEL", "Process free");
                         put("COLOR", Arrays.asList(178, 186, 187));
-                        put("VALUES", new ArrayList());
+                        put("VALUES", new ArrayList<>());
                     }},
                     new HashMap<String, Object>() {{ 
                         put("ELEMENT", "Process used");
                         put("LABEL", "Process used");
                         put("COLOR", Arrays.asList(127,0,244));
-                        put("VALUES", new ArrayList());
+                        put("VALUES", new ArrayList<>());
+                    }}               
+                    )
+                );
+            }});     
+            put("HEAP", new HashMap<String, Object>() {{
+                put("ID", "HEAP");
+                put("TITLE", "Leap heap statistics");
+                put("CODEC", "PNG");
+                put("SAVE_PATH", "monitor/heap.png");
+                put("GRAPH", "AREA");
+                put("ALPHA", 0.3);
+                put("INTERPOLATE", "SPLINE");
+                put("WIDTH", 800);
+                put("HEIGHT", 500);
+                put("XINDEX", IntStream.range(0, 50).mapToObj(i -> i % 2 == 0 ? i+"" : "").collect(Collectors.toList()));
+                put("YINDEX", Arrays.asList(heapMax, heapInit, heapCommitted, heapUsed));
+                put("LIMIT", heapMax * 1.3);
+                put("UNIT", " "+unit.name());
+                put("ELEMENTS", Arrays.asList(
+                    new HashMap<String, Object>() {{ 
+                        put("ELEMENT", "Heap max");
+                        put("LABEL", "Heap max");
+                        put("COLOR", Arrays.asList(133, 157, 233));
+                        put("VALUES", new ArrayList<>());
+                    }},
+                    new HashMap<String, Object>() {{ 
+                        put("ELEMENT", "Heap committed");
+                        put("LABEL", "Heap committed");
+                        put("COLOR", Arrays.asList(233, 138, 133));
+                        put("VALUES", new ArrayList<>());
+                    }},
+                    new HashMap<String, Object>() {{ 
+                        put("ELEMENT", "Heap init");
+                        put("LABEL", "Heap init");
+                        put("COLOR", Arrays.asList(200, 133, 233));
+                        put("VALUES", new ArrayList<>());
+                    }},
+                    new HashMap<String, Object>() {{ 
+                        put("ELEMENT", "Heap used");
+                        put("LABEL", "Heap used");
+                        put("COLOR", Arrays.asList(142, 233, 133));
+                        put("VALUES", new ArrayList<>());
                     }}               
                     )
                 );
@@ -192,6 +241,7 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
                 put("CODEC", "PNG");
                 put("SAVE_PATH", "monitor/thread.png");
                 put("GRAPH", "LINE");
+                put("ALPHA", 0.5);
                 put("INTERPOLATE", "SPLINE");
                 put("WIDTH", 800);
                 put("HEIGHT", 500);
@@ -204,25 +254,25 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
                         put("ELEMENT", "Leap thread max");
                         put("LABEL", "max");
                         put("COLOR", Arrays.asList(180,130,130));
-                        put("VALUES", new ArrayList());
+                        put("VALUES", new ArrayList<>());
                     }},
                     new HashMap<String, Object>() {{ 
                         put("ELEMENT", "Leap thread core");
                         put("LABEL", "core");
                         put("COLOR", Arrays.asList(150,200,158));
-                        put("VALUES", new ArrayList());
+                        put("VALUES", new ArrayList<>());
                     }},
                     new HashMap<String, Object>() {{ 
                         put("ELEMENT", "Leap thread active");
                         put("LABEL", "active");
                         put("COLOR", Arrays.asList(150,130,158));
-                        put("VALUES", new ArrayList());
+                        put("VALUES", new ArrayList<>());
                     }},
                     new HashMap<String, Object>() {{ 
                         put("ELEMENT", "Leap thread queued");
                         put("LABEL", "queued");
                         put("COLOR", Arrays.asList(130,180,110));
-                        put("VALUES", new ArrayList());
+                        put("VALUES", new ArrayList<>());
                     }})
                 );
             }});   
@@ -273,7 +323,10 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
             this.timer.cancel();
         }
     }
-
+    /**
+     * Set probing values
+     * @throws NotSupportedException
+     */
     private void setProbingValues() throws NotSupportedException {
         List<Object> values = null;
         values = super.getValue("CPU.ELEMENTS.0.VALUES");
@@ -315,8 +368,27 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
         values = super.getValue("THREAD.ELEMENTS.3.VALUES");
         if(values.size() > 50) values.remove(0);
         values.add(getQueuedTaskCount());
-    }
 
+        values = super.getValue("HEAP.ELEMENTS.0.VALUES");
+        if(values.size() > 50) values.remove(0);
+        values.add(getProcessHeapMax());
+
+        values = super.getValue("HEAP.ELEMENTS.1.VALUES");
+        if(values.size() > 50) values.remove(0);
+        values.add(getProcessHeapInit());
+
+        values = super.getValue("HEAP.ELEMENTS.2.VALUES");
+        if(values.size() > 50) values.remove(0);
+        values.add(getProcessHeapCommitted());
+
+        values = super.getValue("HEAP.ELEMENTS.3.VALUES");
+        if(values.size() > 50) values.remove(0);
+        values.add(getProcessHeapUsed());
+    }
+    /**
+     * Request monitoring data to monitoring service
+     * @throws IOException
+     */
     private void requestMonitorings() throws IOException {
         String monitorJson = this.mapper.writerWithDefaultPrettyPrinter().writeValueAsString(super.getMeta());
         Map<String, FormData<?>> formDatas = Map.of("CHART", new FormData<byte[]>(MIME.TEXT_JSON, monitorJson.getBytes()));
@@ -455,6 +527,14 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
 		long value = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getInit();
 		return (double) this.unit.applyUnit(value, this.fractionPoint);
 	}	
+    /**
+     * Get used heap memory amount
+     * @return
+     */
+    public double getProcessHeapUsed() {
+        long value = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getUsed();
+        return (double) this.unit.applyUnit(value, this.fractionPoint);
+    }
 	/**
      * Get commited heap memory amount
 	 * @param unit

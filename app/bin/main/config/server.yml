@@ -5,6 +5,7 @@ server:
     backlog: 50
     file-buffer-size: 1024
     streaming-buffer-size: 102400
+    request-blocking-interval: 1000
 
     threadpool:
       core: 30

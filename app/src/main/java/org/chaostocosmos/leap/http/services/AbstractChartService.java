@@ -111,7 +111,7 @@ public abstract class AbstractChartService extends AbstractService implements Ch
         graphElements.setGraphElementMap(createGraphElements((List<Object>)map.get("ELEMENTS")));
         graph.setLimit(limit);        
         graph.setUnit(unit);        
-        //graph.setGraphAlpha(0.5f);
+        graph.setGraphAlpha(Float.valueOf(map.get("ALPHA")+""));
         graph.setTitleFontAlpha(0.3f);                
         return graph;
     }       

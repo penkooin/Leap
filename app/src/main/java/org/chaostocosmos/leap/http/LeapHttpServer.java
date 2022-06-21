@@ -2,6 +2,7 @@ package org.chaostocosmos.leap.http;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
@@ -17,6 +18,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.SSLServerSocket;
+import javax.transaction.NotSupportedException;
 
 import org.chaostocosmos.leap.http.commons.Constants;
 import org.chaostocosmos.leap.http.commons.Filtering;
@@ -25,6 +27,7 @@ import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.enums.PROTOCOL;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
+import org.chaostocosmos.leap.http.resources.ClassUtils;
 import org.chaostocosmos.leap.http.resources.Html;
 import org.chaostocosmos.leap.http.resources.LeapURLClassLoader;
 import org.chaostocosmos.leap.http.resources.ResourceMonitor;
@@ -42,98 +45,100 @@ public class LeapHttpServer extends Thread {
      * logger
      */
     Logger logger = (Logger)LoggerFactory.getLogger(Context.getHosts().getDefaultHost().getHostId());
-
     /**
      * Whether default host
      */
     boolean isDefaultHost;
-
     /**
      * Protocol
      */
     PROTOCOL protocol;
-
     /**
      * InetSocketAddress
      */
     InetSocketAddress inetSocketAddress;
-
     /**
      * backlog
      */
     int backlog;
-
     /**
      * document root
      */
     Path docroot;
-
     /**
      * leap home path
      */
     Path homePath;
-
     /**
      * Hosts
      */
     Host<?> host;
-
     /**
      * Server socket
      */
     ServerSocket server;
-
     /**
      * servlet loading & managing
      */
     ServiceManager serviceManager;
-
     /**
      * Resource monitor
      */
     ResourceMonitor resourceMonitor;
-
     /**
      * thread pool
      */
     ThreadPoolExecutor threadpool;
-
     /**
      * Redirect host object
      */
     RedirectHostSelection redirectHostSelection;
-
     /**
      * IP filtering object
      */
     Filtering ipAllowedFilters, ipForbiddenFilters; 
-
     /**
      * Default constructor 
      * @throws UnknownHostException
      * @throws MalformedURLException
+     * @throws NotSupportedException
      */
-    public LeapHttpServer() throws UnknownHostException, MalformedURLException {
+    public LeapHttpServer() throws UnknownHostException, MalformedURLException, NotSupportedException {
         this(Constants.DEFAULT_HOME_PATH);
     }
-
     /**
      * Construct with home path
      * @param homePath
      * @throws UnknownHostException
      * @throws MalformedURLException
+     * @throws NotSupportedException
      */
-    public LeapHttpServer(Path homePath) throws UnknownHostException, MalformedURLException {
+    public LeapHttpServer(Path homePath) throws UnknownHostException, MalformedURLException, NotSupportedException {
         this(homePath, 
              Context.getHosts().getHost(Context.getHosts().getDefaultHost().getHostId()), 
              new ThreadPoolExecutor(Context.getServer().getThreadPoolCoreSize(), 
                                     Context.getServer().getThreadPoolMaxSize(), 
                                     Context.getServer().getThreadPoolKeepAlive(), 
                                     TimeUnit.SECONDS, 
-                                    new LinkedBlockingQueue<Runnable>()),
-            new LeapURLClassLoader(Context.getHosts().getAllDynamicClasspathURLs()),
-            null
+                                    new LinkedBlockingQueue<Runnable>())
         );
+    }
+    /**
+     * Construct with home path, host object, thread pool
+     * @param homePath
+     * @param host
+     * @param threadpool
+     * @throws UnknownHostException
+     * @throws MalformedURLException
+     * @throws NotSupportedException
+     */
+    public LeapHttpServer(Path homePath, 
+                          Host<?> host, 
+                          ThreadPoolExecutor threadpool
+                          ) throws UnknownHostException, 
+                                   MalformedURLException, 
+                                   NotSupportedException {
+        this(homePath, host, threadpool, ClassUtils.getClassLoader(), ResourceMonitor.get());
     }
 
     /**
@@ -204,7 +209,6 @@ public class LeapHttpServer extends Thread {
         this.redirectHostSelection = new RedirectHostSelection(Context.getServer().getLoadBalanceRedirects());
         this.serviceManager = new ServiceManager(host, new UserManager(host.getHostId()), classLoader);
     }
-
     /**
      * Get service host ID
      * @return
@@ -212,15 +216,13 @@ public class LeapHttpServer extends Thread {
     public String getHostId() {
         return this.host.getHostId();
     }
-
     /**
      * Get service port
      * @return
      */
     public int getPort() {
         return this.inetSocketAddress.getPort();
-    }    
-
+    }
     /**
      * Get servlet loader object
      * @return
@@ -228,7 +230,6 @@ public class LeapHttpServer extends Thread {
     protected ServiceManager getServiceManager() {
         return this.serviceManager;
     }
-
     /**
      * Get resource monitor
      * @return
@@ -236,7 +237,6 @@ public class LeapHttpServer extends Thread {
     protected ResourceMonitor getResourceMonitor() {
         return this.resourceMonitor;
     }
-
     /**
      * Get root directory
      * @return
@@ -262,7 +262,7 @@ public class LeapHttpServer extends Thread {
             while (true) { 
                 Socket connection = server.accept();
                 connection.setSoTimeout(Context.getServer().getConnectionTimeout());
-                //connection.setSoLinger(true, 10);
+                //connection.setSoLinger(false, 1);
                 int queueSize = this.threadpool.getQueue().size();
                 String ipAddress = connection.getLocalAddress().toString();
                 if(this.ipAllowedFilters.include(ipAddress) || this.ipForbiddenFilters.exclude(ipAddress)) {
@@ -273,7 +273,9 @@ public class LeapHttpServer extends Thread {
                         String redirectHost = redirectHostSelection.getSelectedHost();
                         String redirectPage = Html.makeRedirect(this.protocol.protocol(), 0, redirectHost);
                         logger.info("[CLIENT DETECTED] Thread pool queue size limit reached: "+queueSize+".  Send redirect to Load-Balance URL: "+redirectHost+"\n"+redirectPage);
-                        connection.getOutputStream().write(redirectPage.getBytes());
+                        try(OutputStream out = connection.getOutputStream()) {
+                            out.write(redirectPage.getBytes());
+                        }
                         connection.close();
                     }
                 } else {
@@ -283,15 +285,16 @@ public class LeapHttpServer extends Thread {
                     params.put("@type", "Not in allowed IP or forbidden IP.");
                     params.put("@message", "Rquested IP address is not in allowed filters or exist in forbidden filters: "+ipAddress);
                     String resPage = this.host.getResource().getResourcePage(params);
-                    connection.getOutputStream().write(resPage.getBytes());
-                    connection.close();                                    
-                }
+                    try(OutputStream out = connection.getOutputStream()) {
+                        out.write(resPage.getBytes());
+                    }
+                    connection.close();
+            }
             } 
         } catch(Exception e) {
             logger.error(e.getMessage(), e);
         }
     }
-
     /**
      * Stop server 
      * @throws InterruptedException

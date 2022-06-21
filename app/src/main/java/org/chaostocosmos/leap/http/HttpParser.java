@@ -2,11 +2,13 @@ package org.chaostocosmos.leap.http;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.InetAddress;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -17,6 +19,7 @@ import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
+import org.chaostocosmos.leap.http.enums.RES_CODE;
 import org.chaostocosmos.leap.http.part.BinaryPart;
 import org.chaostocosmos.leap.http.part.BodyPart;
 import org.chaostocosmos.leap.http.part.KeyValuePart;
@@ -36,8 +39,11 @@ public class HttpParser {
     /**
      * Http response parser
      */
-    private static ResponseParser responseParser;    
-
+    private static ResponseParser responseParser;
+    /**
+     * For blocking request attack (ip = timestemp)
+     */
+    private static Map<String, Map<String, Long>> requestAttackBlockingMap = new LinkedHashMap<>();
     /**
      * Get request parser object
      * @return
@@ -49,7 +55,6 @@ public class HttpParser {
         }
         return requestParser;
     }
-
     /**
      * Get response parser object
      * @return
@@ -60,14 +65,14 @@ public class HttpParser {
         }
         return responseParser;
     }
-
     /**
      * Check request method
      * @param requestType
      * @return
      */
     public static boolean isValidType(String requestType) {
-        if( REQUEST_TYPE.GET.name().equals(requestType) || 
+        if( 
+            REQUEST_TYPE.GET.name().equals(requestType) || 
             REQUEST_TYPE.POST.name().equals(requestType) || 
             REQUEST_TYPE.PUT.name().equals(requestType) || 
             REQUEST_TYPE.DELETE.name().equals(requestType)) {
@@ -75,7 +80,31 @@ public class HttpParser {
         }
         return false; 
     }
-
+    /**
+     * Check too many request attack on short time period.
+     * 
+     * @param connection
+     * @return
+     * @throws IOException
+     */
+    public static boolean checkRequestAttack(String ip, String context) throws IOException {
+        if(requestAttackBlockingMap.containsKey(ip)) {
+            Map<String, Long> map = requestAttackBlockingMap.get(ip);
+            for(Map.Entry<String, Long> entry : map.entrySet()) {
+                String preContext = entry.getKey();
+                long preTimestemp = entry.getValue();
+                if(context.equals(preContext) && System.currentTimeMillis() - preTimestemp < Context.getServer().getRequestBlockingInterval()) {
+                    requestAttackBlockingMap.remove(ip);
+                    throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES429.code(), "You requested too many on short period!!!");
+                }
+            }
+            map.put(context, System.currentTimeMillis());
+        } else {
+            requestAttackBlockingMap.put(ip, new HashMap<String, Long>());
+        }
+        requestAttackBlockingMap.get(ip).put(context, System.currentTimeMillis());
+        return true;
+    }
     /**
      * Request parser inner class
      * @author 9ins
@@ -86,7 +115,7 @@ public class HttpParser {
          * @throws IOException
          * @throws WASException
          */
-        public Request parseRequest(InputStream in) throws Exception {
+        public Request parseRequest(InetAddress inetAddress, InputStream in) throws Exception {
             // BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
             // String line;
             // while((line = reader.readLine()) != null) {
@@ -117,7 +146,11 @@ public class HttpParser {
                 System.out.println(header.substring(0, idx)+"   "+header.substring(idx + 1, header.length()).trim());
                 headerMap.put(header.substring(0, idx), header.substring(idx + 1, header.length()).trim());
             }
-            String requestedHost = headerMap.get("Host").toString().trim();
+            String requestedHost = headerMap.get("Host").toString().trim();                        
+            if(!checkRequestAttack(inetAddress.getHostAddress(), contextPath)) {
+                LoggerFactory.getLogger(requestedHost).warn("[CLIENT BLOCKED] Too many requested client blocking: "+inetAddress.getHostAddress());
+                throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES429.code(), "You requested too many on short period!!!");
+            }
             Map<String, String> contextParam = new HashMap<>();
             int paramsIndex = contextPath.indexOf("?");
             if(paramsIndex != -1) {
@@ -128,7 +161,7 @@ public class HttpParser {
                     String[] keyValue = param.split("=", -1);
                     if(keyValue.length > 1) {
                         contextParam.put(keyValue[0], keyValue[1]);
-                    }                    
+                    }
                 }
             }
             String host = requestedHost.indexOf(":") != -1 ? requestedHost.substring(0, requestedHost.indexOf(":")) : requestedHost;
@@ -199,7 +232,7 @@ public class HttpParser {
                 }
             }
             Request desc = new Request(hostId, host, protocol, requestType, headerMap, mimeType, contextPath, contextParam, bodyPart, contentLength);
-            return desc;
+            return desc;                    
         }
     }
 

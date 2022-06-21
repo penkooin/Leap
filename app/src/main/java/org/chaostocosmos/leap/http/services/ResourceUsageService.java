@@ -68,13 +68,17 @@ public class ResourceUsageService extends AbstractChartService {
         Graph cpuChart = super.lineChart((Map<String, Object>)map.get("CPU"));
         Graph memoryChart = super.areaChart((Map<String, Object>)map.get("MEMORY"));
         Graph threadChart = super.lineChart((Map<String, Object>)map.get("THREAD"));
+        Graph heapChart = super.areaChart((Map<String, Object>)map.get("HEAP"));
+
         String cpuPath = DataStructureOpr.<String>getValue(map, "CPU.SAVE_PATH");
         String memoryPath = DataStructureOpr.<String>getValue(map, "MEMORY.SAVE_PATH");
         String threadPath = DataStructureOpr.<String>getValue(map, "THREAD.SAVE_PATH");
+        String heapPath = DataStructureOpr.<String>getValue(map, "HEAP.SAVE_PATH");
 
         if(cpuChart != null) saveBufferedImage(cpuChart.getBufferedImage(), super.serviceManager.getHost().getStatic().resolve(cpuPath).toFile(), CODEC.PNG);    
         if(memoryChart != null) saveBufferedImage(memoryChart.getBufferedImage(), super.serviceManager.getHost().getStatic().resolve(memoryPath).toFile(), CODEC.PNG);
         if(threadChart != null) saveBufferedImage(threadChart.getBufferedImage(), super.serviceManager.getHost().getStatic().resolve(threadPath).toFile(), CODEC.PNG);
+        if(heapChart != null) saveBufferedImage(heapChart.getBufferedImage(), super.serviceManager.getHost().getStatic().resolve(heapPath).toFile(), CODEC.PNG);
     }
 
     /**
