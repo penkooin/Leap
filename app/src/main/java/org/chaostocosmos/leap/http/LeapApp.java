@@ -167,8 +167,6 @@ public class LeapApp {
         //NetworkInterfaces.getAllNetworkAddresses().stream().forEach(i -> System.out.println(i.getHostName())); 
         //LeapClassLoader 
 
-        System.out.println("***************************************"+LeapApp.getThreadPool());
-
         //Spring JPA 
         //SpringJPAManager jpaManager = SpringJPAManager.get();
 

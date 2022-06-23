@@ -94,6 +94,7 @@ public class HttpParser {
                 String preContext = entry.getKey();
                 long preTimestemp = entry.getValue();
                 if(context.equals(preContext) && System.currentTimeMillis() - preTimestemp < Context.getServer().getRequestBlockingInterval()) {
+                    //System.out.println(requestAttackBlockingMap.toString());                    
                     requestAttackBlockingMap.remove(ip);
                     throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES429.code(), "You requested too many on short period!!!");
                 }
@@ -143,13 +144,13 @@ public class HttpParser {
                 if (idx == -1) {
                     throw new WASException(MSG_TYPE.ERROR, 3, header);
                 }
-                System.out.println(header.substring(0, idx)+"   "+header.substring(idx + 1, header.length()).trim());
+                System.out.println(header.substring(0, idx)+":   "+header.substring(idx + 1, header.length()).trim());
                 headerMap.put(header.substring(0, idx), header.substring(idx + 1, header.length()).trim());
             }
             String requestedHost = headerMap.get("Host").toString().trim();                        
             if(!checkRequestAttack(inetAddress.getHostAddress(), contextPath)) {
                 LoggerFactory.getLogger(requestedHost).warn("[CLIENT BLOCKED] Too many requested client blocking: "+inetAddress.getHostAddress());
-                throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES429.code(), "You requested too many on short period!!!");
+                throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES429.code(), requestedHost+" requested too many on short period!!!");
             }
             Map<String, String> contextParam = new HashMap<>();
             int paramsIndex = contextPath.indexOf("?");
