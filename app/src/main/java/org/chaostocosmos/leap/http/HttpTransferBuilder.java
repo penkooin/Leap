@@ -216,7 +216,7 @@ public class HttpTransferBuilder {
 
             //LoggerFactory.getLogger(response.getRequestedHost()).debug(response.toString());
             StringBuffer resStr = new StringBuffer();
-            resStr.append("============================== RES : "+res.trim()+" - "+this.socket.getRemoteSocketAddress().toString()+" =============================="+System.lineSeparator());
+            resStr.append("============================== [RESPONSE] : "+res.trim()+" - "+this.socket.getRemoteSocketAddress().toString()+" =============================="+System.lineSeparator());
             resStr.append("RES CODE: "+resCode+System.lineSeparator());
             for(Map.Entry<String, List<Object>> e : headers.entrySet()) {
                 this.clientOutputStream.write((e.getKey()+": "+e.getValue().stream().map(v -> v.toString()).collect(Collectors.joining("; "))+"\r\n").getBytes());

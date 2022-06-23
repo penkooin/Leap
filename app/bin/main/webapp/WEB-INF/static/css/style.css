@@ -88,3 +88,7 @@ hr {
     background: lightskyblue;
     margin-bottom: 20px;
 }
+a:link { 
+    color : #66b6d2;
+    text-decoration: none; 
+}

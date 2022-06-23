@@ -81,7 +81,7 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
     public static ResourceMonitor get() throws NotSupportedException {
         if(resourceMonitor == null) {
             resourceMonitor = new ResourceMonitor();
-            //resourceMonitor.start();
+            resourceMonitor.start();
         }
         return resourceMonitor;
     }
@@ -170,12 +170,6 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
                         put("ELEMENT", "Physical used");
                         put("LABEL", "Physical used");
                         put("COLOR", Arrays.asList(133, 193, 233));
-                        put("VALUES", new ArrayList<>());
-                    }},
-                    new HashMap<String, Object>() {{ 
-                        put("ELEMENT", "Process commited");
-                        put("LABEL", "Process commited");
-                        put("COLOR", Arrays.asList(82, 190, 128));
                         put("VALUES", new ArrayList<>());
                     }},
                     new HashMap<String, Object>() {{ 
@@ -343,13 +337,9 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
                 
         values = super.getValue("MEMORY.ELEMENTS.1.VALUES");
         if(values.size() > 50) values.remove(0);
-        values.add(getProcessHeapCommitted());
-
-        values = super.getValue("MEMORY.ELEMENTS.2.VALUES");
-        if(values.size() > 50) values.remove(0);
         values.add(getFreeMemory());
 
-        values = super.getValue("MEMORY.ELEMENTS.3.VALUES");
+        values = super.getValue("MEMORY.ELEMENTS.2.VALUES");
         if(values.size() > 50) values.remove(0);
         values.add(getUsedMemory());
 
@@ -440,7 +430,7 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
         return LeapApp.getThreadPool().getQueue().size();
     }
     /**
-     * Get max memory bytes applied with fraction ImageProcessingException
+     * Get max memory bytes applied
      * @return
      * @throws NotSupportedException
      */

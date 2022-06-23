@@ -82,7 +82,6 @@ public class HttpParser {
     }
     /**
      * Check too many request attack on short time period.
-     * 
      * @param connection
      * @return
      * @throws IOException
@@ -94,7 +93,7 @@ public class HttpParser {
                 String preContext = entry.getKey();
                 long preTimestemp = entry.getValue();
                 if(context.equals(preContext) && System.currentTimeMillis() - preTimestemp < Context.getServer().getRequestBlockingInterval()) {
-                    //System.out.println(requestAttackBlockingMap.toString());                    
+                    //System.out.println(requestAttackBlockingMap.toString());
                     requestAttackBlockingMap.remove(ip);
                     throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES429.code(), "You requested too many on short period!!!");
                 }
@@ -128,11 +127,15 @@ public class HttpParser {
                 throw new WASException(MSG_TYPE.ERROR, 1);
             }
             requestLine = URLDecoder.decode(requestLine, StandardCharsets.UTF_8);
-            String method = requestLine.substring(0, requestLine.indexOf(" "));
+            String[] linesplited = requestLine.split(" ");                        
+            if(linesplited.length != 3) {
+                throw new WASException(MSG_TYPE.HTTP, 400, "Requested line is something wrong: "+requestLine);
+            }
+            String method = linesplited[0];
             if(!Arrays.asList(REQUEST_TYPE.values()).stream().anyMatch(R -> R.name().equals(method))) {
                 throw new WASException(MSG_TYPE.HTTP, 500, method);
             }
-            String contextPath = requestLine.substring(requestLine.indexOf(" ")+1, requestLine.lastIndexOf(" "));
+            String contextPath = linesplited[1];
             String protocol = requestLine.substring(requestLine.lastIndexOf(" ")+1);
             List<String> headerLines = StreamUtils.readHeaders(in);
             Map<String, String> headerMap = new HashMap<>();
@@ -147,8 +150,8 @@ public class HttpParser {
                 System.out.println(header.substring(0, idx)+":   "+header.substring(idx + 1, header.length()).trim());
                 headerMap.put(header.substring(0, idx), header.substring(idx + 1, header.length()).trim());
             }
-            String requestedHost = headerMap.get("Host").toString().trim();                        
-            if(!checkRequestAttack(inetAddress.getHostAddress(), contextPath)) {
+            String requestedHost = headerMap.get("Host").toString().trim();
+            if(!contextPath.startsWith("/streaming") && !checkRequestAttack(inetAddress.getHostAddress(), contextPath)) {
                 LoggerFactory.getLogger(requestedHost).warn("[CLIENT BLOCKED] Too many requested client blocking: "+inetAddress.getHostAddress());
                 throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES429.code(), requestedHost+" requested too many on short period!!!");
             }
