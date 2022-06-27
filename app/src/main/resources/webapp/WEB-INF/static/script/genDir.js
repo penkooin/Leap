@@ -28,7 +28,7 @@ function genDir(resJson) {
         resList += '<span class=\"file-name\" style="width:30%;display:inline-block;"><img class=\"img\" src=\"'+elements[i].img+'\"><a href=\"'+elements[i].uri+'\">'+elements[i].file+'</a></span>'
               +'<span class=\"last-modified\" style="width:30%;display:inline-block;">'+elements[i].lastModified+'</span>'
               +'<span class=\"file-size\" style="width:20%;display:inline-block;">'+elements[i].size+'</span>'
-              +'<span class=\"desc\" style="width:20%;display:inline-block;">-</span>'
+              +'<span class=\"desc\" style="width:20%;display:inline-block;">'+elements[i].desc+'</span>'
               +'<br>';
     }
     dir.insertAdjacentHTML("afterbegin", resList);

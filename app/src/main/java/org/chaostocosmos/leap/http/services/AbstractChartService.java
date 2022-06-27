@@ -27,29 +27,29 @@ import org.chaostocosmos.leap.http.services.model.ChartModel;
 
 public abstract class AbstractChartService extends AbstractService implements ChartModel {
 
-    Map<String, Graph> graphMap;
+    Map<String, Graph<Double, String, Double>> graphMap;
 
     public AbstractChartService() {
-        this.graphMap = new HashMap<String, Graph>();
+        this.graphMap = new HashMap<String, Graph<Double, String, Double>>();
     }
     
     @Override
-    public Graph lineChart(Map<String, Object> graphAttributes) throws Exception {
+    public Graph<Double, String, Double> lineChart(Map<String, Object> graphAttributes) throws Exception {
         return createGraph(graphAttributes);
     }
 
     @Override
-    public Graph areaChart(Map<String, Object> graphAttributes) throws Exception {
+    public Graph<Double, String, Double> areaChart(Map<String, Object> graphAttributes) throws Exception {
         return createGraph(graphAttributes);
     }
 
     @Override
-    public Graph barChart(Map<String, Object> graphAttributes) throws Exception {
+    public Graph<Double, String, Double> barChart(Map<String, Object> graphAttributes) throws Exception {
         return createGraph(graphAttributes);
     }
 
     @Override
-    public Graph circleChart(Map<String, Object> graphAttributes) throws Exception {
+    public Graph<Double, String, Double> circleChart(Map<String, Object> graphAttributes) throws Exception {
         return createGraph(graphAttributes);
     }
 
@@ -65,9 +65,9 @@ public abstract class AbstractChartService extends AbstractService implements Ch
      */
     @Override
     @SuppressWarnings("unchecked")
-    public Graph createGraph(Map<String, Object> map) throws Exception {
+    public Graph<Double, String, Double> createGraph(Map<String, Object> map) throws Exception {
         String id = (String) map.get("ID");
-        Graph graph = graphMap.get(id);
+        Graph<Double, String, Double> graph = graphMap.get(id);
         double limit = (double)map.get("LIMIT");
         String unit = map.get("UNIT")+"";
         if(DataStructureOpr.<List<Double>>getValue(map, "ELEMENTS.0.VALUES").size() < 3) {
@@ -79,26 +79,25 @@ public abstract class AbstractChartService extends AbstractService implements Ch
             int width = (int)Double.parseDouble(map.get("WIDTH")+"");
             int height = (int)Double.parseDouble(map.get("HEIGHT")+"");
             
-            List<Object> xIndex = (List<Object>)map.get("XINDEX");  
+            List<String> xIndex = (List<String>)map.get("XINDEX");  
             List<Double> yIndex = (List<Double>)map.get("YINDEX");  
-            List<Map<String, Object>> elementList = (List<Map<String, Object>>)map.get("ELEMENTS"); 
-            GraphElements graphElements = new GraphElements(type, xIndex, yIndex);            
+            GraphElements<Double, String, Double> graphElements = new GraphElements<Double, String, Double>(type, xIndex, yIndex);            
             graphElements.setGraphElementMap(createGraphElements((List<Object>)map.get("ELEMENTS")));    	
             switch(type) {
                 case LINE :
-                    graph = new LineGraph(graphElements, title, width, height);                    
+                    graph = new LineGraph<Double, String, Double>(graphElements, title, width, height);                    
                     break;
                 case AREA :
-                    graph = new AreaGraph(graphElements, title, width, height);
+                    graph = new AreaGraph<Double, String, Double>(graphElements, title, width, height);
                     break;
                 case CIRCLE :
-                    graph = new CircleGraph(graphElements, title, width, height);
+                    graph = new CircleGraph<Double, String, Double>(graphElements, title, width, height);
                     break;
                 case BAR : 
-                    graph = new BarGraph(graphElements, title, width, height);
+                    graph = new BarGraph<Double, String, Double>(graphElements, title, width, height);
                     break;
                 case BAR_RATIO :
-                    graph = new BarRatioGraph(graphElements, title, width, height);
+                    graph = new BarRatioGraph<Double, String, Double>(graphElements, title, width, height);
                     break;
             }
             graph.setShowGraphXY(false);
@@ -107,7 +106,7 @@ public abstract class AbstractChartService extends AbstractService implements Ch
             graph.setGraphBorderSize(2f);
             graphMap.put(id, graph);
         }        
-        GraphElements graphElements = graph.getGraphElements();
+        GraphElements<Double, String, Double> graphElements = graph.getGraphElements();
         graphElements.setGraphElementMap(createGraphElements((List<Object>)map.get("ELEMENTS")));
         graph.setLimit(limit);        
         graph.setUnit(unit);        
@@ -117,14 +116,14 @@ public abstract class AbstractChartService extends AbstractService implements Ch
     }       
 
     @Override
-    public Map<Object, GraphElement> createGraphElements(List<Object> elements) throws Exception {
+    public Map<Object, GraphElement<Double, String, Double>> createGraphElements(List<Object> elements) throws Exception {
         return elements.stream().map(o -> (Map<String, Object>)o).map(m -> {
             String elementName = m.get("ELEMENT")+"";
             String label = m.get("LABEL")+"";
             List<Integer> colorList = ((List<Object>)m.get("COLOR")).stream().map(v -> (int)Double.parseDouble(v+"")).collect(Collectors.toList());
             Color elementColor = new Color((int)colorList.get(0), (int)colorList.get(1), (int)colorList.get(2));
             List<Double> valueList = ((List<Object>)m.get("VALUES")).stream().map(v -> Double.parseDouble(v+"")).collect(Collectors.toList());
-            return new GraphElement(elementName, elementColor, label, elementColor, valueList);
+            return new GraphElement<Double, String, Double>(elementName, elementColor, elementName, elementColor, valueList);
         }).filter(el -> el != null).collect(Collectors.toMap(k -> k.getElementName(), v -> v)); 
     }
 

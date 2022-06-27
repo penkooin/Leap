@@ -65,10 +65,10 @@ public class ResourceUsageService extends AbstractChartService {
         }
         String chartJson = new String(body, charset);
         Map<String, Object> map = gson.fromJson(chartJson, Map.class);
-        Graph cpuChart = super.lineChart((Map<String, Object>)map.get("CPU"));
-        Graph memoryChart = super.areaChart((Map<String, Object>)map.get("MEMORY"));
-        Graph threadChart = super.lineChart((Map<String, Object>)map.get("THREAD"));
-        Graph heapChart = super.areaChart((Map<String, Object>)map.get("HEAP"));
+        Graph<Double, String, Double> cpuChart = super.lineChart((Map<String, Object>)map.get("CPU"));
+        Graph<Double, String, Double> memoryChart = super.areaChart((Map<String, Object>)map.get("MEMORY"));
+        Graph<Double, String, Double> threadChart = super.lineChart((Map<String, Object>)map.get("THREAD"));
+        Graph<Double, String, Double> heapChart = super.areaChart((Map<String, Object>)map.get("HEAP"));
 
         String cpuPath = DataStructureOpr.<String>getValue(map, "CPU.SAVE_PATH");
         String memoryPath = DataStructureOpr.<String>getValue(map, "MEMORY.SAVE_PATH");

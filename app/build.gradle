@@ -62,7 +62,7 @@ dependencies {
     // https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client
     implementation 'org.mariadb.jdbc:mariadb-java-client:3.0.3'
 
-    implementation 'io.github.9ins:chaosgraph:2.0.0'  
+    implementation 'io.github.9ins:chaosgraph:2.1.0'  
 
 }
 

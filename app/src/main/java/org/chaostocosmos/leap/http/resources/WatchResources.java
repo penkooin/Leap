@@ -439,6 +439,12 @@ public class WatchResources extends Thread implements Resources {
         return resourcePath.toFile().exists();
     }
 
+    @Override
+    public boolean isInMemory(Path resourcePath) {
+        ResourceInfo resInfo = getResourceInfo(resourcePath);
+        return resInfo == null ? false : resInfo.isInMemory();
+    }
+
     /**
      * Add resource to resource tree
      * @param tree
@@ -581,7 +587,6 @@ public class WatchResources extends Thread implements Resources {
         long resourceSize;
         /**
          * Constructs with resource path & in-memory flag
-         * 
          * @param isNode
          * @param resourcePath
          * @param inMemoryFlag
@@ -812,6 +817,13 @@ public class WatchResources extends Thread implements Resources {
          */
         public long getTime(TimeUnit timeUnit) {
             return this.lastModified.to(timeUnit);
+        }
+        /**
+         * Whether In-Memory resource
+         * @return
+         */
+        public boolean isInMemory() {
+            return this.inMemoryFlag;
         }
     }
 }

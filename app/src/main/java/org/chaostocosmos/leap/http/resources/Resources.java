@@ -62,6 +62,12 @@ public interface Resources {
      */
     public boolean exists(Path resourcePath) throws Exception;
     /**
+     * Whether resource is In-Memory 
+     * @param resourcePath
+     * @return
+     */
+    public boolean isInMemory(Path resourcePath);
+    /**
      * Get welcome page
      * @param params
      * @return
