@@ -114,7 +114,7 @@ public class TemplateBuilder {
                         String uri = path+"/"+file;
                         long lastModified = f.lastModified();
                         String size = f.isFile() ? UNIT.MB.get(f.length())+" "+UNIT.MB.name() : "-";
-                        String inMemory = host.getResource().isInMemory(f.toPath()) ? "In-Memory resource" : "File resource";
+                        String inMemory = f.isDirectory() ? "-" : host.getResource().isInMemory(f.toPath()) ? "In-Memory resource" : "File resource";
                         return Map.of("img", img, "file", file, "uri", uri, "lastModified", new Date(lastModified).toString(), "size", size, "desc", inMemory);
         }).collect(Collectors.toList()));
         return new Gson().toJson(params);

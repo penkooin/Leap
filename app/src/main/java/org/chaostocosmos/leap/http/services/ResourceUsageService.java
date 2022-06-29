@@ -64,6 +64,7 @@ public class ResourceUsageService extends AbstractChartService {
             throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES404.code(), "Request has no body data. Chart service must have JSON chart data.");
         }
         String chartJson = new String(body, charset);
+        System.out.println(chartJson);
         Map<String, Object> map = gson.fromJson(chartJson, Map.class);
         Graph<Double, String, Double> cpuChart = super.lineChart((Map<String, Object>)map.get("CPU"));
         Graph<Double, String, Double> memoryChart = super.areaChart((Map<String, Object>)map.get("MEMORY"));

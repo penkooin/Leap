@@ -74,6 +74,10 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
      */
     private static ResourceMonitor resourceMonitor = null;
     /**
+     * X axis index count
+     */
+    private static int xIndexCnt = 10;
+    /**
      * Get resource monitor
      * @return
      * @throws NotSupportedException
@@ -111,7 +115,6 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
             // INTERPOLATE.NEVILLE
             // INTERPOLATE.SPLINE
             // INTERPOLATE.NONE
-            int xIndexCnt = 100;
             UNIT unit = Context.getServer().getMonitoringUnit();
             double totalMemory = unit.get(((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getTotalPhysicalMemorySize(), Constants.DEFAULT_FRACTION_POINT);
             double usedMemory = unit.get(((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getTotalPhysicalMemorySize() - ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getFreePhysicalMemorySize(), Constants.DEFAULT_FRACTION_POINT);
@@ -312,55 +315,55 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
     private void setProbingValues() throws NotSupportedException {
         List<Object> values = null;
         values = super.getValue("CPU.ELEMENTS.0.VALUES");
-        if(values.size() > 50) values.remove(0);
+        if(values.size() > xIndexCnt) values.remove(0);
         values.add(getProcessCpuLoad());
         
         values = super.getValue("CPU.ELEMENTS.1.VALUES");
-        if(values.size() > 50) values.remove(0);
+        if(values.size() > xIndexCnt) values.remove(0);
         values.add(getSystemCpuLoad());
         
         values = super.getValue("MEMORY.ELEMENTS.0.VALUES");
-        if(values.size() > 50) values.remove(0);
+        if(values.size() > xIndexCnt) values.remove(0);
         values.add(getPhysicalUsedMemory());
                 
         values = super.getValue("MEMORY.ELEMENTS.1.VALUES");
-        if(values.size() > 50) values.remove(0);
+        if(values.size() > xIndexCnt) values.remove(0);
         values.add(getFreeMemory());
 
         values = super.getValue("MEMORY.ELEMENTS.2.VALUES");
-        if(values.size() > 50) values.remove(0);
+        if(values.size() > xIndexCnt) values.remove(0);
         values.add(getUsedMemory());
 
         values = super.getValue("THREAD.ELEMENTS.0.VALUES");
-        if(values.size() > 50) values.remove(0);
+        if(values.size() > xIndexCnt) values.remove(0);
         values.add(getCorePoolSize());
 
         values = super.getValue("THREAD.ELEMENTS.1.VALUES");
-        if(values.size() > 50) values.remove(0);
+        if(values.size() > xIndexCnt) values.remove(0);
         values.add(getActiveCount());
 
         values = super.getValue("THREAD.ELEMENTS.2.VALUES");
-        if(values.size() > 50) values.remove(0);
+        if(values.size() > xIndexCnt) values.remove(0);
         values.add(getMaximumPoolSize());
 
         values = super.getValue("THREAD.ELEMENTS.3.VALUES");
-        if(values.size() > 50) values.remove(0);
+        if(values.size() > xIndexCnt) values.remove(0);
         values.add(getQueuedTaskCount());
 
         values = super.getValue("HEAP.ELEMENTS.0.VALUES");
-        if(values.size() > 50) values.remove(0);
+        if(values.size() > xIndexCnt) values.remove(0);
         values.add(getProcessHeapMax());
 
         values = super.getValue("HEAP.ELEMENTS.1.VALUES");
-        if(values.size() > 50) values.remove(0);
+        if(values.size() > xIndexCnt) values.remove(0);
         values.add(getProcessHeapInit());
 
         values = super.getValue("HEAP.ELEMENTS.2.VALUES");
-        if(values.size() > 50) values.remove(0);
+        if(values.size() > xIndexCnt) values.remove(0);
         values.add(getProcessHeapCommitted());
 
         values = super.getValue("HEAP.ELEMENTS.3.VALUES");
-        if(values.size() > 50) values.remove(0);
+        if(values.size() > xIndexCnt) values.remove(0);
         values.add(getProcessHeapUsed());
     }
     /**

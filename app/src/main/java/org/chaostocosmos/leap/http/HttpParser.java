@@ -151,7 +151,7 @@ public class HttpParser {
                 headerMap.put(header.substring(0, idx), header.substring(idx + 1, header.length()).trim());
             }
             String requestedHost = headerMap.get("Host").toString().trim();
-            if(!contextPath.startsWith("/streaming") && !checkRequestAttack(inetAddress.getHostAddress(), contextPath)) {
+            if(!headerMap.containsKey("Range") && !checkRequestAttack(inetAddress.getHostAddress(), contextPath)) {
                 LoggerFactory.getLogger(requestedHost).warn("[CLIENT BLOCKED] Too many requested client blocking: "+inetAddress.getHostAddress());
                 throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES429.code(), requestedHost+" requested too many on short period!!!");
             }
