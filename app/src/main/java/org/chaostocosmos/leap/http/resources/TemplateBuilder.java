@@ -30,8 +30,10 @@ public class TemplateBuilder {
      * @throws Exception
      */
     public static String buildMonitoringPage(String contextPath, Host<?> host) throws Exception {
-        String monitorPage = host.getResource().getTemplatePage("templates/monitor.html", null);
-        String script = host.getResource().getTemplatePage("script/refreshImage.js", Map.of("@interval", Context.getServer().getMonitoringInterval()));
+        Host<?> defaultHost = Context.getHosts().getDefaultHost();
+        String url = defaultHost.getProtocol().name().toLowerCase()+"://"+defaultHost.getHost()+":"+defaultHost.getPort();
+        String monitorPage = host.getResource().getTemplatePage("templates/monitor.html", Map.of("@url", url));        
+        String script = host.getResource().getTemplatePage("script/refreshImage.js", Map.of("@interval", Context.getServer().getMonitoringInterval(), "@url", url));
         return host.getResource().getTemplatePage("templates/default.html", Map.of("@serverName", host.getHost(), "@script", script, "@body", monitorPage));
     }
     /**

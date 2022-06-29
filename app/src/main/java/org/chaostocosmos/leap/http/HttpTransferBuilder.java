@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.chaostocosmos.leap.http.commons.Constants;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Host;
@@ -183,16 +184,14 @@ public class HttpTransferBuilder {
          */
         public void sendResponse(String hostId, int resCode, Map<String, List<Object>> headers, Object body) throws IOException {
             Charset charset = Context.getHosts().charset(hostId);
-            String str = Context.getHosts().getHost(hostId).getProtocol().name();
-            String protocol = str.substring(0, str.indexOf("_"));
-            String version = str.substring(str.indexOf("_")+1).replace("_", ".");
+            String protocol = Context.getHosts().getHost(hostId).getProtocol().name();
             String resMsg = null;
             if(resCode >= 200 && resCode <= 600) {
                 resMsg = RES_CODE.valueOf("RES"+resCode).msg();
             } else {
                 resMsg = Context.getMessages().getErrorMsg(resCode, hostId);
             }
-            String res = protocol+"/"+version+" "+resCode+" "+resMsg+"\r\n"; 
+            String res = protocol+"/"+Constants.HTTP_VERSION+" "+resCode+" "+resMsg+"\r\n"; 
             this.clientOutputStream.write(res.getBytes());
             if(body == null) {
                 LoggerFactory.getLogger(hostId).warn("Response body is Null: "+resCode);

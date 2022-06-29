@@ -10,6 +10,10 @@ import java.util.regex.Pattern;
  */
 public class Constants {
     /**
+     * Http protocol version
+     */
+    public static final String HTTP_VERSION = "1.0";
+    /**
      * In-Memory limit resource size
      */
     public static final long IN_MEMORY_LIMIT_SIZE = (long)Integer.MAX_VALUE * 100;

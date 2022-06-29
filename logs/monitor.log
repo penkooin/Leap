@@ -1,34 +1,752 @@
-2022-06-29 11:29:17.189 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 0  Queued size: 0  Task completed: 0
-2022-06-29 11:29:17.887 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 118.77 MB  Process Free: 8393.57 MB  Physical Total: 34043.23 MB  Physical Free: 18533.64 MB  Process CPU load: 12.0 PCT  Process CPU time: 3.0 SE  System CPU load: 15.0 PCT
-2022-06-29 11:29:20.194 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 1  Queued size: 0  Task completed: 1
-2022-06-29 11:29:20.278 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 127.16 MB  Process Free: 8385.18 MB  Physical Total: 34043.23 MB  Physical Free: 18455.46 MB  Process CPU load: 3.0 PCT  Process CPU time: 4.0 SE  System CPU load: 15.0 PCT
-2022-06-29 11:29:23.204 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 10  Queued size: 0  Task completed: 9
-2022-06-29 11:29:23.258 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 131.36 MB  Process Free: 8380.98 MB  Physical Total: 34043.23 MB  Physical Free: 18443.44 MB  Process CPU load: 3.0 PCT  Process CPU time: 5.0 SE  System CPU load: 20.0 PCT
-2022-06-29 11:29:26.214 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 11  Queued size: 0  Task completed: 10
-2022-06-29 11:29:26.264 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 160.97 MB  Process Free: 8351.37 MB  Physical Total: 34043.23 MB  Physical Free: 18422.29 MB  Process CPU load: 15.0 PCT  Process CPU time: 8.0 SE  System CPU load: 30.0 PCT
-2022-06-29 11:29:29.229 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 12  Queued size: 0  Task completed: 12
-2022-06-29 11:29:29.286 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 137.34 MB  Process Free: 8375.0 MB  Physical Total: 34043.23 MB  Physical Free: 18388.45 MB  Process CPU load: 5.0 PCT  Process CPU time: 9.0 SE  System CPU load: 14.0 PCT
-2022-06-29 11:29:32.232 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 13  Queued size: 0  Task completed: 13
-2022-06-29 11:29:32.295 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 183.48 MB  Process Free: 8328.86 MB  Physical Total: 34043.23 MB  Physical Free: 18424.61 MB  Process CPU load: 5.0 PCT  Process CPU time: 10.0 SE  System CPU load: 15.0 PCT
-2022-06-29 11:29:35.245 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 14  Queued size: 0  Task completed: 14
-2022-06-29 11:29:35.306 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 227.52 MB  Process Free: 8284.82 MB  Physical Total: 34043.23 MB  Physical Free: 18390.86 MB  Process CPU load: 3.0 PCT  Process CPU time: 11.0 SE  System CPU load: 12.0 PCT
-2022-06-29 11:29:38.260 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 15  Queued size: 0  Task completed: 15
-2022-06-29 11:29:38.318 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 273.65 MB  Process Free: 8238.69 MB  Physical Total: 34043.23 MB  Physical Free: 18400.65 MB  Process CPU load: 3.0 PCT  Process CPU time: 12.0 SE  System CPU load: 13.0 PCT
-2022-06-29 11:29:41.271 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 16  Queued size: 0  Task completed: 16
-2022-06-29 11:29:41.337 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 321.89 MB  Process Free: 8190.45 MB  Physical Total: 34043.23 MB  Physical Free: 18320.88 MB  Process CPU load: 3.0 PCT  Process CPU time: 13.0 SE  System CPU load: 15.0 PCT
-2022-06-29 11:29:44.280 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 17  Queued size: 0  Task completed: 17
-2022-06-29 11:29:44.328 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 196.75 MB  Process Free: 8315.59 MB  Physical Total: 34043.23 MB  Physical Free: 18296.16 MB  Process CPU load: 3.0 PCT  Process CPU time: 13.0 SE  System CPU load: 12.0 PCT
-2022-06-29 11:29:47.289 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 18  Queued size: 0  Task completed: 18
-2022-06-29 11:29:47.339 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 242.88 MB  Process Free: 8269.46 MB  Physical Total: 34043.23 MB  Physical Free: 18309.56 MB  Process CPU load: 2.0 PCT  Process CPU time: 14.0 SE  System CPU load: 13.0 PCT
-2022-06-29 11:29:50.297 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 19  Queued size: 0  Task completed: 19
-2022-06-29 11:29:50.368 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 289.02 MB  Process Free: 8223.32 MB  Physical Total: 34043.23 MB  Physical Free: 18284.78 MB  Process CPU load: 2.0 PCT  Process CPU time: 14.0 SE  System CPU load: 13.0 PCT
-2022-06-29 11:29:53.298 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 20  Queued size: 0  Task completed: 20
-2022-06-29 11:29:53.366 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 335.16 MB  Process Free: 8177.18 MB  Physical Total: 34043.23 MB  Physical Free: 18272.49 MB  Process CPU load: 3.0 PCT  Process CPU time: 15.0 SE  System CPU load: 24.0 PCT
-2022-06-29 11:29:56.307 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 21  Queued size: 0  Task completed: 21
-2022-06-29 11:29:56.356 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 381.3 MB  Process Free: 8131.04 MB  Physical Total: 34043.23 MB  Physical Free: 18246.79 MB  Process CPU load: 2.0 PCT  Process CPU time: 15.0 SE  System CPU load: 11.0 PCT
-2022-06-29 11:29:59.321 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 22  Queued size: 0  Task completed: 22
-2022-06-29 11:29:59.399 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 184.19 MB  Process Free: 8328.15 MB  Physical Total: 34043.23 MB  Physical Free: 18240.91 MB  Process CPU load: 4.0 PCT  Process CPU time: 16.0 SE  System CPU load: 18.0 PCT
-2022-06-29 11:30:02.323 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 23  Queued size: 0  Task completed: 23
-2022-06-29 11:30:02.384 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 230.32 MB  Process Free: 8282.02 MB  Physical Total: 34043.23 MB  Physical Free: 18240.5 MB  Process CPU load: 2.0 PCT  Process CPU time: 17.0 SE  System CPU load: 13.0 PCT
-2022-06-29 11:30:05.327 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 24  Queued size: 0  Task completed: 24
-2022-06-29 11:30:05.398 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 276.46 MB  Process Free: 8235.88 MB  Physical Total: 34043.23 MB  Physical Free: 18222.64 MB  Process CPU load: 3.0 PCT  Process CPU time: 17.0 SE  System CPU load: 19.0 PCT
+2022-06-29 14:00:00.329 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2164
+2022-06-29 14:00:00.378 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 381.69 MB  Process Free: 8130.65 MB  Physical Total: 34043.23 MB  Physical Free: 17046.57 MB  Process CPU load: 2.0 PCT  Process CPU time: 610.0 SE  System CPU load: 7.0 PCT
+2022-06-29 14:00:03.342 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2165
+2022-06-29 14:00:03.388 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 199.05 MB  Process Free: 8313.29 MB  Physical Total: 34043.23 MB  Physical Free: 17023.4 MB  Process CPU load: 3.0 PCT  Process CPU time: 611.0 SE  System CPU load: 11.0 PCT
+2022-06-29 14:00:06.347 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2166
+2022-06-29 14:00:06.393 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 247.28 MB  Process Free: 8265.06 MB  Physical Total: 34043.23 MB  Physical Free: 17031.3 MB  Process CPU load: 2.0 PCT  Process CPU time: 611.0 SE  System CPU load: 6.0 PCT
+2022-06-29 14:00:09.354 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2167
+2022-06-29 14:00:09.403 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 295.52 MB  Process Free: 8216.82 MB  Physical Total: 34043.23 MB  Physical Free: 17003.48 MB  Process CPU load: 2.0 PCT  Process CPU time: 612.0 SE  System CPU load: 23.0 PCT
+2022-06-29 14:00:12.357 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2168
+2022-06-29 14:00:12.405 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 343.75 MB  Process Free: 8168.59 MB  Physical Total: 34043.23 MB  Physical Free: 16991.07 MB  Process CPU load: 2.0 PCT  Process CPU time: 612.0 SE  System CPU load: 15.0 PCT
+2022-06-29 14:00:15.364 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2169
+2022-06-29 14:00:15.410 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 389.89 MB  Process Free: 8122.45 MB  Physical Total: 34043.23 MB  Physical Free: 17004.4 MB  Process CPU load: 2.0 PCT  Process CPU time: 612.0 SE  System CPU load: 15.0 PCT
+2022-06-29 14:00:18.368 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2170
+2022-06-29 14:00:18.411 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 203.42 MB  Process Free: 8308.92 MB  Physical Total: 34043.23 MB  Physical Free: 17019.14 MB  Process CPU load: 2.0 PCT  Process CPU time: 613.0 SE  System CPU load: 9.0 PCT
+2022-06-29 14:00:21.384 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2171
+2022-06-29 14:00:21.418 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 251.65 MB  Process Free: 8260.69 MB  Physical Total: 34043.23 MB  Physical Free: 17050.16 MB  Process CPU load: 2.0 PCT  Process CPU time: 613.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:00:24.403 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2172
+2022-06-29 14:00:24.452 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 299.89 MB  Process Free: 8212.45 MB  Physical Total: 34043.23 MB  Physical Free: 17070.17 MB  Process CPU load: 2.0 PCT  Process CPU time: 614.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:00:27.415 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2173
+2022-06-29 14:00:27.449 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 346.03 MB  Process Free: 8166.31 MB  Physical Total: 34043.23 MB  Physical Free: 17070.47 MB  Process CPU load: 2.0 PCT  Process CPU time: 614.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:00:30.418 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2178
+2022-06-29 14:00:30.461 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 171.79 MB  Process Free: 8338.46 MB  Physical Total: 34043.23 MB  Physical Free: 17058.84 MB  Process CPU load: 3.0 PCT  Process CPU time: 615.0 SE  System CPU load: 9.0 PCT
+2022-06-29 14:00:33.432 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2179
+2022-06-29 14:00:33.478 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 222.12 MB  Process Free: 8290.22 MB  Physical Total: 34043.23 MB  Physical Free: 17067.36 MB  Process CPU load: 2.0 PCT  Process CPU time: 615.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:00:36.440 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2181
+2022-06-29 14:00:36.475 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 270.35 MB  Process Free: 8241.99 MB  Physical Total: 34043.23 MB  Physical Free: 17068.25 MB  Process CPU load: 3.0 PCT  Process CPU time: 616.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:00:39.451 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2182
+2022-06-29 14:00:39.487 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 316.49 MB  Process Free: 8195.85 MB  Physical Total: 34043.23 MB  Physical Free: 17078.08 MB  Process CPU load: 2.0 PCT  Process CPU time: 616.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:00:42.458 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2183
+2022-06-29 14:00:42.500 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 364.72 MB  Process Free: 8147.62 MB  Physical Total: 34043.23 MB  Physical Free: 17062.29 MB  Process CPU load: 3.0 PCT  Process CPU time: 617.0 SE  System CPU load: 14.0 PCT
+2022-06-29 14:00:45.471 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2184
+2022-06-29 14:00:45.519 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 178.06 MB  Process Free: 8334.28 MB  Physical Total: 34043.23 MB  Physical Free: 16954.59 MB  Process CPU load: 2.0 PCT  Process CPU time: 618.0 SE  System CPU load: 24.0 PCT
+2022-06-29 14:00:48.481 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2185
+2022-06-29 14:00:48.528 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 226.3 MB  Process Free: 8286.04 MB  Physical Total: 34043.23 MB  Physical Free: 16961.28 MB  Process CPU load: 2.0 PCT  Process CPU time: 618.0 SE  System CPU load: 7.0 PCT
+2022-06-29 14:00:51.481 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2186
+2022-06-29 14:00:51.517 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 274.53 MB  Process Free: 8237.81 MB  Physical Total: 34043.23 MB  Physical Free: 16982.09 MB  Process CPU load: 2.0 PCT  Process CPU time: 618.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:00:54.492 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2187
+2022-06-29 14:00:54.541 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 322.77 MB  Process Free: 8189.57 MB  Physical Total: 34043.23 MB  Physical Free: 17001.67 MB  Process CPU load: 2.0 PCT  Process CPU time: 619.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:00:57.500 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2188
+2022-06-29 14:00:57.550 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 368.91 MB  Process Free: 8143.43 MB  Physical Total: 34043.23 MB  Physical Free: 17014.46 MB  Process CPU load: 1.0 PCT  Process CPU time: 619.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:01:00.522 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2189
+2022-06-29 14:01:00.558 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 188.06 MB  Process Free: 8324.28 MB  Physical Total: 34043.23 MB  Physical Free: 17014.5 MB  Process CPU load: 3.0 PCT  Process CPU time: 620.0 SE  System CPU load: 6.0 PCT
+2022-06-29 14:01:03.532 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2190
+2022-06-29 14:01:03.577 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 234.2 MB  Process Free: 8278.14 MB  Physical Total: 34043.23 MB  Physical Free: 17014.21 MB  Process CPU load: 2.0 PCT  Process CPU time: 620.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:01:06.541 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2191
+2022-06-29 14:01:06.575 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 282.43 MB  Process Free: 8229.91 MB  Physical Total: 34043.23 MB  Physical Free: 17018.09 MB  Process CPU load: 2.0 PCT  Process CPU time: 621.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:01:09.549 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2192
+2022-06-29 14:01:09.583 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 330.67 MB  Process Free: 8181.67 MB  Physical Total: 34043.23 MB  Physical Free: 17021.33 MB  Process CPU load: 2.0 PCT  Process CPU time: 621.0 SE  System CPU load: 7.0 PCT
+2022-06-29 14:01:12.573 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2193
+2022-06-29 14:01:12.618 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 376.81 MB  Process Free: 8135.53 MB  Physical Total: 34043.23 MB  Physical Free: 17020.53 MB  Process CPU load: 2.0 PCT  Process CPU time: 622.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:01:15.582 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2194
+2022-06-29 14:01:15.643 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 190.87 MB  Process Free: 8321.47 MB  Physical Total: 34043.23 MB  Physical Free: 16861.03 MB  Process CPU load: 3.0 PCT  Process CPU time: 622.0 SE  System CPU load: 52.0 PCT
+2022-06-29 14:01:18.585 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2195
+2022-06-29 14:01:18.630 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 237.0 MB  Process Free: 8275.34 MB  Physical Total: 34043.23 MB  Physical Free: 16673.96 MB  Process CPU load: 2.0 PCT  Process CPU time: 623.0 SE  System CPU load: 55.0 PCT
+2022-06-29 14:01:21.587 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2196
+2022-06-29 14:01:21.660 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 285.24 MB  Process Free: 8227.1 MB  Physical Total: 34043.23 MB  Physical Free: 16394.6 MB  Process CPU load: 2.0 PCT  Process CPU time: 623.0 SE  System CPU load: 60.0 PCT
+2022-06-29 14:01:24.591 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2197
+2022-06-29 14:01:24.662 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 333.47 MB  Process Free: 8178.87 MB  Physical Total: 34043.23 MB  Physical Free: 16094.3 MB  Process CPU load: 3.0 PCT  Process CPU time: 624.0 SE  System CPU load: 89.0 PCT
+2022-06-29 14:01:27.599 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2198
+2022-06-29 14:01:27.695 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 381.71 MB  Process Free: 8130.63 MB  Physical Total: 34043.23 MB  Physical Free: 15771.32 MB  Process CPU load: 2.0 PCT  Process CPU time: 624.0 SE  System CPU load: 86.0 PCT
+2022-06-29 14:01:30.608 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2203
+2022-06-29 14:01:30.664 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 201.35 MB  Process Free: 8310.99 MB  Physical Total: 34043.23 MB  Physical Free: 15600.67 MB  Process CPU load: 4.0 PCT  Process CPU time: 625.0 SE  System CPU load: 86.0 PCT
+2022-06-29 14:01:33.623 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2204
+2022-06-29 14:01:33.697 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 251.68 MB  Process Free: 8260.66 MB  Physical Total: 34043.23 MB  Physical Free: 15480.12 MB  Process CPU load: 2.0 PCT  Process CPU time: 626.0 SE  System CPU load: 78.0 PCT
+2022-06-29 14:01:36.633 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2206
+2022-06-29 14:01:36.701 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 299.92 MB  Process Free: 8212.42 MB  Physical Total: 34043.23 MB  Physical Free: 15283.9 MB  Process CPU load: 4.0 PCT  Process CPU time: 627.0 SE  System CPU load: 100.0 PCT
+2022-06-29 14:01:39.643 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2207
+2022-06-29 14:01:39.699 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 346.05 MB  Process Free: 8166.29 MB  Physical Total: 34043.23 MB  Physical Free: 15232.35 MB  Process CPU load: 2.0 PCT  Process CPU time: 627.0 SE  System CPU load: 86.0 PCT
+2022-06-29 14:01:42.652 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2208
+2022-06-29 14:01:42.697 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 394.29 MB  Process Free: 8118.05 MB  Physical Total: 34043.23 MB  Physical Free: 15230.14 MB  Process CPU load: 2.0 PCT  Process CPU time: 628.0 SE  System CPU load: 25.0 PCT
+2022-06-29 14:01:45.664 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2209
+2022-06-29 14:01:45.711 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 203.43 MB  Process Free: 8308.91 MB  Physical Total: 34043.23 MB  Physical Free: 15292.92 MB  Process CPU load: 3.0 PCT  Process CPU time: 629.0 SE  System CPU load: 17.0 PCT
+2022-06-29 14:01:48.671 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2210
+2022-06-29 14:01:48.717 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 251.67 MB  Process Free: 8260.67 MB  Physical Total: 34043.23 MB  Physical Free: 15414.74 MB  Process CPU load: 2.0 PCT  Process CPU time: 629.0 SE  System CPU load: 20.0 PCT
+2022-06-29 14:01:51.682 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2211
+2022-06-29 14:01:51.728 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 299.9 MB  Process Free: 8212.44 MB  Physical Total: 34043.23 MB  Physical Free: 15432.57 MB  Process CPU load: 2.0 PCT  Process CPU time: 629.0 SE  System CPU load: 16.0 PCT
+2022-06-29 14:01:54.690 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2212
+2022-06-29 14:01:54.737 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 346.04 MB  Process Free: 8166.3 MB  Physical Total: 34043.23 MB  Physical Free: 15479.24 MB  Process CPU load: 2.0 PCT  Process CPU time: 630.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:01:57.692 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2213
+2022-06-29 14:01:57.738 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 169.9 MB  Process Free: 8342.44 MB  Physical Total: 34043.23 MB  Physical Free: 15488.63 MB  Process CPU load: 2.0 PCT  Process CPU time: 630.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:02:00.695 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2214
+2022-06-29 14:02:00.742 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 218.14 MB  Process Free: 8294.2 MB  Physical Total: 34043.23 MB  Physical Free: 15488.92 MB  Process CPU load: 2.0 PCT  Process CPU time: 631.0 SE  System CPU load: 6.0 PCT
+2022-06-29 14:02:03.704 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2215
+2022-06-29 14:02:03.757 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 264.27 MB  Process Free: 8248.07 MB  Physical Total: 34043.23 MB  Physical Free: 15502.62 MB  Process CPU load: 1.0 PCT  Process CPU time: 631.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:02:06.710 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2216
+2022-06-29 14:02:06.757 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 312.51 MB  Process Free: 8199.83 MB  Physical Total: 34043.23 MB  Physical Free: 15576.52 MB  Process CPU load: 2.0 PCT  Process CPU time: 631.0 SE  System CPU load: 10.0 PCT
+2022-06-29 14:02:09.712 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2217
+2022-06-29 14:02:09.757 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 360.74 MB  Process Free: 8151.6 MB  Physical Total: 34043.23 MB  Physical Free: 15569.21 MB  Process CPU load: 1.0 PCT  Process CPU time: 632.0 SE  System CPU load: 9.0 PCT
+2022-06-29 14:02:12.720 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2218
+2022-06-29 14:02:12.767 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 180.4 MB  Process Free: 8331.94 MB  Physical Total: 34043.23 MB  Physical Free: 15575.61 MB  Process CPU load: 3.0 PCT  Process CPU time: 632.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:02:15.734 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2219
+2022-06-29 14:02:15.779 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 228.64 MB  Process Free: 8283.7 MB  Physical Total: 34043.23 MB  Physical Free: 15580.77 MB  Process CPU load: 1.0 PCT  Process CPU time: 633.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:02:18.744 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2220
+2022-06-29 14:02:18.790 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 276.87 MB  Process Free: 8235.47 MB  Physical Total: 34043.23 MB  Physical Free: 15586.48 MB  Process CPU load: 2.0 PCT  Process CPU time: 633.0 SE  System CPU load: 6.0 PCT
+2022-06-29 14:02:21.752 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2221
+2022-06-29 14:02:21.800 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 323.01 MB  Process Free: 8189.33 MB  Physical Total: 34043.23 MB  Physical Free: 15596.52 MB  Process CPU load: 2.0 PCT  Process CPU time: 634.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:02:24.766 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2222
+2022-06-29 14:02:24.811 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 371.24 MB  Process Free: 8141.1 MB  Physical Total: 34043.23 MB  Physical Free: 15602.72 MB  Process CPU load: 2.0 PCT  Process CPU time: 634.0 SE  System CPU load: 9.0 PCT
+2022-06-29 14:02:27.781 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2223
+2022-06-29 14:02:27.845 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 192.29 MB  Process Free: 8320.05 MB  Physical Total: 34043.23 MB  Physical Free: 15592.4 MB  Process CPU load: 3.0 PCT  Process CPU time: 635.0 SE  System CPU load: 34.0 PCT
+2022-06-29 14:02:30.794 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2228
+2022-06-29 14:02:30.837 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 242.62 MB  Process Free: 8269.72 MB  Physical Total: 34043.23 MB  Physical Free: 17405.58 MB  Process CPU load: 2.0 PCT  Process CPU time: 635.0 SE  System CPU load: 17.0 PCT
+2022-06-29 14:02:33.810 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2229
+2022-06-29 14:02:33.850 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 292.95 MB  Process Free: 8219.39 MB  Physical Total: 34043.23 MB  Physical Free: 17444.47 MB  Process CPU load: 2.0 PCT  Process CPU time: 636.0 SE  System CPU load: 6.0 PCT
+2022-06-29 14:02:36.817 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2231
+2022-06-29 14:02:36.852 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 339.09 MB  Process Free: 8173.25 MB  Physical Total: 34043.23 MB  Physical Free: 17548.61 MB  Process CPU load: 2.0 PCT  Process CPU time: 636.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:02:39.830 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2232
+2022-06-29 14:02:39.875 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 387.32 MB  Process Free: 8125.02 MB  Physical Total: 34043.23 MB  Physical Free: 17572.63 MB  Process CPU load: 2.0 PCT  Process CPU time: 637.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:02:42.844 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2233
+2022-06-29 14:02:42.879 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 200.66 MB  Process Free: 8311.68 MB  Physical Total: 34043.23 MB  Physical Free: 17558.45 MB  Process CPU load: 2.0 PCT  Process CPU time: 637.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:02:45.850 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2234
+2022-06-29 14:02:45.886 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 248.9 MB  Process Free: 8263.44 MB  Physical Total: 34043.23 MB  Physical Free: 17573.61 MB  Process CPU load: 2.0 PCT  Process CPU time: 638.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:02:48.854 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2235
+2022-06-29 14:02:48.898 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 297.13 MB  Process Free: 8215.21 MB  Physical Total: 34043.23 MB  Physical Free: 17578.7 MB  Process CPU load: 2.0 PCT  Process CPU time: 638.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:02:51.870 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2236
+2022-06-29 14:02:51.905 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 343.27 MB  Process Free: 8169.07 MB  Physical Total: 34043.23 MB  Physical Free: 17580.54 MB  Process CPU load: 2.0 PCT  Process CPU time: 638.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:02:54.881 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2237
+2022-06-29 14:02:54.916 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 391.5 MB  Process Free: 8120.84 MB  Physical Total: 34043.23 MB  Physical Free: 17582.68 MB  Process CPU load: 2.0 PCT  Process CPU time: 639.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:02:57.896 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2238
+2022-06-29 14:02:57.928 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 211.59 MB  Process Free: 8300.75 MB  Physical Total: 34043.23 MB  Physical Free: 17585.45 MB  Process CPU load: 3.0 PCT  Process CPU time: 639.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:03:00.903 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2239
+2022-06-29 14:03:00.938 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 257.73 MB  Process Free: 8254.61 MB  Physical Total: 34043.23 MB  Physical Free: 17635.06 MB  Process CPU load: 2.0 PCT  Process CPU time: 640.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:03:03.922 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2240
+2022-06-29 14:03:03.956 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 305.97 MB  Process Free: 8206.37 MB  Physical Total: 34043.23 MB  Physical Free: 17651.31 MB  Process CPU load: 2.0 PCT  Process CPU time: 640.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:03:06.937 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2241
+2022-06-29 14:03:06.972 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 354.2 MB  Process Free: 8158.14 MB  Physical Total: 34043.23 MB  Physical Free: 17651.81 MB  Process CPU load: 1.0 PCT  Process CPU time: 640.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:03:09.948 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2242
+2022-06-29 14:03:09.983 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 170.15 MB  Process Free: 8342.19 MB  Physical Total: 34043.23 MB  Physical Free: 17652.75 MB  Process CPU load: 2.0 PCT  Process CPU time: 641.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:03:12.963 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2243
+2022-06-29 14:03:12.998 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 218.39 MB  Process Free: 8293.95 MB  Physical Total: 34043.23 MB  Physical Free: 17652.07 MB  Process CPU load: 2.0 PCT  Process CPU time: 641.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:03:15.976 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2244
+2022-06-29 14:03:16.011 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 264.52 MB  Process Free: 8247.82 MB  Physical Total: 34043.23 MB  Physical Free: 17652.0 MB  Process CPU load: 2.0 PCT  Process CPU time: 642.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:03:18.986 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2245
+2022-06-29 14:03:19.020 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 312.76 MB  Process Free: 8199.58 MB  Physical Total: 34043.23 MB  Physical Free: 17651.52 MB  Process CPU load: 2.0 PCT  Process CPU time: 642.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:03:21.989 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2246
+2022-06-29 14:03:22.024 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 360.99 MB  Process Free: 8151.35 MB  Physical Total: 34043.23 MB  Physical Free: 17652.26 MB  Process CPU load: 2.0 PCT  Process CPU time: 643.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:03:25.004 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2247
+2022-06-29 14:03:25.039 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 180.0 MB  Process Free: 8332.34 MB  Physical Total: 34043.23 MB  Physical Free: 17654.45 MB  Process CPU load: 2.0 PCT  Process CPU time: 643.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:03:28.014 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2248
+2022-06-29 14:03:28.049 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 228.24 MB  Process Free: 8284.1 MB  Physical Total: 34043.23 MB  Physical Free: 17655.28 MB  Process CPU load: 2.0 PCT  Process CPU time: 643.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:03:31.015 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2253
+2022-06-29 14:03:31.051 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 278.57 MB  Process Free: 8233.77 MB  Physical Total: 34043.23 MB  Physical Free: 17638.26 MB  Process CPU load: 2.0 PCT  Process CPU time: 644.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:03:34.026 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2255
+2022-06-29 14:03:34.061 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 328.9 MB  Process Free: 8183.44 MB  Physical Total: 34043.23 MB  Physical Free: 17633.7 MB  Process CPU load: 1.0 PCT  Process CPU time: 644.0 SE  System CPU load: 13.0 PCT
+2022-06-29 14:03:37.039 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2256
+2022-06-29 14:03:37.083 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 377.14 MB  Process Free: 8135.2 MB  Physical Total: 34043.23 MB  Physical Free: 17645.45 MB  Process CPU load: 2.0 PCT  Process CPU time: 645.0 SE  System CPU load: 14.0 PCT
+2022-06-29 14:03:40.054 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2257
+2022-06-29 14:03:40.088 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 193.02 MB  Process Free: 8319.32 MB  Physical Total: 34043.23 MB  Physical Free: 17636.45 MB  Process CPU load: 2.0 PCT  Process CPU time: 645.0 SE  System CPU load: 9.0 PCT
+2022-06-29 14:03:43.069 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2258
+2022-06-29 14:03:43.104 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 241.25 MB  Process Free: 8271.09 MB  Physical Total: 34043.23 MB  Physical Free: 17646.99 MB  Process CPU load: 2.0 PCT  Process CPU time: 646.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:03:46.077 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2259
+2022-06-29 14:03:46.119 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 287.39 MB  Process Free: 8224.95 MB  Physical Total: 34043.23 MB  Physical Free: 17647.98 MB  Process CPU load: 2.0 PCT  Process CPU time: 646.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:03:49.079 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2260
+2022-06-29 14:03:49.115 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 335.62 MB  Process Free: 8176.72 MB  Physical Total: 34043.23 MB  Physical Free: 17651.47 MB  Process CPU load: 2.0 PCT  Process CPU time: 646.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:03:52.093 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2261
+2022-06-29 14:03:52.127 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 383.86 MB  Process Free: 8128.48 MB  Physical Total: 34043.23 MB  Physical Free: 17643.61 MB  Process CPU load: 1.0 PCT  Process CPU time: 647.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:03:55.105 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2262
+2022-06-29 14:03:55.148 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 200.69 MB  Process Free: 8311.65 MB  Physical Total: 34043.23 MB  Physical Free: 17653.85 MB  Process CPU load: 3.0 PCT  Process CPU time: 647.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:03:58.118 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2263
+2022-06-29 14:03:58.153 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 248.93 MB  Process Free: 8263.41 MB  Physical Total: 34043.23 MB  Physical Free: 17657.8 MB  Process CPU load: 1.0 PCT  Process CPU time: 648.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:04:01.132 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2264
+2022-06-29 14:04:01.166 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 297.16 MB  Process Free: 8215.18 MB  Physical Total: 34043.23 MB  Physical Free: 17659.94 MB  Process CPU load: 2.0 PCT  Process CPU time: 648.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:04:04.139 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2265
+2022-06-29 14:04:04.178 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 343.3 MB  Process Free: 8169.04 MB  Physical Total: 34043.23 MB  Physical Free: 17658.22 MB  Process CPU load: 1.0 PCT  Process CPU time: 649.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:04:07.144 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2266
+2022-06-29 14:04:07.180 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 391.54 MB  Process Free: 8120.8 MB  Physical Total: 34043.23 MB  Physical Free: 17688.49 MB  Process CPU load: 2.0 PCT  Process CPU time: 649.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:04:10.174 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2267
+2022-06-29 14:04:10.209 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 213.26 MB  Process Free: 8299.08 MB  Physical Total: 34043.23 MB  Physical Free: 17689.07 MB  Process CPU load: 2.0 PCT  Process CPU time: 649.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:04:13.188 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2268
+2022-06-29 14:04:13.223 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 259.4 MB  Process Free: 8252.94 MB  Physical Total: 34043.23 MB  Physical Free: 17694.53 MB  Process CPU load: 2.0 PCT  Process CPU time: 650.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:04:16.211 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2269
+2022-06-29 14:04:16.240 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 307.64 MB  Process Free: 8204.7 MB  Physical Total: 34043.23 MB  Physical Free: 17691.36 MB  Process CPU load: 2.0 PCT  Process CPU time: 650.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:04:19.215 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2270
+2022-06-29 14:04:19.250 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 355.87 MB  Process Free: 8156.47 MB  Physical Total: 34043.23 MB  Physical Free: 17691.07 MB  Process CPU load: 2.0 PCT  Process CPU time: 651.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:04:22.215 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2271
+2022-06-29 14:04:22.252 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 175.97 MB  Process Free: 8336.37 MB  Physical Total: 34043.23 MB  Physical Free: 17692.88 MB  Process CPU load: 3.0 PCT  Process CPU time: 651.0 SE  System CPU load: 6.0 PCT
+2022-06-29 14:04:25.227 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2272
+2022-06-29 14:04:25.262 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 222.11 MB  Process Free: 8290.23 MB  Physical Total: 34043.23 MB  Physical Free: 17696.24 MB  Process CPU load: 1.0 PCT  Process CPU time: 652.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:04:28.232 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2273
+2022-06-29 14:04:28.268 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 270.34 MB  Process Free: 8242.0 MB  Physical Total: 34043.23 MB  Physical Free: 17700.22 MB  Process CPU load: 2.0 PCT  Process CPU time: 652.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:04:31.257 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2278
+2022-06-29 14:04:31.293 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 320.67 MB  Process Free: 8191.67 MB  Physical Total: 34043.23 MB  Physical Free: 17700.04 MB  Process CPU load: 2.0 PCT  Process CPU time: 652.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:04:34.260 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2280
+2022-06-29 14:04:34.290 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 368.91 MB  Process Free: 8143.43 MB  Physical Total: 34043.23 MB  Physical Free: 17701.27 MB  Process CPU load: 2.0 PCT  Process CPU time: 653.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:04:37.269 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2281
+2022-06-29 14:04:37.304 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 178.81 MB  Process Free: 8333.53 MB  Physical Total: 34043.23 MB  Physical Free: 17701.93 MB  Process CPU load: 3.0 PCT  Process CPU time: 654.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:04:40.280 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2282
+2022-06-29 14:04:40.314 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 227.04 MB  Process Free: 8285.3 MB  Physical Total: 34043.23 MB  Physical Free: 17702.12 MB  Process CPU load: 2.0 PCT  Process CPU time: 654.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:04:43.295 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2283
+2022-06-29 14:04:43.338 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 275.27 MB  Process Free: 8237.06 MB  Physical Total: 34043.23 MB  Physical Free: 17702.22 MB  Process CPU load: 2.0 PCT  Process CPU time: 654.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:04:46.300 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2284
+2022-06-29 14:04:46.334 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 321.41 MB  Process Free: 8190.93 MB  Physical Total: 34043.23 MB  Physical Free: 17701.96 MB  Process CPU load: 2.0 PCT  Process CPU time: 655.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:04:49.315 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2285
+2022-06-29 14:04:49.352 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 369.65 MB  Process Free: 8142.69 MB  Physical Total: 34043.23 MB  Physical Free: 17705.59 MB  Process CPU load: 1.0 PCT  Process CPU time: 655.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:04:52.319 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2286
+2022-06-29 14:04:52.361 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 188.41 MB  Process Free: 8323.93 MB  Physical Total: 34043.23 MB  Physical Free: 17707.04 MB  Process CPU load: 3.0 PCT  Process CPU time: 656.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:04:55.332 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2287
+2022-06-29 14:04:55.366 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 234.55 MB  Process Free: 8277.79 MB  Physical Total: 34043.23 MB  Physical Free: 17705.84 MB  Process CPU load: 1.0 PCT  Process CPU time: 656.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:04:58.344 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2288
+2022-06-29 14:04:58.378 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 282.79 MB  Process Free: 8229.55 MB  Physical Total: 34043.23 MB  Physical Free: 17706.21 MB  Process CPU load: 2.0 PCT  Process CPU time: 656.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:05:01.366 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2289
+2022-06-29 14:05:01.405 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 331.02 MB  Process Free: 8181.32 MB  Physical Total: 34043.23 MB  Physical Free: 17709.1 MB  Process CPU load: 2.0 PCT  Process CPU time: 657.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:05:04.383 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2290
+2022-06-29 14:05:04.417 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 377.16 MB  Process Free: 8135.18 MB  Physical Total: 34043.23 MB  Physical Free: 17706.86 MB  Process CPU load: 2.0 PCT  Process CPU time: 657.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:05:07.385 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2291
+2022-06-29 14:05:07.420 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 193.26 MB  Process Free: 8319.08 MB  Physical Total: 34043.23 MB  Physical Free: 17708.71 MB  Process CPU load: 3.0 PCT  Process CPU time: 658.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:05:10.400 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2292
+2022-06-29 14:05:10.434 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 239.39 MB  Process Free: 8272.95 MB  Physical Total: 34043.23 MB  Physical Free: 17711.87 MB  Process CPU load: 2.0 PCT  Process CPU time: 658.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:05:13.401 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2293
+2022-06-29 14:05:13.435 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 287.63 MB  Process Free: 8224.71 MB  Physical Total: 34043.23 MB  Physical Free: 17712.9 MB  Process CPU load: 2.0 PCT  Process CPU time: 659.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:05:16.403 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2294
+2022-06-29 14:05:16.437 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 335.86 MB  Process Free: 8176.48 MB  Physical Total: 34043.23 MB  Physical Free: 17715.72 MB  Process CPU load: 2.0 PCT  Process CPU time: 659.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:05:19.424 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2295
+2022-06-29 14:05:19.458 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 382.0 MB  Process Free: 8130.34 MB  Physical Total: 34043.23 MB  Physical Free: 17715.46 MB  Process CPU load: 2.0 PCT  Process CPU time: 659.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:05:22.424 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2296
+2022-06-29 14:05:22.459 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 200.99 MB  Process Free: 8311.35 MB  Physical Total: 34043.23 MB  Physical Free: 17715.59 MB  Process CPU load: 2.0 PCT  Process CPU time: 660.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:05:25.435 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2297
+2022-06-29 14:05:25.470 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 249.23 MB  Process Free: 8263.11 MB  Physical Total: 34043.23 MB  Physical Free: 17715.11 MB  Process CPU load: 2.0 PCT  Process CPU time: 660.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:05:28.447 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2298
+2022-06-29 14:05:28.496 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 295.37 MB  Process Free: 8216.97 MB  Physical Total: 34043.23 MB  Physical Free: 17704.67 MB  Process CPU load: 2.0 PCT  Process CPU time: 661.0 SE  System CPU load: 7.0 PCT
+2022-06-29 14:05:31.448 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2303
+2022-06-29 14:05:31.492 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 347.8 MB  Process Free: 8164.54 MB  Physical Total: 34043.23 MB  Physical Free: 17698.01 MB  Process CPU load: 1.0 PCT  Process CPU time: 661.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:05:34.449 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2305
+2022-06-29 14:05:34.485 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 396.03 MB  Process Free: 8116.31 MB  Physical Total: 34043.23 MB  Physical Free: 17664.64 MB  Process CPU load: 2.0 PCT  Process CPU time: 662.0 SE  System CPU load: 6.0 PCT
+2022-06-29 14:05:37.450 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2306
+2022-06-29 14:05:37.484 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 211.42 MB  Process Free: 8300.92 MB  Physical Total: 34043.23 MB  Physical Free: 17667.71 MB  Process CPU load: 3.0 PCT  Process CPU time: 662.0 SE  System CPU load: 7.0 PCT
+2022-06-29 14:05:40.458 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2307
+2022-06-29 14:05:40.500 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 257.56 MB  Process Free: 8254.78 MB  Physical Total: 34043.23 MB  Physical Free: 17684.27 MB  Process CPU load: 2.0 PCT  Process CPU time: 663.0 SE  System CPU load: 6.0 PCT
+2022-06-29 14:05:43.463 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2308
+2022-06-29 14:05:43.496 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 305.79 MB  Process Free: 8206.55 MB  Physical Total: 34043.23 MB  Physical Free: 17684.87 MB  Process CPU load: 2.0 PCT  Process CPU time: 663.0 SE  System CPU load: 6.0 PCT
+2022-06-29 14:05:46.473 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2309
+2022-06-29 14:05:46.514 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 354.03 MB  Process Free: 8158.31 MB  Physical Total: 34043.23 MB  Physical Free: 17629.62 MB  Process CPU load: 2.0 PCT  Process CPU time: 663.0 SE  System CPU load: 13.0 PCT
+2022-06-29 14:05:49.479 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2310
+2022-06-29 14:05:49.520 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 170.19 MB  Process Free: 8342.15 MB  Physical Total: 34043.23 MB  Physical Free: 17455.22 MB  Process CPU load: 3.0 PCT  Process CPU time: 664.0 SE  System CPU load: 20.0 PCT
+2022-06-29 14:05:52.488 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2311
+2022-06-29 14:05:52.528 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 216.33 MB  Process Free: 8296.01 MB  Physical Total: 34043.23 MB  Physical Free: 17453.87 MB  Process CPU load: 1.0 PCT  Process CPU time: 665.0 SE  System CPU load: 7.0 PCT
+2022-06-29 14:05:55.488 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2312
+2022-06-29 14:05:55.523 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 264.56 MB  Process Free: 8247.78 MB  Physical Total: 34043.23 MB  Physical Free: 17444.58 MB  Process CPU load: 1.0 PCT  Process CPU time: 665.0 SE  System CPU load: 6.0 PCT
+2022-06-29 14:05:58.493 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2313
+2022-06-29 14:05:58.529 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 312.79 MB  Process Free: 8199.55 MB  Physical Total: 34043.23 MB  Physical Free: 17464.26 MB  Process CPU load: 2.0 PCT  Process CPU time: 665.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:06:01.503 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2314
+2022-06-29 14:06:01.539 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 361.03 MB  Process Free: 8151.31 MB  Physical Total: 34043.23 MB  Physical Free: 17523.4 MB  Process CPU load: 1.0 PCT  Process CPU time: 666.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:06:04.507 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2315
+2022-06-29 14:06:04.542 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 177.95 MB  Process Free: 8334.39 MB  Physical Total: 34043.23 MB  Physical Free: 17533.24 MB  Process CPU load: 3.0 PCT  Process CPU time: 666.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:06:07.515 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2316
+2022-06-29 14:06:07.549 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 226.18 MB  Process Free: 8286.16 MB  Physical Total: 34043.23 MB  Physical Free: 17542.47 MB  Process CPU load: 2.0 PCT  Process CPU time: 667.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:06:10.525 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2317
+2022-06-29 14:06:10.560 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 274.42 MB  Process Free: 8237.92 MB  Physical Total: 34043.23 MB  Physical Free: 17542.59 MB  Process CPU load: 2.0 PCT  Process CPU time: 667.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:06:13.534 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2318
+2022-06-29 14:06:13.568 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 320.56 MB  Process Free: 8191.78 MB  Physical Total: 34043.23 MB  Physical Free: 17518.37 MB  Process CPU load: 2.0 PCT  Process CPU time: 668.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:06:16.540 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2319
+2022-06-29 14:06:16.582 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 368.79 MB  Process Free: 8143.55 MB  Physical Total: 34043.23 MB  Physical Free: 17313.17 MB  Process CPU load: 2.0 PCT  Process CPU time: 668.0 SE  System CPU load: 7.0 PCT
+2022-06-29 14:06:19.544 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2320
+2022-06-29 14:06:19.579 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 190.73 MB  Process Free: 8321.61 MB  Physical Total: 34043.23 MB  Physical Free: 17304.06 MB  Process CPU load: 3.0 PCT  Process CPU time: 669.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:06:22.573 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2321
+2022-06-29 14:06:22.608 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 236.86 MB  Process Free: 8275.48 MB  Physical Total: 34043.23 MB  Physical Free: 17269.67 MB  Process CPU load: 2.0 PCT  Process CPU time: 669.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:06:25.582 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2322
+2022-06-29 14:06:25.618 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 285.1 MB  Process Free: 8227.24 MB  Physical Total: 34043.23 MB  Physical Free: 17272.36 MB  Process CPU load: 2.0 PCT  Process CPU time: 669.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:06:28.582 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2326
+2022-06-29 14:06:28.624 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 333.33 MB  Process Free: 8179.01 MB  Physical Total: 34043.23 MB  Physical Free: 17368.11 MB  Process CPU load: 2.0 PCT  Process CPU time: 670.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:06:31.589 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2328
+2022-06-29 14:06:31.624 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 385.76 MB  Process Free: 8126.58 MB  Physical Total: 34043.23 MB  Physical Free: 17362.65 MB  Process CPU load: 2.0 PCT  Process CPU time: 670.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:06:34.590 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2330
+2022-06-29 14:06:34.625 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 196.53 MB  Process Free: 8315.81 MB  Physical Total: 34043.23 MB  Physical Free: 17370.73 MB  Process CPU load: 3.0 PCT  Process CPU time: 671.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:06:37.602 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2331
+2022-06-29 14:06:37.637 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 244.76 MB  Process Free: 8267.58 MB  Physical Total: 34043.23 MB  Physical Free: 17372.27 MB  Process CPU load: 2.0 PCT  Process CPU time: 671.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:06:40.603 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2332
+2022-06-29 14:06:40.638 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 293.0 MB  Process Free: 8219.34 MB  Physical Total: 34043.23 MB  Physical Free: 17372.23 MB  Process CPU load: 2.0 PCT  Process CPU time: 672.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:06:43.618 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2333
+2022-06-29 14:06:43.653 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 341.23 MB  Process Free: 8171.11 MB  Physical Total: 34043.23 MB  Physical Free: 17374.23 MB  Process CPU load: 2.0 PCT  Process CPU time: 672.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:06:46.631 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2334
+2022-06-29 14:06:46.666 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 387.37 MB  Process Free: 8124.97 MB  Physical Total: 34043.23 MB  Physical Free: 17375.49 MB  Process CPU load: 2.0 PCT  Process CPU time: 673.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:06:49.642 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2335
+2022-06-29 14:06:49.677 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 199.34 MB  Process Free: 8313.0 MB  Physical Total: 34043.23 MB  Physical Free: 17377.3 MB  Process CPU load: 3.0 PCT  Process CPU time: 673.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:06:52.644 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2336
+2022-06-29 14:06:52.679 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 247.57 MB  Process Free: 8264.77 MB  Physical Total: 34043.23 MB  Physical Free: 17378.16 MB  Process CPU load: 2.0 PCT  Process CPU time: 674.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:06:55.652 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2337
+2022-06-29 14:06:55.687 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 293.71 MB  Process Free: 8218.63 MB  Physical Total: 34043.23 MB  Physical Free: 17379.43 MB  Process CPU load: 2.0 PCT  Process CPU time: 674.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:06:58.660 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2338
+2022-06-29 14:06:58.694 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 341.94 MB  Process Free: 8170.4 MB  Physical Total: 34043.23 MB  Physical Free: 17379.27 MB  Process CPU load: 2.0 PCT  Process CPU time: 674.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:07:01.662 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2339
+2022-06-29 14:07:01.697 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 390.18 MB  Process Free: 8122.16 MB  Physical Total: 34043.23 MB  Physical Free: 17379.61 MB  Process CPU load: 2.0 PCT  Process CPU time: 675.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:07:04.675 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2340
+2022-06-29 14:07:04.709 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 203.33 MB  Process Free: 8309.01 MB  Physical Total: 34043.23 MB  Physical Free: 17379.03 MB  Process CPU load: 2.0 PCT  Process CPU time: 675.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:07:07.676 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2341
+2022-06-29 14:07:07.711 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 251.56 MB  Process Free: 8260.78 MB  Physical Total: 34043.23 MB  Physical Free: 17379.23 MB  Process CPU load: 2.0 PCT  Process CPU time: 676.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:07:10.680 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2342
+2022-06-29 14:07:10.715 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 299.8 MB  Process Free: 8212.54 MB  Physical Total: 34043.23 MB  Physical Free: 17361.97 MB  Process CPU load: 2.0 PCT  Process CPU time: 676.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:07:13.680 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2343
+2022-06-29 14:07:13.715 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 345.94 MB  Process Free: 8166.4 MB  Physical Total: 34043.23 MB  Physical Free: 17361.01 MB  Process CPU load: 1.0 PCT  Process CPU time: 677.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:07:16.691 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2344
+2022-06-29 14:07:16.726 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 167.89 MB  Process Free: 8344.45 MB  Physical Total: 34043.23 MB  Physical Free: 17374.85 MB  Process CPU load: 2.0 PCT  Process CPU time: 677.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:07:19.700 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2345
+2022-06-29 14:07:19.734 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 216.13 MB  Process Free: 8296.21 MB  Physical Total: 34043.23 MB  Physical Free: 17379.01 MB  Process CPU load: 2.0 PCT  Process CPU time: 678.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:07:22.701 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2346
+2022-06-29 14:07:22.736 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 262.26 MB  Process Free: 8250.08 MB  Physical Total: 34043.23 MB  Physical Free: 17378.7 MB  Process CPU load: 2.0 PCT  Process CPU time: 678.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:07:25.705 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2347
+2022-06-29 14:07:25.747 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 310.5 MB  Process Free: 8201.84 MB  Physical Total: 34043.23 MB  Physical Free: 17381.07 MB  Process CPU load: 2.0 PCT  Process CPU time: 678.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:07:28.723 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2351
+2022-06-29 14:07:28.767 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 358.73 MB  Process Free: 8153.61 MB  Physical Total: 34043.23 MB  Physical Free: 17367.33 MB  Process CPU load: 2.0 PCT  Process CPU time: 679.0 SE  System CPU load: 6.0 PCT
+2022-06-29 14:07:31.735 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2353
+2022-06-29 14:07:31.770 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 176.07 MB  Process Free: 8336.27 MB  Physical Total: 34043.23 MB  Physical Free: 17368.36 MB  Process CPU load: 3.0 PCT  Process CPU time: 679.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:07:34.740 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2355
+2022-06-29 14:07:34.776 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 224.3 MB  Process Free: 8288.04 MB  Physical Total: 34043.23 MB  Physical Free: 17377.0 MB  Process CPU load: 2.0 PCT  Process CPU time: 680.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:07:37.765 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2356
+2022-06-29 14:07:37.799 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 272.54 MB  Process Free: 8239.8 MB  Physical Total: 34043.23 MB  Physical Free: 17378.46 MB  Process CPU load: 2.0 PCT  Process CPU time: 680.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:07:40.772 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2357
+2022-06-29 14:07:40.807 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 320.77 MB  Process Free: 8191.57 MB  Physical Total: 34043.23 MB  Physical Free: 17378.86 MB  Process CPU load: 2.0 PCT  Process CPU time: 681.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:07:43.787 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2358
+2022-06-29 14:07:43.822 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 369.01 MB  Process Free: 8143.33 MB  Physical Total: 34043.23 MB  Physical Free: 17362.65 MB  Process CPU load: 2.0 PCT  Process CPU time: 681.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:07:46.800 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2359
+2022-06-29 14:07:46.835 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 179.08 MB  Process Free: 8333.26 MB  Physical Total: 34043.23 MB  Physical Free: 17375.05 MB  Process CPU load: 2.0 PCT  Process CPU time: 681.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:07:49.806 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2360
+2022-06-29 14:07:49.840 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 227.32 MB  Process Free: 8285.02 MB  Physical Total: 34043.23 MB  Physical Free: 17374.9 MB  Process CPU load: 2.0 PCT  Process CPU time: 682.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:07:52.812 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2361
+2022-06-29 14:07:52.846 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 275.55 MB  Process Free: 8236.79 MB  Physical Total: 34043.23 MB  Physical Free: 17377.31 MB  Process CPU load: 2.0 PCT  Process CPU time: 682.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:07:55.840 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2362
+2022-06-29 14:07:55.876 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 323.78 MB  Process Free: 8188.56 MB  Physical Total: 34043.23 MB  Physical Free: 17378.1 MB  Process CPU load: 2.0 PCT  Process CPU time: 683.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:07:58.842 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2363
+2022-06-29 14:07:58.876 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 369.92 MB  Process Free: 8142.42 MB  Physical Total: 34043.23 MB  Physical Free: 17377.14 MB  Process CPU load: 2.0 PCT  Process CPU time: 683.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:08:01.861 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2364
+2022-06-29 14:08:01.897 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 188.46 MB  Process Free: 8323.88 MB  Physical Total: 34043.23 MB  Physical Free: 17379.91 MB  Process CPU load: 3.0 PCT  Process CPU time: 684.0 SE  System CPU load: 6.0 PCT
+2022-06-29 14:08:04.867 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2365
+2022-06-29 14:08:04.902 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 234.6 MB  Process Free: 8277.74 MB  Physical Total: 34043.23 MB  Physical Free: 17389.47 MB  Process CPU load: 1.0 PCT  Process CPU time: 684.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:08:07.877 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2366
+2022-06-29 14:08:07.911 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 282.83 MB  Process Free: 8229.51 MB  Physical Total: 34043.23 MB  Physical Free: 17390.49 MB  Process CPU load: 2.0 PCT  Process CPU time: 685.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:08:10.886 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2367
+2022-06-29 14:08:10.921 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 331.06 MB  Process Free: 8181.28 MB  Physical Total: 34043.23 MB  Physical Free: 17389.15 MB  Process CPU load: 2.0 PCT  Process CPU time: 685.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:08:13.889 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2368
+2022-06-29 14:08:13.924 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 377.2 MB  Process Free: 8135.14 MB  Physical Total: 34043.23 MB  Physical Free: 17388.81 MB  Process CPU load: 2.0 PCT  Process CPU time: 685.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:08:16.894 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2369
+2022-06-29 14:08:16.930 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 190.97 MB  Process Free: 8321.37 MB  Physical Total: 34043.23 MB  Physical Free: 17391.08 MB  Process CPU load: 2.0 PCT  Process CPU time: 686.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:08:19.895 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2370
+2022-06-29 14:08:19.929 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 237.11 MB  Process Free: 8275.23 MB  Physical Total: 34043.23 MB  Physical Free: 17269.91 MB  Process CPU load: 2.0 PCT  Process CPU time: 686.0 SE  System CPU load: 7.0 PCT
+2022-06-29 14:08:22.906 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2371
+2022-06-29 14:08:22.941 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 285.35 MB  Process Free: 8226.99 MB  Physical Total: 34043.23 MB  Physical Free: 17252.31 MB  Process CPU load: 1.0 PCT  Process CPU time: 686.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:08:25.909 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2372
+2022-06-29 14:08:25.945 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 331.48 MB  Process Free: 8180.86 MB  Physical Total: 34043.23 MB  Physical Free: 17271.13 MB  Process CPU load: 2.0 PCT  Process CPU time: 687.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:08:28.920 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2377
+2022-06-29 14:08:28.955 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 383.91 MB  Process Free: 8128.43 MB  Physical Total: 34043.23 MB  Physical Free: 17283.69 MB  Process CPU load: 2.0 PCT  Process CPU time: 687.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:08:31.922 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2378
+2022-06-29 14:08:31.957 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 201.04 MB  Process Free: 8311.3 MB  Physical Total: 34043.23 MB  Physical Free: 17294.02 MB  Process CPU load: 2.0 PCT  Process CPU time: 688.0 SE  System CPU load: 6.0 PCT
+2022-06-29 14:08:34.932 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2380
+2022-06-29 14:08:34.966 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 247.18 MB  Process Free: 8265.16 MB  Physical Total: 34043.23 MB  Physical Free: 17294.07 MB  Process CPU load: 2.0 PCT  Process CPU time: 688.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:08:37.937 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2381
+2022-06-29 14:08:37.971 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 295.41 MB  Process Free: 8216.93 MB  Physical Total: 34043.23 MB  Physical Free: 17295.51 MB  Process CPU load: 2.0 PCT  Process CPU time: 689.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:08:40.937 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2382
+2022-06-29 14:08:40.973 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 343.65 MB  Process Free: 8168.69 MB  Physical Total: 34043.23 MB  Physical Free: 17252.07 MB  Process CPU load: 2.0 PCT  Process CPU time: 689.0 SE  System CPU load: 11.0 PCT
+2022-06-29 14:08:43.952 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2383
+2022-06-29 14:08:43.987 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 389.78 MB  Process Free: 8122.56 MB  Physical Total: 34043.23 MB  Physical Free: 17246.78 MB  Process CPU load: 2.0 PCT  Process CPU time: 689.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:08:46.952 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2384
+2022-06-29 14:08:46.988 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 211.47 MB  Process Free: 8300.87 MB  Physical Total: 34043.23 MB  Physical Free: 17256.4 MB  Process CPU load: 2.0 PCT  Process CPU time: 690.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:08:49.966 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2385
+2022-06-29 14:08:50.001 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 257.6 MB  Process Free: 8254.74 MB  Physical Total: 34043.23 MB  Physical Free: 17261.96 MB  Process CPU load: 1.0 PCT  Process CPU time: 690.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:08:52.972 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2386
+2022-06-29 14:08:53.007 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 305.84 MB  Process Free: 8206.5 MB  Physical Total: 34043.23 MB  Physical Free: 17429.06 MB  Process CPU load: 2.0 PCT  Process CPU time: 691.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:08:55.978 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2387
+2022-06-29 14:08:56.013 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 354.07 MB  Process Free: 8158.27 MB  Physical Total: 34043.23 MB  Physical Free: 17435.7 MB  Process CPU load: 2.0 PCT  Process CPU time: 691.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:08:58.986 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2388
+2022-06-29 14:08:59.021 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 172.1 MB  Process Free: 8340.24 MB  Physical Total: 34043.23 MB  Physical Free: 17432.31 MB  Process CPU load: 2.0 PCT  Process CPU time: 692.0 SE  System CPU load: 13.0 PCT
+2022-06-29 14:09:01.992 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2389
+2022-06-29 14:09:02.027 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 218.24 MB  Process Free: 8294.1 MB  Physical Total: 34043.23 MB  Physical Free: 17432.5 MB  Process CPU load: 1.0 PCT  Process CPU time: 692.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:09:05.004 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2390
+2022-06-29 14:09:05.039 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 266.48 MB  Process Free: 8245.86 MB  Physical Total: 34043.23 MB  Physical Free: 17434.08 MB  Process CPU load: 2.0 PCT  Process CPU time: 692.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:09:08.004 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2391
+2022-06-29 14:09:08.039 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 312.61 MB  Process Free: 8199.73 MB  Physical Total: 34043.23 MB  Physical Free: 17435.92 MB  Process CPU load: 2.0 PCT  Process CPU time: 693.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:09:11.005 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2392
+2022-06-29 14:09:11.048 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 358.75 MB  Process Free: 8153.59 MB  Physical Total: 34043.23 MB  Physical Free: 17437.88 MB  Process CPU load: 2.0 PCT  Process CPU time: 693.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:09:14.014 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2393
+2022-06-29 14:09:14.049 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 186.14 MB  Process Free: 8326.2 MB  Physical Total: 34043.23 MB  Physical Free: 17438.59 MB  Process CPU load: 2.0 PCT  Process CPU time: 694.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:09:17.022 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2394
+2022-06-29 14:09:17.057 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 232.28 MB  Process Free: 8280.06 MB  Physical Total: 34043.23 MB  Physical Free: 17438.31 MB  Process CPU load: 1.0 PCT  Process CPU time: 694.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:09:20.030 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2395
+2022-06-29 14:09:20.074 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 280.51 MB  Process Free: 8231.83 MB  Physical Total: 34043.23 MB  Physical Free: 17356.93 MB  Process CPU load: 2.0 PCT  Process CPU time: 694.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:09:23.035 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2396
+2022-06-29 14:09:23.070 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 328.75 MB  Process Free: 8183.59 MB  Physical Total: 34043.23 MB  Physical Free: 17356.95 MB  Process CPU load: 2.0 PCT  Process CPU time: 695.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:09:26.040 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2397
+2022-06-29 14:09:26.082 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 374.88 MB  Process Free: 8137.46 MB  Physical Total: 34043.23 MB  Physical Free: 17312.62 MB  Process CPU load: 2.0 PCT  Process CPU time: 695.0 SE  System CPU load: 7.0 PCT
+2022-06-29 14:09:29.054 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2402
+2022-06-29 14:09:29.089 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 190.9 MB  Process Free: 8319.34 MB  Physical Total: 34043.23 MB  Physical Free: 17310.8 MB  Process CPU load: 3.0 PCT  Process CPU time: 696.0 SE  System CPU load: 7.0 PCT
+2022-06-29 14:09:32.070 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2403
+2022-06-29 14:09:32.105 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 241.23 MB  Process Free: 8271.11 MB  Physical Total: 34043.23 MB  Physical Free: 17313.28 MB  Process CPU load: 2.0 PCT  Process CPU time: 696.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:09:35.078 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2405
+2022-06-29 14:09:35.113 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 289.47 MB  Process Free: 8222.87 MB  Physical Total: 34043.23 MB  Physical Free: 17332.15 MB  Process CPU load: 2.0 PCT  Process CPU time: 697.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:09:38.086 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2406
+2022-06-29 14:09:38.121 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 335.6 MB  Process Free: 8176.74 MB  Physical Total: 34043.23 MB  Physical Free: 17335.61 MB  Process CPU load: 2.0 PCT  Process CPU time: 697.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:09:41.096 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2407
+2022-06-29 14:09:41.131 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 383.84 MB  Process Free: 8128.5 MB  Physical Total: 34043.23 MB  Physical Free: 17346.95 MB  Process CPU load: 2.0 PCT  Process CPU time: 698.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:09:44.099 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2408
+2022-06-29 14:09:44.134 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 190.98 MB  Process Free: 8321.36 MB  Physical Total: 34043.23 MB  Physical Free: 17353.04 MB  Process CPU load: 2.0 PCT  Process CPU time: 698.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:09:47.103 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2409
+2022-06-29 14:09:47.139 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 239.22 MB  Process Free: 8273.12 MB  Physical Total: 34043.23 MB  Physical Free: 17342.6 MB  Process CPU load: 2.0 PCT  Process CPU time: 699.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:09:50.113 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2410
+2022-06-29 14:09:50.149 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 287.45 MB  Process Free: 8224.89 MB  Physical Total: 34043.23 MB  Physical Free: 17342.43 MB  Process CPU load: 2.0 PCT  Process CPU time: 699.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:09:53.126 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2411
+2022-06-29 14:09:53.173 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 333.59 MB  Process Free: 8178.75 MB  Physical Total: 34043.23 MB  Physical Free: 17342.71 MB  Process CPU load: 2.0 PCT  Process CPU time: 699.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:09:56.128 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2412
+2022-06-29 14:09:56.164 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 381.83 MB  Process Free: 8130.51 MB  Physical Total: 34043.23 MB  Physical Free: 17348.71 MB  Process CPU load: 2.0 PCT  Process CPU time: 700.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:09:59.141 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2413
+2022-06-29 14:09:59.177 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 198.96 MB  Process Free: 8313.38 MB  Physical Total: 34043.23 MB  Physical Free: 17350.34 MB  Process CPU load: 2.0 PCT  Process CPU time: 700.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:10:02.155 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2414
+2022-06-29 14:10:02.190 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 247.19 MB  Process Free: 8265.15 MB  Physical Total: 34043.23 MB  Physical Free: 17350.21 MB  Process CPU load: 2.0 PCT  Process CPU time: 701.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:10:05.155 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2415
+2022-06-29 14:10:05.189 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 295.43 MB  Process Free: 8216.91 MB  Physical Total: 34043.23 MB  Physical Free: 17350.02 MB  Process CPU load: 2.0 PCT  Process CPU time: 701.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:10:08.159 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2416
+2022-06-29 14:10:08.194 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 341.56 MB  Process Free: 8170.78 MB  Physical Total: 34043.23 MB  Physical Free: 17349.87 MB  Process CPU load: 2.0 PCT  Process CPU time: 701.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:10:11.161 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2417
+2022-06-29 14:10:11.196 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 389.8 MB  Process Free: 8122.54 MB  Physical Total: 34043.23 MB  Physical Free: 17352.51 MB  Process CPU load: 1.0 PCT  Process CPU time: 702.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:10:14.166 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2418
+2022-06-29 14:10:14.201 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 203.58 MB  Process Free: 8308.76 MB  Physical Total: 34043.23 MB  Physical Free: 17352.61 MB  Process CPU load: 2.0 PCT  Process CPU time: 702.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:10:17.173 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2419
+2022-06-29 14:10:17.208 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 251.81 MB  Process Free: 8260.53 MB  Physical Total: 34043.23 MB  Physical Free: 17352.52 MB  Process CPU load: 2.0 PCT  Process CPU time: 703.0 SE  System CPU load: 8.0 PCT
+2022-06-29 14:10:20.187 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2420
+2022-06-29 14:10:20.221 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 297.95 MB  Process Free: 8214.39 MB  Physical Total: 34043.23 MB  Physical Free: 17346.04 MB  Process CPU load: 1.0 PCT  Process CPU time: 703.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:10:23.194 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2421
+2022-06-29 14:10:23.229 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 346.18 MB  Process Free: 8166.16 MB  Physical Total: 34043.23 MB  Physical Free: 17346.67 MB  Process CPU load: 2.0 PCT  Process CPU time: 703.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:10:26.202 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2422
+2022-06-29 14:10:26.238 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 167.49 MB  Process Free: 8344.85 MB  Physical Total: 34043.23 MB  Physical Free: 17354.29 MB  Process CPU load: 3.0 PCT  Process CPU time: 704.0 SE  System CPU load: 7.0 PCT
+2022-06-29 14:10:29.215 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2427
+2022-06-29 14:10:29.249 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 217.82 MB  Process Free: 8294.52 MB  Physical Total: 34043.23 MB  Physical Free: 17330.44 MB  Process CPU load: 2.0 PCT  Process CPU time: 705.0 SE  System CPU load: 13.0 PCT
+2022-06-29 14:10:32.229 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2428
+2022-06-29 14:10:32.264 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 268.15 MB  Process Free: 8244.19 MB  Physical Total: 34043.23 MB  Physical Free: 17351.08 MB  Process CPU load: 2.0 PCT  Process CPU time: 705.0 SE  System CPU load: 15.0 PCT
+2022-06-29 14:10:35.238 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2430
+2022-06-29 14:10:35.272 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 316.39 MB  Process Free: 8195.95 MB  Physical Total: 34043.23 MB  Physical Free: 17347.99 MB  Process CPU load: 1.0 PCT  Process CPU time: 705.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:10:38.242 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2431
+2022-06-29 14:10:38.277 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 362.53 MB  Process Free: 8149.81 MB  Physical Total: 34043.23 MB  Physical Free: 17348.72 MB  Process CPU load: 1.0 PCT  Process CPU time: 706.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:10:41.260 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2432
+2022-06-29 14:10:41.294 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 176.1 MB  Process Free: 8336.24 MB  Physical Total: 34043.23 MB  Physical Free: 17351.08 MB  Process CPU load: 3.0 PCT  Process CPU time: 706.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:10:44.274 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2433
+2022-06-29 14:10:44.315 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 224.34 MB  Process Free: 8288.0 MB  Physical Total: 34043.23 MB  Physical Free: 17351.6 MB  Process CPU load: 2.0 PCT  Process CPU time: 707.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:10:47.280 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2434
+2022-06-29 14:10:47.315 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 270.47 MB  Process Free: 8241.87 MB  Physical Total: 34043.23 MB  Physical Free: 17351.36 MB  Process CPU load: 2.0 PCT  Process CPU time: 707.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:10:50.290 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2435
+2022-06-29 14:10:50.324 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 318.71 MB  Process Free: 8193.63 MB  Physical Total: 34043.23 MB  Physical Free: 17348.85 MB  Process CPU load: 2.0 PCT  Process CPU time: 708.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:10:53.294 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2436
+2022-06-29 14:10:53.329 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 366.94 MB  Process Free: 8145.4 MB  Physical Total: 34043.23 MB  Physical Free: 17352.02 MB  Process CPU load: 2.0 PCT  Process CPU time: 708.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:10:56.317 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2437
+2022-06-29 14:10:56.353 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 183.07 MB  Process Free: 8329.27 MB  Physical Total: 34043.23 MB  Physical Free: 17349.72 MB  Process CPU load: 2.0 PCT  Process CPU time: 708.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:10:59.319 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2438
+2022-06-29 14:10:59.353 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 231.31 MB  Process Free: 8281.03 MB  Physical Total: 34043.23 MB  Physical Free: 17349.46 MB  Process CPU load: 2.0 PCT  Process CPU time: 709.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:11:02.324 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2439
+2022-06-29 14:11:02.358 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 279.54 MB  Process Free: 8232.8 MB  Physical Total: 34043.23 MB  Physical Free: 17354.26 MB  Process CPU load: 2.0 PCT  Process CPU time: 709.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:11:05.333 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2440
+2022-06-29 14:11:05.368 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 325.68 MB  Process Free: 8186.66 MB  Physical Total: 34043.23 MB  Physical Free: 17354.07 MB  Process CPU load: 2.0 PCT  Process CPU time: 710.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:11:08.341 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2441
+2022-06-29 14:11:08.376 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 373.91 MB  Process Free: 8138.43 MB  Physical Total: 34043.23 MB  Physical Free: 17354.57 MB  Process CPU load: 2.0 PCT  Process CPU time: 710.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:11:11.356 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2442
+2022-06-29 14:11:11.403 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 196.65 MB  Process Free: 8315.69 MB  Physical Total: 34043.23 MB  Physical Free: 17350.66 MB  Process CPU load: 2.0 PCT  Process CPU time: 711.0 SE  System CPU load: 7.0 PCT
+2022-06-29 14:11:14.359 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2443
+2022-06-29 14:11:14.402 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 244.88 MB  Process Free: 8267.46 MB  Physical Total: 34043.23 MB  Physical Free: 17350.4 MB  Process CPU load: 2.0 PCT  Process CPU time: 711.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:11:17.361 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2444
+2022-06-29 14:11:17.404 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 291.02 MB  Process Free: 8221.32 MB  Physical Total: 34043.23 MB  Physical Free: 17352.75 MB  Process CPU load: 2.0 PCT  Process CPU time: 711.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:11:20.368 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2445
+2022-06-29 14:11:20.409 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 339.26 MB  Process Free: 8173.08 MB  Physical Total: 34043.23 MB  Physical Free: 17351.14 MB  Process CPU load: 2.0 PCT  Process CPU time: 712.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:11:23.382 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2446
+2022-06-29 14:11:23.425 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 387.49 MB  Process Free: 8124.85 MB  Physical Total: 34043.23 MB  Physical Free: 17350.44 MB  Process CPU load: 1.0 PCT  Process CPU time: 712.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:11:26.389 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2447
+2022-06-29 14:11:26.429 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 199.4 MB  Process Free: 8312.94 MB  Physical Total: 34043.23 MB  Physical Free: 17337.93 MB  Process CPU load: 2.0 PCT  Process CPU time: 713.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:11:29.391 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2452
+2022-06-29 14:11:29.434 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 249.73 MB  Process Free: 8262.61 MB  Physical Total: 34043.23 MB  Physical Free: 17343.86 MB  Process CPU load: 2.0 PCT  Process CPU time: 713.0 SE  System CPU load: 6.0 PCT
+2022-06-29 14:11:32.398 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2453
+2022-06-29 14:11:32.440 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 300.06 MB  Process Free: 8212.28 MB  Physical Total: 34043.23 MB  Physical Free: 17346.93 MB  Process CPU load: 2.0 PCT  Process CPU time: 713.0 SE  System CPU load: 2.0 PCT
+2022-06-29 14:11:35.413 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2455
+2022-06-29 14:11:35.454 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 348.29 MB  Process Free: 8164.05 MB  Physical Total: 34043.23 MB  Physical Free: 17345.81 MB  Process CPU load: 1.0 PCT  Process CPU time: 714.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:11:38.414 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2456
+2022-06-29 14:11:38.457 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 394.43 MB  Process Free: 8117.91 MB  Physical Total: 34043.23 MB  Physical Free: 17325.65 MB  Process CPU load: 2.0 PCT  Process CPU time: 714.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:11:41.429 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2457
+2022-06-29 14:11:41.473 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 201.73 MB  Process Free: 8310.61 MB  Physical Total: 34043.23 MB  Physical Free: 17330.76 MB  Process CPU load: 2.0 PCT  Process CPU time: 715.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:11:44.442 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2458
+2022-06-29 14:11:44.485 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 249.96 MB  Process Free: 8262.38 MB  Physical Total: 34043.23 MB  Physical Free: 17335.97 MB  Process CPU load: 1.0 PCT  Process CPU time: 715.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:11:47.454 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2459
+2022-06-29 14:11:47.498 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 298.2 MB  Process Free: 8214.14 MB  Physical Total: 34043.23 MB  Physical Free: 17341.04 MB  Process CPU load: 1.0 PCT  Process CPU time: 715.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:11:50.469 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2460
+2022-06-29 14:11:50.510 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 344.34 MB  Process Free: 8168.0 MB  Physical Total: 34043.23 MB  Physical Free: 17350.11 MB  Process CPU load: 1.0 PCT  Process CPU time: 716.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:11:53.478 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2461
+2022-06-29 14:11:53.521 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 392.57 MB  Process Free: 8119.77 MB  Physical Total: 34043.23 MB  Physical Free: 17351.61 MB  Process CPU load: 2.0 PCT  Process CPU time: 716.0 SE  System CPU load: 2.0 PCT
+2022-06-29 14:11:56.489 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2462
+2022-06-29 14:11:56.532 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 211.08 MB  Process Free: 8301.26 MB  Physical Total: 34043.23 MB  Physical Free: 17353.76 MB  Process CPU load: 3.0 PCT  Process CPU time: 717.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:11:59.494 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2463
+2022-06-29 14:11:59.538 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 257.21 MB  Process Free: 8255.13 MB  Physical Total: 34043.23 MB  Physical Free: 17349.64 MB  Process CPU load: 1.0 PCT  Process CPU time: 717.0 SE  System CPU load: 2.0 PCT
+2022-06-29 14:12:02.496 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2464
+2022-06-29 14:12:02.540 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 305.45 MB  Process Free: 8206.89 MB  Physical Total: 34043.23 MB  Physical Free: 17348.85 MB  Process CPU load: 1.0 PCT  Process CPU time: 717.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:12:05.498 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2465
+2022-06-29 14:12:05.541 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 351.59 MB  Process Free: 8160.75 MB  Physical Total: 34043.23 MB  Physical Free: 17356.53 MB  Process CPU load: 2.0 PCT  Process CPU time: 718.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:12:08.510 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2466
+2022-06-29 14:12:08.553 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 170.51 MB  Process Free: 8341.83 MB  Physical Total: 34043.23 MB  Physical Free: 17351.95 MB  Process CPU load: 3.0 PCT  Process CPU time: 718.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:12:11.510 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2467
+2022-06-29 14:12:11.553 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 218.75 MB  Process Free: 8293.59 MB  Physical Total: 34043.23 MB  Physical Free: 17352.86 MB  Process CPU load: 1.0 PCT  Process CPU time: 719.0 SE  System CPU load: 2.0 PCT
+2022-06-29 14:12:14.513 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2468
+2022-06-29 14:12:14.548 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 264.88 MB  Process Free: 8247.46 MB  Physical Total: 34043.23 MB  Physical Free: 17346.06 MB  Process CPU load: 1.0 PCT  Process CPU time: 719.0 SE  System CPU load: 2.0 PCT
+2022-06-29 14:12:17.519 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2469
+2022-06-29 14:12:17.554 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 313.12 MB  Process Free: 8199.22 MB  Physical Total: 34043.23 MB  Physical Free: 17347.08 MB  Process CPU load: 2.0 PCT  Process CPU time: 720.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:12:20.528 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2470
+2022-06-29 14:12:20.563 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 359.26 MB  Process Free: 8153.08 MB  Physical Total: 34043.23 MB  Physical Free: 17355.2 MB  Process CPU load: 2.0 PCT  Process CPU time: 720.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:12:23.538 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2471
+2022-06-29 14:12:23.573 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 178.28 MB  Process Free: 8334.06 MB  Physical Total: 34043.23 MB  Physical Free: 17355.26 MB  Process CPU load: 2.0 PCT  Process CPU time: 720.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:12:26.539 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2472
+2022-06-29 14:12:26.575 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 226.51 MB  Process Free: 8285.83 MB  Physical Total: 34043.23 MB  Physical Free: 17355.66 MB  Process CPU load: 2.0 PCT  Process CPU time: 721.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:12:29.544 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2477
+2022-06-29 14:12:29.578 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 276.84 MB  Process Free: 8235.5 MB  Physical Total: 34043.23 MB  Physical Free: 17339.71 MB  Process CPU load: 2.0 PCT  Process CPU time: 721.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:12:32.552 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2478
+2022-06-29 14:12:32.586 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 327.18 MB  Process Free: 8185.16 MB  Physical Total: 34043.23 MB  Physical Free: 17351.57 MB  Process CPU load: 2.0 PCT  Process CPU time: 722.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:12:35.553 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2480
+2022-06-29 14:12:35.588 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 373.31 MB  Process Free: 8139.03 MB  Physical Total: 34043.23 MB  Physical Free: 17350.52 MB  Process CPU load: 1.0 PCT  Process CPU time: 722.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:12:38.564 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2481
+2022-06-29 14:12:38.599 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 188.47 MB  Process Free: 8323.87 MB  Physical Total: 34043.23 MB  Physical Free: 17353.09 MB  Process CPU load: 2.0 PCT  Process CPU time: 722.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:12:41.567 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2482
+2022-06-29 14:12:41.602 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 234.61 MB  Process Free: 8277.73 MB  Physical Total: 34043.23 MB  Physical Free: 17355.12 MB  Process CPU load: 2.0 PCT  Process CPU time: 723.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:12:44.577 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2483
+2022-06-29 14:12:44.612 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 282.84 MB  Process Free: 8229.5 MB  Physical Total: 34043.23 MB  Physical Free: 17338.21 MB  Process CPU load: 2.0 PCT  Process CPU time: 723.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:12:47.589 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2484
+2022-06-29 14:12:47.623 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 331.08 MB  Process Free: 8181.26 MB  Physical Total: 34043.23 MB  Physical Free: 17351.28 MB  Process CPU load: 2.0 PCT  Process CPU time: 724.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:12:50.593 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2485
+2022-06-29 14:12:50.628 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 377.21 MB  Process Free: 8135.13 MB  Physical Total: 34043.23 MB  Physical Free: 17344.22 MB  Process CPU load: 2.0 PCT  Process CPU time: 724.0 SE  System CPU load: 6.0 PCT
+2022-06-29 14:12:53.605 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2486
+2022-06-29 14:12:53.639 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 193.1 MB  Process Free: 8319.24 MB  Physical Total: 34043.23 MB  Physical Free: 17340.62 MB  Process CPU load: 3.0 PCT  Process CPU time: 725.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:12:56.611 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2487
+2022-06-29 14:12:56.646 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 239.24 MB  Process Free: 8273.1 MB  Physical Total: 34043.23 MB  Physical Free: 17340.72 MB  Process CPU load: 2.0 PCT  Process CPU time: 725.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:12:59.624 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2488
+2022-06-29 14:12:59.659 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 287.47 MB  Process Free: 8224.87 MB  Physical Total: 34043.23 MB  Physical Free: 17337.68 MB  Process CPU load: 2.0 PCT  Process CPU time: 725.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:13:02.632 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2489
+2022-06-29 14:13:02.670 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 333.61 MB  Process Free: 8178.73 MB  Physical Total: 34043.23 MB  Physical Free: 17334.28 MB  Process CPU load: 2.0 PCT  Process CPU time: 726.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:13:05.638 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2490
+2022-06-29 14:13:05.673 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 379.75 MB  Process Free: 8132.59 MB  Physical Total: 34043.23 MB  Physical Free: 17336.0 MB  Process CPU load: 2.0 PCT  Process CPU time: 726.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:13:08.653 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2491
+2022-06-29 14:13:08.688 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 201.08 MB  Process Free: 8311.26 MB  Physical Total: 34043.23 MB  Physical Free: 17335.84 MB  Process CPU load: 2.0 PCT  Process CPU time: 727.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:13:11.661 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2492
+2022-06-29 14:13:11.696 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 249.32 MB  Process Free: 8263.02 MB  Physical Total: 34043.23 MB  Physical Free: 17336.37 MB  Process CPU load: 2.0 PCT  Process CPU time: 727.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:13:14.669 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2493
+2022-06-29 14:13:14.704 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 297.55 MB  Process Free: 8214.79 MB  Physical Total: 34043.23 MB  Physical Free: 17336.29 MB  Process CPU load: 2.0 PCT  Process CPU time: 728.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:13:17.674 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2494
+2022-06-29 14:13:17.709 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 343.69 MB  Process Free: 8168.65 MB  Physical Total: 34043.23 MB  Physical Free: 17336.71 MB  Process CPU load: 2.0 PCT  Process CPU time: 728.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:13:20.689 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2495
+2022-06-29 14:13:20.724 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 391.92 MB  Process Free: 8120.42 MB  Physical Total: 34043.23 MB  Physical Free: 17337.74 MB  Process CPU load: 2.0 PCT  Process CPU time: 728.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:13:23.701 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2496
+2022-06-29 14:13:23.735 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 215.49 MB  Process Free: 8296.85 MB  Physical Total: 34043.23 MB  Physical Free: 17337.86 MB  Process CPU load: 2.0 PCT  Process CPU time: 729.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:13:26.718 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2497
+2022-06-29 14:13:26.753 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 261.62 MB  Process Free: 8250.72 MB  Physical Total: 34043.23 MB  Physical Free: 17339.04 MB  Process CPU load: 2.0 PCT  Process CPU time: 729.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:13:29.722 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2502
+2022-06-29 14:13:29.757 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 314.05 MB  Process Free: 8198.29 MB  Physical Total: 34043.23 MB  Physical Free: 17338.62 MB  Process CPU load: 2.0 PCT  Process CPU time: 730.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:13:32.725 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2503
+2022-06-29 14:13:32.760 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 362.29 MB  Process Free: 8150.05 MB  Physical Total: 34043.23 MB  Physical Free: 17329.87 MB  Process CPU load: 4.0 PCT  Process CPU time: 731.0 SE  System CPU load: 7.0 PCT
+2022-06-29 14:13:35.735 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2505
+2022-06-29 14:13:35.768 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 175.62 MB  Process Free: 8336.72 MB  Physical Total: 34043.23 MB  Physical Free: 17282.57 MB  Process CPU load: 2.0 PCT  Process CPU time: 731.0 SE  System CPU load: 9.0 PCT
+2022-06-29 14:13:38.750 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2506
+2022-06-29 14:13:38.785 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 223.86 MB  Process Free: 8288.48 MB  Physical Total: 34043.23 MB  Physical Free: 17276.67 MB  Process CPU load: 2.0 PCT  Process CPU time: 732.0 SE  System CPU load: 9.0 PCT
+2022-06-29 14:13:41.764 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2507
+2022-06-29 14:13:41.799 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 272.09 MB  Process Free: 8240.25 MB  Physical Total: 34043.23 MB  Physical Free: 17277.63 MB  Process CPU load: 2.0 PCT  Process CPU time: 732.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:13:44.768 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2508
+2022-06-29 14:13:44.802 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 320.33 MB  Process Free: 8192.01 MB  Physical Total: 34043.23 MB  Physical Free: 17278.58 MB  Process CPU load: 2.0 PCT  Process CPU time: 732.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:13:47.769 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2509
+2022-06-29 14:13:47.804 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 366.46 MB  Process Free: 8145.88 MB  Physical Total: 34043.23 MB  Physical Free: 17278.32 MB  Process CPU load: 2.0 PCT  Process CPU time: 733.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:13:50.769 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2510
+2022-06-29 14:13:50.804 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 180.78 MB  Process Free: 8331.56 MB  Physical Total: 34043.23 MB  Physical Free: 17289.56 MB  Process CPU load: 2.0 PCT  Process CPU time: 733.0 SE  System CPU load: 6.0 PCT
+2022-06-29 14:13:53.784 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2511
+2022-06-29 14:13:53.815 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 229.01 MB  Process Free: 8283.33 MB  Physical Total: 34043.23 MB  Physical Free: 17289.45 MB  Process CPU load: 1.0 PCT  Process CPU time: 734.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:13:56.786 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2512
+2022-06-29 14:13:56.821 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 277.25 MB  Process Free: 8235.09 MB  Physical Total: 34043.23 MB  Physical Free: 17289.84 MB  Process CPU load: 2.0 PCT  Process CPU time: 734.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:13:59.792 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2513
+2022-06-29 14:13:59.827 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 323.38 MB  Process Free: 8188.96 MB  Physical Total: 34043.23 MB  Physical Free: 17289.92 MB  Process CPU load: 2.0 PCT  Process CPU time: 735.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:14:02.805 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2514
+2022-06-29 14:14:02.840 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 371.62 MB  Process Free: 8140.72 MB  Physical Total: 34043.23 MB  Physical Free: 17289.92 MB  Process CPU load: 2.0 PCT  Process CPU time: 735.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:14:05.813 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2515
+2022-06-29 14:14:05.848 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 190.62 MB  Process Free: 8321.72 MB  Physical Total: 34043.23 MB  Physical Free: 17282.86 MB  Process CPU load: 2.0 PCT  Process CPU time: 735.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:14:08.825 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2516
+2022-06-29 14:14:08.860 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 236.76 MB  Process Free: 8275.58 MB  Physical Total: 34043.23 MB  Physical Free: 17282.94 MB  Process CPU load: 2.0 PCT  Process CPU time: 736.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:14:11.825 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2517
+2022-06-29 14:14:11.860 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 284.99 MB  Process Free: 8227.35 MB  Physical Total: 34043.23 MB  Physical Free: 17284.24 MB  Process CPU load: 2.0 PCT  Process CPU time: 736.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:14:14.826 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2518
+2022-06-29 14:14:14.860 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 331.13 MB  Process Free: 8181.21 MB  Physical Total: 34043.23 MB  Physical Free: 17284.05 MB  Process CPU load: 2.0 PCT  Process CPU time: 737.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:14:17.832 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2519
+2022-06-29 14:14:17.867 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 379.36 MB  Process Free: 8132.98 MB  Physical Total: 34043.23 MB  Physical Free: 17284.01 MB  Process CPU load: 1.0 PCT  Process CPU time: 737.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:14:20.836 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2520
+2022-06-29 14:14:20.870 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 198.73 MB  Process Free: 8313.61 MB  Physical Total: 34043.23 MB  Physical Free: 17285.71 MB  Process CPU load: 3.0 PCT  Process CPU time: 738.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:14:23.841 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2521
+2022-06-29 14:14:23.875 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 246.96 MB  Process Free: 8265.38 MB  Physical Total: 34043.23 MB  Physical Free: 17285.08 MB  Process CPU load: 2.0 PCT  Process CPU time: 738.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:14:26.852 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2522
+2022-06-29 14:14:26.887 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 295.2 MB  Process Free: 8217.14 MB  Physical Total: 34043.23 MB  Physical Free: 17274.69 MB  Process CPU load: 1.0 PCT  Process CPU time: 738.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:14:29.861 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2527
+2022-06-29 14:14:29.896 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 345.53 MB  Process Free: 8166.81 MB  Physical Total: 34043.23 MB  Physical Free: 17273.7 MB  Process CPU load: 2.0 PCT  Process CPU time: 739.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:14:32.875 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2528
+2022-06-29 14:14:32.910 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 393.76 MB  Process Free: 8118.58 MB  Physical Total: 34043.23 MB  Physical Free: 17277.05 MB  Process CPU load: 2.0 PCT  Process CPU time: 739.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:14:35.890 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2530
+2022-06-29 14:14:35.927 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 201.53 MB  Process Free: 8310.81 MB  Physical Total: 34043.23 MB  Physical Free: 17287.83 MB  Process CPU load: 2.0 PCT  Process CPU time: 740.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:14:38.904 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2531
+2022-06-29 14:14:38.939 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 249.76 MB  Process Free: 8262.58 MB  Physical Total: 34043.23 MB  Physical Free: 17292.35 MB  Process CPU load: 2.0 PCT  Process CPU time: 740.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:14:41.916 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2532
+2022-06-29 14:14:41.951 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 298.0 MB  Process Free: 8214.34 MB  Physical Total: 34043.23 MB  Physical Free: 17293.18 MB  Process CPU load: 2.0 PCT  Process CPU time: 741.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:14:44.928 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2533
+2022-06-29 14:14:44.963 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 346.23 MB  Process Free: 8166.11 MB  Physical Total: 34043.23 MB  Physical Free: 17293.53 MB  Process CPU load: 1.0 PCT  Process CPU time: 741.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:14:47.940 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2534
+2022-06-29 14:14:47.974 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 392.37 MB  Process Free: 8119.97 MB  Physical Total: 34043.23 MB  Physical Free: 17293.76 MB  Process CPU load: 2.0 PCT  Process CPU time: 741.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:14:50.954 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2535
+2022-06-29 14:14:50.988 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 211.34 MB  Process Free: 8301.0 MB  Physical Total: 34043.23 MB  Physical Free: 17293.6 MB  Process CPU load: 2.0 PCT  Process CPU time: 742.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:14:53.961 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2536
+2022-06-29 14:14:53.996 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 257.47 MB  Process Free: 8254.87 MB  Physical Total: 34043.23 MB  Physical Free: 17293.42 MB  Process CPU load: 1.0 PCT  Process CPU time: 742.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:14:56.961 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2537
+2022-06-29 14:14:56.995 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 305.71 MB  Process Free: 8206.63 MB  Physical Total: 34043.23 MB  Physical Free: 17295.92 MB  Process CPU load: 2.0 PCT  Process CPU time: 743.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:14:59.975 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2538
+2022-06-29 14:15:00.010 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 353.94 MB  Process Free: 8158.4 MB  Physical Total: 34043.23 MB  Physical Free: 17295.76 MB  Process CPU load: 2.0 PCT  Process CPU time: 743.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:15:02.986 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2539
+2022-06-29 14:15:03.021 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 172.63 MB  Process Free: 8339.71 MB  Physical Total: 34043.23 MB  Physical Free: 17295.77 MB  Process CPU load: 2.0 PCT  Process CPU time: 744.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:15:05.998 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2540
+2022-06-29 14:15:06.032 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 218.76 MB  Process Free: 8293.58 MB  Physical Total: 34043.23 MB  Physical Free: 17299.27 MB  Process CPU load: 2.0 PCT  Process CPU time: 744.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:15:09.013 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2541
+2022-06-29 14:15:09.047 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 267.0 MB  Process Free: 8245.34 MB  Physical Total: 34043.23 MB  Physical Free: 17296.57 MB  Process CPU load: 2.0 PCT  Process CPU time: 744.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:15:12.020 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2542
+2022-06-29 14:15:12.055 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 315.23 MB  Process Free: 8197.11 MB  Physical Total: 34043.23 MB  Physical Free: 17297.33 MB  Process CPU load: 1.0 PCT  Process CPU time: 745.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:15:15.029 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2543
+2022-06-29 14:15:15.063 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 361.37 MB  Process Free: 8150.97 MB  Physical Total: 34043.23 MB  Physical Free: 17296.76 MB  Process CPU load: 2.0 PCT  Process CPU time: 745.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:15:18.030 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2544
+2022-06-29 14:15:18.064 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 186.21 MB  Process Free: 8326.13 MB  Physical Total: 34043.23 MB  Physical Free: 17296.01 MB  Process CPU load: 2.0 PCT  Process CPU time: 746.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:15:21.041 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2545
+2022-06-29 14:15:21.079 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 232.34 MB  Process Free: 8280.0 MB  Physical Total: 34043.23 MB  Physical Free: 17293.98 MB  Process CPU load: 2.0 PCT  Process CPU time: 746.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:15:24.056 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2546
+2022-06-29 14:15:24.091 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 280.58 MB  Process Free: 8231.76 MB  Physical Total: 34043.23 MB  Physical Free: 17293.74 MB  Process CPU load: 2.0 PCT  Process CPU time: 747.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:15:27.058 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2547
+2022-06-29 14:15:27.093 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 328.81 MB  Process Free: 8183.53 MB  Physical Total: 34043.23 MB  Physical Free: 17295.26 MB  Process CPU load: 2.0 PCT  Process CPU time: 747.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:15:30.073 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2552
+2022-06-29 14:15:30.107 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 379.15 MB  Process Free: 8133.19 MB  Physical Total: 34043.23 MB  Physical Free: 17281.2 MB  Process CPU load: 2.0 PCT  Process CPU time: 747.0 SE  System CPU load: 6.0 PCT
+2022-06-29 14:15:33.077 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2553
+2022-06-29 14:15:33.113 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 190.97 MB  Process Free: 8321.37 MB  Physical Total: 34043.23 MB  Physical Free: 17298.05 MB  Process CPU load: 2.0 PCT  Process CPU time: 748.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:15:36.088 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2555
+2022-06-29 14:15:36.123 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 237.1 MB  Process Free: 8275.24 MB  Physical Total: 34043.23 MB  Physical Free: 17297.39 MB  Process CPU load: 2.0 PCT  Process CPU time: 748.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:15:39.098 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2556
+2022-06-29 14:15:39.134 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 287.43 MB  Process Free: 8224.91 MB  Physical Total: 34043.23 MB  Physical Free: 17324.15 MB  Process CPU load: 1.0 PCT  Process CPU time: 749.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:15:42.104 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2557
+2022-06-29 14:15:42.140 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 333.57 MB  Process Free: 8178.77 MB  Physical Total: 34043.23 MB  Physical Free: 17325.77 MB  Process CPU load: 2.0 PCT  Process CPU time: 749.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:15:45.108 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2558
+2022-06-29 14:15:45.144 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 381.81 MB  Process Free: 8130.53 MB  Physical Total: 34043.23 MB  Physical Free: 17325.76 MB  Process CPU load: 2.0 PCT  Process CPU time: 749.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:15:48.110 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2559
+2022-06-29 14:15:48.147 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 201.09 MB  Process Free: 8311.25 MB  Physical Total: 34043.23 MB  Physical Free: 17333.26 MB  Process CPU load: 3.0 PCT  Process CPU time: 750.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:15:51.126 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2560
+2022-06-29 14:15:51.161 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 249.33 MB  Process Free: 8263.01 MB  Physical Total: 34043.23 MB  Physical Free: 17302.44 MB  Process CPU load: 2.0 PCT  Process CPU time: 750.0 SE  System CPU load: 7.0 PCT
+2022-06-29 14:15:54.128 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2561
+2022-06-29 14:15:54.164 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 295.46 MB  Process Free: 8216.88 MB  Physical Total: 34043.23 MB  Physical Free: 17307.58 MB  Process CPU load: 2.0 PCT  Process CPU time: 751.0 SE  System CPU load: 8.0 PCT
+2022-06-29 14:15:57.142 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2562
+2022-06-29 14:15:57.178 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 343.7 MB  Process Free: 8168.64 MB  Physical Total: 34043.23 MB  Physical Free: 17307.48 MB  Process CPU load: 2.0 PCT  Process CPU time: 751.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:16:00.156 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2563
+2022-06-29 14:16:00.190 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 391.93 MB  Process Free: 8120.41 MB  Physical Total: 34043.23 MB  Physical Free: 17310.67 MB  Process CPU load: 2.0 PCT  Process CPU time: 752.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:16:03.167 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2564
+2022-06-29 14:16:03.201 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 213.63 MB  Process Free: 8298.71 MB  Physical Total: 34043.23 MB  Physical Free: 17313.32 MB  Process CPU load: 3.0 PCT  Process CPU time: 752.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:16:06.171 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2565
+2022-06-29 14:16:06.202 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 259.77 MB  Process Free: 8252.57 MB  Physical Total: 34043.23 MB  Physical Free: 17313.86 MB  Process CPU load: 2.0 PCT  Process CPU time: 753.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:16:09.177 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2566
+2022-06-29 14:16:09.218 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 308.0 MB  Process Free: 8204.34 MB  Physical Total: 34043.23 MB  Physical Free: 17314.22 MB  Process CPU load: 2.0 PCT  Process CPU time: 753.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:16:12.179 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2567
+2022-06-29 14:16:12.213 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 354.14 MB  Process Free: 8158.2 MB  Physical Total: 34043.23 MB  Physical Free: 17318.19 MB  Process CPU load: 1.0 PCT  Process CPU time: 753.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:16:15.202 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2568
+2022-06-29 14:16:15.237 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 175.87 MB  Process Free: 8336.47 MB  Physical Total: 34043.23 MB  Physical Free: 17317.94 MB  Process CPU load: 3.0 PCT  Process CPU time: 754.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:16:18.211 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2569
+2022-06-29 14:16:18.245 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 222.01 MB  Process Free: 8290.33 MB  Physical Total: 34043.23 MB  Physical Free: 17318.19 MB  Process CPU load: 2.0 PCT  Process CPU time: 755.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:16:21.219 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2570
+2022-06-29 14:16:21.248 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 270.25 MB  Process Free: 8242.09 MB  Physical Total: 34043.23 MB  Physical Free: 17318.08 MB  Process CPU load: 1.0 PCT  Process CPU time: 755.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:16:24.230 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2571
+2022-06-29 14:16:24.264 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 318.48 MB  Process Free: 8193.86 MB  Physical Total: 34043.23 MB  Physical Free: 17319.66 MB  Process CPU load: 1.0 PCT  Process CPU time: 755.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:16:27.234 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2572
+2022-06-29 14:16:27.269 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 364.62 MB  Process Free: 8147.72 MB  Physical Total: 34043.23 MB  Physical Free: 17318.88 MB  Process CPU load: 2.0 PCT  Process CPU time: 756.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:16:30.249 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2577
+2022-06-29 14:16:30.284 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 183.13 MB  Process Free: 8329.21 MB  Physical Total: 34043.23 MB  Physical Free: 17318.4 MB  Process CPU load: 3.0 PCT  Process CPU time: 756.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:16:33.256 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2578
+2022-06-29 14:16:33.291 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 231.36 MB  Process Free: 8280.98 MB  Physical Total: 34043.23 MB  Physical Free: 17338.87 MB  Process CPU load: 2.0 PCT  Process CPU time: 757.0 SE  System CPU load: 8.0 PCT
+2022-06-29 14:16:36.258 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2580
+2022-06-29 14:16:36.292 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 279.6 MB  Process Free: 8232.74 MB  Physical Total: 34043.23 MB  Physical Free: 17325.32 MB  Process CPU load: 2.0 PCT  Process CPU time: 757.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:16:39.269 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2581
+2022-06-29 14:16:39.311 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 327.83 MB  Process Free: 8184.51 MB  Physical Total: 34043.23 MB  Physical Free: 17326.0 MB  Process CPU load: 2.0 PCT  Process CPU time: 757.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:16:42.279 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2582
+2022-06-29 14:16:42.314 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 373.97 MB  Process Free: 8138.37 MB  Physical Total: 34043.23 MB  Physical Free: 17326.47 MB  Process CPU load: 2.0 PCT  Process CPU time: 758.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:16:45.280 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2583
+2022-06-29 14:16:45.315 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 186.69 MB  Process Free: 8325.65 MB  Physical Total: 34043.23 MB  Physical Free: 17326.71 MB  Process CPU load: 6.0 PCT  Process CPU time: 759.0 SE  System CPU load: 8.0 PCT
+2022-06-29 14:16:48.280 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2584
+2022-06-29 14:16:48.315 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 232.83 MB  Process Free: 8279.51 MB  Physical Total: 34043.23 MB  Physical Free: 17323.96 MB  Process CPU load: 2.0 PCT  Process CPU time: 760.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:16:51.283 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2585
+2022-06-29 14:16:51.318 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 281.06 MB  Process Free: 8231.28 MB  Physical Total: 34043.23 MB  Physical Free: 17328.29 MB  Process CPU load: 2.0 PCT  Process CPU time: 760.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:16:54.293 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2586
+2022-06-29 14:16:54.328 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 327.2 MB  Process Free: 8185.14 MB  Physical Total: 34043.23 MB  Physical Free: 17327.51 MB  Process CPU load: 1.0 PCT  Process CPU time: 760.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:16:57.295 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2587
+2022-06-29 14:16:57.329 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 375.43 MB  Process Free: 8136.91 MB  Physical Total: 34043.23 MB  Physical Free: 17327.23 MB  Process CPU load: 2.0 PCT  Process CPU time: 761.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:17:00.299 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2588
+2022-06-29 14:17:00.333 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 191.05 MB  Process Free: 8321.29 MB  Physical Total: 34043.23 MB  Physical Free: 17327.31 MB  Process CPU load: 2.0 PCT  Process CPU time: 761.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:17:03.311 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2589
+2022-06-29 14:17:03.346 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 237.19 MB  Process Free: 8275.15 MB  Physical Total: 34043.23 MB  Physical Free: 17327.82 MB  Process CPU load: 2.0 PCT  Process CPU time: 762.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:17:06.312 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2590
+2022-06-29 14:17:06.346 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 285.42 MB  Process Free: 8226.92 MB  Physical Total: 34043.23 MB  Physical Free: 17327.8 MB  Process CPU load: 1.0 PCT  Process CPU time: 762.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:17:09.325 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2591
+2022-06-29 14:17:09.360 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 333.66 MB  Process Free: 8178.68 MB  Physical Total: 34043.23 MB  Physical Free: 17324.2 MB  Process CPU load: 2.0 PCT  Process CPU time: 763.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:17:12.333 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2592
+2022-06-29 14:17:12.367 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 379.8 MB  Process Free: 8132.54 MB  Physical Total: 34043.23 MB  Physical Free: 17319.1 MB  Process CPU load: 2.0 PCT  Process CPU time: 763.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:17:15.346 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2593
+2022-06-29 14:17:15.380 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 196.69 MB  Process Free: 8315.65 MB  Physical Total: 34043.23 MB  Physical Free: 17319.67 MB  Process CPU load: 3.0 PCT  Process CPU time: 764.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:17:18.349 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2594
+2022-06-29 14:17:18.384 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 244.93 MB  Process Free: 8267.41 MB  Physical Total: 34043.23 MB  Physical Free: 17321.74 MB  Process CPU load: 2.0 PCT  Process CPU time: 764.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:17:21.360 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2595
+2022-06-29 14:17:21.394 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 291.06 MB  Process Free: 8221.28 MB  Physical Total: 34043.23 MB  Physical Free: 17321.47 MB  Process CPU load: 2.0 PCT  Process CPU time: 765.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:17:24.363 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2596
+2022-06-29 14:17:24.399 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 339.3 MB  Process Free: 8173.04 MB  Physical Total: 34043.23 MB  Physical Free: 17321.48 MB  Process CPU load: 2.0 PCT  Process CPU time: 765.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:17:27.369 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2597
+2022-06-29 14:17:27.404 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 387.53 MB  Process Free: 8124.81 MB  Physical Total: 34043.23 MB  Physical Free: 17326.24 MB  Process CPU load: 2.0 PCT  Process CPU time: 765.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:17:30.369 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2602
+2022-06-29 14:17:30.405 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 203.63 MB  Process Free: 8308.71 MB  Physical Total: 34043.23 MB  Physical Free: 17308.63 MB  Process CPU load: 3.0 PCT  Process CPU time: 766.0 SE  System CPU load: 6.0 PCT
+2022-06-29 14:17:33.381 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2603
+2022-06-29 14:17:33.415 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 251.86 MB  Process Free: 8260.48 MB  Physical Total: 34043.23 MB  Physical Free: 17317.03 MB  Process CPU load: 2.0 PCT  Process CPU time: 766.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:17:36.390 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2605
+2022-06-29 14:17:36.425 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 300.1 MB  Process Free: 8212.24 MB  Physical Total: 34043.23 MB  Physical Free: 17320.17 MB  Process CPU load: 2.0 PCT  Process CPU time: 767.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:17:39.394 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2606
+2022-06-29 14:17:39.429 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 348.33 MB  Process Free: 8164.01 MB  Physical Total: 34043.23 MB  Physical Free: 17323.38 MB  Process CPU load: 2.0 PCT  Process CPU time: 767.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:17:42.397 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2607
+2022-06-29 14:17:42.432 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 394.47 MB  Process Free: 8117.87 MB  Physical Total: 34043.23 MB  Physical Free: 17324.02 MB  Process CPU load: 2.0 PCT  Process CPU time: 768.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:17:45.412 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2608
+2022-06-29 14:17:45.447 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 201.35 MB  Process Free: 8310.99 MB  Physical Total: 34043.23 MB  Physical Free: 17307.23 MB  Process CPU load: 2.0 PCT  Process CPU time: 768.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:17:48.423 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2609
+2022-06-29 14:17:48.458 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 249.59 MB  Process Free: 8262.75 MB  Physical Total: 34043.23 MB  Physical Free: 17316.85 MB  Process CPU load: 2.0 PCT  Process CPU time: 769.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:17:51.432 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2610
+2022-06-29 14:17:51.467 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 297.82 MB  Process Free: 8214.52 MB  Physical Total: 34043.23 MB  Physical Free: 17316.93 MB  Process CPU load: 2.0 PCT  Process CPU time: 769.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:17:54.435 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2611
+2022-06-29 14:17:54.469 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 343.96 MB  Process Free: 8168.38 MB  Physical Total: 34043.23 MB  Physical Free: 17317.79 MB  Process CPU load: 2.0 PCT  Process CPU time: 769.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:17:57.448 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2612
+2022-06-29 14:17:57.483 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 392.19 MB  Process Free: 8120.15 MB  Physical Total: 34043.23 MB  Physical Free: 17319.33 MB  Process CPU load: 2.0 PCT  Process CPU time: 770.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:18:00.448 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2613
+2022-06-29 14:18:00.482 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 211.37 MB  Process Free: 8300.97 MB  Physical Total: 34043.23 MB  Physical Free: 17319.84 MB  Process CPU load: 2.0 PCT  Process CPU time: 770.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:18:03.456 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2614
+2022-06-29 14:18:03.490 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 257.51 MB  Process Free: 8254.83 MB  Physical Total: 34043.23 MB  Physical Free: 17319.83 MB  Process CPU load: 2.0 PCT  Process CPU time: 771.0 SE  System CPU load: 4.0 PCT
+2022-06-29 14:18:06.473 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2615
+2022-06-29 14:18:06.508 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 305.74 MB  Process Free: 8206.6 MB  Physical Total: 34043.23 MB  Physical Free: 17319.94 MB  Process CPU load: 2.0 PCT  Process CPU time: 771.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:18:09.482 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2616
+2022-06-29 14:18:09.517 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 353.98 MB  Process Free: 8158.36 MB  Physical Total: 34043.23 MB  Physical Free: 17320.57 MB  Process CPU load: 2.0 PCT  Process CPU time: 772.0 SE  System CPU load: 3.0 PCT
+2022-06-29 14:18:12.501 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2617
+2022-06-29 14:18:12.536 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 168.24 MB  Process Free: 8344.1 MB  Physical Total: 34043.23 MB  Physical Free: 17326.31 MB  Process CPU load: 2.0 PCT  Process CPU time: 772.0 SE  System CPU load: 5.0 PCT
+2022-06-29 14:18:15.516 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2618
+2022-06-29 14:18:15.559 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 214.37 MB  Process Free: 8297.97 MB  Physical Total: 34043.23 MB  Physical Free: 17241.55 MB  Process CPU load: 2.0 PCT  Process CPU time: 772.0 SE  System CPU load: 11.0 PCT
+2022-06-29 14:18:18.526 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2619
+2022-06-29 14:18:18.569 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 262.61 MB  Process Free: 8249.73 MB  Physical Total: 34043.23 MB  Physical Free: 17278.37 MB  Process CPU load: 2.0 PCT  Process CPU time: 773.0 SE  System CPU load: 14.0 PCT
+2022-06-29 14:18:21.538 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2620
+2022-06-29 14:18:21.580 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 310.84 MB  Process Free: 8201.5 MB  Physical Total: 34043.23 MB  Physical Free: 17470.28 MB  Process CPU load: 1.0 PCT  Process CPU time: 773.0 SE  System CPU load: 7.0 PCT
+2022-06-29 14:18:24.547 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2621
+2022-06-29 14:18:24.607 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 356.98 MB  Process Free: 8155.36 MB  Physical Total: 34043.23 MB  Physical Free: 17262.37 MB  Process CPU load: 1.0 PCT  Process CPU time: 774.0 SE  System CPU load: 15.0 PCT
+2022-06-29 14:18:27.551 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2622
+2022-06-29 14:18:27.599 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 178.09 MB  Process Free: 8334.25 MB  Physical Total: 34043.23 MB  Physical Free: 17206.25 MB  Process CPU load: 3.0 PCT  Process CPU time: 774.0 SE  System CPU load: 32.0 PCT
+2022-06-29 14:18:30.553 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2635
+2022-06-29 14:18:30.597 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 234.71 MB  Process Free: 8277.63 MB  Physical Total: 34043.23 MB  Physical Free: 17383.18 MB  Process CPU load: 2.0 PCT  Process CPU time: 775.0 SE  System CPU load: 27.0 PCT
+2022-06-29 14:18:33.567 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2640
+2022-06-29 14:18:33.614 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 287.14 MB  Process Free: 8225.2 MB  Physical Total: 34043.23 MB  Physical Free: 17404.67 MB  Process CPU load: 2.0 PCT  Process CPU time: 775.0 SE  System CPU load: 9.0 PCT
+2022-06-29 14:18:36.572 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2649
+2022-06-29 14:18:36.648 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 341.66 MB  Process Free: 8170.68 MB  Physical Total: 34043.23 MB  Physical Free: 17354.81 MB  Process CPU load: 2.0 PCT  Process CPU time: 776.0 SE  System CPU load: 13.0 PCT
+2022-06-29 14:18:39.574 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2654
+2022-06-29 14:18:39.621 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 389.9 MB  Process Free: 8122.44 MB  Physical Total: 34043.23 MB  Physical Free: 17734.24 MB  Process CPU load: 2.0 PCT  Process CPU time: 776.0 SE  System CPU load: 13.0 PCT
+2022-06-29 14:18:42.575 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2659
+2022-06-29 14:18:42.623 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 181.06 MB  Process Free: 8331.28 MB  Physical Total: 34043.23 MB  Physical Free: 17660.46 MB  Process CPU load: 2.0 PCT  Process CPU time: 777.0 SE  System CPU load: 11.0 PCT
+2022-06-29 14:18:45.584 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 0  Largest: 30  Queued size: 0  Task completed: 2664
+2022-06-29 14:18:45.631 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 231.39 MB  Process Free: 8280.95 MB  Physical Total: 34043.23 MB  Physical Free: 17614.18 MB  Process CPU load: 2.0 PCT  Process CPU time: 777.0 SE  System CPU load: 7.0 PCT
+2022-06-29 14:18:48.590 INFO  - [THREAD-MONITOR]   Core: 30  Max: 30  Active: 1  Largest: 30  Queued size: 0  Task completed: 2669
+2022-06-29 14:18:48.641 INFO  - [MEMORY-MONITOR]   Process Max: 8512.34 MB  Process Used: 279.62 MB  Process Free: 8232.72 MB  Physical Total: 34043.23 MB  Physical Free: 17685.81 MB  Process CPU load: 2.0 PCT  Process CPU time: 778.0 SE  System CPU load: 12.0 PCT
