@@ -1,4 +1,4 @@
-package org.chaostocosmos.leap.http.user;
+package org.chaostocosmos.leap.http.context;
 
 /**
  * Grant for user

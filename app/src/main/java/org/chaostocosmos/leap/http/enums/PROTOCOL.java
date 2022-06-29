@@ -8,15 +8,7 @@ package org.chaostocosmos.leap.http.enums;
 public enum PROTOCOL {
     
     HTTP(false, "HTTP"),
-    HTTPS(true, "HTTPS"),
-    HTTP_1_0(false, "HTTP/1.0"),
-    HTTPS_1_0(true, "HTTPS/1.0"),
-    HTTP_1_1(false, "HTTP/1.1"),
-    HTTPS_1_1(true, "HTTPS/1.1"),
-    HTTP_2(false, "HTTP/2.0"),
-    HTTPS_2(true, "HTTPS/2.0"),
-    HTTP_3(false, "HTTP/3.0"),
-    HTTPS_3(true, "HTTPS/3.0");
+    HTTPS(true, "HTTPS");
 
     /**
      * SSL flag

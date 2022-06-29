@@ -1,7 +1,7 @@
 package org.chaostocosmos.leap.http.services.filters;
 
 import org.chaostocosmos.leap.http.WASException;
-import org.chaostocosmos.leap.http.user.User;
+import org.chaostocosmos.leap.http.context.User;
 
 /**
  * User authentication interface
