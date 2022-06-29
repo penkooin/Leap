@@ -7,8 +7,8 @@ import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.annotation.PreFilter;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
+import org.chaostocosmos.leap.http.context.User;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
-import org.chaostocosmos.leap.http.user.User;
 
 /**
  * BasicAuthFilter object

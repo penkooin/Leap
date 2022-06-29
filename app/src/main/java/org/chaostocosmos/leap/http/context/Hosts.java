@@ -14,7 +14,6 @@ import org.chaostocosmos.leap.http.commons.Filtering;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.enums.PROTOCOL;
 import org.chaostocosmos.leap.http.resources.ClassUtils;
-import org.chaostocosmos.leap.http.user.User;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;

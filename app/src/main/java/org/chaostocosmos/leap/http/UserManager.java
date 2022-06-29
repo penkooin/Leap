@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 import org.chaostocosmos.leap.http.commons.Constants;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.META;
+import org.chaostocosmos.leap.http.context.User;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.services.filters.IAuthenticate;
-import org.chaostocosmos.leap.http.user.User;
 
 /**
  * UserManager 
