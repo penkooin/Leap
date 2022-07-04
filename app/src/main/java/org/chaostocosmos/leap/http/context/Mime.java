@@ -22,7 +22,7 @@ public class Mime <M> extends Metadata <M> {
      * @param expr
      * @return
      */
-    public String getMime(String expr) {
-        return super.<String>getValue("mime", expr);
+    public String getMime(String mimeKey) {
+        return super.<String>getValue("mime."+mimeKey);
     }
 }

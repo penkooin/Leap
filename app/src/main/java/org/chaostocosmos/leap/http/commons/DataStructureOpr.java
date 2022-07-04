@@ -3,7 +3,6 @@ package org.chaostocosmos.leap.http.commons;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * StructureOpr
@@ -29,7 +28,7 @@ public class DataStructureOpr {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T> T findValue(Object obj, Object[] keys) {
+	private static <T> T findValue(Object obj, Object[] keys) {
 		if (obj instanceof List) {
 			List<T> list = (List<T>) obj;
 			if (keys.length == 1) {
@@ -37,7 +36,7 @@ public class DataStructureOpr {
 				if (list.size() > idx) {
 					return (T) list.get(idx);
 				} else {
-					throw new IllegalArgumentException("There isn't exist value of key: "+Arrays.asList(keys).stream().map(o -> o+"").collect(Collectors.joining(".")));
+					return null;
 				}
 			} else if (list.size() > 0 && keys.length > 1) {
 				int idx = Integer.parseInt(keys[0]+"");
@@ -55,7 +54,7 @@ public class DataStructureOpr {
 				return findValue(map.get(keys[0]), subKeys);
 			}
 		}
-		throw new IllegalArgumentException("There isn't exist value of key: "+Arrays.asList(keys).stream().map(o -> o+"").collect(Collectors.joining(".")));
+		return null;
 	}    
 
 	/**
@@ -78,6 +77,13 @@ public class DataStructureOpr {
 	 */
 	@SuppressWarnings("unchecked")
     public static <T> void putValue(Object obj, Object[] keys, T value) {
-        ((Map<Object, T>)findValue(obj, Arrays.copyOfRange(keys, 0, keys.length-1))).put(keys[keys.length-1], value); 
+		T parent = findValue(obj, Arrays.copyOfRange(keys, 0, keys.length-1));
+		if(parent == null) {
+            throw new IllegalArgumentException("Specified expression's parent is not exist!!!");
+        } else if(parent instanceof List) {
+			((List<T>)parent).set(Integer.valueOf(keys[keys.length-1]+""), value);
+		} else if(parent instanceof Map) {
+			((Map<String, T>)parent).put(keys[keys.length-1]+"", value);
+		}
     }    
 }

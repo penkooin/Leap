@@ -14,10 +14,10 @@ server:
       queue-size: 100
 
     monitoring:      
-      interval: 3000
+      interval: 5000
       unit: MB
       logs: ./logs/monitor.log
-      log-level: INFO
+      log-level: INFO      
 
     redirect:
       http://awesome:8082 : 20

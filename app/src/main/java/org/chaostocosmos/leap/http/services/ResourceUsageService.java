@@ -61,22 +61,22 @@ public class ResourceUsageService extends AbstractChartService {
             throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES415.code(), "Requested content type is not allowed on this service.");
         }
         MultiPart multiPart = (MultiPart)request.getBodyPart();
-        byte[] body = multiPart.getBody().get("CHART");
+        byte[] body = multiPart.getBody().get("chart");
         if(body == null) {
             throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES404.code(), "Request has no body data. Chart service must have JSON chart data.");
         }
         String chartJson = new String(body, charset);
-        super.logger.debug(chartJson);
+        //super.logger.debug(chartJson);
         Map<String, Object> map = gson.fromJson(chartJson, Map.class);
-        Graph<Double, String, Double> cpuChart = super.lineChart((Map<String, Object>)map.get("CPU"));
-        Graph<Double, String, Double> memoryChart = super.areaChart((Map<String, Object>)map.get("MEMORY"));
-        Graph<Double, String, Double> threadChart = super.lineChart((Map<String, Object>)map.get("THREAD"));
-        Graph<Double, String, Double> heapChart = super.areaChart((Map<String, Object>)map.get("HEAP"));
+        Graph<Double, String, Double> cpuChart = super.lineChart((Map<String, Object>)map.get("cpu"));
+        Graph<Double, String, Double> memoryChart = super.areaChart((Map<String, Object>)map.get("memory"));
+        Graph<Double, String, Double> threadChart = super.lineChart((Map<String, Object>)map.get("thread"));
+        Graph<Double, String, Double> heapChart = super.areaChart((Map<String, Object>)map.get("heap"));
 
-        String cpuPath = DataStructureOpr.<String>getValue(map, "CPU.SAVE_PATH");
-        String memoryPath = DataStructureOpr.<String>getValue(map, "MEMORY.SAVE_PATH");
-        String threadPath = DataStructureOpr.<String>getValue(map, "THREAD.SAVE_PATH");
-        String heapPath = DataStructureOpr.<String>getValue(map, "HEAP.SAVE_PATH");
+        String cpuPath = DataStructureOpr.<String>getValue(map, "cpu.save-path");
+        String memoryPath = DataStructureOpr.<String>getValue(map, "memory.save-path");
+        String threadPath = DataStructureOpr.<String>getValue(map, "thread.save-path");
+        String heapPath = DataStructureOpr.<String>getValue(map, "heap.save-path");
 
         for(Host<?> host : Context.getHosts().getAllHosts()) {
             if(cpuChart != null) saveBufferedImage(cpuChart.getBufferedImage(), host.getStatic().resolve(cpuPath).toFile(), CODEC.PNG);    
@@ -94,7 +94,7 @@ public class ResourceUsageService extends AbstractChartService {
      * @throws IOException
      * @throws NotSuppotedEncodingFormatException
      */
-    public void saveBufferedImage(BufferedImage image, File saveFile, CODEC codec) throws IOException, NotSuppotedEncodingFormatException {
+    public synchronized void saveBufferedImage(BufferedImage image, File saveFile, CODEC codec) throws IOException, NotSuppotedEncodingFormatException {
         Enumeration enu = ImageCodec.getCodecs();
     	String ext = saveFile.getName().substring(saveFile.getName().lastIndexOf(".")+1);
     	if(!Stream.of(CODEC.values()).anyMatch(c -> c.name().equalsIgnoreCase(ext))) {

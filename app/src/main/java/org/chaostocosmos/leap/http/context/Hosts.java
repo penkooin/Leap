@@ -25,25 +25,23 @@ import ch.qos.logback.classic.Logger;
  * @since 2021.09.18
  */
 public class Hosts <M> extends Metadata <M> {
-
-    Host<?> defaultHost;
-    List<Host<?>> virtualHost;
-    List<Host<?>> allHost;
-    Map<String, Host<?>> hostMap;    
+    /**
+     * Host Map
+     */
+    Map<String, Host<?>> hostMap;
 
     /**
      * Constructor
-     * 
      * @param hostsMap
      */
-    public Hosts(M hostsMap) {        
+    public Hosts(M hostsMap) {
         super(hostsMap);
-        this.defaultHost = new Host<>(super.getValue("hosts.default"), true);
-        this.virtualHost = super.<List<Map<String, Object>>>getValue("hosts.virtual").stream().map(m -> new Host<>(m, false)).collect(Collectors.toList());
-        this.allHost = new ArrayList<>();
-        this.allHost.add(this.defaultHost);
-        this.allHost.addAll(this.virtualHost);
-        this.hostMap = this.allHost.stream().map(h -> new Object[]{ h.getHostId(), h}).collect(Collectors.toMap(k -> (String)k[0], v -> (Host<?>)v[1]));
+        List<Host<?>> allHost = new ArrayList<>();
+        allHost.add(new Host<>(super.getValue("hosts.default"), true));
+        if(super.exists("hosts.virtual")) {
+            allHost.addAll(super.<List<Map<String, Object>>>getValue("hosts.virtual").stream().map(m -> new Host<>(m, false)).collect(Collectors.toList()));
+        }
+        this.hostMap = allHost.stream().map(h -> new Object[]{ h.getHostId(), h}).collect(Collectors.toMap(k -> (String)k[0], v -> (Host<?>)v[1]));
     }    
 
     /**
@@ -52,7 +50,7 @@ public class Hosts <M> extends Metadata <M> {
      * @return
      */
     public Host<?> getHost(String hostId) {
-        return hostId.equals(defaultHost.getHostId()) ? this.defaultHost : this.virtualHost.stream().filter(h -> h.getHostId().equals(hostId)).findFirst().orElseThrow(() -> new IllegalArgumentException("There isn't exist host ID: "+hostId));
+        return this.hostMap.values().stream().filter(h -> h.getHostId().equals(hostId)).findFirst().orElseThrow(() -> new IllegalArgumentException("Specified Host ID not found: "+hostId));
     }
 
     /**
@@ -60,7 +58,7 @@ public class Hosts <M> extends Metadata <M> {
      * @return
      */
     public Host<?> getDefaultHost() {
-        return this.defaultHost;
+        return this.hostMap.values().stream().filter(h -> h.isDefaultHost()).findFirst().orElseThrow(() -> new IllegalArgumentException("Default Host not found!!!"));
     }
 
     /**
@@ -68,7 +66,7 @@ public class Hosts <M> extends Metadata <M> {
      * @return
      */
     public String getDefaultHostName() {
-        return this.defaultHost.getHost();
+        return getDefaultHost().getHost();
     }
 
     /**
@@ -76,7 +74,7 @@ public class Hosts <M> extends Metadata <M> {
      * @return
      */
     public int getDefaultPort() {
-        return this.defaultHost.getPort();
+        return getDefaultHost().getPort();
     }
 
     /**
@@ -84,8 +82,7 @@ public class Hosts <M> extends Metadata <M> {
      * @return
      */
     public List<Host<?>> getAllHosts() {
-        this.virtualHost.add(0, this.defaultHost);
-        return this.virtualHost;
+        return this.hostMap.values().stream().collect(Collectors.toList());
     }
 
     /**

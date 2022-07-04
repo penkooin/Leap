@@ -12,7 +12,5 @@ public class Chart<M> extends Metadata<M> {
      */
     public Chart(M meta) {
         super(meta);
-    }
-
-    
+    }    
 }

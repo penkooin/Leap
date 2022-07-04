@@ -52,7 +52,7 @@ public class Context {
             refresh();
 
             //dispatch context events
-            dispatchContextEvent(EVENT_TYPE.INITIALIZE);
+            dispatchContextEvent(EVENT_TYPE.INITIALIZED);
         } catch(Exception e) {
             throw new WASException(e);
         }
@@ -73,7 +73,7 @@ public class Context {
      * @param <T>
      * @throws Exception
      */
-    private static <T> void dispatchContextEvent(EVENT_TYPE eventType) {
+    public static void dispatchContextEvent(EVENT_TYPE eventType) {
         try{
             for(ContextListener<?> listener : contextListeners) {
                 String typeName = ((ParameterizedType)listener.getClass().getGenericSuperclass()).getActualTypeArguments()[0].getTypeName();
@@ -212,6 +212,7 @@ public class Context {
      * @throws WASException
      */
     public static void save(META meta) throws WASException {
-        meta.save();        
+        meta.save(); 
+        dispatchContextEvent(EVENT_TYPE.STORED);       
     }   
 }

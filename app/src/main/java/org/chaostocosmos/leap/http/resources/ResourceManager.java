@@ -41,7 +41,7 @@ public class ResourceManager {
      */
     private ResourceManager() throws IOException, InterruptedException {
         this.resourceMap = new HashMap<>();
-        for(Host<?> host : Context.getHosts().getHostMap().values()) {
+        for(Host<?> host : Context.getHosts().getAllHosts()) {
             this.resourceMap.put(host.getHost(), new WatchResources(host, WATCH_KIND));
         }
     }

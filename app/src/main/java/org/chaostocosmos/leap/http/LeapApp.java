@@ -27,7 +27,6 @@ import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.ContextAdapter;
 import org.chaostocosmos.leap.http.context.ContextEvent;
-import org.chaostocosmos.leap.http.context.EVENT_TYPE;
 import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.context.Hosts;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
@@ -262,9 +261,6 @@ public class LeapApp extends ContextAdapter<Hosts<?>> {
 
     @Override
     public void contextHosts(ContextEvent<Hosts<?>> ce) throws Exception {
-        System.out.println("=================================43543543=====================================================================");
-        if(ce.getEventType() == EVENT_TYPE.INITIALIZE) {
-        }
     }
 
     public static void main(String[] args) throws Exception {

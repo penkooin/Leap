@@ -1,11 +1,11 @@
 package org.chaostocosmos.leap.http.context;
 
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Properties;
 import java.util.stream.Collectors;
@@ -42,15 +42,16 @@ public enum META {
         this.metaPath = metaPath;
         String metaName = this.metaPath.toFile().getName();
         String metaType = metaName.substring(metaName.lastIndexOf(".")+1);
-        try (InputStreamReader isr = new InputStreamReader(new FileInputStream(metaPath.toFile()), StandardCharsets.UTF_8)) {
+        try {
+            String metaString = Files.readString(metaPath, StandardCharsets.UTF_8);            
             if(metaType.equalsIgnoreCase("yml")) {
-                this.metaMap = (Map<String, Object>)new Yaml().load(isr);
+                this.metaMap = (Map<String, Object>)new Yaml().load(metaString);
             } else if(metaType.equalsIgnoreCase("json")) {
-                this.metaMap = (Map<String, Object>)new Gson().fromJson(isr, Map.class);
+                this.metaMap = (Map<String, Object>)new Gson().fromJson(metaString, Map.class);
             } else if(metaType.equalsIgnoreCase("properites")) {
-                Properties prop = new Properties();
-                prop.load(isr);
-                this.metaMap = prop.entrySet().stream().collect(Collectors.toMap(e -> (String)e.getKey(), e -> e.getValue()));
+                this.metaMap = Arrays.asList(metaString.split(System.lineSeparator()))
+                                     .stream().map(l -> new Object[]{l.substring(0, l.indexOf("=")).trim(), l.substring(l.indexOf("=")+1).trim()})
+                                     .collect(Collectors.toMap(k -> (String)k[0], v -> v[1]));
             } else {
                 throw new NotSupportedException("Meta file not supported: "+metaName);
             }    

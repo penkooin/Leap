@@ -66,23 +66,23 @@ public abstract class AbstractChartService extends AbstractService implements Ch
     @Override
     @SuppressWarnings("unchecked")
     public Graph<Double, String, Double> createGraph(Map<String, Object> map) throws Exception {
-        String id = (String) map.get("ID");
+        String id = (String) map.get("id");
         Graph<Double, String, Double> graph = graphMap.get(id);
-        double limit = (double)map.get("LIMIT");
-        String unit = map.get("UNIT")+"";
-        if(DataStructureOpr.<List<Double>>getValue(map, "ELEMENTS.0.VALUES").size() < 3) {
+        double limit = (double)map.get("limit");
+        String unit = map.get("unit")+"";
+        if(DataStructureOpr.<List<Double>>getValue(map, "elements.0.values").size() < 3) {
             return null;                        
         }
+        GraphConstants.GRAPH type = GraphConstants.GRAPH.valueOf(map.get("graph")+"");            
+        String title = map.get("title")+"";
+        int width = (int)Double.parseDouble(map.get("width")+"");
+        int height = (int)Double.parseDouble(map.get("height")+"");            
+        List<String> xIndex = (List<String>)map.get("x-index");  
+        List<Double> yIndex = (List<Double>)map.get("y-index");  
+        GraphElements<Double, String, Double> graphElements = null;
         if(graph == null) {
-            GraphConstants.GRAPH type = GraphConstants.GRAPH.valueOf(map.get("GRAPH")+"");            
-            String title = map.get("TITLE")+"";
-            int width = (int)Double.parseDouble(map.get("WIDTH")+"");
-            int height = (int)Double.parseDouble(map.get("HEIGHT")+"");
-            
-            List<String> xIndex = (List<String>)map.get("XINDEX");  
-            List<Double> yIndex = (List<Double>)map.get("YINDEX");  
-            GraphElements<Double, String, Double> graphElements = new GraphElements<Double, String, Double>(type, xIndex, yIndex);            
-            graphElements.setGraphElementMap(createGraphElements((List<Object>)map.get("ELEMENTS")));    	
+            graphElements = new GraphElements<Double, String, Double>(type, xIndex, yIndex);            
+            graphElements.setGraphElementMap(createGraphElements((List<Object>)map.get("elements")));    	
             switch(type) {
                 case LINE :
                     graph = new LineGraph<Double, String, Double>(graphElements, title, width, height);                    
@@ -101,28 +101,30 @@ public abstract class AbstractChartService extends AbstractService implements Ch
                     break;
             }
             graph.setShowGraphXY(false);
-            graph.setInterpolateType(INTERPOLATE.valueOf(map.get("INTERPOLATE")+""));
+            graph.setInterpolateType(INTERPOLATE.valueOf(map.get("interpolate")+""));
             graph.setGridStyle(GRID.DOT);
             graph.setGraphBorderSize(2f);
             graphMap.put(id, graph);
-        }        
-        GraphElements<Double, String, Double> graphElements = graph.getGraphElements();
-        graphElements.setGraphElementMap(createGraphElements((List<Object>)map.get("ELEMENTS")));
-        graph.setLimit(limit);        
+        } else {
+            graphElements = graph.getGraphElements();
+            graphElements.setYIndex(yIndex);
+            graphElements.setGraphElementMap(createGraphElements((List<Object>)map.get("elements")));
+        }       
+        graph.setLimit(graphElements.getMaximum() * 1.3);        
         graph.setUnit(unit);        
-        graph.setGraphAlpha(Float.valueOf(map.get("ALPHA")+""));
-        graph.setTitleFontAlpha(0.3f);                
+        graph.setGraphAlpha(Float.valueOf(map.get("alpha")+""));
+        graph.setTitleFontAlpha(0.3f);                    
         return graph;
     }       
 
     @Override
     public Map<Object, GraphElement<Double, String, Double>> createGraphElements(List<Object> elements) throws Exception {
         return elements.stream().map(o -> (Map<String, Object>)o).map(m -> {
-            String elementName = m.get("ELEMENT")+"";
-            String label = m.get("LABEL")+"";
-            List<Integer> colorList = ((List<Object>)m.get("COLOR")).stream().map(v -> (int)Double.parseDouble(v+"")).collect(Collectors.toList());
+            String elementName = m.get("element")+"";
+            String label = m.get("label")+"";
+            List<Integer> colorList = ((List<?>)m.get("color")).stream().map(v -> Double.valueOf(v+"").intValue()).collect(Collectors.toList());
             Color elementColor = new Color((int)colorList.get(0), (int)colorList.get(1), (int)colorList.get(2));
-            List<Double> valueList = ((List<Object>)m.get("VALUES")).stream().map(v -> Double.parseDouble(v+"")).collect(Collectors.toList());
+            List<Double> valueList = (List<Double>)m.get("values");
             return new GraphElement<Double, String, Double>(elementName, elementColor, elementName, elementColor, valueList);
         }).filter(el -> el != null).collect(Collectors.toMap(k -> k.getElementName(), v -> v)); 
     }
