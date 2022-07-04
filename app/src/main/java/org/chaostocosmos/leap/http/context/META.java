@@ -28,7 +28,7 @@ public enum META {
     HOSTS(Context.getHomePath().resolve("config").resolve("hosts.yml")),
     MESSAGES(Context.getHomePath().resolve("config").resolve("messages.yml")),
     MIME(Context.getHomePath().resolve("config").resolve("mime.yml")),
-    CHART(Context.getHomePath().resolve("config").resolve("chart.json"));
+    CHART(Context.getHomePath().resolve("config").resolve("chart.yml"));
 
     Path metaPath;
     Map<String, Object> metaMap;
@@ -72,15 +72,15 @@ public enum META {
      * @param pathExpr
      * @param value
      */
-    public void setMetaValue(String pathExpr, Object value) {
-        DataStructureOpr.setValue(this.metaMap, pathExpr, value);
+    public <T> void setMetaValue(String pathExpr, T value) {
+        DataStructureOpr.<T>setValue(this.metaMap, pathExpr, value);
     }
 
     /**
      * Get meta data value
      */
-    public Object getMetaValue(String pathExpr) {
-        return DataStructureOpr.getValue(this.metaMap, pathExpr);
+    public <T> T getMetaValue(String pathExpr) {
+        return DataStructureOpr.<T>getValue(this.metaMap, pathExpr);
     }
 
     /**

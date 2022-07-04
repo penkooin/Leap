@@ -1,8 +1,6 @@
 package org.chaostocosmos.leap.http;
 
-import java.io.IOException;
 import java.lang.reflect.Method;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -69,7 +67,7 @@ public class ServiceManager {
             List<Class<? extends ServiceModel>> services = ClassUtils.findAllLeapServices(classLoader, false, host.getDynamicPackageFiltering());
             //List<Class<? extends IFilter>> filters = ClassUtils.findAllLeapFilters(false); 
             initialize(services);
-        } catch(IOException | URISyntaxException e) {
+        } catch(Exception e) {
             throw new WASException(e);
         }
     }

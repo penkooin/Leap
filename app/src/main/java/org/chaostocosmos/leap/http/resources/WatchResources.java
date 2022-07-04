@@ -214,11 +214,11 @@ public class WatchResources extends Thread implements Resources {
                                         Files.move(path, path, StandardCopyOption.ATOMIC_MOVE);                                        
                                         if(path.toFile().length() <= this.inMemoryLimitSize) {
                                             data = new ResourceInfo(false, path, true);
-                                            LoggerFactory.getLogger(this.hostId).debug("[IN-MEMORY CREATED] Loaded to memory: "+path.toAbsolutePath()+"  [SIZE: "+UNIT.MB.get(size)+"]");
+                                            LoggerFactory.getLogger(this.hostId).debug("[IN-MEMORY CREATED LOADING] Loaded to memory: "+path.toAbsolutePath()+"  [SIZE: "+UNIT.MB.get(size)+"]");
                                         } else {
                                             //When In-Memory limit and reject
                                             data = new ResourceInfo(false, path, false);
-                                            LoggerFactory.getLogger(this.hostId).debug("[IN-MEMORY CREATED] In-Memory file size overflow. Limit: "+UNIT.MB.get(this.inMemoryLimitSize)+"  File size: "+UNIT.MB.get(path.toFile().length()));
+                                            LoggerFactory.getLogger(this.hostId).debug("[IN-MEMORY CREATED LOADING] In-Memory file size overflow. Limit: "+UNIT.MB.get(this.inMemoryLimitSize)+"  File size: "+UNIT.MB.get(path.toFile().length()));
                                         }
                                     } else {                        
                                         // When File resource            
@@ -230,7 +230,7 @@ public class WatchResources extends Thread implements Resources {
                                 }
                             }
                         }
-                        String[] paths = path.subpath(this.watchPath.getNameCount(), path.getNameCount()).toString().split(Pattern.quote(File.separator));
+                        //String[] paths = path.subpath(this.watchPath.getNameCount(), path.getNameCount()).toString().split(Pattern.quote(File.separator));
                         //addResource(this.resourceTree, paths, data);
                         addResource(path);
                     } else if(event.kind() == StandardWatchEventKinds.ENTRY_MODIFY) {
@@ -242,11 +242,11 @@ public class WatchResources extends Thread implements Resources {
                                 if(this.inMemoryFiltering.include(path.toFile().getName())) {
                                     Files.move(path, path, StandardCopyOption.ATOMIC_MOVE);
                                     if(path.toFile().length() <= this.inMemoryLimitSize) {
-                                        LoggerFactory.getLogger(this.hostId).debug("[IN-MEMORY CREATED] Loaded to memory: "+path.toAbsolutePath()+"  [SIZE: "+UNIT.MB.get(path.toFile().length())+"]");
+                                        LoggerFactory.getLogger(this.hostId).debug("[IN-MEMORY MODIFIED LOADING] Loaded to memory: "+path.toAbsolutePath()+"  [SIZE: "+UNIT.MB.get(path.toFile().length())+"]");
                                         data = new ResourceInfo(false, path, true);
                                     } else {
                                         //When In-Memory limit and reject
-                                        LoggerFactory.getLogger(this.hostId).debug("[IN-MEMORY CREATED] In-Memory file size overflow. Limit: "+UNIT.MB.get(this.inMemoryLimitSize)+"  File size: "+UNIT.MB.get(path.toFile().length()));
+                                        LoggerFactory.getLogger(this.hostId).debug("[IN-MEMORY MODIFIED LOADING] In-Memory file size overflow. Limit: "+UNIT.MB.get(this.inMemoryLimitSize)+"  File size: "+UNIT.MB.get(path.toFile().length()));
                                         data = new ResourceInfo(false, path, false);
                                     }
                                 } else {
@@ -255,10 +255,11 @@ public class WatchResources extends Thread implements Resources {
                                     data = new ResourceInfo(false, path, false);
                                 }
                             } catch(FileSystemException e) {
-                                LoggerFactory.getLogger(this.hostId).warn("[FILE SYSTEM ALERT] "+e.getMessage());
+                                //e.printStackTrace();
+                                //LoggerFactory.getLogger(this.hostId).warn("[FILE SYSTEM ALERT] "+e.getMessage());
                                 continue;
                             }
-                            String[] paths = path.subpath(this.watchPath.getNameCount(), path.getNameCount()).toString().split(Pattern.quote(File.separator));
+                            //String[] paths = path.subpath(this.watchPath.getNameCount(), path.getNameCount()).toString().split(Pattern.quote(File.separator));
                             //addResource(this.resourceTree, paths, data);
                             addResource(path);
                         }
@@ -317,13 +318,14 @@ public class WatchResources extends Thread implements Resources {
 
     @Override
     public synchronized void addResource(Path resourcePath) throws Exception { 
+        //System.out.println(resourcePath.toString());
         if(resourcePath.toFile().isFile() && this.accessFiltering.include(resourcePath.toFile().getName()) && this.forbiddenFiltering.exclude(resourcePath.toFile().getName())) {            
             Path path = resourcePath.subpath(this.watchPath.getNameCount(), resourcePath.getNameCount());
             if(this.inMemoryFiltering.include(resourcePath.toFile().getName())) {
-                LoggerFactory.getLogger(this.hostId).debug("[ADD IN-MEMORY RESOURCE] Watch: "+this.watchPath.toString()+"  Resource: "+resourcePath.toString());
+                LoggerFactory.getLogger(this.hostId).debug("[ADD IN-MEMORY RESOURCE] Resource Path: "+resourcePath.toString());
                 addResource(this.resourceTree, path.toString().split(Pattern.quote(File.separator)), new ResourceInfo(false, resourcePath, true));
             } else {
-                LoggerFactory.getLogger(this.hostId).debug("[ADD FILE RESOURCE] Watch: "+this.watchPath.toString()+"  Resource: "+resourcePath.toString());
+                LoggerFactory.getLogger(this.hostId).debug("[ADD FILE RESOURCE] Resource Path: "+resourcePath.toString());
                 addResource(this.resourceTree, path.toString().split(Pattern.quote(File.separator)), new ResourceInfo(false, resourcePath, false));
             }
         }

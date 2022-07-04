@@ -12,7 +12,7 @@ public class LeapWASTest {
         
     @Test
     public void test() {
-        
+        System.out.println(System.getProperty("user.dir"));
     }
 }
     

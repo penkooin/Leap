@@ -168,7 +168,7 @@ public class Hosts <M> extends Metadata <M> {
      * @param hostId
      * @return
      */
-    public List<User> getUsers(String hostId) {
+    public List<User<?>> getUsers(String hostId) {
         return this.hostMap.get(hostId).getUsers();
     }
 

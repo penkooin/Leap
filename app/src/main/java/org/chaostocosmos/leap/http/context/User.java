@@ -6,7 +6,7 @@ import java.util.Map;
  * User
  * @author 9ins
  */
-public class User {
+public class User <T> extends Metadata<T> {
 
     String username;
     String password;
@@ -18,26 +18,24 @@ public class User {
      * @param password
      * @param grant
      */
-    public User(String username, String password, GRANT grant) {
-        this.username = username;
-        this.password = password;
-        this.grant = grant;
+    public User(T userMap) {
+        super(userMap);
     }
 
     public String getUsername() {
-        return this.username;
+        return super.getValue("username");
     }
 
     public String getPassword() {
-        return this.password;
+        return super.getValue("password");
     }
 
     public GRANT getGrant() {
-        return this.grant;
+        return GRANT.valueOf(super.getValue("grant"));
     }
 
     public Map<String, Object> getUserMap() {
-        return Map.of("username", this.username, "password", this.password, "grant", this.grant.name());
+        return Map.of("username", getUsername(), "password", getPassword(), "grant", getGrant());
     }
 
     @Override

@@ -28,10 +28,6 @@ import ch.qos.logback.classic.Logger;
  */
 public class Host <M> extends Metadata <M> {
     /**
-     * Filtering objects
-     */
-    Filtering ipAllowedFiltering, ipForbiddenFiltering, inMemoryFiltering, accessFiltering, forbiddenFiltering, dynamicPackagesFiltering, springJpaPackagesFiltering, errorFiltering;
-    /**
      * Resource object for host
      */
     private Resources resource;
@@ -134,17 +130,17 @@ public class Host <M> extends Metadata <M> {
      * Get users
      * @return
      */
-    public List<User> getUsers() {        
-        return (List<User>)super.<List<Map<String, Object>>>getValue("users")
+    public List<User<?>> getUsers() {        
+        return super.<List<Map<String, Object>>>getValue("users")
                 .stream()
-                .map(m -> new User(m.get("username").toString(), m.get("password").toString(), GRANT.valueOf(m.get("grant").toString())))
+                .map(m -> new User<Map<String, Object>>(m))
                 .collect(Collectors.toList());
     }
     /**
      * Set users
      * @param users
      */
-    public void setUsers(List<User> users) {
+    public void setUsers(List<User<?>> users) {
         users.stream().map(u -> {
             Map<String, String> map = new HashMap<String, String>();
             map.put("username", u.getUsername());
@@ -179,10 +175,7 @@ public class Host <M> extends Metadata <M> {
      * @return
      */
     public Filtering getIpAllowedFiltering() {
-        if(this.ipAllowedFiltering == null) {
-            this.ipAllowedFiltering = new Filtering(getIpAllowedFilters());
-        }
-        return this.ipAllowedFiltering;
+        return new Filtering(getIpAllowedFilters());
     }
     /**
      * Get IP forbbiden filters
@@ -203,10 +196,7 @@ public class Host <M> extends Metadata <M> {
      * @return
      */
     public Filtering getIpForbiddenFiltering() {
-        if(ipForbiddenFiltering == null) {
-            this.ipForbiddenFiltering = new Filtering(getIpForbbidenFilters());
-        }
-        return this.ipForbiddenFiltering;
+        return new Filtering(getIpForbbidenFilters());
     }
     /**
      * Get dynamic class path
@@ -241,10 +231,7 @@ public class Host <M> extends Metadata <M> {
      * @return
      */
     public Filtering getDynamicPackageFiltering() {
-        if(this.dynamicPackagesFiltering == null) {
-            this.dynamicPackagesFiltering = new Filtering(getDynamicPackages());
-        }
-        return this.dynamicPackagesFiltering;
+        return new Filtering(getDynamicPackages());
     }
     /**
      * Get in-memory resource filters
@@ -265,10 +252,7 @@ public class Host <M> extends Metadata <M> {
      * @return
      */
     public Filtering getInMemoryFiltering() {
-        if(inMemoryFiltering == null) {
-            this.inMemoryFiltering = new Filtering(getInMemoryFilters());
-        }        
-        return this.inMemoryFiltering;
+        return new Filtering(getInMemoryFilters());
     }
     /**
      * Get access filters
@@ -289,10 +273,7 @@ public class Host <M> extends Metadata <M> {
      * @return
      */
     public Filtering getAccessFiltering() {
-        if(this.accessFiltering == null) {
-            this.accessFiltering = new Filtering(super.<List<String>>getValue("resources.access-filters"));
-        }
-        return this.accessFiltering;
+        return new Filtering(super.<List<String>>getValue("resources.access-filters"));
     }
     /**
      * Get forbidden filters
@@ -313,10 +294,7 @@ public class Host <M> extends Metadata <M> {
      * @return
      */
     public Filtering getForbiddenFiltering() {
-        if(this.forbiddenFiltering == null) {
-            this.forbiddenFiltering = new Filtering(getForbiddenFilters());
-        }
-        return this.forbiddenFiltering;
+        return new Filtering(getForbiddenFilters());
     }
     /**
      * Get error Filtering

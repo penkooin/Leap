@@ -22,6 +22,8 @@ import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.annotation.MethodMappper;
 import org.chaostocosmos.leap.http.annotation.ServiceMapper;
 import org.chaostocosmos.leap.http.commons.DataStructureOpr;
+import org.chaostocosmos.leap.http.context.Context;
+import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
@@ -64,7 +66,7 @@ public class ResourceUsageService extends AbstractChartService {
             throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES404.code(), "Request has no body data. Chart service must have JSON chart data.");
         }
         String chartJson = new String(body, charset);
-        System.out.println(chartJson);
+        super.logger.debug(chartJson);
         Map<String, Object> map = gson.fromJson(chartJson, Map.class);
         Graph<Double, String, Double> cpuChart = super.lineChart((Map<String, Object>)map.get("CPU"));
         Graph<Double, String, Double> memoryChart = super.areaChart((Map<String, Object>)map.get("MEMORY"));
@@ -76,10 +78,12 @@ public class ResourceUsageService extends AbstractChartService {
         String threadPath = DataStructureOpr.<String>getValue(map, "THREAD.SAVE_PATH");
         String heapPath = DataStructureOpr.<String>getValue(map, "HEAP.SAVE_PATH");
 
-        if(cpuChart != null) saveBufferedImage(cpuChart.getBufferedImage(), super.serviceManager.getHost().getStatic().resolve(cpuPath).toFile(), CODEC.PNG);    
-        if(memoryChart != null) saveBufferedImage(memoryChart.getBufferedImage(), super.serviceManager.getHost().getStatic().resolve(memoryPath).toFile(), CODEC.PNG);
-        if(threadChart != null) saveBufferedImage(threadChart.getBufferedImage(), super.serviceManager.getHost().getStatic().resolve(threadPath).toFile(), CODEC.PNG);
-        if(heapChart != null) saveBufferedImage(heapChart.getBufferedImage(), super.serviceManager.getHost().getStatic().resolve(heapPath).toFile(), CODEC.PNG);
+        for(Host<?> host : Context.getHosts().getAllHosts()) {
+            if(cpuChart != null) saveBufferedImage(cpuChart.getBufferedImage(), host.getStatic().resolve(cpuPath).toFile(), CODEC.PNG);    
+            if(memoryChart != null) saveBufferedImage(memoryChart.getBufferedImage(), host.getStatic().resolve(memoryPath).toFile(), CODEC.PNG);
+            if(threadChart != null) saveBufferedImage(threadChart.getBufferedImage(), host.getStatic().resolve(threadPath).toFile(), CODEC.PNG);
+            if(heapChart != null) saveBufferedImage(heapChart.getBufferedImage(), host.getStatic().resolve(heapPath).toFile(), CODEC.PNG);                
+        }
     }
 
     /**

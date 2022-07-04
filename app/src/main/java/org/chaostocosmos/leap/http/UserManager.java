@@ -21,7 +21,7 @@ public class UserManager implements IAuthenticate {
     /**
      * User list
      */
-    protected List<User> users;
+    protected List<User<?>> users;
 
     /**
      * Default constructor
@@ -34,7 +34,7 @@ public class UserManager implements IAuthenticate {
     @Override
     public boolean signIn(String username, String password) {
         System.out.println(this.users.toString());
-        User user = this.users.stream().filter(u -> u.getUsername().equals(username)).findAny().orElseThrow(() -> new WASException(MSG_TYPE.ERROR, 25, username));
+        User<?> user = this.users.stream().filter(u -> u.getUsername().equals(username)).findAny().orElseThrow(() -> new WASException(MSG_TYPE.ERROR, 25, username));
         if(!user.getPassword().equals(password)) {
             throw new WASException(MSG_TYPE.ERROR, 16, password);
         }
@@ -58,7 +58,7 @@ public class UserManager implements IAuthenticate {
      * @param users
      * @throws WASException
      */
-    public void save(List<User> users) throws WASException {
+    public void save(List<User<?>> users) throws WASException {
         List<Map<String, Object>> list = users.stream().map(u -> u.getUserMap()).collect(Collectors.toList());
         Context.getServer().setValue("server.users", list);
         Context.save(META.SERVER);
