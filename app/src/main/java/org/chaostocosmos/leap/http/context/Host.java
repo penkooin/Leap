@@ -315,7 +315,7 @@ public class Host <M> extends Metadata <M> {
      * @return
      */    
     public Path getDocroot() {
-        return Paths.get(super.<String>getValue("doc-root")).toAbsolutePath();
+        return Paths.get(super.<String>getValue("doc-root")).normalize().toAbsolutePath();
     }
     /**
      * Set docroot

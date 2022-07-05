@@ -13,55 +13,49 @@ import org.chaostocosmos.leap.http.services.model.ServiceModel;
  */
 public class ServiceHolder {
     /**
-     * Service path 
+     * Context path
      */
-    String servicePath;
-
+    String contextPath;
     /**
      * Request type
      */
     REQUEST_TYPE requestType;
-
     /**
      * Leap service
      */
     ServiceModel service;
-
     /**
      * Service method
      */
     Method serviceMethod;
-
     /**
      * Service filter for pre process
      */
     protected List<IFilter> preFilters;
-
     /**
      * Service filter for post process
      */
     protected List<IFilter> postFilters;
-
     /**
      * Constructor with parameters
-     * @param servicePath
+     * @param contextPath
      * @param service
      * @param requestType
      * @param serviceMethod
      */
-    public ServiceHolder(String servicePath, ServiceModel service, REQUEST_TYPE requestType, Method serviceMethod) {
-        this.servicePath = servicePath;
+    public ServiceHolder(String contextPath, ServiceModel service, REQUEST_TYPE requestType, Method serviceMethod) {
+        this.contextPath = contextPath;
         this.requestType = requestType;
         this.service = service;
         this.serviceMethod = serviceMethod;
     }
 
     public String getServicePath() {
-        return this.servicePath;
+        return this.contextPath;
     }
 
     public void setServicePath(String servicePath) {
-        this.servicePath = servicePath;
+        this.contextPath = servicePath;
     }
 
     public REQUEST_TYPE getRequestType() {

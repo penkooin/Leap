@@ -1,6 +1,8 @@
 package org.chaostocosmos.leap.http;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,9 +14,7 @@ import org.chaostocosmos.leap.http.annotation.ServiceMapper;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Host;
-import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
-import org.chaostocosmos.leap.http.enums.RES_CODE;
 import org.chaostocosmos.leap.http.resources.ClassUtils;
 import org.chaostocosmos.leap.http.resources.LeapURLClassLoader;
 import org.chaostocosmos.leap.http.services.filters.IFilter;
@@ -32,108 +32,118 @@ public class ServiceManager {
      * Logger
      */
     public static final Logger logger = LoggerFactory.getLogger(Context.getHosts().getDefaultHost().getHostId());
-
-    /**
-     * ServiceHolder Map
-     */
-    private Map<String, ServiceHolder> serviceHolderMap = new HashMap<>();
-
     /**
      * Host object 
      */
     Host<?> host;
-
     /**
      * Leap security manager object
      */
     private UserManager userManager;
-
     /**
      * ClassLoder for host
      */
     private LeapURLClassLoader classLoader;
-
+    /**
+     * Services 
+     */
+    Map<String, Method> serviceMethodMap;
     /**
      * Constructor with 
      * @param host
      * @param userManager 
      * @param classLoader
+     * @throws URISyntaxException
+     * @throws IOException
      */
-    public ServiceManager(Host<?> host, UserManager userManager, LeapURLClassLoader classLoader) {
+    public ServiceManager(Host<?> host, UserManager userManager, LeapURLClassLoader classLoader) throws IOException, URISyntaxException {
         this.host = host;
         this.userManager  = userManager;
         this.classLoader = (LeapURLClassLoader) classLoader;
-        try {
-            List<Class<? extends ServiceModel>> services = ClassUtils.findAllLeapServices(classLoader, false, host.getDynamicPackageFiltering());
-            //List<Class<? extends IFilter>> filters = ClassUtils.findAllLeapFilters(false); 
-            initialize(services);
-        } catch(Exception e) {
-            throw new WASException(e);
-        }
+        this.serviceMethodMap = new HashMap<>();
+        initialize();        
     }
-
     /**
-     * initialize
+     * Initialize ServiceManager
+     * @throws IOException
+     * @throws URISyntaxException
      */
-    private void initialize(List<Class<? extends ServiceModel>> services) {        
-        for(Class<? extends ServiceModel> serviceClass : services) {
-            ServiceModel service = (ServiceModel) ClassUtils.instantiate(classLoader, serviceClass);
-            addService(service);
-        }
-    }
-
-    /**
-     * Set service holder
-     * @param service
-     */
-    public void addService(final ServiceModel service) {
-        service.setServiceManager(this);
-        ServiceMapper sm = service.getClass().getDeclaredAnnotation(ServiceMapper.class);
-        if(sm != null) {
-            String sPath = sm.path();
-            Method[] methods = service.getClass().getDeclaredMethods();
-            for(Method method : methods) {
-                MethodMappper mm = method.getDeclaredAnnotation(MethodMappper.class);
-                if(mm != null) {
-                    String sKey = sPath + mm.path();
-                    if(!this.serviceHolderMap.containsKey(sKey)) {
-                        logger.info("Add service: "+service.getClass().getName()+"  Mapping path: "+ sKey + "   METHOD: "+mm.mappingMethod());
+    public void initialize() throws IOException, URISyntaxException {
+        List<Class<? extends ServiceModel>> services = ClassUtils.findAllLeapServices(classLoader, false, host.getDynamicPackageFiltering());
+        for(Class<? extends ServiceModel> service : services) {            
+            ServiceMapper sm = service.getDeclaredAnnotation(ServiceMapper.class);
+            if(sm != null) {
+                String servicePath = sm.path();
+                Method[] methods = service.getDeclaredMethods();
+                for(Method method : methods) {
+                    MethodMappper mm = method.getDeclaredAnnotation(MethodMappper.class);
+                    if(mm != null) {
+                        this.serviceMethodMap.put(servicePath + mm.path(), method);
                     }
-                    REQUEST_TYPE rType = mm.mappingMethod();
-                    FilterMapper fm = method.getDeclaredAnnotation(FilterMapper.class);
-                    ServiceHolder serviceHolder;
-                    if(fm != null) {
-                        List<IFilter> preFilters = new ArrayList<>();
-                        Class<? extends IFilter>[] preFilterClasses = fm.preFilters();
-                        for(Class<? extends IFilter> clazz : preFilterClasses) {
-                            IFilter f = (IFilter)newFilterInstance(clazz.getName());
-                            f.setUserManager(userManager);
-                            preFilters.add(f);
-                        }
-                        List<IFilter> postFilters = new ArrayList<>();
-                        Class<? extends IFilter>[] postFilterClasses = fm.postFilters();
-                        for(Class<? extends IFilter> clazz : postFilterClasses) {
-                            IFilter f = (IFilter)newFilterInstance(clazz.getName());
-                            f.setUserManager(userManager);
-                            postFilters.add(f);
-                        }
-                        service.setFilters(preFilters, postFilters);
-                        service.setServiceManager(this);
-                        serviceHolder = new ServiceHolder(sKey, service, rType, method);
-                        serviceHolderMap.put(sKey, serviceHolder);
-                    } else {
-                        serviceHolder = new ServiceHolder(sKey, service, rType, method);
-                        serviceHolderMap.put(sKey, serviceHolder);
-                    }
-                } else {
-                    //logger.debug("Method not mapped with MethodMapper: "+method.getName());
                 }
-            }
-        } else {
-            logger.debug("Service not mapped with ServiceMapper: "+service.getClass().getName());
+            }            
         }
     }
-
+    /**
+     * Create ServiceHolder
+     * @param contextPath
+     * @return
+     */
+    public ServiceHolder createServiceHolder(String contextPath) {
+        if(!this.serviceMethodMap.containsKey(contextPath)) {
+            return null;
+        }
+        Method serviceMethod = this.serviceMethodMap.get(contextPath);
+        ServiceModel service = createService(serviceMethod);
+        REQUEST_TYPE requestType = serviceMethod.getDeclaredAnnotation(MethodMappper.class).mappingMethod();
+        ServiceHolder serviceHolder = new ServiceHolder(contextPath, service, requestType, serviceMethod);
+        return serviceHolder;
+    }
+    /**
+     * Create new instance of service mapping with context path
+     */
+    public ServiceModel createService(String contextPath) {
+        Method serviceMethod = this.serviceMethodMap.get(contextPath);
+        if(serviceMethod == null) {
+            return null;
+        }
+        return createService(this.serviceMethodMap.get(contextPath));
+    }
+    /**
+     * Create new instance with service Class object
+     * @param contextPath
+     * @return
+     */
+    public ServiceModel createService(final Method serviceMethod) {
+        ServiceModel service = newServiceInstance(serviceMethod.getDeclaringClass().getCanonicalName());
+        Method[] methods = service.getClass().getDeclaredMethods();
+        for(Method method : methods) {
+            MethodMappper mm = method.getDeclaredAnnotation(MethodMappper.class);
+            if(mm != null) {
+                FilterMapper filterMapper = method.getDeclaredAnnotation(FilterMapper.class);                
+                if(filterMapper != null) {
+                    List<IFilter> preFilters = new ArrayList<>();
+                    Class<? extends IFilter>[] preFilterClasses = filterMapper.preFilters();
+                    for(Class<? extends IFilter> clazz : preFilterClasses) {
+                        IFilter f = (IFilter)newFilterInstance(clazz.getName());
+                        f.setUserManager(userManager);
+                        preFilters.add(f);
+                    }
+                    List<IFilter> postFilters = new ArrayList<>();
+                    Class<? extends IFilter>[] postFilterClasses = filterMapper.postFilters();
+                    for(Class<? extends IFilter> clazz : postFilterClasses) {
+                        IFilter f = (IFilter)newFilterInstance(clazz.getName());
+                        f.setUserManager(userManager);
+                        postFilters.add(f);
+                    }    
+                    service.setFilters(preFilters, postFilters);
+                }
+                service.setServiceManager(this);    
+                return service;
+            }
+        }
+        return null;
+    }    
     /**
      * Get user manager object
      * @return
@@ -157,68 +167,6 @@ public class ServiceManager {
     public LeapURLClassLoader getClassLoader() {
         return this.classLoader;
     }
-
-    /**
-     * Remove ServiceHolder for specified context path
-     * @param contextPath
-     * @return
-     */
-    public boolean removeService(String contextPath) {
-        return serviceHolderMap.remove(contextPath) != null ? true : false;
-    }
-
-    /**
-     * Validate request method
-     * @param type
-     * @param contextPath
-     * @return
-     * @throws WASException
-     */
-    public boolean vaildateRequestMethod(REQUEST_TYPE type, final String contextPath) throws Exception {
-        ServiceHolder serviceHolder = serviceHolderMap.get(contextPath);
-        if(serviceHolder.getRequestType() != type) {
-            throw new WASException(MSG_TYPE.ERROR, 15, type.name());
-        }
-        return true;
-    }
-
-    /**
-     * Get ServiceHolder object mapping with context path
-     * @param contextPath
-     * @return
-     * @throws WASException
-     */
-    public ServiceHolder getMappingServiceHolder(String contextPath) throws Exception {
-        ServiceHolder serviceHolder = serviceHolderMap.get(contextPath);
-        return serviceHolder;
-    }
-
-    /**
-     * Get ILeapService mapping with context path
-     * @param contextPath
-     * @return
-     */
-    public ServiceModel getMappingService(String contextPath) {
-        return serviceHolderMap.get(contextPath).getService();
-    }
-
-    /**
-     * Get service object matching with specfied context path
-     * @param contextPath
-     * @return
-     * @throws WASException
-     */
-    public Method getMappingServiceMethod(String contextPath) throws Exception {
-        return serviceHolderMap.get(contextPath).getServiceMethod();
-    }
-
-    /**
-     * Remove service instance by service qualifiedClassName
-     * @param qualifiedClassName
-     */
-    public void removeServiceInstance(final String qualifiedClassName) {
-        serviceHolderMap.entrySet().stream().filter(e -> e.getValue().getService().getClass().getName().equals(qualifiedClassName)).findFirst().orElseThrow(() -> new WASException(MSG_TYPE.HTTP, RES_CODE.RES412.code(), "There isn't exist service: " + qualifiedClassName));
-    }    
 
     /**
      * Get service instance

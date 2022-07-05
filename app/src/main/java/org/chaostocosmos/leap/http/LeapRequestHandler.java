@@ -80,18 +80,16 @@ public class LeapRequestHandler implements Runnable {
             //Put requested host to request header Map for ip filter
             request.getReqHeader().put("@Client", host.getHost());
             ServiceManager serviceManager = httpServer.getServiceManager();
-            ServiceHolder serviceHolder = serviceManager.getMappingServiceHolder(request.getContextPath());
+            ServiceHolder serviceHolder = serviceManager.createServiceHolder(request.getContextPath());
 
             //If client request context path in Services.
             if (serviceHolder != null) {
                 // Request method validation
                 if(serviceHolder.getRequestType() != request.getRequestType()) {
                     throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES405.code(), "Not supported: "+request.getRequestType().name());
-                } else if (serviceManager.vaildateRequestMethod(request.getRequestType(), request.getContextPath())) {
-                    // Do requested service to execute by cloned service of request
-                    response = ServiceInvoker.invokeService(serviceHolder, httpTransfer, true);
                 } else {
-                    throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES405.code(), Context.getMessages().getHttpMsg(405));
+                    // Do requested service to execute by cloned service of request
+                    response = ServiceInvoker.invokeServiceMethod(serviceHolder, httpTransfer);
                 }
             } else { // When client request static resources
                 if(request.getRequestType() != REQUEST_TYPE.GET) {

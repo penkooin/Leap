@@ -44,7 +44,7 @@ public class Constants {
     /**
      * Line separator
      */
-    public static final String LS = "\r\n";
+    public static final String LS = System.lineSeparator();
     /**
      * File separator
      */

@@ -13,7 +13,6 @@ import org.chaostocosmos.leap.http.resources.SpringJPAManager;
  * @author 9ins
  */
 public abstract class AbstractIpFilter<R> implements IIpFilter<R> {
-
     /**
      * Security manager object
      */

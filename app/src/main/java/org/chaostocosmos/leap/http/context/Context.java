@@ -42,15 +42,12 @@ public class Context {
      */
     public static void init(Path homePath) {
         try {
-            HOME_PATH = homePath;
+            HOME_PATH = homePath.normalize().toAbsolutePath();
             CONFIG_PATH = HOME_PATH.resolve("config");
-
             //build config environment
             ResourceHelper.extractResource("config", homePath); 
-
             //refresh context attributes
             refresh();
-
             //dispatch context events
             dispatchContextEvent(EVENT_TYPE.INITIALIZED);
         } catch(Exception e) {

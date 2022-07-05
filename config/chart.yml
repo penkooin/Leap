@@ -2,7 +2,6 @@ cpu:
   id : cpu
   title: cpu
   codec: PNG
-  save-path: monitor/cpu.png
   graph: LINE
   alpha: 0.6
   interpolate: LINEAR
@@ -19,11 +18,12 @@ cpu:
     - element: system
       color: [180,180,140]
       values: []
+  in-memory: true
+  save-path: monitor/cpu.png
 memory: 
   id : memory
   title: memory
   codec: PNG
-  save-path: monitor/memory.png
   graph: AREA
   alpha: 0.6
   interpolate: SPLINE
@@ -43,11 +43,12 @@ memory:
     - element: Leap Used
       color: [127,0,244]
       values: []
+  in-memory: true
+  save-path: monitor/memory.png
 heap: 
   id : heap
   title: heap
   codec: PNG
-  save-path: monitor/heap.png
   graph: AREA
   alpha: 0.6
   interpolate: SPLINE
@@ -70,11 +71,12 @@ heap:
     - element: Used
       color: [131,203,124]
       values: []
+  in-memory: true
+  save-path: monitor/heap.png
 thread: 
   id : thread
   title: thread
   codec: PNG
-  save-path: monitor/thread.png
   graph: LINE
   alpha: 0.6
   interpolate: SPLINE
@@ -83,18 +85,20 @@ thread:
   x-index: 100
   y-index: [0, 0, 0, 0]
   limit: 150
-  unit: mb
+  unit: cnt
   elements: 
     - element: Max
       color: [180,130,130]
       values: []
     - element: Core
-      color: [150,200,158]
+      color: [88,121,203]
       values: []
-    - element: Active
-      color: [150,130,158]
+    - element: Active Task
+      color: [73, 182, 69]
       values: []
     - element: Queued
-      color: [130,180,110]
+      color: [239, 44, 21]
       values: []
+  in-memory: true
+  save-path: monitor/thread.png
 

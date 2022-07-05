@@ -69,17 +69,17 @@ public abstract class AbstractService implements GetServiceModel, PostServiceMod
         this.httpTransfer = httpTransfer;
         this.invokingMethod = invokingMethod;
         this.resource = this.httpTransfer.getHost().getResource();
+        Request request = httpTransfer.getRequest();
+        Response response = httpTransfer.getResponse();
 
         if(this.preFilters != null) {
             for(IFilter filter : this.preFilters) {
                 List<Method> methods = AnnotationHelper.getFilterMethods(filter, PreFilter.class); 
                 for(Method method : methods) {
-                    ServiceInvoker.invokeMethod(filter, method, this.httpTransfer.getRequest());
+                    ServiceInvoker.invokeMethod(filter, method, request);
                 }
             }
         }        
-        Request request = httpTransfer.getRequest();
-        Response response = httpTransfer.getResponse();
 
         Class<?>[] paramTypes = this.invokingMethod.getParameterTypes();
         if(paramTypes.length != 2 || paramTypes[0] != request.getClass() || paramTypes[1] != response.getClass()) {

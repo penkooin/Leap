@@ -34,14 +34,18 @@ public interface Resources {
      * @param resourcePath
      */
     public void addResource(Path resourcePath) throws Exception;
-
+    /**
+     * Add resource raw data with Path
+     * @param resourcePath
+     * @param resourceRawData
+     */
+    public void addResource(Path resourcePath, byte[] resourceRawData, boolean inMemoryFlag) throws Exception;
     /**
      * Remove resource
      * @param resourcePath
      * @throws Exception
      */
-    public void removeResource(Path resourcePath) throws Exception;
-    
+    public void removeResource(Path resourcePath) throws Exception;    
     /**
      * Get resource matching with path
      * @param resourcePath

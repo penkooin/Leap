@@ -3,13 +3,17 @@ package org.chaostocosmos.leap.http.services;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.renderable.ParameterBlock;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.imageio.ImageIO;
 import javax.media.jai.JAI;
 import javax.media.jai.PlanarImage;
 
@@ -21,7 +25,6 @@ import org.chaostocosmos.leap.http.Response;
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.annotation.MethodMappper;
 import org.chaostocosmos.leap.http.annotation.ServiceMapper;
-import org.chaostocosmos.leap.http.commons.DataStructureOpr;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
@@ -37,7 +40,7 @@ import com.sun.media.jai.codec.ImageCodec;
 import com.sun.media.jai.codec.ImageEncoder;
 
 @ServiceMapper(path = "/monitor")
-public class ResourceUsageService extends AbstractChartService {
+public class MonitorService extends AbstractChartService {
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
@@ -67,22 +70,24 @@ public class ResourceUsageService extends AbstractChartService {
         }
         String chartJson = new String(body, charset);
         //super.logger.debug(chartJson);
-        Map<String, Object> map = gson.fromJson(chartJson, Map.class);
-        Graph<Double, String, Double> cpuChart = super.lineChart((Map<String, Object>)map.get("cpu"));
-        Graph<Double, String, Double> memoryChart = super.areaChart((Map<String, Object>)map.get("memory"));
-        Graph<Double, String, Double> threadChart = super.lineChart((Map<String, Object>)map.get("thread"));
-        Graph<Double, String, Double> heapChart = super.areaChart((Map<String, Object>)map.get("heap"));
-
-        String cpuPath = DataStructureOpr.<String>getValue(map, "cpu.save-path");
-        String memoryPath = DataStructureOpr.<String>getValue(map, "memory.save-path");
-        String threadPath = DataStructureOpr.<String>getValue(map, "thread.save-path");
-        String heapPath = DataStructureOpr.<String>getValue(map, "heap.save-path");
-
+        Map<String, Object> jsonMap = gson.fromJson(chartJson, Map.class);
+        List<Map<String, Object>> chartMap = jsonMap.values().stream().map(m -> (Map<String, Object>)m).collect(Collectors.toList());        
         for(Host<?> host : Context.getHosts().getAllHosts()) {
-            if(cpuChart != null) saveBufferedImage(cpuChart.getBufferedImage(), host.getStatic().resolve(cpuPath).toFile(), CODEC.PNG);    
-            if(memoryChart != null) saveBufferedImage(memoryChart.getBufferedImage(), host.getStatic().resolve(memoryPath).toFile(), CODEC.PNG);
-            if(threadChart != null) saveBufferedImage(threadChart.getBufferedImage(), host.getStatic().resolve(threadPath).toFile(), CODEC.PNG);
-            if(heapChart != null) saveBufferedImage(heapChart.getBufferedImage(), host.getStatic().resolve(heapPath).toFile(), CODEC.PNG);                
+            for(Map<String, Object> map : chartMap) {
+                String savePath = (String)map.get("save-path");
+                boolean inMemory = (boolean)map.get("in-memory");
+                Graph<Double, String, Double> chart = super.createGraph(map);
+                if(chart == null) continue;
+                if(!inMemory) {
+                    saveBufferedImage(chart.getBufferedImage(), host.getStatic().resolve(savePath).toFile(), CODEC.PNG);
+                    //super.logger.debug("[MONITOR] Chart image save to file: "+host.getStatic().resolve(savePath).toString());
+                } else {               
+                    ByteArrayOutputStream out = new ByteArrayOutputStream();
+                    ImageIO.write(chart.getBufferedImage(), CODEC.PNG.name(), out);                     
+                    host.getResource().addResource(host.getStatic().resolve(savePath), out.toByteArray(), true);
+                    //super.logger.debug("[MONITOR] Chart image add to In-Memory resource.");
+                }
+           }
         }
     }
 

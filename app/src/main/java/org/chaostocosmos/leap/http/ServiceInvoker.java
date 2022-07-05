@@ -27,23 +27,16 @@ public class ServiceInvoker {
      * @throws Exception
      * @throws CloneNotSupportedException
      */
-    public static Response invokeService(ServiceHolder serviceHolder, HttpTransfer httpTransfer, boolean doClone) throws Throwable {
+    public static Response invokeServiceMethod(ServiceHolder serviceHolder, HttpTransfer httpTransfer) throws Throwable {
         Response response = httpTransfer.getResponse();
         AbstractService service = (AbstractService)serviceHolder.getService();
         try {
-            if(doClone) {
-                service = (AbstractService) service.clone();
-                response = service.serve(httpTransfer, serviceHolder.getServiceMethod());
-            } else {
-                synchronized(service) {
-                    response = service.serve(httpTransfer, serviceHolder.getServiceMethod());
-                }
-            }
+            response = service.serve(httpTransfer, serviceHolder.getServiceMethod());
         } catch(Throwable e) {
             if(service.errorHandling(httpTransfer.getResponse(), e) != null) {
                 throw e;
             }
-            logger.warn(Context.getMessages().getWarnMsg(2, serviceHolder.getService().getClass().getName(), e.getMessage()));
+            logger.error(Context.getMessages().getWarnMsg(2, serviceHolder.getService().getClass().getName(), e.getMessage()));
         }
         return response;
     }

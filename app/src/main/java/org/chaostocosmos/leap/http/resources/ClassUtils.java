@@ -58,9 +58,11 @@ public class ClassUtils {
      * @param reloadConfig
      * @param filters
      * @return
+     * @throws URISyntaxException
+     * @throws IOException
      * @throws Exception
      */
-    public static List<Class<? extends ServiceModel>> findAllLeapServices(URLClassLoader classLoader, boolean reloadConfig, Filtering filters) throws Exception {
+    public static List<Class<? extends ServiceModel>> findAllLeapServices(URLClassLoader classLoader, boolean reloadConfig, Filtering filters) throws IOException, URISyntaxException {
         if(reloadConfig) {
             Context.refresh();
         }

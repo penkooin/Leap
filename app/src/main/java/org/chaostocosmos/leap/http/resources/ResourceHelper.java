@@ -105,7 +105,7 @@ public class ResourceHelper {
             throw new WASException(MSG_TYPE.HTTP, 403, hostId, contextPath);
         }
         LoggerFactory.getLogger(hostId).debug("REQUEST PATH: "+reqPath.toString()); 
-        return reqPath;
+        return reqPath.normalize();
     }
 
     /**
@@ -236,7 +236,7 @@ public class ResourceHelper {
      * @throws WASException
      */
     public static Path getDocroot(String hostId) throws WASException {
-        return Context.getHosts().getDocroot(hostId).toAbsolutePath();
+        return Context.getHosts().getDocroot(hostId).normalize().toAbsolutePath();
     }
 
     /**

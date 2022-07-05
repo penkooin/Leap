@@ -2,6 +2,7 @@ package org.chaostocosmos.leap.http.services;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -63,7 +64,7 @@ public class DeployService extends AbstractService implements DeployModel {
                         //Add classpath of the service to ClassLoader
                         super.serviceManager.getClassLoader().addPath(serviceClassPath);
                         //Add service to ServiceManager
-                        super.serviceManager.addService(deployService);
+                        super.serviceManager.initialize();
                     } catch(NoClassDefFoundError | Exception e) {
                         multipart.getFilePaths().stream().forEach(p -> deleteClean(serviceClassPath.getFileName().toString(), p));
                         super.logger.error(Context.getMessages().getErrorMsg(19, e.getMessage()), e);
@@ -81,7 +82,7 @@ public class DeployService extends AbstractService implements DeployModel {
 
     @MethodMappper(mappingMethod = REQUEST_TYPE.GET, path = "/service/delete")
     @FilterMapper(preFilters = BasicAuthFilter.class)
-    public void delete(Request request, Response response) {
+    public void delete(Request request, Response response) throws IOException, URISyntaxException {
         String qualifiedClassName = request.getParameter("serviceClassNames");
         if(qualifiedClassName.startsWith("[") && qualifiedClassName.endsWith("]")) {
             qualifiedClassName = qualifiedClassName.substring(qualifiedClassName.indexOf("[")+1, qualifiedClassName.lastIndexOf("]"));
@@ -89,16 +90,16 @@ public class DeployService extends AbstractService implements DeployModel {
                 throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES412.code(), "Service class name is empty!!!");
             }
             List<String> classNames = Arrays.asList(qualifiedClassName.split(",")).stream().map(c -> c.trim()).collect(Collectors.toList());
-            classNames.stream().forEach(c -> {
-                super.serviceManager.removeServiceInstance(c);
-                Path serviceClassPath = super.serviceManager.getHost().getDynamicClasspaths().resolve(c);
+            for(String className : classNames) {
+                super.serviceManager.initialize();
+                Path serviceClassPath = super.serviceManager.getHost().getDynamicClasspaths().resolve(className);
                 if(serviceClassPath.toFile().exists()) {
                     serviceClassPath.toFile().delete();
-                    super.logger.info("[DEPLOY] Delete service -  class: "+c+"  path: "+serviceClassPath.toString());
+                    super.logger.info("[DEPLOY] Delete service -  class: "+className+"  path: "+serviceClassPath.toString());
                 } else {
                     throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES404.code(), "Service class file not found: "+serviceClassPath.toString());
                 }
-            });         
+            }
         } else {
             throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES404.code(), "Service class name must be array!!!");
         }

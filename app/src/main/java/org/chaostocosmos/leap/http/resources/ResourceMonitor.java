@@ -115,6 +115,289 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
     }
 
     /**
+     * Start monitor timer
+     */
+    public void start() {
+        this.timer = new Timer(this.getClass().getName(), this.isDaemon);
+        this.timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                try {
+                    logger.info(
+                        "[THREAD-MONITOR] "
+                        + "  Core: " + getCorePoolSize()
+                        + "  Max: " + getMaximumPoolSize()
+                        + "  Active: "+getTaskCount()
+                        + "  Largest: "+getLargestPoolSize()
+                        + "  Queued size: "+getQueuedTaskCount()
+                        + "  Task completed: "+getCompletedTaskCount()
+                    );
+                    logger.info(
+                        "[MEMORY-MONITOR] "
+                        + "  Process Max: "+getMaxMemory()+" "+unit.name()
+                        + "  Process Used: "+getUsedMemory()+" "+unit.name()
+                        + "  Process Free: "+getFreeMemory()+" "+unit.name()
+                        + "  Physical Total: "+getPhysicalTotalMemory()+" "+unit.name()
+                        + "  Physical Free: "+getPhysicalFreeMemory()+" "+unit.name()
+                        + "  Process CPU load: "+getProcessCpuLoad()+" "+UNIT.PCT.name()
+                        + "  Process CPU time: "+getProcessCpuTime()+" "+UNIT.SE.name()
+                        + "  System CPU load: "+getSystemCpuLoad()+" "+UNIT.PCT.name()
+                    );             
+                    setProbingValues();           
+                    requestMonitorings();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }, 0, this.interval);
+    }
+    /**
+     * Stop timer
+     */
+    public void stop() {
+        if(this.timer != null) {
+            this.timer.cancel();
+        }
+    }
+    /**
+     * Set probing values
+     * @throws NotSupportedException
+     */
+    private void setProbingValues() throws NotSupportedException {
+        List<Object> values = null;
+        values = super.getValue("cpu.elements.0.values");
+        if(values.size() > xIndexCnt) values.remove(0);
+        values.add(getProcessCpuLoad());                
+        values = super.getValue("cpu.elements.1.values");
+        if(values.size() > xIndexCnt) values.remove(0);
+        values.add(getSystemCpuLoad());
+        super.setValue("cpu.y-index.0", getProcessCpuLoad());
+        super.setValue("cpu.y-index.1", getSystemCpuLoad());
+        
+        values = super.getValue("memory.elements.0.values");
+        if(values.size() > xIndexCnt) values.remove(0);
+        values.add(getPhysicalUsedMemory());                
+        values = super.getValue("memory.elements.1.values");
+        if(values.size() > xIndexCnt) values.remove(0);
+        values.add(getFreeMemory());
+        values = super.getValue("memory.elements.2.values");
+        if(values.size() > xIndexCnt) values.remove(0);
+        values.add(getUsedMemory());
+        super.setValue("memory.y-index.0", getPhysicalUsedMemory());
+        super.setValue("memory.y-index.1", getFreeMemory());
+        super.setValue("memory.y-index.2", getUsedMemory());
+
+        values = super.getValue("thread.elements.0.values");
+        if(values.size() > xIndexCnt) values.remove(0);
+        values.add(getCorePoolSize());
+        values = super.getValue("thread.elements.1.values");
+        if(values.size() > xIndexCnt) values.remove(0);
+        values.add(getTaskCount() - getCompletedTaskCount());
+        values = super.getValue("thread.elements.2.values");
+        if(values.size() > xIndexCnt) values.remove(0);
+        values.add(getMaximumPoolSize());
+        values = super.getValue("thread.elements.3.values");
+        if(values.size() > xIndexCnt) values.remove(0);
+        values.add(getQueuedTaskCount());
+        super.setValue("thread.y-index.0", getCorePoolSize());
+        super.setValue("thread.y-index.1", getTaskCount());
+        super.setValue("thread.y-index.2", getMaximumPoolSize());
+        super.setValue("thread.y-index.3", getQueuedTaskCount());
+
+        values = super.getValue("heap.elements.0.values");
+        if(values.size() > xIndexCnt) values.remove(0);
+        values.add(getProcessHeapMax());
+        values = super.getValue("heap.elements.1.values");
+        if(values.size() > xIndexCnt) values.remove(0);
+        values.add(getProcessHeapInit());
+        values = super.getValue("heap.elements.2.values");
+        if(values.size() > xIndexCnt) values.remove(0);
+        values.add(getProcessHeapCommitted());
+        values = super.getValue("heap.elements.3.values");
+        if(values.size() > xIndexCnt) values.remove(0);
+        values.add(getProcessHeapUsed());
+        super.setValue("heap.y-index.0", getProcessHeapMax());
+        super.setValue("heap.y-index.1", getProcessHeapInit());
+        super.setValue("heap.y-index.2", getProcessHeapCommitted());
+        super.setValue("heap.y-index.3", getProcessHeapUsed());
+    }
+    /**
+     * Request monitoring data to monitoring service
+     * @throws IOException
+     */
+    private void requestMonitorings() throws IOException {
+        String monitorJson = this.mapper.writerWithDefaultPrettyPrinter().writeValueAsString(super.getMeta());
+        Map<String, FormData<?>> formDatas = Map.of("chart", new FormData<byte[]>(MIME.TEXT_JSON, monitorJson.getBytes()));
+        LeapClient.build(Context.getHosts().getDefaultHost().getHost(), Context.getHosts().getDefaultHost().getPort())
+                  .addHeader("charset", "utf-8")
+                  .addHeader("body-in-stream", false)
+                  .post("/monitor/chart/image", null, formDatas);
+    }    
+    /**
+     * Get thread pool core pool size
+     * @return
+     */
+    public int getCorePoolSize() {
+        return LeapApp.getThreadPool().getCorePoolSize();
+    }
+    /**
+     * Get thread pool active count
+     * @return
+     */
+    public long getTaskCount() {
+        return LeapApp.getThreadPool().getTaskCount();
+    }
+    /**
+     * Get thread pool largest size
+     * @return
+     */
+    public int getLargestPoolSize() {
+        return LeapApp.getThreadPool().getLargestPoolSize();
+    }
+    /**
+     * Get thread pool maximum size
+     * @return
+     */
+    public int getMaximumPoolSize() {
+        return LeapApp.getThreadPool().getMaximumPoolSize();
+    }
+    /**
+     * Get thread pool complated task count
+     * @return
+     */
+    public long getCompletedTaskCount() {
+        return LeapApp.getThreadPool().getCompletedTaskCount();
+    }
+    /**
+     * Get current queued task count in thread pool
+     * @return
+     */
+    public int getQueuedTaskCount() {
+        return LeapApp.getThreadPool().getQueue().size();
+    }
+    /**
+     * Get max memory bytes applied
+     * @return
+     * @throws NotSupportedException
+     */
+    public double getMaxMemory() throws NotSupportedException {
+        return unit.get(ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getMax(), fractionPoint);
+    }
+    /**
+     * Get used memory size
+     * @return
+     * @throws NotSupportedException
+     */
+    public double getUsedMemory() throws NotSupportedException {
+        return unit.get(ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getUsed(), fractionPoint);
+    }
+    /**
+     * Get free memory size
+     * @return
+     * @throws NotSupportedException
+     */
+    public double getFreeMemory() throws NotSupportedException {
+        return unit.get(ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getMax() - ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getUsed(), fractionPoint);
+    }
+    /**
+     * Get total physical memory size
+     * @return
+     * @throws NotSupportedException
+     */
+    public double getPhysicalTotalMemory() throws NotSupportedException {
+        return unit.get(((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getTotalPhysicalMemorySize(), fractionPoint);
+    }
+    /**
+     * Get total physical used memory
+     * @return
+     */
+    public double getPhysicalUsedMemory() {
+        return unit.get(((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getTotalPhysicalMemorySize() - ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getFreePhysicalMemorySize(), fractionPoint);
+    }
+    /**
+     * Get free physical memory size
+     * @return
+     * @throws NotSupportedException
+     */
+    public double getPhysicalFreeMemory() throws NotSupportedException {
+        return unit.get(((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getFreePhysicalMemorySize(), fractionPoint);
+    }
+    /**
+     * Get process CPU load
+     * @return
+     */
+    public double getProcessCpuLoad() {
+        double load = ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getProcessCpuLoad();
+        return (Math.round(load * 100d) * 100d) / 100d;
+    }
+    /**
+     * Get process CPU time
+     * @return
+     * @throws NotSupportedException
+     */
+    public double getProcessCpuTime() throws NotSupportedException {
+        long nano = ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getProcessCpuTime();
+        return TimeUnit.SECONDS.convert(nano, TimeUnit.NANOSECONDS);
+    }
+    /**
+     * Get system CPU load
+     * @return
+     */
+    public double getSystemCpuLoad() {
+        double load = ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getSystemCpuLoad();
+        return (Math.round(load * 100d) * 100d) / 100d;
+    }    
+    /**
+     * Get system CPU load average
+     * @return
+     */
+    public double getSystemLoadAverage() {
+        return ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getSystemLoadAverage();
+    }
+	/**
+     * Get heap memory init amout
+	 * @param unit
+	 * @return
+	 */
+	public double getProcessHeapInit() {
+		long value = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getInit();
+		return (double) this.unit.applyUnit(value, this.fractionPoint);
+	}	
+    /**
+     * Get used heap memory amount
+     * @return
+     */
+    public double getProcessHeapUsed() {
+        long value = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getUsed();
+        return (double) this.unit.applyUnit(value, this.fractionPoint);
+    }
+	/**
+     * Get commited heap memory amount
+	 * @param unit
+	 * @return
+	 */
+	public double getProcessHeapCommitted() {
+		long value = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getCommitted();
+		return (double) this.unit.applyUnit(value, this.fractionPoint);
+	}	
+	/**
+     * Get heap memory max amount
+	 * @param unit
+	 * @return
+	 */
+	public double getProcessHeapMax() {
+		long value = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getMax();
+		return (double) this.unit.applyUnit(value, this.fractionPoint);
+	}
+    /**
+     * Get available processors
+     * @return
+     */
+    public long getAvailableProcessors() {
+        return ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getAvailableProcessors();
+    }
+
+    /**
      * Build monitor schema Map
      * @return
      */
@@ -274,288 +557,5 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
                 );
             }});   
         }};     
-    }
-    /**
-     * Start monitor timer
-     */
-    public void start() {
-        this.timer = new Timer(this.getClass().getName(), this.isDaemon);
-        this.timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                try {
-                    logger.info(
-                        "[THREAD-MONITOR] "
-                        + "  Core: " + getCorePoolSize()
-                        + "  Max: " + getMaximumPoolSize()
-                        + "  Active: "+getActiveCount()
-                        + "  Largest: "+getLargestPoolSize()
-                        + "  Queued size: "+getQueuedTaskCount()
-                        + "  Task completed: "+getCompletedTaskCount()
-                    );
-                    logger.info(
-                        "[MEMORY-MONITOR] "
-                        + "  Process Max: "+getMaxMemory()+" "+unit.name()
-                        + "  Process Used: "+getUsedMemory()+" "+unit.name()
-                        + "  Process Free: "+getFreeMemory()+" "+unit.name()
-                        + "  Physical Total: "+getPhysicalTotalMemory()+" "+unit.name()
-                        + "  Physical Free: "+getPhysicalFreeMemory()+" "+unit.name()
-                        + "  Process CPU load: "+getProcessCpuLoad()+" "+UNIT.PCT.name()
-                        + "  Process CPU time: "+getProcessCpuTime()+" "+UNIT.SE.name()
-                        + "  System CPU load: "+getSystemCpuLoad()+" "+UNIT.PCT.name()
-                    );             
-                    setProbingValues();           
-                    requestMonitorings();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }, 0, this.interval);
-    }
-    /**
-     * Stop timer
-     */
-    public void stop() {
-        if(this.timer != null) {
-            this.timer.cancel();
-        }
-    }
-    /**
-     * Set probing values
-     * @throws NotSupportedException
-     */
-    private void setProbingValues() throws NotSupportedException {
-        List<Object> values = null;
-        values = super.getValue("cpu.elements.0.values");
-        if(values.size() > xIndexCnt) values.remove(0);
-        values.add(getProcessCpuLoad());                
-        values = super.getValue("cpu.elements.1.values");
-        if(values.size() > xIndexCnt) values.remove(0);
-        values.add(getSystemCpuLoad());
-        super.setValue("cpu.y-index.0", getProcessCpuLoad());
-        super.setValue("cpu.y-index.1", getSystemCpuLoad());
-
-        
-        values = super.getValue("memory.elements.0.values");
-        if(values.size() > xIndexCnt) values.remove(0);
-        values.add(getPhysicalUsedMemory());                
-        values = super.getValue("memory.elements.1.values");
-        if(values.size() > xIndexCnt) values.remove(0);
-        values.add(getFreeMemory());
-        values = super.getValue("memory.elements.2.values");
-        if(values.size() > xIndexCnt) values.remove(0);
-        values.add(getUsedMemory());
-        super.setValue("memory.y-index.0", getPhysicalUsedMemory());
-        super.setValue("memory.y-index.1", getFreeMemory());
-        super.setValue("memory.y-index.2", getUsedMemory());
-
-        values = super.getValue("thread.elements.0.values");
-        if(values.size() > xIndexCnt) values.remove(0);
-        values.add(getCorePoolSize());
-        values = super.getValue("thread.elements.1.values");
-        if(values.size() > xIndexCnt) values.remove(0);
-        values.add(getActiveCount());
-        values = super.getValue("thread.elements.2.values");
-        if(values.size() > xIndexCnt) values.remove(0);
-        values.add(getMaximumPoolSize());
-        values = super.getValue("thread.elements.3.values");
-        if(values.size() > xIndexCnt) values.remove(0);
-        values.add(getQueuedTaskCount());
-        super.setValue("thread.y-index.0", getCorePoolSize());
-        super.setValue("thread.y-index.1", getActiveCount());
-        super.setValue("thread.y-index.2", getMaximumPoolSize());
-        super.setValue("thread.y-index.3", getQueuedTaskCount());
-
-        values = super.getValue("heap.elements.0.values");
-        if(values.size() > xIndexCnt) values.remove(0);
-        values.add(getProcessHeapMax());
-        values = super.getValue("heap.elements.1.values");
-        if(values.size() > xIndexCnt) values.remove(0);
-        values.add(getProcessHeapInit());
-        values = super.getValue("heap.elements.2.values");
-        if(values.size() > xIndexCnt) values.remove(0);
-        values.add(getProcessHeapCommitted());
-        values = super.getValue("heap.elements.3.values");
-        if(values.size() > xIndexCnt) values.remove(0);
-        values.add(getProcessHeapUsed());
-        super.setValue("heap.y-index.0", getProcessHeapMax());
-        super.setValue("heap.y-index.1", getProcessHeapInit());
-        super.setValue("heap.y-index.2", getProcessHeapCommitted());
-        super.setValue("heap.y-index.3", getProcessHeapUsed());
-    }
-    /**
-     * Request monitoring data to monitoring service
-     * @throws IOException
-     */
-    private void requestMonitorings() throws IOException {
-        String monitorJson = this.mapper.writerWithDefaultPrettyPrinter().writeValueAsString(super.getMeta());
-        Map<String, FormData<?>> formDatas = Map.of("chart", new FormData<byte[]>(MIME.TEXT_JSON, monitorJson.getBytes()));
-        LeapClient.build(Context.getHosts().getDefaultHost().getHost(), Context.getHosts().getDefaultHost().getPort())
-                  .addHeader("charset", "utf-8")
-                  .addHeader("body-in-stream", false)
-                  .post("/monitor/chart/image", null, formDatas);
-    }    
-    /**
-     * Get thread pool core pool size
-     * @return
-     */
-    public int getCorePoolSize() {
-        return LeapApp.getThreadPool().getCorePoolSize();
-    }
-    /**
-     * Get thread pool active count
-     * @return
-     */
-    public int getActiveCount() {
-        return LeapApp.getThreadPool().getActiveCount();
-    }
-    /**
-     * Get thread pool largest size
-     * @return
-     */
-    public int getLargestPoolSize() {
-        return LeapApp.getThreadPool().getLargestPoolSize();
-    }
-    /**
-     * Get thread pool maximum size
-     * @return
-     */
-    public int getMaximumPoolSize() {
-        return LeapApp.getThreadPool().getMaximumPoolSize();
-    }
-    /**
-     * Get thread pool complated task count
-     * @return
-     */
-    public long getCompletedTaskCount() {
-        return LeapApp.getThreadPool().getCompletedTaskCount();
-    }
-    /**
-     * Get current queued task count in thread pool
-     * @return
-     */
-    public int getQueuedTaskCount() {
-        return LeapApp.getThreadPool().getQueue().size();
-    }
-    /**
-     * Get max memory bytes applied
-     * @return
-     * @throws NotSupportedException
-     */
-    public double getMaxMemory() throws NotSupportedException {
-        return unit.get(ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getMax(), fractionPoint);
-    }
-    /**
-     * Get used memory size
-     * @return
-     * @throws NotSupportedException
-     */
-    public double getUsedMemory() throws NotSupportedException {
-        return unit.get(ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getUsed(), fractionPoint);
-    }
-    /**
-     * Get free memory size
-     * @return
-     * @throws NotSupportedException
-     */
-    public double getFreeMemory() throws NotSupportedException {
-        return unit.get(ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getMax() - ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getUsed(), fractionPoint);
-    }
-    /**
-     * Get total physical memory size
-     * @return
-     * @throws NotSupportedException
-     */
-    public double getPhysicalTotalMemory() throws NotSupportedException {
-        return unit.get(((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getTotalPhysicalMemorySize(), fractionPoint);
-    }
-    /**
-     * Get total physical used memory
-     * @return
-     */
-    public double getPhysicalUsedMemory() {
-        return unit.get(((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getTotalPhysicalMemorySize() - ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getFreePhysicalMemorySize(), fractionPoint);
-    }
-    /**
-     * Get free physical memory size
-     * @return
-     * @throws NotSupportedException
-     */
-    public double getPhysicalFreeMemory() throws NotSupportedException {
-        return unit.get(((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getFreePhysicalMemorySize(), fractionPoint);
-    }
-    /**
-     * Get process CPU load
-     * @return
-     */
-    public double getProcessCpuLoad() {
-        double load = ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getProcessCpuLoad();
-        return (Math.round(load * 100d) * 100d) / 100d;
-    }
-    /**
-     * Get process CPU time
-     * @return
-     * @throws NotSupportedException
-     */
-    public double getProcessCpuTime() throws NotSupportedException {
-        long nano = ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getProcessCpuTime();
-        return TimeUnit.SECONDS.convert(nano, TimeUnit.NANOSECONDS);
-    }
-    /**
-     * Get system CPU load
-     * @return
-     */
-    public double getSystemCpuLoad() {
-        double load = ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getSystemCpuLoad();
-        return (Math.round(load * 100d) * 100d) / 100d;
-    }    
-    /**
-     * Get system CPU load average
-     * @return
-     */
-    public double getSystemLoadAverage() {
-        return ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getSystemLoadAverage();
-    }
-	/**
-     * Get heap memory init amout
-	 * @param unit
-	 * @return
-	 */
-	public double getProcessHeapInit() {
-		long value = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getInit();
-		return (double) this.unit.applyUnit(value, this.fractionPoint);
-	}	
-    /**
-     * Get used heap memory amount
-     * @return
-     */
-    public double getProcessHeapUsed() {
-        long value = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getUsed();
-        return (double) this.unit.applyUnit(value, this.fractionPoint);
-    }
-	/**
-     * Get commited heap memory amount
-	 * @param unit
-	 * @return
-	 */
-	public double getProcessHeapCommitted() {
-		long value = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getCommitted();
-		return (double) this.unit.applyUnit(value, this.fractionPoint);
-	}	
-	/**
-     * Get heap memory max amount
-	 * @param unit
-	 * @return
-	 */
-	public double getProcessHeapMax() {
-		long value = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getMax();
-		return (double) this.unit.applyUnit(value, this.fractionPoint);
-	}
-    /**
-     * Get available processors
-     * @return
-     */
-    public long getAvailableProcessors() {
-        return ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getAvailableProcessors();
     }
 }

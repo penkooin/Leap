@@ -2,11 +2,17 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch ReflectionTest",
+            "request": "launch",
+            "mainClass": "org.chaostocosmos.leap.http.ReflectionTest",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
             "name": "Launch LeapApp",
             "request": "launch",
             "mainClass": "org.chaostocosmos.leap.http.LeapApp",
-            "projectName": "app",
-            //"vmArgs" : "-Xms8G"
+            "projectName": "app"
         }
     ]
 }

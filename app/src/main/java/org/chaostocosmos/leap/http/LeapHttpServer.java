@@ -8,7 +8,7 @@ import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.UnknownHostException;
+import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -99,21 +99,21 @@ public class LeapHttpServer extends Thread {
     Filtering ipAllowedFilters, ipForbiddenFilters; 
     /**
      * Default constructor 
-     * @throws UnknownHostException
-     * @throws MalformedURLException
      * @throws NotSupportedException
+     * @throws URISyntaxException
+     * @throws IOException
      */
-    public LeapHttpServer() throws UnknownHostException, MalformedURLException, NotSupportedException {
+    public LeapHttpServer() throws NotSupportedException, IOException, URISyntaxException {
         this(Constants.DEFAULT_HOME_PATH);
     }
     /**
      * Construct with home path
      * @param homePath
-     * @throws UnknownHostException
-     * @throws MalformedURLException
      * @throws NotSupportedException
+     * @throws URISyntaxException
+     * @throws IOException
      */
-    public LeapHttpServer(Path homePath) throws UnknownHostException, MalformedURLException, NotSupportedException {
+    public LeapHttpServer(Path homePath) throws NotSupportedException, IOException, URISyntaxException {
         this(homePath, 
              Context.getHosts().getHost(Context.getHosts().getDefaultHost().getHostId()), 
              new ThreadPoolExecutor(Context.getServer().getThreadPoolCoreSize(), 
@@ -128,16 +128,14 @@ public class LeapHttpServer extends Thread {
      * @param homePath
      * @param host
      * @param threadpool
-     * @throws UnknownHostException
-     * @throws MalformedURLException
      * @throws NotSupportedException
+     * @throws URISyntaxException
+     * @throws IOException
      */
     public LeapHttpServer(Path homePath, 
                           Host<?> host, 
                           ThreadPoolExecutor threadpool
-                          ) throws UnknownHostException, 
-                                   MalformedURLException, 
-                                   NotSupportedException {
+                          ) throws NotSupportedException, IOException, URISyntaxException {
         this(homePath, host, threadpool, ClassUtils.getClassLoader(), ResourceMonitor.get());
     }
 
@@ -148,7 +146,8 @@ public class LeapHttpServer extends Thread {
      * @param threadpool 
      * @param classLoader
      * @param resourceMonitor
-     * @throws UnknownHostException
+     * @throws URISyntaxException
+     * @throws IOException
      * @throws MalformedURLException
      */
     public LeapHttpServer(Path homePath, 
@@ -156,7 +155,7 @@ public class LeapHttpServer extends Thread {
                           ThreadPoolExecutor threadpool, 
                           LeapURLClassLoader classLoader,
                           ResourceMonitor resourceMonitor
-                          ) throws UnknownHostException {
+                          ) throws IOException, URISyntaxException {
         this(
             true,
             Context.getHomePath(),
@@ -183,6 +182,8 @@ public class LeapHttpServer extends Thread {
      * @param host
      * @param classLoader
      * @param resourceMonitor
+     * @throws URISyntaxException
+     * @throws IOException
      */
     public LeapHttpServer(boolean isDefaultHost, 
                           Path homePath, 
@@ -194,7 +195,7 @@ public class LeapHttpServer extends Thread {
                           Host<?> host,
                           LeapURLClassLoader classLoader,
                           ResourceMonitor resourceMonitor
-                          ) {
+                          ) throws IOException, URISyntaxException {
         this.isDefaultHost = true;
         this.homePath = homePath;
         this.protocol = protocol;

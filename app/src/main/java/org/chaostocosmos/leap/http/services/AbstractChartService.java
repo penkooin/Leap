@@ -25,10 +25,23 @@ import org.chaostocosmos.chaosgraph.awt2d.LineGraph;
 import org.chaostocosmos.leap.http.commons.DataStructureOpr;
 import org.chaostocosmos.leap.http.services.model.ChartModel;
 
+/**
+ * AbstractChartService
+ * 
+ * Abstraction class for Chart service.
+ * In case of monitoring of Leap, Using this abstraction for sample monitoring dashboard.
+ * 
+ * @author 9ins
+ */
 public abstract class AbstractChartService extends AbstractService implements ChartModel {
-
+    /**
+     * Chart Map
+     */
     Map<String, Graph<Double, String, Double>> graphMap;
 
+    /**
+     * Default Constructor
+     */
     public AbstractChartService() {
         this.graphMap = new HashMap<String, Graph<Double, String, Double>>();
     }
@@ -107,6 +120,7 @@ public abstract class AbstractChartService extends AbstractService implements Ch
             graphMap.put(id, graph);
         } else {
             graphElements = graph.getGraphElements();
+            graphElements.setXIndex(xIndex);
             graphElements.setYIndex(yIndex);
             graphElements.setGraphElementMap(createGraphElements((List<Object>)map.get("elements")));
         }       
@@ -117,6 +131,7 @@ public abstract class AbstractChartService extends AbstractService implements Ch
         return graph;
     }       
 
+    @SuppressWarnings("unchecked")
     @Override
     public Map<Object, GraphElement<Double, String, Double>> createGraphElements(List<Object> elements) throws Exception {
         return elements.stream().map(o -> (Map<String, Object>)o).map(m -> {

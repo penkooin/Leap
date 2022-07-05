@@ -10,8 +10,8 @@ server:
     threadpool:
       core: 30
       max: 30
-      keep-alive: 30
-      queue-size: 100
+      keep-alive: 3000
+      queue-size: 300
 
     monitoring:      
       interval: 5000

@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.chaostocosmos.leap.http.commons.Constants;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.commons.StreamUtils;
 import org.chaostocosmos.leap.http.context.Context;
@@ -122,6 +123,7 @@ public class HttpParser {
             //     System.out.println(line);
             // }
             // in.close();
+            StringBuffer debug = new StringBuffer();
             String requestLine = StreamUtils.readLine(in, StandardCharsets.ISO_8859_1);
             if(requestLine == null) {
                 throw new WASException(MSG_TYPE.ERROR, 1);
@@ -147,7 +149,7 @@ public class HttpParser {
                 if (idx == -1) {
                     throw new WASException(MSG_TYPE.ERROR, 3, header);
                 }
-                System.out.println(header.substring(0, idx)+":   "+header.substring(idx + 1, header.length()).trim());
+                debug.append(header.substring(0, idx)+":   "+header.substring(idx + 1, header.length()).trim()+Constants.LS);
                 headerMap.put(header.substring(0, idx), header.substring(idx + 1, header.length()).trim());
             }
             String requestedHost = headerMap.get("Host").toString().trim();
@@ -169,9 +171,8 @@ public class HttpParser {
                 }
             }
             String host = requestedHost.indexOf(":") != -1 ? requestedHost.substring(0, requestedHost.indexOf(":")) : requestedHost;
-            String debug = "";
-            debug += "============================== [REQUEST] "+requestLine+" =============================="+System.lineSeparator();
-            debug += headerLines.stream().collect(Collectors.joining(System.lineSeparator()));
+            debug.append("============================== [REQUEST] "+requestLine+" =============================="+System.lineSeparator());
+            debug.append(headerLines.stream().collect(Collectors.joining(System.lineSeparator())));
             String contentType = headerMap.get("Content-Type");
             long contentLength = headerMap.get("Content-Length") != null ? Long.parseLong(headerMap.get("Content-Length")) : 0L;
             /*
@@ -184,9 +185,9 @@ public class HttpParser {
             if(!Context.getHosts().isExistHost(hostId)) {
                 throw new WASException(MSG_TYPE.HTTP, 400, "Requested host ID not exist in this server: "+host);
             }
-            debug += System.lineSeparator()+"============================== Request Host: "+host+"  Host ID: "+hostId+" ==============================";
+            debug.append(Constants.LS+"============================== Request Host: "+host+"  Host ID: "+hostId+" ==============================");
             Charset charset = Context.getHosts().charset(hostId);
-            LoggerFactory.getLogger(hostId).debug(debug);
+            LoggerFactory.getLogger(hostId).debug(debug.toString());
             BodyPart bodyPart = null;
             MIME_TYPE mimeType = null;
             if(contentType != null) {
