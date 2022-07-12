@@ -6,11 +6,11 @@ import java.util.Map;
  * User
  * @author 9ins
  */
-public class User <T> extends Metadata<T> {
+public class User {
 
     String username;
     String password;
-    GRANT grant;
+    String grant;
 
     /**
      * Construct with user, password, grant
@@ -18,20 +18,22 @@ public class User <T> extends Metadata<T> {
      * @param password
      * @param grant
      */
-    public User(T userMap) {
-        super(userMap);
+    public User(String username, String password, String grant) {
+        this.username = username;
+        this.password = password;
+        this.grant = grant;
     }
 
     public String getUsername() {
-        return super.getValue("username");
+        return this.username;
     }
 
     public String getPassword() {
-        return super.getValue("password");
+        return this.password;
     }
 
     public GRANT getGrant() {
-        return GRANT.valueOf(super.getValue("grant"));
+        return GRANT.valueOf(this.grant);
     }
 
     public Map<String, Object> getUserMap() {

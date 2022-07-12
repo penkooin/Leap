@@ -72,7 +72,7 @@ public class MonitorService extends AbstractChartService {
         //super.logger.debug(chartJson);
         Map<String, Object> jsonMap = gson.fromJson(chartJson, Map.class);
         List<Map<String, Object>> chartMap = jsonMap.values().stream().map(m -> (Map<String, Object>)m).collect(Collectors.toList());        
-        for(Host<?> host : Context.getHosts().getAllHosts()) {
+        for(Host<?> host : Context.getHosts().getAllHost()) {
             for(Map<String, Object> map : chartMap) {
                 String savePath = (String)map.get("save-path");
                 boolean inMemory = (boolean)map.get("in-memory");

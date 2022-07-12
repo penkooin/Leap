@@ -92,25 +92,48 @@ public abstract class AbstractChartService extends AbstractService implements Ch
         int height = (int)Double.parseDouble(map.get("height")+"");            
         List<String> xIndex = (List<String>)map.get("x-index");  
         List<Double> yIndex = (List<Double>)map.get("y-index");  
-        GraphElements<Double, String, Double> graphElements = null;
+        GraphElements<Double, String, Double> graphElements = null;        
         if(graph == null) {
             graphElements = new GraphElements<Double, String, Double>(type, xIndex, yIndex);            
             graphElements.setGraphElementMap(createGraphElements((List<Object>)map.get("elements")));    	
+            Color legendColor = getColor(((List<?>)map.get("legend-color")).stream().map(v -> Double.valueOf(v+"").intValue()).collect(Collectors.toList()));
+            Color imgBgColor = getColor(((List<?>)map.get("bg-color")).stream().map(v -> Double.valueOf(v+"").intValue()).collect(Collectors.toList()));
+            Color graphBgColor = getColor(((List<?>)map.get("graph-bg-color")).stream().map(v -> Double.valueOf(v+"").intValue()).collect(Collectors.toList()));
             switch(type) {
                 case LINE :
-                    graph = new LineGraph<Double, String, Double>(graphElements, title, width, height);                    
+                    LineGraph<Double, String, Double> line = new LineGraph<>(graphElements, title, width, height);
+                    line.setLabelBgColor(legendColor);
+                    line.setImgBgColor(imgBgColor);
+                    line.setGraphBgColor(graphBgColor);
+                    graph = line;
                     break;
                 case AREA :
-                    graph = new AreaGraph<Double, String, Double>(graphElements, title, width, height);
+                    AreaGraph<Double, String, Double> area = new AreaGraph<>(graphElements, title, width, height);
+                    area.setLabelBgColor(legendColor);
+                    area.setImgBgColor(imgBgColor);
+                    area.setGraphBgColor(graphBgColor);
+                    graph = area;
                     break;
                 case CIRCLE :
-                    graph = new CircleGraph<Double, String, Double>(graphElements, title, width, height);
+                    CircleGraph<Double, String, Double> pi = new CircleGraph<>(graphElements, title, width, height);
+                    pi.setLabelBgColor(legendColor);
+                    pi.setImgBgColor(imgBgColor);
+                    pi.setGraphBgColor(graphBgColor);
+                    graph = pi;
                     break;
                 case BAR : 
-                    graph = new BarGraph<Double, String, Double>(graphElements, title, width, height);
+                    BarGraph<Double, String, Double> bar = new BarGraph<>(graphElements, title, width, height);
+                    bar.setLabelBgColor(legendColor);
+                    bar.setImgBgColor(imgBgColor);
+                    bar.setGraphBgColor(graphBgColor);
+                    graph = bar;
                     break;
                 case BAR_RATIO :
-                    graph = new BarRatioGraph<Double, String, Double>(graphElements, title, width, height);
+                    BarRatioGraph<Double, String, Double> barRatio = new BarRatioGraph<Double, String, Double>(graphElements, title, width, height);
+                    barRatio.setLabelBgColor(legendColor);
+                    barRatio.setImgBgColor(imgBgColor);
+                    barRatio.setGraphBgColor(graphBgColor);
+                    graph = barRatio;
                     break;
             }
             graph.setShowGraphXY(false);
@@ -137,8 +160,7 @@ public abstract class AbstractChartService extends AbstractService implements Ch
         return elements.stream().map(o -> (Map<String, Object>)o).map(m -> {
             String elementName = m.get("element")+"";
             String label = m.get("label")+"";
-            List<Integer> colorList = ((List<?>)m.get("color")).stream().map(v -> Double.valueOf(v+"").intValue()).collect(Collectors.toList());
-            Color elementColor = new Color((int)colorList.get(0), (int)colorList.get(1), (int)colorList.get(2));
+            Color elementColor = getColor(((List<?>)m.get("color")).stream().map(v -> Double.valueOf(v+"").intValue()).collect(Collectors.toList()));
             List<Double> valueList = (List<Double>)m.get("values");
             return new GraphElement<Double, String, Double>(elementName, elementColor, elementName, elementColor, valueList);
         }).filter(el -> el != null).collect(Collectors.toMap(k -> k.getElementName(), v -> v)); 
@@ -147,5 +169,12 @@ public abstract class AbstractChartService extends AbstractService implements Ch
     @Override
     public synchronized void saveImage(BufferedImage image, Path savePath, CODEC codec) throws Exception {       
         GraphUtility.saveBufferedImage(image, savePath.toFile(), CODEC.PNG);
+    }
+
+    /**
+     * Get Color from rgb int list
+     */
+    public Color getColor(List<Integer> rgb) {
+        return new Color(rgb.get(0), rgb.get(1), rgb.get(2));
     }
 }

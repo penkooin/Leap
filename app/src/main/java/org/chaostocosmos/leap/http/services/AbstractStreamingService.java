@@ -13,7 +13,6 @@ import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
-import org.chaostocosmos.leap.http.resources.MediaStreamer;
 import org.chaostocosmos.leap.http.resources.Resources;
 import org.chaostocosmos.leap.http.resources.WatchResources.ResourceInfo;
 import org.chaostocosmos.leap.http.services.model.StreamingModel;
@@ -74,9 +73,9 @@ public abstract class AbstractStreamingService extends AbstractService implement
             start = start < 0 ? 0 : start;
         }
         int len = start + bufferSize > fileLength ? (int)fileLength - start : bufferSize;
-        MediaStreamer mediaStreamer = new MediaStreamer(info);
-        
-        byte[] body = mediaStreamer.getProgress(start, len);        
+        //MediaStreamer mediaStreamer = new MediaStreamer(info);        
+        //byte[] body = mediaStreamer.getProgress(start, len);  
+        byte[] body = info.getBytes1(start, len);
         int contentLength = body.length;
         long lastModified = info.getTime(TimeUnit.MILLISECONDS);
         long expire = System.currentTimeMillis() + EXPIRE_TIME;
@@ -84,7 +83,7 @@ public abstract class AbstractStreamingService extends AbstractService implement
 
         //Fill Response
         super.logger.debug("Video streaming called: "+file.toString()+" ======================== length: "+fileLength);
-        System.out.println("Content start: "+start+"  length: "+contentLength);        
+        super.logger.debug("Content start: "+start+"  length: "+contentLength);        
         response.addHeader("Content-Disposition", String.format("inline;filename=\"%s\"", file.toFile().getName()));
         response.addHeader("Accept-Ranges", "bytes");
         response.addHeader("Last-Modified", lastModified);

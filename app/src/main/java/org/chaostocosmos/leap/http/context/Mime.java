@@ -5,15 +5,13 @@ package org.chaostocosmos.leap.http.context;
  * 
  * @author 9ins
  */
-public class Mime <M> extends Metadata <M> {
-
-    M mimeMap;
+public class Mime <T> extends Metadata <T> {
 
     /**
      * Constructor
      * @param mimeMap
      */
-    public Mime(M mimeMap) {
+    public Mime(T mimeMap) {
         super(mimeMap);
     }
 
@@ -22,7 +20,7 @@ public class Mime <M> extends Metadata <M> {
      * @param expr
      * @return
      */
-    public String getMime(String mimeKey) {
-        return super.<String>getValue("mime."+mimeKey);
+    public <V> V getMime(String mimeKey) {
+        return super.getValue("mime."+mimeKey);
     }
 }

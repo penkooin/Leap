@@ -25,10 +25,9 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.context.Context;
-import org.chaostocosmos.leap.http.context.ContextAdapter;
-import org.chaostocosmos.leap.http.context.ContextEvent;
 import org.chaostocosmos.leap.http.context.Host;
-import org.chaostocosmos.leap.http.context.Hosts;
+import org.chaostocosmos.leap.http.context.MetaEvent;
+import org.chaostocosmos.leap.http.context.MetaListener;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.resources.ResourceHelper;
 import org.chaostocosmos.leap.http.resources.ResourceManager;
@@ -42,7 +41,7 @@ import ch.qos.logback.classic.Logger;
  * 
  * @author 9ins
  */
-public class LeapApp extends ContextAdapter<Hosts<?>> {
+public class LeapApp implements MetaListener<Map<String, Object>> {
     /**
      * Logger
      */
@@ -138,22 +137,11 @@ public class LeapApp extends ContextAdapter<Hosts<?>> {
             logger.setLevel(level);
         }
         logger.info("Leap starting.");
+
         //print trade mark
         trademark();
-        logger.info("====================================================================================================");
-        //build webapp environment
-        for(Host<?> host : Context.getHostMap().values()) {
-            ResourceHelper.extractResource("webapp", host.getDocroot());
-        }
-        //initialize static resource manager
-        staticResourceManager = ResourceManager.initialize();
-        //initialize thread queue
-        threadQueue = new LinkedBlockingQueue<Runnable>();
-        //initialize thread pool
-        threadpool = new ThreadPoolExecutor(Context.getServer().getThreadPoolCoreSize(), Context.getServer().getThreadPoolMaxSize(), Context.getServer().getThreadPoolKeepAlive(), TimeUnit.SECONDS, threadQueue);        
-        logger.info("====================================================================================================");
-        logger.info("ThreadPool initialized - CORE: "+Context.getServer().getThreadPoolCoreSize()+"   MAX: "+Context.getServer().getThreadPoolMaxSize()+"   KEEP-ALIVE WHEN IDLE(seconds): "+Context.getServer().getThreadPoolKeepAlive());
 
+        logger.info("====================================================================================================");
         //set verbose option to STD IO
         String optionV = cmdLine.getOptionValue("v");
         if(optionV != null && optionV.equals("false")) {
@@ -179,7 +167,19 @@ public class LeapApp extends ContextAdapter<Hosts<?>> {
 
         //Spring JPA 
         //SpringJPAManager jpaManager = SpringJPAManager.get();
-        for(Host<?> host : Context.getHosts().getAllHosts()) {
+        //initialize static resource manager
+        staticResourceManager = ResourceManager.initialize();
+        //initialize thread queue
+        threadQueue = new LinkedBlockingQueue<Runnable>();
+        //initialize thread pool
+        threadpool = new ThreadPoolExecutor(Context.getServer().<Integer> getThreadPoolCoreSize(), Context.getServer().<Integer> getThreadPoolMaxSize(), Context.getServer().<Integer> getThreadPoolKeepAlive(), TimeUnit.SECONDS, threadQueue);        
+        logger.info("====================================================================================================");
+        logger.info("ThreadPool initialized - CORE: "+Context.getServer().<Integer> getThreadPoolCoreSize()+"   MAX: "+Context.getServer().<Integer> getThreadPoolMaxSize()+"   KEEP-ALIVE WHEN IDLE(seconds): "+Context.getServer().<Integer> getThreadPoolKeepAlive());    
+
+        for(Host<?> host : Context.getHosts().getAllHost()) {
+            //initalize host environment
+            ResourceHelper.extractResource("webapp", host.getDocroot());        
+    
             InetAddress hostAddress = InetAddress.getByName(host.getHost());
             String hostName = hostAddress.getHostAddress()+":"+host.getPort();
             if(leapServerMap.containsKey(hostName)) {
@@ -188,10 +188,10 @@ public class LeapApp extends ContextAdapter<Hosts<?>> {
             }
             LeapHttpServer server = new LeapHttpServer(Context.getHomePath(), host, threadpool);
             leapServerMap.put(hostAddress.getHostAddress()+":"+host.getPort(), server);
-            if(host.isDefaultHost()) {
-                logger.info("[DEFAULT HOST] - Protocol: "+host.getProtocol().name()+"   Server: "+host.getHostId()+"   Host: "+host.getHost()+"   Port: "+host.getPort()+"   Doc-Root: "+host.getDocroot()+"   Logging path: "+host.getLogPath()+"   Level: "+host.getLogLevel().toString());                
+            if(host.<Boolean> isDefaultHost()) {
+                logger.info("[DEFAULT HOST] - Protocol: "+host.getProtocol()+"   Server: "+host.getHostId()+"   Host: "+host.getHost()+"   Port: "+host.getPort()+"   Doc-Root: "+host.getDocroot()+"   Logging path: "+host.getLogPath()+"   Level: "+host.getLogLevel().toString());                
             } else {
-                logger.info("[VIRTUAL HOST] - Protocol: "+host.getProtocol().name()+"   Server: "+host.getHostId()+"   Host: "+host.getHost()+"   Port: "+host.getPort()+"   Doc-Root: "+host.getDocroot()+"   Logging path: "+host.getLogPath()+"   Level: "+host.getLogLevel().toString());
+                logger.info("[VIRTUAL HOST] - Protocol: "+host.getProtocol()+"   Server: "+host.getHostId()+"   Host: "+host.getHost()+"   Port: "+host.getPort()+"   Doc-Root: "+host.getDocroot()+"   Logging path: "+host.getLogPath()+"   Level: "+host.getLogLevel().toString());
             }
         }
         logger.info("----------------------------------------------------------------------------------------------------");
@@ -260,7 +260,8 @@ public class LeapApp extends ContextAdapter<Hosts<?>> {
     }
 
     @Override
-    public void contextHosts(ContextEvent<Hosts<?>> ce) throws Exception {
+    public <V> void receiveContextEvent(MetaEvent<Map<String, Object>, V> ce) throws Exception {
+        //System.out.println(ce.getPathExpression()+"  "+ce.getEventType());
     }
 
     public static void main(String[] args) throws Exception {

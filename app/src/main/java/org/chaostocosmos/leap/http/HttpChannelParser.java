@@ -72,9 +72,7 @@ public class HttpChannelParser {
          */
         public Request parseRequest(Socket socket) throws IOException {
             SocketChannel channel = socket.getChannel();
-            Map<String, List<String>> lines = ChannelUtils.readHeaders(channel, ByteBuffer.allocate(1024)); 
-            lines.values().stream().forEach(System.out::println);
-            
+            Map<String, List<String>> lines = ChannelUtils.readHeaders(channel, ByteBuffer.allocate(1024));             
             /* 
             String requestLine = StreamUtils.readLine(in, StandardCharsets.ISO_8859_1);
             if(requestLine == null) {

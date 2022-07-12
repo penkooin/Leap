@@ -8,14 +8,15 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.WASException;
+import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
 import org.chaostocosmos.leap.http.resources.ClassUtils;
 import org.chaostocosmos.leap.http.services.filters.IFilter;
 import org.chaostocosmos.leap.http.services.model.ServiceModel;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory; 
+
+import ch.qos.logback.classic.Logger;
 
 /**
  * Annotation helper object

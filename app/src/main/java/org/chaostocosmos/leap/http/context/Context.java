@@ -1,12 +1,12 @@
 package org.chaostocosmos.leap.http.context;
 
-import java.lang.reflect.ParameterizedType;
+import java.io.IOException;
 import java.nio.file.Path;
-import java.security.GeneralSecurityException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.transaction.NotSupportedException;
 
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.resources.ResourceHelper;
@@ -19,94 +19,93 @@ import org.chaostocosmos.leap.http.resources.ResourceHelper;
  */
 public class Context {
     /**
+     * Context instance
+     */
+    public static Context context;
+
+    /**
      * Home path
      */
     private static Path HOME_PATH;
+
     /**
      * Config path
      */
     private static Path CONFIG_PATH;
-    /**
-     * Metadata Map
-     */
-    private static Map<META, Metadata<?>> metaMap = new HashMap<>();;
-    /**
-     * Context listener map
-     */
-    private static List<ContextListener<?>> contextListeners = new ArrayList<>();;
 
-    public Context() {}
+    /**
+     * Context listener list
+     */
+    private static List<MetaListener<?>> contextListeners = new ArrayList<>();
+
+
     /**
      * Constructor with home path
      * @param homePath
      */
     public static void init(Path homePath) {
         try {
+            if(context == null) {
+                context = new Context();
+            }
             HOME_PATH = homePath.normalize().toAbsolutePath();
             CONFIG_PATH = HOME_PATH.resolve("config");
+
             //build config environment
             ResourceHelper.extractResource("config", homePath); 
-            //refresh context attributes
-            refresh();
+
             //dispatch context events
-            dispatchContextEvent(EVENT_TYPE.INITIALIZED);
+            dispatchContextEvent(new MetaEvent<Map<String, Object>, Object>(context, EVENT_TYPE.INITIALIZED, null, null, null));
         } catch(Exception e) {
             throw new WASException(e);
         }
     }
+
     /**
-     * Refresh context attributes
+     * Refresh all metadata
+     * @throws NotSupportedException
+     * @throws IOException
      */
-    public static void refresh() {
-        //load configuration files
-        metaMap.put(META.SERVER, new Server<Map<String, Object>>(META.SERVER.getMetaMap()));            
-        metaMap.put(META.HOSTS, new Hosts<Map<String, Object>>(META.HOSTS.getMetaMap()));
-        metaMap.put(META.MESSAGES, new Messages<Map<String, Object>>(META.MESSAGES.getMetaMap()));
-        metaMap.put(META.MIME, new Mime<Map<String, Object>>(META.MIME.getMetaMap()));
-        metaMap.put(META.CHART, new Chart<Map<String, Object>>(META.CHART.getMetaMap()));
-    }
-    /**
-     * Dispatch context event to listeners
-     * @param <T>
-     * @throws Exception
-     */
-    public static void dispatchContextEvent(EVENT_TYPE eventType) {
-        try{
-            for(ContextListener<?> listener : contextListeners) {
-                String typeName = ((ParameterizedType)listener.getClass().getGenericSuperclass()).getActualTypeArguments()[0].getTypeName();
-                if(typeName.startsWith(Server.class.getTypeName())) {
-                    listener.contextServer(new ContextEvent<Server<?>>(new Context(), eventType, (Server<?>)metaMap.get(META.SERVER)));
-                } else if(typeName.startsWith(Hosts.class.getTypeName())) {
-                    listener.contextHosts(new ContextEvent<Hosts<?>>(new Context(), eventType, (Hosts<?>)metaMap.get(META.HOSTS)));
-                } else if(typeName.startsWith(Messages.class.getTypeName())) {
-                    listener.contextMessages(new ContextEvent<Messages<?>>(new Context(), eventType, (Messages<?>)metaMap.get(META.MESSAGES)));
-                } else if(typeName.startsWith(Mime.class.getTypeName())) {
-                    listener.contextMime(new ContextEvent<Mime<?>>(new Context(), eventType, (Mime<?>)metaMap.get(META.MIME)));
-                } else if(typeName.startsWith(Chart.class.getTypeName())) {
-                    listener.contextChart(new ContextEvent<Chart<?>>(new Context(), eventType, (Chart<?>)metaMap.get(META.CHART)));                
-                } else {
-                    throw new GeneralSecurityException("ContextListener generic type not support type of Metadata");
-                }
-            }    
-        } catch(Exception e){
-            e.printStackTrace();
+    public static void refresh() throws NotSupportedException, IOException {
+        for(META meta : META.values()) {
+            meta.load();
         }
     }
+
+    /**
+     * Dispatch context event to listeners
+     * @param <V>
+     * @throws Exception
+     */
+    @SuppressWarnings("unchecked")
+    public static <T, V> void dispatchContextEvent(MetaEvent<T, V> me) {
+        for(MetaListener<?> listener : contextListeners) {
+            try {
+                //String typeName = ((ParameterizedType)listener.getClass().getGenericSuperclass()).getActualTypeArguments()[0].getTypeName();            
+                ((MetaListener<T>)listener).receiveContextEvent(me);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }    
+    }
+
     /**
      * Add context listener
      * @param meta
      * @param listener
      */
-    public static <T> void addContextListener(ContextListener<T> listener) {        
+    public static <T, V> void addContextListener(MetaListener<T> listener) {        
         contextListeners.add(listener);
-    }   
+    }  
+
     /**
      * Remove context listener
      * @param listener
      */ 
-    public static <T> void removeContextListener(ContextListener<T> listener) {
+    public static <T, V> void removeContextListener(MetaListener<T> listener) {
         contextListeners.remove(listener);
     }
+
     /**
      * Get home path
      * @return
@@ -114,6 +113,7 @@ public class Context {
     public static Path getHomePath() {
         return HOME_PATH;
     }
+
     /**
      * Get config path
      * @return
@@ -121,6 +121,7 @@ public class Context {
     public static Path getConfigPath() {
         return CONFIG_PATH;
     }
+
     /**
      * Get template path
      * @return
@@ -128,56 +129,66 @@ public class Context {
     public static Path getTemplates(String hostId) {
         return getHosts().getTemplates(hostId);
     }
+
     /**
      * Get Server context
      * @return
      */
-    public static Server<?> getServer() {
-        return (Server<?>)metaMap.get(META.SERVER);
+    public static <T> Server<T> getServer() {
+        return META.SERVER.getMeta();
     }
+
     /**
      * Get Hosts context
      * @return
      */
-    public static Hosts<?> getHosts() {
-        return (Hosts<?>)metaMap.get(META.HOSTS);
+    public static <T> Hosts<T> getHosts() {
+        return META.HOSTS.<Hosts<T>>getMeta();
     }
+
     /**
      * Get Messages context
      * @return
      */
-    public static Messages<?> getMessages() {
-        return (Messages<?>)metaMap.get(META.MESSAGES);
+    public static <T> Messages<T> getMessages() {
+        return META.MESSAGES.getMeta();
     }    
+
     /**
      * Get Mime context
      * @return
      */
-    public static Mime<?> getMime() {
-        return (Mime<?>)metaMap.get(META.MIME);
+    public static <T> Mime<T> getMime() {
+        return META.MIME.getMeta();
     }
+
     /**
      * Get Chart context
      * @return
      */
-    public static Chart<?> getChart() {
-        return (Chart<?>)metaMap.get(META.CHART);
+    public static <T> Chart<T> getChart() {
+        return META.CHART.getMeta();
     }
+
     /**
      * Get Host object mapping with the specifiedhost ID
      * @param hostId
      * @return
      */
-    public static Host<?> getHost(String hostId) {
-        return getHosts().getHost(hostId);
+    public static <T> Host<T> getHost(String hostId) {
+        Hosts<T> hosts = getHosts();
+        return hosts.getHost(hostId);
     }
+
     /**
      * Get Host Map
      * @return
      */
-    public static Map<String, Host<?>> getHostMap() {
-        return getHosts().getHostMap();
+    public static <T> List<Host<T>> getAllHost() {
+        Hosts<T> hosts = getHosts();
+        return hosts.getAllHost();
     }
+
     /**
      * Get meta-data value
      * @param <T>
@@ -201,15 +212,16 @@ public class Context {
                 throw new IllegalArgumentException("Metadata type is not found: "+metaType.name());
         }
     }
+
     /**
      * Save config
      * 
      * @param map
      * @param targetFile
-     * @throws WASException
+     * @throws Exception
      */
-    public static void save(META meta) throws WASException {
+    public static <T, V> void save(META meta) {
         meta.save(); 
-        dispatchContextEvent(EVENT_TYPE.STORED);       
+        dispatchContextEvent(new MetaEvent<T,V>(context, EVENT_TYPE.STORED, meta.getMeta(), null, null));       
     }   
 }

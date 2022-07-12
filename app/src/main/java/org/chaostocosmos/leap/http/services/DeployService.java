@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.transaction.NotSupportedException;
+
 import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.Response;
 import org.chaostocosmos.leap.http.WASException;
@@ -82,7 +84,7 @@ public class DeployService extends AbstractService implements DeployModel {
 
     @MethodMappper(mappingMethod = REQUEST_TYPE.GET, path = "/service/delete")
     @FilterMapper(preFilters = BasicAuthFilter.class)
-    public void delete(Request request, Response response) throws IOException, URISyntaxException {
+    public void delete(Request request, Response response) throws IOException, URISyntaxException, NotSupportedException {
         String qualifiedClassName = request.getParameter("serviceClassNames");
         if(qualifiedClassName.startsWith("[") && qualifiedClassName.endsWith("]")) {
             qualifiedClassName = qualifiedClassName.substring(qualifiedClassName.indexOf("[")+1, qualifiedClassName.lastIndexOf("]"));
@@ -92,7 +94,7 @@ public class DeployService extends AbstractService implements DeployModel {
             List<String> classNames = Arrays.asList(qualifiedClassName.split(",")).stream().map(c -> c.trim()).collect(Collectors.toList());
             for(String className : classNames) {
                 super.serviceManager.initialize();
-                Path serviceClassPath = super.serviceManager.getHost().getDynamicClasspaths().resolve(className);
+                Path serviceClassPath = super.serviceManager.getHost().getDynamicClassPaths().resolve(className);
                 if(serviceClassPath.toFile().exists()) {
                     serviceClassPath.toFile().delete();
                     super.logger.info("[DEPLOY] Delete service -  class: "+className+"  path: "+serviceClassPath.toString());

@@ -1,6 +1,7 @@
 package org.chaostocosmos.leap.http.resources;
 
 import java.net.MalformedURLException;
+import java.util.List;
 
 import org.chaostocosmos.leap.http.context.Context;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -34,7 +35,7 @@ public class SpringJPAManager {
     private SpringJPAManager(ClassLoader classLoader) {
         jpaContext = new AnnotationConfigApplicationContext();
         jpaContext.setClassLoader(classLoader);
-        jpaContext.scan(Context.getServer().getSpringJPAPackage().toArray(new String[0]));
+        jpaContext.scan(Context.getServer().<List<String>>getSpringJPAPackage().toArray(new String[0]));
         jpaContext.refresh();  
     }
 

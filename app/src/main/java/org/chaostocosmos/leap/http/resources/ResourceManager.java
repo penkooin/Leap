@@ -22,17 +22,14 @@ public class ResourceManager {
                                              StandardWatchEventKinds.ENTRY_DELETE, 
                                              StandardWatchEventKinds.ENTRY_MODIFY, 
                                              StandardWatchEventKinds.OVERFLOW};
-
     /**
      * WatchResource object Map by Hosts
      */
     Map<String, Resources> resourceMap;
-
     /**
      * StaticResourceManager object
      */
     private static ResourceManager manager;
-
     /**
      * Default constructor
      * @throws IOException
@@ -41,7 +38,7 @@ public class ResourceManager {
      */
     private ResourceManager() throws IOException, InterruptedException {
         this.resourceMap = new HashMap<>();
-        for(Host<?> host : Context.getHosts().getAllHosts()) {
+        for(Host<?> host : Context.getHosts().getAllHost()) {
             this.resourceMap.put(host.getHost(), new WatchResources(host, WATCH_KIND));
         }
     }

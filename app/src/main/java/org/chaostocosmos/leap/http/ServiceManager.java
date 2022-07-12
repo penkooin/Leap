@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.transaction.NotSupportedException;
+
 import org.chaostocosmos.leap.http.annotation.FilterMapper;
 import org.chaostocosmos.leap.http.annotation.MethodMappper;
 import org.chaostocosmos.leap.http.annotation.ServiceMapper;
@@ -55,8 +57,9 @@ public class ServiceManager {
      * @param classLoader
      * @throws URISyntaxException
      * @throws IOException
+     * @throws NotSupportedException
      */
-    public ServiceManager(Host<?> host, UserManager userManager, LeapURLClassLoader classLoader) throws IOException, URISyntaxException {
+    public ServiceManager(Host<?> host, UserManager userManager, LeapURLClassLoader classLoader) throws IOException, URISyntaxException, NotSupportedException {
         this.host = host;
         this.userManager  = userManager;
         this.classLoader = (LeapURLClassLoader) classLoader;
@@ -67,8 +70,9 @@ public class ServiceManager {
      * Initialize ServiceManager
      * @throws IOException
      * @throws URISyntaxException
+     * @throws NotSupportedException
      */
-    public void initialize() throws IOException, URISyntaxException {
+    public void initialize() throws IOException, URISyntaxException, NotSupportedException {
         List<Class<? extends ServiceModel>> services = ClassUtils.findAllLeapServices(classLoader, false, host.getDynamicPackageFiltering());
         for(Class<? extends ServiceModel> service : services) {            
             ServiceMapper sm = service.getDeclaredAnnotation(ServiceMapper.class);
@@ -81,26 +85,29 @@ public class ServiceManager {
                         this.serviceMethodMap.put(servicePath + mm.path(), method);
                     }
                 }
-            }            
+            }
         }
     }
     /**
      * Create ServiceHolder
      * @param contextPath
      * @return
+     * @throws SecurityException
+     * @throws NoSuchMethodException
      */
-    public ServiceHolder createServiceHolder(String contextPath) {
+    public ServiceHolder createServiceHolder(String contextPath) throws NoSuchMethodException, SecurityException {
         if(!this.serviceMethodMap.containsKey(contextPath)) {
             return null;
         }
         Method serviceMethod = this.serviceMethodMap.get(contextPath);
         ServiceModel service = createService(serviceMethod);
+        serviceMethod = service.getClass().getDeclaredMethod(serviceMethod.getName(), serviceMethod.getParameterTypes());
         REQUEST_TYPE requestType = serviceMethod.getDeclaredAnnotation(MethodMappper.class).mappingMethod();
-        ServiceHolder serviceHolder = new ServiceHolder(contextPath, service, requestType, serviceMethod);
-        return serviceHolder;
+        return new ServiceHolder(contextPath, service, requestType, serviceMethod);
     }
     /**
      * Create new instance of service mapping with context path
+     * @param contextPath
      */
     public ServiceModel createService(String contextPath) {
         Method serviceMethod = this.serviceMethodMap.get(contextPath);
@@ -151,7 +158,6 @@ public class ServiceManager {
     public UserManager getUserManager() {
         return this.userManager;
     }
-
     /**
      * Get Host
      * @return
@@ -159,7 +165,6 @@ public class ServiceManager {
     public Host<?> getHost() {
         return this.host;
     }
-
     /**
      * Get class loader object
      * @return
@@ -167,7 +172,6 @@ public class ServiceManager {
     public LeapURLClassLoader getClassLoader() {
         return this.classLoader;
     }
-
     /**
      * Get service instance
      * @param qualifiedClassName
@@ -177,7 +181,6 @@ public class ServiceManager {
     public ServiceModel newServiceInstance(String serviceClassName) {
         return (ServiceModel)ClassUtils.instantiate(this.classLoader, serviceClassName);
     }   
-
     /**
      * Get filter instance
      * @param filterClassName

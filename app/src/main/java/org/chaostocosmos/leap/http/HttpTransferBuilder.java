@@ -39,7 +39,7 @@ public class HttpTransferBuilder {
     public static HttpTransfer buildHttpTransfer(String hostId, Socket client) throws IOException {
         return new HttpTransfer(hostId, client);
     } 
-
+    
     /**
      * Add key-value to header Map
      * @param headers
@@ -148,13 +148,13 @@ public class HttpTransferBuilder {
                 String msg = TemplateBuilder.buildResponseHtml(this.host, MSG_TYPE.HTTP, 200, Context.getMessages().getHttpMsg(200));
                 Map<String, List<Object>> headers = addHeader(new HashMap<>(), "Content-Type", MIME_TYPE.TEXT_HTML.mimeType());
                 headers = addHeader(new HashMap<>(), "Content-Length", msg.getBytes().length);
-                headers = addHeader(new HashMap<>(), "Charset", this.host.charset().name());
+                headers = addHeader(new HashMap<>(), "Charset", this.host.<String> charset());
                 this.httpResponseDescriptor = HttpResponseBuilder.getBuilder()
-                                                                .build(this.httpRequestDescriptor)
-                                                                .setStatusCode(200)
-                                                                .setBody(msg)
-                                                                .setHeaders(headers)
-                                                                .get();
+                                                                 .build(this.httpRequestDescriptor)
+                                                                 .setStatusCode(200)
+                                                                 .setBody(msg)
+                                                                 .setHeaders(headers)
+                                                                 .get();
             }
             return this.httpResponseDescriptor;
         }
@@ -184,7 +184,7 @@ public class HttpTransferBuilder {
          */
         public void sendResponse(String hostId, int resCode, Map<String, List<Object>> headers, Object body) throws IOException {
             Charset charset = Context.getHosts().charset(hostId);
-            String protocol = Context.getHosts().getHost(hostId).getProtocol().name();
+            String protocol = Context.getHosts().getHost(hostId).<String> getProtocol();
             String resMsg = null;
             if(resCode >= 200 && resCode <= 600) {
                 resMsg = RES_CODE.valueOf("RES"+resCode).msg();
@@ -200,7 +200,7 @@ public class HttpTransferBuilder {
             long contentLength = -1;
             if(body instanceof byte[]) {
                 contentLength = ((byte[])body).length;
-            } else if(body instanceof String) {                
+            } else if(body instanceof String) {
                 contentLength = ((String)body).getBytes(charset).length;
             } else if(body instanceof Path) {
                 contentLength = ((Path)body).toFile().length();
@@ -218,7 +218,8 @@ public class HttpTransferBuilder {
             resStr.append("============================== [RESPONSE] : "+res.trim()+" - "+this.socket.getRemoteSocketAddress().toString()+" =============================="+System.lineSeparator());
             resStr.append("RES CODE: "+resCode+System.lineSeparator());
             for(Map.Entry<String, List<Object>> e : headers.entrySet()) {
-                this.clientOutputStream.write((e.getKey()+": "+e.getValue().stream().map(v -> v.toString()).collect(Collectors.joining("; "))+"\r\n").getBytes());
+                String hv = e.getValue().stream().map(v -> v.toString()).collect(Collectors.joining("; "));
+                this.clientOutputStream.write((e.getKey()+": "+hv+"\r\n").getBytes());
                 resStr.append(e.getKey()+": "+e.getValue()+System.lineSeparator());
             }
             LoggerFactory.getLogger(hostId).debug(resStr.substring(0, resStr.length()-1));

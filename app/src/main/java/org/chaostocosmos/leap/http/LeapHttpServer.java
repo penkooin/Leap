@@ -22,6 +22,7 @@ import javax.transaction.NotSupportedException;
 
 import org.chaostocosmos.leap.http.commons.Constants;
 import org.chaostocosmos.leap.http.commons.Filtering;
+import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.commons.RedirectHostSelection;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Host;
@@ -31,8 +32,8 @@ import org.chaostocosmos.leap.http.resources.ClassUtils;
 import org.chaostocosmos.leap.http.resources.Html;
 import org.chaostocosmos.leap.http.resources.LeapURLClassLoader;
 import org.chaostocosmos.leap.http.resources.ResourceMonitor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory; 
+
+import ch.qos.logback.classic.Logger;
 
 /**
  * HttpServer object
@@ -44,7 +45,7 @@ public class LeapHttpServer extends Thread {
     /**
      * logger
      */
-    Logger logger = (Logger)LoggerFactory.getLogger(Context.getHosts().getDefaultHost().getHostId());
+    Logger logger = LoggerFactory.getLogger(Context.getHosts().getDefaultHost().getHostId());
     /**
      * Whether default host
      */
@@ -148,6 +149,7 @@ public class LeapHttpServer extends Thread {
      * @param resourceMonitor
      * @throws URISyntaxException
      * @throws IOException
+     * @throws NotSupportedException
      * @throws MalformedURLException
      */
     public LeapHttpServer(Path homePath, 
@@ -155,12 +157,12 @@ public class LeapHttpServer extends Thread {
                           ThreadPoolExecutor threadpool, 
                           LeapURLClassLoader classLoader,
                           ResourceMonitor resourceMonitor
-                          ) throws IOException, URISyntaxException {
+                          ) throws IOException, URISyntaxException, NotSupportedException {
         this(
             true,
             Context.getHomePath(),
             host.getDocroot(),
-            host.getProtocol(),
+            PROTOCOL.valueOf(host.getProtocol()),
             new InetSocketAddress(InetAddress.getByName(host.getHost()), host.getPort()),
             Context.getServer().getBackLog(),
             threadpool,
@@ -184,6 +186,7 @@ public class LeapHttpServer extends Thread {
      * @param resourceMonitor
      * @throws URISyntaxException
      * @throws IOException
+     * @throws NotSupportedException
      */
     public LeapHttpServer(boolean isDefaultHost, 
                           Path homePath, 
@@ -195,7 +198,7 @@ public class LeapHttpServer extends Thread {
                           Host<?> host,
                           LeapURLClassLoader classLoader,
                           ResourceMonitor resourceMonitor
-                          ) throws IOException, URISyntaxException {
+                          ) throws IOException, URISyntaxException, NotSupportedException {
         this.isDefaultHost = true;
         this.homePath = homePath;
         this.protocol = protocol;
@@ -254,7 +257,7 @@ public class LeapHttpServer extends Thread {
                 this.server.bind(this.inetSocketAddress, this.backlog);
                 logger.info("[HTTP SERVER START] Address: " + this.inetSocketAddress.toString());
             } else {
-                File keyStore = Context.getServer().getKeyStore().toFile();
+                File keyStore = new File(Context.getServer().<String> getKeyStore());
                 String passphrase = Context.getServer().getPassphrase();
                 String sslProtocol = Context.getServer().getEncryptionMethod();
                 this.server = HttpsServerSocketFactory.getSSLServerSocket(keyStore, passphrase, sslProtocol, this.inetSocketAddress, this.backlog);                
@@ -267,7 +270,7 @@ public class LeapHttpServer extends Thread {
                 int queueSize = this.threadpool.getQueue().size();
                 String ipAddress = connection.getLocalAddress().toString();
                 if(this.ipAllowedFilters.include(ipAddress) || this.ipForbiddenFilters.exclude(ipAddress)) {
-                    if(queueSize < Context.getServer().getThreadQueueSize()) {
+                    if(queueSize < Context.getServer().<Integer> getThreadQueueSize()) {
                         logger.info("[CLIENT DETECTED] Client request accepted. Submitting thread. "+ipAddress+" - "+connection.getPort()+"  Thread queue size - "+queueSize);
                         this.threadpool.submit(new LeapRequestHandler(this, this.docroot, connection, this.host));    
                     } else {

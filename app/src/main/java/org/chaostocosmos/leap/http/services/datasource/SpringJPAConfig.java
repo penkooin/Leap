@@ -1,5 +1,7 @@
 package org.chaostocosmos.leap.http.services.datasource;
 
+import java.util.List;
+
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
@@ -34,7 +36,7 @@ public class SpringJPAConfig {
       LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
       factory.setPersistenceUnitName("leap");
       factory.setJpaVendorAdapter(vendorAdapter);
-      factory.setPackagesToScan(Context.getServer().getSpringJPAPackage().toArray(new String[0]));
+      factory.setPackagesToScan(Context.getServer().<List<String>> getSpringJPAPackage().toArray(new String[0]));
       factory.setDataSource(getDataSource());
       return factory;
     }

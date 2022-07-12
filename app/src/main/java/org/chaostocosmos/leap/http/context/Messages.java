@@ -28,9 +28,10 @@ public class Messages <T> extends Metadata <T> {
      * @param args
      * @return
      */
-    public String getMsg(MSG_TYPE type, int code, Object ... args) {
-        String msg = super.getValue("messages."+type.name().toLowerCase()+"."+type.name().toLowerCase()+code);
-        return Arrays.stream(args).filter(a -> a != null).reduce(msg, (ap, a) -> ap.toString().replaceFirst("\\{\\}", a.toString())).toString();
+    @SuppressWarnings("unchecked")
+    public <V> V getMsg(MSG_TYPE type, int code, Object ... args) {
+        V msg = super.getValue("messages."+type.name().toLowerCase()+"."+type.name().toLowerCase()+code);
+        return (V) Arrays.stream(args).filter(a -> a != null).reduce(msg, (ap, a) -> ap.toString().replaceFirst("\\{\\}", a.toString())).toString();
     }    
 
    /**
@@ -38,7 +39,7 @@ public class Messages <T> extends Metadata <T> {
      * @param expr
      * @param value
      */
-    public void setMsg(String expr, String value) {
+    public <V> void setMsg(String expr, V value) {
         super.setValue(expr, value);
     }    
 
@@ -47,7 +48,7 @@ public class Messages <T> extends Metadata <T> {
      * @param code
      * @return
      */
-    public String getHttpMsg(int code) {
+    public <V> V getHttpMsg(int code) {
         return getMsg(MSG_TYPE.HTTP, code);
     }
 
@@ -57,7 +58,7 @@ public class Messages <T> extends Metadata <T> {
      * @param args
      * @return
      */
-    public String getHttpMsg(int code, Object... args) {
+    public <V> V getHttpMsg(int code, Object... args) {
         return getMsg(MSG_TYPE.HTTP, code, args);
     }
 
@@ -67,7 +68,7 @@ public class Messages <T> extends Metadata <T> {
      * @param args
      * @return
      */
-    public String getDebugMsg(int code, Object... args) {
+    public <V> V getDebugMsg(int code, Object... args) {
         return getMsg(MSG_TYPE.DEBUG, code, args);
     } 
 
@@ -77,7 +78,7 @@ public class Messages <T> extends Metadata <T> {
      * @param args
      * @return
      */
-    public String getInfoMsg(int code, Object ... args) {
+    public <V> V getInfoMsg(int code, Object ... args) {
         return getMsg(MSG_TYPE.INFO, code, args);
     }
 
@@ -87,7 +88,7 @@ public class Messages <T> extends Metadata <T> {
      * @param args
      * @return
      */
-    public String getWarnMsg(int code, Object ... args) {
+    public <V> V getWarnMsg(int code, Object ... args) {
         return getMsg(MSG_TYPE.WARN, code, args);
     }
 
@@ -97,7 +98,7 @@ public class Messages <T> extends Metadata <T> {
      * @param args
      * @return
      */
-    public String getErrorMsg(int code, Object ... args) {
+    public <V> V getErrorMsg(int code, Object ... args) {
         return getMsg(MSG_TYPE.ERROR, code, args);
     }
 }

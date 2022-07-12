@@ -30,6 +30,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 
 /**
@@ -96,14 +97,18 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
      */
     private ResourceMonitor() throws NotSupportedException {
         super(buildMonitorSchema());
-        this.unit = Context.getServer().getMonitoringUnit();
+        this.unit = UNIT.valueOf(Context.getServer().<String> getMonitoringUnit());
         this.fractionPoint = Constants.DEFAULT_FRACTION_POINT;
-        this.interval = Context.getServer().getMonitoringInterval();
+        this.interval = Context.getServer().<Integer> getMonitoringInterval().longValue();
         this.logger = LoggerFactory.createLoggerFor("monitoring", 
-                      LeapApp.getHomePath().resolve(Context.getServer().getMonitoringLogs()).normalize().toString(), 
-                      Context.getServer().getMonitoringLogLevel());        
+                      LeapApp.getHomePath().resolve(Context.getServer().<String> getMonitoringLogs()).normalize().toString(), 
+                      Arrays.asList(Context.getServer().<String> getMonitoringLogLevel().split(",")).stream().map(s -> Level.valueOf(s)).collect(Collectors.toList()));        
     }
 
+    /**
+     * Build monitoring schema
+     * @return
+     */
     private static Map<String, Object> buildMonitorSchema() {
         Chart<?> chart = Context.getChart();
         //Setting x index values

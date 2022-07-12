@@ -1,6 +1,7 @@
 package org.chaostocosmos.leap.http.context;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -23,41 +24,75 @@ import com.google.gson.Gson;
  * @author 9ins
  */
 public enum META {
-    
+
     SERVER(Context.getHomePath().resolve("config").resolve("server.yml")),
     HOSTS(Context.getHomePath().resolve("config").resolve("hosts.yml")),
     MESSAGES(Context.getHomePath().resolve("config").resolve("messages.yml")),
     MIME(Context.getHomePath().resolve("config").resolve("mime.yml")),
-    CHART(Context.getHomePath().resolve("config").resolve("chart.yml"));
+    CHART(Context.getHomePath().resolve("config").resolve("chart.yml"));    
 
     Path metaPath;
     Map<String, Object> metaMap;
+    Object meta;
 
     /**
      * Initializer
      * @param metaPath
+     * @throws IOException
+     * @throws NotSupportedException
      */
-    @SuppressWarnings("unchecked")
     META(Path metaPath) {
         this.metaPath = metaPath;
-        String metaName = this.metaPath.toFile().getName();
-        String metaType = metaName.substring(metaName.lastIndexOf(".")+1);
         try {
-            String metaString = Files.readString(metaPath, StandardCharsets.UTF_8);            
-            if(metaType.equalsIgnoreCase("yml")) {
-                this.metaMap = (Map<String, Object>)new Yaml().load(metaString);
-            } else if(metaType.equalsIgnoreCase("json")) {
-                this.metaMap = (Map<String, Object>)new Gson().fromJson(metaString, Map.class);
-            } else if(metaType.equalsIgnoreCase("properites")) {
-                this.metaMap = Arrays.asList(metaString.split(System.lineSeparator()))
-                                     .stream().map(l -> new Object[]{l.substring(0, l.indexOf("=")).trim(), l.substring(l.indexOf("=")+1).trim()})
-                                     .collect(Collectors.toMap(k -> (String)k[0], v -> v[1]));
-            } else {
-                throw new NotSupportedException("Meta file not supported: "+metaName);
-            }    
-        } catch(Exception e) {
-            throw new RuntimeException(e);
-        }
+            load();
+        } catch (IOException | NotSupportedException e) {            
+            e.printStackTrace();
+        }        
+    }
+
+    /**
+     * Load metadata from file
+     * @throws NotSupportedException
+     * @throws IOException
+     */
+    public void load() throws NotSupportedException, IOException {
+        String metaName = metaPath.toFile().getName();
+        String metaType = metaName.substring(metaName.lastIndexOf(".")+1);
+        String metaString = Files.readString(metaPath, StandardCharsets.UTF_8);            
+        if(metaType.equalsIgnoreCase("yml")) {
+            this.metaMap = (Map<String, Object>)new Yaml().load(metaString);
+        } else if(metaType.equalsIgnoreCase("json")) {
+            this.metaMap = (Map<String, Object>)new Gson().fromJson(metaString, Map.class);
+        } else if(metaType.equalsIgnoreCase("properites")) {
+            this.metaMap = Arrays.asList(metaString.split(System.lineSeparator()))
+                                 .stream().map(l -> new Object[]{l.substring(0, l.indexOf("=")).trim(), l.substring(l.indexOf("=")+1).trim()})
+                                 .collect(Collectors.toMap(k -> (String)k[0], v -> v[1]));
+        } else {
+            throw new NotSupportedException("Meta file not supported: "+metaName);
+        }    
+        if(this.name().equals("SERVER")) {
+            this.meta = new Server<Map<String, Object>>(this.metaMap);
+        } else if(this.name().equals("HOSTS")) {
+            this.meta = new Hosts<Map<String, Object>>(this.metaMap);
+        } else if(this.name().equals("MESSAGES")) {
+            this.meta = new Messages<Map<String, Object>>(this.metaMap);
+        } else if(this.name().equals("MIME")) {
+            this.meta = new Mime<Map<String, Object>>(this.metaMap);
+        } else if(this.name().equals("CHART")) {
+            this.meta = new Chart<Map<String, Object>>(this.metaMap);
+        } else {
+            this.meta = this.metaMap;
+        }            
+    }
+
+    /**
+     * Get meta object
+     * @param <T>
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public <T> T getMeta() {
+        return (T) this.meta;
     }
 
     /**
@@ -84,14 +119,6 @@ public enum META {
         return DataStructureOpr.<T>getValue(this.metaMap, pathExpr);
     }
 
-    /**
-     * Set meta data value
-     * @param metaMap
-     */
-    public void setMetaMap(Map<String, Object> metaMap) {
-        this.metaMap = metaMap;
-    }
-    
     /**
      * Get meta data Path
      * @return

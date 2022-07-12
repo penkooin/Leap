@@ -84,7 +84,7 @@ public abstract class AbstractService implements GetServiceModel, PostServiceMod
         Class<?>[] paramTypes = this.invokingMethod.getParameterTypes();
         if(paramTypes.length != 2 || paramTypes[0] != request.getClass() || paramTypes[1] != response.getClass()) {
             //org.chaostocosmos.leap.http.WASException: Not Implemented.
-            throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES501.code(), Context.getMessages().getErrorMsg(201, this.invokingMethod.getName()));
+            throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES501.code(), Context.getMessages().<String> getErrorMsg(201, this.invokingMethod.getName()));
         }
 
         //setting JPA link

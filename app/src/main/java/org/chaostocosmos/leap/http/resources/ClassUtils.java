@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.transaction.NotSupportedException;
+
 import org.chaostocosmos.leap.http.commons.Filtering;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Host;
@@ -60,9 +62,10 @@ public class ClassUtils {
      * @return
      * @throws URISyntaxException
      * @throws IOException
+     * @throws NotSupportedException
      * @throws Exception
      */
-    public static List<Class<? extends ServiceModel>> findAllLeapServices(URLClassLoader classLoader, boolean reloadConfig, Filtering filters) throws IOException, URISyntaxException {
+    public static List<Class<? extends ServiceModel>> findAllLeapServices(URLClassLoader classLoader, boolean reloadConfig, Filtering filters) throws IOException, URISyntaxException, NotSupportedException {
         if(reloadConfig) {
             Context.refresh();
         }
@@ -277,8 +280,8 @@ public class ClassUtils {
      * @throws IOException
      * @throws ImageProcessingException
      */
-    public static Host<?> mappingToHost(Map<String, Object> map, boolean isDefaultHost) throws IOException {
-        return new Host<Map<String, Object>>(map, isDefaultHost);
+    public static Host<?> mappingToHost(Map<String, Object> map) throws IOException {
+        return new Host<Map<String, Object>>(map);
     }
 
     /**
@@ -290,8 +293,8 @@ public class ClassUtils {
         Map<String, Object> map = new HashMap<>();
         map.put("default", host.isDefaultHost());
         map.put("hostname", host.getHostId());
-        map.put("protocol", host.getProtocol().name());
-        map.put("charset", host.charset().name());
+        map.put("protocol", host.<String> getProtocol());
+        map.put("charset", host.<String> charset());
         map.put("host", host.getHost());
         map.put("port", host.getPort());
         map.put("users", host.getValue("users"));

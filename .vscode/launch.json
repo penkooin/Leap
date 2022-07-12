@@ -12,7 +12,8 @@
             "name": "Launch LeapApp",
             "request": "launch",
             "mainClass": "org.chaostocosmos.leap.http.LeapApp",
-            "projectName": "app"
+            "projectName": "app",
+            "vmArgs": "-Xms2g -Xmx3g"
         }
     ]
 }

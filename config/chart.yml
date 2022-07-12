@@ -4,6 +4,9 @@ cpu:
   codec: PNG
   graph: LINE
   alpha: 0.6
+  legend-color: [232, 218, 239]
+  bg-color: [214, 234, 248]
+  graph-bg-color: [235, 237, 239]
   interpolate: LINEAR
   width: 800
   height: 500
@@ -14,10 +17,10 @@ cpu:
   elements: 
     - element: leap
       color: [180,130,130]
-      values: []
+      values: [0, 0, 0]
     - element: system
       color: [180,180,140]
-      values: []
+      values: [0, 0, 0]
   in-memory: true
   save-path: monitor/cpu.png
 memory: 
@@ -26,6 +29,9 @@ memory:
   codec: PNG
   graph: AREA
   alpha: 0.6
+  legend-color: [232, 218, 239]
+  bg-color: [214, 234, 248]
+  graph-bg-color: [235, 237, 239]
   interpolate: SPLINE
   width: 800
   height: 500
@@ -36,13 +42,13 @@ memory:
   elements: 
     - element: Physical Used
       color: [133,193,233]
-      values: []
+      values: [0, 0, 0]
     - element: Physical Free
       color: [178,186,187]
-      values: []
+      values: [0, 0, 0]
     - element: Leap Used
       color: [127,0,244]
-      values: []
+      values: [0, 0, 0]
   in-memory: true
   save-path: monitor/memory.png
 heap: 
@@ -51,6 +57,9 @@ heap:
   codec: PNG
   graph: AREA
   alpha: 0.6
+  legend-color: [232, 218, 239]
+  bg-color: [214, 234, 248]
+  graph-bg-color: [235, 237, 239]
   interpolate: SPLINE
   width: 800
   height: 500
@@ -61,16 +70,16 @@ heap:
   elements: 
     - element: Max
       color: [133,157,233]
-      values: []
+      values: [0, 0, 0]
     - element: Committed
       color: [233,138,133]
-      values: []
+      values: [0, 0, 0]
     - element: Init
       color: [200,133,233]
-      values: []
+      values: [0, 0, 0]
     - element: Used
-      color: [131,203,124]
-      values: []
+      color: [127,0,244]
+      values: [0, 0, 0]
   in-memory: true
   save-path: monitor/heap.png
 thread: 
@@ -79,6 +88,9 @@ thread:
   codec: PNG
   graph: LINE
   alpha: 0.6
+  legend-color: [232, 218, 239]
+  bg-color: [214, 234, 248]
+  graph-bg-color: [235, 237, 239]
   interpolate: SPLINE
   width: 800
   height: 500
@@ -89,16 +101,16 @@ thread:
   elements: 
     - element: Max
       color: [180,130,130]
-      values: []
+      values: [0, 0, 0]
     - element: Core
       color: [88,121,203]
-      values: []
+      values: [0, 0, 0]
     - element: Active Task
       color: [73, 182, 69]
-      values: []
+      values: [0, 0, 0]
     - element: Queued
       color: [239, 44, 21]
-      values: []
+      values: [0, 0, 0]
   in-memory: true
   save-path: monitor/thread.png
 

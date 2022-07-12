@@ -5,12 +5,12 @@ package org.chaostocosmos.leap.http.context;
  * 
  * @author 9ins
  */
-public class Chart<M> extends Metadata<M> {
+public class Chart<T> extends Metadata<T> {
     /**
      * Constructor
      * @param meta
      */
-    public Chart(M meta) {
+    public Chart(T meta) {
         super(meta);
     }    
 }

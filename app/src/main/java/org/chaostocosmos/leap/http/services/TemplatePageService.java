@@ -24,7 +24,7 @@ public class TemplatePageService extends AbstractService {
 
     @MethodMappper(mappingMethod = REQUEST_TYPE.GET, path = "/error")
     public void error(Request request, Response response) throws Exception {
-        System.out.println(request.getContextParam().toString());
+        //System.out.println(request.getContextParam().toString());
         String errorPage = super.resource.getErrorPage(request.getContextParam().entrySet().stream().collect(Collectors.toMap(k -> "@"+k.getKey(), v -> v.getValue())));
         response.setResponseCode(Integer.parseInt(request.getParameter("code")));
         response.addHeader("Content-Type", MIME_TYPE.TEXT_HTML.mimeType());

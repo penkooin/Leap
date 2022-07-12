@@ -87,7 +87,7 @@ public class ChannelUtils {
                 
             }
             buffer.compact();
-            System.out.println(len+"  "+contentLength+"  "+new String(buffer.array(), charset));
+            //System.out.println(len+"  "+contentLength+"  "+new String(buffer.array(), charset));
         } while(len < contentLength);
         return multiPartMap;
     }
