@@ -19,13 +19,12 @@ import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
-import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -573,7 +572,7 @@ public class WatchResources extends Thread implements Resources {
      * 
      * @author 9ins
      */
-    public class ResourceInfo extends LinkedHashMap<String, ResourceInfo> {
+    public class ResourceInfo extends HashMap<String, ResourceInfo> {
         /**
          * Whether node resource
          */
@@ -618,11 +617,6 @@ public class WatchResources extends Thread implements Resources {
          * Resource size
          */
         long resourceSize;
-
-        /**
-         * Mutex
-         */
-        Semaphore semaphore = new Semaphore(1);
 
         /**
          * Constructs with resource path & in-memory flag
@@ -739,7 +733,7 @@ public class WatchResources extends Thread implements Resources {
          * @return
          * @throws IOException
          */
-        public byte[] getBytes1(long position, int length) throws Exception {
+        public synchronized byte[] getBytes1(long position, int length) throws Exception {
             byte[] bytes = new byte[length];
             if(this.inMemoryFlag) {                
                 if(position < 0) {
@@ -750,7 +744,6 @@ public class WatchResources extends Thread implements Resources {
                 int posStart = 0, posEnd = 0;
                 int pos = 0;
 
-                semaphore.acquire();
                 for(int i=0; i<this.resourceData.size(); i++) {
                     byte[] data = this.resourceData.get(i);
                     posEnd += data.length;
@@ -782,7 +775,6 @@ public class WatchResources extends Thread implements Resources {
                         }
                     }
                 } 
-                semaphore.release();   
             } else {
                 bytes = getFileBytes(position, length);
             }
@@ -796,7 +788,7 @@ public class WatchResources extends Thread implements Resources {
          * @return
          * @throws IOException
          */
-        public byte[] getBytes2(long position, int length) throws IOException {
+        public synchronized byte[] getBytes2(long position, int length) throws IOException {
             byte[] data = new byte[length];
             if(this.inMemoryFlag) {
                 if(position < 0) {

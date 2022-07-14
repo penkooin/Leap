@@ -1,6 +1,7 @@
 package org.chaostocosmos.leap.http.resources;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.WatchEvent.Kind;
 import java.util.HashMap;
@@ -34,11 +35,14 @@ public class ResourceManager {
      * Default constructor
      * @throws IOException
      * @throws InterruptedException
+     * @throws URISyntaxException
      * @throws ImageProcessingException
      */
-    private ResourceManager() throws IOException, InterruptedException {
+    private ResourceManager() throws IOException, InterruptedException, URISyntaxException {
         this.resourceMap = new HashMap<>();
         for(Host<?> host : Context.getHosts().getAllHost()) {
+            //initalize host environment
+            ResourceHelper.extractResource("webapp", host.getDocroot());
             this.resourceMap.put(host.getHost(), new WatchResources(host, WATCH_KIND));
         }
     }
@@ -48,10 +52,13 @@ public class ResourceManager {
      * @throws IOException
      * @return
      * @throws InterruptedException
+     * @throws URISyntaxException
      * @throws ImageProcessingException
      */
-    public static ResourceManager initialize() throws IOException, InterruptedException {
-        manager = new ResourceManager();
+    public static ResourceManager initialize() throws IOException, InterruptedException, URISyntaxException {
+        if(manager == null) {
+            manager = new ResourceManager();
+        }        
         return manager;
     }
 
@@ -60,9 +67,10 @@ public class ResourceManager {
      * @return
      * @throws IOException
      * @throws InterruptedException
+     * @throws URISyntaxException
      * @throws ImageProcessingException
      */
-    public static Resources get(String hostId) throws IOException, InterruptedException {
+    public static Resources get(String hostId) throws IOException, InterruptedException, URISyntaxException {
         if(manager == null) {
             manager = new ResourceManager();
         }

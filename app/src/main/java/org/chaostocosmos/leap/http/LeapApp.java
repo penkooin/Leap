@@ -176,10 +176,7 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
         logger.info("====================================================================================================");
         logger.info("ThreadPool initialized - CORE: "+Context.getServer().<Integer> getThreadPoolCoreSize()+"   MAX: "+Context.getServer().<Integer> getThreadPoolMaxSize()+"   KEEP-ALIVE WHEN IDLE(seconds): "+Context.getServer().<Integer> getThreadPoolKeepAlive());    
 
-        for(Host<?> host : Context.getHosts().getAllHost()) {
-            //initalize host environment
-            ResourceHelper.extractResource("webapp", host.getDocroot());        
-    
+        for(Host<?> host : Context.getHosts().getAllHost()) {    
             InetAddress hostAddress = InetAddress.getByName(host.getHost());
             String hostName = hostAddress.getHostAddress()+":"+host.getPort();
             if(leapServerMap.containsKey(hostName)) {

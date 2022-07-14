@@ -59,7 +59,6 @@ public abstract class AbstractStreamingService extends AbstractService implement
         if(!file.toFile().exists()) {
             throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES404.code(), "Specified resource not found: "+file.toAbsolutePath().toString().replace("\\", "/"));
         }
-        ResourceInfo info = (ResourceInfo) super.resource.getResourceInfo(file);
         String range = request.getReqHeader().get("Range");
         if(range == null || range.equals("")) {
             throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES412.code(), "Header field not found(Range). Streaming request header must have field of Range");
@@ -75,12 +74,13 @@ public abstract class AbstractStreamingService extends AbstractService implement
         int len = start + bufferSize > fileLength ? (int)fileLength - start : bufferSize;
         //MediaStreamer mediaStreamer = new MediaStreamer(info);        
         //byte[] body = mediaStreamer.getProgress(start, len);  
-        byte[] body = info.getBytes1(start, len);
+        ResourceInfo info = (ResourceInfo) super.resource.getResourceInfo(file);
+        byte[] body = info.getBytes2(start, len);
         int contentLength = body.length;
         long lastModified = info.getTime(TimeUnit.MILLISECONDS);
         long expire = System.currentTimeMillis() + EXPIRE_TIME;
-        MIME_TYPE mimeType = info.getMimeType();
-
+        MIME_TYPE mimeType = info.getMimeType();    
+    
         //Fill Response
         super.logger.debug("Video streaming called: "+file.toString()+" ======================== length: "+fileLength);
         super.logger.debug("Content start: "+start+"  length: "+contentLength);        
