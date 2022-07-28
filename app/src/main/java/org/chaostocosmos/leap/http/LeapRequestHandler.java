@@ -17,9 +17,9 @@ import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
+import org.chaostocosmos.leap.http.resources.Resource;
 import org.chaostocosmos.leap.http.resources.ResourceHelper;
 import org.chaostocosmos.leap.http.resources.TemplateBuilder;
-import org.chaostocosmos.leap.http.resources.WatchResources.ResourceInfo;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
@@ -104,7 +104,7 @@ public class LeapRequestHandler implements Runnable {
                 } else {
                     if (host.getResource().exists(resourcePath)) {
                         //Get requested resource data
-                        ResourceInfo resourceInfo = host.getResource().getResourceInfo(resourcePath);
+                        Resource resourceInfo = host.getResource().getResource(resourcePath);
                         if(resourceInfo != null) {
                             if(resourceInfo.isNode()) {
                                 String body = TemplateBuilder.buildResourceHtml(request.getContextPath(), host);

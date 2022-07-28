@@ -17,7 +17,7 @@ import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
-import org.chaostocosmos.leap.http.resources.Resources;
+import org.chaostocosmos.leap.http.resources.ResourcesModel;
 import org.chaostocosmos.leap.http.resources.SpringJPAManager;
 import org.chaostocosmos.leap.http.services.filters.IFilter;
 import org.chaostocosmos.leap.http.services.model.DeleteServiceModel;
@@ -38,26 +38,32 @@ public abstract class AbstractService implements GetServiceModel, PostServiceMod
      * Logger
      */
     protected Logger logger;
+
     /**
      * Method to be called for request
      */
     protected Method invokingMethod;
+
     /**
      * Filters for previous filtering process of service method
      */
     protected List<IFilter> preFilters;
+
     /**
      * Filter for after filtering process of service method
      */
     protected List<IFilter> postFilters;
+
     /**
      * Leap service manager object
      */
     protected ServiceManager serviceManager;
+
     /**
      * Resource object
      */
-    protected Resources resource;
+    protected ResourcesModel resource;
+    
     /**
      * HttpTransfer object
      */
@@ -150,7 +156,7 @@ public abstract class AbstractService implements GetServiceModel, PostServiceMod
     }
 
     @Override
-    public Resources getResource() {
+    public ResourcesModel getResource() {
         return this.resource;
     }
 

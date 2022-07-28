@@ -4,7 +4,6 @@ import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.Response;
 import org.chaostocosmos.leap.http.annotation.MethodMappper;
 import org.chaostocosmos.leap.http.annotation.ServiceMapper;
-import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
 
@@ -17,7 +16,7 @@ import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
 public class SimpleStreamingService extends AbstractStreamingService {
 
     public SimpleStreamingService() {
-        super(MIME_TYPE.VIDEO_MP4, Context.getServer().getStreamingBufferSize());
+        super(MIME_TYPE.VIDEO_MP4);
     }
 
     @MethodMappper(mappingMethod = REQUEST_TYPE.GET, path = "/video")

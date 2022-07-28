@@ -10,11 +10,11 @@ import java.util.regex.Pattern;
 import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.Response;
 import org.chaostocosmos.leap.http.WASException;
+import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
-import org.chaostocosmos.leap.http.resources.Resources;
-import org.chaostocosmos.leap.http.resources.WatchResources.ResourceInfo;
+import org.chaostocosmos.leap.http.resources.ResourcesModel;
 import org.chaostocosmos.leap.http.services.model.StreamingModel;
 
 /**
@@ -25,7 +25,6 @@ import org.chaostocosmos.leap.http.services.model.StreamingModel;
 public abstract class AbstractStreamingService extends AbstractService implements StreamingModel {
 
     private final Pattern RANGE_PATTERN = Pattern.compile("bytes=(?<start>\\d*)-(?<end>\\d*)");
-    private int bufferSize;
     private long EXPIRE_TIME = 1000 * 60 * 60 * 24;
 
     /**
@@ -33,7 +32,7 @@ public abstract class AbstractStreamingService extends AbstractService implement
      * @param mimeType
      * @param bufferSize
      */
-    public AbstractStreamingService(MIME_TYPE mimeType, int bufferSize) {
+    public AbstractStreamingService(MIME_TYPE mimeType) {
         if(mimeType != MIME_TYPE.VIDEO_MP4 
            && mimeType != MIME_TYPE.VIDEO_X_FLV 
            && mimeType != MIME_TYPE.VIDEO_QUICKTIME
@@ -45,7 +44,6 @@ public abstract class AbstractStreamingService extends AbstractService implement
            ) {
            throw new WASException(MSG_TYPE.ERROR, 22, "Specified media type is not supported: "+mimeType.mimeType());
         }
-        this.bufferSize = bufferSize;        
     }
 
     @Override
@@ -55,41 +53,39 @@ public abstract class AbstractStreamingService extends AbstractService implement
         if(reqFile == null || reqFile.equals("")) {
             throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES412.code(), "Parameter not found(file). Streaming request must have field of file.");
         }
-        Path file = super.serviceManager.getHost().getStatic().resolve(reqFile);
-        if(!file.toFile().exists()) {
-            throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES404.code(), "Specified resource not found: "+file.toAbsolutePath().toString().replace("\\", "/"));
+        Path resourcePath = super.serviceManager.getHost().getStatic().resolve(reqFile);
+        if(!resourcePath.toFile().exists()) {
+            throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES404.code(), "Specified resource not found: "+resourcePath.toAbsolutePath().toString().replace("\\", "/"));
         }
         String range = request.getReqHeader().get("Range");
         if(range == null || range.equals("")) {
             throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES412.code(), "Header field not found(Range). Streaming request header must have field of Range");
         }
         Matcher matcher = RANGE_PATTERN.matcher(range);
-        long fileLength = file.toFile().length();
-        int start = 0;
+        long fileLength = resourcePath.toFile().length();
+        int position = 0;
         if (matcher.matches()) {
             String startGroup = matcher.group("start");
-            start = startGroup.isEmpty() ? start : Integer.valueOf(startGroup);
-            start = start < 0 ? 0 : start;
+            position = startGroup.isEmpty() ? position : Integer.valueOf(startGroup);
+            position = position < 0 ? 0 : position;
         }
-        int len = start + bufferSize > fileLength ? (int)fileLength - start : bufferSize;
-        //MediaStreamer mediaStreamer = new MediaStreamer(info);        
-        //byte[] body = mediaStreamer.getProgress(start, len);  
-        ResourceInfo info = (ResourceInfo) super.resource.getResourceInfo(file);
-        byte[] body = info.getBytes2(start, len);
+        int bufferSize = Context.getHost(request.getHostId()).getStreamingBufferSize();
+        int length = position + bufferSize >= fileLength ? (int)fileLength - position : bufferSize;
+        byte[] body = super.resource.getResource(resourcePath).getBytes1(position, length);
         int contentLength = body.length;
-        long lastModified = info.getTime(TimeUnit.MILLISECONDS);
+        long lastModified = TimeUnit.MILLISECONDS.convert(contentLength, TimeUnit.MILLISECONDS);
         long expire = System.currentTimeMillis() + EXPIRE_TIME;
-        MIME_TYPE mimeType = info.getMimeType();    
+        MIME_TYPE mimeType = MIME_TYPE.VIDEO_MP4;
     
         //Fill Response
-        super.logger.debug("Video streaming called: "+file.toString()+" ======================== length: "+fileLength);
-        super.logger.debug("Content start: "+start+"  length: "+contentLength);        
-        response.addHeader("Content-Disposition", String.format("inline;filename=\"%s\"", file.toFile().getName()));
+        super.logger.debug("Video streaming called: "+resourcePath.toString()+" ======================== length: "+fileLength);
+        super.logger.debug("Content start: "+position+"  length: "+contentLength);        
+        response.addHeader("Content-Disposition", String.format("inline;filename=\"%s\"", resourcePath.toFile().getName()));
         response.addHeader("Accept-Ranges", "bytes");
         response.addHeader("Last-Modified", lastModified);
         response.addHeader("Expires", expire);
         response.addHeader("Content-Type", mimeType.mimeType());
-        response.addHeader("Content-Range", String.format("bytes %s-%s/%s", start, start + len -1, fileLength));
+        response.addHeader("Content-Range", String.format("bytes %s-%s/%s", position, position + length -1, fileLength));
         response.addHeader("Content-Length", String.format("%s", contentLength));
         response.setResponseCode(206);
         response.setBody(body);        
@@ -125,8 +121,8 @@ public abstract class AbstractStreamingService extends AbstractService implement
      * @throws Exception
      */
     public byte[] getFilePartial(String contextPath, long start, int length) throws Exception {
-        Resources resource = super.getResource();
-        Object res = resource.getContextResourceInfo(contextPath);
+        ResourcesModel resource = super.getResource();
+        Object res = resource.getContextResource(contextPath);
         byte[] data = new byte[length];
         if(res instanceof File) {
             FileInputStream in = new FileInputStream((File)res);

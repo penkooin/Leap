@@ -210,7 +210,6 @@ public class LeapClient {
         String requestLine = method.name()+" "+contextPath+""+(contextParams == null ? "" : "?"+contextParams.entrySet().stream().map(e -> URLEncoder.encode(e.getKey(), charset)+"="+URLEncoder.encode(e.getValue(), charset)).collect(Collectors.joining("&")))+" HTTP/1.1\r\n";        
         this.outputStream.write(requestLine.getBytes(StandardCharsets.ISO_8859_1));        
         this.outputStream.flush();
-        System.out.print(requestLine);
     }
     /**
      * Write request headers
@@ -289,10 +288,8 @@ public class LeapClient {
         this.responseHeaders = new HashMap<>();
         int contentLength = 0;
         while(!(line = new String(readLine(is)).trim()).equals("")) {
-            System.out.println(line);
             String key = line.substring(0, line.indexOf(":")).trim();
             List<String> values = Arrays.asList(line.substring(line.indexOf(":")+1).trim().split(";")).stream().map(t -> t.trim()).collect(Collectors.toList());
-            System.out.println(values.toString());
             this.responseHeaders.put(key, values); 
             if(key.equals("Content-Length")) {
                 contentLength = Integer.parseInt(values.get(0));

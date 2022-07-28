@@ -3,8 +3,7 @@ server:
     version: 1.0.0
     connection-timeout: 5000
     backlog: 50
-    file-buffer-size: 1024
-    streaming-buffer-size: 1024000
+    file-buffer-size: 1024    
     request-blocking-interval: 100
 
     threadpool:

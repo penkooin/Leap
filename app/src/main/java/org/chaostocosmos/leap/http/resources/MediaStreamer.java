@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 import org.chaostocosmos.leap.http.commons.FileUtils;
-import org.chaostocosmos.leap.http.resources.WatchResources.ResourceInfo;
 
 /**
  * MediaStream
@@ -13,7 +12,7 @@ import org.chaostocosmos.leap.http.resources.WatchResources.ResourceInfo;
  */
 public class MediaStreamer {
 
-    ResourceInfo resourceInfo;
+    Resource resourceInfo;
     Path mediaPath;
     int bytePerSeconds;
 
@@ -22,7 +21,7 @@ public class MediaStreamer {
      * @param resourceInfo
      * @throws IOException
      */
-    public MediaStreamer(ResourceInfo resourceInfo) throws IOException {
+    public MediaStreamer(Resource resourceInfo) throws IOException {
         this.resourceInfo = resourceInfo;
         double duration = FileUtils.getMp4DurationSeconds(this.resourceInfo.getPath());
         double totalSize = this.resourceInfo.getResourceSize() * 1.0d;        

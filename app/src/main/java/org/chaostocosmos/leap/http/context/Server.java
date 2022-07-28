@@ -53,13 +53,6 @@ public class Server <T> extends Metadata <T> {
         return super.getValue("server.file-buffer-size");
     }
     /**
-     * Get streaming service buffer size
-     * @return
-     */
-    public <V> V getStreamingBufferSize() {
-        return super.getValue("server.streaming-buffer-size");
-    }
-    /**
      * Get threadpool core size
      * @return
      */

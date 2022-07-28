@@ -7,7 +7,7 @@ import org.chaostocosmos.leap.http.HttpTransferBuilder.HttpTransfer;
 import org.chaostocosmos.leap.http.Response;
 import org.chaostocosmos.leap.http.ServiceManager;
 import org.chaostocosmos.leap.http.WASException;
-import org.chaostocosmos.leap.http.resources.Resources;
+import org.chaostocosmos.leap.http.resources.ResourcesModel;
 import org.chaostocosmos.leap.http.services.filters.IFilter;
 
 /**
@@ -41,7 +41,7 @@ public interface ServiceModel extends SpringJPAModel, Cloneable {
     /**
      * Get Resource object
      */
-    public Resources getResource();
+    public ResourcesModel getResource();
 
     /**
      * Get ServiceManager

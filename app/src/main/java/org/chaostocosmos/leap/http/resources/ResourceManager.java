@@ -26,7 +26,7 @@ public class ResourceManager {
     /**
      * WatchResource object Map by Hosts
      */
-    Map<String, Resources> resourceMap;
+    Map<String, ResourcesModel> resourceMap;
     /**
      * StaticResourceManager object
      */
@@ -70,7 +70,7 @@ public class ResourceManager {
      * @throws URISyntaxException
      * @throws ImageProcessingException
      */
-    public static Resources get(String hostId) throws IOException, InterruptedException, URISyntaxException {
+    public static ResourcesModel get(String hostId) throws IOException, InterruptedException, URISyntaxException {
         if(manager == null) {
             manager = new ResourceManager();
         }
@@ -85,7 +85,7 @@ public class ResourceManager {
      * @throws InterruptedException
      * @throws ImageProcessingException
      */
-    public Resources getResource(String hostId) throws IOException, InterruptedException {
+    public ResourcesModel getResource(String hostId) throws IOException, InterruptedException {
         if(!this.resourceMap.containsKey(hostId)) {
             this.resourceMap.put(hostId, new WatchResources(Context.getHosts().getHost(hostId), WATCH_KIND));
         }
@@ -96,7 +96,7 @@ public class ResourceManager {
      * Get Resources Map
      * @return
      */
-    public Map<String, Resources> getResourceMap() {
+    public Map<String, ResourcesModel> getResourceMap() {
         return this.resourceMap;
     } 
 }

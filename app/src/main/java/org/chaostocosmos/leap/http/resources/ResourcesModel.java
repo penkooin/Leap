@@ -4,19 +4,18 @@ import java.nio.file.Path;
 import java.util.Map;
 
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
-import org.chaostocosmos.leap.http.resources.WatchResources.ResourceInfo;
 
 /**
  * Resource model
  * @author 9ins
  */
-public interface Resources {    
+public interface ResourcesModel {    
     /**
      * Filtering and get resource List by mime-type
      * @param mimeType
      * @return
      */
-    public ResourceInfo filter(MIME_TYPE mimeType) throws Exception;
+    public Resource filter(MIME_TYPE mimeType) throws Exception;
     /**
      * Resolve real path
      * @param contextPath
@@ -51,14 +50,32 @@ public interface Resources {
      * @param resourcePath
      * @return
      */
-    public ResourceInfo getResourceInfo(Path resourcePath) throws Exception;
+    public Resource getResource(Path resourcePath) throws Exception;
     /**
      * Get resource content
      * @param contentName
      * @return
      * @throws Exception
      */
-    public ResourceInfo getContextResourceInfo(String contextPath) throws Exception;
+    public Resource getContextResource(String contextPath) throws Exception;
+    /**
+     * Get resurce partial data
+     * @param resource
+     * @param position
+     * @param length
+     * @return
+     */
+    public byte[] getResourceData(Path resource, long position, int length) throws Exception;
+
+    /**
+     * Get partial bytes of file.
+     * @param resource
+     * @param position
+     * @param length
+     * @return
+     * @throws Exception
+     */
+    public byte[] getFilePartial(Path resource, long position, int length) throws Exception;
     /**
      * Whether resource exist in Resource
      * @param resourcePath

@@ -17,7 +17,7 @@ import org.chaostocosmos.leap.http.commons.Filtering;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
-import org.chaostocosmos.leap.http.resources.Resources;
+import org.chaostocosmos.leap.http.resources.ResourcesModel;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
@@ -140,6 +140,15 @@ public class Host <T> extends Metadata<T> {
      */    
     public <V> void setUsers(V users) {
         super.setValue("users", users);
+    }
+
+    /**
+     * Get streaming buffer size
+     * @param <V>
+     * @return
+     */
+    public <V> V getStreamingBufferSize() {
+        return super.getValue("resources.streaming-buffer-size");
     }
 
     /**
@@ -462,14 +471,14 @@ public class Host <T> extends Metadata<T> {
      * Get resource for host object
      * @return
      */
-    public Resources getResource() {
+    public ResourcesModel getResource() {
         return super.getValue("resources.resource");
     }
 
     /**
      * Set resource for host object
      */
-    public void setResource(Resources resource) {
+    public void setResource(ResourcesModel resource) {
         super.setValue("resources.resource", resource);
     }
 
