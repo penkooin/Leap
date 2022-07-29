@@ -199,7 +199,7 @@ public class Resource extends ConcurrentHashMap<String, Resource> {
                 } else if(start < partStart) {
                     if(end <= partEnd) {
                         int len = partStart + (partEnd - end);
-                        System.out.println("begin "+start+"  end: "+end+" data: "+data.length+"  posStart: "+partStart+"  posEnd: "+partEnd+"  len: "+len);
+                        System.out.println("begin "+start+"  end: "+end+"  data: "+data.length+"  posStart: "+partStart+"  posEnd: "+partEnd+"  len: "+len);
                         if(pos + len < end) {
                             System.arraycopy(data, 0, bytes, pos, len);
                         } else {
