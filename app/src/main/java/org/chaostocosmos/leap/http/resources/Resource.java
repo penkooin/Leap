@@ -11,8 +11,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
@@ -22,7 +22,7 @@ import org.chaostocosmos.leap.http.enums.MIME_TYPE;
  * 
  * @author 9ins
  */
-public class Resource extends ConcurrentHashMap<String, Resource> {
+public class Resource extends HashMap<String, Resource> {
     /**
      * Whether node resource
      */
@@ -138,7 +138,7 @@ public class Resource extends ConcurrentHashMap<String, Resource> {
             }
             part = new byte[rest];
             System.arraycopy(resourceRawData, cnt * part.length, part, 0, part.length);
-            this.resourceData.add(part);      
+            this.resourceData.add(part);
         } else {
             try(FileOutputStream out = new FileOutputStream(resourcePath.toFile())) {
                 out.write(resourceRawData);
@@ -171,41 +171,94 @@ public class Resource extends ConcurrentHashMap<String, Resource> {
      * @return
      * @throws IOException
      */
-    public synchronized byte[] getBytes1(long position, int length) throws Exception {
-        if(this.inMemoryFlag) {                
-            byte[] bytes = new byte[length];
+    public byte[] getBytes1(long position, int length) throws IOException {
+        byte[] bytes = new byte[length];
+        if(this.inMemoryFlag) {
             if(position < 0) {
                 throw new IllegalArgumentException("Offset position must be on positive side of the digit.");
             }
             int start = (int) position;
             int end  = (int) (position + length);
-            int partStart = 0, partEnd = 0;
-            int pos = 0;
-
+            int posStart = 0, posEnd = 0;
+            int idx = 0;
             for(int i=0; i<this.resourceData.size(); i++) {
                 byte[] data = this.resourceData.get(i);
-                partEnd += data.length;
-                partStart = partEnd - data.length;
+                posEnd += data.length;
+                posStart = posEnd - data.length;
                 //System.out.println("start: "+start+" end: "+end+"  range: "+posStart+" - "+posEnd+"  i: "+i);
-                if(start >= partStart && start < partEnd) {
-                    if(end <= partEnd) {
-                        System.arraycopy(data, start - partStart, bytes, 0, length);
+                if(start >= posStart && start < posEnd) {
+                    if(end <= posEnd) {
+                        System.arraycopy(data, start - posStart, bytes, 0, length);
                         break;
                     } else {
-                        pos = partEnd - start;
-                        System.arraycopy(data, start - partStart, bytes, 0, pos);
+                        idx = posEnd - start;
+                        System.arraycopy(data, start - posStart, bytes, 0, idx);
                         continue;
                     }
-                } else if(start < partStart) {
-                    if(end <= partEnd) {
-                        int len = partStart + (partEnd - end);
-                        System.out.println("begin "+start+"  end: "+end+"  data: "+data.length+"  posStart: "+partStart+"  posEnd: "+partEnd+"  len: "+len);
-                        if(pos + len < end) {
-                            System.arraycopy(data, 0, bytes, pos, len);
+                } else if(start <= posStart) {
+                    if(end < posEnd) {
+                        int len = (posEnd - end);
+                        //System.out.println("begin "+start+"  end: "+end+" data: "+data.length+"  posStart: "+posStart+"  posEnd: "+posEnd+"  len: "+len);
+                        if(idx + len < posEnd) {
+                            System.arraycopy(data, 0, bytes, idx, data.length - len);
                         } else {
-                            System.arraycopy(data, 0, bytes, pos, partEnd - len);
+                            System.arraycopy(data, 0, bytes, idx, posEnd - len);
                         }
                         break;    
+                    } else {
+                        System.arraycopy(data, 0, bytes, idx, data.length);
+                        //System.out.println("idx: "+idx);
+                        idx += data.length;
+                    }
+                }
+            }
+        } else {
+            bytes = getFilePartial(position, length);
+        }
+        return bytes;
+    }    
+
+    /**
+     * Get bytes of resource(file or memory) with position & length
+     * @param position
+     * @param length
+     * @return
+     * @throws IOException
+     */
+    public byte[] getBytes3(long position, int length) throws Exception {
+        byte[] bytes = new byte[length];
+        if(this.inMemoryFlag) {                
+            if(position < 0) {
+                throw new IllegalArgumentException("Offset position must be on positive side of the digit.");
+            }
+            int start = (int) position;
+            int end  = (int) (position + length);
+            int posStart = 0, posEnd = 0;
+            int pos = 0;
+            for(int i=0; i<this.resourceData.size(); i++) {
+                byte[] data = this.resourceData.get(i);
+                posEnd += data.length;
+                posStart = posEnd - data.length;
+                //System.out.println("start: "+start+" end: "+end+"  range: "+posStart+" - "+posEnd+"  i: "+i);
+                if(start >= posStart && start < posEnd) {
+                    if(end <= posEnd) {
+                        System.arraycopy(data, start - posStart, bytes, 0, length);
+                        break;
+                    } else {
+                        pos = posEnd - start;
+                        System.arraycopy(data, start - posStart, bytes, 0, pos);
+                        continue;
+                    }
+                } else if(start < posStart) {
+                    if(end < posEnd) {
+                        int len = posStart +(posEnd - end);
+                        System.out.println("begin "+start+"  end: "+end+" data: "+data.length+"  posStart: "+posStart+"  posEnd: "+posEnd+"  len: "+len+"  data: "+data.length+"  pos: "+pos);
+                        if(pos + len <= end) {
+                            System.arraycopy(data, 0, bytes, pos, len);
+                        } else {
+                            System.arraycopy(data, 0, bytes, pos, posEnd - len);
+                        }
+                        break;
                     } else {
                         System.arraycopy(data, 0, bytes, pos, data.length);
                         //System.out.println("idx: "+idx);
@@ -213,10 +266,10 @@ public class Resource extends ConcurrentHashMap<String, Resource> {
                     }
                 }
             } 
-            return bytes;    
         } else {
-            return getFilePartial(position, length);
+            bytes = getFilePartial(position, length);
         }
+        return bytes;
     }
 
     /**
