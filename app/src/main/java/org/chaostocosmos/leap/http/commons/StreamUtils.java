@@ -49,6 +49,7 @@ public class StreamUtils {
         }
         logger.debug("Save bytes Data To: "+savePath.toString()+"   Size: "+savePath.toFile().length());
     }
+    
     /**
      * Save binary body
      * @param host
@@ -103,6 +104,7 @@ public class StreamUtils {
      * @param host
      * @param is
      * @param boundary
+     * @param charset
      * @return
      * @throws IOException
      */
@@ -163,6 +165,7 @@ public class StreamUtils {
      * @param savePath
      * @param flushSize
      * @param boundary
+     * @param charset
      * @throws IOException
      */
     public static synchronized List<Path> saveMultiPart(String host, InputStream inputStream, Path savePath, int flushSize, String boundary, Charset charset) throws IOException {
@@ -365,7 +368,7 @@ public class StreamUtils {
             baos.write(c);
         } ;
         byte[] data = baos.toByteArray();
-        String line = new String(Arrays.copyOfRange(data, 0, data.length -1), charset);
+        String line = new String(Arrays.copyOfRange(data, 0, data.length - 1), charset);
         return line.equals("") ? null : line;
     }
 

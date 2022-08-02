@@ -112,7 +112,8 @@ class UtilBoxTest {
     }
 
     public static void main(String[] args) {
-        testGson();        
+        int val = 1 / 12;
+        System.out.println(val);
     }
 
 }

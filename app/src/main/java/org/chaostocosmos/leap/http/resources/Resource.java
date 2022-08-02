@@ -10,10 +10,12 @@ import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
 
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 
@@ -74,7 +76,7 @@ public class Resource extends HashMap<String, Resource> {
     int splitSize;
 
     /**
-     * Constructs with resource path & in-memory flag
+     * Constructs with resource path & in-memory flag & file split size
      * @param isNode
      * @param resourcePath
      * @param inMemoryFlag
@@ -90,7 +92,7 @@ public class Resource extends HashMap<String, Resource> {
         this.splitSize = splitSize;
         this.mimeType = MIME_TYPE.mimeType(Files.probeContentType(this.resourcePath));
         if(this.inMemoryFlag) {
-            this.resourceData = Collections.synchronizedList(new ArrayList<>());
+            this.resourceData = new ArrayList<>();
             try(FileInputStream fis = new FileInputStream(resourcePath.toFile())) {
                 long fileSize = this.resourcePath.toFile().length();
                 int cnt = (int) (fileSize / splitSize);
@@ -109,7 +111,7 @@ public class Resource extends HashMap<String, Resource> {
     }  
 
     /**
-     * Constructs with node flag, path, raw data
+     * Constructs with node flag, path, raw data, in-memory flag, splited file size
      * @param isNode
      * @param resourcePath
      * @param resourceRawData
@@ -166,6 +168,7 @@ public class Resource extends HashMap<String, Resource> {
 
     /**
      * Get bytes of resource(file or memory) with position & length
+     * 
      * @param position
      * @param length
      * @return
@@ -177,142 +180,81 @@ public class Resource extends HashMap<String, Resource> {
             if(position < 0) {
                 throw new IllegalArgumentException("Offset position must be on positive side of the digit.");
             }
-            int start = (int) position;
-            int end  = (int) (position + length);
-            int posStart = 0, posEnd = 0;
-            int idx = 0;
-            for(int i=0; i<this.resourceData.size(); i++) {
+            final int startIdx = (int) (position / this.splitSize);
+            final int endIdx = startIdx + (length % this.splitSize == 0 ? length / this.splitSize : length / this.splitSize + 1);
+            final int pre = (int) (position % this.splitSize);
+            final int post = (int) ((position + length) % this.splitSize);
+            //System.out.println("resourceSize: "+this.resourceSize+"  splitCount: "+this.resourceData.size()+"  splitSize: "+this.splitSize+" startIdx: "+startIdx+"  endIdx: "+endIdx+"  pre: "+pre+"  post: "+post+"  position: "+position+"  length: "+length);
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            IntStream.range(startIdx, endIdx).mapToObj(i -> {
                 byte[] data = this.resourceData.get(i);
-                posEnd += data.length;
-                posStart = posEnd - data.length;
-                //System.out.println("start: "+start+" end: "+end+"  range: "+posStart+" - "+posEnd+"  i: "+i);
-                if(start >= posStart && start < posEnd) {
-                    if(end <= posEnd) {
-                        System.arraycopy(data, start - posStart, bytes, 0, length);
-                        break;
-                    } else {
-                        idx = posEnd - start;
-                        System.arraycopy(data, start - posStart, bytes, 0, idx);
-                        continue;
-                    }
-                } else if(start <= posStart) {
-                    if(end < posEnd) {
-                        int len = (posEnd - end);
-                        //System.out.println("begin "+start+"  end: "+end+" data: "+data.length+"  posStart: "+posStart+"  posEnd: "+posEnd+"  len: "+len);
-                        if(idx + len < posEnd) {
-                            System.arraycopy(data, 0, bytes, idx, data.length - len);
-                        } else {
-                            System.arraycopy(data, 0, bytes, idx, posEnd - len);
-                        }
-                        break;    
-                    } else {
-                        System.arraycopy(data, 0, bytes, idx, data.length);
-                        //System.out.println("idx: "+idx);
-                        idx += data.length;
-                    }
+                if(i == startIdx) {
+                    // System.out.println("start i: " + i + "  len: " + (data.length - pre));
+                    return Arrays.copyOfRange(data, pre, data.length);
+                } else if(i == endIdx - 1 ) {
+                    // System.out.println("end i: " + i + "  len: " + post);
+                    return Arrays.copyOfRange(data, 0, post);
+                } else {
+                    // System.out.println("---------------------------------------");
+                    return Arrays.copyOfRange(data, 0, data.length);
                 }
-            }
+            }).forEach(ba -> {
+                try {
+                    baos.write(ba);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+            baos.close();
+            return baos.toByteArray();
         } else {
             bytes = getFilePartial(position, length);
         }
         return bytes;
-    }    
+    } 
 
     /**
      * Get bytes of resource(file or memory) with position & length
+     * 
      * @param position
      * @param length
      * @return
      * @throws IOException
      */
-    public byte[] getBytes3(long position, int length) throws Exception {
-        byte[] bytes = new byte[length];
-        if(this.inMemoryFlag) {                
-            if(position < 0) {
-                throw new IllegalArgumentException("Offset position must be on positive side of the digit.");
-            }
-            int start = (int) position;
-            int end  = (int) (position + length);
-            int posStart = 0, posEnd = 0;
-            int pos = 0;
-            for(int i=0; i<this.resourceData.size(); i++) {
-                byte[] data = this.resourceData.get(i);
-                posEnd += data.length;
-                posStart = posEnd - data.length;
-                //System.out.println("start: "+start+" end: "+end+"  range: "+posStart+" - "+posEnd+"  i: "+i);
-                if(start >= posStart && start < posEnd) {
-                    if(end <= posEnd) {
-                        System.arraycopy(data, start - posStart, bytes, 0, length);
-                        break;
-                    } else {
-                        pos = posEnd - start;
-                        System.arraycopy(data, start - posStart, bytes, 0, pos);
-                        continue;
-                    }
-                } else if(start < posStart) {
-                    if(end < posEnd) {
-                        int len = posStart +(posEnd - end);
-                        System.out.println("begin "+start+"  end: "+end+" data: "+data.length+"  posStart: "+posStart+"  posEnd: "+posEnd+"  len: "+len+"  data: "+data.length+"  pos: "+pos);
-                        if(pos + len <= end) {
-                            System.arraycopy(data, 0, bytes, pos, len);
-                        } else {
-                            System.arraycopy(data, 0, bytes, pos, posEnd - len);
-                        }
-                        break;
-                    } else {
-                        System.arraycopy(data, 0, bytes, pos, data.length);
-                        //System.out.println("idx: "+idx);
-                        pos += data.length;
-                    }
-                }
-            } 
-        } else {
-            bytes = getFilePartial(position, length);
-        }
-        return bytes;
-    }
-
-    /**
-     * Get bytes of resource(file or memory) with position & length
-     * @param position
-     * @param length
-     * @return
-     * @throws IOException
-     */
-    public synchronized byte[] getBytes2(long position, int length) throws IOException {
+    public byte[] getBytes2(final long position, final int length) throws IOException {
         if(this.inMemoryFlag) {
             if(position < 0) {
                 throw new IllegalArgumentException("Offset position must be on positive side of the digit.");
             }
-            byte[] bytes = new byte[length];
-            long totalLen = this.resourcePath.toFile().length();
-            int totalCnt = this.resourceData.size();
-            int partIdx1 = (int) ( position / (totalCnt * this.splitSize) );
-            int partIdx2 = (int) ( (position + length) / (totalCnt * this.splitSize) );
-            System.out.println("filename: "+this.resourceFile.getName()+"  partIdx1: "+partIdx1+"  partIdx2: "+partIdx2+"  total count: "+totalCnt+"  position: "+position+"  buffer: "+length+"  part size: "+this.resourceData.get(0).length);
+            int partIdx1 = (int) ( position / this.splitSize );
+            int partIdx2 = (int) ((position + length) / this.splitSize);
+            int pre = (int) ( position % this.splitSize );
+            int post = (int) (( position + length) % this.splitSize );
+            //System.out.println("filename: "+this.resourceFile.getName()+"  partIdx1: "+partIdx1+"  partIdx2: "+partIdx2+"  pre: "+pre+"  post: "+post+"  position: "+position+"  length: "+length+"  resourceCount: "+this.resourceData.size());
             if(partIdx1 == partIdx2) {
                 byte[] part = this.resourceData.get(partIdx1);
-                System.arraycopy(part, (int)(position % part.length), bytes, 0, length);
+                return Arrays.copyOfRange(part, pre, pre + length);
             } else {
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 if(partIdx2 - partIdx1 == 1) {
-                    byte[] part = this.resourceData.get(partIdx1); 
-                    int idx = (int) ( position - (partIdx1 * part.length) );
-                    System.arraycopy(part, idx, bytes, 0, part.length - idx);
+                    byte[] part = this.resourceData.get( partIdx1 );
+                    baos.write(Arrays.copyOfRange(part, pre, part.length));
                     part = this.resourceData.get( partIdx2 );
-                    System.arraycopy(part, 0, bytes, part.length - idx, length - (part.length - idx));
+                    baos.write(Arrays.copyOfRange(part, 0, post));
                 } else {
-                    byte[] part = this.resourceData.get(partIdx1); 
-                    int idx = (int) ( position - (partIdx1 * part.length) );
-                    System.arraycopy(part, idx, bytes, 0, part.length - idx);
-                    for(int i=0; i < (partIdx2 - partIdx1); i++) {
+                    byte[] part = this.resourceData.get( partIdx1 );
+                    baos.write(Arrays.copyOfRange(part, pre, part.length));
+                    for(int i = partIdx1 + 1; i < partIdx2; i++) {
                         part = this.resourceData.get(i);
-                        System.arraycopy(part, 0, bytes, idx += (i * part.length), part.length);
+                        baos.write(part);
+                        //System.out.println("i: "+i+"  pre: "+pre+"  post: "+post+"  part: "+part.length);
                     }
-                    part = this.resourceData.get(partIdx2);
-                    System.arraycopy(part, 0, bytes, idx, (int)(totalLen % idx));
+                    part = this.resourceData.get( partIdx2 );
+                    baos.write(Arrays.copyOfRange(part, 0, post));
                 }
+                baos.close();
+                return baos.toByteArray();
             }
-            return bytes;
         } else {
             return getFilePartial(position, length);
         }

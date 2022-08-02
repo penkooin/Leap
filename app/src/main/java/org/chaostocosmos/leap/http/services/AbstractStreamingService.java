@@ -71,7 +71,7 @@ public abstract class AbstractStreamingService extends AbstractService implement
         }
         int bufferSize = Context.getHost(request.getHostId()).getStreamingBufferSize();
         int length = position + bufferSize >= fileLength ? (int)fileLength - position : bufferSize;
-        byte[] body = super.resource.getResource(resourcePath).getBytes1(position, length);
+        byte[] body = super.resource.getResource(resourcePath).getBytes2(position, length);
         int contentLength = body.length;
         long lastModified = TimeUnit.MILLISECONDS.convert(contentLength, TimeUnit.MILLISECONDS);
         long expire = System.currentTimeMillis() + EXPIRE_TIME;

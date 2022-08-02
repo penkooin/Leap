@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch UtilBoxTest",
+            "request": "launch",
+            "mainClass": "org.chaostocosmos.leap.http.UtilBoxTest",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
             "name": "Launch ReflectionTest",
             "request": "launch",
             "mainClass": "org.chaostocosmos.leap.http.ReflectionTest",
