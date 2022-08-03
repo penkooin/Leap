@@ -31,7 +31,6 @@ import org.chaostocosmos.leap.http.enums.RES_CODE;
 import org.chaostocosmos.leap.http.resources.ClassUtils;
 import org.chaostocosmos.leap.http.resources.Html;
 import org.chaostocosmos.leap.http.resources.LeapURLClassLoader;
-import org.chaostocosmos.leap.http.resources.ResourceMonitor;
 
 import ch.qos.logback.classic.Logger;
 
@@ -46,58 +45,72 @@ public class LeapHttpServer extends Thread {
      * logger
      */
     Logger logger = LoggerFactory.getLogger(Context.getHosts().getDefaultHost().getHostId());
+
     /**
      * Whether default host
      */
     boolean isDefaultHost;
+
     /**
      * Protocol
      */
     PROTOCOL protocol;
+
     /**
      * InetSocketAddress
      */
     InetSocketAddress inetSocketAddress;
+
     /**
      * backlog
      */
     int backlog;
+
     /**
      * document root
      */
     Path docroot;
+
     /**
      * leap home path
      */
     Path homePath;
+
     /**
      * Hosts
      */
     Host<?> host;
+
     /**
      * Server socket
      */
     ServerSocket server;
+
     /**
      * servlet loading & managing
      */
     ServiceManager serviceManager;
-    /**
-     * Resource monitor
-     */
-    ResourceMonitor resourceMonitor;
+
     /**
      * thread pool
      */
     ThreadPoolExecutor threadpool;
+
     /**
      * Redirect host object
      */
     RedirectHostSelection redirectHostSelection;
+
     /**
      * IP filtering object
      */
     Filtering ipAllowedFilters, ipForbiddenFilters; 
+
+    /**
+     * Server started flag
+     */
+    boolean started;
+
     /**
      * Default constructor 
      * @throws NotSupportedException
@@ -107,6 +120,7 @@ public class LeapHttpServer extends Thread {
     public LeapHttpServer() throws NotSupportedException, IOException, URISyntaxException {
         this(Constants.DEFAULT_HOME_PATH);
     }
+
     /**
      * Construct with home path
      * @param homePath
@@ -124,6 +138,7 @@ public class LeapHttpServer extends Thread {
                                     new LinkedBlockingQueue<Runnable>())
         );
     }
+
     /**
      * Construct with home path, host object, thread pool
      * @param homePath
@@ -137,7 +152,7 @@ public class LeapHttpServer extends Thread {
                           Host<?> host, 
                           ThreadPoolExecutor threadpool
                           ) throws NotSupportedException, IOException, URISyntaxException {
-        this(homePath, host, threadpool, ClassUtils.getClassLoader(), ResourceMonitor.get());
+        this(homePath, host, threadpool, ClassUtils.getClassLoader());
     }
 
     /**
@@ -146,7 +161,6 @@ public class LeapHttpServer extends Thread {
      * @param host
      * @param threadpool 
      * @param classLoader
-     * @param resourceMonitor
      * @throws URISyntaxException
      * @throws IOException
      * @throws NotSupportedException
@@ -155,8 +169,7 @@ public class LeapHttpServer extends Thread {
     public LeapHttpServer(Path homePath, 
                           Host<?> host, 
                           ThreadPoolExecutor threadpool, 
-                          LeapURLClassLoader classLoader,
-                          ResourceMonitor resourceMonitor
+                          LeapURLClassLoader classLoader
                           ) throws IOException, URISyntaxException, NotSupportedException {
         this(
             true,
@@ -167,8 +180,7 @@ public class LeapHttpServer extends Thread {
             Context.getServer().getBackLog(),
             threadpool,
             host,
-            classLoader,
-            resourceMonitor
+            classLoader
         );
     }
 
@@ -183,7 +195,6 @@ public class LeapHttpServer extends Thread {
      * @param threadpool
      * @param host
      * @param classLoader
-     * @param resourceMonitor
      * @throws URISyntaxException
      * @throws IOException
      * @throws NotSupportedException
@@ -196,8 +207,7 @@ public class LeapHttpServer extends Thread {
                           int backlog, 
                           ThreadPoolExecutor threadpool,
                           Host<?> host,
-                          LeapURLClassLoader classLoader,
-                          ResourceMonitor resourceMonitor
+                          LeapURLClassLoader classLoader
                           ) throws IOException, URISyntaxException, NotSupportedException {
         this.isDefaultHost = true;
         this.homePath = homePath;
@@ -207,12 +217,12 @@ public class LeapHttpServer extends Thread {
         this.host = host;
         this.threadpool = threadpool;
         this.inetSocketAddress = inetSocketAddress;
-        this.resourceMonitor = resourceMonitor;
         this.ipAllowedFilters = host.getIpAllowedFiltering();
         this.ipForbiddenFilters = host.getIpForbiddenFiltering();
         this.redirectHostSelection = new RedirectHostSelection(Context.getServer().getLoadBalanceRedirects());
         this.serviceManager = new ServiceManager(host, new UserManager(host.getHostId()), classLoader);
     }
+
     /**
      * Get service host ID
      * @return
@@ -220,6 +230,7 @@ public class LeapHttpServer extends Thread {
     public String getHostId() {
         return this.host.getHostId();
     }
+
     /**
      * Get service port
      * @return
@@ -227,6 +238,7 @@ public class LeapHttpServer extends Thread {
     public int getPort() {
         return this.inetSocketAddress.getPort();
     }
+
     /**
      * Get servlet loader object
      * @return
@@ -234,13 +246,7 @@ public class LeapHttpServer extends Thread {
     protected ServiceManager getServiceManager() {
         return this.serviceManager;
     }
-    /**
-     * Get resource monitor
-     * @return
-     */
-    protected ResourceMonitor getResourceMonitor() {
-        return this.resourceMonitor;
-    }
+
     /**
      * Get root directory
      * @return
@@ -293,11 +299,12 @@ public class LeapHttpServer extends Thread {
                         out.write(resPage.getBytes());
                     }
                     connection.close();
-            }
+                }
             } 
         } catch(Exception e) {
             logger.error(e.getMessage(), e);
         }
+        this.started = true;
     }
     /**
      * Stop server 
@@ -306,5 +313,13 @@ public class LeapHttpServer extends Thread {
      */
     public void close() throws InterruptedException, IOException {
         this.server.close();
+    }
+
+    /**
+     * Whether server started
+     * @return
+     */
+    public boolean isStarted() {
+        return this.started;
     }
 }

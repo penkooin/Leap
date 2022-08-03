@@ -49,7 +49,7 @@ public class StreamUtils {
         }
         logger.debug("Save bytes Data To: "+savePath.toString()+"   Size: "+savePath.toFile().length());
     }
-    
+
     /**
      * Save binary body
      * @param host
@@ -115,7 +115,7 @@ public class StreamUtils {
         Map<String, byte[]> multiPartMap = new HashMap<>();
         String boundaryStart = "--"+boundary;
         String boundaryEnd = boundaryStart+"--";
-        boolean isLast = false;    
+        boolean isLast = false;
         do {
             if(line.trim().startsWith(boundaryStart)) {
                 String contentDesposition = readLine(reader, charset);
@@ -140,7 +140,7 @@ public class StreamUtils {
                             len -= 2;
                             break;
                         }
-                        len += lineData.length;         
+                        len += lineData.length;
                         data.writeBytes(lineData);
                         lineStream.reset();
                     }

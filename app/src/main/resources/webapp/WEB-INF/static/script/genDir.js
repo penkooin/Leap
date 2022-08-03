@@ -4,12 +4,11 @@
  * @param {*} resJson 
  */
 function genDir(resJson) {            
-    var data = JSON.parse(resJson);
+    var data = JSON.parse(resJson);    
     var host = data.host.substring(0, data.host.lastIndexOf('/'));
     var path = data.path.substring(1, data.path.length);
     var parent = data.parent;
     var elements = data.elements;
-
     var accum = '';
     var sublink = path == '' ? '' : "</a>"+path.split('/').map(e => {
         var l = '<a class=\"font-large\" href=\"'+accum+"/"+e+'\">/'+e+'</a>';

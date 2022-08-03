@@ -11,7 +11,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -97,8 +96,8 @@ public class Resource extends HashMap<String, Resource> {
                 long fileSize = this.resourcePath.toFile().length();
                 int cnt = (int) (fileSize / splitSize);
                 int rest = (int) (fileSize % splitSize);
-                for(int i=0; i<cnt; i++) {
-                    byte[] part = new byte[splitSize];
+                for(int i = 0; i < cnt; i++) {
+                    byte[] part = new byte[ splitSize ];
                     fis.read(part);
                     this.resourceData.add(part);
                 }
@@ -108,10 +107,11 @@ public class Resource extends HashMap<String, Resource> {
             };
         }
         this.lastModified = resourcePath.toFile().lastModified();
-    }  
+    }
 
     /**
      * Constructs with node flag, path, raw data, in-memory flag, splited file size
+     * 
      * @param isNode
      * @param resourcePath
      * @param resourceRawData
@@ -127,18 +127,18 @@ public class Resource extends HashMap<String, Resource> {
         this.splitSize = splitSize;
         this.mimeType = MIME_TYPE.mimeType(Files.probeContentType(this.resourcePath));
         if(this.inMemoryFlag) {
-            this.resourceData = Collections.synchronizedList(new ArrayList<>());
+            this.resourceData = new ArrayList<>();
             long fileSize = resourceRawData.length;
-            int cnt = (int)(fileSize / splitSize);
-            int rest = (int)(fileSize % splitSize);
+            int cnt = (int) (fileSize / splitSize);
+            int rest = (int) (fileSize % splitSize);
             byte[] part = null;
             int i = 0;
-            for(i=0; i<cnt; i++) {
-                part = new byte[splitSize];
+            for(i = 0; i < cnt; i++) {
+                part = new byte[ splitSize ];
                 System.arraycopy(resourceRawData, i * part.length, part, 0, part.length);
                 this.resourceData.add(part);
             }
-            part = new byte[rest];
+            part = new byte[ rest ];
             System.arraycopy(resourceRawData, cnt * part.length, part, 0, part.length);
             this.resourceData.add(part);
         } else {
@@ -151,16 +151,18 @@ public class Resource extends HashMap<String, Resource> {
 
     /**
      * Get all bytes on resource
+     * 
      * @return
      * @throws IOException
      */
     public byte[] getBytes() throws IOException {
         if(this.inMemoryFlag) {
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
-            for(byte[] part : this.resourceData) {
-                out.write(part);
+            try( ByteArrayOutputStream out = new ByteArrayOutputStream() ) {
+                for(byte[] part : this.resourceData) {
+                    out.write(part);
+                }
+                return out.toByteArray();    
             }
-            return out.toByteArray();
         } else {
             return Files.readAllBytes(this.resourcePath);
         }
@@ -185,28 +187,28 @@ public class Resource extends HashMap<String, Resource> {
             final int pre = (int) (position % this.splitSize);
             final int post = (int) ((position + length) % this.splitSize);
             //System.out.println("resourceSize: "+this.resourceSize+"  splitCount: "+this.resourceData.size()+"  splitSize: "+this.splitSize+" startIdx: "+startIdx+"  endIdx: "+endIdx+"  pre: "+pre+"  post: "+post+"  position: "+position+"  length: "+length);
-            final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            IntStream.range(startIdx, endIdx).mapToObj(i -> {
-                byte[] data = this.resourceData.get(i);
-                if(i == startIdx) {
-                    // System.out.println("start i: " + i + "  len: " + (data.length - pre));
-                    return Arrays.copyOfRange(data, pre, data.length);
-                } else if(i == endIdx - 1 ) {
-                    // System.out.println("end i: " + i + "  len: " + post);
-                    return Arrays.copyOfRange(data, 0, post);
-                } else {
-                    // System.out.println("---------------------------------------");
-                    return Arrays.copyOfRange(data, 0, data.length);
-                }
-            }).forEach(ba -> {
-                try {
-                    baos.write(ba);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
-            baos.close();
-            return baos.toByteArray();
+            try( ByteArrayOutputStream baos = new ByteArrayOutputStream() ) {
+                IntStream.range(startIdx, endIdx).mapToObj(i -> {
+                    byte[] data = this.resourceData.get(i);
+                    if(i == startIdx) {
+                        // System.out.println("start i: " + i + "  len: " + (data.length - pre));
+                        return Arrays.copyOfRange(data, pre, data.length);
+                    } else if(i == endIdx - 1 ) {
+                        // System.out.println("end i: " + i + "  len: " + post);
+                        return Arrays.copyOfRange(data, 0, post);
+                    } else {
+                        // System.out.println("---------------------------------------");
+                        return Arrays.copyOfRange(data, 0, data.length);
+                    }
+                }).forEach(ba -> {
+                    try {
+                        baos.write(ba);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+                return baos.toByteArray();
+            }
         } else {
             bytes = getFilePartial(position, length);
         }
@@ -235,25 +237,25 @@ public class Resource extends HashMap<String, Resource> {
                 byte[] part = this.resourceData.get(partIdx1);
                 return Arrays.copyOfRange(part, pre, pre + length);
             } else {
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                if(partIdx2 - partIdx1 == 1) {
-                    byte[] part = this.resourceData.get( partIdx1 );
-                    baos.write(Arrays.copyOfRange(part, pre, part.length));
-                    part = this.resourceData.get( partIdx2 );
-                    baos.write(Arrays.copyOfRange(part, 0, post));
-                } else {
-                    byte[] part = this.resourceData.get( partIdx1 );
-                    baos.write(Arrays.copyOfRange(part, pre, part.length));
-                    for(int i = partIdx1 + 1; i < partIdx2; i++) {
-                        part = this.resourceData.get(i);
-                        baos.write(part);
-                        //System.out.println("i: "+i+"  pre: "+pre+"  post: "+post+"  part: "+part.length);
+                try( ByteArrayOutputStream baos = new ByteArrayOutputStream() ) {
+                    if(partIdx2 - partIdx1 == 1) {
+                        byte[] part = this.resourceData.get( partIdx1 );
+                        baos.write(Arrays.copyOfRange(part, pre, part.length));
+                        part = this.resourceData.get( partIdx2 );
+                        baos.write(Arrays.copyOfRange(part, 0, post));
+                    } else {
+                        byte[] part = this.resourceData.get( partIdx1 );
+                        baos.write(Arrays.copyOfRange(part, pre, part.length));
+                        for(int i = partIdx1 + 1; i < partIdx2; i++) {
+                            part = this.resourceData.get(i);
+                            baos.write(part);
+                            //System.out.println("i: "+i+"  pre: "+pre+"  post: "+post+"  part: "+part.length);
+                        }
+                        part = this.resourceData.get( partIdx2 );
+                        baos.write(Arrays.copyOfRange(part, 0, post));
                     }
-                    part = this.resourceData.get( partIdx2 );
-                    baos.write(Arrays.copyOfRange(part, 0, post));
+                    return baos.toByteArray();    
                 }
-                baos.close();
-                return baos.toByteArray();
             }
         } else {
             return getFilePartial(position, length);

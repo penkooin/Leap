@@ -104,9 +104,9 @@ public class LeapRequestHandler implements Runnable {
                 } else {
                     if (host.getResource().exists(resourcePath)) {
                         //Get requested resource data
-                        Resource resourceInfo = host.getResource().getResource(resourcePath);
-                        if(resourceInfo != null) {
-                            if(resourceInfo.isNode()) {
+                        Resource resource = host.getResource().getResource(resourcePath);
+                        if(resource != null) {
+                            if(resource.isNode()) {
                                 String body = TemplateBuilder.buildResourceHtml(request.getContextPath(), host);
                                 String mimeType = MIME_TYPE.TEXT_HTML.mimeType();
                                 response.setResponseCode(RES_CODE.RES200.code());
@@ -114,13 +114,13 @@ public class LeapRequestHandler implements Runnable {
                                 response.setBody(body);
                                 //LoggerFactory.getLogger(hosts.getHost()).debug("RESOURCE LIST REQUESTED: "+body);
                             } else {
-                                String mimeType = UtilBox.probeContentType(resourceInfo.getPath());
+                                String mimeType = UtilBox.probeContentType(resource.getPath());
                                 if(mimeType == null) {
                                     mimeType = MIME_TYPE.APPLICATION_OCTET_STREAM.mimeType();
                                 }
                                 response.setResponseCode(RES_CODE.RES200.code());
                                 response.addHeader("Content-Type", mimeType);
-                                response.setBody(resourceInfo.getBytes());
+                                response.setBody(resource.getBytes());
                                 LoggerFactory.getLogger(host.getHost()).debug("DOWNLOAD RESOURCE MIME-TYPE: "+mimeType);    
                             }
                         } else {

@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.InetAddress;
-import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -29,6 +28,7 @@ import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.context.MetaEvent;
 import org.chaostocosmos.leap.http.context.MetaListener;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
+import org.chaostocosmos.leap.http.resources.ClassUtils;
 import org.chaostocosmos.leap.http.resources.ResourceHelper;
 import org.chaostocosmos.leap.http.resources.ResourceManager;
 import org.chaostocosmos.leap.http.resources.ResourceMonitor;
@@ -65,7 +65,12 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
     /**
      * Static resource manager
      */
-    public static ResourceManager staticResourceManager;
+    public static ResourceManager resourceManager;
+
+    /**
+     * Resource Monitor
+     */
+    public static ResourceMonitor resourceMonitor;
 
     /**
      * Server Map
@@ -85,13 +90,10 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
     /**
      * Constructor with arguments
      * @param args 
-     * @throws IOException
-     * @throws URISyntaxException
-     * @throws WASException
-     * @throws ParseException
+     * @throws Exception
      */
     public LeapApp(String[] args) throws Exception {
-        //set commend line options
+        // set commend line options
         leapServerMap = new HashMap<>();
         setup(args);
     }
@@ -109,6 +111,7 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
         } catch (ParseException e) {
             throw new WASException(e);
         }
+                
         //set HOME directory
         String optionH = cmdLine.getOptionValue("h");
         if(optionH != null) {
@@ -121,6 +124,7 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
         } else {
             HOME_PATH = Paths.get("./").toAbsolutePath().normalize(); 
         }
+
         if(!HOME_PATH.toFile().isDirectory() || !HOME_PATH.toFile().exists()) {
             throw new FileNotFoundException("Resource path must be directory and exist : "+HOME_PATH.toAbsolutePath().toString());
         }
@@ -148,8 +152,7 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
             systemOut = System.out;
             System.setOut(new PrintStream(new OutputStream() {
                 @Override
-                public void write(int b) throws IOException {                    
-                }
+                public void write(int b) throws IOException {}
             }));
             logger.info("verbose mode off");
         } else {
@@ -159,7 +162,7 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
 
     /**
      * Start environment
-     * @throws WASException
+     * @throws Exception
      */
     public void start() throws Exception {
         //NetworkInterfaces.getAllNetworkAddresses().stream().forEach(i -> System.out.println(i.getHostName())); 
@@ -167,15 +170,18 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
 
         //Spring JPA 
         //SpringJPAManager jpaManager = SpringJPAManager.get();
-        //initialize static resource manager
-        staticResourceManager = ResourceManager.initialize();
+
         //initialize thread queue
         threadQueue = new LinkedBlockingQueue<Runnable>();
         //initialize thread pool
-        threadpool = new ThreadPoolExecutor(Context.getServer().<Integer> getThreadPoolCoreSize(), Context.getServer().<Integer> getThreadPoolMaxSize(), Context.getServer().<Integer> getThreadPoolKeepAlive(), TimeUnit.SECONDS, threadQueue);        
+        threadpool = new ThreadPoolExecutor(Context.getServer().<Integer> getThreadPoolCoreSize(), Context.getServer().<Integer> getThreadPoolMaxSize(), Context.getServer().<Integer> getThreadPoolKeepAlive(), TimeUnit.SECONDS, threadQueue);                
         logger.info("====================================================================================================");
         logger.info("ThreadPool initialized - CORE: "+Context.getServer().<Integer> getThreadPoolCoreSize()+"   MAX: "+Context.getServer().<Integer> getThreadPoolMaxSize()+"   KEEP-ALIVE WHEN IDLE(seconds): "+Context.getServer().<Integer> getThreadPoolKeepAlive());    
 
+        //initialize resource manager
+        resourceManager = ResourceManager.initialize();
+
+        //initialize Leap hosts
         for(Host<?> host : Context.getHosts().getAllHost()) {    
             InetAddress hostAddress = InetAddress.getByName(host.getHost());
             String hostName = hostAddress.getHostAddress()+":"+host.getPort();
@@ -183,7 +189,7 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
                 String key = leapServerMap.keySet().stream().filter(k -> k.equals(hostName)).findAny().get();
                 throw new IllegalArgumentException("Mapping host address is collapse on network interace: "+hostAddress.toString()+":"+host.getPort()+" with "+key);
             }
-            LeapHttpServer server = new LeapHttpServer(Context.getHomePath(), host, threadpool);
+            LeapHttpServer server = new LeapHttpServer(Context.getHomePath(), host, threadpool, ClassUtils.getClassLoader());
             leapServerMap.put(hostAddress.getHostAddress()+":"+host.getPort(), server);
             if(host.<Boolean> isDefaultHost()) {
                 logger.info("[DEFAULT HOST] - Protocol: "+host.getProtocol()+"   Server: "+host.getHostId()+"   Host: "+host.getHost()+"   Port: "+host.getPort()+"   Doc-Root: "+host.getDocroot()+"   Logging path: "+host.getLogPath()+"   Level: "+host.getLogLevel().toString());                
@@ -195,8 +201,19 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
         for(LeapHttpServer server : leapServerMap.values()) {
             server.setDaemon(false);
             server.start();
-        }    
+        }
+
+        /**
+         * Waiting for all host be started.
+         */
+        if(!leapServerMap.values().stream().allMatch(s -> s.isStarted())) {
+            Thread.sleep(100);
+        }
+
+        //initialize resource monitor
+        resourceMonitor = ResourceMonitor.get();
     }
+
     /**
      * Shut down Leap WAS
      * @throws IOException
@@ -218,6 +235,7 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
         }
         logger.info("Leap server terminated...");
     }
+
     /**
      * Get home path
      * @return
@@ -225,6 +243,7 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
     public static Path getHomePath() {
         return HOME_PATH;
     }
+
     /**
      * Get thread pool
      * @return
@@ -232,6 +251,23 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
     public static ThreadPoolExecutor getThreadPool() {
         return threadpool;
     }
+
+    /**
+     * Get resource manager
+     * @return
+     */
+    public static ResourceManager getResourceManager() {
+        return resourceManager;
+    }
+
+    /**
+     * Get resource monitor
+     * @return
+     */
+    public static ResourceMonitor getResourceMonitor() {
+        return resourceMonitor;
+    }
+
     /**
      * Get execution parameter options
      * @return
@@ -243,6 +279,7 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
         options.addOption(new Option("l", "logLevel", true, "log level setting"));
         return options;
     } 
+
     /**
      * Print trademark 
      * @throws WASException

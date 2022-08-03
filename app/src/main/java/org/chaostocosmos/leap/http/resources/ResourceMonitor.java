@@ -43,42 +43,52 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
      * Unit of data size
      */
     private UNIT unit;
+
     /**
      * Fraction point of digit
      */
     private int fractionPoint;
+
     /**
      * Logger
      */
     private Logger logger;
+
     /**
      * Interval
      */
     private long interval;
+
     /**
      * Timer
      */
     private Timer timer;
+
     /**
      * Whether daemon thread
      */
     private boolean isDaemon;
+
     /**
      * Gson parser
      */
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
     /**
      * Jackson Json 
      */
     private final ObjectMapper mapper = new ObjectMapper();
+
     /**
      * Resource monitor instance
      */
     private static ResourceMonitor resourceMonitor = null;
+
     /**
      * X axis index count
      */
     private static int xIndexCnt = 100;
+
     /**
      * Get resource monitor
      * @return
@@ -87,10 +97,10 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
     public static ResourceMonitor get() throws NotSupportedException {
         if(resourceMonitor == null) {
             resourceMonitor = new ResourceMonitor();
-            resourceMonitor.start();
         }
         return resourceMonitor;
     }
+
     /**
      * Default constructor
      * @throws NotSupportedException

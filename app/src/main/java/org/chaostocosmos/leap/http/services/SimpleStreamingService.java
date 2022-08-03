@@ -12,7 +12,7 @@ import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
  * 
  * @author 9ins
  */
-@ServiceMapper(path = "/streaming")
+@ServiceMapper(path = "")
 public class SimpleStreamingService extends AbstractStreamingService {
 
     public SimpleStreamingService() {

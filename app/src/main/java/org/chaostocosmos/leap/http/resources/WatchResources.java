@@ -43,15 +43,54 @@ import com.google.gson.Gson;
  * @author 9ins
  */
 public class WatchResources extends Thread implements ResourcesModel {    
+    /**
+     * host ID
+     */
     String hostId;
+
+    /**
+     * Host object
+     */
     Host<?> host;
+
+    /**
+     * Watch path
+     */
     Path watchPath;
+
+    /**
+     * Watch kind
+     */
     Kind<?>[] watchKind;
+
+    /**
+     * Filters
+     */
     Filtering accessFiltering, forbiddenFiltering, inMemoryFiltering;
+
+    /**
+     * In-Memory resource limit size
+     */
     long inMemoryLimitSize;
+
+    /**
+     * Resource root object
+     */
     Resource resourceTree;
+
+    /**
+     * Watch path Map
+     */
     Map<WatchKey, Path> watchMap;
+
+    /**
+     * Watch service object
+     */
     WatchService watchService;
+
+    /**
+     * Gson object
+     */
     Gson gson = new Gson();
 
     /**
@@ -68,14 +107,10 @@ public class WatchResources extends Thread implements ResourcesModel {
     /**
      * Create with params
      * @param hosts
-     * @param watchPath
      * @param watchKinds
-     * @param accessFilters
-     * @param forbiddenFilters
      * @param inMemoryFilters
      * @throws IOException
      * @throws InterruptedException
-     * @throws ImageProcessingException
      */
     public WatchResources(Host<?> host, Kind<?>[] watchKinds, long inMemoryLimitSize) throws IOException, InterruptedException {
         this.host = host;
@@ -99,9 +134,9 @@ public class WatchResources extends Thread implements ResourcesModel {
         }).filter(arr -> arr != null).collect(Collectors.toMap(k -> (WatchKey)k[0], v -> (Path)v[1]));
         // Load host resources
         long startMillis = System.currentTimeMillis();
-        this.resourceTree = loadResoureTree(this.watchPath, this.resourceTree);
-        //this.resourceTree = loadForkJoinResources();
-        this.host.getLogger().info("[RESOURCE-LOAD] Host "+this.host.getHost()+" is complated: "+UNIT.SE.applyUnit(System.currentTimeMillis()-startMillis, 2));        
+        //this.resourceTree = loadResoureTree(this.watchPath, this.resourceTree);
+        this.resourceTree = loadForkJoinResources();
+        this.host.getLogger().info("[RESOURCE-LOAD] Host "+this.host.getHost()+" is complated: "+UNIT.SE.applyUnit(System.currentTimeMillis() - startMillis, 2));        
         //Have to set WatchResource to Hosts
         Context.getHosts().getHost(this.hostId).setResource(this);
         //Start watch thread
@@ -139,6 +174,7 @@ public class WatchResources extends Thread implements ResourcesModel {
          * ResourceInfo  
          */        
         private Resource res;
+
         /**
          * Constructe with ResourceInfo object
          * 
@@ -147,6 +183,7 @@ public class WatchResources extends Thread implements ResourcesModel {
         public ResourceLoadProcessor(Resource res) {
             this.res = res;
         }
+
         @Override
         protected Resource compute() {
             try {
@@ -186,7 +223,7 @@ public class WatchResources extends Thread implements ResourcesModel {
                 final WatchKey key = this.watchService.take();
                 for(WatchEvent<?> event : key.pollEvents()) {
                     final Path eventPath = this.watchMap.get(key);
-                    long size = eventPath.toFile().length();
+                    final long size = eventPath.toFile().length();
                     //LoggerFactory.getLogger(this.hostId).debug("[WATCH EVENT] KIND: "+event.kind()+"   Context: "+event.context()+"   Path: "+this.watchMap.get(key)+"   CNT: "+event.count());
                     if(event.kind() == StandardWatchEventKinds.OVERFLOW || eventPath == null) {
                         continue;
@@ -363,14 +400,8 @@ public class WatchResources extends Thread implements ResourcesModel {
     @Override
     public byte[] getFilePartial(Path resourcePath, long position, int length) throws Exception {
         return getResource(resourcePath).getFilePartial(position, length);
-    }    
+    }   
 
-    /**
-     * Filtering and get resource List by mime-type
-     * @param mimeType
-     * @return
-     * @throws IOException
-     */
     @Override
     public Resource filter(MIME_TYPE mimeType) throws IOException {
         return filterResourceTree(this.resourceTree, mimeType);
@@ -456,7 +487,7 @@ public class WatchResources extends Thread implements ResourcesModel {
     public boolean exists(Path resourcePath) {
         try {
             Resource resourceInfo = getResource(resourcePath.normalize());
-            if(resourceInfo != null) {
+            if(resourceInfo != null || resourcePath.toFile().exists()) {
                 return true;
             }
         } catch (Exception e) {}
