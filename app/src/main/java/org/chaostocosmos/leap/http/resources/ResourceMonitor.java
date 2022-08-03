@@ -97,10 +97,11 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
     public static ResourceMonitor get() throws NotSupportedException {
         if(resourceMonitor == null) {
             resourceMonitor = new ResourceMonitor();
+            resourceMonitor.start();
         }
         return resourceMonitor;
     }
-
+    
     /**
      * Default constructor
      * @throws NotSupportedException
@@ -132,39 +133,43 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
     /**
      * Start monitor timer
      */
-    public void start() {
-        this.timer = new Timer(this.getClass().getName(), this.isDaemon);
-        this.timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                try {
-                    logger.info(
-                        "[THREAD-MONITOR] "
-                        + "  Core: " + getCorePoolSize()
-                        + "  Max: " + getMaximumPoolSize()
-                        + "  Active: "+getTaskCount()
-                        + "  Largest: "+getLargestPoolSize()
-                        + "  Queued size: "+getQueuedTaskCount()
-                        + "  Task completed: "+getCompletedTaskCount()
-                    );
-                    logger.info(
-                        "[MEMORY-MONITOR] "
-                        + "  Process Max: "+getMaxMemory()+" "+unit.name()
-                        + "  Process Used: "+getUsedMemory()+" "+unit.name()
-                        + "  Process Free: "+getFreeMemory()+" "+unit.name()
-                        + "  Physical Total: "+getPhysicalTotalMemory()+" "+unit.name()
-                        + "  Physical Free: "+getPhysicalFreeMemory()+" "+unit.name()
-                        + "  Process CPU load: "+getProcessCpuLoad()+" "+UNIT.PCT.name()
-                        + "  Process CPU time: "+getProcessCpuTime()+" "+UNIT.SE.name()
-                        + "  System CPU load: "+getSystemCpuLoad()+" "+UNIT.PCT.name()
-                    );             
-                    setProbingValues();           
-                    requestMonitorings();
-                } catch (Exception e) {
-                    e.printStackTrace();
+    public void start() {        
+        if(this.interval >= 3000) {
+            this.timer = new Timer(this.getClass().getName(), this.isDaemon);
+            this.timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    try {
+                        logger.info(
+                            "[THREAD-MONITOR] "
+                            + "  Core: " + getCorePoolSize()
+                            + "  Max: " + getMaximumPoolSize()
+                            + "  Active: "+getTaskCount()
+                            + "  Largest: "+getLargestPoolSize()
+                            + "  Queued size: "+getQueuedTaskCount()
+                            + "  Task completed: "+getCompletedTaskCount()
+                        );
+                        logger.info(
+                            "[MEMORY-MONITOR] "
+                            + "  Process Max: "+getMaxMemory()+" "+unit.name()
+                            + "  Process Used: "+getUsedMemory()+" "+unit.name()
+                            + "  Process Free: "+getFreeMemory()+" "+unit.name()
+                            + "  Physical Total: "+getPhysicalTotalMemory()+" "+unit.name()
+                            + "  Physical Free: "+getPhysicalFreeMemory()+" "+unit.name()
+                            + "  Process CPU load: "+getProcessCpuLoad()+" "+UNIT.PCT.name()
+                            + "  Process CPU time: "+getProcessCpuTime()+" "+UNIT.SE.name()
+                            + "  System CPU load: "+getSystemCpuLoad()+" "+UNIT.PCT.name()
+                        );             
+                        setProbingValues();           
+                        requestMonitorings();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
-        }, 0, this.interval);
+            }, 0, this.interval);    
+        } else {
+            this.logger.info("[MONITOR OFF] Leap system monitoring interval is too low value: "+this.interval+" milliseconds. To turn on system monitoring, Please set monitoring interval value over 3000 milliseconds.");
+        }
     }
     /**
      * Stop timer

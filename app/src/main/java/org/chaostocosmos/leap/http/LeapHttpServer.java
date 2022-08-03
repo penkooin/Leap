@@ -270,7 +270,7 @@ public class LeapHttpServer extends Thread {
                 logger.info("[HTTPS SERVER START] Address: "+this.inetSocketAddress.toString()+"  Protocol: "+sslProtocol+"  KeyStore: "+keyStore.getName()+"  Supported Protocol: "+Arrays.toString(((SSLServerSocket)server).getSupportedProtocols())+"  KeyStore: "+keyStore.getName());
             }
             while (true) { 
-                Socket connection = server.accept();
+                Socket connection = this.server.accept();
                 connection.setSoTimeout(Context.getServer().getConnectionTimeout());
                 //connection.setSoLinger(false, 1);
                 int queueSize = this.threadpool.getQueue().size();
@@ -278,7 +278,7 @@ public class LeapHttpServer extends Thread {
                 if(this.ipAllowedFilters.include(ipAddress) || this.ipForbiddenFilters.exclude(ipAddress)) {
                     if(queueSize < Context.getServer().<Integer> getThreadQueueSize()) {
                         logger.info("[CLIENT DETECTED] Client request accepted. Submitting thread. "+ipAddress+" - "+connection.getPort()+"  Thread queue size - "+queueSize);
-                        this.threadpool.submit(new LeapRequestHandler(this, this.docroot, connection, this.host));    
+                        this.threadpool.submit(new LeapRequestHandler(this, this.docroot, connection, this.host));
                     } else {
                         String redirectHost = redirectHostSelection.getSelectedHost();
                         String redirectPage = Html.makeRedirect(this.protocol.protocol(), 0, redirectHost);
@@ -304,7 +304,6 @@ public class LeapHttpServer extends Thread {
         } catch(Exception e) {
             logger.error(e.getMessage(), e);
         }
-        this.started = true;
     }
     /**
      * Stop server 
@@ -319,7 +318,7 @@ public class LeapHttpServer extends Thread {
      * Whether server started
      * @return
      */
-    public boolean isStarted() {
-        return this.started;
+    public boolean isClosed() {
+        return this.server == null ? true : this.server.isClosed();
     }
 }

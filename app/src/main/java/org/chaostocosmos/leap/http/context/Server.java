@@ -3,8 +3,6 @@ package org.chaostocosmos.leap.http.context;
 import java.util.ArrayList;
 
 /**
- * Server
- * 
  * Server configuration object
  * 
  * @author 9ins
@@ -79,6 +77,21 @@ public class Server <T> extends Metadata <T> {
      */
     public <V> V getThreadQueueSize() {
         return super.getValue("server.threadpool.queue-size");
+    }
+    /**
+     * Whether supporting monitoring
+     * @param <V>
+     * @return
+     */
+    public <V> V isSupportMonitoring() {
+        return super.getValue("server.monitoring.support-monitoring");
+    }
+    /**
+     * Set whether supporting monitoring
+     * @param isSupportMonitoring
+     */
+    public <V> void setSupportMonitoring(V isSupportMonitoring) {
+        super.setValue("server.monitoring.support-monitoring", isSupportMonitoring);
     }
     /**
      * Get monitoring interval
@@ -163,6 +176,22 @@ public class Server <T> extends Metadata <T> {
      */
     public <V> V getPassphrase() {
         return super.getValue("server.security.passphrase");
+    }
+    /**
+     * Get whether supporting Spring-JPA
+     * @param <V>
+     * @return
+     */
+    public <V> V isSupportSpringJPA() {
+        return super.getValue("server.spring-jpa.support-spring-jpa");
+    }
+    /**
+     * Set whether supporting Spring-JPA
+     * @param <V>
+     * @param supportSpringJPA
+     */
+    public <V> void setSupportSpringJPA(V supportSpringJPA) {
+        super.setValue("server.spring-jpa.supoort-spring-jpa", supportSpringJPA);
     }
     /**
      * Get use of Spring JPA feature

@@ -13,6 +13,14 @@ public class User {
     String grant;
 
     /**
+     * Constructs with user Map
+     * @param userMap
+     */
+    public User(Map<String, Object> userMap) {        
+        this((String) userMap.get("username"), (String) userMap.get("password"), (String) userMap.get("grant"));
+    }
+
+    /**
      * Construct with user, password, grant
      * @param username
      * @param password
@@ -24,18 +32,33 @@ public class User {
         this.grant = grant;
     }
 
+    /**
+     * Get user name
+     * @return
+     */
     public String getUsername() {
         return this.username;
     }
 
+    /**
+     * Get password
+     */
     public String getPassword() {
         return this.password;
     }
 
+    /**
+     * Get grant of user
+     * @return
+     */
     public GRANT getGrant() {
         return GRANT.valueOf(this.grant);
     }
 
+    /**
+     * Get user Map
+     * @return
+     */
     public Map<String, Object> getUserMap() {
         return Map.of("username", getUsername(), "password", getPassword(), "grant", getGrant());
     }

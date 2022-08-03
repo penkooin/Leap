@@ -3,7 +3,7 @@ server:
     version: 1.0.0
     connection-timeout: 5000
     backlog: 50
-    file-buffer-size: 1024    
+    file-buffer-size: 1024
     request-blocking-interval: 100
 
     threadpool:
@@ -12,11 +12,12 @@ server:
       keep-alive: 3000
       queue-size: 1000
 
-    monitoring:      
-      interval: 5000
+    monitoring:
+      support-monitoring: true
+      interval: 3000
       unit: MB
       logs: ./logs/monitor.log
-      log-level: INFO      
+      log-level: DEBUG
 
     redirect:
       http://awesome:8082 : 20
@@ -25,10 +26,11 @@ server:
     security:
       encryption: 'TLS'
       keystore: './config/ssl/leap-keystore.jks'
-      passphrase: '939393'    
+      passphrase: '939393'
 
     spring-jpa:
-      datasource: 
+      support-spring-jpa: false
+      datasource:         
         driver-class: "org.mariadb.jdbc.Driver"
         url: "jdbc:mariadb://localhost:3306"
         schema: leap

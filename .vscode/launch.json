@@ -2,6 +2,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch LeapClient",
+            "request": "launch",
+            "mainClass": "org.chaostocosmos.leap.http.client.LeapClient",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "Launch LeapRequestTest",
+            "request": "launch",
+            "mainClass": "org.chaostocosmos.leap.http.LeapRequestTest",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
             "name": "Launch UtilBoxTest",
             "request": "launch",
             "mainClass": "org.chaostocosmos.leap.http.UtilBoxTest",

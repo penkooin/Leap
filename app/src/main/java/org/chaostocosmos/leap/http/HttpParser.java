@@ -22,7 +22,6 @@ import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
-import org.chaostocosmos.leap.http.enums.RES_CODE;
 import org.chaostocosmos.leap.http.part.BinaryPart;
 import org.chaostocosmos.leap.http.part.BodyPart;
 import org.chaostocosmos.leap.http.part.KeyValuePart;
@@ -39,10 +38,12 @@ public class HttpParser {
      * Http request parser
      */
     private static RequestParser requestParser;
+
     /**
      * Http response parser
      */
     private static ResponseParser responseParser;
+
     /**
      * Get request parser object
      * @return
@@ -54,6 +55,7 @@ public class HttpParser {
         }
         return requestParser;
     }
+
     /**
      * Get response parser object
      * @return
@@ -64,6 +66,7 @@ public class HttpParser {
         }
         return responseParser;
     }
+
     /**
      * Check request method
      * @param requestType
@@ -165,10 +168,10 @@ public class HttpParser {
             //Get content length from requested header
             long contentLength = headerMap.get("Content-Length") != null ? Long.parseLong(headerMap.get("Content-Length")) : 0L;
 
-            if(!headerMap.containsKey("Range") && !host.checkRequestAttack(inetAddress.getHostAddress(), protocol+"://"+hostName + contextPath)) {
-                LoggerFactory.getLogger(requestedHost).warn("[CLIENT BLOCKED] Too many requested client blocking: "+inetAddress.getHostAddress());
-                throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES429.code(), requestedHost+" requested too many on short period!!!");
-            }
+            //if(!headerMap.containsKey("Range") && !host.checkRequestAttack(inetAddress.getHostAddress(), protocol+"://"+hostName + contextPath)) {
+            //    LoggerFactory.getLogger(requestedHost).warn("[CLIENT BLOCKED] Too many requested client blocking: "+inetAddress.getHostAddress());
+            //    throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES429.code(), requestedHost+" requested too many on short period!!!");
+            //}
             if(!Context.getHosts().isExistHostname(hostName)) {
                 throw new WASException(MSG_TYPE.HTTP, 400, "Requested host ID not exist in this server. ID: "+hostName);
             }

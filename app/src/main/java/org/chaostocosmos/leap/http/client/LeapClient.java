@@ -305,7 +305,10 @@ public class LeapClient {
             this.responseBody = out.toByteArray();
             List<String> ctxTypeList = (List<String>)this.responseHeaders.get("Content-Type");
             if(ctxTypeList != null) {
-                String charset = ctxTypeList.size() > 0 ? ctxTypeList.get(1).substring(ctxTypeList.get(1).indexOf("=")+1) : this.responseHeaders.get("Charset") != null ? this.responseHeaders.get("Charset").get(0) : "utf-8";
+                String charset = null;                
+                if(ctxTypeList.size() > 1) {
+                    charset = ctxTypeList.size() > 0 ? ctxTypeList.get(1).substring(ctxTypeList.get(1).indexOf("=")+1) : this.responseHeaders.get("Charset") != null ? this.responseHeaders.get("Charset").get(0) : "utf-8";
+                }
                 if(charset != null) {
                     this.responseMsg = new String(this.responseBody, Charset.forName(charset.trim()));
                 } else {
@@ -333,7 +336,7 @@ public class LeapClient {
      * @return
      * @throws IOException
      */
-    public LeapClient get(String contextPath, Map<String, String> contextParams) throws IOException {
+    public synchronized LeapClient get(String contextPath, Map<String, String> contextParams) throws IOException {
         this.requestHeaders.put("Host", this.host+":"+this.port);
         connect();
         writeContextParams(REQUEST.GET, contextPath, contextParams);
@@ -353,7 +356,7 @@ public class LeapClient {
      * @return
      * @throws IOException
      */
-    public LeapClient post(String contextPath, Map<String, String> contextParams, Map<String, FormData<?>> formDataMap) throws IOException {
+    public synchronized LeapClient post(String contextPath, Map<String, String> contextParams, Map<String, FormData<?>> formDataMap) throws IOException {
         connect();
         writeContextParams(REQUEST.POST, contextPath, contextParams);
 

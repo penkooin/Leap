@@ -28,12 +28,12 @@ public class UserManager implements IAuthenticate {
      * @param context
      */
     public UserManager(String hostId) {
-        this.users = Context.getHosts().getHost(hostId).getUsers();
+        this.users = Context.getHosts().getHost(hostId).<List<Map<String, Object>>>getUsers().stream().map(m -> new User(m)).collect(Collectors.toList());
     }
 
     @Override
     public boolean signIn(String username, String password) {
-        //System.out.println(this.users.toString());
+        System.out.println(this.users.toString());
         User user = this.users.stream().filter(u -> u.getUsername().equals(username)).findAny().orElseThrow(() -> new WASException(MSG_TYPE.ERROR, 25, username));
         if(!user.getPassword().equals(password)) {
             throw new WASException(MSG_TYPE.ERROR, 16, password);

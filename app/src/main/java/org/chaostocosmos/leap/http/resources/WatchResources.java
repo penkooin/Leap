@@ -2,6 +2,7 @@ package org.chaostocosmos.leap.http.resources;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.management.ManagementFactory;
 import java.nio.file.FileSystemException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -21,8 +22,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-
-import javax.transaction.NotSupportedException;
 
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.commons.Constants;
@@ -147,21 +146,17 @@ public class WatchResources extends Thread implements ResourcesModel {
      * Load resources by ForkJoin framework
      * @return
      * @throws IOException
+     * @throws InterruptedException
      */
-    protected Resource loadForkJoinResources() throws IOException {
-        try {
-            ForkJoinPool pool = new ForkJoinPool((int)ResourceMonitor.get().getAvailableProcessors());
-            ResourceLoadProcessor proc = new ResourceLoadProcessor(new Resource(true, this.watchPath, false, this.host.getInMemorySplitUnit()));
-            pool.execute(proc);
-            while(!proc.isDone()) {
-                TimeUnit.SECONDS.sleep(1);
-            }
-            pool.shutdown();
-            return proc.join();
-        } catch (NotSupportedException | InterruptedException e) {
-            host.getLogger().error(e.getMessage());
+    protected Resource loadForkJoinResources() throws IOException, InterruptedException {
+        ForkJoinPool pool = new ForkJoinPool((int)((com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean()).getAvailableProcessors());
+        ResourceLoadProcessor proc = new ResourceLoadProcessor(new Resource(true, this.watchPath, false, this.host.getInMemorySplitUnit()));
+        pool.execute(proc);
+        while(!proc.isDone()) {
+            TimeUnit.SECONDS.sleep(1);
         }
-        throw new IllegalStateException("Fail to load resources when boot up process.");
+        pool.shutdown();
+        return proc.join();
     }
 
     /**
@@ -511,7 +506,7 @@ public class WatchResources extends Thread implements ResourcesModel {
      * @param res
      * @throws IOException
      */
-    protected void addResource(Resource resourceTree, String[] res, Resource data) throws IOException {        
+    protected synchronized void addResource(Resource resourceTree, String[] res, Resource data) throws IOException {        
         if(res.length == 1) {            
             resourceTree.put(res[0], data);
         } else {

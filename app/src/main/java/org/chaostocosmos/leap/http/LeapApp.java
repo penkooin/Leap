@@ -32,6 +32,7 @@ import org.chaostocosmos.leap.http.resources.ClassUtils;
 import org.chaostocosmos.leap.http.resources.ResourceHelper;
 import org.chaostocosmos.leap.http.resources.ResourceManager;
 import org.chaostocosmos.leap.http.resources.ResourceMonitor;
+import org.chaostocosmos.leap.http.resources.SpringJPAManager;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
@@ -71,6 +72,11 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
      * Resource Monitor
      */
     public static ResourceMonitor resourceMonitor;
+
+    /**
+     * SpringJPAManager object
+     */
+    public static SpringJPAManager jpaManager;
 
     /**
      * Server Map
@@ -166,10 +172,11 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
      */
     public void start() throws Exception {
         //NetworkInterfaces.getAllNetworkAddresses().stream().forEach(i -> System.out.println(i.getHostName())); 
-        //LeapClassLoader 
 
         //Spring JPA 
-        //SpringJPAManager jpaManager = SpringJPAManager.get();
+        if((boolean) Context.getServer().isSupportSpringJPA()) {
+            jpaManager = SpringJPAManager.get();
+        }
 
         //initialize thread queue
         threadQueue = new LinkedBlockingQueue<Runnable>();
@@ -197,21 +204,24 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
                 logger.info("[VIRTUAL HOST] - Protocol: "+host.getProtocol()+"   Server: "+host.getHostId()+"   Host: "+host.getHost()+"   Port: "+host.getPort()+"   Doc-Root: "+host.getDocroot()+"   Logging path: "+host.getLogPath()+"   Level: "+host.getLogLevel().toString());
             }
         }
-        logger.info("----------------------------------------------------------------------------------------------------");
+
+        logger.info("----------------------------------------------------------------------------------------------------");        
         for(LeapHttpServer server : leapServerMap.values()) {
             server.setDaemon(false);
             server.start();
         }
 
-        /**
-         * Waiting for all host be started.
-         */
-        if(!leapServerMap.values().stream().allMatch(s -> s.isStarted())) {
+        // Waiting for all host be started.
+        if(leapServerMap.values().stream().allMatch(s -> !s.isClosed())) {
             Thread.sleep(100);
         }
 
         //initialize resource monitor
-        resourceMonitor = ResourceMonitor.get();
+        if((boolean) Context.getServer().isSupportMonitoring()) {
+            resourceMonitor = ResourceMonitor.get();
+        } else {
+            logger.info("[MONITOR OFF] Leap system monitor turned off.");
+        }
     }
 
     /**

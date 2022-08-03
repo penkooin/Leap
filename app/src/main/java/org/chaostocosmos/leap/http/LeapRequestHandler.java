@@ -105,6 +105,10 @@ public class LeapRequestHandler implements Runnable {
                     if (host.getResource().exists(resourcePath)) {
                         //Get requested resource data
                         Resource resource = host.getResource().getResource(resourcePath);
+                        if(resource == null) {
+                            host.getResource().addResource(resourcePath);
+                            resource = host.getResource().getResource(resourcePath);
+                        }
                         if(resource != null) {
                             if(resource.isNode()) {
                                 String body = TemplateBuilder.buildResourceHtml(request.getContextPath(), host);
@@ -114,7 +118,7 @@ public class LeapRequestHandler implements Runnable {
                                 response.setBody(body);
                                 //LoggerFactory.getLogger(hosts.getHost()).debug("RESOURCE LIST REQUESTED: "+body);
                             } else {
-                                String mimeType = UtilBox.probeContentType(resource.getPath());
+                                String mimeType = UtilBox.probeContentType(resourcePath);
                                 if(mimeType == null) {
                                     mimeType = MIME_TYPE.APPLICATION_OCTET_STREAM.mimeType();
                                 }
