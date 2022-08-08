@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.chaostocosmos.chaosgraph.Graph;
 import org.chaostocosmos.chaosgraph.GraphElement;
-import org.chaostocosmos.chaosgraph.GraphUtility.CODEC;
+import org.chaostocosmos.chaosgraph.GraphUtility.CODEC;  
 
 /**
  * Chart Mode interface

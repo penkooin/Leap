@@ -24,13 +24,11 @@ import ch.qos.logback.classic.Logger;
 
 /**
  * Host object
- * 
  * @author 9ins
  */
 public class Host <T> extends Metadata<T> {
     /**
      * Default constructor
-     * 
      * @param map
      * @throws IOException
      */
@@ -446,7 +444,6 @@ public class Host <T> extends Metadata<T> {
      * Set logPath
      * @param logPath
      */
-    @SuppressWarnings("unchecked")
     public <V> void setLogPath(Path logPath) {
         super.setValue("logs", logPath.subpath(getDocroot().getNameCount(), logPath.getNameCount()).toString());
     }

@@ -4,6 +4,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 import org.chaostocosmos.leap.http.Request;
+import org.chaostocosmos.leap.http.Response;
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.annotation.PreFilter;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
@@ -14,14 +15,13 @@ import org.chaostocosmos.leap.http.enums.MSG_TYPE;
  * BasicAuthFilter object
  * @author 9ins
  */
-public class BasicAuthFilter<R, S> extends AbstractFilter<R, S> implements IAuthenticate { 
+public class BasicAuthFilter extends AbstractFilter<Request, Response> implements IAuthenticate { 
 
     @Override
     @PreFilter
-    public void filterRequest(R r) throws Exception { 
-        super.filterRequest(r);
-        if(r.getClass().isAssignableFrom(Request.class)) {
-            Request request = (Request)r;
+    public void filterRequest(Request request) throws Exception { 
+        super.filterRequest(request);
+        if(request.getClass().isAssignableFrom(Request.class)) {
             final String authorization = request.getReqHeader().get("Authorization");
             if (authorization != null && authorization.trim().startsWith("Basic")) {
                 String base64Credentials = authorization.trim().substring("Basic".length()).trim();
@@ -32,7 +32,7 @@ public class BasicAuthFilter<R, S> extends AbstractFilter<R, S> implements IAuth
                 if(!signIn(values[0], values[1])) {                    
                     throw new WASException(MSG_TYPE.HTTP, 401);
                 }
-                LoggerFactory.getLogger(request.getRequestedHost()).debug("User "+values[0]+" is login."); 
+                LoggerFactory.getLogger(request.getRequestedHost()).debug("User "+values[0]+" is login.");  
             } else {
                 throw new WASException(MSG_TYPE.HTTP, 401, "Auth information not found!!!");
             }

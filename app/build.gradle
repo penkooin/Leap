@@ -17,10 +17,10 @@ repositories {
 }
 
 dependencies {
-
+    
     implementation fileTree(dir: 'libs', include: '*.jar')
 
-    // https://mvnrepository.com/artifact/org.openjdk.jmh/jmh-core
+    // https://mvnrepository.com/artifact/org.openjdk.jmh/jmh-core 
     implementation 'org.openjdk.jmh:jmh-core:1.35'
 
     // https://mvnrepository.com/artifact/org.openjdk.jmh/jmh-generator-annprocess
@@ -32,7 +32,7 @@ dependencies {
     // Use JUnit Jupiter for testing.
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.1'
 
-   // https://mvnrepository.com/artifact/ch.qos.logback/logback-core  
+    // https://mvnrepository.com/artifact/ch.qos.logback/logback-core  
     implementation 'ch.qos.logback:logback-core:1.2.11'
 
     // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic 
@@ -62,7 +62,8 @@ dependencies {
     // https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client
     implementation 'org.mariadb.jdbc:mariadb-java-client:3.0.3'
 
-    implementation 'io.github.9ins:chaosgraph:2.1.1'   
+
+    implementation 'io.github.9ins:chaosgraph:2.1.1'
 }
 
 application {

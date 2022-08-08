@@ -26,7 +26,7 @@ public class TemplatePageService extends AbstractService {
     public void error(Request request, Response response) throws Exception {
         //System.out.println(request.getContextParam().toString());
         String errorPage = super.resource.getErrorPage(request.getContextParam().entrySet().stream().collect(Collectors.toMap(k -> "@"+k.getKey(), v -> v.getValue())));
-        response.setResponseCode(Integer.parseInt(request.getParameter("code")));
+        response.setResponseCode(Integer.parseInt(request.getParameter("code").toString()));
         response.addHeader("Content-Type", MIME_TYPE.TEXT_HTML.mimeType());
         response.setBody(errorPage);
     }

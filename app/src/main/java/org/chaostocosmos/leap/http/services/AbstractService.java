@@ -1,7 +1,10 @@
 package org.chaostocosmos.leap.http.services;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.HttpTransferBuilder.HttpTransfer;
 import org.chaostocosmos.leap.http.Request;
@@ -14,9 +17,7 @@ import org.chaostocosmos.leap.http.annotation.AnnotationOpr;
 import org.chaostocosmos.leap.http.annotation.PostFilter;
 import org.chaostocosmos.leap.http.annotation.PreFilter;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
-import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
-import org.chaostocosmos.leap.http.enums.RES_CODE;
 import org.chaostocosmos.leap.http.resources.ResourcesModel;
 import org.chaostocosmos.leap.http.resources.SpringJPAManager;
 import org.chaostocosmos.leap.http.services.filters.IFilter;
@@ -30,6 +31,7 @@ import ch.qos.logback.classic.Logger;
 
 /**
  * Abstraction of SimpleServlet object
+ * 
  * @author Kooin-Shin
  * @since 2021.09.15
  */
@@ -69,49 +71,59 @@ public abstract class AbstractService implements GetServiceModel, PostServiceMod
      */
     protected HttpTransfer httpTransfer;
 
+    /**
+     * Request
+     */
+    protected Request request;
+
+    /**
+     * Response
+     */
+    protected Response response;
+
     @Override
     public Response serve(final HttpTransfer httpTransfer, final Method invokingMethod) throws Exception {        
         this.logger = LoggerFactory.getLogger(httpTransfer.getRequest().getRequestedHost());
-        this.httpTransfer = httpTransfer;
         this.invokingMethod = invokingMethod;
+        this.httpTransfer = httpTransfer;
         this.resource = this.httpTransfer.getHost().getResource();
-        Request request = httpTransfer.getRequest();
-        Response response = httpTransfer.getResponse();
+        this.request = this.httpTransfer.getRequest();
+        this.response = this.httpTransfer.getResponse();
 
         if(this.preFilters != null) {
             for(IFilter filter : this.preFilters) {
-                List<Method> methods = AnnotationHelper.getFilterMethods(filter, PreFilter.class); 
+                List<Method> methods = AnnotationHelper.getFilterMethods(filter, PreFilter.class);
                 for(Method method : methods) {
                     ServiceInvoker.invokeMethod(filter, method, request);
                 }
             }
-        }        
-
-        Class<?>[] paramTypes = this.invokingMethod.getParameterTypes();
-        if(paramTypes.length != 2 || paramTypes[0] != request.getClass() || paramTypes[1] != response.getClass()) {
-            //org.chaostocosmos.leap.http.WASException: Not Implemented.
-            throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES501.code(), Context.getMessages().<String> getErrorMsg(201, this.invokingMethod.getName()));
         }
+        Map<String, Object> paramMap = Arrays.asList(this.getClass().getDeclaredFields()).stream().map(f -> {
+            try {
+                f.setAccessible(true);
+                return new Object[]{ f.getClass().getName(), f.get(this) };
+            } catch (IllegalArgumentException | IllegalAccessException e) {
+                logger.error(e.getMessage(), e);
+            }
+            return null;
+        }).filter(f -> f != null).collect(Collectors.toMap( k -> (String)k[0],  v -> v));
+        System.out.println(paramMap.toString());
+
+        //Class<?>[] paramTypes = this.invokingMethod.getParameterTypes();
+        //if(paramTypes.length != 2 || paramTypes[0] != request.getClass() || paramTypes[1] != response.getClass()) {
+            //org.chaostocosmos.leap.http.WASException: Not Implemented.
+        //    throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES501.code(), Context.getMessages().<String> getErrorMsg(201, this.invokingMethod.getName()));
+        //}
 
         //setting JPA link
-        new AnnotationOpr<ServiceModel>(httpTransfer.getHost().getHost(), this).injectToAutowired();
-        //aOpr.injectToAutowired();
-        switch(httpTransfer.getRequest().getRequestType()) {
-            case GET: 
-            serveGet(request, response);
-            break;
-            case POST: 
-            servePost(request, response);
-            break;
-            case PUT:
-            servePost(request, response);
-            break;
-            case DELETE:
-            serveDelete(request, response);
-            break;
-            default:
-                throw new WASException(MSG_TYPE.ERROR, 16, request.getRequestType().name());
+        AnnotationOpr<ServiceModel> annotaionOpr = new AnnotationOpr<>(httpTransfer.getHost().getHost(), this);
+        annotaionOpr.injectToAutowired();
+
+        Method serviceMethod = this.getClass().getMethod(request.getRequestType().name(), paramMap.values().stream().map(v -> v.getClass()).toArray(Class[]::new));
+        if(serviceMethod == null) {
+            throw new WASException(MSG_TYPE.ERROR, 16, request.getRequestType().name());
         }
+        
         if(this.postFilters != null) {
             for(IFilter filter : this.postFilters) {
                 List<Method> methods = AnnotationHelper.getFilterMethods(filter, PostFilter.class);
@@ -124,23 +136,23 @@ public abstract class AbstractService implements GetServiceModel, PostServiceMod
     }
 
     @Override
-    public void serveGet(final Request request, final Response response) throws Exception {        
-        this.invokingMethod.invoke(this, request, response);
+    public void GET(final Object[] params) throws Exception {        
+        this.invokingMethod.invoke(this, request, params);
     }
 
     @Override
-    public void servePost(final Request request, final Response response) throws Exception {
-        this.invokingMethod.invoke(this, request, response);
+    public void POST(final Object[] params) throws Exception {
+        this.invokingMethod.invoke(this, request, params);
     }
 
     @Override
-    public void servePut(final Request request, final Response response) throws Exception {
-        this.invokingMethod.invoke(this, request, response);
+    public void PUT(final Object[] params) throws Exception {
+        this.invokingMethod.invoke(this, request, params);
     }
 
     @Override
-    public void serveDelete(final Request request, final Response response) throws Exception {
-        this.invokingMethod.invoke(this, request, response);
+    public void DELETE(final Object[] params) throws Exception {
+        this.invokingMethod.invoke(this, request, params);
     }    
 
     @Override

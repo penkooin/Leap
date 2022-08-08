@@ -47,8 +47,8 @@ public abstract class AbstractStreamingService extends AbstractService implement
     }
 
     @Override
-    public void serveGet(final Request request, final Response response) throws Exception {        
-        String reqFile = request.getParameter("file");
+    public void GET(final Request request, final Response response) throws Exception {        
+        String reqFile = (String) request.getParameter("file");
         reqFile = reqFile.charAt(0) == '/' ? reqFile.substring(1) : reqFile;
         if(reqFile == null || reqFile.equals("")) {
             throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES412.code(), "Parameter not found(file). Streaming request must have field of file.");

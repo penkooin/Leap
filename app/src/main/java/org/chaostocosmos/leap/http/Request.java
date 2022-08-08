@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.Map;
 
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
@@ -28,9 +29,10 @@ public class Request {
     final private String httpVersion;
     final private Map<String, String> reqHeader;
     final private String contextPath;
-    final private Map<String, String> contextParam;
+    final private Map<String, Object> contextParam;
     final private Part bodyPart;
     final private long contentLength;
+    final private Charset charset;
     
     /**
      * Constructor
@@ -45,18 +47,20 @@ public class Request {
      * @param contextParam
      * @param bodyPart
      * @param contentLength
+     * @param charset
      */
     public Request(
             String hostId,
             String requestHost,
             String httpVersion, 
             REQUEST_TYPE requestType, 
-            Map<String,String> reqHeader, 
+            Map<String, String> reqHeader, 
             MIME_TYPE contentType,
             String contextPath, 
-            Map<String,String> contextParam,
+            Map<String,Object> contextParam,
             Part bodyPart,
-            long contentLength
+            long contentLength,
+            Charset charset
         ) {
             this.hostId = hostId;
             this.requestedHost = requestHost;
@@ -68,6 +72,7 @@ public class Request {
             this.contextParam = contextParam;
             this.bodyPart = bodyPart;
             this.contentLength = contentLength;
+            this.charset = charset;
     }
 
     public final String getHostId() {
@@ -86,7 +91,7 @@ public class Request {
         return this.requestType;
     }
 
-    public final Map<String,String> getReqHeader() {
+    public final Map<String, String> getReqHeader() {
         return this.reqHeader;
     }
 
@@ -98,11 +103,11 @@ public class Request {
         return this.contextPath;
     }
 
-    public final Map<String, String> getContextParam() {
+    public final Map<String, Object> getContextParam() {
         return this.contextParam;
     }
 
-    public final String getParameter(String name) {
+    public final Object getParameter(String name) {
         return this.contextParam.get(name);
     }
 
@@ -112,6 +117,10 @@ public class Request {
 
     public final long getContentLength() {
         return this.contentLength;
+    }
+
+    public final Charset charset() {
+        return this.charset;
     }
 
     public void printURLInfo() throws URISyntaxException, MalformedURLException {
@@ -143,6 +152,7 @@ public class Request {
             ", contextParam='" + getContextParam() + "'" +
             ", bodyPart='" + getBodyPart() + "'" +
             ", contentLength='" + getContentLength() + "'" +
+            ", charset='" + charset() + "'" +
             "}";
     }
 }

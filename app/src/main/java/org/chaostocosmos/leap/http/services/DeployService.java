@@ -85,7 +85,7 @@ public class DeployService extends AbstractService implements DeployModel {
     @MethodMappper(mappingMethod = REQUEST_TYPE.GET, path = "/service/delete")
     @FilterMapper(preFilters = BasicAuthFilter.class)
     public void delete(Request request, Response response) throws IOException, URISyntaxException, NotSupportedException {
-        String qualifiedClassName = request.getParameter("serviceClassNames");
+        String qualifiedClassName = (String) request.getParameter("serviceClassNames");
         if(qualifiedClassName.startsWith("[") && qualifiedClassName.endsWith("]")) {
             qualifiedClassName = qualifiedClassName.substring(qualifiedClassName.indexOf("[")+1, qualifiedClassName.lastIndexOf("]"));
             if(qualifiedClassName == null || qualifiedClassName.equals("")) {

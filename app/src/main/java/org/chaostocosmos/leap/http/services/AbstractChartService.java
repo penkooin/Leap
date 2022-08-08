@@ -2,7 +2,6 @@ package org.chaostocosmos.leap.http.services;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
@@ -70,11 +69,7 @@ public abstract class AbstractChartService extends AbstractService implements Ch
      * Create graph object with given map object
      * @param map
      * @return
-     * @throws InvocationTargetException 
-     * @throws IllegalArgumentException 
-     * @throws IllegalAccessException 
-     * @throws SecurityException 
-     * @throws NoSuchMethodException 
+     * @throws Exception 
      */
     @Override
     @SuppressWarnings("unchecked")
@@ -89,10 +84,10 @@ public abstract class AbstractChartService extends AbstractService implements Ch
         GraphConstants.GRAPH type = GraphConstants.GRAPH.valueOf(map.get("graph")+"");            
         String title = map.get("title")+"";
         int width = (int)Double.parseDouble(map.get("width")+"");
-        int height = (int)Double.parseDouble(map.get("height")+"");            
+        int height = (int)Double.parseDouble(map.get("height")+"");
         List<String> xIndex = (List<String>)map.get("x-index");  
         List<Double> yIndex = (List<Double>)map.get("y-index");  
-        GraphElements<Double, String, Double> graphElements = null;        
+        GraphElements<Double, String, Double> graphElements = null;
         if(graph == null) {
             graphElements = new GraphElements<Double, String, Double>(type, xIndex, yIndex);            
             graphElements.setGraphElementMap(createGraphElements((List<Object>)map.get("elements")));    	

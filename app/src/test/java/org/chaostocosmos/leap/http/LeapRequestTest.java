@@ -10,6 +10,8 @@ import org.chaostocosmos.leap.http.client.LeapClient;
 
 /**
  * Leap request test
+ * 
+ * @author 9ins
  */
 public class LeapRequestTest {
 
@@ -31,6 +33,9 @@ public class LeapRequestTest {
     int requestCnt;
     int threadCnt;
 
+    /**
+     * Constructor
+     */
     public LeapRequestTest(String host, int port, int requestCnt, int threadCnt) throws UnknownHostException, IOException {
         this.threadPool = Executors.newFixedThreadPool(threadCnt);
         this.host = host;
@@ -39,17 +44,21 @@ public class LeapRequestTest {
         this.threadCnt = threadCnt;
     }
 
+    /**
+     * Request
+     * @throws Exception
+     */
     public void request() throws Exception {
         Random random = new Random();
         for(int i=0; i<this.requestCnt; i++) {            
-            final int r = random.nextInt(urls.length -1);
+            final int r = random.nextInt(urls.length - 1);
             this.threadPool.submit(new Runnable() {
                 @Override
-                public void run() {                    
-                    String url = urls[ r ];
+                public void run() { 
+                    String url = urls[ r ]; 
                     System.out.println("[REQUEST] "+host+":"+port+""+url);
                     try {
-                        Thread.sleep(r * 3);
+                        Thread.sleep( r * 3 );
                         LeapClient.build(host, port).get(url, null);
                     } catch (Exception e) {
                         e.printStackTrace();

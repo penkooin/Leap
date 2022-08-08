@@ -112,18 +112,19 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
     private void setup(String[] args) throws Exception {
         CommandLineParser parser = new DefaultParser();
         CommandLine cmdLine;
+
         try {
             cmdLine = parser.parse(getOptions(), args);
         } catch (ParseException e) {
             throw new WASException(e);
         }
-                
+
         //set HOME directory
         String optionH = cmdLine.getOptionValue("h");
         if(optionH != null) {
             HOME_PATH = Paths.get(optionH);
             try {
-                Files.createDirectories(HOME_PATH);
+                Files.createDirectories( HOME_PATH ); 
             } catch (IOException e) {
                 throw new WASException(e);
             }
@@ -185,11 +186,11 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
         logger.info("====================================================================================================");
         logger.info("ThreadPool initialized - CORE: "+Context.getServer().<Integer> getThreadPoolCoreSize()+"   MAX: "+Context.getServer().<Integer> getThreadPoolMaxSize()+"   KEEP-ALIVE WHEN IDLE(seconds): "+Context.getServer().<Integer> getThreadPoolKeepAlive());    
 
-        //initialize resource manager
+        // initialize resource manager
         resourceManager = ResourceManager.initialize();
 
         //initialize Leap hosts
-        for(Host<?> host : Context.getHosts().getAllHost()) {    
+        for(Host<?> host : Context.getHosts().getAllHost()) {
             InetAddress hostAddress = InetAddress.getByName(host.getHost());
             String hostName = hostAddress.getHostAddress()+":"+host.getPort();
             if(leapServerMap.containsKey(hostName)) {
@@ -305,7 +306,7 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
 
     @Override
     public <V> void receiveContextEvent(MetaEvent<Map<String, Object>, V> ce) throws Exception {
-        //System.out.println(ce.getPathExpression()+"  "+ce.getEventType());
+        System.out.println(ce.getPathExpression()+"  "+ce.getEventType());
     }
 
     public static void main(String[] args) throws Exception {

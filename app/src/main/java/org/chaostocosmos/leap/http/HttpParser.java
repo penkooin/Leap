@@ -12,7 +12,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.commons.Constants;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
@@ -22,6 +21,7 @@ import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
+import org.chaostocosmos.leap.http.enums.RES_CODE;
 import org.chaostocosmos.leap.http.part.BinaryPart;
 import org.chaostocosmos.leap.http.part.BodyPart;
 import org.chaostocosmos.leap.http.part.KeyValuePart;
@@ -33,7 +33,7 @@ import org.chaostocosmos.leap.http.part.TextPart;
  * 
  * @author 9ins 
  */
-public class HttpParser {    
+public class HttpParser {
     /**
      * Http request parser
      */
@@ -114,6 +114,7 @@ public class HttpParser {
                 throw new WASException(MSG_TYPE.ERROR, 1);
             }
             requestLine = URLDecoder.decode(requestLine, StandardCharsets.UTF_8);
+            debug.append("============================== [REQUEST] "+requestLine+" =============================="+System.lineSeparator());
             String[] linesplited = requestLine.split(" ");                        
             if(linesplited.length != 3) {
                 throw new WASException(MSG_TYPE.HTTP, 400, "Requested line is something wrong: "+requestLine);
@@ -123,7 +124,7 @@ public class HttpParser {
                 throw new WASException(MSG_TYPE.HTTP, 500, method);
             }
             String contextPath = linesplited[1];
-            String protocolVersion = requestLine.substring(requestLine.lastIndexOf(" ")+1);
+            String protocolVersion = requestLine.substring(requestLine.lastIndexOf(" ") + 1);
             String protocol = protocolVersion.indexOf("/") != -1 ? protocolVersion.substring(0, protocolVersion.indexOf("/")).toLowerCase() : protocolVersion;
             List<String> headerLines = StreamUtils.readHeaders(in);
             Map<String, String> headerMap = new HashMap<>();
@@ -139,7 +140,7 @@ public class HttpParser {
                 headerMap.put(header.substring(0, idx), header.substring(idx + 1, header.length()).trim());
             }
             String requestedHost = headerMap.get("Host").toString().trim();
-            Map<String, String> contextParam = new HashMap<>();
+            Map<String, Object> contextParam = new HashMap<>();
             int paramsIndex = contextPath.indexOf("?");
             if(paramsIndex != -1) {
                 String paramString = contextPath.substring(paramsIndex+1);
@@ -153,8 +154,7 @@ public class HttpParser {
                 }
             }
             String hostName = requestedHost.indexOf(":") != -1 ? requestedHost.substring(0, requestedHost.indexOf(":")) : requestedHost;
-            debug.append("============================== [REQUEST] "+requestLine+" =============================="+System.lineSeparator());
-            debug.append(headerLines.stream().collect(Collectors.joining(System.lineSeparator())));
+            //debug.append(headerLines.stream().collect(Collectors.joining(System.lineSeparator())));
 
             //Get host ID from request host name
             String hostId = Context.getHosts().getHostId(hostName);
@@ -168,19 +168,20 @@ public class HttpParser {
             //Get content length from requested header
             long contentLength = headerMap.get("Content-Length") != null ? Long.parseLong(headerMap.get("Content-Length")) : 0L;
 
-            //if(!headerMap.containsKey("Range") && !host.checkRequestAttack(inetAddress.getHostAddress(), protocol+"://"+hostName + contextPath)) {
-            //    LoggerFactory.getLogger(requestedHost).warn("[CLIENT BLOCKED] Too many requested client blocking: "+inetAddress.getHostAddress());
-            //    throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES429.code(), requestedHost+" requested too many on short period!!!");
-            //}
+            if(!headerMap.containsKey("Range") && !host.checkRequestAttack(inetAddress.getHostAddress(), protocol+"://"+hostName + contextPath)) {
+                LoggerFactory.getLogger(requestedHost).warn("[CLIENT BLOCKED] Too many requested client blocking: "+inetAddress.getHostAddress());
+                throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES429.code(), requestedHost+" requested too many on short period!!!");
+            }
+
             if(!Context.getHosts().isExistHostname(hostName)) {
                 throw new WASException(MSG_TYPE.HTTP, 400, "Requested host ID not exist in this server. ID: "+hostName);
             }
-            debug.append(Constants.LS+"============================== Request Host: "+hostName+"  Host ID: "+hostId+" ==============================");
+            debug.append("Host ID: "+hostId);
             Charset charset = Context.getHosts().charset(hostId);
             LoggerFactory.getLogger(hostId).debug(debug.toString());
             BodyPart bodyPart = null;
             MIME_TYPE mimeType = null;
-            if(contentType != null) {
+            if(contentType != null) {                
                 mimeType = contentType.indexOf(";") != -1 ? MIME_TYPE.mimeType(contentType.substring(0, contentType.indexOf(";"))) : MIME_TYPE.mimeType(contentType);
                 String boundary = contentType != null ? contentType.substring(contentType.indexOf(";")+1) : null;
                 String bodyInStream = headerMap.get("body-in-stream");
@@ -225,7 +226,7 @@ public class HttpParser {
                     }
                 }
             }
-            Request desc = new Request(hostId, hostName, protocol, requestType, headerMap, mimeType, contextPath, contextParam, bodyPart, contentLength);
+            Request desc = new Request(hostId, hostName, protocol, requestType, headerMap, mimeType, contextPath, contextParam, bodyPart, contentLength, charset);
             return desc;                    
         }
     }

@@ -16,7 +16,7 @@ import org.chaostocosmos.leap.http.resources.ClassUtils;
 import org.chaostocosmos.leap.http.services.filters.IFilter;
 import org.chaostocosmos.leap.http.services.model.ServiceModel;
 
-import ch.qos.logback.classic.Logger;
+import ch.qos.logback.classic.Logger;  
 
 /**
  * Annotation helper object
@@ -28,7 +28,7 @@ public class AnnotationHelper {
     /**
      * logger
      */
-    public static final Logger logger = LoggerFactory.getLogger(Context.getHosts().getDefaultHost().getHostId());
+    public static final Logger logger = LoggerFactory.getLogger(Context.getHosts().getDefaultHost().getHostId()); 
 
     /**
      * Servlet context mapping Map
@@ -237,6 +237,7 @@ public class AnnotationHelper {
      * @param annotationClass
      * @return
      */
+    @SuppressWarnings("unchecked")
     public static List<Method> getFilterMethods(IFilter filter, Class annotationClass) {
         return Arrays.asList(filter.getClass().getDeclaredMethods()).stream().filter(m -> m.getDeclaredAnnotation(annotationClass) != null).collect(Collectors.toList());
     }

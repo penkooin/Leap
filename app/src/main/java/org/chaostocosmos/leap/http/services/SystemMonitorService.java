@@ -1,6 +1,5 @@
 package org.chaostocosmos.leap.http.services;
 
-
 import java.awt.image.BufferedImage;
 import java.awt.image.renderable.ParameterBlock;
 import java.io.ByteArrayOutputStream;
@@ -40,16 +39,20 @@ import com.sun.media.jai.codec.ImageCodec;
 import com.sun.media.jai.codec.ImageEncoder;
 
 @ServiceMapper(path = "/monitor")
-public class MonitorService extends AbstractChartService {
+public class SystemMonitorService extends AbstractChartService {
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     @MethodMappper(mappingMethod = REQUEST_TYPE.GET, path = "")
     public void getMonitorWebpage(Request request, Response response) throws Exception {
-        String body = TemplateBuilder.buildMonitoringPage(request.getContextPath(), super.httpTransfer.getHost());        
-        response.setBody(body);
-        response.addHeader("Content-Type", MIME_TYPE.TEXT_HTML.mimeType());
-        response.setResponseCode(RES_CODE.RES200.code());
+        if(Context.getServer().<Boolean> isSupportMonitoring()) {
+            String body = TemplateBuilder.buildMonitoringPage(request.getContextPath(), super.httpTransfer.getHost());
+            response.setBody(body);
+            response.addHeader("Content-Type", MIME_TYPE.TEXT_HTML.mimeType());
+            response.setResponseCode(RES_CODE.RES200.code());
+        } else {
+            throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES503.code(), "Monitoring page not available now. Currently monitoring option is off !!!");
+        }
     }
 
     @MethodMappper(mappingMethod = REQUEST_TYPE.POST, path = "/chart/image")
@@ -71,23 +74,23 @@ public class MonitorService extends AbstractChartService {
         String chartJson = new String(body, charset);
         //super.logger.debug(chartJson);
         Map<String, Object> jsonMap = gson.fromJson(chartJson, Map.class);
-        List<Map<String, Object>> chartMap = jsonMap.values().stream().map(m -> (Map<String, Object>)m).collect(Collectors.toList());        
+        List<Map<String, Object>> chartMap = jsonMap.values().stream().map(m -> (Map<String, Object>) m ).collect(Collectors.toList());
         for(Host<?> host : Context.getHosts().getAllHost()) {
             for(Map<String, Object> map : chartMap) {
-                String savePath = (String)map.get("save-path");
-                boolean inMemory = (boolean)map.get("in-memory");
+                String savePath = (String) map.get("save-path"); 
+                boolean inMemory = (boolean) map.get("in-memory"); 
                 Graph<Double, String, Double> chart = super.createGraph(map);
                 if(chart == null) continue;
                 if(!inMemory) {
                     saveBufferedImage(chart.getBufferedImage(), host.getStatic().resolve(savePath).toFile(), CODEC.PNG);
                     //super.logger.debug("[MONITOR] Chart image save to file: "+host.getStatic().resolve(savePath).toString());
-                } else {               
+                } else {
                     ByteArrayOutputStream out = new ByteArrayOutputStream();
-                    ImageIO.write(chart.getBufferedImage(), CODEC.PNG.name(), out);                     
+                    ImageIO.write(chart.getBufferedImage(), CODEC.PNG.name(), out);
                     host.getResource().addResource(host.getStatic().resolve(savePath), out.toByteArray(), true);
                     //super.logger.debug("[MONITOR] Chart image add to In-Memory resource.");
                 }
-           }
+            }
         }
     }
 
@@ -101,7 +104,7 @@ public class MonitorService extends AbstractChartService {
      */
     public synchronized void saveBufferedImage(BufferedImage image, File saveFile, CODEC codec) throws IOException, NotSuppotedEncodingFormatException {
         Enumeration enu = ImageCodec.getCodecs();
-    	String ext = saveFile.getName().substring(saveFile.getName().lastIndexOf(".")+1);
+    	String ext = saveFile.getName().substring(saveFile.getName().lastIndexOf(".") + 1);
     	if(!Stream.of(CODEC.values()).anyMatch(c -> c.name().equalsIgnoreCase(ext))) {
     		throw new NotSuppotedEncodingFormatException("Given file extention isn't exist in supported codec list.");
     	}
@@ -110,8 +113,8 @@ public class MonitorService extends AbstractChartService {
         PlanarImage tPlanarImage = (PlanarImage)JAI.create("awtImage", pb );
         ImageCodec ic = ImageCodec.getCodec(codec.name());
         try(FileOutputStream out = new FileOutputStream(saveFile)) {
-            ImageEncoder tEncoder = ic.createImageEncoder(codec.name(), out,  null);
-            tEncoder.encode(tPlanarImage);    
+            ImageEncoder tEncoder = ic.createImageEncoder(codec.name(), out,  null); 
+            tEncoder.encode(tPlanarImage); 
         }
     }
 

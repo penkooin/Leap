@@ -26,7 +26,8 @@ import ch.qos.logback.classic.Logger;
 
 /**
  * Service loader object
- * @author Kooin-Shin
+ * 
+ * @author 9ins
  * @since 2021.09.15
  */
 public class ServiceManager {
@@ -34,24 +35,35 @@ public class ServiceManager {
      * Logger
      */
     public static final Logger logger = LoggerFactory.getLogger(Context.getHosts().getDefaultHost().getHostId());
+
     /**
      * Host object 
      */
     Host<?> host;
+
     /**
      * Leap security manager object
      */
     private UserManager userManager;
+
     /**
      * ClassLoder for host
      */
     private LeapURLClassLoader classLoader;
+
     /**
-     * Services 
+     * Services Method Map
      */
-    Map<String, Method> serviceMethodMap;
+    Map<String, Method> serviceMethodMap = new HashMap<>();    
+
+    /**
+     * Service Holder Map
+     */
+    Map<String, ServiceHolder> serviceHolderMap = new HashMap<>();
+
     /**
      * Constructor with 
+     * 
      * @param host
      * @param userManager 
      * @param classLoader
@@ -62,17 +74,19 @@ public class ServiceManager {
     public ServiceManager(Host<?> host, UserManager userManager, LeapURLClassLoader classLoader) throws IOException, URISyntaxException, NotSupportedException {
         this.host = host;
         this.userManager  = userManager;
-        this.classLoader = (LeapURLClassLoader) classLoader;
-        this.serviceMethodMap = new HashMap<>();
+        this.classLoader = classLoader;        
         initialize();        
     }
     /**
      * Initialize ServiceManager
+     * 
      * @throws IOException
      * @throws URISyntaxException
      * @throws NotSupportedException
+     * @throws SecurityException
+     * @throws NoSuchMethodException
      */
-    public void initialize() throws IOException, URISyntaxException, NotSupportedException {
+    public void initialize() throws IOException, URISyntaxException, NotSupportedException, NoSuchMethodException, SecurityException {
         List<Class<? extends ServiceModel>> services = ClassUtils.findAllLeapServices(classLoader, false, host.getDynamicPackageFiltering());
         for(Class<? extends ServiceModel> service : services) {            
             ServiceMapper sm = service.getDeclaredAnnotation(ServiceMapper.class);
@@ -82,21 +96,25 @@ public class ServiceManager {
                 for(Method method : methods) {
                     MethodMappper mm = method.getDeclaredAnnotation(MethodMappper.class);
                     if(mm != null) {
-                        this.serviceMethodMap.put(servicePath + mm.path(), method);
+                        String contextPath = servicePath + mm.path();
+                        this.serviceMethodMap.put(contextPath, method);
+                        this.serviceHolderMap.put(contextPath, createServiceHolder(contextPath));
                     }
                 }
             }
         }
     }
+
     /**
      * Create ServiceHolder
+     * 
      * @param contextPath
      * @return
      * @throws SecurityException
      * @throws NoSuchMethodException
      */
     public ServiceHolder createServiceHolder(String contextPath) throws NoSuchMethodException, SecurityException {
-        if(!this.serviceMethodMap.containsKey(contextPath)) {
+        if(!this.serviceHolderMap.containsKey(contextPath)) {
             return null;
         }
         Method serviceMethod = this.serviceMethodMap.get(contextPath);
