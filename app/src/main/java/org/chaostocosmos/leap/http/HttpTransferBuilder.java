@@ -22,6 +22,7 @@ import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
 import org.chaostocosmos.leap.http.resources.TemplateBuilder;
+import org.chaostocosmos.leap.http.services.session.Session;
 
 /**
  * HttpResponseTransfer
@@ -68,31 +69,43 @@ public class HttpTransferBuilder {
         /**
          * Hosts, Information configured in config.yml
          */
-        Host<?> host;
+        private Host<?> host;
+
         /**
          * Client Socket
          */
-        Socket socket;
+        private Socket socket;
+
         /**
          * InputStream
          */
-        InputStream clientInputStream;
+        private InputStream inStream;
+
         /**
          * OutputStream
          */
-        OutputStream clientOutputStream;
+        private OutputStream outStream;
+
         /**
          * Http request
          */
-        Request httpRequestDescriptor;
+        private Request request;
+
         /**
          * Http response
          */
-        Response httpResponseDescriptor;
+        private Response response;
+
+        /**
+         * Session object
+         */
+        private Session session;
+
         /**
          * Whether closed
          */
         boolean isClosed = false;
+
         /**
          * Construct with request host and client socket
          * @param hostId
@@ -102,9 +115,10 @@ public class HttpTransferBuilder {
         public HttpTransfer(String hostId, Socket socket) throws IOException {
             this.host = Context.getHosts().getHost(hostId);
             this.socket = socket;
-            this.clientInputStream = socket.getInputStream();
-            this.clientOutputStream = socket.getOutputStream();
+            this.inStream = socket.getInputStream();
+            this.outStream = socket.getOutputStream();
         }
+
         /**
          * Get requested host
          * @return
@@ -112,31 +126,35 @@ public class HttpTransferBuilder {
         public Host<?> getHost() {
             return this.host;
         }
+
         /**
          * Get client InputStream
          * @return
          */
         public InputStream getClientInputStream() {
-            return clientInputStream;
+            return inStream;
         }
+
         /**
          * Get client OutputStream
          * @return
          */
         public OutputStream getClientOutputStream() {
-            return clientOutputStream;
+            return outStream;
         }
+
         /**
          * Get HttpRequestDescriptor
          * @return
          * @throws Exception
          */
         public Request getRequest() throws Exception {
-            if(this.httpRequestDescriptor == null) {
-                this.httpRequestDescriptor = parseRequest();
+            if(this.request == null) {
+                this.request = parseRequest();
             }
-            return this.httpRequestDescriptor;
+            return this.request;
         }
+
         /**
          * Get HttpResponseDescriptor
          * @return
@@ -144,28 +162,30 @@ public class HttpTransferBuilder {
          * @throws ImageProcessingException
          */
         public Response getResponse() throws Exception {
-            if(this.httpResponseDescriptor == null) {
+            if(this.response == null) {
                 String msg = TemplateBuilder.buildResponseHtml(this.host, MSG_TYPE.HTTP, 200, Context.getMessages().getHttpMsg(200));
                 Map<String, List<Object>> headers = addHeader(new HashMap<>(), "Content-Type", MIME_TYPE.TEXT_HTML.mimeType());
                 headers = addHeader(new HashMap<>(), "Content-Length", msg.getBytes().length);
                 headers = addHeader(new HashMap<>(), "Charset", this.host.<String> charset());
-                this.httpResponseDescriptor = HttpResponseBuilder.getBuilder()
-                                                                 .build(this.httpRequestDescriptor)
-                                                                 .setStatusCode(200)
-                                                                 .setBody(msg)
-                                                                 .setHeaders(headers)
-                                                                 .get();
+                this.response = HttpResponseBuilder.getBuilder().build(this.request)
+                                                                .setStatusCode(200)
+                                                                .setBody(msg)
+                                                                .setHeaders(headers)
+                                                                .get();
             }
-            return this.httpResponseDescriptor;
+            return this.response;
         }
+
         /**
          * Get HttpRequestDescriptor object
          * @return
          * @throws Exception
          */
         private Request parseRequest() throws Exception {
-            return HttpParser.buildRequestParser().parseRequest(socket.getInetAddress(), clientInputStream);
+            Request request = HttpParser.buildRequestParser().parseRequest(this.socket.getInetAddress(), this.inStream);
+            return request;
         }
+
         /**
          * Send response to client by HttpResponseDescriptor object
          * @param response
@@ -174,6 +194,7 @@ public class HttpTransferBuilder {
         public void sendResponse(Response response) throws Exception {
             sendResponse(response.getHostId(), response.getResponseCode(), response.getHeaders(), response.getBody());
         }
+
         /**
          * Send response to client by requested host, status code, reponse headers, body object
          * @param hostId
@@ -192,7 +213,7 @@ public class HttpTransferBuilder {
                 resMsg = Context.getMessages().getErrorMsg(resCode, hostId);
             }
             String res = protocol+"/"+Constants.HTTP_VERSION+" "+resCode+" "+resMsg+"\r\n"; 
-            this.clientOutputStream.write(res.getBytes());
+            this.outStream.write(res.getBytes());
             if(body == null) {
                 LoggerFactory.getLogger(hostId).warn("Response body is Null: "+resCode);
                 return ;
@@ -219,27 +240,28 @@ public class HttpTransferBuilder {
             resStr.append("RES CODE: "+resCode+System.lineSeparator());
             for(Map.Entry<String, List<Object>> e : headers.entrySet()) {
                 String hv = e.getValue().stream().map(v -> v.toString()).collect(Collectors.joining("; "));
-                this.clientOutputStream.write((e.getKey()+": "+hv+"\r\n").getBytes());
+                this.outStream.write((e.getKey()+": "+hv+"\r\n").getBytes());
                 resStr.append(e.getKey()+": "+e.getValue()+System.lineSeparator());
             }
             LoggerFactory.getLogger(hostId).debug(resStr.substring(0, resStr.length()-1));
-            this.clientOutputStream.write("\r\n".getBytes()); 
-            this.clientOutputStream.flush(); 
+            this.outStream.write("\r\n".getBytes()); 
+            this.outStream.flush(); 
             if(body instanceof byte[]) {
-                this.clientOutputStream.write((byte[]) body);
+                this.outStream.write((byte[]) body);
             } else { 
                 if(body instanceof String) {                                       
-                    this.clientOutputStream.write(body.toString().getBytes(charset));
+                    this.outStream.write(body.toString().getBytes(charset));
                 } else if(body instanceof File) {
-                    writeToStream((File)body, this.clientOutputStream, Context.getServer().getFileBufferSize());
+                    writeToStream((File)body, this.outStream, Context.getServer().getFileBufferSize());
                 } else if(body instanceof Path) {
-                    writeToStream(((Path)body).toFile(), this.clientOutputStream, Context.getServer().getFileBufferSize());
+                    writeToStream(((Path)body).toFile(), this.outStream, Context.getServer().getFileBufferSize());
                 } else {
                     throw new IllegalArgumentException("Not supported response body type: "+body.getClass().getName());
                 }
             }
-            this.clientOutputStream.flush();
+            this.outStream.flush();
         }
+
         /**
          * Write resource to OutputStream for client
          * @param resource
@@ -256,17 +278,18 @@ public class HttpTransferBuilder {
             }
             in.close();
         }
+        
         /**
          * Close client connection
          * @throws IOException
          */
         public void close() {
             try {
-                if(this.clientInputStream != null) {
-                    this.clientInputStream.close();
+                if(this.inStream != null) {
+                    this.inStream.close();
                 }
-                if(this.clientOutputStream != null) {
-                    this.clientOutputStream.close();
+                if(this.outStream != null) {
+                    this.outStream.close();
                 }
                 if(this.socket != null && !this.socket.isClosed()) {
                     this.socket.close();

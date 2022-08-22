@@ -8,27 +8,28 @@ package org.chaostocosmos.leap.http.enums;
 public enum PROTOCOL {
     
     HTTP(false, "HTTP"),
-    HTTPS(true, "HTTPS");
+    HTTPS(true, "HTTPS"),
+    WSS(true, "WSS");
 
     /**
      * SSL flag
      */
-    boolean isSSL;
+    boolean isSecured;
     /**
      * protocol
      */
     String protocol;
 
     PROTOCOL(boolean isSSL, String protocol) {
-        this.isSSL = isSSL;
+        this.isSecured = isSSL;
         this.protocol = protocol;
     }
     /**
      * Whether SSL
      * @return
      */
-    public boolean isSSL() {
-        return isSSL;
+    public boolean isSecured() {
+        return isSecured;
     }
     /**
      * Get protocol

@@ -15,7 +15,7 @@ import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
 import org.chaostocosmos.leap.http.resources.ResourcesModel;
-import org.chaostocosmos.leap.http.services.model.StreamingModel;
+import org.chaostocosmos.leap.http.services.servicemodel.StreamingModel;
 
 /**
  * AbstractStreamingService
@@ -47,7 +47,7 @@ public abstract class AbstractStreamingService extends AbstractService implement
     }
 
     @Override
-    public void GET(final Request request, final Response response) throws Exception {        
+    public void GET(final Request request, final Response response) throws Exception {
         String reqFile = (String) request.getParameter("file");
         reqFile = reqFile.charAt(0) == '/' ? reqFile.substring(1) : reqFile;
         if(reqFile == null || reqFile.equals("")) {
@@ -89,7 +89,6 @@ public abstract class AbstractStreamingService extends AbstractService implement
         response.addHeader("Content-Length", String.format("%s", contentLength));
         response.setResponseCode(206);
         response.setBody(body);        
-        super.serveGet(request, response);
     }
 
     @Override

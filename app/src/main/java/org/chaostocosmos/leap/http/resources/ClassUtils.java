@@ -23,7 +23,7 @@ import org.chaostocosmos.leap.http.commons.Filtering;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.services.filters.IFilter;
-import org.chaostocosmos.leap.http.services.model.ServiceModel;
+import org.chaostocosmos.leap.http.services.servicemodel.ServiceModel;
 
 /**
  * ClassUtils object

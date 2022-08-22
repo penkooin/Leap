@@ -5,7 +5,7 @@ import java.util.Date;
 import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.Response;
 import org.chaostocosmos.leap.http.annotation.FilterMapper;
-import org.chaostocosmos.leap.http.annotation.MethodMappper;
+import org.chaostocosmos.leap.http.annotation.MethodMapper;
 import org.chaostocosmos.leap.http.annotation.ServiceMapper;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
@@ -29,7 +29,7 @@ public class TimeServiceImpl extends AbstractService {
      * @param request
      * @param response
      */
-    @MethodMappper(mappingMethod = REQUEST_TYPE.GET, path = "/GetTime")
+    @MethodMapper(mappingMethod = REQUEST_TYPE.GET, path = "/GetTime")
     @FilterMapper(preFilters = {BasicAuthFilter.class, BasicHttpFilter.class})
     public void getTime(Request request, Response response) {
         LoggerFactory.getLogger(request.getRequestedHost()).debug("getTime servlet started....+++++++++++++++++++++++++++++++++++++++++++++++++");

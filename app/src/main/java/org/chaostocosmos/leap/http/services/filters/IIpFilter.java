@@ -2,7 +2,7 @@ package org.chaostocosmos.leap.http.services.filters;
 
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.annotation.PreFilter;
-import org.chaostocosmos.leap.http.services.model.SpringJPAModel;
+import org.chaostocosmos.leap.http.services.servicemodel.SpringJPAModel;
 
 /**
  * Ip filter(allowed/forbidden)

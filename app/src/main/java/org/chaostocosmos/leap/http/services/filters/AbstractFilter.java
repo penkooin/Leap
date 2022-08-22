@@ -7,7 +7,7 @@ import org.chaostocosmos.leap.http.UserManager;
 import org.chaostocosmos.leap.http.annotation.PostFilter;
 import org.chaostocosmos.leap.http.annotation.PreFilter;
 import org.chaostocosmos.leap.http.resources.SpringJPAManager;
-import org.chaostocosmos.leap.http.services.model.SpringJPAModel;
+import org.chaostocosmos.leap.http.services.servicemodel.SpringJPAModel;
 
 /**
  * Filtering request URL

@@ -239,7 +239,7 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
         }
         threadpool.shutdown();
         int countDown = 0;
-        while(!threadpool.isTerminated()) {            
+        while(!threadpool.isTerminated()) {
             TimeUnit.SECONDS.sleep(1);
             logger.info("Waiting for termination server..."+countDown);
             countDown += 1;

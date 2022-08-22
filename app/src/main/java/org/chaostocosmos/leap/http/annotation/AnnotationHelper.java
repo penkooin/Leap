@@ -14,7 +14,7 @@ import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
 import org.chaostocosmos.leap.http.resources.ClassUtils;
 import org.chaostocosmos.leap.http.services.filters.IFilter;
-import org.chaostocosmos.leap.http.services.model.ServiceModel;
+import org.chaostocosmos.leap.http.services.servicemodel.ServiceModel;
 
 import ch.qos.logback.classic.Logger;  
 
@@ -58,7 +58,7 @@ public class AnnotationHelper {
     public static boolean vaildateRequestMethod(REQUEST_TYPE type, String path, List<Object> servlets) {
         Method method = methodMatches(path, servlets);
         if(method != null) {
-            MethodMappper methodDescriptor = method.getDeclaredAnnotation(MethodMappper.class);
+            MethodMapper methodDescriptor = method.getDeclaredAnnotation(MethodMapper.class);
             if(type != methodDescriptor.mappingMethod()) {
                 return false;
             }
@@ -82,7 +82,7 @@ public class AnnotationHelper {
             }
             Method[] methods = service.getClass().getDeclaredMethods();
             for(Method method : methods) {
-                MethodMappper methodDescriptor = method.getDeclaredAnnotation(MethodMappper.class);
+                MethodMapper methodDescriptor = method.getDeclaredAnnotation(MethodMapper.class);
                 if(methodDescriptor != null) {
                     String mPath = methodDescriptor.path();
                     if(mPath == null) {
@@ -112,7 +112,7 @@ public class AnnotationHelper {
                 String sPath = serviceDescriptor.path();
                 Method[] methods = service.getClass().getDeclaredMethods();
                 for(Method method : methods) {
-                    MethodMappper methodDescriptor = method.getDeclaredAnnotation(MethodMappper.class);
+                    MethodMapper methodDescriptor = method.getDeclaredAnnotation(MethodMapper.class);
                     if(methodDescriptor != null) {
                         String mPath = methodDescriptor.path();
                         String fullPath = sPath + mPath;
@@ -141,7 +141,7 @@ public class AnnotationHelper {
                 String sPath = serviceDescriptor.path();
                 Method[] methods = servlet.getClass().getDeclaredMethods();
                 for(Method method : methods) {
-                    MethodMappper methodDescriptor = method.getDeclaredAnnotation(MethodMappper.class);
+                    MethodMapper methodDescriptor = method.getDeclaredAnnotation(MethodMapper.class);
                     if(methodDescriptor != null) {
                         String mPath = methodDescriptor.path();
                         String fullPath = sPath + mPath;
@@ -174,7 +174,7 @@ public class AnnotationHelper {
                 }
                 Method[] methods = service.getClass().getDeclaredMethods();
                 for(Method method : methods) {
-                    MethodMappper methodDescriptor = method.getDeclaredAnnotation(MethodMappper.class);
+                    MethodMapper methodDescriptor = method.getDeclaredAnnotation(MethodMapper.class);
                     if(methodDescriptor != null) {
                         String mPath = methodDescriptor.path();
                         if(!mPath.substring(0, 1).equals("/") || mPath.substring(mPath.length()-1).equals("/")) {
@@ -184,7 +184,7 @@ public class AnnotationHelper {
                         if(serviceContextMappings.containsKey(fullPath)) {
                             throw new WASException(MSG_TYPE.ERROR, 11, new Object[]{service, fullPath});
                         }
-                        serviceContextMappings.put(fullPath, (ServiceModel)ClassUtils.instantiate(ClassLoader.getSystemClassLoader().getSystemClassLoader(), service));
+                        serviceContextMappings.put(fullPath, (ServiceModel)ClassUtils.instantiate(ClassLoader.getSystemClassLoader(), service));
                     }
                 }
             } else {
@@ -211,7 +211,7 @@ public class AnnotationHelper {
                 }
                 Method[] methods = service.getClass().getDeclaredMethods();
                 for(Method method : methods) {
-                    MethodMappper methodMapper = method.getDeclaredAnnotation(MethodMappper.class);
+                    MethodMapper methodMapper = method.getDeclaredAnnotation(MethodMapper.class);
                     if(methodMapper != null) {
                         String mPath = methodMapper.path();
                         if(!mPath.substring(0, 1).equals("/") || mPath.substring(mPath.length()-1).equals("/")) {
@@ -238,7 +238,7 @@ public class AnnotationHelper {
      * @return
      */
     @SuppressWarnings("unchecked")
-    public static List<Method> getFilterMethods(IFilter filter, Class annotationClass) {
+    public static <T> List<Method> getFilterMethods(IFilter filter, Class annotationClass) {
         return Arrays.asList(filter.getClass().getDeclaredMethods()).stream().filter(m -> m.getDeclaredAnnotation(annotationClass) != null).collect(Collectors.toList());
     }
 }

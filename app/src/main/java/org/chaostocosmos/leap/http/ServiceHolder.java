@@ -1,53 +1,51 @@
 package org.chaostocosmos.leap.http;
 
-import java.lang.reflect.Method;
 import java.util.List;
 
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
 import org.chaostocosmos.leap.http.services.filters.IFilter;
-import org.chaostocosmos.leap.http.services.model.ServiceModel;
+import org.chaostocosmos.leap.http.services.servicemodel.ServiceModel;
 
 /**
  * ServiceHolder
- * @author 9ins
+ * @author Kooin Shin
  */
 public class ServiceHolder {
     /**
      * Context path
      */
     String contextPath;
+
     /**
      * Request type
      */
     REQUEST_TYPE requestType;
+
     /**
      * Leap service
      */
-    ServiceModel service;
-    /**
-     * Service method
-     */
-    Method serviceMethod;
+    ServiceModel serviceModel;
+    
     /**
      * Service filter for pre process
      */
     protected List<IFilter> preFilters;
+
     /**
      * Service filter for post process
      */
     protected List<IFilter> postFilters;
+
     /**
      * Constructor with parameters
      * @param contextPath
-     * @param service
+     * @param serviceModel
      * @param requestType
-     * @param serviceMethod
      */
-    public ServiceHolder(String contextPath, ServiceModel service, REQUEST_TYPE requestType, Method serviceMethod) {
+    public ServiceHolder(String contextPath, ServiceModel serviceModel, REQUEST_TYPE requestType) {
         this.contextPath = contextPath;
         this.requestType = requestType;
-        this.service = service;
-        this.serviceMethod = serviceMethod;
+        this.serviceModel = serviceModel;
     }
 
     public String getServicePath() {
@@ -66,28 +64,22 @@ public class ServiceHolder {
         this.requestType = requestType;
     }
 
-    public ServiceModel getService() {
-        return this.service;
+    public ServiceModel getServiceModel() {
+        return this.serviceModel;
     }
 
-    public void setService(ServiceModel service) {
-        this.service = service;
-    }
-
-    public Method getServiceMethod() {
-        return this.serviceMethod;
-    }
-
-    public void setServiceMethod(Method serviceMethod) {
-        this.serviceMethod = serviceMethod;
+    public void setServiceModel(ServiceModel service) {
+        this.serviceModel = service;
     }
 
     @Override
     public String toString() {
         return "{" +
-            " servicePath='" + getServicePath() + "'" +
-            " requestType='" + getRequestType()+ "'" +
-            ", serviceMethod='" + getServiceMethod() + "'" +
+            " contextPath='" + contextPath + "'" +
+            ", requestType='" + requestType + "'" +
+            ", service='" + serviceModel + "'" +
+            ", preFilters='" + preFilters + "'" +
+            ", postFilters='" + postFilters + "'" +
             "}";
     }
 }

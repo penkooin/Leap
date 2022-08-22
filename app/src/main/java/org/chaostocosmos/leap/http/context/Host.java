@@ -360,6 +360,59 @@ public class Host <T> extends Metadata<T> {
         super.setValue("welcome", welcome);
     }
 
+    /**
+     * Get session id encription algorithm
+     * @param <V>
+     * @return
+     */
+    public <V> V getSessionIDEncription() {
+        return super.getValue("session.id-encription");
+    }
+
+    /**
+     * Set session id encription algorithm
+     * @param <V>
+     * @param sessionIDencription
+     */
+    public <V> void setSessionIDEncription(V sessionIDencription) {
+        super.setValue("session.id-encription", sessionIDencription);
+    }
+
+    /**
+     * Get session id length
+     * @param <V>
+     * @return 
+     */
+    public <V> V getSessionIDLength() {
+        return super.getValue("session.id-length");
+    }
+
+    /**
+     * Set seesion id length
+     * @param sessionIdLength
+     */
+    public <V> void setSessionIDLength(V sessionIdLength) {
+        super.setValue("session.id-length", sessionIdLength);
+    }
+
+    /**
+     * Get session timeout
+     * @param <V>
+     * @return
+     */
+    public <V> V getSessionTimeout() {
+        return super.getValue("session.timeout");
+    }
+
+    /**
+     * Set session timeout
+     * @param <V>
+     * @param sessionTimeout
+     */
+    public <V> void setSessionTimeout(V sessionTimeout) {
+        super.setValue("session.timeout", sessionTimeout);
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
@@ -494,11 +547,6 @@ public class Host <T> extends Metadata<T> {
         return LoggerFactory.getLogger(getHostId());
     }
 
-    @Override
-    public String toString() {
-        return super.toString();
-    }
-
     /**
      * For blocking request attack (ip = timestemp)
      */
@@ -527,5 +575,10 @@ public class Host <T> extends Metadata<T> {
         }
         requestAttackBlockingMap.get(ip).put(url, System.currentTimeMillis());
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }

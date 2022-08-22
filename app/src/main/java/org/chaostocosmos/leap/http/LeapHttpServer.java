@@ -116,8 +116,10 @@ public class LeapHttpServer extends Thread {
      * @throws NotSupportedException
      * @throws URISyntaxException
      * @throws IOException
+     * @throws SecurityException
+     * @throws NoSuchMethodException
      */
-    public LeapHttpServer() throws NotSupportedException, IOException, URISyntaxException {
+    public LeapHttpServer() throws NotSupportedException, IOException, URISyntaxException, NoSuchMethodException, SecurityException {
         this(Constants.DEFAULT_HOME_PATH);
     }
 
@@ -127,8 +129,10 @@ public class LeapHttpServer extends Thread {
      * @throws NotSupportedException
      * @throws URISyntaxException
      * @throws IOException
+     * @throws SecurityException
+     * @throws NoSuchMethodException
      */
-    public LeapHttpServer(Path homePath) throws NotSupportedException, IOException, URISyntaxException {
+    public LeapHttpServer(Path homePath) throws NotSupportedException, IOException, URISyntaxException, NoSuchMethodException, SecurityException {
         this(homePath, 
              Context.getHosts().getHost(Context.getHosts().getDefaultHost().getHostId()), 
              new ThreadPoolExecutor(Context.getServer().getThreadPoolCoreSize(), 
@@ -147,11 +151,13 @@ public class LeapHttpServer extends Thread {
      * @throws NotSupportedException
      * @throws URISyntaxException
      * @throws IOException
+     * @throws SecurityException
+     * @throws NoSuchMethodException
      */
     public LeapHttpServer(Path homePath, 
                           Host<?> host, 
                           ThreadPoolExecutor threadpool
-                          ) throws NotSupportedException, IOException, URISyntaxException {
+                          ) throws NotSupportedException, IOException, URISyntaxException, NoSuchMethodException, SecurityException {
         this(homePath, host, threadpool, ClassUtils.getClassLoader());
     }
 
@@ -164,13 +170,15 @@ public class LeapHttpServer extends Thread {
      * @throws URISyntaxException
      * @throws IOException
      * @throws NotSupportedException
+     * @throws SecurityException
+     * @throws NoSuchMethodException
      * @throws MalformedURLException
      */
     public LeapHttpServer(Path homePath, 
                           Host<?> host, 
                           ThreadPoolExecutor threadpool, 
                           LeapURLClassLoader classLoader
-                          ) throws IOException, URISyntaxException, NotSupportedException {
+                          ) throws IOException, URISyntaxException, NotSupportedException, NoSuchMethodException, SecurityException {
         this(
             true,
             Context.getHomePath(),
@@ -198,6 +206,8 @@ public class LeapHttpServer extends Thread {
      * @throws URISyntaxException
      * @throws IOException
      * @throws NotSupportedException
+     * @throws SecurityException
+     * @throws NoSuchMethodException
      */
     public LeapHttpServer(boolean isDefaultHost, 
                           Path homePath, 
@@ -205,10 +215,10 @@ public class LeapHttpServer extends Thread {
                           PROTOCOL protocol, 
                           InetSocketAddress inetSocketAddress, 
                           int backlog, 
-                          ThreadPoolExecutor threadpool,
+                          ThreadPoolExecutor threadpool, 
                           Host<?> host,
                           LeapURLClassLoader classLoader
-                          ) throws IOException, URISyntaxException, NotSupportedException {
+                          ) throws IOException, URISyntaxException, NotSupportedException, NoSuchMethodException, SecurityException {
         this.isDefaultHost = true;
         this.homePath = homePath;
         this.protocol = protocol;
@@ -258,7 +268,7 @@ public class LeapHttpServer extends Thread {
     @Override
     public void run() {
         try {
-            if(!this.protocol.isSSL()) {
+            if(!this.protocol.isSecured()) {
                 this.server = new ServerSocket();
                 this.server.bind(this.inetSocketAddress, this.backlog);
                 logger.info("[HTTP SERVER START] Address: " + this.inetSocketAddress.toString());
@@ -266,7 +276,7 @@ public class LeapHttpServer extends Thread {
                 File keyStore = new File(Context.getServer().<String> getKeyStore());
                 String passphrase = Context.getServer().getPassphrase();
                 String sslProtocol = Context.getServer().getEncryptionMethod();
-                this.server = HttpsServerSocketFactory.getSSLServerSocket(keyStore, passphrase, sslProtocol, this.inetSocketAddress, this.backlog);                
+                this.server = HttpsServerSocketFactory.getSSLServerSocket(keyStore, passphrase, sslProtocol, this.inetSocketAddress, this.backlog);
                 logger.info("[HTTPS SERVER START] Address: "+this.inetSocketAddress.toString()+"  Protocol: "+sslProtocol+"  KeyStore: "+keyStore.getName()+"  Supported Protocol: "+Arrays.toString(((SSLServerSocket)server).getSupportedProtocols())+"  KeyStore: "+keyStore.getName());
             }
             while (true) { 

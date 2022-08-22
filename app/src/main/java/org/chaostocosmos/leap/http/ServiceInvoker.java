@@ -29,14 +29,14 @@ public class ServiceInvoker {
      */
     public static Response invokeServiceMethod(ServiceHolder serviceHolder, HttpTransfer httpTransfer) throws Throwable {
         Response response = httpTransfer.getResponse();
-        AbstractService service = (AbstractService)serviceHolder.getService();
+        AbstractService service = (AbstractService)serviceHolder.getServiceModel();
         try {
-            response = service.serve(httpTransfer, serviceHolder.getServiceMethod());
+            response = service.serve(httpTransfer);
         } catch(Throwable e) {
             if(service.errorHandling(httpTransfer.getResponse(), e) != null) {
                 throw e;
             }
-            logger.error(Context.getMessages().getWarnMsg(2, serviceHolder.getService().getClass().getName(), e.getMessage()));
+            logger.error(Context.getMessages().getWarnMsg(2, serviceHolder.getServiceModel().getClass().getName(), e.getMessage()));
         }
         return response;
     }

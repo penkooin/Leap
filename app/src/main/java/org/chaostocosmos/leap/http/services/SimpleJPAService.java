@@ -6,7 +6,7 @@ import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.Response;
 import org.chaostocosmos.leap.http.annotation.AutowiredJPA;
 import org.chaostocosmos.leap.http.annotation.FilterMapper;
-import org.chaostocosmos.leap.http.annotation.MethodMappper;
+import org.chaostocosmos.leap.http.annotation.MethodMapper;
 import org.chaostocosmos.leap.http.annotation.ServiceMapper;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
 import org.chaostocosmos.leap.http.services.entity.Users;
@@ -24,7 +24,7 @@ public class SimpleJPAService extends AbstractService {
     @AutowiredJPA
     private SimpleSpringService springService;
 
-    @MethodMappper(mappingMethod = REQUEST_TYPE.GET, path="/users")
+    @MethodMapper(mappingMethod = REQUEST_TYPE.GET, path="/users")
     @FilterMapper(preFilters = {BasicHttpFilter.class})    
     public void getUsers(Request request, Response response) {
         System.out.println("Simple JPA Service called.......................................");

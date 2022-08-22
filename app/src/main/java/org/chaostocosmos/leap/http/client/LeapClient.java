@@ -31,7 +31,6 @@ public class LeapClient {
     private Socket socket = null;
     private String host = null;
     private int port = -1;
-    private String uri = null;
     private boolean keepAlive = true;
     private boolean tcpNoDelay = true;
     private int receiveBufferSize = 2048;
@@ -274,7 +273,6 @@ public class LeapClient {
      * @return
      * @throws IOException
      */
-    @SuppressWarnings("unchecked")
     private byte[] processResponse(InputStream is) throws IOException {
         byte[] bytes = readLine(is);
         if(bytes == null) {
@@ -282,7 +280,6 @@ public class LeapClient {
         }
         String line = new String(bytes, StandardCharsets.ISO_8859_1);
         List<String> list = Arrays.asList(line.split(" "));
-        String protocol = list.get(0).trim();
         this.responseCode = Integer.parseInt(list.get(1).trim());
         this.responseMsg = list.get(2);        
         this.responseHeaders = new HashMap<>();

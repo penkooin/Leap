@@ -20,9 +20,6 @@ import org.chaostocosmos.leap.http.enums.RES_CODE;
 import org.chaostocosmos.leap.http.resources.Resource;
 import org.chaostocosmos.leap.http.resources.ResourceHelper;
 import org.chaostocosmos.leap.http.resources.TemplateBuilder;
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.State;
 
 /**
  * Client request processor object
@@ -30,7 +27,6 @@ import org.openjdk.jmh.annotations.State;
  * @author 9ins
  * @since 2021.09.16
  */
-@State(Scope.Thread)
 public class LeapRequestHandler implements Runnable {
     /**
      * Leap server home path
@@ -51,6 +47,7 @@ public class LeapRequestHandler implements Runnable {
      * Hosts
      */
     Host<?> host;
+
     /**
      * Constructor with HeapHttpServer, root direcotry, index.html file, client socket
      * @param httpServer
@@ -66,7 +63,6 @@ public class LeapRequestHandler implements Runnable {
     }
 
     @Override
-    @Benchmark
     public void run() {
         Request request = null;
         Response response = null;

@@ -22,7 +22,7 @@ import org.chaostocosmos.chaosgraph.awt2d.BarRatioGraph;
 import org.chaostocosmos.chaosgraph.awt2d.CircleGraph;
 import org.chaostocosmos.chaosgraph.awt2d.LineGraph;
 import org.chaostocosmos.leap.http.commons.DataStructureOpr;
-import org.chaostocosmos.leap.http.services.model.ChartModel;
+import org.chaostocosmos.leap.http.services.servicemodel.ChartModel;
 
 /**
  * AbstractChartService

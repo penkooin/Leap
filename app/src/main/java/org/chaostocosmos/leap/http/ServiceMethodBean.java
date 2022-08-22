@@ -4,7 +4,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 import org.chaostocosmos.leap.http.services.filters.IFilter;
-import org.chaostocosmos.leap.http.services.model.ServiceModel;
+import org.chaostocosmos.leap.http.services.servicemodel.ServiceModel;
 
 /**
  * Service info bean object

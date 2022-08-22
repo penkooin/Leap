@@ -16,7 +16,7 @@ import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.Response;
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.annotation.FilterMapper;
-import org.chaostocosmos.leap.http.annotation.MethodMappper;
+import org.chaostocosmos.leap.http.annotation.MethodMapper;
 import org.chaostocosmos.leap.http.annotation.ServiceMapper;
 import org.chaostocosmos.leap.http.commons.ExceptionUtils;
 import org.chaostocosmos.leap.http.context.Context;
@@ -27,13 +27,13 @@ import org.chaostocosmos.leap.http.enums.RES_CODE;
 import org.chaostocosmos.leap.http.part.MultiPart;
 import org.chaostocosmos.leap.http.part.Part;
 import org.chaostocosmos.leap.http.services.filters.BasicAuthFilter;
-import org.chaostocosmos.leap.http.services.model.DeployModel;
-import org.chaostocosmos.leap.http.services.model.ServiceModel;
+import org.chaostocosmos.leap.http.services.servicemodel.DeployModel;
+import org.chaostocosmos.leap.http.services.servicemodel.ServiceModel;
 
 @ServiceMapper(path="/deploy")
 public class DeployService extends AbstractService implements DeployModel {
     
-    @MethodMappper(mappingMethod = REQUEST_TYPE.POST, path = "/service/add")
+    @MethodMapper(mappingMethod = REQUEST_TYPE.POST, path = "/service/add")
     @FilterMapper(preFilters = BasicAuthFilter.class)
     public void add(Request request, Response response) throws WASException, IOException {
         final Map<String, String> headers = request.getReqHeader();
@@ -82,9 +82,9 @@ public class DeployService extends AbstractService implements DeployModel {
         }
     }
 
-    @MethodMappper(mappingMethod = REQUEST_TYPE.GET, path = "/service/delete")
+    @MethodMapper(mappingMethod = REQUEST_TYPE.GET, path = "/service/delete")
     @FilterMapper(preFilters = BasicAuthFilter.class)
-    public void delete(Request request, Response response) throws IOException, URISyntaxException, NotSupportedException {
+    public void delete(Request request, Response response) throws IOException, URISyntaxException, NotSupportedException, NoSuchMethodException, SecurityException {
         String qualifiedClassName = (String) request.getParameter("serviceClassNames");
         if(qualifiedClassName.startsWith("[") && qualifiedClassName.endsWith("]")) {
             qualifiedClassName = qualifiedClassName.substring(qualifiedClassName.indexOf("[")+1, qualifiedClassName.lastIndexOf("]"));

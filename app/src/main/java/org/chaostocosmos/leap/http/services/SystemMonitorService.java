@@ -22,7 +22,7 @@ import org.chaostocosmos.chaosgraph.NotSuppotedEncodingFormatException;
 import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.Response;
 import org.chaostocosmos.leap.http.WASException;
-import org.chaostocosmos.leap.http.annotation.MethodMappper;
+import org.chaostocosmos.leap.http.annotation.MethodMapper;
 import org.chaostocosmos.leap.http.annotation.ServiceMapper;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Host;
@@ -43,7 +43,7 @@ public class SystemMonitorService extends AbstractChartService {
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    @MethodMappper(mappingMethod = REQUEST_TYPE.GET, path = "")
+    @MethodMapper(mappingMethod = REQUEST_TYPE.GET, path = "")
     public void getMonitorWebpage(Request request, Response response) throws Exception {
         if(Context.getServer().<Boolean> isSupportMonitoring()) {
             String body = TemplateBuilder.buildMonitoringPage(request.getContextPath(), super.httpTransfer.getHost());
@@ -55,7 +55,7 @@ public class SystemMonitorService extends AbstractChartService {
         }
     }
 
-    @MethodMappper(mappingMethod = REQUEST_TYPE.POST, path = "/chart/image")
+    @MethodMapper(mappingMethod = REQUEST_TYPE.POST, path = "/chart/image")
     @SuppressWarnings("unchecked")
     public void getResources(Request request, Response response) throws Exception {
         Map<String, String> header = request.getReqHeader();
