@@ -31,6 +31,8 @@ import org.chaostocosmos.leap.http.enums.RES_CODE;
 import org.chaostocosmos.leap.http.resources.ClassUtils;
 import org.chaostocosmos.leap.http.resources.Html;
 import org.chaostocosmos.leap.http.resources.LeapURLClassLoader;
+import org.chaostocosmos.leap.http.services.security.SecurityManager;
+import org.chaostocosmos.leap.http.services.session.SessionManager;
 
 import ch.qos.logback.classic.Logger;
 
@@ -87,11 +89,6 @@ public class LeapHttpServer extends Thread {
     ServerSocket server;
 
     /**
-     * servlet loading & managing
-     */
-    ServiceManager serviceManager;
-
-    /**
      * thread pool
      */
     ThreadPoolExecutor threadpool;
@@ -112,19 +109,40 @@ public class LeapHttpServer extends Thread {
     boolean started;
 
     /**
+     * SessionManager object
+     */
+    SessionManager sessionManager;
+
+    /**
+     * servlet loading & managing
+     */
+    ServiceManager serviceManager;
+
+    /**
+     * User manager object
+     */
+    SecurityManager userManager;
+
+    /**
      * Default constructor 
+     * 
      * @throws NotSupportedException
      * @throws URISyntaxException
      * @throws IOException
      * @throws SecurityException
      * @throws NoSuchMethodException
      */
-    public LeapHttpServer() throws NotSupportedException, IOException, URISyntaxException, NoSuchMethodException, SecurityException {
+    public LeapHttpServer() throws NotSupportedException, 
+                                   IOException, 
+                                   URISyntaxException, 
+                                   NoSuchMethodException, 
+                                   SecurityException {
         this(Constants.DEFAULT_HOME_PATH);
     }
 
     /**
      * Construct with home path
+     * 
      * @param homePath
      * @throws NotSupportedException
      * @throws URISyntaxException
@@ -132,7 +150,11 @@ public class LeapHttpServer extends Thread {
      * @throws SecurityException
      * @throws NoSuchMethodException
      */
-    public LeapHttpServer(Path homePath) throws NotSupportedException, IOException, URISyntaxException, NoSuchMethodException, SecurityException {
+    public LeapHttpServer(Path homePath) throws NotSupportedException, 
+                                                IOException, 
+                                                URISyntaxException, 
+                                                NoSuchMethodException, 
+                                                SecurityException {
         this(homePath, 
              Context.getHosts().getHost(Context.getHosts().getDefaultHost().getHostId()), 
              new ThreadPoolExecutor(Context.getServer().getThreadPoolCoreSize(), 
@@ -145,6 +167,7 @@ public class LeapHttpServer extends Thread {
 
     /**
      * Construct with home path, host object, thread pool
+     * 
      * @param homePath
      * @param host
      * @param threadpool
@@ -157,12 +180,17 @@ public class LeapHttpServer extends Thread {
     public LeapHttpServer(Path homePath, 
                           Host<?> host, 
                           ThreadPoolExecutor threadpool
-                          ) throws NotSupportedException, IOException, URISyntaxException, NoSuchMethodException, SecurityException {
+                          ) throws NotSupportedException, 
+                                   IOException, 
+                                   URISyntaxException, 
+                                   NoSuchMethodException, 
+                                   SecurityException {
         this(homePath, host, threadpool, ClassUtils.getClassLoader());
     }
 
     /**
      * Construct with Context object
+     * 
      * @param homePath
      * @param host
      * @param threadpool 
@@ -178,7 +206,11 @@ public class LeapHttpServer extends Thread {
                           Host<?> host, 
                           ThreadPoolExecutor threadpool, 
                           LeapURLClassLoader classLoader
-                          ) throws IOException, URISyntaxException, NotSupportedException, NoSuchMethodException, SecurityException {
+                          ) throws IOException, 
+                                   URISyntaxException, 
+                                   NotSupportedException, 
+                                   NoSuchMethodException, 
+                                   SecurityException {
         this(
             true,
             Context.getHomePath(),
@@ -194,6 +226,7 @@ public class LeapHttpServer extends Thread {
 
     /**
      * Constructor with configuration file Path
+     * 
      * @param isDefaultHost
      * @param homePath
      * @param docroot
@@ -218,7 +251,11 @@ public class LeapHttpServer extends Thread {
                           ThreadPoolExecutor threadpool, 
                           Host<?> host,
                           LeapURLClassLoader classLoader
-                          ) throws IOException, URISyntaxException, NotSupportedException, NoSuchMethodException, SecurityException {
+                          ) throws IOException, 
+                                   URISyntaxException, 
+                                   NotSupportedException, 
+                                   NoSuchMethodException, 
+                                   SecurityException {
         this.isDefaultHost = true;
         this.homePath = homePath;
         this.protocol = protocol;
@@ -230,7 +267,9 @@ public class LeapHttpServer extends Thread {
         this.ipAllowedFilters = host.getIpAllowedFiltering();
         this.ipForbiddenFilters = host.getIpForbiddenFiltering();
         this.redirectHostSelection = new RedirectHostSelection(Context.getServer().getLoadBalanceRedirects());
-        this.serviceManager = new ServiceManager(host, new UserManager(host.getHostId()), classLoader);
+        this.sessionManager = new SessionManager(host);
+        this.userManager = new SecurityManager(host.getHostId());
+        this.serviceManager = new ServiceManager(host, this.userManager, this.sessionManager, classLoader);
     }
 
     /**
@@ -258,6 +297,22 @@ public class LeapHttpServer extends Thread {
     }
 
     /**
+     * Get session manager
+     * @return
+     */
+    protected SessionManager getSessionManager() {
+        return this.sessionManager;
+    }
+
+    /**
+     * Get user manager object
+     * @return
+     */
+    protected SecurityManager getUserManager() {
+        return this.userManager;
+    }
+
+    /**
      * Get root directory
      * @return
      */
@@ -271,13 +326,13 @@ public class LeapHttpServer extends Thread {
             if(!this.protocol.isSecured()) {
                 this.server = new ServerSocket();
                 this.server.bind(this.inetSocketAddress, this.backlog);
-                logger.info("[HTTP SERVER START] Address: " + this.inetSocketAddress.toString());
+                this.logger.info("[HTTP SERVER START] Address: " + this.inetSocketAddress.toString());
             } else {
                 File keyStore = new File(Context.getServer().<String> getKeyStore());
                 String passphrase = Context.getServer().getPassphrase();
                 String sslProtocol = Context.getServer().getEncryptionMethod();
                 this.server = HttpsServerSocketFactory.getSSLServerSocket(keyStore, passphrase, sslProtocol, this.inetSocketAddress, this.backlog);
-                logger.info("[HTTPS SERVER START] Address: "+this.inetSocketAddress.toString()+"  Protocol: "+sslProtocol+"  KeyStore: "+keyStore.getName()+"  Supported Protocol: "+Arrays.toString(((SSLServerSocket)server).getSupportedProtocols())+"  KeyStore: "+keyStore.getName());
+                this.logger.info("[HTTPS SERVER START] Address: "+this.inetSocketAddress.toString()+"  Protocol: "+sslProtocol+"  KeyStore: "+keyStore.getName()+"  Supported Protocol: "+Arrays.toString(((SSLServerSocket)server).getSupportedProtocols())+"  KeyStore: "+keyStore.getName());
             }
             while (true) { 
                 Socket connection = this.server.accept();
@@ -287,19 +342,19 @@ public class LeapHttpServer extends Thread {
                 String ipAddress = connection.getLocalAddress().toString();
                 if(this.ipAllowedFilters.include(ipAddress) || this.ipForbiddenFilters.exclude(ipAddress)) {
                     if(queueSize < Context.getServer().<Integer> getThreadQueueSize()) {
-                        logger.info("[CLIENT DETECTED] Client request accepted. Submitting thread. "+ipAddress+" - "+connection.getPort()+"  Thread queue size - "+queueSize);
+                        this.logger.info("[CLIENT DETECTED] Client request accepted. Submitting thread. "+ipAddress+" - "+connection.getPort()+"  Thread queue size - "+queueSize);
                         this.threadpool.submit(new LeapRequestHandler(this, this.docroot, connection, this.host));
                     } else {
                         String redirectHost = redirectHostSelection.getSelectedHost();
                         String redirectPage = Html.makeRedirect(this.protocol.protocol(), 0, redirectHost);
-                        logger.info("[CLIENT DETECTED] Thread pool queue size limit reached: "+queueSize+".  Send redirect to Load-Balance URL: "+redirectHost+"\n"+redirectPage);
+                        this.logger.info("[CLIENT DETECTED] Thread pool queue size limit reached: "+queueSize+".  Send redirect to Load-Balance URL: "+redirectHost+"\n"+redirectPage);
                         try(OutputStream out = connection.getOutputStream()) {
                             out.write(redirectPage.getBytes());
                         }
                         connection.close();
                     }
                 } else {
-                    logger.info("[CLIENT CANCELED] Rquested IP address is not in allowed filters or exist in forbidden filters: "+ipAddress);
+                    this.logger.info("[CLIENT CANCELED] Rquested IP address is not in allowed filters or exist in forbidden filters: "+ipAddress);
                     Map<String, Object> params = new HashMap<>();
                     params.put("@code", RES_CODE.RES500);
                     params.put("@type", "Not in allowed IP or forbidden IP.");
@@ -312,7 +367,7 @@ public class LeapHttpServer extends Thread {
                 }
             } 
         } catch(Exception e) {
-            logger.error(e.getMessage(), e);
+            this.logger.error(e.getMessage(), e);
         }
     }
     /**

@@ -2,6 +2,8 @@ package org.chaostocosmos.leap.http.services.filters;
 
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.context.User;
+import org.chaostocosmos.leap.http.services.security.SecurityManager;
+import org.chaostocosmos.leap.http.services.session.SessionManager;
 
 /**
  * User authentication interface
@@ -22,4 +24,16 @@ public interface IAuthenticate {
      * @throws WASException
      */
     public void signUp(User user) throws WASException;
+    
+    /**
+     * Set user manager object
+     * @param userManager
+     */
+    public void setUserManager(SecurityManager userManager);
+
+    /**
+     * Set session manager object
+     * @param sessionManager
+     */
+    public void setSessionManager(SessionManager sessionManager);
 }

@@ -1,6 +1,6 @@
 package org.chaostocosmos.leap.http.services.filters;
 
-import org.chaostocosmos.leap.http.UserManager;
+import org.chaostocosmos.leap.http.services.security.SecurityManager;
 
 /**
  * Top level of Filter
@@ -9,9 +9,4 @@ import org.chaostocosmos.leap.http.UserManager;
  * @since 2021.09.17
  */
 public interface IFilter {
-    /**
-     * Set security manager object
-     * @param securityManager
-     */
-    public void setUserManager(UserManager securityManager);
 }

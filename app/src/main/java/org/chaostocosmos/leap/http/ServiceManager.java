@@ -21,8 +21,11 @@ import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
 import org.chaostocosmos.leap.http.resources.ClassUtils;
 import org.chaostocosmos.leap.http.resources.LeapURLClassLoader;
+import org.chaostocosmos.leap.http.services.filters.AbstractAuthFilter;
 import org.chaostocosmos.leap.http.services.filters.IFilter;
+import org.chaostocosmos.leap.http.services.security.SecurityManager;
 import org.chaostocosmos.leap.http.services.servicemodel.ServiceModel;
+import org.chaostocosmos.leap.http.services.session.SessionManager;
 
 import ch.qos.logback.classic.Logger;
 
@@ -46,7 +49,12 @@ public class ServiceManager {
     /**
      * Leap security manager object
      */
-    private UserManager userManager;
+    private SecurityManager userManager;
+
+    /**
+     * Session manager
+     */
+    private SessionManager sessionManager;
 
     /**
      * ClassLoder for host
@@ -62,6 +70,7 @@ public class ServiceManager {
      * Constructor with 
      * @param host
      * @param userManager 
+     * @param sessionManager
      * @param classLoader
      * @throws URISyntaxException
      * @throws IOException
@@ -71,7 +80,8 @@ public class ServiceManager {
      * @throws SecurityException
      */
     public ServiceManager(Host<?> host, 
-                          UserManager userManager, 
+                          SecurityManager userManager, 
+                          SessionManager sessionManager,
                           LeapURLClassLoader classLoader) throws 
                                                           IOException, 
                                                           URISyntaxException, 
@@ -80,6 +90,7 @@ public class ServiceManager {
                                                           SecurityException {
         this.host = host;
         this.userManager  = userManager;
+        this.sessionManager = sessionManager;
         this.classLoader = classLoader;        
         initialize();
     }
@@ -178,14 +189,20 @@ public class ServiceManager {
                     Class<? extends IFilter>[] preFilterClasses = filterMapper.preFilters();
                     for(Class<? extends IFilter> clazz : preFilterClasses) {
                         IFilter f = (IFilter)newFilterInstance(clazz.getName());
-                        f.setUserManager(userManager);
+                        if(f instanceof AbstractAuthFilter) {
+                            ((AbstractAuthFilter)f).setUserManager(userManager);
+                            ((AbstractAuthFilter)f).setSessionManager(sessionManager);
+                        }
                         preFilters.add(f);
                     }
                     List<IFilter> postFilters = new ArrayList<>();
                     Class<? extends IFilter>[] postFilterClasses = filterMapper.postFilters();
                     for(Class<? extends IFilter> clazz : postFilterClasses) {
                         IFilter f = (IFilter)newFilterInstance(clazz.getName());
-                        f.setUserManager(userManager);
+                        if(f instanceof AbstractAuthFilter) {
+                            ((AbstractAuthFilter)f).setUserManager(userManager);
+                            ((AbstractAuthFilter)f).setSessionManager(sessionManager);
+                        }
                         postFilters.add(f);
                     }    
                     service.setFilters(preFilters, postFilters);
@@ -201,7 +218,7 @@ public class ServiceManager {
      * Get user manager object
      * @return
      */
-    public UserManager getUserManager() {
+    public SecurityManager getUserManager() {
         return this.userManager;
     }
 
