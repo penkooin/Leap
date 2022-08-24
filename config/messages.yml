@@ -75,4 +75,5 @@ messages:
     error22: 'Can not read template file: {}'
     error23: 'Multi Part is in fault operation: {}'
     error24: 'Requested host not found in this server: {}'
+    error25: 'Specified session ID not exist: {}'
 

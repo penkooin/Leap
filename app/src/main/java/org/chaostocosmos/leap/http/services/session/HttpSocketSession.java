@@ -29,12 +29,16 @@ public class HttpSocketSession extends HttpSession {
     }
 
     @Override
-    public void close() throws IOException {
+    public void close() {
         Message msg = new Message();
         msg.setContent(Context.getMessages().getHttpMsg(RES_CODE.RES500.code()));
-        this.inStream.close();
-        this.outStream.write(msg.getContent().getBytes());
-        this.outStream.close();
-        this.socket.close();
+        try {
+            this.inStream.close();
+            this.outStream.write(msg.getContent().getBytes());
+            this.outStream.close();
+            this.socket.close();    
+        } catch(IOException e) {
+            super.getHost().getLogger().error("Error in session closing process: "+super.sessionId, e);
+        }
     }
 }

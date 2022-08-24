@@ -4,7 +4,6 @@ import java.net.InetAddress;
 import java.util.List;
 
 import org.chaostocosmos.leap.http.Request;
-import org.chaostocosmos.leap.http.UserManager;
 import org.chaostocosmos.leap.http.annotation.PreFilter;
 import org.chaostocosmos.leap.http.resources.SpringJPAManager;
 
@@ -13,10 +12,6 @@ import org.chaostocosmos.leap.http.resources.SpringJPAManager;
  * @author 9ins
  */
 public abstract class AbstractIpFilter<R> implements IIpFilter<R> {
-    /**
-     * Security manager object
-     */
-    protected UserManager securityManager;
     /**
      * Allowed / forbidden hosts
      */
@@ -51,11 +46,6 @@ public abstract class AbstractIpFilter<R> implements IIpFilter<R> {
             return false;
         }        
     }
-
-    @Override
-    public void setUserManager(UserManager securityManager) {
-        this.securityManager = securityManager;
-    }    
 
     @Override
     public <T> T getBean(String beanName, Object... args) throws Exception {

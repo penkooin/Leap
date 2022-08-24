@@ -236,7 +236,7 @@ public class HttpParser {
                     }
                 }
             }            
-            return new Request(PROTOCOL.valueOf(protocol.toUpperCase()), hostId, hostName, protocol, requestType, headerMap, mimeType, contextPath, requestURI, queryParam, bodyPart, contentLength, charset, cookies);
+            return new Request(PROTOCOL.valueOf(protocol.toUpperCase()), hostId, hostName, protocol, requestType, headerMap, mimeType, contextPath, requestURI, queryParam, bodyPart, contentLength, charset, cookies, null);
         }
     }
 

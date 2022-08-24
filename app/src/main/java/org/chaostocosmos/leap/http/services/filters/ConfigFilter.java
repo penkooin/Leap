@@ -37,8 +37,7 @@ public class ConfigFilter extends AbstractFilter <Request, Response> {
     @PreFilter
     public void filterRequest(Request request) throws Exception {
         super.filterRequest(request);
-        Map<CONFIG, Map<String, Object>> configMap = extractConfigMap(request);
-        
+        Map<CONFIG, Map<String, Object>> configMap = extractConfigMap(request);        
     }
 
     @Override

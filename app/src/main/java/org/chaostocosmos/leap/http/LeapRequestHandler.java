@@ -20,6 +20,8 @@ import org.chaostocosmos.leap.http.enums.RES_CODE;
 import org.chaostocosmos.leap.http.resources.Resource;
 import org.chaostocosmos.leap.http.resources.ResourceHelper;
 import org.chaostocosmos.leap.http.resources.TemplateBuilder;
+import org.chaostocosmos.leap.http.services.session.Session;
+import org.chaostocosmos.leap.http.services.session.SessionManager;
 
 /**
  * Client request processor object
@@ -72,10 +74,14 @@ public class LeapRequestHandler implements Runnable {
             request = httpTransfer.getRequest();
             response = httpTransfer.getResponse();
             Host<?> host = httpTransfer.getHost();
-
+            
             //Put requested host to request header Map for ip filter
             request.getReqHeader().put("@Client", host.getHost());
+
+            //Get service manager from Http Server
             ServiceManager serviceManager = httpServer.getServiceManager();
+
+            //Create service holder
             ServiceHolder serviceHolder = serviceManager.createServiceHolder(request.getContextPath());
 
             //If client request context path in Services.
@@ -93,7 +99,7 @@ public class LeapRequestHandler implements Runnable {
                 }
                 Path resourcePath = ResourceHelper.getResourcePath(request);
                 if(request.getContextPath().equals("/")) {
-                    String body = TemplateBuilder.buildWelcomeResourceHtml(request.getContextPath(), host);                    
+                    String body = TemplateBuilder.buildWelcomeResourceHtml(request.getContextPath(), host);
                     response.addHeader("Content-Type", MIME_TYPE.TEXT_HTML.mimeType()+"; charset="+host.<String> charset());
                     response.setBody(body.getBytes());
                     response.setResponseCode(RES_CODE.RES200.code());
@@ -205,3 +211,6 @@ public class LeapRequestHandler implements Runnable {
         return e;   
     }
 }
+
+
+

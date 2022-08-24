@@ -97,8 +97,9 @@ public abstract class AbstractService implements GetServiceModel, PostServiceMod
                 }
             }
         }        
-
+        //Set service method
         this.targetMethod = this.serviceManager.getServiceMethod(REQUEST_TYPE.GET, request.getContextPath(), this);
+
         Class<?>[] paramTypes = this.targetMethod.getParameterTypes();
         if(paramTypes.length != 2 || paramTypes[0] != request.getClass() || paramTypes[1] != response.getClass()) {
             throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES501.code(), Context.getMessages().<String> getErrorMsg(201, this.targetMethod.getName()));
@@ -123,8 +124,7 @@ public abstract class AbstractService implements GetServiceModel, PostServiceMod
             break;
             default :
             throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES405.code(), "Requested method is not allowed: "+request.getRequestType().name());
-        }
-        
+        }        
         if(this.postFilters != null) {
             for(IFilter filter : this.postFilters) {
                 List<Method> methods = AnnotationHelper.getFilterMethods(filter, PostFilter.class);
@@ -137,27 +137,23 @@ public abstract class AbstractService implements GetServiceModel, PostServiceMod
     }
 
     @Override
-    public void GET(final Request request, final Response response) throws Exception {        
-        
-        targetMethod.invoke(this, request, response);
+    public void GET(final Request request, final Response response) throws Exception {                
+        this.targetMethod.invoke(this, request, response);
     }
 
     @Override
     public void POST(final Request request, final Response response) throws Exception {
-        Method targetMethod = this.serviceManager.getServiceMethod(REQUEST_TYPE.POST, request.getContextPath(), this);
-        targetMethod.invoke(this, request, response);
+        this.targetMethod.invoke(this, request, response);
     }
 
     @Override
     public void PUT(final Request request, final Response response) throws Exception {
-        Method targetMethod = this.serviceManager.getServiceMethod(REQUEST_TYPE.PUT, request.getContextPath(), this);
-        targetMethod.invoke(this, request, response);
+        this.targetMethod.invoke(this, request, response);
     }
 
     @Override
     public void DELETE(final Request request, final Response response) throws Exception {
-        Method targetMethod = this.serviceManager.getServiceMethod(REQUEST_TYPE.DELETE, request.getContextPath(), this);
-        targetMethod.invoke(this, request, response);
+        this.targetMethod.invoke(this, request, response);
     }    
 
     @Override

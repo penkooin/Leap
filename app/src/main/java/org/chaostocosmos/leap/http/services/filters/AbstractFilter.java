@@ -3,7 +3,6 @@ package org.chaostocosmos.leap.http.services.filters;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.chaostocosmos.leap.http.UserManager;
 import org.chaostocosmos.leap.http.annotation.PostFilter;
 import org.chaostocosmos.leap.http.annotation.PreFilter;
 import org.chaostocosmos.leap.http.resources.SpringJPAManager;
@@ -14,11 +13,6 @@ import org.chaostocosmos.leap.http.services.servicemodel.SpringJPAModel;
  * @author 9ins
  */
 public abstract class AbstractFilter<R, S> implements IHttpFilter<R, S>, SpringJPAModel {
-
-    /**
-     * Security manager object
-     */
-    protected UserManager userManager;
 
     @Override
     @PreFilter
@@ -40,11 +34,6 @@ public abstract class AbstractFilter<R, S> implements IHttpFilter<R, S>, SpringJ
             return false;
         }
         return true;
-    }
-
-    @Override
-    public void setUserManager(UserManager userManager) {
-        this.userManager = userManager;
     }
 
     @Override

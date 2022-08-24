@@ -4,7 +4,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 import org.chaostocosmos.leap.http.Request;
-import org.chaostocosmos.leap.http.Response;
 import org.chaostocosmos.leap.http.WASException;
 import org.chaostocosmos.leap.http.annotation.PreFilter;
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
@@ -13,9 +12,10 @@ import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 
 /**
  * BasicAuthFilter object
+ * 
  * @author 9ins
  */
-public class BasicAuthFilter extends AbstractFilter<Request, Response> implements IAuthenticate { 
+public class BasicAuthFilter extends AbstractAuthFilter { 
 
     @Override
     @PreFilter

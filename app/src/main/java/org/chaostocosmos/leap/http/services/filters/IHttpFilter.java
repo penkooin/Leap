@@ -13,7 +13,8 @@ public interface IHttpFilter<R, S> extends IHttpRequestFilter<R>, IHttpResponseF
      * Check URL is valied
      * @param url
      * @return
-     * @throws WASException
+     * @throws WASException 
      */
     public boolean isValidURL(String url); 
+
 }

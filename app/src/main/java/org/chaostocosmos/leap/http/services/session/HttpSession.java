@@ -1,6 +1,5 @@
 package org.chaostocosmos.leap.http.services.session;
 
-import java.io.IOException;
 import java.net.URI;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -9,6 +8,8 @@ import java.util.Map;
 
 import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.WASException;
+import org.chaostocosmos.leap.http.context.Context;
+import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.PROTOCOL;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
@@ -31,6 +32,7 @@ public class HttpSession implements Session {
 
     /**
      * Constructs with session id, creation millis, last access millis, max interactive second and request object
+     * 
      * @param sessionId
      * @param creationTime
      * @param lastAccessedTime
@@ -45,6 +47,11 @@ public class HttpSession implements Session {
         this.maxInteractiveInteralSecond = maxInteractiveInteralSecond;
         this.isSecure = request.getProtocol() == PROTOCOL.HTTPS ? true : false;
         this.isNew = true;
+    }
+
+    @Override
+    public Host<?> getHost() {
+        return Context.getHost(this.request.getHostId());
     }
 
     @Override
@@ -117,7 +124,7 @@ public class HttpSession implements Session {
     }
 
     @Override
-    public void close() throws IOException {
+    public void close() {
         throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES500.code(), "This connection is unexpected to close.");
     }
 

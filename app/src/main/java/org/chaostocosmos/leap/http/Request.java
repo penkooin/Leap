@@ -4,7 +4,6 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.Charset;
-import java.util.List;
 import java.util.Map;
 
 import org.chaostocosmos.leap.http.commons.LoggerFactory;
@@ -12,6 +11,8 @@ import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.PROTOCOL;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
 import org.chaostocosmos.leap.http.part.Part;
+import org.chaostocosmos.leap.http.services.session.Session;
+import org.chaostocosmos.leap.http.services.session.SessionManager;
 
 import ch.qos.logback.classic.Logger;
 
@@ -37,7 +38,8 @@ public class Request {
     final private URI requestURI;
     final private PROTOCOL protocol;
     final private Map<String, String> cookies;
-    
+    private Session session;
+
     /**
      * Constructor
      * 
@@ -55,6 +57,7 @@ public class Request {
      * @param contentLength
      * @param charset
      * @param cookies
+     * @param session
      * @throws URISyntaxException
      */
     public Request(
@@ -71,7 +74,8 @@ public class Request {
             Part bodyPart,
             long contentLength,
             Charset charset,
-            Map<String, String> cookies
+            Map<String, String> cookies, 
+            Session session
         ) throws URISyntaxException {
             this.protocol = protocol;
             this.hostId = hostId;
@@ -87,6 +91,7 @@ public class Request {
             this.contentLength = contentLength;
             this.charset = charset;
             this.cookies = cookies;
+            this.session = session;
     }
 
     public final PROTOCOL getProtocol() {
@@ -153,6 +158,14 @@ public class Request {
         return this.cookies.get(attrKey);
     }
 
+    public final Session getSession() {
+        return this.session;
+    }
+
+    public final void setSession(Session session) {
+        this.session = session;
+    }
+
     public void printURLInfo() throws URISyntaxException, MalformedURLException {
         Logger logger = (Logger)LoggerFactory.getLogger(this.requestedHost);
         logger.debug(this.toString());
@@ -175,6 +188,7 @@ public class Request {
             ", requestURI='" + requestURI + "'" +
             ", protocol='" + protocol + "'" +
             ", cookies='" + cookies + "'" +
+            ", session='" + session + "'" +
             "}";
     }
 }

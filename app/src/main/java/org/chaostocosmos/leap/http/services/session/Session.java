@@ -1,10 +1,9 @@
 package org.chaostocosmos.leap.http.services.session;
 
-import java.io.IOException;
-import java.net.Socket;
 import java.net.URI;
 import java.util.Enumeration;
 
+import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.enums.PROTOCOL;
 
 /**
@@ -12,7 +11,13 @@ import org.chaostocosmos.leap.http.enums.PROTOCOL;
  * 
  * @author 9ins
  */
-public interface Session {    
+public interface Session {   
+    /**
+     * Get Host
+     * @return
+     */ 
+    public Host<?> getHost();
+    
     /**
      * Get attribute name
      * @param attrName
@@ -100,7 +105,6 @@ public interface Session {
 
     /**
      * Close session
-     * @throws IOException
      */
-    public void close() throws IOException;
+    public void close();
 }

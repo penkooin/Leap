@@ -24,6 +24,7 @@ import ch.qos.logback.classic.Logger;
 
 /**
  * Host object
+ * 
  * @author 9ins
  */
 public class Host <T> extends Metadata<T> {
@@ -411,6 +412,24 @@ public class Host <T> extends Metadata<T> {
      */
     public <V> void setSessionTimeout(V sessionTimeout) {
         super.setValue("session.timeout", sessionTimeout);
+    }
+
+    /**
+     * Get session filters
+     * @param <V>
+     * @return
+     */
+    public <V> V getApplySession() {
+        return super.getValue("session.apply");
+    }
+
+    /**
+     * Set session filters
+     * @param <V>
+     * @param sessionFilters
+     */
+    public <V> void setApplySession(V sessionFilters) {
+        super.setValue("session.apply", sessionFilters);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////
