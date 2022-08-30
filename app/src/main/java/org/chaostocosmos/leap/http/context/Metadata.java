@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.chaostocosmos.leap.http.commons.DataStructureOpr;
+import org.chaostocosmos.leap.http.common.DataStructureOpr;
 
 /**
  * AbstractMeta

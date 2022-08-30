@@ -1,5 +1,6 @@
 package org.chaostocosmos.leap.http.annotation;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -7,14 +8,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.http.WASException;
-import org.chaostocosmos.leap.http.commons.LoggerFactory;
+import org.chaostocosmos.leap.http.HTTPException;
+import org.chaostocosmos.leap.http.common.LoggerFactory;
 import org.chaostocosmos.leap.http.context.Context;
-import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
-import org.chaostocosmos.leap.http.resources.ClassUtils;
-import org.chaostocosmos.leap.http.services.filters.IFilter;
-import org.chaostocosmos.leap.http.services.servicemodel.ServiceModel;
+import org.chaostocosmos.leap.http.enums.RES_CODE;
+import org.chaostocosmos.leap.http.resource.ClassUtils;
+import org.chaostocosmos.leap.http.service.filter.IFilter;
+import org.chaostocosmos.leap.http.service.model.ServiceModel;
 
 import ch.qos.logback.classic.Logger;  
 
@@ -70,15 +71,15 @@ public class AnnotationHelper {
      * Get service method Map
      * @param service
      * @return
-     * @throws WASException
+     * @throws HTTPException
      */
-    public static Map<String, Method> getServiceMethodMap(ServiceModel service) throws WASException {
+    public static Map<String, Method> getServiceMethodMap(ServiceModel service) throws HTTPException {
         Map<String, Method> methodMap = new HashMap<>();
         ServiceMapper serviceDescriptor = service.getClass().getDeclaredAnnotation(ServiceMapper.class);
         if(serviceDescriptor != null) {
             String sPath = serviceDescriptor.path();
             if(sPath == null) {
-                throw new WASException(MSG_TYPE.ERROR, 6, sPath, service.getClass().getName());
+                throw new HTTPException(RES_CODE.RES500, Context.getMessages(). <String>getErrorMsg(6, service.getClass().getName()));
             }
             Method[] methods = service.getClass().getDeclaredMethods();
             for(Method method : methods) {
@@ -86,11 +87,11 @@ public class AnnotationHelper {
                 if(methodDescriptor != null) {
                     String mPath = methodDescriptor.path();
                     if(mPath == null) {
-                        throw new WASException(MSG_TYPE.ERROR, 7, mPath, method.getName());
+                        throw new HTTPException(RES_CODE.RES500, Context.getMessages(). <String>getErrorMsg(7, method.getName()));
                     }        
                     String fullPath = sPath + mPath;
                     if(methodMap.containsKey(fullPath)) {
-                        throw new WASException(MSG_TYPE.ERROR, 8, fullPath, methodMap.get(fullPath).getName());
+                        throw new HTTPException(RES_CODE.RES500, Context.getMessages(). <String>getErrorMsg(8, methodMap.get(fullPath).getName()));
                     }
                     methodMap.put(fullPath, method);
                 }
@@ -161,16 +162,16 @@ public class AnnotationHelper {
      * Get servlet conext mappings Map
      * @param classes
      * @return
-     * @throws WASException
+     * @throws HTTPException
      */
-    public static Map<String, ServiceModel> getServiceContextMappings(List<String> classes) throws WASException {
+    public static Map<String, ServiceModel> getServiceContextMappings(List<String> classes) throws Exception {
         Map<String, ServiceModel> serviceContextMappings = new HashMap<>();
         for(String service : classes) {
             ServiceMapper serviceDescriptor = service.getClass().getDeclaredAnnotation(ServiceMapper.class);
             if(serviceDescriptor != null) {
                 String sPath = serviceDescriptor.path();
                 if(!sPath.substring(0, 1).equals("/") || sPath.substring(sPath.length()-1).equals("/")) {
-                    throw new WASException(MSG_TYPE.ERROR, 9);
+                    throw new Exception(Context.getMessages(). <String>getErrorMsg(9, service));
                 }
                 Method[] methods = service.getClass().getDeclaredMethods();
                 for(Method method : methods) {
@@ -178,11 +179,11 @@ public class AnnotationHelper {
                     if(methodDescriptor != null) {
                         String mPath = methodDescriptor.path();
                         if(!mPath.substring(0, 1).equals("/") || mPath.substring(mPath.length()-1).equals("/")) {
-                            throw new WASException(MSG_TYPE.ERROR, 10);
+                            throw new Exception(Context.getMessages(). <String>getErrorMsg(10, method.getName()));
                         }        
                         String fullPath = sPath + mPath;
                         if(serviceContextMappings.containsKey(fullPath)) {
-                            throw new WASException(MSG_TYPE.ERROR, 11, new Object[]{service, fullPath});
+                            throw new Exception(Context.getMessages(). <String>getErrorMsg(11, new Object[]{service, fullPath}));
                         }
                         serviceContextMappings.put(fullPath, (ServiceModel)ClassUtils.instantiate(ClassLoader.getSystemClassLoader(), service));
                     }
@@ -198,16 +199,16 @@ public class AnnotationHelper {
      * Get service method 
      * @param classes
      * @return
-     * @throws WASException
+     * @throws HTTPException
      */
-    public static Map<String, Method> getServiceHolderMap(List<String> classes) throws WASException {
+    public static Map<String, Method> getServiceHolderMap(List<String> classes) throws Exception {
         Map<String, Method> serviceContextMappings = new HashMap<>();
         for(String service : classes) {
             ServiceMapper serviceMapper = service.getClass().getDeclaredAnnotation(ServiceMapper.class);
             if(serviceMapper != null) {
                 String sPath = serviceMapper.path();
                 if(!sPath.substring(0, 1).equals("/") || sPath.substring(sPath.length()-1).equals("/")) {
-                    throw new WASException(MSG_TYPE.ERROR, 9);
+                    throw new Exception(Context.getMessages(). <String>getErrorMsg(9, service));
                 }
                 Method[] methods = service.getClass().getDeclaredMethods();
                 for(Method method : methods) {
@@ -215,11 +216,11 @@ public class AnnotationHelper {
                     if(methodMapper != null) {
                         String mPath = methodMapper.path();
                         if(!mPath.substring(0, 1).equals("/") || mPath.substring(mPath.length()-1).equals("/")) {
-                            throw new WASException(MSG_TYPE.ERROR, 10);
+                            throw new Exception(Context.getMessages(). <String>getErrorMsg(10, method.getName()));
                         }        
                         String fullPath = sPath + mPath;
                         if(serviceContextMappings.containsKey(fullPath)) {
-                            throw new WASException(MSG_TYPE.ERROR, 8, new Object[]{service, fullPath});
+                            throw new Exception(Context.getMessages(). <String>getErrorMsg(8, new Object[]{service, fullPath}));
                         }
                         serviceContextMappings.put(fullPath, method);
                     }
@@ -237,8 +238,7 @@ public class AnnotationHelper {
      * @param annotationClass
      * @return
      */
-    @SuppressWarnings("unchecked")
-    public static <T> List<Method> getFilterMethods(IFilter filter, Class annotationClass) {
+    public static <T> List<Method> getFilterMethods(IFilter filter, Class<? extends Annotation> annotationClass) {
         return Arrays.asList(filter.getClass().getDeclaredMethods()).stream().filter(m -> m.getDeclaredAnnotation(annotationClass) != null).collect(Collectors.toList());
     }
 }

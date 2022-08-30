@@ -3,8 +3,8 @@ package org.chaostocosmos.leap.http;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import org.chaostocosmos.leap.http.services.filters.IFilter;
-import org.chaostocosmos.leap.http.services.servicemodel.ServiceModel;
+import org.chaostocosmos.leap.http.service.filter.IFilter;
+import org.chaostocosmos.leap.http.service.model.ServiceModel;
 
 /**
  * Service info bean object

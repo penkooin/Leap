@@ -5,7 +5,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.chaostocosmos.leap.http.services.filters.IFilter;
+import org.chaostocosmos.leap.http.service.filter.IFilter;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

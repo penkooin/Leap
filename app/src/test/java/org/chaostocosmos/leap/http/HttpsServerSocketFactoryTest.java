@@ -61,7 +61,7 @@ public class HttpsServerSocketFactoryTest {
 
     public static ServerSocket getServerSocket(String protocol) {
         //if (type.equals("TLS")) {
-            SSLServerSocketFactory ssf = null;
+            //SSLServerSocketFactory ssf = null;
             try {
                 // set up key manager to do server authentication
                 char[] passphrase = "939393".toCharArray();

@@ -21,18 +21,16 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
-import org.chaostocosmos.leap.http.commons.LoggerFactory;
+import org.chaostocosmos.leap.http.common.LoggerFactory;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.context.MetaEvent;
 import org.chaostocosmos.leap.http.context.MetaListener;
-import org.chaostocosmos.leap.http.enums.MSG_TYPE;
-import org.chaostocosmos.leap.http.resources.ClassUtils;
-import org.chaostocosmos.leap.http.resources.ResourceHelper;
-import org.chaostocosmos.leap.http.resources.ResourceManager;
-import org.chaostocosmos.leap.http.resources.ResourceMonitor;
-import org.chaostocosmos.leap.http.resources.SpringJPAManager;
+import org.chaostocosmos.leap.http.resource.ClassUtils;
+import org.chaostocosmos.leap.http.resource.ResourceHelper;
+import org.chaostocosmos.leap.http.resource.ResourceManager;
+import org.chaostocosmos.leap.http.resource.ResourceMonitor;
+import org.chaostocosmos.leap.http.resource.SpringJPAManager;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
@@ -113,21 +111,13 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
         CommandLineParser parser = new DefaultParser();
         CommandLine cmdLine;
 
-        try {
-            cmdLine = parser.parse(getOptions(), args);
-        } catch (ParseException e) {
-            throw new WASException(e);
-        }
+        cmdLine = parser.parse(getOptions(), args);
 
         //set HOME directory
         String optionH = cmdLine.getOptionValue("h");
         if(optionH != null) {
             HOME_PATH = Paths.get(optionH);
-            try {
-                Files.createDirectories( HOME_PATH ); 
-            } catch (IOException e) {
-                throw new WASException(e);
-            }
+            Files.createDirectories( HOME_PATH ); 
         } else {
             HOME_PATH = Paths.get("./").toAbsolutePath().normalize(); 
         }
@@ -293,15 +283,11 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
 
     /**
      * Print trademark 
-     * @throws WASException
+     * @throws HTTPException
      */
-    private void trademark() throws WASException {
-        try {
-            System.out.println(ResourceHelper.getInstance().getTrademark());
-            System.out.println();
-        } catch (IOException e) {
-            throw new WASException(MSG_TYPE.ERROR, 5);
-        }
+    private void trademark() throws Exception {
+        System.out.println(ResourceHelper.getInstance().getTrademark());
+        System.out.println();
     }
 
     @Override

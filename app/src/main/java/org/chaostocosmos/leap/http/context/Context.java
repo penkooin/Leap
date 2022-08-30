@@ -1,6 +1,7 @@
 package org.chaostocosmos.leap.http.context;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +9,7 @@ import java.util.Map;
 
 import javax.transaction.NotSupportedException;
 
-import org.chaostocosmos.leap.http.WASException;
-import org.chaostocosmos.leap.http.resources.ResourceHelper;
+import org.chaostocosmos.leap.http.resource.ResourceHelper;
 
 /**
  * Context management object
@@ -42,23 +42,21 @@ public class Context {
     /**
      * Constructor with home path
      * @param homePath
+     * @throws URISyntaxException
+     * @throws IOException
      */
-    public static void init(Path homePath) {
-        try {
-            if(context == null) {
-                context = new Context();
-            }
-            HOME_PATH = homePath.normalize().toAbsolutePath();
-            CONFIG_PATH = HOME_PATH.resolve("config");
-
-            //build config environment
-            ResourceHelper.extractResource("config", homePath); 
-
-            //dispatch context events
-            dispatchContextEvent(new MetaEvent<Map<String, Object>, Object>(context, EVENT_TYPE.INITIALIZED, null, null, null));
-        } catch(Exception e) {
-            throw new WASException(e);
+    public static void init(Path homePath) throws IOException, URISyntaxException {
+        if(context == null) {
+            context = new Context();
         }
+        HOME_PATH = homePath.normalize().toAbsolutePath();
+        CONFIG_PATH = HOME_PATH.resolve("config");
+
+        //build config environment
+        ResourceHelper.extractResource("config", homePath); 
+
+        //dispatch context events
+        dispatchContextEvent(new MetaEvent<Map<String, Object>, Object>(context, EVENT_TYPE.INITIALIZED, null, null, null));
     }
 
     /**

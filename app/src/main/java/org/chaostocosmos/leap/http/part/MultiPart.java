@@ -11,11 +11,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.http.WASException;
-import org.chaostocosmos.leap.http.commons.StreamUtils;
+import org.chaostocosmos.leap.http.HTTPException;
+import org.chaostocosmos.leap.http.common.StreamUtils;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
-import org.chaostocosmos.leap.http.enums.MSG_TYPE;
+import org.chaostocosmos.leap.http.enums.RES_CODE;
 
 /**
  * Multi part descriptor
@@ -88,7 +88,7 @@ public class MultiPart extends BodyPart {
     @Override
     public void save(final Path targetPath) throws IOException {
         if(contentType != MIME_TYPE.MULTIPART_FORM_DATA || contentType != MIME_TYPE.MULTIPART_BYTERANGES) {
-            throw new WASException(MSG_TYPE.ERROR, 23, "Can not save content. Not supported on Multi Part Operation.");
+            throw new HTTPException(RES_CODE.RES406, "Can not save content. Not supported on Multi Part Operation.");
         }        
         if(targetPath.toFile().isDirectory()) {
             throw new IOException("Multi part saving must be provided directory Path: "+targetPath.toString());

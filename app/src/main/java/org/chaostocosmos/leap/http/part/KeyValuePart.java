@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.http.commons.StreamUtils;
+import org.chaostocosmos.leap.http.common.StreamUtils;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 
 /**

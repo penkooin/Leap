@@ -39,7 +39,7 @@ public class Response {
     /**
      * Response header map
      */
-    private Map<String, List<Object>> headers;
+    private Map<String, List<String>> headers;
 
     /**
      * Construct with parameters
@@ -48,7 +48,7 @@ public class Response {
      * @param responseBody
      * @param headers
      */ 
-    public Response(final Request request, int statusCode, Object responseBody, Map<String, List<Object>> headers) {
+    public Response(final Request request, int statusCode, Object responseBody, Map<String, List<String>> headers) {
         this.request = request;
         this.hostId = request.getHostId();
         this.responseCode = statusCode;
@@ -56,7 +56,7 @@ public class Response {
         this.headers = headers;
         if(responseBody != null) {
             this.contentLength = responseBody instanceof byte[] ? ((byte[])responseBody).length : responseBody instanceof File ? ((File)responseBody).length() : -1;
-        }
+        }        
     }
 
     /**
@@ -99,17 +99,17 @@ public class Response {
         this.contentLength = responseBody instanceof byte[] ? ((byte[])responseBody).length : responseBody instanceof File ? ((File)responseBody).length() : -1;
     }
 
-    public Map<String, List<Object>> getHeaders() {
+    public Map<String, List<String>> getHeaders() {
         return this.headers;
     }
 
-    public void setHeaders(Map<String, List<Object>> responseHeader) {
+    public void setHeaders(Map<String, List<String>> responseHeader) {
         this.headers = responseHeader;
     }
 
-    public void addHeader(String name, Object value) {
+    public void addHeader(String name, String value) {
         if(!this.headers.containsKey(name)) {
-            List<Object> values = new ArrayList<>();
+            List<String> values = new ArrayList<>();
             values.add(value);
             this.headers.put(name, values);
         } else {
@@ -117,7 +117,7 @@ public class Response {
         }
     }
 
-    public void setHeader(String name, Object value) {
+    public void setHeader(String name, String value) {
         if(this.headers.containsKey(name)) {
             this.headers.get(name).add(value);
         } else {
@@ -135,6 +135,20 @@ public class Response {
 
     public long getContentLength() {
         return this.contentLength;
+    }
+
+    public void addSetCookie(String attrKey, String attrValue) {
+        List<String> cookieList = this.headers.get("Set-Cookie");
+        if(cookieList == null) {
+            cookieList = new ArrayList<>();
+            this.headers.put("Set-Cookie", cookieList);
+        }        
+        cookieList.add(attrKey+"="+attrValue);        
+    }
+
+    public String getSetCookie(String attrKey) {
+        List<String> cookieList = this.headers.get("Set-Cookie");
+        return cookieList.stream().filter(c -> c.toString().startsWith(attrKey)).map(c -> c.toString().substring(c.toString().indexOf("=")+1)).findFirst().orElse(null);
     }
 
     @Override

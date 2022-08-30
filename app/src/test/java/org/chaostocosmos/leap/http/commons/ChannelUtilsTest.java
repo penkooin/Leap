@@ -16,6 +16,7 @@ import java.nio.channels.SocketChannel;
 import java.util.List;
 import java.util.Map;
 
+import org.chaostocosmos.leap.http.common.ChannelUtils;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -44,7 +45,7 @@ public class ChannelUtilsTest {
                         Map<String, List<String>> headers = ChannelUtils.readHeaders(client, buffer);
                         System.out.println(headers);
                         if(headers != null && headers.size() > 1) {
-                            String contentType = headers.get("Content-Type").get(0);
+                            //String contentType = headers.get("Content-Type").get(0);
                             String boundary = headers.get("Content-Type").get(1);
                             boundary = boundary.substring(boundary.indexOf("=")+1);
                             long length = Long.parseLong(headers.get("Content-Length").get(0));
@@ -67,30 +68,29 @@ public class ChannelUtilsTest {
     }
 
     public void testReadLines1() throws IOException {
-        ServerSocket serverSocket = null;
-        serverSocket = new ServerSocket();
-        serverSocket.bind(new InetSocketAddress(8080));
-
-        while(true) {
-            Socket client = serverSocket.accept();   
-            new Thread(new Runnable() {
-                public void run() {
-                    try {
-                        System.out.println("start handling......");
-                        BufferedReader br = new BufferedReader(new InputStreamReader(client.getInputStream(), "UTF-8"));
-                        String line;
-                        while((line = br.readLine()) != null) {
-                            System.out.println(line);
+        try(ServerSocket serverSocket = new ServerSocket()) {
+            serverSocket.bind(new InetSocketAddress(8080));
+            while(true) {
+                Socket client = serverSocket.accept();   
+                new Thread(new Runnable() {
+                    public void run() {
+                        try {
+                            System.out.println("start handling......");
+                            BufferedReader br = new BufferedReader(new InputStreamReader(client.getInputStream(), "UTF-8"));
+                            String line;
+                            while((line = br.readLine()) != null) {
+                                System.out.println(line);
+                            }
+                            br.close();
+                            client.close();
+                        } catch(Exception e) {
+                            e.printStackTrace();
                         }
-                        br.close();
-                        client.close();
-                    } catch(Exception e) {
-                        e.printStackTrace();
                     }
-                }
-            }).start();
+                }).start();
+            }    
         }
-    }
+   }
 
     public static void main(String[] args) throws IOException {
         //new ChannelUtilsTest().testReadLines1();

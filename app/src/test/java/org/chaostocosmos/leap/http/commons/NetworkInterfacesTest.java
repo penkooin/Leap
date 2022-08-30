@@ -4,6 +4,7 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.util.List;
 
+import org.chaostocosmos.leap.http.common.NetworkInterfaces;
 import org.junit.Before;
 import org.junit.Test;    
     

@@ -7,12 +7,12 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.chaostocosmos.leap.http.WASException;
-import org.chaostocosmos.leap.http.commons.LoggerFactory;
-import org.chaostocosmos.leap.http.commons.StreamUtils;
+import org.chaostocosmos.leap.http.HTTPException;
+import org.chaostocosmos.leap.http.common.LoggerFactory;
+import org.chaostocosmos.leap.http.common.StreamUtils;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
-import org.chaostocosmos.leap.http.enums.MSG_TYPE;
+import org.chaostocosmos.leap.http.enums.RES_CODE;
 
 import ch.qos.logback.classic.Logger;
 
@@ -92,7 +92,7 @@ public class BodyPart implements Part {
      */
     private Map<String, byte[]> readBody() throws IOException {
         if(contentType == MIME_TYPE.MULTIPART_FORM_DATA || contentType == MIME_TYPE.MULTIPART_BYTERANGES) {
-            throw new WASException(MSG_TYPE.ERROR, 23, "Method not supported on MultiPart operation: readBody()");
+            throw new HTTPException(RES_CODE.RES406, "Method not supported on MultiPart operation: readBody()");
         }
         Map<String, byte[]> map = new HashMap<>();
         byte[] data = StreamUtils.readLength(this.requestStream, (int)this.contentLength);        
@@ -132,7 +132,7 @@ public class BodyPart implements Part {
     @Override
     public void save(Path targetPath) throws IOException {        
         if(contentType == MIME_TYPE.MULTIPART_FORM_DATA || contentType == MIME_TYPE.MULTIPART_BYTERANGES) {
-            throw new WASException(MSG_TYPE.ERROR, 23, "Can not save content. Not supported on Multi Part Operation.");
+            throw new HTTPException(RES_CODE.RES406, "Can not save content. Not supported on Multi Part Operation.");
         }        
         if(this.isLoadedBody) {
             StreamUtils.saveBinary(this.host, this.body.get("BODY"), targetPath, Context.getServer().getFileBufferSize());

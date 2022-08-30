@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.http.commons.Filtering;
-import org.chaostocosmos.leap.http.commons.LoggerFactory;
+import org.chaostocosmos.leap.http.common.Filtering;
+import org.chaostocosmos.leap.http.common.LoggerFactory;
 import org.chaostocosmos.leap.http.enums.PROTOCOL;
-import org.chaostocosmos.leap.http.resources.ClassUtils;
+import org.chaostocosmos.leap.http.resource.ClassUtils;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;

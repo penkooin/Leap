@@ -15,13 +15,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.http.commons.Constants;
-import org.chaostocosmos.leap.http.commons.LoggerFactory;
-import org.chaostocosmos.leap.http.commons.StreamUtils;
+import org.chaostocosmos.leap.http.common.Constants;
+import org.chaostocosmos.leap.http.common.LoggerFactory;
+import org.chaostocosmos.leap.http.common.StreamUtils;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
-import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.PROTOCOL;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
@@ -108,23 +107,24 @@ public class HttpParser {
          * Parse request
          * 
          * @throws IOException
-         * @throws WASException
+         * @throws HTTPException
          */
         public Request parseRequest(InetAddress inetAddress, InputStream inStream) throws Exception {
+            long requestMillis = System.currentTimeMillis();
             StringBuffer debug = new StringBuffer();
             String requestLine = StreamUtils.readLine(inStream, StandardCharsets.ISO_8859_1);
             if(requestLine == null) {
-                throw new WASException(MSG_TYPE.ERROR, 1);
+                throw new Exception(Context.getMessages().<String>getErrorMsg(1));
             }
             requestLine = URLDecoder.decode(requestLine, StandardCharsets.UTF_8);
             debug.append("============================== [REQUEST] "+requestLine+" =============================="+System.lineSeparator());
             String[] linesplited = requestLine.split(" ");        
             if(linesplited.length != 3) {
-                throw new WASException(MSG_TYPE.HTTP, 400, "Requested line is something wrong: "+requestLine);
+                throw new HTTPException(RES_CODE.RES417, Context.getMessages().<String>getErrorMsg(400, "Requested line is something wrong: "+requestLine));
             }
             String method = linesplited[0];
             if(!Arrays.asList(REQUEST_TYPE.values()).stream().anyMatch(R -> R.name().equals(method))) {
-                throw new WASException(MSG_TYPE.HTTP, 500, method);
+                throw new HTTPException(RES_CODE.RES405, Context.getMessages().<String>getErrorMsg(26, method));
             }
             String contextPath = linesplited[1];
             String protocolVersion = requestLine.substring(requestLine.lastIndexOf(" ") + 1);
@@ -137,7 +137,7 @@ public class HttpParser {
                     break;
                 int idx = header.indexOf(":");
                 if (idx == -1) {
-                    throw new WASException(MSG_TYPE.ERROR, 3, header);
+                    throw new HTTPException(RES_CODE.RES417, Context.getMessages().<String>getErrorMsg(3, header));
                 }
                 debug.append(header.substring(0, idx)+":   "+header.substring(idx + 1, header.length()).trim()+Constants.LS);
                 headerMap.put(header.substring(0, idx), header.substring(idx + 1, header.length()).trim());
@@ -165,7 +165,7 @@ public class HttpParser {
             //Get Host object by requested host name
             Host<?> host = Context.getHost(hostId);
             if(host == null) {
-                throw new WASException(MSG_TYPE.ERROR, 24, hostName);
+                throw new HTTPException(RES_CODE.RES417, Context.getMessages().<String>getErrorMsg(24, hostName));
             }
             
             //Get content type from requested header
@@ -174,17 +174,19 @@ public class HttpParser {
             //Get cookies
             Map<String, String> cookies = null;
             if(headerMap.get("Cookie") != null) {
-                cookies = Arrays.asList(headerMap.get("Cookie").trim().split(";")).stream().map(a -> new String[]{a.substring(0, a.indexOf("=")).trim(), a.substring(a.indexOf("=")+1)}).collect(Collectors.toMap(k -> k[0], v -> v[1]));
+                String[] cookieArr = headerMap.get("Cookie").trim().split(";");
+                System.out.println(Arrays.toString(cookieArr));
+                cookies = Arrays.asList(cookieArr).stream().map(a -> new String[]{a.substring(0, a.indexOf("=")).trim(), a.substring(a.indexOf("=")+1)}).collect(Collectors.toMap(k -> k[0], v -> v[1]));
             }
             
             //Get content length from requested header
             long contentLength = headerMap.get("Content-Length") != null ? Long.parseLong(headerMap.get("Content-Length")) : 0L;
             if(!headerMap.containsKey("Range") && !host.checkRequestAttack(inetAddress.getHostAddress(), protocol+"://"+hostName + contextPath)) {
                 LoggerFactory.getLogger(requestedHost).warn("[CLIENT BLOCKED] Too many requested client blocking: "+inetAddress.getHostAddress());
-                throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES429.code(), requestedHost+" requested too many on short period!!!");
+                throw new HTTPException(RES_CODE.RES429, requestedHost+" requested too many on short period!!!");
             }
             if(!Context.getHosts().isExistHostname(hostName)) {
-                throw new WASException(MSG_TYPE.HTTP, 400, "Requested host ID not exist in this server. ID: "+hostName);
+                throw new HTTPException(RES_CODE.RES417, Context.getMessages().<String>getErrorMsg(400, "Requested host ID not exist in this server. ID: "+hostName));
             }            
             debug.append("Host ID: "+hostId);
             Charset charset = Context.getHosts().charset(hostId);
@@ -236,7 +238,7 @@ public class HttpParser {
                     }
                 }
             }            
-            return new Request(PROTOCOL.valueOf(protocol.toUpperCase()), hostId, hostName, protocol, requestType, headerMap, mimeType, contextPath, requestURI, queryParam, bodyPart, contentLength, charset, cookies, null);
+            return new Request(requestMillis, PROTOCOL.valueOf(protocol.toUpperCase()), hostId, hostName, protocol, requestType, headerMap, mimeType, contextPath, requestURI, queryParam, bodyPart, contentLength, charset, cookies, null);
         }
     }
 
@@ -247,12 +249,12 @@ public class HttpParser {
         /**
          * parse response
          * @return
-         * @throws WASException
+         * @throws HTTPException
          */
         public Response buildResponse(final Request request, 
                                       final int statusCode, 
                                       final Object body, 
-                                      final Map<String, List<Object>> headers) {
+                                      final Map<String, List<String>> headers) {
             return new Response(request, statusCode, body, headers);
         }
     }    

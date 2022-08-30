@@ -4,15 +4,15 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.Charset;
+import java.util.HashMap;
 import java.util.Map;
 
-import org.chaostocosmos.leap.http.commons.LoggerFactory;
+import org.chaostocosmos.leap.http.common.LoggerFactory;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.PROTOCOL;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
 import org.chaostocosmos.leap.http.part.Part;
-import org.chaostocosmos.leap.http.services.session.Session;
-import org.chaostocosmos.leap.http.services.session.SessionManager;
+import org.chaostocosmos.leap.http.session.Session;
 
 import ch.qos.logback.classic.Logger;
 
@@ -24,6 +24,7 @@ import ch.qos.logback.classic.Logger;
  */
 public class Request {
     
+    final private long requestTimstamp;
     final private REQUEST_TYPE requestType;    
     final private String hostId;
     final private String requestedHost;
@@ -37,12 +38,13 @@ public class Request {
     final private Charset charset;
     final private URI requestURI;
     final private PROTOCOL protocol;
-    final private Map<String, String> cookies;
+    private Map<String, String> cookies;
     private Session session;
 
     /**
      * Constructor
      * 
+     * @param newTimeStamp
      * @param protocol
      * @param hostId
      * @param requestHost
@@ -60,7 +62,7 @@ public class Request {
      * @param session
      * @throws URISyntaxException
      */
-    public Request(
+    public Request(long newTimeStamp,
             PROTOCOL protocol,
             String hostId,
             String requestHost,
@@ -77,6 +79,7 @@ public class Request {
             Map<String, String> cookies, 
             Session session
         ) throws URISyntaxException {
+            this.requestTimstamp = newTimeStamp;
             this.protocol = protocol;
             this.hostId = hostId;
             this.requestedHost = requestHost;
@@ -92,6 +95,10 @@ public class Request {
             this.charset = charset;
             this.cookies = cookies;
             this.session = session;
+    }
+
+    public final long getTimestamp() {
+        return this.requestTimstamp;
     }
 
     public final PROTOCOL getProtocol() {
@@ -154,8 +161,18 @@ public class Request {
         return this.cookies;
     }
 
-    public final String getCookies(String attrKey) {
+    public final String getCookie(String attrKey) {
+        if(this.cookies == null) {
+            return null;
+        }        
         return this.cookies.get(attrKey);
+    }
+
+    public final void setCookie(String attrKey, String attrValue) {
+        if(this.cookies == null) {
+            this.cookies = new HashMap<>();
+        }
+        this.cookies.put(attrKey, attrValue);
     }
 
     public final Session getSession() {

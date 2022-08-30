@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 import javax.transaction.NotSupportedException;
 
-import org.chaostocosmos.leap.http.commons.DataStructureOpr;
+import org.chaostocosmos.leap.http.common.DataStructureOpr;
 import org.yaml.snakeyaml.Yaml;
 
 import com.google.gson.Gson;
@@ -60,9 +60,9 @@ public enum META {
         String metaType = metaName.substring(metaName.lastIndexOf(".")+1);
         String metaString = Files.readString(metaPath, StandardCharsets.UTF_8);            
         if(metaType.equalsIgnoreCase("yml")) {
-            this.metaMap = (Map<String, Object>)new Yaml().load(metaString);
+            this.metaMap = new Yaml().<Map<String, Object>> load(metaString);
         } else if(metaType.equalsIgnoreCase("json")) {
-            this.metaMap = (Map<String, Object>)new Gson().fromJson(metaString, Map.class);
+            this.metaMap = new Gson().<Map<String, Object>> fromJson(metaString, Map.class);
         } else if(metaType.equalsIgnoreCase("properites")) {
             this.metaMap = Arrays.asList(metaString.split(System.lineSeparator()))
                                  .stream().map(l -> new Object[]{l.substring(0, l.indexOf("=")).trim(), l.substring(l.indexOf("=")+1).trim()})

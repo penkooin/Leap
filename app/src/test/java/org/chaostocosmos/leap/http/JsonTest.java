@@ -30,13 +30,13 @@ public class JsonTest {
                         put("ELEMENT", "Leap CPU load");
                         put("LABEL", "Leap CPU load");
                         put("COLOR", Arrays.asList(180,130,130));
-                        put("VALUES", new ArrayList());
+                        put("VALUES", new ArrayList<>());
                     }});
                     put("SYSTEM", new HashMap<String, Object>() {{ 
                         put("ELEMENT", "System CPU load");
                         put("LABEL", "System CPU load");
                         put("COLOR", Arrays.asList(180,180,140));
-                        put("VALUES", new ArrayList());
+                        put("VALUES", new ArrayList<>());
                     }});                  
                 }});
             }});            
@@ -52,19 +52,19 @@ public class JsonTest {
                         put("ELEMENT", "Physical memory");
                         put("LABEL", "Physical memory");
                         put("COLOR", Arrays.asList(180,130,130));
-                        put("VALUES", new ArrayList());
+                        put("VALUES", new ArrayList<>());
                     }});
                     put("USED", new HashMap<String, Object>() {{ 
                         put("ELEMENT", "Physical used");
                         put("LABEL", "Physical used");
                         put("COLOR", Arrays.asList(150,200,158));
-                        put("VALUES", new ArrayList());
+                        put("VALUES", new ArrayList<>());
                     }});
                     put("PROCESS", new HashMap<String, Object>() {{ 
                         put("ELEMENT", "Process used");
                         put("LABEL", "Physical used");
                         put("COLOR", Arrays.asList(150,200,158));
-                        put("VALUES", new ArrayList());
+                        put("VALUES", new ArrayList<>());
                     }});
                 }});
             }});            
@@ -80,25 +80,25 @@ public class JsonTest {
                         put("ELEMENT", "Leap thread max");
                         put("LABEL", "max");
                         put("COLOR", Arrays.asList(180,130,130));
-                        put("VALUES", new ArrayList());
+                        put("VALUES", new ArrayList<>());
                     }});
                     put("CORE", new HashMap<String, Object>() {{ 
                         put("ELEMENT", "Leap thread core");
                         put("LABEL", "core");
                         put("COLOR", Arrays.asList(150,200,158));
-                        put("VALUES", new ArrayList());
+                        put("VALUES", new ArrayList<>());
                     }});
                     put("ACTIVE", new HashMap<String, Object>() {{ 
                         put("ELEMENT", "Leap thread active");
                         put("LABEL", "active");
                         put("COLOR", Arrays.asList(150,130,158));
-                        put("VALUES", new ArrayList());
+                        put("VALUES", new ArrayList<>());
                     }});
                     put("QUEUED", new HashMap<String, Object>() {{ 
                         put("ELEMENT", "Leap thread queued");
                         put("LABEL", "queued");
                         put("COLOR", Arrays.asList(130,180,110));
-                        put("VALUES", new ArrayList());
+                        put("VALUES", new ArrayList<>());
                     }});
                 }});
             }});            

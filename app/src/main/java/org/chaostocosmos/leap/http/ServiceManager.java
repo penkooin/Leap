@@ -1,6 +1,7 @@
 package org.chaostocosmos.leap.http;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -13,19 +14,19 @@ import javax.transaction.NotSupportedException;
 import org.chaostocosmos.leap.http.annotation.FilterMapper;
 import org.chaostocosmos.leap.http.annotation.MethodMapper;
 import org.chaostocosmos.leap.http.annotation.ServiceMapper;
-import org.chaostocosmos.leap.http.commons.LoggerFactory;
+import org.chaostocosmos.leap.http.common.LoggerFactory;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Host;
-import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
-import org.chaostocosmos.leap.http.resources.ClassUtils;
-import org.chaostocosmos.leap.http.resources.LeapURLClassLoader;
-import org.chaostocosmos.leap.http.services.filters.AbstractAuthFilter;
-import org.chaostocosmos.leap.http.services.filters.IFilter;
-import org.chaostocosmos.leap.http.services.security.SecurityManager;
-import org.chaostocosmos.leap.http.services.servicemodel.ServiceModel;
-import org.chaostocosmos.leap.http.services.session.SessionManager;
+import org.chaostocosmos.leap.http.resource.ClassUtils;
+import org.chaostocosmos.leap.http.resource.LeapURLClassLoader;
+import org.chaostocosmos.leap.http.security.SecurityManager;
+import org.chaostocosmos.leap.http.service.filter.IFilter;
+import org.chaostocosmos.leap.http.service.filter.ISecurityFilter;
+import org.chaostocosmos.leap.http.service.filter.ISessionFilter;
+import org.chaostocosmos.leap.http.service.model.ServiceModel;
+import org.chaostocosmos.leap.http.session.SessionManager;
 
 import ch.qos.logback.classic.Logger;
 
@@ -37,7 +38,7 @@ import ch.qos.logback.classic.Logger;
  */
 public class ServiceManager {
     /**
-     * Logger
+     * Logger 
      */
     public static final Logger logger = LoggerFactory.getLogger(Context.getHosts().getDefaultHost().getHostId());
 
@@ -67,7 +68,7 @@ public class ServiceManager {
     Map<String, ServiceHolder> serviceHolderMap = new HashMap<>();
 
     /**
-     * Constructor with 
+     * Constructor
      * @param host
      * @param userManager 
      * @param sessionManager
@@ -75,23 +76,26 @@ public class ServiceManager {
      * @throws URISyntaxException
      * @throws IOException
      * @throws NotSupportedException
-     * @throws SecurityException
      * @throws NoSuchMethodException
      * @throws SecurityException
      */
     public ServiceManager(Host<?> host, 
                           SecurityManager userManager, 
-                          SessionManager sessionManager,
-                          LeapURLClassLoader classLoader) throws 
-                                                          IOException, 
-                                                          URISyntaxException, 
-                                                          NotSupportedException, 
-                                                          NoSuchMethodException, 
-                                                          SecurityException {
+                          SessionManager sessionManager, 
+                          LeapURLClassLoader classLoader) throws NoSuchMethodException, 
+                                                                 SecurityException, 
+                                                                 IllegalArgumentException, 
+                                                                 InvocationTargetException, 
+                                                                 ClassNotFoundException, 
+                                                                 InstantiationException, 
+                                                                 IllegalAccessException, 
+                                                                 IOException, 
+                                                                 URISyntaxException, 
+                                                                 NotSupportedException {
         this.host = host;
         this.userManager  = userManager;
         this.sessionManager = sessionManager;
-        this.classLoader = classLoader;        
+        this.classLoader = classLoader;
         initialize();
     }
 
@@ -100,16 +104,19 @@ public class ServiceManager {
      * @throws IOException
      * @throws URISyntaxException
      * @throws NotSupportedException
-     * @throws SecurityException
      * @throws NoSuchMethodException
      * @throws SecurityException
      */
-    public void initialize() throws 
-                             IOException, 
-                             URISyntaxException, 
-                             NotSupportedException, 
-                             NoSuchMethodException, 
-                             SecurityException {
+    public void initialize() throws NoSuchMethodException, 
+                                    SecurityException, 
+                                    IllegalArgumentException, 
+                                    InvocationTargetException, 
+                                    ClassNotFoundException, 
+                                    InstantiationException, 
+                                    IllegalAccessException, 
+                                    IOException, 
+                                    URISyntaxException, 
+                                    NotSupportedException {
         List<Class<? extends ServiceModel>> services = ClassUtils.findAllLeapServices(classLoader, false, host.getDynamicPackageFiltering());
         for(Class<? extends ServiceModel> service : services) {
             ServiceMapper sm = service.getDeclaredAnnotation(ServiceMapper.class);
@@ -144,7 +151,7 @@ public class ServiceManager {
         Method[] methods = serviceModel.getClass().getDeclaredMethods();
         for(Method method : methods) {
             MethodMapper mm = method.getDeclaredAnnotation(MethodMapper.class);
-            if(mm == null) {                
+            if(mm == null) {
                 continue;
             }
             REQUEST_TYPE rType = mm.mappingMethod();
@@ -153,7 +160,7 @@ public class ServiceManager {
                 return method;
             }
         }
-        throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES404.code(), "Requested context path is not found in Server.  Request METHOD: "+requestType.name()+"  Rquest context path: "+contextPath);
+        throw new HTTPException(RES_CODE.RES404, "Requested context path is not found in Server.  Request METHOD: "+requestType.name()+"  Rquest context path: "+contextPath);
     }
 
     /**
@@ -163,12 +170,18 @@ public class ServiceManager {
      * @throws SecurityException
      * @throws NoSuchMethodException
      */
-    public ServiceHolder createServiceHolder(String contextPath) throws NoSuchMethodException, SecurityException {
+    public ServiceHolder createServiceHolder(String contextPath) throws NoSuchMethodException, 
+                                                                        SecurityException, 
+                                                                        IllegalArgumentException, 
+                                                                        InvocationTargetException, 
+                                                                        ClassNotFoundException, 
+                                                                        InstantiationException, 
+                                                                        IllegalAccessException {
         if(!this.serviceHolderMap.containsKey(contextPath)) {
             //throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES404.code(), "Not exist service mapped with specfied context path: "+contextPath);
             return null;
         }
-        ServiceHolder serviceHolder = this.serviceHolderMap.get(contextPath);
+        ServiceHolder serviceHolder = this.serviceHolderMap.get(contextPath); 
         return new ServiceHolder(contextPath, createServiceModel(serviceHolder.getServiceModel().getClass().getCanonicalName()), serviceHolder.getRequestType());
     }
     
@@ -177,7 +190,13 @@ public class ServiceManager {
      * @param serviceClassName
      * @return
      */
-    public ServiceModel createServiceModel(final String serviceClassName) {
+    public ServiceModel createServiceModel(final String serviceClassName)throws NoSuchMethodException, 
+                                                                                SecurityException, 
+                                                                                IllegalArgumentException, 
+                                                                                InvocationTargetException, 
+                                                                                ClassNotFoundException, 
+                                                                                InstantiationException, 
+                                                                                IllegalAccessException {
         ServiceModel service = newServiceInstance(serviceClassName);
         Method[] methods = service.getClass().getDeclaredMethods();
         for(Method method : methods) {
@@ -189,9 +208,11 @@ public class ServiceManager {
                     Class<? extends IFilter>[] preFilterClasses = filterMapper.preFilters();
                     for(Class<? extends IFilter> clazz : preFilterClasses) {
                         IFilter f = (IFilter)newFilterInstance(clazz.getName());
-                        if(f instanceof AbstractAuthFilter) {
-                            ((AbstractAuthFilter)f).setUserManager(userManager);
-                            ((AbstractAuthFilter)f).setSessionManager(sessionManager);
+                        if(f instanceof ISecurityFilter) {
+                            ((ISecurityFilter)f).setSecurityManager(this.userManager);
+                        }
+                        if(f instanceof ISessionFilter) {
+                            ((ISessionFilter)f).setSessionManager(this.sessionManager);
                         }
                         preFilters.add(f);
                     }
@@ -199,9 +220,11 @@ public class ServiceManager {
                     Class<? extends IFilter>[] postFilterClasses = filterMapper.postFilters();
                     for(Class<? extends IFilter> clazz : postFilterClasses) {
                         IFilter f = (IFilter)newFilterInstance(clazz.getName());
-                        if(f instanceof AbstractAuthFilter) {
-                            ((AbstractAuthFilter)f).setUserManager(userManager);
-                            ((AbstractAuthFilter)f).setSessionManager(sessionManager);
+                        if(f instanceof ISecurityFilter) {
+                            ((ISecurityFilter)f).setSecurityManager(this.userManager);
+                        }
+                        if(f instanceof ISessionFilter) {
+                            ((ISessionFilter)f).setSessionManager(this.sessionManager);
                         }
                         postFilters.add(f);
                     }    
@@ -242,20 +265,39 @@ public class ServiceManager {
      * Get service instance
      * @param serviceClassName
      * @return
+     * @throws IllegalAccessException
+     * @throws InstantiationException
+     * @throws ClassNotFoundException
+     * @throws InvocationTargetException
+     * @throws IllegalArgumentException
+     * @throws SecurityException
+     * @throws NoSuchMethodException
      * @throws Exception
      */
-    public ServiceModel newServiceInstance(String serviceClassName) {
-        return (ServiceModel)ClassUtils.instantiate(this.classLoader, serviceClassName);
+    public ServiceModel newServiceInstance(String serviceClassName) throws NoSuchMethodException, 
+                                                                           SecurityException, 
+                                                                           IllegalArgumentException, 
+                                                                           InvocationTargetException, 
+                                                                           ClassNotFoundException, 
+                                                                           InstantiationException, 
+                                                                           IllegalAccessException {
+        return ClassUtils.<ServiceModel> instantiate(this.classLoader, serviceClassName);
     }
 
     /**
      * Get filter instance
      * @param filterClassName
      * @return
-     * @throws WASException
+     * @throws HTTPException
      */
-    public IFilter newFilterInstance(String filterClassName) {
-        return (IFilter)ClassUtils.instantiate(this.classLoader, filterClassName);
+    public IFilter newFilterInstance(String filterClassName) throws NoSuchMethodException, 
+                                                                    SecurityException, 
+                                                                    IllegalArgumentException, 
+                                                                    InvocationTargetException, 
+                                                                    ClassNotFoundException, 
+                                                                    InstantiationException, 
+                                                                    IllegalAccessException {
+        return ClassUtils.<IFilter> instantiate(this.classLoader, filterClassName);
     }
 }
 

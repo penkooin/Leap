@@ -8,7 +8,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.chaostocosmos.leap.http.context.Context;
-import org.chaostocosmos.leap.http.resources.ResourceHelper;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -16,7 +15,7 @@ import org.junit.jupiter.api.Test;
  */
 public class ContextTest {
 
-    public ContextTest() throws URISyntaxException, IOException, WASException {    
+    public ContextTest() throws URISyntaxException, IOException, HTTPException {    
     }
 
     @Test
@@ -34,9 +33,9 @@ public class ContextTest {
     }
 
     @Test
-    public void testGetResouce() throws IOException, URISyntaxException, WASException {
-        int code = 404;
-        Path path = ResourceHelper.getResponseResourcePath("locahost");
+    public void testGetResouce() throws IOException, URISyntaxException, HTTPException {
+        //int code = 404;
+        //Path path = ResourceHelper.getResponseResourcePath("locahost");
         //byte[] bytes = ResourceHelper.getResourceContent("response.html");
         //System.out.println(new String(bytes));
         //String res = Files.readString(new File(Context.class.getClass().getResource("/WEB-INF/static/"+code+".html").toURI()).toPath());
@@ -45,7 +44,6 @@ public class ContextTest {
     
     @Test
     public void testGetMsg() {
-        String type = "debug";
         int code = 1;
         String str = Context.getMessages().getDebugMsg(code, "a", "b", "c");
         System.out.println(str);

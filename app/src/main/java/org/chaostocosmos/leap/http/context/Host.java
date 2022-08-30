@@ -12,12 +12,11 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.http.WASException;
-import org.chaostocosmos.leap.http.commons.Filtering;
-import org.chaostocosmos.leap.http.commons.LoggerFactory;
-import org.chaostocosmos.leap.http.enums.MSG_TYPE;
+import org.chaostocosmos.leap.http.HTTPException;
+import org.chaostocosmos.leap.http.common.Filtering;
+import org.chaostocosmos.leap.http.common.LoggerFactory;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
-import org.chaostocosmos.leap.http.resources.ResourcesModel;
+import org.chaostocosmos.leap.http.resource.ResourcesModel;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
@@ -320,6 +319,20 @@ public class Host <T> extends Metadata<T> {
     }
 
     /**
+     * Get whether show error-details content to client ( true or false)
+     */
+    public <V> V getErrorDetails() {
+        return super.getValue("error-details");
+    }
+
+    /**
+     * Set whether show error-details content to client ( true or false)
+     */
+    public <V> void setErrorDetails(V errorDetails) {
+        super.setValue("error-details", errorDetails);
+    }
+
+    /**
      * Get error Filtering
      * @return
      */
@@ -366,17 +379,17 @@ public class Host <T> extends Metadata<T> {
      * @param <V>
      * @return
      */
-    public <V> V getSessionIDEncription() {
-        return super.getValue("session.id-encription");
+    public <V> V getSessionIDEncryption() {
+        return super.getValue("session.encryption");
     }
 
     /**
-     * Set session id encription algorithm
+     * Set session id encryption algorithm
      * @param <V>
-     * @param sessionIDencription
+     * @param sessionIDencryption
      */
-    public <V> void setSessionIDEncription(V sessionIDencription) {
-        super.setValue("session.id-encription", sessionIDencription);
+    public <V> void setSessionIDEncryption(V sessionIDencryption) {
+        super.setValue("session.encryption", sessionIDencryption);
     }
 
     /**
@@ -420,16 +433,52 @@ public class Host <T> extends Metadata<T> {
      * @return
      */
     public <V> V getApplySession() {
-        return super.getValue("session.apply");
+        return super.getValue("session.apply-session");
     }
 
     /**
      * Set session filters
      * @param <V>
-     * @param sessionFilters
+     * @param applySession
      */
-    public <V> void setApplySession(V sessionFilters) {
-        super.setValue("session.apply", sessionFilters);
+    public <V> void setApplySession(V applySession) {
+        super.setValue("session.apply-session", applySession);
+    }
+
+    /**
+     * Get session expires
+     * @param <V>
+     * @return
+     */
+    public <V> V getExpires() {
+        return super.getValue("session.expires");
+    }
+
+    /**
+     * Set session expires
+     * @param <V>
+     * @param expires
+     */
+    public <V> void setExpires(V expires) {
+        super.setValue("session.expires", expires);
+    }
+
+    /**
+     * Get session path( including all subdirectories)
+     * @param <V>
+     * @return
+     */
+    public <V> V getPath() {
+        return super.getValue("session.path");
+    }
+
+    /**
+     * Set session path
+     * @param <V>
+     * @param path
+     */
+    public <V> void setPath(V path) {
+        super.setValue("session.path", path);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////
@@ -585,7 +634,7 @@ public class Host <T> extends Metadata<T> {
                 long preTimestemp = entry.getValue();
                 if(url.equals(preContext) && System.currentTimeMillis() - preTimestemp < Context.getServer().<Integer>getRequestBlockingInterval().longValue()) {
                     requestAttackBlockingMap.remove(ip);
-                    throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES429.code(), "You requested too many on short period!!!  URI: "+url);
+                    throw new HTTPException(RES_CODE.RES429, "You requested too many on short period!!!  URI: "+url);
                 }
             }
             map.put(url, System.currentTimeMillis());

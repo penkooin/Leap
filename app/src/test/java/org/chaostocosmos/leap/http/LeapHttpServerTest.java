@@ -17,17 +17,19 @@ public class LeapHttpServerTest {
     }
 
     @Test
-    public void testHttpServer() throws WASException, URISyntaxException, IOException {
+    public void testHttpServer() throws HTTPException, URISyntaxException, IOException {
         this.server.start();
     }
 
     public void testServiceHost() throws IOException {
         InetAddress inet = InetAddress.getByName("www.leap.org");
-        ServerSocket ss = new ServerSocket(8080, 50, inet);
-        ss.accept();
+        try(ServerSocket ss = new ServerSocket(8080, 50, inet)) {
+            ss.accept();
+        }
     }
 
     public static void main(String[] args) throws Exception {
         LeapHttpServerTest server = new LeapHttpServerTest();
+        server.testHttpServer();
     }    
 }

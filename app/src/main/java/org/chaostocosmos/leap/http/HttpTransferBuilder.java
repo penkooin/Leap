@@ -14,15 +14,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.http.commons.Constants;
-import org.chaostocosmos.leap.http.commons.LoggerFactory;
+import org.chaostocosmos.leap.http.common.Constants;
+import org.chaostocosmos.leap.http.common.LoggerFactory;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
-import org.chaostocosmos.leap.http.resources.TemplateBuilder;
-import org.chaostocosmos.leap.http.services.session.Session;
+import org.chaostocosmos.leap.http.resource.TemplateBuilder;
 
 /**
  * HttpResponseTransfer
@@ -48,11 +47,11 @@ public class HttpTransferBuilder {
      * @param value
      * @return
      */
-    public static Map<String, List<Object>> addHeader(Map<String, List<Object>> headers, String key, Object value) {
+    public static Map<String, List<String>> addHeader(Map<String, List<String>> headers, String key, String value) {
         if(headers != null) {
             headers = new HashMap<>();
         }
-        List<Object> values = headers.get(key);
+        List<String> values = headers.get(key);
         if(values == null) {
             values = new ArrayList<>();
         }
@@ -95,11 +94,6 @@ public class HttpTransferBuilder {
          * Http response
          */
         private Response response;
-
-        /**
-         * Session object
-         */
-        private Session session;
 
         /**
          * Whether closed
@@ -164,8 +158,8 @@ public class HttpTransferBuilder {
         public Response getResponse() throws Exception {
             if(this.response == null) {
                 String msg = TemplateBuilder.buildResponseHtml(this.host, MSG_TYPE.HTTP, 200, Context.getMessages().getHttpMsg(200));
-                Map<String, List<Object>> headers = addHeader(new HashMap<>(), "Content-Type", MIME_TYPE.TEXT_HTML.mimeType());
-                headers = addHeader(new HashMap<>(), "Content-Length", msg.getBytes().length);
+                Map<String, List<String>> headers = addHeader(new HashMap<>(), "Content-Type", MIME_TYPE.TEXT_HTML.mimeType());
+                headers = addHeader(new HashMap<>(), "Content-Length", String.valueOf(msg.getBytes().length));
                 headers = addHeader(new HashMap<>(), "Charset", this.host.<String> charset());
                 this.response = HttpResponseBuilder.getBuilder().build(this.request)
                                                                 .setStatusCode(200)
@@ -203,7 +197,7 @@ public class HttpTransferBuilder {
          * @param body
          * @throws IOException
          */
-        public void sendResponse(String hostId, int resCode, Map<String, List<Object>> headers, Object body) throws IOException {
+        public void sendResponse(String hostId, int resCode, Map<String, List<String>> headers, Object body) throws IOException {
             Charset charset = Context.getHosts().charset(hostId);
             String protocol = Context.getHosts().getHost(hostId).<String> getProtocol();
             String resMsg = null;
@@ -217,7 +211,7 @@ public class HttpTransferBuilder {
             if(body == null) {
                 LoggerFactory.getLogger(hostId).warn("Response body is Null: "+resCode);
                 return ;
-            }
+            }    
             long contentLength = -1;
             if(body instanceof byte[]) {
                 contentLength = ((byte[])body).length;
@@ -228,20 +222,20 @@ public class HttpTransferBuilder {
             } else if(body instanceof File) {
                 contentLength = ((File)body).length();
             } else {
-                throw new WASException(MSG_TYPE.ERROR, 4, body.getClass().getName());
+                throw new HTTPException(RES_CODE.RES501, Context.getMessages().<String>getErrorMsg(4, body.getClass().getName()));
             }
-            List<Object> values = new ArrayList<>();
-            values.add(contentLength);
+            List<String> values = new ArrayList<>();
+            values.add(String.valueOf(contentLength));
             headers.put("Content-Length", values);
 
             //LoggerFactory.getLogger(response.getRequestedHost()).debug(response.toString());
             StringBuffer resStr = new StringBuffer();
             resStr.append("============================== [RESPONSE] : "+res.trim()+" - "+this.socket.getRemoteSocketAddress().toString()+" =============================="+System.lineSeparator());
             resStr.append("RES CODE: "+resCode+System.lineSeparator());
-            for(Map.Entry<String, List<Object>> e : headers.entrySet()) {
+            for(Map.Entry<String, List<String>> e : headers.entrySet()) {
                 String hv = e.getValue().stream().map(v -> v.toString()).collect(Collectors.joining("; "));
                 this.outStream.write((e.getKey()+": "+hv+"\r\n").getBytes());
-                resStr.append(e.getKey()+": "+e.getValue()+System.lineSeparator());
+                resStr.append(e.getKey()+": "+hv+System.lineSeparator());
             }
             LoggerFactory.getLogger(hostId).debug(resStr.substring(0, resStr.length()-1));
             this.outStream.write("\r\n".getBytes()); 

@@ -20,8 +20,9 @@ import org.junit.jupiter.api.Test;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-class UtilBoxTest {
 
+class UtilBoxTest {
+    
     private static final Map<String, String> date_format_regexps = new HashMap<String, String>() {{
 		put("^\\d{4}\\d{1,2}\\d{1,2}$", "yyyyMMdd");
 		put("^\\d{1,2}-\\d{1,2}-\\d{2}$", "yy-MM-dd");
@@ -96,13 +97,13 @@ class UtilBoxTest {
                         put("ELEMENT", "Leap CPU load");
                         put("LABEL", "Leap CPU load");
                         put("COLOR", Arrays.asList(180,130,130));
-                        put("VALUES", new ArrayList());
+                        put("VALUES", new ArrayList<>());
                     }});
                     put("SYSTEM", new HashMap<String, Object>() {{ 
                         put("ELEMENT", "System CPU load");
                         put("LABEL", "System CPU load");
                         put("COLOR", Arrays.asList(180,180,140));
-                        put("VALUES", new ArrayList());
+                        put("VALUES", new ArrayList<>());
                     }});                  
                 }});
             //}});

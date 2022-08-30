@@ -4,9 +4,9 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 
 import org.chaostocosmos.leap.http.HttpTransferBuilder.HttpTransfer;
-import org.chaostocosmos.leap.http.commons.LoggerFactory;
+import org.chaostocosmos.leap.http.common.LoggerFactory;
 import org.chaostocosmos.leap.http.context.Context;
-import org.chaostocosmos.leap.http.services.AbstractService;
+import org.chaostocosmos.leap.http.service.AbstractService;
 import org.slf4j.Logger;
 
 /**
@@ -24,15 +24,15 @@ public class ServiceInvoker {
      * @param serviceHolder
      * @param httpTransfer
      * @param doClone
-     * @throws Exception
+     * @throws Throwable
      * @throws CloneNotSupportedException
      */
-    public static Response invokeServiceMethod(ServiceHolder serviceHolder, HttpTransfer httpTransfer) throws Throwable {
+    public static Response invokeServiceMethod(ServiceHolder serviceHolder, HttpTransfer httpTransfer) throws Exception {
         Response response = httpTransfer.getResponse();
         AbstractService service = (AbstractService)serviceHolder.getServiceModel();
         try {
             response = service.serve(httpTransfer);
-        } catch(Throwable e) {
+        } catch(Exception e) {
             if(service.errorHandling(httpTransfer.getResponse(), e) != null) {
                 throw e;
             }
@@ -46,7 +46,7 @@ public class ServiceInvoker {
      * @param object
      * @param method
      * @param params
-     * @throws WASException
+     * @throws HTTPException
      */
     public static void invokeMethod(Object object, String methodName, Object... params) throws Exception {
         Method method = object.getClass().getDeclaredMethod(methodName, Arrays.asList(params).stream().map(o -> o.getClass()).toArray(Class[]::new));
@@ -58,7 +58,7 @@ public class ServiceInvoker {
      * @param object
      * @param method
      * @param params
-     * @throws WASException
+     * @throws HTTPException
      */
     public static void invokeMethod(Object object, Method method, Object... params) throws Exception {
         method.invoke(object, params);

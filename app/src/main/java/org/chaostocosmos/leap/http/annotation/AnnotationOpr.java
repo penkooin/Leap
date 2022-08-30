@@ -3,7 +3,7 @@ package org.chaostocosmos.leap.http.annotation;
 import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 
-import org.chaostocosmos.leap.http.resources.SpringJPAManager;
+import org.chaostocosmos.leap.http.resource.SpringJPAManager;
 
 /**
  * Annotaion handler

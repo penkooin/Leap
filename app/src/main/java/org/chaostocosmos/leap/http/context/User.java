@@ -2,6 +2,8 @@ package org.chaostocosmos.leap.http.context;
 
 import java.util.Map;
 
+import org.chaostocosmos.leap.http.session.Session;
+
 /**
  * User
  * @author 9ins
@@ -11,6 +13,7 @@ public class User {
     String username;
     String password;
     String grant;
+    Session session;
 
     /**
      * Constructs with user Map
@@ -53,6 +56,22 @@ public class User {
      */
     public GRANT getGrant() {
         return GRANT.valueOf(this.grant);
+    }
+
+    /**
+     * Get session
+     * @return
+     */
+    public Session getSession() {
+        return this.session;
+    }
+
+    /**
+     * Set session
+     * @param session
+     */
+    public void setSession(Session session) {
+        this.session = session;
     }
 
     /**

@@ -23,11 +23,12 @@ public class ConfigTest {
         this.path = Paths.get("D:\\0.github\\leap\\app\\src\\main\\resources\\webapp\\WEB-INF\\config.json");
     }
 
+    @SuppressWarnings("unchecked")
     public void convertJsonToYaml() throws Exception {
         String allStr = Files.readAllLines(this.path).stream().collect(Collectors.joining());
         //from JSON        
         Gson gson = new Gson();
-        Map map = gson.fromJson(allStr, Map.class);
+        Map<String, Object> map = gson.fromJson(allStr, Map.class);
         //from YAML
         DumperOptions options = new DumperOptions();  //Set dump options
         options.setDefaultFlowStyle(FlowStyle.BLOCK); 
@@ -37,7 +38,7 @@ public class ConfigTest {
     }
 
     public static void main(String[] args) throws Exception {
-        Method m = ConfigTest.class.getMethod("convertJsonToYaml", null);
+        Method m = ConfigTest.class.getMethod("convertJsonToYaml", new Class<?>[0]);
         System.out.println(m.getDeclaringClass().getName());
     }    
 }

@@ -15,7 +15,7 @@ public enum RES_CODE {
     // http103: Early Hints  {}
     RES103(103),
     // http200: OK.   {}
-    RES200(200),
+    RES200(200), 
     // http201: Created.   {}
     RES201(201),
     // http202: Accepted.   {}

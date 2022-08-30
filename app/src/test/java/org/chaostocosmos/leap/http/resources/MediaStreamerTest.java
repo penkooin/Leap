@@ -83,6 +83,7 @@ public class MediaStreamerTest {
         Path resourcePath = Paths.get("D:\\0.github\\Leap\\home\\webapp\\WEB-INF\\static\\video\\video.mp4");
         // System.out.println(resourcePath.toFile().length());
         MediaStreamerTest test = new MediaStreamerTest(resourcePath);
+        test.getBytes(1000L, 100);
         
         // test.inMemoryFlag = false;
         // byte[] bytes = test.getBytes(7445, 20);

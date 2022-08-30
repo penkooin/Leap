@@ -1,10 +1,10 @@
 package org.chaostocosmos.leap.http.enums;
 
-import org.chaostocosmos.leap.http.services.servicemodel.DeleteServiceModel;
-import org.chaostocosmos.leap.http.services.servicemodel.GetServiceModel;
-import org.chaostocosmos.leap.http.services.servicemodel.PostServiceModel;
-import org.chaostocosmos.leap.http.services.servicemodel.PutServiceModel;
-import org.chaostocosmos.leap.http.services.servicemodel.ServiceModel;
+import org.chaostocosmos.leap.http.service.model.DeleteServiceModel;
+import org.chaostocosmos.leap.http.service.model.GetServiceModel;
+import org.chaostocosmos.leap.http.service.model.PostServiceModel;
+import org.chaostocosmos.leap.http.service.model.PutServiceModel;
+import org.chaostocosmos.leap.http.service.model.ServiceModel;
 
 /**
  * Http request type

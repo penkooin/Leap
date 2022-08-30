@@ -26,8 +26,8 @@ public class HttpResponseBuilder {
         return httpResponseBuilder;
     }
 
-    public HttpResponseBuilder build(Request httpRequest) throws WASException {
-        this.httpResponse =  HttpParser.buildResponseParser().buildResponse(httpRequest, -1, null, new HashMap<String, List<Object>>()); 
+    public HttpResponseBuilder build(Request httpRequest) throws HTTPException {
+        this.httpResponse =  HttpParser.buildResponseParser().buildResponse(httpRequest, -1, null, new HashMap<String, List<String>>()); 
         return httpResponseBuilder;
     }
 
@@ -41,7 +41,7 @@ public class HttpResponseBuilder {
         return httpResponseBuilder;
     }
 
-    public HttpResponseBuilder setHeaders(Map<String, List<Object>> headers) {
+    public HttpResponseBuilder setHeaders(Map<String, List<String>> headers) {
         this.httpResponse.setHeaders(headers);
         return httpResponseBuilder;
     }
