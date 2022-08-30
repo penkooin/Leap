@@ -2,7 +2,9 @@ package org.chaostocosmos.leap.http;
 
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +15,7 @@ import org.chaostocosmos.leap.http.common.LoggerFactory;
 import org.chaostocosmos.leap.http.common.UtilBox;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Host;
+import org.chaostocosmos.leap.http.context.User;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
@@ -20,11 +23,15 @@ import org.chaostocosmos.leap.http.enums.RES_CODE;
 import org.chaostocosmos.leap.http.resource.Resource;
 import org.chaostocosmos.leap.http.resource.ResourceHelper;
 import org.chaostocosmos.leap.http.resource.TemplateBuilder;
+import org.chaostocosmos.leap.http.security.SecurityManager;
 import org.chaostocosmos.leap.http.session.Session;
 import org.chaostocosmos.leap.http.session.SessionManager;
 
 /**
- * Client request processor object
+ * Client request handing object
+ * This object is main process of HTTP request from client.
+ * It has server, session, service, security managing and authenticating credential information
+ * And processing various attributes of web request.
  * 
  * @author 9ins
  * @since 2021.09.16
@@ -39,7 +46,22 @@ public class LeapRequestHandler implements Runnable {
      * Server
      */
     LeapHttpServer httpServer;
-    
+
+    /**
+     * Service manager object
+     */
+    ServiceManager serviceManager;
+
+    /**
+     * Session manager object
+     */
+    SessionManager sessionManager;
+
+    /**
+     * Security manager object
+     */
+    SecurityManager securityManager;
+
     /**
      * Client socket
      */
@@ -51,7 +73,7 @@ public class LeapRequestHandler implements Runnable {
     Host<?> host;
 
     /**
-     * Constructor with HeapHttpServer, root direcotry, index.html file, client socket
+     * Constructor with HeapHttpServer, root direcotry, client socket and host object
      * @param httpServer
      * @param rootPath
      * @param client
@@ -62,48 +84,58 @@ public class LeapRequestHandler implements Runnable {
         this.LEAP_HOME = LEAP_HOME;
         this.client = client;
         this.host = host;
+        this.serviceManager = httpServer.getServiceManager(); 
+        this.sessionManager = httpServer.getSessionManager();
+        this.securityManager = httpServer.getSecurityManager();
     }
 
     @Override
     public void run() {
-        Request request = null;
-        Response response = null;
         HttpTransfer httpTransfer = null;
         try {
             httpTransfer = HttpTransferBuilder.buildHttpTransfer(httpServer.getHostId(), this.client);
-            request = httpTransfer.getRequest();
-            response = httpTransfer.getResponse();
+            Request request = httpTransfer.getRequest();
+            Response response = httpTransfer.getResponse();
             Host<?> host = httpTransfer.getHost();
             
             //Put requested host to request header Map for ip filter
             request.getReqHeader().put("@Client", host.getHost());
 
-            //Get service manager from Http Server
-            ServiceManager serviceManager = httpServer.getServiceManager(); 
-
-            //Get session manager object
-            SessionManager sessionManager = httpServer.getSessionManager();
-            String sessionId = request.getCookie("__Leap-Session-ID");
+            /**
+             * Basic authorization handling
+             */
+            final String authorization = request.getReqHeader().get("Authorization");
+            if(authorization != null) {
+                User user = this.securityManager.loginBasicAuth(authorization);
+                if(user != null) {
+                    final String sessionId = request.getCookie("__Leap-Session-ID");
+                    Session session = this.sessionManager.getSession(sessionId);
+                    if(!session.isAuthenticated() && session == null) {                
+                        session = this.sessionManager.createSession(request);
+                        this.sessionManager.addSession(session);
+                        System.out.println("Requested session ID is NULL. session map: "+this.sessionManager.getSessionMap().toString());
+                    }    
+                    session.setAuthenticated(true);
+                    user.setSession(session);
+                    response.addSetCookie("__Leap-Session-ID", session.getId());
+                    response.addSetCookie("Max-Age", String.valueOf(session.getMaxInactiveIntervalSecond()));
+                    response.addSetCookie("Expires", DateUtils.getExpireOffset(session.getMaxInactiveIntervalSecond()));
+                }
+            }            
+            String contextPath = request.getContextPath();
+            String sessionPath = this.host.<String> getPath();
             int maxAge = request.getCookie("Max-Age") == null ? 0 : Integer.parseInt(request.getCookie("Max-Age"));
-            long expires = request.getCookie("Expires") != null ? DateUtils.getMillis(request.getCookie("Expires")) : DateUtils.getCurrentMillis();
-            String sessionPath = request.getCookie("Path");
-            Session session = sessionManager.getSession(sessionId);
-            
-            if(this.host.<Boolean> getApplySession()) {                
-                if(session == null && request.getReqHeader().get("Authorization") == null) {
-                    HTTPException httpe = new HTTPException(RES_CODE.RES401, "Authorization is fail. Please login.");
-                    httpe.addHeader("WWW-Authenticate", "Basic");
-                    throw httpe;    
-                }                
-            }
-            if(DateUtils.getCurrentMillis() - expires > 0  && request.getReqHeader().get("Authorization") == null ) {
-                HTTPException httpe = new HTTPException(RES_CODE.RES401, "Session interactive period is over.");
+            long expires = request.getCookie("Expires") != null ? DateUtils.getMillis(request.getCookie("Expires")) : DateUtils.getCurrentMillis();            
+
+            System.out.println(contextPath+" ///////////// "+sessionPath);
+            if((!session.isAuthenticated() && contextPath.startsWith(sessionPath)) || maxAge == 0 || expires < DateUtils.getCurrentMillis()) {
+                HTTPException httpe = new HTTPException(RES_CODE.RES401, "Authorization is fail. Please login.");
                 httpe.addHeader("WWW-Authenticate", "Basic");
                 throw httpe;
             }
+
             //Create service holder
             ServiceHolder serviceHolder = serviceManager.createServiceHolder(request.getContextPath());
-
             //If client request context path in Services.
             if (serviceHolder != null) {
                 // Request method validation
