@@ -16,9 +16,9 @@ import javax.transaction.NotSupportedException;
 import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.Response;
 import org.chaostocosmos.leap.http.HTTPException;
-import org.chaostocosmos.leap.http.annotation.FilterMapper;
-import org.chaostocosmos.leap.http.annotation.MethodMapper;
-import org.chaostocosmos.leap.http.annotation.ServiceMapper;
+import org.chaostocosmos.leap.http.annotation.FilterIndicates;
+import org.chaostocosmos.leap.http.annotation.MethodIndicates;
+import org.chaostocosmos.leap.http.annotation.ServiceIndicates;
 import org.chaostocosmos.leap.http.common.ExceptionUtils;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.enums.MIME_TYPE;
@@ -30,11 +30,11 @@ import org.chaostocosmos.leap.http.service.filter.BasicAuthFilter;
 import org.chaostocosmos.leap.http.service.model.DeployModel;
 import org.chaostocosmos.leap.http.service.model.ServiceModel;
 
-@ServiceMapper(path="/deploy")
+@ServiceIndicates(path="/deploy")
 public class DeployService extends AbstractService implements DeployModel {
     
-    @MethodMapper(mappingMethod = REQUEST_TYPE.POST, path = "/service/add")
-    @FilterMapper(preFilters = BasicAuthFilter.class)
+    @MethodIndicates(mappingMethod = REQUEST_TYPE.POST, path = "/service/add")
+    @FilterIndicates(preFilters = BasicAuthFilter.class)
     public void add(Request request, Response response) throws HTTPException, IOException {
         final Map<String, String> headers = request.getReqHeader();
         final Part bodyPart = request.getBodyPart();
@@ -82,8 +82,8 @@ public class DeployService extends AbstractService implements DeployModel {
         }
     }
 
-    @MethodMapper(mappingMethod = REQUEST_TYPE.GET, path = "/service/delete")
-    @FilterMapper(preFilters = BasicAuthFilter.class)
+    @MethodIndicates(mappingMethod = REQUEST_TYPE.GET, path = "/service/delete")
+    @FilterIndicates(preFilters = BasicAuthFilter.class)
     public void delete(Request request, Response response) throws IOException, 
                                                                   URISyntaxException, 
                                                                   NotSupportedException, 

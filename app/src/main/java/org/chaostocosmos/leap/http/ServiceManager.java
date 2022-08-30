@@ -11,9 +11,9 @@ import java.util.Map;
 
 import javax.transaction.NotSupportedException;
 
-import org.chaostocosmos.leap.http.annotation.FilterMapper;
-import org.chaostocosmos.leap.http.annotation.MethodMapper;
-import org.chaostocosmos.leap.http.annotation.ServiceMapper;
+import org.chaostocosmos.leap.http.annotation.FilterIndicates;
+import org.chaostocosmos.leap.http.annotation.MethodIndicates;
+import org.chaostocosmos.leap.http.annotation.ServiceIndicates;
 import org.chaostocosmos.leap.http.common.LoggerFactory;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Host;
@@ -119,12 +119,12 @@ public class ServiceManager {
                                     NotSupportedException {
         List<Class<? extends ServiceModel>> services = ClassUtils.findAllLeapServices(classLoader, false, host.getDynamicPackageFiltering());
         for(Class<? extends ServiceModel> service : services) {
-            ServiceMapper sm = service.getDeclaredAnnotation(ServiceMapper.class);
+            ServiceIndicates sm = service.getDeclaredAnnotation(ServiceIndicates.class);
             if(sm != null) {
                 String servicePath = sm.path();
                 Method[] methods = service.getDeclaredMethods();
                 for(Method method : methods) {
-                    MethodMapper mm = method.getDeclaredAnnotation(MethodMapper.class);
+                    MethodIndicates mm = method.getDeclaredAnnotation(MethodIndicates.class);
                     if(mm != null) {
                         String contextPath = servicePath + mm.path();
                         ServiceModel serviceModel = createServiceModel(service.getCanonicalName());
@@ -144,13 +144,13 @@ public class ServiceManager {
      * @return
      */
     public Method getServiceMethod(REQUEST_TYPE requestType, String contextPath, ServiceModel serviceModel) {
-        ServiceMapper sm = serviceModel.getClass().getDeclaredAnnotation(ServiceMapper.class);
+        ServiceIndicates sm = serviceModel.getClass().getDeclaredAnnotation(ServiceIndicates.class);
         if(sm == null) {
             return null;
         }
         Method[] methods = serviceModel.getClass().getDeclaredMethods();
         for(Method method : methods) {
-            MethodMapper mm = method.getDeclaredAnnotation(MethodMapper.class);
+            MethodIndicates mm = method.getDeclaredAnnotation(MethodIndicates.class);
             if(mm == null) {
                 continue;
             }
@@ -200,9 +200,9 @@ public class ServiceManager {
         ServiceModel service = newServiceInstance(serviceClassName);
         Method[] methods = service.getClass().getDeclaredMethods();
         for(Method method : methods) {
-            MethodMapper mm = method.getDeclaredAnnotation(MethodMapper.class);
+            MethodIndicates mm = method.getDeclaredAnnotation(MethodIndicates.class);
             if(mm != null) {
-                FilterMapper filterMapper = method.getDeclaredAnnotation(FilterMapper.class);                
+                FilterIndicates filterMapper = method.getDeclaredAnnotation(FilterIndicates.class);                
                 if(filterMapper != null) {
                     List<IFilter> preFilters = new ArrayList<>();
                     Class<? extends IFilter>[] preFilterClasses = filterMapper.preFilters();

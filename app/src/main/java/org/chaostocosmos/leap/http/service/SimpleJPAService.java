@@ -5,16 +5,16 @@ import java.util.List;
 import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.Response;
 import org.chaostocosmos.leap.http.annotation.AutowiredJPA;
-import org.chaostocosmos.leap.http.annotation.FilterMapper;
-import org.chaostocosmos.leap.http.annotation.MethodMapper;
-import org.chaostocosmos.leap.http.annotation.ServiceMapper;
+import org.chaostocosmos.leap.http.annotation.FilterIndicates;
+import org.chaostocosmos.leap.http.annotation.MethodIndicates;
+import org.chaostocosmos.leap.http.annotation.ServiceIndicates;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
 import org.chaostocosmos.leap.http.service.entity.Users;
-import org.chaostocosmos.leap.http.service.filter.BasicHttpFilter;
+import org.chaostocosmos.leap.http.service.filter.BasicHttpRequestFilter;
 import org.chaostocosmos.leap.http.service.repository.IUsersRespository;
 import org.springframework.stereotype.Service;
 
-@ServiceMapper(path = "/simple/jpa")
+@ServiceIndicates(path = "/simple/jpa")
 @Service
 public class SimpleJPAService extends AbstractService {
 
@@ -24,8 +24,8 @@ public class SimpleJPAService extends AbstractService {
     @AutowiredJPA
     private SimpleSpringService springService;
 
-    @MethodMapper(mappingMethod = REQUEST_TYPE.GET, path="/users")
-    @FilterMapper(preFilters = {BasicHttpFilter.class})    
+    @MethodIndicates(mappingMethod = REQUEST_TYPE.GET, path="/users")
+    @FilterIndicates(preFilters = {BasicHttpRequestFilter.class})    
     public void getUsers(Request request, Response response) {
         System.out.println("Simple JPA Service called.......................................");
         System.out.println(usersRepo);

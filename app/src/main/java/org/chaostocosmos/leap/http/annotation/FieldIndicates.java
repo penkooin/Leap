@@ -6,17 +6,23 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * ServletDescriptor annotation
+ * FieldMapper annotation
  * 
  * @author 9ins
- * @since 2021.09.17
  */
-@Target(ElementType.TYPE)
+@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ServiceMapper {    
+public @interface FieldIndicates {
+
     /**
-     * Servlet context path
+     * Mapping class 
      * @return
      */
-    String path() default "";
+    Class<? extends Object> mappingClass();
+
+    /**
+     * Mapping class parameters
+     * @return
+     */
+    Class<? extends Object>[] parameters();
 }

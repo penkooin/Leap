@@ -3,7 +3,7 @@ package org.chaostocosmos.leap.http.security;
 import java.util.HashMap;
 
 import org.chaostocosmos.leap.http.HTTPException;
-import org.chaostocosmos.leap.http.annotation.FieldMapper;
+import org.chaostocosmos.leap.http.annotation.FieldIndicates;
 import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.context.User;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
@@ -17,10 +17,10 @@ import org.chaostocosmos.leap.http.session.SessionManager;
  */
 public class BasicAuthorization implements IAuthenticate {
 
-    @FieldMapper(loadClass = SecurityManager.class)
+    @FieldIndicates(mappingClass = SecurityManager.class, parameters = {Host.class})
     SecurityManager securityManager;
 
-    @FieldMapper(loadClass = SessionManager.class)
+    @FieldIndicates(mappingClass = SessionManager.class, parameters = {Host.class})
     SessionManager sessionManager;
 
     Host<?> host;
@@ -31,7 +31,7 @@ public class BasicAuthorization implements IAuthenticate {
 
     @Override
     public User login(String username, String password) throws HTTPException {
-        User user = this.securityManager.signIn(username, password);
+        User user = this.securityManager.login(username, password);
         if(user == null) {            
             HTTPException httpe = new HTTPException(RES_CODE.RES401, new HashMap<>(), "User( "+username+" ) not found in server." );
             httpe.addHeader("WWW-Authenticate", "Basic");
@@ -50,7 +50,7 @@ public class BasicAuthorization implements IAuthenticate {
 
     @Override
     public void register(User user) throws HTTPException {
-        this.securityManager.signUp(user);
+        this.securityManager.register(user);
     }
 }
 

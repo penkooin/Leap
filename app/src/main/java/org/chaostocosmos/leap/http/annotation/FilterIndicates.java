@@ -5,21 +5,20 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
+import org.chaostocosmos.leap.http.service.filter.IFilter;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface MethodMappper {
+public @interface FilterIndicates {
+    /**
+     * Get pre filter class
+     * @return
+     */
+    Class<? extends IFilter>[] preFilters() default {};
 
     /**
-     * Servelt mapped path of uri
+     * Get post filter class
      * @return
      */
-    String path();
-    
-    /**
-     * Request type
-     * @return
-     */
-    REQUEST_TYPE mappingMethod();
+    Class<? extends IFilter>[] postFilters() default {};
 }

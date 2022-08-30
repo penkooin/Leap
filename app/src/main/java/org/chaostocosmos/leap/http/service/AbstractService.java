@@ -12,8 +12,9 @@ import org.chaostocosmos.leap.http.ServiceInvoker;
 import org.chaostocosmos.leap.http.ServiceManager;
 import org.chaostocosmos.leap.http.annotation.AnnotationHelper;
 import org.chaostocosmos.leap.http.annotation.AnnotationOpr;
-import org.chaostocosmos.leap.http.annotation.PostFilter;
-import org.chaostocosmos.leap.http.annotation.PreFilter;
+import org.chaostocosmos.leap.http.annotation.FieldIndicates;
+import org.chaostocosmos.leap.http.annotation.PostFilterIndicates;
+import org.chaostocosmos.leap.http.annotation.PreFilterIndicates;
 import org.chaostocosmos.leap.http.common.LoggerFactory;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
@@ -39,12 +40,13 @@ import ch.qos.logback.classic.Logger;
 public abstract class AbstractService implements GetServiceModel, PostServiceModel, PutServiceModel, DeleteServiceModel {
     /**
      * Logger
-     */
+     */    
     protected Logger logger;
 
     /**
      * Filters for previous filtering process of service method
      */
+    @FieldIndicates(mappingClass = IFilter.class, parameters = {})    
     protected List<IFilter> preFilters;
 
     /**
@@ -92,7 +94,7 @@ public abstract class AbstractService implements GetServiceModel, PostServiceMod
 
         if(this.preFilters != null) {
             for(IFilter filter : this.preFilters) {
-                List<Method> methods = AnnotationHelper.getFilterMethods(filter, PreFilter.class);
+                List<Method> methods = AnnotationHelper.getFilterMethods(filter, PreFilterIndicates.class);
                 for(Method method : methods) {
                     ServiceInvoker.invokeMethod(filter, method, request);
                 }
@@ -125,23 +127,11 @@ public abstract class AbstractService implements GetServiceModel, PostServiceMod
         }        
         if(this.postFilters != null) {
             for(IFilter filter : this.postFilters) {
-                List<Method> methods = AnnotationHelper.getFilterMethods(filter, PostFilter.class);
+                List<Method> methods = AnnotationHelper.getFilterMethods(filter, PostFilterIndicates.class);
                 for(Method method : methods) {
                     ServiceInvoker.invokeMethod(filter, method, response);
                 }
             }
-        }
-        //Set session cookies
-        Session session = this.request.getSession();
-        if(session != null) {
-            session.setAttribute("__Leap-Session-ID", session.getId());
-            Enumeration<String> enu = session.getAttributeNames();        
-            while(enu.hasMoreElements()) {
-                String attrName = enu.nextElement();
-                this.response.addSetCookie(attrName, String.valueOf(session.getAttribute(attrName)));
-                System.out.print("Set-Cookie: "+attrName+"="+session.getAttribute(attrName)+"; ");
-            }
-            System.out.println();    
         }
         return response;
     }

@@ -354,7 +354,7 @@ public class LeapHttpServer extends Thread {
      * Get user manager object
      * @return
      */
-    protected SecurityManager getUserManager() {
+    protected SecurityManager getSecurityManager() {
         return this.userManager;
     }
 

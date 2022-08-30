@@ -5,8 +5,8 @@ import java.net.URL;
 
 import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.Response;
-import org.chaostocosmos.leap.http.annotation.PostFilter;
-import org.chaostocosmos.leap.http.annotation.PreFilter;
+import org.chaostocosmos.leap.http.annotation.PostFilterIndicates;
+import org.chaostocosmos.leap.http.annotation.PreFilterIndicates;
 import org.chaostocosmos.leap.http.resource.SpringJPAManager;
 import org.chaostocosmos.leap.http.service.model.SpringJPAModel;
 import org.chaostocosmos.leap.http.session.SessionManager;
@@ -16,23 +16,17 @@ import org.chaostocosmos.leap.http.session.SessionManager;
  * 
  * @author 9ins
  */
-public abstract class AbstractFilter implements ISessionFilter, IHttpFilter<Request, Response>, SpringJPAModel {
+public abstract class AbstractRequestFilter implements IRequestFilter<Request>, SpringJPAModel {
     /**
      * Session manager object
      */
     SessionManager sessionManager;
 
     @Override
-    @PreFilter
+    @PreFilterIndicates
     public void filterRequest(Request request) throws Exception {        
     }
 
-    @Override
-    @PostFilter
-    public void filterResponse(Response response) throws Exception {
-        //System.out.println("Processing post filter..........");
-    }
-    
     @Override
     public boolean isValidURL(String url) {
         try {

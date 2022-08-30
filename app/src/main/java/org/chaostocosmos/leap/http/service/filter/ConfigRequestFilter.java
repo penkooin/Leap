@@ -5,10 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.chaostocosmos.leap.http.Request;
-import org.chaostocosmos.leap.http.Response;
 import org.chaostocosmos.leap.http.HTTPException;
-import org.chaostocosmos.leap.http.annotation.PostFilter;
-import org.chaostocosmos.leap.http.annotation.PreFilter;
+import org.chaostocosmos.leap.http.annotation.PreFilterIndicates;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
 
 import com.google.gson.Gson;
@@ -19,7 +17,7 @@ import com.google.gson.GsonBuilder;
  * 
  * @author 9ins
  */
-public class ConfigFilter extends AbstractFilter {
+public class ConfigRequestFilter extends AbstractRequestFilter {
 
     public enum CONFIG {
         CHART,
@@ -33,16 +31,10 @@ public class ConfigFilter extends AbstractFilter {
     Gson gson = new GsonBuilder().setPrettyPrinting().create(); 
 
     @Override 
-    @PreFilter
+    @PreFilterIndicates
     public void filterRequest(Request request) throws Exception {
         super.filterRequest(request);
         //Map<CONFIG, Map<String, Object>> configMap = extractConfigMap(request);        
-    }
-
-    @Override
-    @PostFilter
-    public void filterResponse(Response response) throws Exception {
-
     }
 
     @SuppressWarnings("unchecked")

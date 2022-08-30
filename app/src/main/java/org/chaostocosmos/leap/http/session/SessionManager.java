@@ -64,15 +64,23 @@ public class SessionManager {
     }
 
     /**
+     * Get session Map
+     * @return
+     */
+    public Map<String, Session> getSessionMap() {
+        return this.sessionMap;
+    }
+
+    /**
      * Get session by session ID
      * @param sessionId
      * @return
      */
     public Session getSession(String sessionId) {
-        if(sessionId == null) {
-            return null;
+        if(this.sessionMap.containsKey(sessionId)) {
+            this.sessionMap.get(sessionId);            
         }
-        return this.sessionMap.get(sessionId);
+        return null;
     }
 
     /**
@@ -84,7 +92,7 @@ public class SessionManager {
         int idLength = Context.getHost(this.host.getHostId()).getSessionIDLength();
         long creationTime = System.currentTimeMillis();
         long lastAccessedTime = creationTime;
-        int maxInteractiveInteralSecond = Context.getHost(this.host.getHostId()).<Integer> getSessionTimeout() / 1000;
+        int maxInteractiveInteralSecond = Context.getHost(this.host.getHostId()).<Integer> getSessionTimeout();
         String sessionId = SessionIDGenerator.get(this.host.<String> getHostId()).generateSessionId(idLength);
         Session session = new HttpSession(sessionId, creationTime, lastAccessedTime, maxInteractiveInteralSecond, request); 
         session.setAttribute("Expires", DateUtils.getDateGMT(System.currentTimeMillis() + 1000 * this.host.<Integer>getExpires(), "yyyy/MM/dd HH:mm:ss Z"));

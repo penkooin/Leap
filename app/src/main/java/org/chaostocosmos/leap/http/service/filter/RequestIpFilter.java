@@ -4,14 +4,14 @@ import java.net.InetAddress;
 import java.util.List;
 
 import org.chaostocosmos.leap.http.Request;
-import org.chaostocosmos.leap.http.annotation.PreFilter;
+import org.chaostocosmos.leap.http.annotation.PreFilterIndicates;
 import org.chaostocosmos.leap.http.resource.SpringJPAManager;
 
 /**
  * Abstract ip filtering object
  * @author 9ins
  */
-public abstract class AbstractIpFilter<R> implements IIpFilter<R> {
+public class RequestIpFilter<R> extends AbstractRequestFilter implements IIpFilter<R> {
     /**
      * Allowed / forbidden hosts
      */
@@ -22,13 +22,13 @@ public abstract class AbstractIpFilter<R> implements IIpFilter<R> {
      * @param allowedHosts
      * @param forbiddenHosts
      */
-    public AbstractIpFilter(List<InetAddress> allowedHosts, List<InetAddress> forbiddenHosts) {
+    public RequestIpFilter(List<InetAddress> allowedHosts, List<InetAddress> forbiddenHosts) {
         this.allowedHosts = allowedHosts;
         this.forbiddenHosts = forbiddenHosts;
     }
     
     @Override
-    @PreFilter
+    @PreFilterIndicates
     public boolean allowedHost(R r) {
         if(this.allowedHosts != null && r.getClass().isAssignableFrom(Request.class)) {
             return this.allowedHosts.stream().anyMatch(i -> i.getHostName().equals(((Request)r).getReqHeader().get("@Client")));
@@ -38,7 +38,7 @@ public abstract class AbstractIpFilter<R> implements IIpFilter<R> {
     }
 
     @Override
-    @PreFilter
+    @PreFilterIndicates
     public boolean forbiddenHost(R r) {
         if(this.forbiddenHosts != null && r.getClass().isAssignableFrom(Request.class)) {
             return !this.forbiddenHosts.stream().anyMatch(i -> i.getHostName().equals(((Request)r).getReqHeader().get("@Client")));

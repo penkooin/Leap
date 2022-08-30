@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 import org.chaostocosmos.leap.http.HTTPException;
 import org.chaostocosmos.leap.http.Request;
-import org.chaostocosmos.leap.http.annotation.PreFilter;
+import org.chaostocosmos.leap.http.annotation.PreFilterIndicates;
 import org.chaostocosmos.leap.http.common.LoggerFactory;
 import org.chaostocosmos.leap.http.context.User;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
@@ -19,14 +19,14 @@ import org.chaostocosmos.leap.http.service.model.IAuthenticate;
  * 
  * @author 9ins
  */
-public class BasicAuthFilter extends AbstractFilter implements ISecurityFilter, IAuthenticate { 
+public class BasicAuthFilter extends AbstractRequestFilter implements ISecurityFilter, IAuthenticate { 
     /**
      * Security manager object
      */
     SecurityManager securityManager;
 
     @Override
-    @PreFilter
+    @PreFilterIndicates
     public void filterRequest(Request request) throws Exception { 
         super.filterRequest(request);
         String sessionId = request.getCookie("__Leap-Session-ID");
@@ -65,7 +65,7 @@ public class BasicAuthFilter extends AbstractFilter implements ISecurityFilter, 
         if(this.securityManager == null) {
             throw new IllegalStateException("Leap security manager not set. Can not sing in with "+username+"/"+password);
         }   
-        return this.securityManager.signIn(username, password);
+        return this.securityManager.login(username, password);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class BasicAuthFilter extends AbstractFilter implements ISecurityFilter, 
         if(this.securityManager == null) {
             throw new IllegalStateException("Leap security manager not set. Can not sing up with "+user.toString());
         }   
-        this.securityManager.signUp(user);
+        this.securityManager.register(user);
     }
 
     @Override

@@ -16,7 +16,7 @@ public class DateUtils {
     /**
      * Default date pattern
      */
-    public static final String DEFAULT_DATE_PATTERN = "dd-MMM-yyyy HH:mm:ss z";
+    public static final String DEFAULT_DATE_PATTERN = "dd-MM-yyyy HH:mm:ss z";
 
     /**
      * Get current milliseconds
@@ -64,6 +64,15 @@ public class DateUtils {
         Instant instant = date.toInstant();
         ZonedDateTime zdt = ZonedDateTime.ofInstant(instant, ZoneId.systemDefault());        
         return zdt.format(DateTimeFormatter.ofPattern(pattern));
+    }
+
+    /**
+     * Get expire date added with offset seconds
+     * @param offsetSeconds
+     * @return
+     */
+    public static String getExpireOffset(long offsetSeconds) {
+        return getDateGMT(getCurrentMillis() + offsetSeconds * 1000, DEFAULT_DATE_PATTERN);
     }
 
 }

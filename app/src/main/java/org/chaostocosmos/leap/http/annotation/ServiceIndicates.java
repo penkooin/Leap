@@ -5,21 +5,18 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
-
-@Target(ElementType.METHOD)
+/**
+ * ServletDescriptor annotation
+ * 
+ * @author 9ins
+ * @since 2021.09.17
+ */
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface MethodMapper {
-
+public @interface ServiceIndicates {    
     /**
-     * Servelt mapped path of uri
+     * Servlet context path
      * @return
      */
-    String path();
-    
-    /**
-     * Request type
-     * @return
-     */
-    REQUEST_TYPE mappingMethod();
+    String path() default "";
 }
