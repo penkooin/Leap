@@ -1,11 +1,12 @@
 package org.chaostocosmos.leap.http.session;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.chaostocosmos.leap.http.Request;
+import org.chaostocosmos.leap.http.common.Constants;
 import org.chaostocosmos.leap.http.common.DateUtils;
+import org.chaostocosmos.leap.http.common.UNIT;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.security.SessionIDGenerator;
@@ -24,7 +25,7 @@ public class SessionManager {
     /**
      * Session Map
      */
-    final Map<String, Session> sessionMap = Collections.synchronizedMap(new HashMap<String, Session>());
+    final Map<String, Session> sessionMap = new HashMap<String, Session>();
     
     /**
      * Constructs with Host
@@ -55,8 +56,8 @@ public class SessionManager {
      * @param request
      * @return
      */
-    public boolean exists(Request request) {
-        String sessionId = request.getCookie("__Leap-Session-ID");
+    public synchronized boolean exists(Request request) {
+        String sessionId = request.getCookie(Constants.SESSION_ID_KEY);
         if(this.sessionMap.containsKey(sessionId)) {
             return true;
         }
@@ -64,23 +65,19 @@ public class SessionManager {
     }
 
     /**
-     * Get session Map
-     * @return
-     */
-    public Map<String, Session> getSessionMap() {
-        return this.sessionMap;
-    }
-
-    /**
      * Get session by session ID
      * @param sessionId
      * @return
      */
-    public Session getSession(String sessionId) {
+    public synchronized Session getSessionCreateIfNotExists(Request request) {
+        String sessionId = request.getCookie(Constants.SESSION_ID_KEY);                
         if(this.sessionMap.containsKey(sessionId)) {
-            this.sessionMap.get(sessionId);            
+            return this.sessionMap.get(sessionId);
+        } else {
+            Session session = createSession(request);
+            this.addSession(session);
+            return session;
         }
-        return null;
     }
 
     /**
@@ -88,15 +85,15 @@ public class SessionManager {
      * @param request
      * @return
      */
-    public Session createSession(Request request) {
+    public synchronized Session createSession(Request request) {
         int idLength = Context.getHost(this.host.getHostId()).getSessionIDLength();
         long creationTime = System.currentTimeMillis();
         long lastAccessedTime = creationTime;
         int maxInteractiveInteralSecond = Context.getHost(this.host.getHostId()).<Integer> getSessionTimeout();
         String sessionId = SessionIDGenerator.get(this.host.<String> getHostId()).generateSessionId(idLength);
-        Session session = new HttpSession(sessionId, creationTime, lastAccessedTime, maxInteractiveInteralSecond, request); 
-        session.setAttribute("Expires", DateUtils.getDateGMT(System.currentTimeMillis() + 1000 * this.host.<Integer>getExpires(), "yyyy/MM/dd HH:mm:ss Z"));
-        session.setAttribute("Max-Age", this.host.<Integer> getSessionTimeout());
+        Session session = new HttpSession(this, sessionId, creationTime, lastAccessedTime, maxInteractiveInteralSecond, request); 
+        session.setAttribute("Expires", DateUtils.getDateLocalAddedOffset(System.currentTimeMillis() + this.host.<Integer>getExpires() * (int) UNIT.DY.getUnit()));
+        session.setAttribute("Max-Age", this.host.<Integer> getMaxAge());
         session.setAttribute("Path", this.host.<String> getPath());
         return session;
     }
@@ -105,34 +102,44 @@ public class SessionManager {
      * Add session
      * @param session
      */
-    public void addSession(Session session) {
+    public synchronized void addSession(Session session) {
         this.sessionMap.put(session.getId(), session);
-    }
-
-    /**
-     * Close session
-     * @param session
-     */
-    public void closeSession(Session session) {
-        removeSession(session.getId());
     }
 
     /**
      * Remove session
      * @param session
      */
-    public void removeSession(String sessionId) {
+    public synchronized boolean removeSession(String sessionId) {
         if(this.sessionMap.containsKey(sessionId)) {
-            this.sessionMap.remove(sessionId).close();
+            this.sessionMap.remove(sessionId);
+            return true;
         }
+        return false;
+    }
+
+    /**
+     * Close session
+     * @param session
+     */
+    public synchronized boolean removeSession(Session session) {
+        return removeSession(session.getId());
     }
 
     /**
      * Clear SessionManager
      */
     public void reset() {
-        this.sessionMap.values().stream().forEach(s -> closeSession(s));
+        this.sessionMap.values().stream().forEach(s -> removeSession(s));
         this.sessionMap.clear();
+    }
+
+    /**
+     * Get session Map
+     * @return
+     */
+    public Map<String, Session> getSessionMap() {
+        return this.sessionMap;
     }
 
     @Override

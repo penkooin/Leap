@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.common.Constants;
 import org.chaostocosmos.leap.http.common.LoggerFactory;
@@ -118,7 +117,7 @@ public class HttpParser {
             }
             requestLine = URLDecoder.decode(requestLine, StandardCharsets.UTF_8);
             debug.append("============================== [REQUEST] "+requestLine+" =============================="+System.lineSeparator());
-            String[] linesplited = requestLine.split(" ");        
+            String[] linesplited = requestLine.split(" ");
             if(linesplited.length != 3) {
                 throw new HTTPException(RES_CODE.RES417, Context.getMessages().<String>getErrorMsg(400, "Requested line is something wrong: "+requestLine));
             }
@@ -158,27 +157,26 @@ public class HttpParser {
                 }
             }
             String hostName = requestedHost.indexOf(":") != -1 ? requestedHost.substring(0, requestedHost.indexOf(":")) : requestedHost;
-
             //Get host ID from request host name
             String hostId = Context.getHosts().getHostId(hostName);
-
             //Get Host object by requested host name
             Host<?> host = Context.getHost(hostId);
             if(host == null) {
                 throw new HTTPException(RES_CODE.RES417, Context.getMessages().<String>getErrorMsg(24, hostName));
             }
-            
             //Get content type from requested header
             String contentType = headerMap.get("Content-Type");
-
+            System.out.println(headerMap.toString());
             //Get cookies
-            Map<String, String> cookies = null;
+            Map<String, String> cookies = new HashMap<>();
             if(headerMap.get("Cookie") != null) {
+                System.out.println(headerMap.get("Cookie")+"  $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
                 String[] cookieArr = headerMap.get("Cookie").trim().split(";");
                 System.out.println(Arrays.toString(cookieArr));
-                cookies = Arrays.asList(cookieArr).stream().map(a -> new String[]{a.substring(0, a.indexOf("=")).trim(), a.substring(a.indexOf("=")+1)}).collect(Collectors.toMap(k -> k[0], v -> v[1]));
+                for(String cookie : cookieArr) {
+                    cookies.putIfAbsent(cookie.substring(0, cookie.indexOf("=")).trim(), cookie.substring(cookie.indexOf("=")+1));
+                }                
             }
-            
             //Get content length from requested header
             long contentLength = headerMap.get("Content-Length") != null ? Long.parseLong(headerMap.get("Content-Length")) : 0L;
             if(!headerMap.containsKey("Range") && !host.checkRequestAttack(inetAddress.getHostAddress(), protocol+"://"+hostName + contextPath)) {

@@ -4,7 +4,7 @@ server:
     connection-timeout: 5000
     backlog: 50
     file-buffer-size: 1024
-    request-blocking-interval: 100
+    request-blocking-interval: 10
 
     threadpool:
       core: 300

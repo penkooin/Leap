@@ -62,7 +62,7 @@ public interface Session {
     public long getLastAccessedTime();
 
     /**
-     * Get max interactive interval
+     * Get max inactive interval
      * @return
      */
     public int getMaxInactiveIntervalSecond();
@@ -91,6 +91,12 @@ public interface Session {
     public boolean isNew();
 
     /**
+     * Set isNew attribute
+     * @param isNew
+     */
+    public void setNew(boolean isNew);
+
+    /**
      * Set attribute of the session
      * @param attrName
      * @param value
@@ -101,7 +107,7 @@ public interface Session {
      * Get maximum interactive interval
      * @param interval
      */
-    public void getMaxInactiveIntervalSecond(int interval);
+    public void setMaxInactiveIntervalSecond(int interval);
 
     /**
      * Get protocol

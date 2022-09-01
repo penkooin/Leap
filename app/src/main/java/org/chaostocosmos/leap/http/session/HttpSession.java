@@ -24,6 +24,11 @@ public class HttpSession implements Session {
      */    
     final Map<String, Object> attributeMap = new HashMap<>();
 
+    /**
+     * Session manager
+     */
+    final SessionManager sessionManager;
+
     /** 
      * Http request
      */
@@ -66,13 +71,15 @@ public class HttpSession implements Session {
 
     /**
      * Constructs with session id, creation millis, last access millis, max interactive second and request object
+     * @param sessionManager
      * @param sessionId
      * @param creationTime
      * @param lastAccessedTime
      * @param maxInactiveIntervalSecond
      * @param request
      */
-    public HttpSession(String sessionId, long creationTime, long lastAccessedTime, int maxInactiveIntervalSecond, Request request) {
+    public HttpSession(SessionManager sessionManager, String sessionId, long creationTime, long lastAccessedTime, int maxInactiveIntervalSecond, Request request) {
+        this.sessionManager = sessionManager;
         this.request = request;
         this.sessionId = sessionId;
         this.creationTime = creationTime;
@@ -135,11 +142,17 @@ public class HttpSession implements Session {
 
     @Override
     public void invalidate() {
+        this.sessionManager.removeSession(this.sessionId);
     }
 
     @Override
     public boolean isNew() {
         return this.isNew;
+    }
+
+    @Override
+    public void setNew(boolean isNew) {
+        this.isNew = isNew;
     }
 
     @Override
@@ -153,7 +166,7 @@ public class HttpSession implements Session {
     }
 
     @Override
-    public void getMaxInactiveIntervalSecond(int interval) {
+    public void setMaxInactiveIntervalSecond(int interval) {
         this.maxInactiveIntervalSecond = interval;
     }
 

@@ -16,6 +16,7 @@ import org.chaostocosmos.leap.http.HTTPException;
 import org.chaostocosmos.leap.http.common.Filtering;
 import org.chaostocosmos.leap.http.common.LoggerFactory;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
+import org.chaostocosmos.leap.http.enums.HOST_STATUS;
 import org.chaostocosmos.leap.http.resource.ResourcesModel;
 
 import ch.qos.logback.classic.Level;
@@ -464,6 +465,24 @@ public class Host <T> extends Metadata<T> {
     }
 
     /**
+     * Get max age seconds in session
+     * @param <V>
+     * @return
+     */
+    public <V> V getMaxAge() {
+        return super.getValue("session.max-age");
+    }
+
+    /**
+     * Set max age seconds in session
+     * @param <V>
+     * @param maxAge
+     */
+    public <V> void setMaxAge(V maxAge) {
+        super.setValue("session.max-age", maxAge);
+    }
+
+    /**
      * Get session path( including all subdirectories)
      * @param <V>
      * @return
@@ -481,7 +500,25 @@ public class Host <T> extends Metadata<T> {
         super.setValue("session.path", path);
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Get host server status
+     * @return
+     */
+    public HOST_STATUS getHostStatus() {        
+        return HOST_STATUS.valueOf(super.<String> getValue("status"));
+    }
+
+    /**
+     * Set host server status
+     * @param status
+     */
+    public void setHostStatus(HOST_STATUS status) {
+        synchronized(super.meta) {
+            super.setValue("status", status.name());
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////    
 
     /**
      * Get dynamic class Path

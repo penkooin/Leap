@@ -7,12 +7,13 @@ import java.util.HashMap;
 import org.chaostocosmos.leap.http.HTTPException;
 import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.annotation.PreFilterIndicates;
+import org.chaostocosmos.leap.http.common.Constants;
 import org.chaostocosmos.leap.http.common.LoggerFactory;
 import org.chaostocosmos.leap.http.context.User;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
-import org.chaostocosmos.leap.http.session.Session;
 import org.chaostocosmos.leap.http.security.SecurityManager;
 import org.chaostocosmos.leap.http.service.model.IAuthenticate;
+import org.chaostocosmos.leap.http.session.Session;
 
 /**
  * BasicAuthFilter object
@@ -29,8 +30,8 @@ public class BasicAuthFilter extends AbstractRequestFilter implements ISecurityF
     @PreFilterIndicates
     public void filterRequest(Request request) throws Exception { 
         super.filterRequest(request);
-        String sessionId = request.getCookie("__Leap-Session-ID");
-        Session session = super.sessionManager.getSession(sessionId);
+        String sessionId = request.getCookie(Constants.SESSION_ID_KEY);
+        Session session = super.sessionManager.getSessionCreateIfNotExists(request);
 
         if(session == null && request.getClass().isAssignableFrom(Request.class)) {
             final String authorization = request.getReqHeader().get("Authorization");

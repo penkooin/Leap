@@ -2,12 +2,9 @@ package org.chaostocosmos.leap.http;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.nio.ByteBuffer;
-import java.nio.channels.SocketChannel;
 import java.util.List;
 import java.util.Map;
 
-import org.chaostocosmos.leap.http.common.ChannelUtils;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
 
 /**
@@ -71,8 +68,8 @@ public class HttpChannelParser {
          * @throws IOException
          */
         public Request parseRequest(Socket socket) throws IOException {
-            SocketChannel channel = socket.getChannel();
-            Map<String, List<String>> lines = ChannelUtils.readHeaders(channel, ByteBuffer.allocate(1024));             
+            //SocketChannel channel = socket.getChannel();
+            //Map<String, List<String>> lines = ChannelUtils.readHeaders(channel, ByteBuffer.allocate(1024));             
             return null;
         }
     }

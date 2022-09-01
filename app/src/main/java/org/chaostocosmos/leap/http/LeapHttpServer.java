@@ -29,6 +29,7 @@ import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.enums.PROTOCOL;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
+import org.chaostocosmos.leap.http.enums.HOST_STATUS;
 import org.chaostocosmos.leap.http.resource.ClassUtils;
 import org.chaostocosmos.leap.http.resource.Html;
 import org.chaostocosmos.leap.http.resource.LeapURLClassLoader;
@@ -302,12 +303,13 @@ public class LeapHttpServer extends Thread {
                                    IOException, 
                                    URISyntaxException, 
                                    NotSupportedException {
+        this.host = host;
+        this.host.setHostStatus(HOST_STATUS.SETUP);
         this.isDefaultHost = true;
         this.homePath = homePath;
         this.protocol = protocol;
         this.backlog = backlog;
         this.docroot = docroot;
-        this.host = host;
         this.threadpool = threadpool;
         this.inetSocketAddress = inetSocketAddress;
         this.ipAllowedFilters = host.getIpAllowedFiltering();
@@ -369,6 +371,7 @@ public class LeapHttpServer extends Thread {
     @Override
     public void run() {
         try {
+            this.host.setHostStatus(HOST_STATUS.STARTING);
             if(!this.protocol.isSecured()) {
                 this.server = new ServerSocket();
                 this.server.bind(this.inetSocketAddress, this.backlog);
@@ -380,7 +383,8 @@ public class LeapHttpServer extends Thread {
                 this.server = HttpsServerSocketFactory.getSSLServerSocket(keyStore, passphrase, sslProtocol, this.inetSocketAddress, this.backlog);
                 this.logger.info("[HTTPS SERVER START] Address: "+this.inetSocketAddress.toString()+"  Protocol: "+sslProtocol+"  KeyStore: "+keyStore.getName()+"  Supported Protocol: "+Arrays.toString(((SSLServerSocket)server).getSupportedProtocols())+"  KeyStore: "+keyStore.getName());
             }
-            while (true) { 
+            this.host.setHostStatus(HOST_STATUS.STARTED);
+            while (this.host.getHostStatus() == HOST_STATUS.STARTED || this.host.getHostStatus() == HOST_STATUS.RUNNING) { 
                 Socket connection = this.server.accept();
                 connection.setSoTimeout(Context.getServer().getConnectionTimeout());
                 //connection.setSoLinger(false, 1);
@@ -412,6 +416,8 @@ public class LeapHttpServer extends Thread {
                     connection.close();
                 }
             } 
+            //Close when breaking host server loop
+            close();
         } catch(Exception e) {
             this.logger.error(e.getMessage(), e);
         }
@@ -423,6 +429,8 @@ public class LeapHttpServer extends Thread {
      */
     public void close() throws InterruptedException, IOException {
         this.server.close();
+        this.host.setHostStatus(HOST_STATUS.TERMINATED);
+        this.host.getLogger().info("[SERVER TERMINATED] "+this.host.getHost()+" Server is terminated...");
     }
 
     /**

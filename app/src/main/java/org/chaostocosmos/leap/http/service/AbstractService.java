@@ -1,11 +1,10 @@
 package org.chaostocosmos.leap.http.service;
 
 import java.lang.reflect.Method;
-import java.util.Enumeration;
 import java.util.List;
 
 import org.chaostocosmos.leap.http.HTTPException;
-import org.chaostocosmos.leap.http.HttpTransferBuilder.HttpTransfer;
+import org.chaostocosmos.leap.http.HttpTransfer;
 import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.Response;
 import org.chaostocosmos.leap.http.ServiceInvoker;
@@ -27,7 +26,6 @@ import org.chaostocosmos.leap.http.service.model.GetServiceModel;
 import org.chaostocosmos.leap.http.service.model.PostServiceModel;
 import org.chaostocosmos.leap.http.service.model.PutServiceModel;
 import org.chaostocosmos.leap.http.service.model.ServiceModel;
-import org.chaostocosmos.leap.http.session.Session;
 
 import ch.qos.logback.classic.Logger;
 

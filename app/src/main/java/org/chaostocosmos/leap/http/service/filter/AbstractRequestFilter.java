@@ -4,8 +4,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.chaostocosmos.leap.http.Request;
-import org.chaostocosmos.leap.http.Response;
-import org.chaostocosmos.leap.http.annotation.PostFilterIndicates;
 import org.chaostocosmos.leap.http.annotation.PreFilterIndicates;
 import org.chaostocosmos.leap.http.resource.SpringJPAManager;
 import org.chaostocosmos.leap.http.service.model.SpringJPAModel;

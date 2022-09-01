@@ -96,7 +96,7 @@ public class TemplateBuilder {
      * @return
      * @throws Exception
      */
-    public static String buildResourceJson(String contextPath, Host<?> host) throws Exception {
+    public static String buildResourceJson(String contextPath, Host<?> host) {
         String path = contextPath.charAt(contextPath.length() - 1) == '/' ? contextPath.substring(0, contextPath.lastIndexOf('/')) : contextPath;
         final String path1 = path.equals("") ? "/" : path;
         List<File> resourceInfos = Arrays.asList(host.getStatic().resolve(path1.substring(1)).toFile().listFiles())

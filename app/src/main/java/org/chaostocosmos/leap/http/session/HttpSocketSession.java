@@ -33,6 +33,7 @@ public class HttpSocketSession extends HttpSession {
 
     /**
      * HttpSocketSession
+     * @param sessionManager
      * @param sessionId
      * @param creationTime
      * @param lastAccessedTime
@@ -41,8 +42,8 @@ public class HttpSocketSession extends HttpSession {
      * @param socket
      * @throws IOException
      */
-    public HttpSocketSession(String sessionId, long creationTime, long lastAccessedTime, int maxInteractiveInteralSecond, Request request, Socket socket) throws IOException {
-        super(sessionId, creationTime, lastAccessedTime, maxInteractiveInteralSecond, request);
+    public HttpSocketSession(SessionManager sessionManager, String sessionId, long creationTime, long lastAccessedTime, int maxInteractiveInteralSecond, Request request, Socket socket) throws IOException {
+        super(sessionManager, sessionId, creationTime, lastAccessedTime, maxInteractiveInteralSecond, request);
         this.socket = socket;
         this.inStream = socket.getInputStream();
         this.outStream = socket.getOutputStream();

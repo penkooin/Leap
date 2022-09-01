@@ -79,7 +79,13 @@ public class DataStructureOpr {
     public static <T> void putValue(Object obj, Object[] keys, T value) {
 		T parent = findValue(obj, Arrays.copyOfRange(keys, 0, keys.length-1));
 		if(parent == null) {
-            throw new IllegalArgumentException("Specified expression's parent is not exist!!!");
+			if(obj instanceof List) {
+				((List<T>)obj).set(Integer.valueOf(keys[keys.length-1]+""), value);
+			} else if(obj instanceof Map) {
+				((Map<String, T>)obj).put(keys[keys.length-1]+"", value);
+			} else {
+				throw new IllegalArgumentException("Parent object must be List or Map.");
+			}
         } else if(parent instanceof List) {
 			((List<T>)parent).set(Integer.valueOf(keys[keys.length-1]+""), value);
 		} else if(parent instanceof Map) {

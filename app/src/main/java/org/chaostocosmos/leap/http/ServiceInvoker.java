@@ -3,7 +3,6 @@ package org.chaostocosmos.leap.http;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
-import org.chaostocosmos.leap.http.HttpTransferBuilder.HttpTransfer;
 import org.chaostocosmos.leap.http.common.LoggerFactory;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.service.AbstractService;
@@ -11,7 +10,7 @@ import org.slf4j.Logger;
 
 /**
  * Servlet management object
- * @author 9ins
+ * @author 9ins 
  */
 public class ServiceInvoker {
     /**

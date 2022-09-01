@@ -2,12 +2,12 @@ package org.chaostocosmos.leap.http.service.model;
 
 import java.util.List;
 
-import org.chaostocosmos.leap.http.HttpTransferBuilder.HttpTransfer;
-import org.chaostocosmos.leap.http.resource.ResourcesModel;
-import org.chaostocosmos.leap.http.service.filter.IFilter;
+import org.chaostocosmos.leap.http.HTTPException;
+import org.chaostocosmos.leap.http.HttpTransfer;
 import org.chaostocosmos.leap.http.Response;
 import org.chaostocosmos.leap.http.ServiceManager;
-import org.chaostocosmos.leap.http.HTTPException;
+import org.chaostocosmos.leap.http.resource.ResourcesModel;
+import org.chaostocosmos.leap.http.service.filter.IFilter;
 
 /**
  * Interface for servlet

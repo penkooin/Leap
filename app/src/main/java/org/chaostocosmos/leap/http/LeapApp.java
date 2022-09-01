@@ -26,6 +26,7 @@ import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.context.MetaEvent;
 import org.chaostocosmos.leap.http.context.MetaListener;
+import org.chaostocosmos.leap.http.enums.HOST_STATUS;
 import org.chaostocosmos.leap.http.resource.ClassUtils;
 import org.chaostocosmos.leap.http.resource.ResourceHelper;
 import org.chaostocosmos.leap.http.resource.ResourceManager;
@@ -97,8 +98,8 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
      * @throws Exception
      */
     public LeapApp(String[] args) throws Exception {
-        // set commend line options
-        leapServerMap = new HashMap<>();
+        // set commend line options        
+        leapServerMap = new HashMap<>();        
         setup(args);
     }
 
@@ -163,14 +164,12 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
      */
     public void start() throws Exception {
         //NetworkInterfaces.getAllNetworkAddresses().stream().forEach(i -> System.out.println(i.getHostName())); 
-
         //Spring JPA 
         if((boolean) Context.getServer().isSupportSpringJPA()) {
             jpaManager = SpringJPAManager.get();
         }
-
         //initialize thread queue
-        threadQueue = new LinkedBlockingQueue<Runnable>();
+        threadQueue = new LinkedBlockingQueue<Runnable>();        
         //initialize thread pool
         threadpool = new ThreadPoolExecutor(Context.getServer().<Integer> getThreadPoolCoreSize(), Context.getServer().<Integer> getThreadPoolMaxSize(), Context.getServer().<Integer> getThreadPoolKeepAlive(), TimeUnit.SECONDS, threadQueue);                
         logger.info("====================================================================================================");
@@ -181,6 +180,8 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
 
         //initialize Leap hosts
         for(Host<?> host : Context.getHosts().getAllHost()) {
+            // set host server status to NONE
+            host.setHostStatus(HOST_STATUS.NONE);
             InetAddress hostAddress = InetAddress.getByName(host.getHost());
             String hostName = hostAddress.getHostAddress()+":"+host.getPort();
             if(leapServerMap.containsKey(hostName)) {

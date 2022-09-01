@@ -2,16 +2,14 @@ package org.chaostocosmos.leap.http;
 
 import java.net.Socket;
 import java.net.SocketTimeoutException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
-import java.util.Base64;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.chaostocosmos.leap.http.HttpTransferBuilder.HttpTransfer;
+import org.chaostocosmos.leap.http.common.Constants;
 import org.chaostocosmos.leap.http.common.DateUtils;
-import org.chaostocosmos.leap.http.common.LoggerFactory;
 import org.chaostocosmos.leap.http.common.UtilBox;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Host;
@@ -20,6 +18,7 @@ import org.chaostocosmos.leap.http.enums.MIME_TYPE;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
 import org.chaostocosmos.leap.http.enums.RES_CODE;
+import org.chaostocosmos.leap.http.enums.HOST_STATUS;
 import org.chaostocosmos.leap.http.resource.Resource;
 import org.chaostocosmos.leap.http.resource.ResourceHelper;
 import org.chaostocosmos.leap.http.resource.TemplateBuilder;
@@ -101,39 +100,39 @@ public class LeapRequestHandler implements Runnable {
             //Put requested host to request header Map for ip filter
             request.getReqHeader().put("@Client", host.getHost());
 
-            /**
-             * Basic authorization handling
-             */
-            final String authorization = request.getReqHeader().get("Authorization");
-            if(authorization != null) {
-                User user = this.securityManager.loginBasicAuth(authorization);
-                if(user != null) {
-                    final String sessionId = request.getCookie("__Leap-Session-ID");
-                    Session session = this.sessionManager.getSession(sessionId);
-                    if(!session.isAuthenticated() && session == null) {                
-                        session = this.sessionManager.createSession(request);
-                        this.sessionManager.addSession(session);
-                        System.out.println("Requested session ID is NULL. session map: "+this.sessionManager.getSessionMap().toString());
-                    }    
-                    session.setAuthenticated(true);
-                    user.setSession(session);
-                    response.addSetCookie("__Leap-Session-ID", session.getId());
-                    response.addSetCookie("Max-Age", String.valueOf(session.getMaxInactiveIntervalSecond()));
-                    response.addSetCookie("Expires", DateUtils.getExpireOffset(session.getMaxInactiveIntervalSecond()));
-                }
-            }            
-            String contextPath = request.getContextPath();
-            String sessionPath = this.host.<String> getPath();
-            int maxAge = request.getCookie("Max-Age") == null ? 0 : Integer.parseInt(request.getCookie("Max-Age"));
-            long expires = request.getCookie("Expires") != null ? DateUtils.getMillis(request.getCookie("Expires")) : DateUtils.getCurrentMillis();            
-
-            System.out.println(contextPath+" ///////////// "+sessionPath);
-            if((!session.isAuthenticated() && contextPath.startsWith(sessionPath)) || maxAge == 0 || expires < DateUtils.getCurrentMillis()) {
-                HTTPException httpe = new HTTPException(RES_CODE.RES401, "Authorization is fail. Please login.");
+            if(this.host.getHostStatus() == HOST_STATUS.STARTED) {
+                this.host.setHostStatus(HOST_STATUS.RUNNING);
+                HTTPException httpe = new HTTPException(RES_CODE.RES401, "Server host started for the first time.");
+                httpe.addHeader("WWW-Authenticate", "Basic");
+                throw httpe;
+            }    
+            final Session session = this.sessionManager.getSessionCreateIfNotExists(request);
+            this.host.getLogger().debug("[SESSION] ID: "+session.getId()+"  Authenticated: "+session.isAuthenticated()+"  New Session: "+session.isNew()+"  Creation Time: "+session.getCreationTime()+"  Last Access Date: "+new Date(session.getLastAccessedTime()));
+            if(DateUtils.getMillis() > session.getLastAccessedTime() + session.getMaxInactiveIntervalSecond() * 1000L) {
+                this.sessionManager.removeSession(session);
+                HTTPException httpe = new HTTPException(RES_CODE.RES401, "  Session timeout: "+host.getSessionTimeout()+" sec.  Current Date: "+new Date(DateUtils.getMillis())+"  Timeout Date: "+new Date(session.getLastAccessedTime() + session.getMaxInactiveIntervalSecond() * 1000L));
                 httpe.addHeader("WWW-Authenticate", "Basic");
                 throw httpe;
             }
-
+            final String authorization = request.getReqHeader().get("Authorization");
+            if(!session.isAuthenticated()) {
+                User user = null;                
+                if(authorization != null) {
+                    user = this.securityManager.loginBasicAuth(authorization);
+                    if(user != null) {
+                        session.setAuthenticated(true);                        
+                        session.setNew(false);
+                        user.setSession(session);
+                        response.addSetCookie(Constants.SESSION_ID_KEY, session.getId());
+                        //response.addSetCookie("Max-Age", String.valueOf(host.<Integer> getMaxAge()));
+                        //response.addSetCookie("Expires", DateUtils.getDateLocalAddedOffset(System.currentTimeMillis() + this.host.<Integer>getExpires() * (int) UNIT.DY.getUnit()));
+                    } else {
+                        HTTPException httpe = new HTTPException(RES_CODE.RES401, "Authorization is fail. Please login.");
+                        httpe.addHeader("WWW-Authenticate", "Basic");
+                        throw httpe;    
+                    }                    
+                }
+            }
             //Create service holder
             ServiceHolder serviceHolder = serviceManager.createServiceHolder(request.getContextPath());
             //If client request context path in Services.
@@ -170,7 +169,6 @@ public class LeapRequestHandler implements Runnable {
                                 response.setResponseCode(RES_CODE.RES200.code());
                                 response.addHeader("Content-Type", mimeType+"; charset="+host.charset());
                                 response.setBody(body);
-                                //LoggerFactory.getLogger(hosts.getHost()).debug("RESOURCE LIST REQUESTED: "+body);
                             } else {
                                 String mimeType = UtilBox.probeContentType(resourcePath);
                                 if(mimeType == null) {
@@ -179,7 +177,7 @@ public class LeapRequestHandler implements Runnable {
                                 response.setResponseCode(RES_CODE.RES200.code());
                                 response.addHeader("Content-Type", mimeType);
                                 response.setBody(resource.getBytes());
-                                LoggerFactory.getLogger(host.getHost()).debug("DOWNLOAD RESOURCE MIME-TYPE: "+mimeType);    
+                                this.host.getLogger().debug("DOWNLOAD RESOURCE MIME-TYPE: "+mimeType);    
                             }
                         } else {
                             throw new HTTPException(RES_CODE.RES403, request.getContextPath());
@@ -194,20 +192,21 @@ public class LeapRequestHandler implements Runnable {
                 httpTransfer.sendResponse(response);
             }
         } catch(SocketTimeoutException e) {
-            LoggerFactory.getLogger(httpTransfer.getHost().getHostId()).error("[SOCKET TIME OUT] Client socket timeout occurred.");
-        } catch(Exception e) {            
+            this.host.getLogger().error("[SOCKET TIME OUT] Client socket timeout occurred.");
+        } catch(Exception e) {           
+            e.printStackTrace(); 
             try {
                 if(!httpTransfer.isClosed()) {                   
                     processError(httpTransfer, e);
                 }
             } catch (Exception ex) {                
                 ex.initCause(e);
-                LoggerFactory.getLogger(httpTransfer.getHost().getHost()).error(e.getMessage(), ex);
+                this.host.getLogger().error(e.getMessage(), ex);
             }            
         } finally {
             if(httpTransfer != null) {
                 httpTransfer.close();
-            }
+            }            
         }
     }
 
@@ -226,8 +225,7 @@ public class LeapRequestHandler implements Runnable {
         MSG_TYPE msgType = null;
         String message = throwable.getMessage();
         String hostId = httpTransfer.getHost().getHostId();
-        Map<String, List<String>> headers = new HashMap<String, List<String>>();
-        headers = HttpTransferBuilder.addHeader(headers, "Content-Type", "text/html; charset="+Context.getHost(hostId).charset());
+        Map<String, List<String>> headers = new HashMap<>();
         if(throwable instanceof HTTPException) {
             HTTPException e = (HTTPException)throwable;
             headers.putAll(e.getHeaders());
@@ -255,7 +253,6 @@ public class LeapRequestHandler implements Runnable {
      * @return
      */
     public Throwable getCaused(String host, Throwable e) {        
-        Throwable top = e;
         int level = 0;
         do {
             if(e instanceof HTTPException || e == null) {
@@ -264,7 +261,7 @@ public class LeapRequestHandler implements Runnable {
             e = e.getCause();
             level++;
         } while(level < 5);
-        LoggerFactory.getLogger(host).debug("[FOUND CAUSED] "+e);
+        this.host.getLogger().debug("[FOUND CAUSED] "+e);
         return e;   
     }
 }

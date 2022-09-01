@@ -79,7 +79,7 @@ public class SecurityManager implements IAuthenticate {
      * @param authorization
      * @return
      */
-    public User loginBasicAuth(String authorization) {
+    public synchronized User loginBasicAuth(String authorization) {
         if (authorization != null && authorization.trim().startsWith("Basic")) {
             String base64Credentials = authorization.trim().substring("Basic".length()).trim();
             byte[] credDecoded = Base64.getDecoder().decode(base64Credentials);
