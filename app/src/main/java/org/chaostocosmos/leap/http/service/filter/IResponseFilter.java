@@ -1,7 +1,5 @@
 package org.chaostocosmos.leap.http.service.filter;
 
-import org.chaostocosmos.leap.http.inject.PostFilterIndicates;
-
 /**
  * IHttpResponseFilter
  * @author 9ins
@@ -12,6 +10,5 @@ public interface IResponseFilter<R> extends IPostFilter {
      * @param response
      * @return
      */
-    @PostFilterIndicates
     public void filterResponse(R response) throws Exception;    
 }

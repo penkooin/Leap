@@ -1,50 +1,59 @@
 package org.chaostocosmos.leap.http.enums;
 
-import org.chaostocosmos.leap.http.service.model.DeleteServiceModel;
-import org.chaostocosmos.leap.http.service.model.GetServiceModel;
-import org.chaostocosmos.leap.http.service.model.PostServiceModel;
-import org.chaostocosmos.leap.http.service.model.PutServiceModel;
-import org.chaostocosmos.leap.http.service.model.ServiceModel;
-
 /**
  * Http request type
+ * 
  * @author 9ins 
  */
 public enum REQUEST {    
     /**
      * Get type for IGetServlet
      */
-    GET(GetServiceModel.class),
+    GET("GET"),
+
     /**
      * Post type for IPostServlet
      */
-    POST(PostServiceModel.class),
+    POST("POST"),
+
     /**
      * Put type for IPutServelt
      */
-    PUT(PutServiceModel.class),
+    PUT("PUT"),
+
     /**
      * Delete type for IDeleteServlet
      */
-    DELETE(DeleteServiceModel.class);
+    DELETE("DELETE");
+
     /**
      * Request type mananging class
      */
-    Class<? extends ServiceModel> oprClass;
+    String requestType;
+
     /**
      * Request type initializer
      * @param requestType
      * @param oprClass
      */
-    REQUEST(Class<? extends ServiceModel> oprClass) {
-        this.oprClass = oprClass;
+    REQUEST(String requestType) {
+        this.requestType = requestType;
     }
+
     /**
      * Get type
      * @param requestType
      * @return
      */
-    public REQUEST type(String requestType) {
+    public static REQUEST type(String requestType) {
         return REQUEST.valueOf(requestType);
+    }
+
+    /**
+     * Get request type
+     * @return
+     */
+    public String getType() {
+        return this.requestType;
     }
 }

@@ -4,17 +4,15 @@ import java.util.List;
 
 import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.Response;
+import org.chaostocosmos.leap.http.annotation.AutowiredJPA;
+import org.chaostocosmos.leap.http.annotation.MethodMapper;
+import org.chaostocosmos.leap.http.annotation.ServiceMapper;
 import org.chaostocosmos.leap.http.enums.REQUEST;
-import org.chaostocosmos.leap.http.inject.AutowiredJPA;
-import org.chaostocosmos.leap.http.inject.FilterIndicates;
-import org.chaostocosmos.leap.http.inject.MethodIndicates;
-import org.chaostocosmos.leap.http.inject.ServiceIndicates;
 import org.chaostocosmos.leap.http.service.entity.Users;
-import org.chaostocosmos.leap.http.service.filter.BasicHttpRequestFilter;
 import org.chaostocosmos.leap.http.service.repository.IUsersRespository;
 import org.springframework.stereotype.Service;
 
-@ServiceIndicates(path = "/simple/jpa")
+@ServiceMapper(mappingPath = "/simple/jpa")
 @Service
 public class SimpleJPAService extends AbstractService {
 
@@ -24,8 +22,7 @@ public class SimpleJPAService extends AbstractService {
     @AutowiredJPA
     private SimpleSpringService springService;
 
-    @MethodIndicates(method = REQUEST.GET, path="/users")
-    @FilterIndicates(preFilters = {BasicHttpRequestFilter.class})    
+    @MethodMapper(method = REQUEST.GET, mappingPath="/users")
     public void getUsers(Request request, Response response) {
         System.out.println("Simple JPA Service called.......................................");
         System.out.println(usersRepo);

@@ -2,9 +2,9 @@ package org.chaostocosmos.leap.http.service.filter;
 
 import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.Response;
+import org.chaostocosmos.leap.http.annotation.PostFilters;
+import org.chaostocosmos.leap.http.annotation.PreFilters;
 import org.chaostocosmos.leap.http.common.LoggerFactory;
-import org.chaostocosmos.leap.http.inject.PostFilterIndicates;
-import org.chaostocosmos.leap.http.inject.PreFilterIndicates;
 
 /**
  * BasicHttpFilter
@@ -14,7 +14,6 @@ import org.chaostocosmos.leap.http.inject.PreFilterIndicates;
 public class BasicHttpRequestFilter extends AbstractRequestFilter {
 
     @Override
-    @PreFilterIndicates
     public void filterRequest(Request request) throws Exception { 
         super.filterRequest(request);
         if(request.getClass().isAssignableFrom(Request.class)) {

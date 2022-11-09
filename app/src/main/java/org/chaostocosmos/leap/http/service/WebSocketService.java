@@ -1,14 +1,14 @@
 package org.chaostocosmos.leap.http.service;
 
 import org.chaostocosmos.leap.http.Response;
-import org.chaostocosmos.leap.http.inject.ServiceIndicates;
+import org.chaostocosmos.leap.http.annotation.ServiceMapper;
 
 /**
  * AbstractWebSocketService
  * 
  * @author 9ins
  */
-@ServiceIndicates(path = "/wss")
+@ServiceMapper(mappingPath = "/wss")
 public class WebSocketService extends AbstractService { 
 
     @Override

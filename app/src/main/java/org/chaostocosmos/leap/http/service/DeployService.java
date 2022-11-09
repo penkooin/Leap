@@ -15,14 +15,13 @@ import javax.transaction.NotSupportedException;
 
 import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.Response;
+import org.chaostocosmos.leap.http.annotation.MethodMapper;
+import org.chaostocosmos.leap.http.annotation.ServiceMapper;
 import org.chaostocosmos.leap.http.HTTPException;
 import org.chaostocosmos.leap.http.common.ExceptionUtils;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.enums.MIME;
 import org.chaostocosmos.leap.http.enums.REQUEST;
-import org.chaostocosmos.leap.http.inject.FilterIndicates;
-import org.chaostocosmos.leap.http.inject.MethodIndicates;
-import org.chaostocosmos.leap.http.inject.ServiceIndicates;
 import org.chaostocosmos.leap.http.enums.HTTP;
 import org.chaostocosmos.leap.http.part.MultiPart;
 import org.chaostocosmos.leap.http.part.Part;
@@ -30,11 +29,10 @@ import org.chaostocosmos.leap.http.service.filter.BasicAuthFilter;
 import org.chaostocosmos.leap.http.service.model.DeployModel;
 import org.chaostocosmos.leap.http.service.model.ServiceModel;
 
-@ServiceIndicates(path="/deploy")
+@ServiceMapper(mappingPath="/deploy")
 public class DeployService extends AbstractService implements DeployModel {
     
-    @MethodIndicates(method = REQUEST.POST, path = "/service/add")
-    @FilterIndicates(preFilters = BasicAuthFilter.class)
+    @MethodMapper(method = REQUEST.POST, mappingPath = "/service/add")
     public void add(Request request, Response response) throws HTTPException, IOException {
         final Map<String, String> headers = request.getReqHeader();
         final Part bodyPart = request.getBodyPart();
@@ -51,7 +49,7 @@ public class DeployService extends AbstractService implements DeployModel {
                 Arrays.asList(qualifiedClassName.split(",")).stream().forEach(cls -> {
                     if(cls == null) {
                         throw new HTTPException(HTTP.RES412, Context.messages().<String>error(400, "Service full qualifiedClassName is missing in header of request."));
-                    }        
+                    }
                     cls = cls.trim();
                     Path serviceClassPath = super.serviceManager.getHost().getDynamicClasspaths();                
                     Path qualifiedClassPath = Paths.get(cls.replace(".", File.separator));
@@ -82,8 +80,7 @@ public class DeployService extends AbstractService implements DeployModel {
         }
     }
 
-    @MethodIndicates(method = REQUEST.GET, path = "/service/delete")
-    @FilterIndicates(preFilters = BasicAuthFilter.class)
+    @MethodMapper(method = REQUEST.GET, mappingPath = "/service/delete")
     public void delete(Request request, Response response) throws IOException, 
                                                                   URISyntaxException, 
                                                                   NotSupportedException, 

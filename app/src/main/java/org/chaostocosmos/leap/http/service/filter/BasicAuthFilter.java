@@ -2,17 +2,14 @@ package org.chaostocosmos.leap.http.service.filter;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
-import java.util.HashMap;
 
 import org.chaostocosmos.leap.http.HTTPException;
 import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.common.Constants;
 import org.chaostocosmos.leap.http.common.LoggerFactory;
-import org.chaostocosmos.leap.http.context.User;
 import org.chaostocosmos.leap.http.enums.HTTP;
-import org.chaostocosmos.leap.http.inject.PreFilterIndicates;
 import org.chaostocosmos.leap.http.security.SecurityManager;
-import org.chaostocosmos.leap.http.service.model.IAuthenticate;
+import org.chaostocosmos.leap.http.security.UserCredentials;
 import org.chaostocosmos.leap.http.session.Session;
 
 /**
@@ -20,14 +17,13 @@ import org.chaostocosmos.leap.http.session.Session;
  * 
  * @author 9ins
  */
-public class BasicAuthFilter extends AbstractRequestFilter implements ISecurityFilter, IAuthenticate { 
+public class BasicAuthFilter extends AbstractRequestFilter implements ISecurityFilter { 
     /**
      * Security manager object
      */
     SecurityManager securityManager;
 
     @Override
-    @PreFilterIndicates
     public void filterRequest(Request request) throws Exception { 
         super.filterRequest(request);
         String sessionId = request.getCookie(Constants.SESSION_ID_KEY);
@@ -41,7 +37,7 @@ public class BasicAuthFilter extends AbstractRequestFilter implements ISecurityF
                 String credentials = new String(credDecoded, StandardCharsets.UTF_8);
                 final String[] values = credentials.split(":", 2);
                 //System.out.println(values[0]+" "+values[1]);
-                User user = login(values[0], values[1]);
+                UserCredentials user = login(values[0], values[1]);
                 if(user != null) {
                     session = super.sessionManager.createSession(sessionId);
                     super.sessionManager.addSession(session);
@@ -57,24 +53,21 @@ public class BasicAuthFilter extends AbstractRequestFilter implements ISecurityF
         }
     }
 
-    @Override
-    public User login(String username, String password) throws HTTPException {
+    public UserCredentials login(String username, String password) throws HTTPException {
         if(this.securityManager == null) {
             throw new IllegalStateException("Leap security manager not set. Can not sing in with "+username+"/"+password);
-        }   
+        }
         return this.securityManager.login(username, password);
     }
 
-    @Override
-    public void register(User user) throws HTTPException {
+    public void register(UserCredentials user) throws HTTPException {
         if(this.securityManager == null) {
             throw new IllegalStateException("Leap security manager not set. Can not sing up with "+user.toString());
         }   
         this.securityManager.register(user);
     }
 
-    @Override
-    public User logout(String username) throws HTTPException {
+    public UserCredentials logout(String username) throws HTTPException {
         return this.securityManager.logout(username);
     }
 
@@ -88,3 +81,6 @@ public class BasicAuthFilter extends AbstractRequestFilter implements ISecurityF
         return this.securityManager;
     }
 }
+
+
+

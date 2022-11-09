@@ -4,10 +4,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.HTTPException;
+import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.enums.HTTP;
-import org.chaostocosmos.leap.http.inject.PreFilterIndicates;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -31,7 +30,6 @@ public class ConfigRequestFilter extends AbstractRequestFilter {
     Gson gson = new GsonBuilder().setPrettyPrinting().create(); 
 
     @Override 
-    @PreFilterIndicates
     public void filterRequest(Request request) throws Exception {
         super.filterRequest(request);
         //Map<CONFIG, Map<String, Object>> configMap = extractConfigMap(request);        

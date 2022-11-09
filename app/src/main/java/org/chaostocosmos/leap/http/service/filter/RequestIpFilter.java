@@ -4,7 +4,6 @@ import java.net.InetAddress;
 import java.util.List;
 
 import org.chaostocosmos.leap.http.Request;
-import org.chaostocosmos.leap.http.inject.PreFilterIndicates;
 import org.chaostocosmos.leap.http.resource.SpringJPAManager;
 
 /**
@@ -28,7 +27,6 @@ public class RequestIpFilter<R> extends AbstractRequestFilter implements IIpFilt
     }
     
     @Override
-    @PreFilterIndicates
     public boolean allowedHost(R r) {
         if(this.allowedHosts != null && r.getClass().isAssignableFrom(Request.class)) {
             return this.allowedHosts.stream().anyMatch(i -> i.getHostName().equals(((Request)r).getReqHeader().get("@Client")));
@@ -38,13 +36,12 @@ public class RequestIpFilter<R> extends AbstractRequestFilter implements IIpFilt
     }
 
     @Override
-    @PreFilterIndicates
     public boolean forbiddenHost(R r) {
         if(this.forbiddenHosts != null && r.getClass().isAssignableFrom(Request.class)) {
             return !this.forbiddenHosts.stream().anyMatch(i -> i.getHostName().equals(((Request)r).getReqHeader().get("@Client")));
         } else {
             return false;
-        }        
+        }
     }
 
     @Override

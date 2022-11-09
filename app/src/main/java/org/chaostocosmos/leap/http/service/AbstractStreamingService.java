@@ -34,19 +34,18 @@ public abstract class AbstractStreamingService extends AbstractService implement
     public AbstractStreamingService(MIME mimeType) {
         if(mimeType != MIME.VIDEO_MP4 
            && mimeType != MIME.VIDEO_X_FLV 
-           && mimeType != MIME.VIDEO_QUICKTIME
-           && mimeType != MIME.VIDEO_X_MSVIDEO
-           && mimeType != MIME.VIDEO_X_MS_WMV
-           && mimeType != MIME.APPLICATION_X_MPEGURL
-           && mimeType != MIME.APPLICATION_OCTET_STREAM
-           && mimeType != MIME.APPLICATION_ZIP
+           && mimeType != MIME.VIDEO_QUICKTIME 
+           && mimeType != MIME.VIDEO_X_MSVIDEO 
+           && mimeType != MIME.VIDEO_X_MS_WMV 
+           && mimeType != MIME.APPLICATION_X_MPEGURL 
+           && mimeType != MIME.APPLICATION_OCTET_STREAM 
+           && mimeType != MIME.APPLICATION_ZIP 
            ) {
            throw new HTTPException(HTTP.RES415, Context.messages().<String>error(22, "Specified media type is not supported: "+mimeType.mimeType()));
         }
     }
 
-    @Override
-    public void GET(final Request request, final Response response) throws Exception {
+    public void streaming(final Request request, final Response response) throws Exception {
         String reqFile = (String) request.getParameter("file");
         reqFile = reqFile.charAt(0) == '/' ? reqFile.substring(1) : reqFile;
         if(reqFile == null || reqFile.equals("")) {
@@ -70,7 +69,7 @@ public abstract class AbstractStreamingService extends AbstractService implement
         }
         int bufferSize = Context.host(request.getHostId()).getStreamingBufferSize();
         int length = position + bufferSize >= fileLength ? (int)fileLength - position : bufferSize;
-        byte[] body = super.resource.getResource(resourcePath).getBytes2(position, length);
+        byte[] body = super.resourcesModel.getResource(resourcePath).getBytes2(position, length);
         int contentLength = body.length;
         long lastModified = TimeUnit.MILLISECONDS.convert(contentLength, TimeUnit.MILLISECONDS);
         long expire = System.currentTimeMillis() + EXPIRE_TIME;
@@ -87,7 +86,7 @@ public abstract class AbstractStreamingService extends AbstractService implement
         response.addHeader("Content-Range", String.format("bytes %s-%s/%s", position, position + length -1, fileLength));
         response.addHeader("Content-Length", String.format("%s", contentLength));
         response.setResponseCode(206);
-        response.setBody(body);        
+        response.setBody(body);
     }
 
     @Override
@@ -119,7 +118,7 @@ public abstract class AbstractStreamingService extends AbstractService implement
      * @throws Exception
      */
     public byte[] getFilePartial(String contextPath, long start, int length) throws Exception {
-        ResourcesModel resource = super.getResource();
+        ResourcesModel resource = super.getResourcesModel();
         Object res = resource.getContextResource(contextPath);
         byte[] data = new byte[length];
         if(res instanceof File) {

@@ -4,7 +4,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.chaostocosmos.leap.http.Request;
-import org.chaostocosmos.leap.http.inject.PreFilterIndicates;
 import org.chaostocosmos.leap.http.resource.SpringJPAManager;
 import org.chaostocosmos.leap.http.service.model.SpringJPAModel;
 import org.chaostocosmos.leap.http.session.SessionManager;
@@ -21,7 +20,6 @@ public abstract class AbstractRequestFilter implements IRequestFilter<Request>, 
     SessionManager sessionManager;
 
     @Override
-    @PreFilterIndicates
     public void filterRequest(Request request) throws Exception {        
     }
 

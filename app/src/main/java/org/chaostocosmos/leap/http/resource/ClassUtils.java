@@ -45,7 +45,7 @@ public class ClassUtils {
      * @return
      * @throws MalformedURLException
      */
-    public static LeapURLClassLoader getClassLoader() throws MalformedURLException {
+    public static LeapURLClassLoader getClassLoader() {
         if(classLoader == null) {
             classLoader = new LeapURLClassLoader(Context.hosts().getAllDynamicClasspathURLs());
         }
@@ -71,7 +71,7 @@ public class ClassUtils {
         List<Class<? extends ServiceModel>> services = findClasses(classLoader, ServiceModel.class, classLoader.getResource(""), null)
                                                        .stream()
                                                        .filter(f ->!Modifier.isAbstract(f.getModifiers()) && !Modifier.isInterface(f.getModifiers()))
-                                                       .map(c -> (Class<? extends ServiceModel>)c)
+                                                       .map(c -> (Class<? extends ServiceModel>) c)
                                                        .collect(Collectors.toList());
         for(URL url : classLoader.getURLs()) {
             services.addAll(findClasses(classLoader, ServiceModel.class, url, filters)
@@ -98,7 +98,7 @@ public class ClassUtils {
                                                           .filter(f -> //f.isAssignableFrom(IFilter.class)
                                                                       !Modifier.isAbstract(f.getModifiers()) && !Modifier.isInterface(f.getModifiers())
                                                                  )
-                                                          .map(f -> (Class<? extends IFilter>)f)
+                                                          .map(f -> (Class<? extends IFilter>) f)
                                                           .collect(Collectors.toList());
         for(URL url : classLoader.getURLs()) {
             filterClasses.addAll(findFilters(classLoader, IFilter.class, url, filters)

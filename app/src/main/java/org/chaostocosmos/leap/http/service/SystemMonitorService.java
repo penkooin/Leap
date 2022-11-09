@@ -20,13 +20,13 @@ import org.chaostocosmos.chaosgraph.GraphUtility.CODEC;
 import org.chaostocosmos.chaosgraph.NotSuppotedEncodingFormatException;
 import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.Response;
+import org.chaostocosmos.leap.http.annotation.MethodMapper;
+import org.chaostocosmos.leap.http.annotation.ServiceMapper;
 import org.chaostocosmos.leap.http.HTTPException;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.enums.MIME;
 import org.chaostocosmos.leap.http.enums.REQUEST;
-import org.chaostocosmos.leap.http.inject.MethodIndicates;
-import org.chaostocosmos.leap.http.inject.ServiceIndicates;
 import org.chaostocosmos.leap.http.enums.HTTP;
 import org.chaostocosmos.leap.http.part.MultiPart;
 import org.chaostocosmos.leap.http.resource.TemplateBuilder;
@@ -36,12 +36,12 @@ import com.google.gson.GsonBuilder;
 import com.sun.media.jai.codec.ImageCodec;
 import com.sun.media.jai.codec.ImageEncoder;
 
-@ServiceIndicates(path = "/monitor")
+@ServiceMapper(mappingPath = "/monitor")
 public class SystemMonitorService extends AbstractChartService {
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    @MethodIndicates(method = REQUEST.GET, path = "")
+    @MethodMapper(method = REQUEST.GET, mappingPath = "")
     public void getMonitorWebpage(Request request, Response response) throws Exception {
         if(Context.server().<Boolean> isSupportMonitoring()) {
             String body = TemplateBuilder.buildMonitoringPage(request.getContextPath(), super.httpTransfer.getHost());
@@ -53,7 +53,7 @@ public class SystemMonitorService extends AbstractChartService {
         }
     } 
 
-    @MethodIndicates(method = REQUEST.POST, path = "/chart/image")
+    @MethodMapper(method = REQUEST.POST, mappingPath = "/chart/image")
     @SuppressWarnings("unchecked")
     public void getResources(Request request, Response response) throws Exception {
         Map<String, String> header = request.getReqHeader();

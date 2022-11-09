@@ -22,7 +22,7 @@ import ch.qos.logback.classic.Logger;
  * @author 9ins
  * @since 2021.09.18
  */
-public class Request {
+public class Request implements Http {
     
     final private long requestTimstamp;
     final private REQUEST requestType;    

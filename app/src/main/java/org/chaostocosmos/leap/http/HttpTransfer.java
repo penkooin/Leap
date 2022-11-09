@@ -27,7 +27,7 @@ import org.chaostocosmos.leap.http.resource.TemplateBuilder;
  * HttpTransfer object
  * @author 9ins
  */
-public class HttpTransfer {
+public class HttpTransfer implements Http {
     /**
      * Hosts, Information configured in config.yml
      */

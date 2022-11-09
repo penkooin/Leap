@@ -2,12 +2,12 @@ package org.chaostocosmos.leap.http.service.model;
 
 import java.util.List;
 
-import org.chaostocosmos.leap.http.HTTPException;
 import org.chaostocosmos.leap.http.HttpTransfer;
 import org.chaostocosmos.leap.http.Response;
 import org.chaostocosmos.leap.http.ServiceManager;
 import org.chaostocosmos.leap.http.resource.ResourcesModel;
 import org.chaostocosmos.leap.http.service.filter.IFilter;
+import org.chaostocosmos.leap.http.session.SessionManager;
 
 /**
  * Interface for servlet
@@ -18,18 +18,27 @@ public interface ServiceModel extends SpringJPAModel, Cloneable {
     /**
      * First entry point of client requets
      * @param httpTransfer
-     * @param serviceMethod
      * @throws Exception
      */
-    public Response serve(final HttpTransfer httpTransfer) throws Exception;
+    public Response handle(final HttpTransfer httpTransfer) throws Exception;
 
     /**
-     * Set filters
+     * Set pre-filter list
      * @param preFilters
-     * @param postFilters
-     * @throws HTTPException
      */
-    public void setFilters(final List<IFilter> preFilters, final List<IFilter> postFilters);
+    public void setPreFilters(final List<IFilter> preFilters);
+
+    /**
+     * Set post-filter list
+     * @param postFilters
+     */
+    public void setPostFilters(final List<IFilter> postFilters);
+
+    /**
+     * Get ServiceManager
+     * @return
+     */
+    public ServiceManager getServiceManager();
 
     /**
      * Set Leap security manager object
@@ -39,14 +48,26 @@ public interface ServiceModel extends SpringJPAModel, Cloneable {
 
     /**
      * Get Resource object
-     */
-    public ResourcesModel getResource();
-
-    /**
-     * Get ServiceManager
      * @return
      */
-    public ServiceManager getServiceManager();
+    public ResourcesModel getResourcesModel();
+
+    /**
+     * Set ResourcesModel
+     * @param resourcesModel
+     */
+    public void setResourcesModel(ResourcesModel resourcesModel);
+
+    /**
+     * Get SessionManager
+     * @return
+     */
+    public SessionManager getSessionManager();
+
+    /**
+     * Set SessionManager
+     */
+    public void setSessionManager(SessionManager sessionManager);
 
     /**
      * Send response to client

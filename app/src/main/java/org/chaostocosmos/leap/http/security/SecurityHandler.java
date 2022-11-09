@@ -14,6 +14,11 @@ import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 
+/**
+ * SecurityHandler
+ * 
+ * @author 9ins
+ */
 public class SecurityHandler {
     /**
      * Load KeyStore

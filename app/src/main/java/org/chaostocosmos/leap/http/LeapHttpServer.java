@@ -10,6 +10,7 @@ import java.net.MalformedURLException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URISyntaxException;
+import java.net.UnknownHostException;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -27,12 +28,14 @@ import org.chaostocosmos.leap.http.common.LoggerFactory;
 import org.chaostocosmos.leap.http.common.RedirectHostSelection;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Host;
-import org.chaostocosmos.leap.http.enums.PROTOCOL;
 import org.chaostocosmos.leap.http.enums.HTTP;
+import org.chaostocosmos.leap.http.enums.PROTOCOL;
 import org.chaostocosmos.leap.http.enums.STATUS;
 import org.chaostocosmos.leap.http.resource.ClassUtils;
 import org.chaostocosmos.leap.http.resource.Html;
 import org.chaostocosmos.leap.http.resource.LeapURLClassLoader;
+import org.chaostocosmos.leap.http.resource.ResourceManager;
+import org.chaostocosmos.leap.http.resource.ResourcesModel;
 import org.chaostocosmos.leap.http.security.SecurityManager;
 import org.chaostocosmos.leap.http.session.SessionManager;
 
@@ -126,29 +129,18 @@ public class LeapHttpServer extends Thread {
     SecurityManager userManager;
 
     /**
+     * ResourcesModel object
+     */
+    ResourcesModel resourcesModel;
+
+    /**
      * Default constructor 
-     * 
      * @throws NotSupportedException
      * @throws URISyntaxException
+     * @throws InterruptedException
      * @throws IOException
-     * @throws SecurityException
-     * @throws NoSuchMethodException
-     * @throws InvocationTargetException
-     * @throws IllegalAccessException
-     * @throws InstantiationException
-     * @throws ClassNotFoundException
-     * @throws IllegalArgumentException
      */
-    public LeapHttpServer() throws NotSupportedException, 
-                                   IOException, 
-                                   URISyntaxException, 
-                                   NoSuchMethodException, 
-                                   SecurityException, 
-                                   IllegalArgumentException, 
-                                   ClassNotFoundException, 
-                                   InstantiationException, 
-                                   IllegalAccessException, 
-                                   InvocationTargetException {
+    public LeapHttpServer() throws IOException, InterruptedException, URISyntaxException, NotSupportedException {
         this(Constants.DEFAULT_HOME_PATH);
     }
 
@@ -158,25 +150,10 @@ public class LeapHttpServer extends Thread {
      * @param homePath
      * @throws NotSupportedException
      * @throws URISyntaxException
+     * @throws InterruptedException
      * @throws IOException
-     * @throws SecurityException
-     * @throws NoSuchMethodException
-     * @throws InvocationTargetException
-     * @throws IllegalAccessException
-     * @throws InstantiationException
-     * @throws ClassNotFoundException
-     * @throws IllegalArgumentException
      */
-    public LeapHttpServer(Path homePath) throws NotSupportedException, 
-                                                IOException, 
-                                                URISyntaxException, 
-                                                NoSuchMethodException, 
-                                                SecurityException, 
-                                                IllegalArgumentException, 
-                                                ClassNotFoundException, 
-                                                InstantiationException, 
-                                                IllegalAccessException, 
-                                                InvocationTargetException {
+    public LeapHttpServer(Path homePath) throws IOException, InterruptedException, URISyntaxException, NotSupportedException {
         this(homePath, 
              Context.hosts().getHost(Context.hosts().getDefaultHost().getHostId()), 
              new ThreadPoolExecutor(Context.server().getThreadPoolCoreSize(), 
@@ -195,27 +172,10 @@ public class LeapHttpServer extends Thread {
      * @param threadpool
      * @throws NotSupportedException
      * @throws URISyntaxException
+     * @throws InterruptedException
      * @throws IOException
-     * @throws SecurityException
-     * @throws NoSuchMethodException
-     * @throws InvocationTargetException
-     * @throws IllegalAccessException
-     * @throws InstantiationException
-     * @throws ClassNotFoundException
-     * @throws IllegalArgumentException
      */
-    public LeapHttpServer(Path homePath, 
-                          Host<?> host, 
-                          ThreadPoolExecutor threadpool
-                          ) throws NotSupportedException, 
-                                   IOException, 
-                                   URISyntaxException, 
-                                   NoSuchMethodException, 
-                                   SecurityException, IllegalArgumentException, 
-                                   ClassNotFoundException, 
-                                   InstantiationException, 
-                                   IllegalAccessException, 
-                                   InvocationTargetException {
+    public LeapHttpServer(Path homePath, Host<?> host, ThreadPoolExecutor threadpool) throws IOException, InterruptedException, URISyntaxException, NotSupportedException {
         this(homePath, host, threadpool, ClassUtils.getClassLoader());
     }
 
@@ -226,43 +186,13 @@ public class LeapHttpServer extends Thread {
      * @param host
      * @param threadpool 
      * @param classLoader
-     * @throws URISyntaxException
-     * @throws IOException
      * @throws NotSupportedException
-     * @throws SecurityException
-     * @throws NoSuchMethodException
-     * @throws InvocationTargetException
-     * @throws IllegalAccessException
-     * @throws InstantiationException
-     * @throws ClassNotFoundException
-     * @throws IllegalArgumentException
-     * @throws MalformedURLException
+     * @throws URISyntaxException
+     * @throws InterruptedException
+     * @throws IOException
      */
-    public LeapHttpServer(Path homePath, 
-                          Host<?> host, 
-                          ThreadPoolExecutor threadpool, 
-                          LeapURLClassLoader classLoader
-                          ) throws IOException, 
-                                   URISyntaxException, 
-                                   NotSupportedException, 
-                                   NoSuchMethodException, 
-                                   SecurityException, 
-                                   IllegalArgumentException, 
-                                   ClassNotFoundException, 
-                                   InstantiationException, 
-                                   IllegalAccessException, 
-                                   InvocationTargetException {
-        this(
-            true,
-            Context.getHomePath(),
-            host.getDocroot(),
-            PROTOCOL.valueOf(host.getProtocol()),
-            new InetSocketAddress(InetAddress.getByName(host.getHost()), host.getPort()),
-            Context.server().getBackLog(),
-            threadpool,
-            host,
-            classLoader
-        );
+    public LeapHttpServer(Path homePath, Host<?> host, ThreadPoolExecutor threadpool, LeapURLClassLoader classLoader) throws IOException, InterruptedException, URISyntaxException, NotSupportedException {
+        this(true, Context.getHomePath(), host.getDocroot(), PROTOCOL.valueOf(host.getProtocol()), new InetSocketAddress(InetAddress.getByName(host.getHost()), host.getPort()), Context.server().getBackLog(), threadpool, host, classLoader);
     }
 
     /**
@@ -278,31 +208,11 @@ public class LeapHttpServer extends Thread {
      * @param host
      * @param classLoader
      * @throws URISyntaxException
+     * @throws InterruptedException
      * @throws IOException
      * @throws NotSupportedException
-     * @throws SecurityException
-     * @throws NoSuchMethodException
-     * @throws InvocationTargetException
      */
-    public LeapHttpServer(boolean isDefaultHost, 
-                          Path homePath, 
-                          Path docroot, 
-                          PROTOCOL protocol, 
-                          InetSocketAddress inetSocketAddress, 
-                          int backlog, 
-                          ThreadPoolExecutor threadpool, 
-                          Host<?> host,
-                          LeapURLClassLoader classLoader
-                          ) throws NoSuchMethodException, 
-                                   SecurityException, 
-                                   IllegalArgumentException, 
-                                   ClassNotFoundException, 
-                                   InstantiationException, 
-                                   IllegalAccessException, 
-                                   InvocationTargetException, 
-                                   IOException, 
-                                   URISyntaxException, 
-                                   NotSupportedException {
+    public LeapHttpServer(boolean isDefaultHost, Path homePath, Path docroot, PROTOCOL protocol, InetSocketAddress inetSocketAddress, int backlog, ThreadPoolExecutor threadpool, Host<?> host, LeapURLClassLoader classLoader) throws IOException, InterruptedException, URISyntaxException, NotSupportedException {
         this.host = host;
         this.host.setHostStatus(STATUS.SETUP);
         this.isDefaultHost = true;
@@ -317,7 +227,8 @@ public class LeapHttpServer extends Thread {
         this.redirectHostSelection = new RedirectHostSelection(Context.server().getLoadBalanceRedirects());
         this.sessionManager = new SessionManager(host);
         this.userManager = new SecurityManager(host.getHostId());
-        this.serviceManager = new ServiceManager(host, this.userManager, this.sessionManager, classLoader);
+        this.resourcesModel = ResourceManager.get(host.getHostId());
+        this.serviceManager = new ServiceManager(host, this.userManager, this.sessionManager, this.resourcesModel, classLoader);
     }
 
     /**

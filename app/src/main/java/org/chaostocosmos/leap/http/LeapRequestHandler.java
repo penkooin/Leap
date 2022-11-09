@@ -3,14 +3,11 @@ package org.chaostocosmos.leap.http;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.nio.file.Path;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.common.Constants;
 import org.chaostocosmos.leap.http.common.DateUtils;
@@ -18,7 +15,6 @@ import org.chaostocosmos.leap.http.common.TIME;
 import org.chaostocosmos.leap.http.common.UtilBox;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Host;
-import org.chaostocosmos.leap.http.context.User;
 import org.chaostocosmos.leap.http.enums.MIME;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
 import org.chaostocosmos.leap.http.enums.REQUEST;
@@ -27,6 +23,7 @@ import org.chaostocosmos.leap.http.resource.Resource;
 import org.chaostocosmos.leap.http.resource.ResourceHelper;
 import org.chaostocosmos.leap.http.resource.TemplateBuilder;
 import org.chaostocosmos.leap.http.security.SecurityManager;
+import org.chaostocosmos.leap.http.security.UserCredentials;
 import org.chaostocosmos.leap.http.session.Session;
 import org.chaostocosmos.leap.http.session.SessionManager;
 
@@ -111,7 +108,7 @@ public class LeapRequestHandler implements Runnable {
                 host.getLogger().debug("[SESSION] ID: "+session.getId()+"  Authorization: "+authorization+"  login: "+session.isAuthenticated()+"  New Session: "+session.isNew()+"  Creation Time: "+new Date(session.getCreationTime())+"  Last Access Date: "+new Date(session.getLastAccessedTime()));
                 try {
                     if(session.isNew() && !session.isAuthenticated()) {
-                        User user = this.securityManager.authenticate(authorization);
+                        UserCredentials user = this.securityManager.authenticate(authorization);
                         session.setAuthenticated(true);
                         user.setSession(session);
                     }

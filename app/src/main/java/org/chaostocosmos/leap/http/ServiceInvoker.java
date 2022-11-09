@@ -30,7 +30,7 @@ public class ServiceInvoker {
         Response response = httpTransfer.getResponse();
         AbstractService service = (AbstractService)serviceHolder.getServiceModel();
         try {
-            response = service.serve(httpTransfer);
+            response = service.handle(httpTransfer);
         } catch(Exception e) {
             if(service.errorHandling(httpTransfer.getResponse(), e) != null) {
                 throw e;

@@ -15,6 +15,7 @@ import org.chaostocosmos.leap.http.common.Filtering;
 import org.chaostocosmos.leap.http.common.LoggerFactory;
 import org.chaostocosmos.leap.http.enums.PROTOCOL;
 import org.chaostocosmos.leap.http.resource.ClassUtils;
+import org.chaostocosmos.leap.http.security.UserCredentials;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
@@ -313,7 +314,7 @@ public class Hosts <T> extends Metadata <T> {
      * @param hostId
      * @return
      */
-    public List<User> getUsers(String hostId) {
+    public List<UserCredentials> getUsers(String hostId) {
         return getHost(hostId).getUsers();
     }
 
@@ -338,12 +339,16 @@ public class Hosts <T> extends Metadata <T> {
      * @return
      * @throws MalformedURLException
      */
-    public URL[] getAllDynamicClasspathURLs() throws MalformedURLException {
+    public URL[] getAllDynamicClasspathURLs() {
         List<Path> paths = getAllDynamicClasspaths();
         List<URL> urls = new ArrayList<>();
         for(Path path : paths) {
             if(path != null) {
-                urls.add(path.toFile().toURI().toURL());
+                try {
+                    urls.add(path.toFile().toURI().toURL());
+                } catch (MalformedURLException e) {
+                    throw new RuntimeException(e);
+                }
             }            
         }
         return urls.stream().toArray(URL[]::new);

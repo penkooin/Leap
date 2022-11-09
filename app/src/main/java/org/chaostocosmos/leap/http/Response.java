@@ -11,7 +11,7 @@ import java.util.Map;
  * @author 9ins
  * @since 2021.09.18
  */
-public class Response {
+public class Response implements Http {
     /**
      * Reponse host ID
      */

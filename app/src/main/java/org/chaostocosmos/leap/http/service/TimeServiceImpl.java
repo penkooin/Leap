@@ -4,14 +4,11 @@ import java.util.Date;
 
 import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.Response;
+import org.chaostocosmos.leap.http.annotation.MethodMapper;
+import org.chaostocosmos.leap.http.annotation.ServiceMapper;
 import org.chaostocosmos.leap.http.common.LoggerFactory;
 import org.chaostocosmos.leap.http.enums.MIME;
 import org.chaostocosmos.leap.http.enums.REQUEST;
-import org.chaostocosmos.leap.http.inject.FilterIndicates;
-import org.chaostocosmos.leap.http.inject.MethodIndicates;
-import org.chaostocosmos.leap.http.inject.ServiceIndicates;
-import org.chaostocosmos.leap.http.service.filter.BasicAuthFilter;
-import org.chaostocosmos.leap.http.service.filter.BasicHttpRequestFilter;
 
 /**
  * Time serving servlet object
@@ -19,9 +16,9 @@ import org.chaostocosmos.leap.http.service.filter.BasicHttpRequestFilter;
  * @author 9ins
  * @since 2021.09.17
  */
-@ServiceIndicates(path = "/time")
+@ServiceMapper(mappingPath = "/time")
 public class TimeServiceImpl extends AbstractService {  
-
+    
     public String cloneTestString = "";
 
     /**
@@ -29,8 +26,7 @@ public class TimeServiceImpl extends AbstractService {
      * @param request
      * @param response
      */
-    @MethodIndicates(method = REQUEST.GET, path = "/GetTime")
-    @FilterIndicates(preFilters = {BasicAuthFilter.class, BasicHttpRequestFilter.class})
+    @MethodMapper(method = REQUEST.GET, mappingPath = "/GetTime", autheticated = {}, allowed = {}, forbidden = {})
     public void getTime(Request request, Response response) {
         LoggerFactory.getLogger(request.getRequestedHost()).debug("getTime servlet started....+++++++++++++++++++++++++++++++++++++++++++++++++");
         String resBody = "<html><title>This is what time</title><body><h2>"+new Date().toString()+"</h2><body></html>";
