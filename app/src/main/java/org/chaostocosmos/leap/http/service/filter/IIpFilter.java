@@ -1,7 +1,7 @@
 package org.chaostocosmos.leap.http.service.filter;
 
 import org.chaostocosmos.leap.http.HTTPException;
-import org.chaostocosmos.leap.http.annotation.PreFilterIndicates;
+import org.chaostocosmos.leap.http.inject.PreFilterIndicates;
 import org.chaostocosmos.leap.http.service.model.SpringJPAModel;
 
 /**

@@ -2,6 +2,55 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch StringTools",
+            "request": "launch",
+            "mainClass": "org.chaostocosmos.metadata.StringTools",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "Launch Utils",
+            "request": "launch",
+            "mainClass": "org.chaostocosmos.metadata.Utils",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "Launch MetaInjectorTest",
+            "request": "launch",
+            "mainClass": "org.chaostocosmos.metadata.MetaInjectorTest",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "Launch TIME",
+            "request": "launch",
+            "mainClass": "org.chaostocosmos.leap.http.common.TIME",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "Launch TimeTest",
+            "request": "launch",
+            "mainClass": "org.chaostocosmos.leap.http.commons.TimeTest",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "Launch SIZE",
+            "request": "launch",
+            "mainClass": "org.chaostocosmos.leap.http.common.SIZE",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "Launch Bits",
+            "request": "launch",
+            "mainClass": "org.chaostocosmos.leap.http.Bits",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
             "name": "Launch ThreadTest",
             "request": "launch",
             "mainClass": "org.chaostocosmos.leap.http.ThreadTest",

@@ -28,8 +28,8 @@ import org.chaostocosmos.leap.http.common.RedirectHostSelection;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.enums.PROTOCOL;
-import org.chaostocosmos.leap.http.enums.RES_CODE;
-import org.chaostocosmos.leap.http.enums.HOST_STATUS;
+import org.chaostocosmos.leap.http.enums.HTTP;
+import org.chaostocosmos.leap.http.enums.STATUS;
 import org.chaostocosmos.leap.http.resource.ClassUtils;
 import org.chaostocosmos.leap.http.resource.Html;
 import org.chaostocosmos.leap.http.resource.LeapURLClassLoader;
@@ -48,7 +48,7 @@ public class LeapHttpServer extends Thread {
     /**
      * logger
      */
-    Logger logger = LoggerFactory.getLogger(Context.getHosts().getDefaultHost().getHostId());
+    Logger logger = LoggerFactory.getLogger(Context.hosts().getDefaultHost().getHostId());
 
     /**
      * Whether default host
@@ -178,10 +178,10 @@ public class LeapHttpServer extends Thread {
                                                 IllegalAccessException, 
                                                 InvocationTargetException {
         this(homePath, 
-             Context.getHosts().getHost(Context.getHosts().getDefaultHost().getHostId()), 
-             new ThreadPoolExecutor(Context.getServer().getThreadPoolCoreSize(), 
-                                    Context.getServer().getThreadPoolMaxSize(), 
-                                    Context.getServer().getThreadPoolKeepAlive(), 
+             Context.hosts().getHost(Context.hosts().getDefaultHost().getHostId()), 
+             new ThreadPoolExecutor(Context.server().getThreadPoolCoreSize(), 
+                                    Context.server().getThreadPoolMaxSize(), 
+                                    Context.server().getThreadPoolKeepAlive(), 
                                     TimeUnit.SECONDS, 
                                     new LinkedBlockingQueue<Runnable>())
         );
@@ -258,7 +258,7 @@ public class LeapHttpServer extends Thread {
             host.getDocroot(),
             PROTOCOL.valueOf(host.getProtocol()),
             new InetSocketAddress(InetAddress.getByName(host.getHost()), host.getPort()),
-            Context.getServer().getBackLog(),
+            Context.server().getBackLog(),
             threadpool,
             host,
             classLoader
@@ -304,7 +304,7 @@ public class LeapHttpServer extends Thread {
                                    URISyntaxException, 
                                    NotSupportedException {
         this.host = host;
-        this.host.setHostStatus(HOST_STATUS.SETUP);
+        this.host.setHostStatus(STATUS.SETUP);
         this.isDefaultHost = true;
         this.homePath = homePath;
         this.protocol = protocol;
@@ -314,7 +314,7 @@ public class LeapHttpServer extends Thread {
         this.inetSocketAddress = inetSocketAddress;
         this.ipAllowedFilters = host.getIpAllowedFiltering();
         this.ipForbiddenFilters = host.getIpForbiddenFiltering();
-        this.redirectHostSelection = new RedirectHostSelection(Context.getServer().getLoadBalanceRedirects());
+        this.redirectHostSelection = new RedirectHostSelection(Context.server().getLoadBalanceRedirects());
         this.sessionManager = new SessionManager(host);
         this.userManager = new SecurityManager(host.getHostId());
         this.serviceManager = new ServiceManager(host, this.userManager, this.sessionManager, classLoader);
@@ -371,27 +371,27 @@ public class LeapHttpServer extends Thread {
     @Override
     public void run() {
         try {
-            this.host.setHostStatus(HOST_STATUS.STARTING);
+            this.host.setHostStatus(STATUS.STARTING);
             if(!this.protocol.isSecured()) {
                 this.server = new ServerSocket();
                 this.server.bind(this.inetSocketAddress, this.backlog);
                 this.logger.info("[HTTP SERVER START] Address: " + this.inetSocketAddress.toString());
             } else {
-                File keyStore = new File(Context.getServer().<String> getKeyStore());
-                String passphrase = Context.getServer().getPassphrase();
-                String sslProtocol = Context.getServer().getEncryptionMethod();
+                File keyStore = new File(Context.server().<String> getKeyStore());
+                String passphrase = Context.server().getPassphrase();
+                String sslProtocol = Context.server().getEncryptionMethod();
                 this.server = HttpsServerSocketFactory.getSSLServerSocket(keyStore, passphrase, sslProtocol, this.inetSocketAddress, this.backlog);
                 this.logger.info("[HTTPS SERVER START] Address: "+this.inetSocketAddress.toString()+"  Protocol: "+sslProtocol+"  KeyStore: "+keyStore.getName()+"  Supported Protocol: "+Arrays.toString(((SSLServerSocket)server).getSupportedProtocols())+"  KeyStore: "+keyStore.getName());
             }
-            this.host.setHostStatus(HOST_STATUS.STARTED);
-            while (this.host.getHostStatus() == HOST_STATUS.STARTED || this.host.getHostStatus() == HOST_STATUS.RUNNING) { 
+            this.host.setHostStatus(STATUS.STARTED);
+            while (this.host.getHostStatus() == STATUS.STARTED || this.host.getHostStatus() == STATUS.RUNNING) { 
                 Socket connection = this.server.accept();
-                connection.setSoTimeout(Context.getServer().getConnectionTimeout());
+                connection.setSoTimeout(Context.server().getConnectionTimeout());
                 //connection.setSoLinger(false, 1);
                 int queueSize = this.threadpool.getQueue().size();
                 String ipAddress = connection.getLocalAddress().toString();
                 if(this.ipAllowedFilters.include(ipAddress) || this.ipForbiddenFilters.exclude(ipAddress)) {
-                    if(queueSize < Context.getServer().<Integer> getThreadQueueSize()) {
+                    if(queueSize < Context.server().<Integer> getThreadQueueSize()) {
                         this.logger.info("[CLIENT DETECTED] Client request accepted. Submitting thread. "+ipAddress+" - "+connection.getPort()+"  Thread queue size - "+queueSize);
                         this.threadpool.submit(new LeapRequestHandler(this, this.docroot, connection, this.host));
                     } else {
@@ -406,7 +406,7 @@ public class LeapHttpServer extends Thread {
                 } else {
                     this.logger.info("[CLIENT CANCELED] Rquested IP address is not in allowed filters or exist in forbidden filters: "+ipAddress);
                     Map<String, Object> params = new HashMap<>();
-                    params.put("@code", RES_CODE.RES500);
+                    params.put("@code", HTTP.RES500);
                     params.put("@type", "Not in allowed IP or forbidden IP.");
                     params.put("@message", "Rquested IP address is not in allowed filters or exist in forbidden filters: "+ipAddress);
                     String resPage = this.host.getResource().getResourcePage(params);
@@ -429,7 +429,7 @@ public class LeapHttpServer extends Thread {
      */
     public void close() throws InterruptedException, IOException {
         this.server.close();
-        this.host.setHostStatus(HOST_STATUS.TERMINATED);
+        this.host.setHostStatus(STATUS.TERMINATED);
         this.host.getLogger().info("[SERVER TERMINATED] "+this.host.getHost()+" Server is terminated...");
     }
 

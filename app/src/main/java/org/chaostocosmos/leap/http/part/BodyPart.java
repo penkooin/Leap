@@ -11,8 +11,8 @@ import org.chaostocosmos.leap.http.HTTPException;
 import org.chaostocosmos.leap.http.common.LoggerFactory;
 import org.chaostocosmos.leap.http.common.StreamUtils;
 import org.chaostocosmos.leap.http.context.Context;
-import org.chaostocosmos.leap.http.enums.MIME_TYPE;
-import org.chaostocosmos.leap.http.enums.RES_CODE;
+import org.chaostocosmos.leap.http.enums.MIME;
+import org.chaostocosmos.leap.http.enums.HTTP;
 
 import ch.qos.logback.classic.Logger;
 
@@ -29,11 +29,11 @@ public class BodyPart implements Part {
     /**
      * Host
      */
-    String host;
+    String hostId;
     /**
      * Content type
      */
-    MIME_TYPE contentType;
+    MIME contentType;
     /**
      * Content length
      */
@@ -56,7 +56,7 @@ public class BodyPart implements Part {
     Charset charset;
     /**
      * Constructor
-     * @param host
+     * @param hostId
      * @param contentType
      * @param contentLength
      * @param requestStream
@@ -64,9 +64,9 @@ public class BodyPart implements Part {
      * @param charset
      * @throws IOException
      */
-    public BodyPart(String host, MIME_TYPE contentType, long contentLength, InputStream requestStream, boolean loadBody, Charset charset) throws IOException {
-        this.logger = LoggerFactory.getLogger(host);
-        this.host = host;
+    public BodyPart(String hostId, MIME contentType, long contentLength, InputStream requestStream, boolean loadBody, Charset charset) throws IOException {
+        this.logger = LoggerFactory.getLogger(hostId);
+        this.hostId = hostId;
         this.contentType = contentType;
         this.contentLength = contentLength;
         this.requestStream = requestStream;        
@@ -81,8 +81,8 @@ public class BodyPart implements Part {
      * Get host
      * @return
      */
-    public String getHost() {
-        return this.host;
+    public String getHostId() {
+        return this.hostId;
     }
 
     /**
@@ -91,8 +91,8 @@ public class BodyPart implements Part {
      * @throws IOException
      */
     private Map<String, byte[]> readBody() throws IOException {
-        if(contentType == MIME_TYPE.MULTIPART_FORM_DATA || contentType == MIME_TYPE.MULTIPART_BYTERANGES) {
-            throw new HTTPException(RES_CODE.RES406, "Method not supported on MultiPart operation: readBody()");
+        if(contentType == MIME.MULTIPART_FORM_DATA || contentType == MIME.MULTIPART_BYTERANGES) {
+            throw new HTTPException(HTTP.RES406, Context.messages().<String> error(27));
         }
         Map<String, byte[]> map = new HashMap<>();
         byte[] data = StreamUtils.readLength(this.requestStream, (int)this.contentLength);        
@@ -106,7 +106,7 @@ public class BodyPart implements Part {
     }
 
     @Override
-    public MIME_TYPE getContentType() {
+    public MIME getContentType() {
         return this.contentType;
     }
 
@@ -131,13 +131,13 @@ public class BodyPart implements Part {
 
     @Override
     public void save(Path targetPath) throws IOException {        
-        if(contentType == MIME_TYPE.MULTIPART_FORM_DATA || contentType == MIME_TYPE.MULTIPART_BYTERANGES) {
-            throw new HTTPException(RES_CODE.RES406, "Can not save content. Not supported on Multi Part Operation.");
+        if(contentType == MIME.MULTIPART_FORM_DATA || contentType == MIME.MULTIPART_BYTERANGES) {
+            throw new HTTPException(HTTP.RES406, "Can not save content. Not supported on Multi Part Operation.");
         }        
         if(this.isLoadedBody) {
-            StreamUtils.saveBinary(this.host, this.body.get("BODY"), targetPath, Context.getServer().getFileBufferSize());
+            StreamUtils.saveBinary(this.hostId, this.body.get("BODY"), targetPath, Context.server().getFileBufferSize());
         } else {
-            StreamUtils.saveBinary(this.host, this.requestStream, getContentLength(), targetPath, Context.getServer().getFileBufferSize());
+            StreamUtils.saveBinary(this.hostId, this.requestStream, getContentLength(), targetPath, Context.server().getFileBufferSize());
         }        
         this.logger.debug("[BODY-PART] "+contentType.name()+" saved: "+targetPath.normalize().toString()+"  Path: "+targetPath.toString());
     }    
@@ -146,7 +146,7 @@ public class BodyPart implements Part {
     public String toString() {
         return "{" +
             " logger='" + logger + "'" +
-            ", host='" + host + "'" +
+            ", host='" + hostId + "'" +
             ", contentType='" + contentType + "'" +
             ", contentLength='" + contentLength + "'" +
             ", requestStream='" + requestStream + "'" +

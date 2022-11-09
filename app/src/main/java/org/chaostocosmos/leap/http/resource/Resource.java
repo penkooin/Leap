@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
-import org.chaostocosmos.leap.http.enums.MIME_TYPE;
+import org.chaostocosmos.leap.http.enums.MIME;
 
 /**
  * ResourceInfo
@@ -52,7 +52,7 @@ public class Resource extends HashMap<String, Resource> {
     /**
      * Resource mime-type  
      */        
-    MIME_TYPE mimeType;
+    MIME mimeType;
 
     /**
      * Resource last modified time
@@ -89,7 +89,7 @@ public class Resource extends HashMap<String, Resource> {
         this.resourceSize = resourcePath.toFile().length();
         this.inMemoryFlag = inMemoryFlag;
         this.splitSize = splitSize;
-        this.mimeType = MIME_TYPE.mimeType(Files.probeContentType(this.resourcePath));
+        this.mimeType = MIME.mimeType(Files.probeContentType(this.resourcePath));
         if(this.inMemoryFlag) {
             this.resourceData = new ArrayList<>();
             try(FileInputStream fis = new FileInputStream(resourcePath.toFile())) {
@@ -125,7 +125,7 @@ public class Resource extends HashMap<String, Resource> {
         this.resourceSize = resourcePath.toFile().length();
         this.inMemoryFlag = inMemoryFlag;
         this.splitSize = splitSize;
-        this.mimeType = MIME_TYPE.mimeType(Files.probeContentType(this.resourcePath));
+        this.mimeType = MIME.mimeType(Files.probeContentType(this.resourcePath));
         if(this.inMemoryFlag) {
             this.resourceData = new ArrayList<>();
             long fileSize = resourceRawData.length;
@@ -332,7 +332,7 @@ public class Resource extends HashMap<String, Resource> {
      * Get mime-type of resource
      * @return
      */
-    public MIME_TYPE getMimeType() {
+    public MIME getMimeType() {
         return this.mimeType;
     }
 

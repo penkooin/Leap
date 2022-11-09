@@ -3,7 +3,7 @@ package org.chaostocosmos.leap.http;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.chaostocosmos.leap.http.enums.RES_CODE;
+import org.chaostocosmos.leap.http.enums.HTTP;
 
 /**
  * RedirectException
@@ -25,7 +25,7 @@ public class RedirectException extends HTTPException {
      * @param url
      */
     public RedirectException(URL url) {
-        super(RES_CODE.RES307, "Redirect to "+url.toString());
+        super(HTTP.RES307, "Redirect to "+url.toString());
         super.addHeader("Location", url.toString());
         this.url = url;
     }    

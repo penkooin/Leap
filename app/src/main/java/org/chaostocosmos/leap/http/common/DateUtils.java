@@ -3,7 +3,6 @@ package org.chaostocosmos.leap.http.common;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 /**
@@ -12,21 +11,6 @@ import java.util.Date;
  * @author 9ins
  */
 public class DateUtils {
-    /**
-     * Local zone date pattern
-     */
-    public static final String ZONE_DATE_PATTERN = "dd-MM-yyyy HH:mm:ss Z";
-
-    /**
-     * GMT date pattern
-     */
-    public static final String GMT_DATE_PATTERN = "dd-MM-yyyy HH:mm:ss 'GMT'Z '('z')'";
-
-    /**
-     * Default date pattern
-     */
-    public static final String DEFAULT_DATE_PATTERN = ZONE_DATE_PATTERN;
-
     /**
      * Get current milliseconds
      * @return
@@ -49,56 +33,38 @@ public class DateUtils {
      * Get string of GMT date current with DEFAULT_DATE_PATTERN
      * @return
      */
-    public static String getDefaultDate() {
-        return getDateString(System.currentTimeMillis(), DEFAULT_DATE_PATTERN);
-    }
-
-    /**
-     * Get string of GMT date string
-     * @param pattern
-     * @return
-     */
-    public static String getDateGMT() {
-        return getDateString(System.currentTimeMillis(), GMT_DATE_PATTERN);
+    public static String getCurrentDate(String zoneId) {
+        return getDateString(System.currentTimeMillis(), zoneId);
     }
 
     /**
      * Get string of local zone date
      * @return
      */
-    public static String getDateLocalZone() {
-        return getDateString(System.currentTimeMillis(), ZONE_DATE_PATTERN);
+    public static String getDateSystemZone() {
+        return getDateString(System.currentTimeMillis(), ZoneId.systemDefault().getId());
     }
     
     /**
      * Get string of GMT date string by specified milliseconds and pattern
      * @param millis
-     * @param pattern
+     * @param zoneId
      * @return
      */
-    public static String getDateString(long millis, String pattern) {
+    public static String getDateString(long millis, String zoneId) {
         Date date = new Date(millis);
         Instant instant = date.toInstant();
-        ZonedDateTime zdt = ZonedDateTime.ofInstant(instant, ZoneId.systemDefault());        
-        return zdt.format(DateTimeFormatter.ofPattern(pattern));
+        ZonedDateTime zdt = ZonedDateTime.ofInstant(instant, ZoneId.of(zoneId));
+        return zdt.toString();
     }
 
     /**
      * Get GMT date string added with offset secondst 
      * @param offsetSeconds
+     * @param zoneId
      * @return
      */
-    public static String getDateGMTAddedOffset(long offsetSeconds) {
-        return getDateString(getMillis() + offsetSeconds * 1000, GMT_DATE_PATTERN);
+    public static String getDateAddedOffset(long offsetSeconds, String zoneId) {
+        return getDateString(getMillis() + offsetSeconds * 1000, zoneId);
     }
-
-    /**
-     * Get local date string added with offset seconds
-     * @param offsetSeconds
-     * @return
-     */
-    public static String getDateLocalAddedOffset(long offsetSeconds) {
-        return getDateString(getMillis() + offsetSeconds * 1000, DEFAULT_DATE_PATTERN);
-    }
-
 }

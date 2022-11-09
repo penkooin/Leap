@@ -49,7 +49,7 @@ public class SessionIDGenerator {
      */
     public static SessionIDGenerator get(String hostId) {
         if(sessionIDGenerator == null) {
-            sessionIDGenerator = new SessionIDGenerator(Context.getHosts().getHost(hostId));
+            sessionIDGenerator = new SessionIDGenerator(Context.hosts().getHost(hostId));
         }
         return sessionIDGenerator;
     }

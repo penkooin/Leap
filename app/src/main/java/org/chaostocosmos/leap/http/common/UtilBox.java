@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.HTTPException;
-import org.chaostocosmos.leap.http.enums.RES_CODE;
+import org.chaostocosmos.leap.http.enums.HTTP;
 
 import ch.qos.logback.classic.Level;
 
@@ -88,7 +88,7 @@ public class UtilBox {
         try {
             return Files.probeContentType(resourcePath);
         } catch (IOException e) {
-            throw new HTTPException(RES_CODE.RES500, e);
+            throw new HTTPException(HTTP.RES500, e);
         }
     }        
 }

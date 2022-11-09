@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.chaostocosmos.leap.http.context.Context;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Test; 
 
 /**
  * Context test
@@ -20,14 +20,14 @@ public class ContextTest {
 
     @Test
     public void testGetServerPort() {
-        int port = Context.getHosts().getDefaultPort();
+        int port = Context.hosts().getDefaultPort();
         System.out.println("port: "+port);
         assertEquals(8080, port);
     }
 
     @Test
     public void testGetThreadPoolCoreSize() {
-        int cnt = Context.getServer().getThreadPoolCoreSize();
+        int cnt = Context.server().getThreadPoolCoreSize();
         System.out.println("cnt: "+cnt);
         assertEquals(50, cnt);
     }
@@ -45,7 +45,7 @@ public class ContextTest {
     @Test
     public void testGetMsg() {
         int code = 1;
-        String str = Context.getMessages().getDebugMsg(code, "a", "b", "c");
+        String str = Context.messages().debug(code, "a", "b", "c");
         System.out.println(str);
     }
 

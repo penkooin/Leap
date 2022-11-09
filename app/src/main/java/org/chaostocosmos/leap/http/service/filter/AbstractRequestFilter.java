@@ -4,7 +4,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.chaostocosmos.leap.http.Request;
-import org.chaostocosmos.leap.http.annotation.PreFilterIndicates;
+import org.chaostocosmos.leap.http.inject.PreFilterIndicates;
 import org.chaostocosmos.leap.http.resource.SpringJPAManager;
 import org.chaostocosmos.leap.http.service.model.SpringJPAModel;
 import org.chaostocosmos.leap.http.session.SessionManager;

@@ -1,0 +1,206 @@
+{
+  "hosts": [
+    {
+      "id": "leap",
+      "default": true,
+      "locale": "Asia/Seoul",
+      "protocol": "HTTPS",
+      "charset": "utf-8",
+      "host": "localhost",
+      "port": 8080,
+      "doc-root": "./home",
+      "welcome": "welcome.html",
+      "logs": "logs/leap.log",
+      "log-level": "DEBUG",
+      "users": [
+        {
+          "username": "localhost",
+          "password": "9393",
+          "grant": "ADMIN"
+        },
+        {
+          "username": "guest",
+          "password": "guest",
+          "grant": "GUEST"
+        }
+      ],
+      "ip-filters": {
+        "allowed": [
+          "*"
+        ],
+        "forbidden": []
+      },
+      "resources": {
+        "streaming-buffer-size": 409600,
+        "in-memory-split-unit": 1024000,
+        "in-memory-filters": [
+          "*"
+        ],
+        "access-filters": [
+          "*"
+        ],
+        "forbidden-filters": []
+      },
+      "dynamic-classpath": "",
+      "dynamic-packages": [
+        "*"
+      ],
+      "error-details": false,
+      "error-filters": [
+        "javax.net.ssl.SSLHandshakeException",
+        "java.net.SocketException"
+      ],
+      "authentication": "BASIC",
+      "session": {
+        "apply": true,
+        "id-length": 16,
+        "encryption": "SHA-256",
+        "path": "/time/GetTime",
+        "expire-days": 10,
+        "max-age-hours": 1,
+        "timeout-seconds": 5
+      }
+    },
+    {
+      "id": "leap1",
+      "default": false,
+      "locale": "Asia/Seoul",
+      "protocol": "HTTP",
+      "charset": "utf-8",
+      "host": "awesome",
+      "port": 8082,
+      "doc-root": "./home1",
+      "welcome": "welcome.html",
+      "logs": "logs/leap.log",
+      "log-level": "ERROR",
+      "users": [
+        {
+          "username": "awesome",
+          "password": "9393",
+          "grant": "ADMIN"
+        },
+        {
+          "username": "guest1",
+          "password": "guest1",
+          "grant": "GUEST"
+        }
+      ],
+      "ip-filters": {
+        "allowed": [
+          "*"
+        ],
+        "forbidden": []
+      },
+      "resources": {
+        "streaming-buffer-size": 1024000,
+        "in-memory-split-unit": 1024000,
+        "in-memory-filters": [
+          "*"
+        ],
+        "access-filters": [
+          "*"
+        ],
+        "forbidden-filters": []
+      },
+      "dynamic-classpath": "",
+      "dynamic-packages": [
+        "*"
+      ],
+      "spring-jpa": {
+        "use-spring-jpa": true,
+        "datasource": {
+          "driver-class": "org.mariadb.jdbc.Driver",
+          "url": "jdbc:mariadb://localhost:3306/leap",
+          "schema": "leap",
+          "user": "root",
+          "password": "9393"
+        },
+        "spring-jpa-packages": []
+      },
+      "error-details": true,
+      "error-filters": [],
+      "authentication": "BASIC",
+      "session": {
+        "apply": true,
+        "id-length": 16,
+        "encryption": "SHA-256",
+        "path": "/time/GetTime",
+        "expire-days": 10,
+        "max-age-hours": 1,
+        "timeout-seconds": 3
+      }
+    },
+    {
+      "id": "leap2",
+      "default": false,
+      "locale": "Asia/Seoul",
+      "protocol": "HTTP",
+      "charset": "utf-8",
+      "host": "www.leap.org",
+      "port": 8081,
+      "doc-root": "./home2",
+      "welcome": "welcome.html",
+      "logs": "logs/leap.log",
+      "log-level": "ERROR",
+      "users": [
+        {
+          "username": "leap1",
+          "password": "9393",
+          "grant": "ADMIN"
+        },
+        {
+          "username": "guest2",
+          "password": "guest2",
+          "grant": "GUEST"
+        }
+      ],
+      "ip-filters": {
+        "allowed": [
+          "*"
+        ],
+        "forbidden": []
+      },
+      "resources": {
+        "streaming-buffer-size": 1024000,
+        "in-memory-split-unit": 1024000,
+        "in-memory-filters": [
+          "*"
+        ],
+        "access-filters": [
+          "*"
+        ],
+        "forbidden-filters": []
+      },
+      "dynamic-classpath": "",
+      "dynamic-packages": [
+        "*"
+      ],
+      "spring-jpa": {
+        "use-spring-jpa": true,
+        "datasource": {
+          "driver-class": "org.mariadb.jdbc.Driver",
+          "url": "jdbc:mariadb://localhost:3306/leap",
+          "schema": "leap",
+          "user": "root",
+          "password": "9393"
+        },
+        "spring-jpa-packages": []
+      },
+      "error-details": true,
+      "error-filters": [
+        "javax.net.ssl.SSLHandshakeException",
+        "java.net.SocketException"
+      ],
+      "authentication": "BASIC",
+      "session": {
+        "apply": true,
+        "id-length": 16,
+        "encryption": "SHA-256",
+        "path": "/time/GetTime",
+        "expire-days": 10,
+        "max-age-hours": 1,
+        "timeout-seconds": 3
+      }
+    }
+  ]
+}

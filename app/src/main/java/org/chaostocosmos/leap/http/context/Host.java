@@ -15,8 +15,8 @@ import java.util.stream.Collectors;
 import org.chaostocosmos.leap.http.HTTPException;
 import org.chaostocosmos.leap.http.common.Filtering;
 import org.chaostocosmos.leap.http.common.LoggerFactory;
-import org.chaostocosmos.leap.http.enums.RES_CODE;
-import org.chaostocosmos.leap.http.enums.HOST_STATUS;
+import org.chaostocosmos.leap.http.enums.HTTP;
+import org.chaostocosmos.leap.http.enums.STATUS;
 import org.chaostocosmos.leap.http.resource.ResourcesModel;
 
 import ch.qos.logback.classic.Level;
@@ -59,6 +59,24 @@ public class Host <T> extends Metadata<T> {
      */
     public <V> void setHostId(V hostId) {
         super.setValue("id", hostId);
+    }
+
+    /**
+     * Get locale
+     * @param <V>
+     * @return
+     */
+    public <V> V getLocale() {
+        return super.getValue("locale");
+    }
+
+    /**
+     * Set locale
+     * @param <V>
+     * @param locale
+     */
+    public <V> void setLocale(V locale) {
+        super.setValue("locale", locale);
     }
 
     /**
@@ -376,6 +394,24 @@ public class Host <T> extends Metadata<T> {
     }
 
     /**
+     * Get authetication method
+     * @param <V>
+     * @return
+     */
+    public <V> V getAuthentication() {
+        return super.getValue("authentication");
+    }
+
+    /**
+     * Set authentication method
+     * @param <V>
+     * @param authMethod
+     */
+    public <V> void setAuthentication(V authMethod) {
+        super.setValue("authentication", authMethod);
+    }
+
+    /**
      * Get session id encription algorithm
      * @param <V>
      * @return
@@ -415,8 +451,8 @@ public class Host <T> extends Metadata<T> {
      * @param <V>
      * @return
      */
-    public <V> V getSessionTimeout() {
-        return super.getValue("session.timeout");
+    public <V> V getSessionTimeoutSeconds() {
+        return super.getValue("session.timeout-seconds");
     }
 
     /**
@@ -424,8 +460,8 @@ public class Host <T> extends Metadata<T> {
      * @param <V>
      * @param sessionTimeout
      */
-    public <V> void setSessionTimeout(V sessionTimeout) {
-        super.setValue("session.timeout", sessionTimeout);
+    public <V> void setSessionTimeoutSeconds(V sessionTimeout) {
+        super.setValue("session.timeout-seconds", sessionTimeout);
     }
 
     /**
@@ -433,8 +469,8 @@ public class Host <T> extends Metadata<T> {
      * @param <V>
      * @return
      */
-    public <V> V getApplySession() {
-        return super.getValue("session.apply-session");
+    public <V> V isSessionApply() {
+        return super.getValue("session.apply");
     }
 
     /**
@@ -442,44 +478,44 @@ public class Host <T> extends Metadata<T> {
      * @param <V>
      * @param applySession
      */
-    public <V> void setApplySession(V applySession) {
-        super.setValue("session.apply-session", applySession);
+    public <V> void setSessionApply(V applySession) {
+        super.setValue("session.apply", applySession);
     }
 
     /**
-     * Get session expires
+     * Get session expire days
      * @param <V>
      * @return
      */
-    public <V> V getExpires() {
-        return super.getValue("session.expires");
+    public <V> V getExpireDays() {
+        return super.getValue("session.expire-days");
     }
 
     /**
-     * Set session expires
+     * Set session expire days
      * @param <V>
      * @param expires
      */
-    public <V> void setExpires(V expires) {
-        super.setValue("session.expires", expires);
+    public <V> void setExpireDays(V expires) {
+        super.setValue("session.expire-days", expires);
     }
 
     /**
-     * Get max age seconds in session
+     * Get max age hours in session
      * @param <V>
      * @return
      */
-    public <V> V getMaxAge() {
-        return super.getValue("session.max-age");
+    public <V> V getMaxAgeHours() {
+        return super.getValue("session.max-age-hours");
     }
 
     /**
-     * Set max age seconds in session
+     * Set max age hours in session
      * @param <V>
      * @param maxAge
      */
-    public <V> void setMaxAge(V maxAge) {
-        super.setValue("session.max-age", maxAge);
+    public <V> void setMaxAgeHours(V maxAge) {
+        super.setValue("session.max-age-hours", maxAge);
     }
 
     /**
@@ -504,15 +540,15 @@ public class Host <T> extends Metadata<T> {
      * Get host server status
      * @return
      */
-    public HOST_STATUS getHostStatus() {        
-        return HOST_STATUS.valueOf(super.<String> getValue("status"));
+    public STATUS getHostStatus() {        
+        return STATUS.valueOf(super.<String> getValue("status"));
     }
 
     /**
      * Set host server status
      * @param status
      */
-    public void setHostStatus(HOST_STATUS status) {
+    public void setHostStatus(STATUS status) {
         synchronized(super.meta) {
             super.setValue("status", status.name());
         }
@@ -669,9 +705,9 @@ public class Host <T> extends Metadata<T> {
             for(Map.Entry<String, Long> entry : map.entrySet()) {
                 String preContext = entry.getKey();
                 long preTimestemp = entry.getValue();
-                if(url.equals(preContext) && System.currentTimeMillis() - preTimestemp < Context.getServer().<Integer>getRequestBlockingInterval().longValue()) {
+                if(url.equals(preContext) && System.currentTimeMillis() - preTimestemp < Context.server().<Integer>getRequestBlockingInterval().longValue()) {
                     requestAttackBlockingMap.remove(ip);
-                    throw new HTTPException(RES_CODE.RES429, "You requested too many on short period!!!  URI: "+url);
+                    throw new HTTPException(HTTP.RES429, new Exception("You requested too many on short period!!!  URI: "+url));
                 }
             }
             map.put(url, System.currentTimeMillis());

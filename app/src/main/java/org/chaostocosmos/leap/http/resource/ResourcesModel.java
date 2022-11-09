@@ -3,7 +3,7 @@ package org.chaostocosmos.leap.http.resource;
 import java.nio.file.Path;
 import java.util.Map;
 
-import org.chaostocosmos.leap.http.enums.MIME_TYPE;
+import org.chaostocosmos.leap.http.enums.MIME;
 
 /**
  * Resource model
@@ -15,7 +15,7 @@ public interface ResourcesModel {
      * @param mimeType
      * @return
      */
-    public Resource filter(MIME_TYPE mimeType) throws Exception;
+    public Resource filter(MIME mimeType) throws Exception;
     /**
      * Resolve real path
      * @param contextPath

@@ -35,7 +35,7 @@ public class SpringJPAManager {
     private SpringJPAManager(ClassLoader classLoader) {
         jpaContext = new AnnotationConfigApplicationContext();
         jpaContext.setClassLoader(classLoader);
-        jpaContext.scan(Context.getServer().<List<String>>getSpringJPAPackage().toArray(new String[0]));
+        jpaContext.scan(Context.server().<List<String>>getSpringJPAPackage().toArray(new String[0]));
         jpaContext.refresh();  
     }
 

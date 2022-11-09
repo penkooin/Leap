@@ -21,13 +21,13 @@ import org.chaostocosmos.chaosgraph.NotSuppotedEncodingFormatException;
 import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.Response;
 import org.chaostocosmos.leap.http.HTTPException;
-import org.chaostocosmos.leap.http.annotation.MethodIndicates;
-import org.chaostocosmos.leap.http.annotation.ServiceIndicates;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Host;
-import org.chaostocosmos.leap.http.enums.MIME_TYPE;
-import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
-import org.chaostocosmos.leap.http.enums.RES_CODE;
+import org.chaostocosmos.leap.http.enums.MIME;
+import org.chaostocosmos.leap.http.enums.REQUEST;
+import org.chaostocosmos.leap.http.inject.MethodIndicates;
+import org.chaostocosmos.leap.http.inject.ServiceIndicates;
+import org.chaostocosmos.leap.http.enums.HTTP;
 import org.chaostocosmos.leap.http.part.MultiPart;
 import org.chaostocosmos.leap.http.resource.TemplateBuilder;
 
@@ -41,39 +41,39 @@ public class SystemMonitorService extends AbstractChartService {
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    @MethodIndicates(mappingMethod = REQUEST_TYPE.GET, path = "")
+    @MethodIndicates(method = REQUEST.GET, path = "")
     public void getMonitorWebpage(Request request, Response response) throws Exception {
-        if(Context.getServer().<Boolean> isSupportMonitoring()) {
+        if(Context.server().<Boolean> isSupportMonitoring()) {
             String body = TemplateBuilder.buildMonitoringPage(request.getContextPath(), super.httpTransfer.getHost());
             response.setBody(body);
-            response.addHeader("Content-Type", MIME_TYPE.TEXT_HTML.mimeType());
-            response.setResponseCode(RES_CODE.RES200.code());
+            response.addHeader("Content-Type", MIME.TEXT_HTML.mimeType());
+            response.setResponseCode(HTTP.RES200.code());
         } else {
-            throw new HTTPException(RES_CODE.RES503, "Monitoring page not available now. Currently monitoring option is off !!!");
+            throw new HTTPException(HTTP.RES503, "Monitoring page not available now. Currently monitoring option is off !!!");
         }
     } 
 
-    @MethodIndicates(mappingMethod = REQUEST_TYPE.POST, path = "/chart/image")
+    @MethodIndicates(method = REQUEST.POST, path = "/chart/image")
     @SuppressWarnings("unchecked")
     public void getResources(Request request, Response response) throws Exception {
         Map<String, String> header = request.getReqHeader();
         String charset = header.get("charset");
         if(charset == null || charset.equals("")) {
-            throw new HTTPException(RES_CODE.RES404, "Request has no charset field in header.");
+            throw new HTTPException(HTTP.RES404, "Request has no charset field in header.");
         }
-        if(request.getContentType() != MIME_TYPE.MULTIPART_FORM_DATA) {
-            throw new HTTPException(RES_CODE.RES415, "Requested content type is not allowed on this service.");
+        if(request.getContentType() != MIME.MULTIPART_FORM_DATA) {
+            throw new HTTPException(HTTP.RES415, "Requested content type is not allowed on this service.");
         }
         MultiPart multiPart = (MultiPart)request.getBodyPart();
         byte[] body = multiPart.getBody().get("chart");
         if(body == null) {
-            throw new HTTPException(RES_CODE.RES404, "Request has no body data. Chart service must have JSON chart data.");
+            throw new HTTPException(HTTP.RES404, "Request has no body data. Chart service must have JSON chart data.");
         }
         String chartJson = new String(body, charset);
         //super.logger.debug(chartJson);
         Map<String, Object> jsonMap = gson.fromJson(chartJson, Map.class);
         List<Map<String, Object>> chartMap = jsonMap.values().stream().map(m -> (Map<String, Object>) m ).collect(Collectors.toList());
-        for(Host<?> host : Context.getHosts().getAllHost()) {
+        for(Host<?> host : Context.hosts().getAllHost()) {
             for(Map<String, Object> map : chartMap) {
                 String savePath = (String) map.get("save-path"); 
                 boolean inMemory = (boolean) map.get("in-memory"); 

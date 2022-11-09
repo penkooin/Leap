@@ -2,7 +2,7 @@ package org.chaostocosmos.leap.http;
 
 import java.util.List;
 
-import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
+import org.chaostocosmos.leap.http.enums.REQUEST;
 import org.chaostocosmos.leap.http.service.filter.IFilter;
 import org.chaostocosmos.leap.http.service.model.ServiceModel;
 
@@ -19,7 +19,7 @@ public class ServiceHolder {
     /**
      * Request type
      */
-    REQUEST_TYPE requestType;
+    REQUEST requestType;
 
     /**
      * Leap service
@@ -42,7 +42,7 @@ public class ServiceHolder {
      * @param serviceModel
      * @param requestType
      */
-    public ServiceHolder(String contextPath, ServiceModel serviceModel, REQUEST_TYPE requestType) {
+    public ServiceHolder(String contextPath, ServiceModel serviceModel, REQUEST requestType) {
         this.contextPath = contextPath;
         this.requestType = requestType;
         this.serviceModel = serviceModel;
@@ -56,11 +56,11 @@ public class ServiceHolder {
         this.contextPath = servicePath;
     }
 
-    public REQUEST_TYPE getRequestType() {
+    public REQUEST getRequestType() {
         return this.requestType;
     }
 
-    public void setRequestType(REQUEST_TYPE requestType) {
+    public void setRequestType(REQUEST requestType) {
         this.requestType = requestType;
     }
 

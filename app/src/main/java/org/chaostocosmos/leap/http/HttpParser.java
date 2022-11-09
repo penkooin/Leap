@@ -19,10 +19,10 @@ import org.chaostocosmos.leap.http.common.LoggerFactory;
 import org.chaostocosmos.leap.http.common.StreamUtils;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Host;
-import org.chaostocosmos.leap.http.enums.MIME_TYPE;
+import org.chaostocosmos.leap.http.enums.MIME;
 import org.chaostocosmos.leap.http.enums.PROTOCOL;
-import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
-import org.chaostocosmos.leap.http.enums.RES_CODE;
+import org.chaostocosmos.leap.http.enums.REQUEST;
+import org.chaostocosmos.leap.http.enums.HTTP;
 import org.chaostocosmos.leap.http.part.BinaryPart;
 import org.chaostocosmos.leap.http.part.BodyPart;
 import org.chaostocosmos.leap.http.part.KeyValuePart;
@@ -74,10 +74,10 @@ public class HttpParser {
      * @return
      */
     public static boolean isValidType(String requestType) {
-        if( REQUEST_TYPE.GET.name().equals(requestType) || 
-            REQUEST_TYPE.POST.name().equals(requestType) || 
-            REQUEST_TYPE.PUT.name().equals(requestType) || 
-            REQUEST_TYPE.DELETE.name().equals(requestType)) {
+        if( REQUEST.GET.name().equals(requestType) || 
+            REQUEST.POST.name().equals(requestType) || 
+            REQUEST.PUT.name().equals(requestType) || 
+            REQUEST.DELETE.name().equals(requestType)) {
             return true;
         }
         return false; 
@@ -104,7 +104,6 @@ public class HttpParser {
     public static class RequestParser {
         /**
          * Parse request
-         * 
          * @throws IOException
          * @throws HTTPException
          */
@@ -113,30 +112,30 @@ public class HttpParser {
             StringBuffer debug = new StringBuffer();
             String requestLine = StreamUtils.readLine(inStream, StandardCharsets.ISO_8859_1);
             if(requestLine == null) {
-                throw new Exception(Context.getMessages().<String>getErrorMsg(1));
+                throw new Exception(Context.messages().<String>error(1));
             }
             requestLine = URLDecoder.decode(requestLine, StandardCharsets.UTF_8);
             debug.append("============================== [REQUEST] "+requestLine+" =============================="+System.lineSeparator());
             String[] linesplited = requestLine.split(" ");
             if(linesplited.length != 3) {
-                throw new HTTPException(RES_CODE.RES417, Context.getMessages().<String>getErrorMsg(400, "Requested line is something wrong: "+requestLine));
+                throw new HTTPException(HTTP.RES417, Context.messages().<String>error(400, "Requested line is something wrong: "+requestLine));
             }
             String method = linesplited[0];
-            if(!Arrays.asList(REQUEST_TYPE.values()).stream().anyMatch(R -> R.name().equals(method))) {
-                throw new HTTPException(RES_CODE.RES405, Context.getMessages().<String>getErrorMsg(26, method));
+            if(!Arrays.asList(REQUEST.values()).stream().anyMatch(R -> R.name().equals(method))) {
+                throw new HTTPException(HTTP.RES405, Context.messages().<String>error(26, method));
             }
             String contextPath = linesplited[1];
             String protocolVersion = requestLine.substring(requestLine.lastIndexOf(" ") + 1);
             String protocol = protocolVersion.indexOf("/") != -1 ? protocolVersion.substring(0, protocolVersion.indexOf("/")).toLowerCase() : protocolVersion;
             List<String> headerLines = StreamUtils.readHeaders(inStream);
             Map<String, String> headerMap = new HashMap<>();
-            REQUEST_TYPE requestType = REQUEST_TYPE.valueOf(method);
+            REQUEST requestType = REQUEST.valueOf(method);
             for(String header : headerLines) {
                 if(header == null || header.length() == 0)
                     break;
                 int idx = header.indexOf(":");
                 if (idx == -1) {
-                    throw new HTTPException(RES_CODE.RES417, Context.getMessages().<String>getErrorMsg(3, header));
+                    throw new HTTPException(HTTP.RES417, Context.messages().<String>error(3, header));
                 }
                 debug.append(header.substring(0, idx)+":   "+header.substring(idx + 1, header.length()).trim()+Constants.LS);
                 headerMap.put(header.substring(0, idx), header.substring(idx + 1, header.length()).trim());
@@ -158,41 +157,43 @@ public class HttpParser {
             }
             String hostName = requestedHost.indexOf(":") != -1 ? requestedHost.substring(0, requestedHost.indexOf(":")) : requestedHost;
             //Get host ID from request host name
-            String hostId = Context.getHosts().getHostId(hostName);
+            String hostId = Context.hosts().getHostId(hostName);
             //Get Host object by requested host name
-            Host<?> host = Context.getHost(hostId);
+            Host<?> host = Context.host(hostId);
             if(host == null) {
-                throw new HTTPException(RES_CODE.RES417, Context.getMessages().<String>getErrorMsg(24, hostName));
+                throw new HTTPException(HTTP.RES417, Context.messages().<String>error(24, hostName));
             }
             //Get content type from requested header
             String contentType = headerMap.get("Content-Type");
-            System.out.println(headerMap.toString());
+            //System.out.println(headerMap.toString());
             //Get cookies
             Map<String, String> cookies = new HashMap<>();
             if(headerMap.get("Cookie") != null) {
-                System.out.println(headerMap.get("Cookie")+"  $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+                //System.out.println(headerMap.get("Cookie")+"  $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
                 String[] cookieArr = headerMap.get("Cookie").trim().split(";");
-                System.out.println(Arrays.toString(cookieArr));
+                //System.out.println(Arrays.toString(cookieArr));
                 for(String cookie : cookieArr) {
-                    cookies.putIfAbsent(cookie.substring(0, cookie.indexOf("=")).trim(), cookie.substring(cookie.indexOf("=")+1));
-                }                
+                    String key = cookie.substring(0, cookie.indexOf("=")).trim();
+                    String value = cookie.substring(cookie.indexOf("=")+1);
+                    cookies.putIfAbsent(key, value.equals("null") ? "" : value);
+                }
             }
             //Get content length from requested header
             long contentLength = headerMap.get("Content-Length") != null ? Long.parseLong(headerMap.get("Content-Length")) : 0L;
             if(!headerMap.containsKey("Range") && !host.checkRequestAttack(inetAddress.getHostAddress(), protocol+"://"+hostName + contextPath)) {
                 LoggerFactory.getLogger(requestedHost).warn("[CLIENT BLOCKED] Too many requested client blocking: "+inetAddress.getHostAddress());
-                throw new HTTPException(RES_CODE.RES429, requestedHost+" requested too many on short period!!!");
+                throw new HTTPException(HTTP.RES429, requestedHost+" requested too many on short period!!!");
             }
-            if(!Context.getHosts().isExistHostname(hostName)) {
-                throw new HTTPException(RES_CODE.RES417, Context.getMessages().<String>getErrorMsg(400, "Requested host ID not exist in this server. ID: "+hostName));
+            if(!Context.hosts().isExistHostname(hostName)) {
+                throw new HTTPException(HTTP.RES417, Context.messages().<String>error(400, "Requested host ID not exist in this server. ID: "+hostName));
             }            
             debug.append("Host ID: "+hostId);
-            Charset charset = Context.getHosts().charset(hostId);
+            Charset charset = Context.hosts().charset(hostId);
             LoggerFactory.getLogger(hostId).debug(debug.toString());
             BodyPart bodyPart = null;
-            MIME_TYPE mimeType = null;
+            MIME mimeType = null;
             if(contentType != null) {
-                mimeType = contentType.indexOf(";") != -1 ? MIME_TYPE.mimeType(contentType.substring(0, contentType.indexOf(";"))) : MIME_TYPE.mimeType(contentType);
+                mimeType = contentType.indexOf(";") != -1 ? MIME.mimeType(contentType.substring(0, contentType.indexOf(";"))) : MIME.mimeType(contentType);
                 String boundary = contentType != null ? contentType.substring(contentType.indexOf(";")+1) : null;
                 String bodyInStream = headerMap.get("body-in-stream");
                 boolean preLoadBody = bodyInStream == null ? false : !Boolean.valueOf(bodyInStream);

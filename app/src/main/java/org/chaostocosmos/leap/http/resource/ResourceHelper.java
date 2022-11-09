@@ -23,11 +23,11 @@ import org.chaostocosmos.leap.http.LeapApp;
 import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.common.LoggerFactory;
 import org.chaostocosmos.leap.http.common.UtilBox;
-import org.chaostocosmos.leap.http.HTTPException;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Host;
+import org.chaostocosmos.leap.http.HTTPException;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
-import org.chaostocosmos.leap.http.enums.RES_CODE;
+import org.chaostocosmos.leap.http.enums.HTTP;
 
 /**
  * Resource helper object
@@ -99,11 +99,11 @@ public class ResourceHelper {
      */
     public static Path getResourcePath(String hostId, String contextPath) {
         contextPath = contextPath.charAt(0) == '/' ? contextPath.substring(1) : contextPath;
-        Host<?> hosts = Context.getHosts().getHost(hostId);
+        Host<?> hosts = Context.hosts().getHost(hostId);
         Path docroot = hosts.getDocroot().toAbsolutePath();
         Path reqPath = getStaticPath(hostId).resolve(contextPath).toAbsolutePath();        
         if(!validatePath(docroot, reqPath)) {
-            throw new HTTPException(RES_CODE.RES403, contextPath);
+            throw new HTTPException(HTTP.RES403, contextPath);
         }
         LoggerFactory.getLogger(hostId).debug("REQUEST PATH: "+reqPath.toString()); 
         return reqPath.normalize();
@@ -116,7 +116,7 @@ public class ResourceHelper {
      * @return
      */
     public static Path getResponseResourcePath(String hostId) {
-        return Context.getHosts().getHost(hostId).getTemplates().resolve("response.html");
+        return Context.hosts().getHost(hostId).getTemplates().resolve("response.html");
     }    
 
     /**
@@ -138,7 +138,7 @@ public class ResourceHelper {
         try {
             return Files.readAllBytes(resourcePath);
         } catch (IOException e) {
-            throw new HTTPException(RES_CODE.RES500, Context.getMessages().<String> getErrorMsg(14, resourcePath));
+            throw new HTTPException(HTTP.RES500, Context.messages().<String> error(14, resourcePath));
         }
     }
 
@@ -237,7 +237,7 @@ public class ResourceHelper {
      * @throws HTTPException
      */
     public static Path getDocroot(String hostId) throws HTTPException {
-        return Context.getHosts().getDocroot(hostId).normalize().toAbsolutePath();
+        return Context.hosts().getDocroot(hostId).normalize().toAbsolutePath();
     }
 
     /**

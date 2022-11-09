@@ -319,7 +319,7 @@ public class Hosts <T> extends Metadata <T> {
 
     /**
      * Whether the host is existing in this server
-     * @param host
+     * @param hostId
      * @return
      */
     public boolean isExistHostname(String hostname) {

@@ -6,8 +6,8 @@ import java.util.Map;
 
 import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.HTTPException;
-import org.chaostocosmos.leap.http.annotation.PreFilterIndicates;
-import org.chaostocosmos.leap.http.enums.RES_CODE;
+import org.chaostocosmos.leap.http.enums.HTTP;
+import org.chaostocosmos.leap.http.inject.PreFilterIndicates;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -45,7 +45,7 @@ public class ConfigRequestFilter extends AbstractRequestFilter {
             try {
                 configMap.put(CONFIG.valueOf(key), (Map<String, Object>) this.gson.fromJson(new String(bodyMap.get(key), request.charset()), Map.class));
             } catch(Exception e) {
-                throw new HTTPException(RES_CODE.RES412, "Configuration extracting fail: "+e.getMessage());
+                throw new HTTPException(HTTP.RES412, "Configuration extracting fail: "+e.getMessage());
             }
         }                        
         return configMap;

@@ -125,14 +125,14 @@ public class Context {
      * @return
      */
     public static Path getTemplates(String hostId) {
-        return getHosts().getTemplates(hostId);
+        return hosts().getTemplates(hostId);
     }
 
     /**
      * Get Server context
      * @return
      */
-    public static <T> Server<T> getServer() {
+    public static <T> Server<T> server() {
         return META.SERVER.getMeta();
     }
 
@@ -140,7 +140,7 @@ public class Context {
      * Get Hosts context
      * @return
      */
-    public static <T> Hosts<T> getHosts() {
+    public static <T> Hosts<T> hosts() {
         return META.HOSTS.<Hosts<T>>getMeta();
     }
 
@@ -148,7 +148,7 @@ public class Context {
      * Get Messages context
      * @return
      */
-    public static <T> Messages<T> getMessages() {
+    public static <T> Messages<T> messages() {
         return META.MESSAGES.getMeta();
     }    
 
@@ -156,7 +156,7 @@ public class Context {
      * Get Mime context
      * @return
      */
-    public static <T> Mime<T> getMime() {
+    public static <T> Mime<T> mime() {
         return META.MIME.getMeta();
     }
 
@@ -164,7 +164,7 @@ public class Context {
      * Get Chart context
      * @return
      */
-    public static <T> Chart<T> getChart() {
+    public static <T> Chart<T> chart() {
         return META.CHART.getMeta();
     }
 
@@ -173,8 +173,8 @@ public class Context {
      * @param hostId
      * @return
      */
-    public static <T> Host<T> getHost(String hostId) {
-        Hosts<T> hosts = getHosts();
+    public static <T> Host<T> host(String hostId) {
+        Hosts<T> hosts = hosts();
         return hosts.getHost(hostId);
     }
 
@@ -182,8 +182,8 @@ public class Context {
      * Get Host Map
      * @return
      */
-    public static <T> List<Host<T>> getAllHost() {
-        Hosts<T> hosts = getHosts();
+    public static <T> List<Host<T>> allHost() {
+        Hosts<T> hosts = hosts();
         return hosts.getAllHost();
     }
 
@@ -197,15 +197,15 @@ public class Context {
     public static <T> T getMetadata(META metaType, String expr) {
         switch(metaType) {
             case SERVER:
-                return getServer().getValue(expr);
+                return server().getValue(expr);
             case HOSTS:
-                return getHosts().getValue(expr);
+                return hosts().getValue(expr);
             case MESSAGES:
-                return getMessages().getValue(expr);
+                return messages().getValue(expr);
             case MIME:
-                return getMime().getValue(expr);
+                return mime().getValue(expr);
             case CHART:
-                return getChart().getValue(expr);
+                return chart().getValue(expr);
             default:
                 throw new IllegalArgumentException("Metadata type is not found: "+metaType.name());
         }

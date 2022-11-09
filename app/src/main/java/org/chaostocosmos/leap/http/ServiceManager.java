@@ -11,14 +11,14 @@ import java.util.Map;
 
 import javax.transaction.NotSupportedException;
 
-import org.chaostocosmos.leap.http.annotation.FilterIndicates;
-import org.chaostocosmos.leap.http.annotation.MethodIndicates;
-import org.chaostocosmos.leap.http.annotation.ServiceIndicates;
 import org.chaostocosmos.leap.http.common.LoggerFactory;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Host;
-import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
-import org.chaostocosmos.leap.http.enums.RES_CODE;
+import org.chaostocosmos.leap.http.enums.REQUEST;
+import org.chaostocosmos.leap.http.inject.FilterIndicates;
+import org.chaostocosmos.leap.http.inject.MethodIndicates;
+import org.chaostocosmos.leap.http.inject.ServiceIndicates;
+import org.chaostocosmos.leap.http.enums.HTTP;
 import org.chaostocosmos.leap.http.resource.ClassUtils;
 import org.chaostocosmos.leap.http.resource.LeapURLClassLoader;
 import org.chaostocosmos.leap.http.security.SecurityManager;
@@ -40,7 +40,7 @@ public class ServiceManager {
     /**
      * Logger 
      */
-    public static final Logger logger = LoggerFactory.getLogger(Context.getHosts().getDefaultHost().getHostId());
+    public static final Logger logger = LoggerFactory.getLogger(Context.hosts().getDefaultHost().getHostId());
 
     /**
      * Host object 
@@ -128,7 +128,7 @@ public class ServiceManager {
                     if(mm != null) {
                         String contextPath = servicePath + mm.path();
                         ServiceModel serviceModel = createServiceModel(service.getCanonicalName());
-                        ServiceHolder serviceHolder = new ServiceHolder(contextPath, serviceModel, mm.mappingMethod());
+                        ServiceHolder serviceHolder = new ServiceHolder(contextPath, serviceModel, mm.method());
                         this.serviceHolderMap.put(contextPath, serviceHolder);
                     }
                 }
@@ -143,7 +143,7 @@ public class ServiceManager {
      * @param serviceModel
      * @return
      */
-    public Method getServiceMethod(REQUEST_TYPE requestType, String contextPath, ServiceModel serviceModel) {
+    public Method getServiceMethod(REQUEST requestType, String contextPath, ServiceModel serviceModel) {
         ServiceIndicates sm = serviceModel.getClass().getDeclaredAnnotation(ServiceIndicates.class);
         if(sm == null) {
             return null;
@@ -154,13 +154,13 @@ public class ServiceManager {
             if(mm == null) {
                 continue;
             }
-            REQUEST_TYPE rType = mm.mappingMethod();
+            REQUEST rType = mm.method();
             String path = sm.path() + mm.path();
             if(requestType == rType && path.equals(contextPath)) {
                 return method;
             }
         }
-        throw new HTTPException(RES_CODE.RES404, "Requested context path is not found in Server.  Request METHOD: "+requestType.name()+"  Rquest context path: "+contextPath);
+        throw new HTTPException(HTTP.RES404, "Requested context path is not found in Server.  Request METHOD: "+requestType.name()+"  Rquest context path: "+contextPath);
     }
 
     /**

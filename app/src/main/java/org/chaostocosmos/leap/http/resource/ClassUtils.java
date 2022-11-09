@@ -47,7 +47,7 @@ public class ClassUtils {
      */
     public static LeapURLClassLoader getClassLoader() throws MalformedURLException {
         if(classLoader == null) {
-            classLoader = new LeapURLClassLoader(Context.getHosts().getAllDynamicClasspathURLs());
+            classLoader = new LeapURLClassLoader(Context.hosts().getAllDynamicClasspathURLs());
         }
         return classLoader;
     }

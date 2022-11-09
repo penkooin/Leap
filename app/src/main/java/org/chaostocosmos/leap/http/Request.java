@@ -8,9 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.chaostocosmos.leap.http.common.LoggerFactory;
-import org.chaostocosmos.leap.http.enums.MIME_TYPE;
+import org.chaostocosmos.leap.http.enums.MIME;
 import org.chaostocosmos.leap.http.enums.PROTOCOL;
-import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
+import org.chaostocosmos.leap.http.enums.REQUEST;
 import org.chaostocosmos.leap.http.part.Part;
 import org.chaostocosmos.leap.http.session.Session;
 
@@ -25,10 +25,10 @@ import ch.qos.logback.classic.Logger;
 public class Request {
     
     final private long requestTimstamp;
-    final private REQUEST_TYPE requestType;    
+    final private REQUEST requestType;    
     final private String hostId;
     final private String requestedHost;
-    final private MIME_TYPE contentType;
+    final private MIME contentType;
     final private String httpVersion;
     final private Map<String, String> reqHeader;
     final private String contextPath;
@@ -67,9 +67,9 @@ public class Request {
             String hostId,
             String requestHost,
             String httpVersion, 
-            REQUEST_TYPE requestType, 
+            REQUEST requestType, 
             Map<String, String> reqHeader, 
-            MIME_TYPE contentType,
+            MIME contentType,
             String contextPath,
             URI requestURI, 
             Map<String, Object> queryParam,
@@ -117,7 +117,7 @@ public class Request {
         return this.httpVersion;
     }
 
-    public final REQUEST_TYPE getRequestType() {
+    public final REQUEST getRequestType() {
         return this.requestType;
     }
 
@@ -125,7 +125,7 @@ public class Request {
         return this.reqHeader;
     }
 
-    public final MIME_TYPE getContentType() {
+    public final MIME getContentType() {
         return this.contentType;
     }
 

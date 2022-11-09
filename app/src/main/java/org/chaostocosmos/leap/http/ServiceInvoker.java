@@ -16,7 +16,7 @@ public class ServiceInvoker {
     /**
      * logger
      */
-    public static final Logger logger = LoggerFactory.getLogger(Context.getHosts().getDefaultHost().getHostId()); 
+    public static final Logger logger = LoggerFactory.getLogger(Context.hosts().getDefaultHost().getHostId()); 
     
     /**
      * Call service method on servlet
@@ -35,7 +35,7 @@ public class ServiceInvoker {
             if(service.errorHandling(httpTransfer.getResponse(), e) != null) {
                 throw e;
             }
-            logger.error(Context.getMessages().getWarnMsg(2, serviceHolder.getServiceModel().getClass().getName(), e.getMessage()));
+            logger.error(Context.messages().warn(2, serviceHolder.getServiceModel().getClass().getName(), e.getMessage()));
         }
         return response;
     }

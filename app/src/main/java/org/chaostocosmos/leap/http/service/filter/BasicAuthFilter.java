@@ -6,11 +6,11 @@ import java.util.HashMap;
 
 import org.chaostocosmos.leap.http.HTTPException;
 import org.chaostocosmos.leap.http.Request;
-import org.chaostocosmos.leap.http.annotation.PreFilterIndicates;
 import org.chaostocosmos.leap.http.common.Constants;
 import org.chaostocosmos.leap.http.common.LoggerFactory;
 import org.chaostocosmos.leap.http.context.User;
-import org.chaostocosmos.leap.http.enums.RES_CODE;
+import org.chaostocosmos.leap.http.enums.HTTP;
+import org.chaostocosmos.leap.http.inject.PreFilterIndicates;
 import org.chaostocosmos.leap.http.security.SecurityManager;
 import org.chaostocosmos.leap.http.service.model.IAuthenticate;
 import org.chaostocosmos.leap.http.session.Session;
@@ -31,7 +31,7 @@ public class BasicAuthFilter extends AbstractRequestFilter implements ISecurityF
     public void filterRequest(Request request) throws Exception { 
         super.filterRequest(request);
         String sessionId = request.getCookie(Constants.SESSION_ID_KEY);
-        Session session = super.sessionManager.getSessionCreateIfNotExists(request);
+        Session session = super.sessionManager.getSessionCreateIfNotExists(sessionId);
 
         if(session == null && request.getClass().isAssignableFrom(Request.class)) {
             final String authorization = request.getReqHeader().get("Authorization");
@@ -43,20 +43,16 @@ public class BasicAuthFilter extends AbstractRequestFilter implements ISecurityF
                 //System.out.println(values[0]+" "+values[1]);
                 User user = login(values[0], values[1]);
                 if(user != null) {
-                    session = super.sessionManager.createSession(request);              
+                    session = super.sessionManager.createSession(sessionId);
                     super.sessionManager.addSession(session);
                     user.setSession(session);
                     request.setSession(session);
                 } else {
-                    HTTPException httpe = new HTTPException(RES_CODE.RES401, new HashMap<>(), "User( "+values[0]+" ) not found in server." );
-                    httpe.addHeader("WWW-Authenticate", "Basic");
-                    throw httpe;
+                    throw new HTTPException(HTTP.RES401, "User( "+values[0]+" ) not found in server." );
                 }
                 LoggerFactory.getLogger(request.getRequestedHost()).debug("User "+values[0]+" is login.");  
             } else {
-                HTTPException httpe = new HTTPException(RES_CODE.RES401, new HashMap<>(), "Auth information not found!!!" );                
-                httpe.addHeader("WWW-Authenticate", "Basic");
-                throw httpe;
+                throw new HTTPException(HTTP.RES401, "Auth information not found!!!" ); 
             }
         }
     }

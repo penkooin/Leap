@@ -3,22 +3,26 @@ package org.chaostocosmos.leap.http;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.common.Constants;
 import org.chaostocosmos.leap.http.common.DateUtils;
+import org.chaostocosmos.leap.http.common.TIME;
 import org.chaostocosmos.leap.http.common.UtilBox;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.context.User;
-import org.chaostocosmos.leap.http.enums.MIME_TYPE;
+import org.chaostocosmos.leap.http.enums.MIME;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
-import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
-import org.chaostocosmos.leap.http.enums.RES_CODE;
-import org.chaostocosmos.leap.http.enums.HOST_STATUS;
+import org.chaostocosmos.leap.http.enums.REQUEST;
+import org.chaostocosmos.leap.http.enums.HTTP;
 import org.chaostocosmos.leap.http.resource.Resource;
 import org.chaostocosmos.leap.http.resource.ResourceHelper;
 import org.chaostocosmos.leap.http.resource.TemplateBuilder;
@@ -84,7 +88,7 @@ public class LeapRequestHandler implements Runnable {
         this.client = client;
         this.host = host;
         this.serviceManager = httpServer.getServiceManager(); 
-        this.sessionManager = httpServer.getSessionManager();
+        this.sessionManager = httpServer.getSessionManager(); 
         this.securityManager = httpServer.getSecurityManager();
     }
 
@@ -100,37 +104,27 @@ public class LeapRequestHandler implements Runnable {
             //Put requested host to request header Map for ip filter
             request.getReqHeader().put("@Client", host.getHost());
 
-            if(this.host.getHostStatus() == HOST_STATUS.STARTED) {
-                this.host.setHostStatus(HOST_STATUS.RUNNING);
-                HTTPException httpe = new HTTPException(RES_CODE.RES401, "Server host started for the first time.");
-                httpe.addHeader("WWW-Authenticate", "Basic");
-                throw httpe;
-            }    
-            final Session session = this.sessionManager.getSessionCreateIfNotExists(request);
-            this.host.getLogger().debug("[SESSION] ID: "+session.getId()+"  Authenticated: "+session.isAuthenticated()+"  New Session: "+session.isNew()+"  Creation Time: "+session.getCreationTime()+"  Last Access Date: "+new Date(session.getLastAccessedTime()));
-            if(DateUtils.getMillis() > session.getLastAccessedTime() + session.getMaxInactiveIntervalSecond() * 1000L) {
-                this.sessionManager.removeSession(session);
-                HTTPException httpe = new HTTPException(RES_CODE.RES401, "  Session timeout: "+host.getSessionTimeout()+" sec.  Current Date: "+new Date(DateUtils.getMillis())+"  Timeout Date: "+new Date(session.getLastAccessedTime() + session.getMaxInactiveIntervalSecond() * 1000L));
-                httpe.addHeader("WWW-Authenticate", "Basic");
-                throw httpe;
-            }
-            final String authorization = request.getReqHeader().get("Authorization");
-            if(!session.isAuthenticated()) {
-                User user = null;                
-                if(authorization != null) {
-                    user = this.securityManager.loginBasicAuth(authorization);
-                    if(user != null) {
-                        session.setAuthenticated(true);                        
-                        session.setNew(false);
+            if(host.<Boolean> isSessionApply()) { 
+                final String sessionId = request.getCookie(Constants.SESSION_ID_KEY);
+                final Session session = this.sessionManager.getSessionCreateIfNotExists(sessionId);
+                final String authorization = request.getReqHeader().get("Authorization");
+                host.getLogger().debug("[SESSION] ID: "+session.getId()+"  Authorization: "+authorization+"  login: "+session.isAuthenticated()+"  New Session: "+session.isNew()+"  Creation Time: "+new Date(session.getCreationTime())+"  Last Access Date: "+new Date(session.getLastAccessedTime()));
+                try {
+                    if(session.isNew() && !session.isAuthenticated()) {
+                        User user = this.securityManager.authenticate(authorization);
+                        session.setAuthenticated(true);
                         user.setSession(session);
-                        response.addSetCookie(Constants.SESSION_ID_KEY, session.getId());
-                        //response.addSetCookie("Max-Age", String.valueOf(host.<Integer> getMaxAge()));
-                        //response.addSetCookie("Expires", DateUtils.getDateLocalAddedOffset(System.currentTimeMillis() + this.host.<Integer>getExpires() * (int) UNIT.DY.getUnit()));
-                    } else {
-                        HTTPException httpe = new HTTPException(RES_CODE.RES401, "Authorization is fail. Please login.");
-                        httpe.addHeader("WWW-Authenticate", "Basic");
-                        throw httpe;    
-                    }                    
+                    }
+                    if(!session.isNew() && DateUtils.getMillis() > session.getLastAccessedTime() + TIME.SECOND.duration(this.host.<Integer> getSessionTimeoutSeconds(), TimeUnit.MILLISECONDS)) {
+                        throw new HTTPException(HTTP.RES401, "  Session timeout: "+host.getSessionTimeoutSeconds()+" sec.  Current Date: "+new Date(DateUtils.getMillis())+"  Timeout Date: "+new Date(session.getLastAccessedTime() + session.getMaxInactiveIntervalSecond() * 1000L));
+                    }
+                    session.setNew(false);
+                    session.setLastAccessedTime(DateUtils.getMillis());
+                    session.setSessionToResponse(response);
+                } catch(HTTPException httpe) {
+                    httpe.printStackTrace();
+                    this.sessionManager.removeSession(session);
+                    throw httpe;
                 }
             }
             //Create service holder
@@ -139,21 +133,21 @@ public class LeapRequestHandler implements Runnable {
             if (serviceHolder != null) {
                 // Request method validation
                 if(serviceHolder.getRequestType() != request.getRequestType()) {
-                    throw new HTTPException(RES_CODE.RES405, "Not supported: "+request.getRequestType().name());
+                    throw new HTTPException(HTTP.RES405, "Not supported: "+request.getRequestType().name());
                 } else {
                     // Do requested service to execute by cloned service of request
                     response = ServiceInvoker.invokeServiceMethod(serviceHolder, httpTransfer);
                 }
             } else { // When client request static resources
-                if(request.getRequestType() != REQUEST_TYPE.GET) {
-                    throw new HTTPException(RES_CODE.RES405, "Static content can't be provided by "+request.getRequestType().name());
+                if(request.getRequestType() != REQUEST.GET) {
+                    throw new HTTPException(HTTP.RES405, "Static content can't be provided by "+request.getRequestType().name());
                 }
                 Path resourcePath = ResourceHelper.getResourcePath(request);
                 if(request.getContextPath().equals("/")) {
                     String body = TemplateBuilder.buildWelcomeResourceHtml(request.getContextPath(), host);
-                    response.addHeader("Content-Type", MIME_TYPE.TEXT_HTML.mimeType()+"; charset="+host.<String> charset());
+                    response.addHeader("Content-Type", MIME.TEXT_HTML.mimeType()+"; charset="+host.<String> charset());
                     response.setBody(body.getBytes());
-                    response.setResponseCode(RES_CODE.RES200.code());
+                    response.setResponseCode(HTTP.RES200.code());
                 } else {
                     if (host.getResource().exists(resourcePath)) {
                         //Get requested resource data
@@ -165,25 +159,25 @@ public class LeapRequestHandler implements Runnable {
                         if(resource != null) {
                             if(resource.isNode()) {
                                 String body = TemplateBuilder.buildResourceHtml(request.getContextPath(), host);
-                                String mimeType = MIME_TYPE.TEXT_HTML.mimeType();
-                                response.setResponseCode(RES_CODE.RES200.code());
+                                String mimeType = MIME.TEXT_HTML.mimeType();
+                                response.setResponseCode(HTTP.RES200.code());
                                 response.addHeader("Content-Type", mimeType+"; charset="+host.charset());
                                 response.setBody(body);
                             } else {
                                 String mimeType = UtilBox.probeContentType(resourcePath);
                                 if(mimeType == null) {
-                                    mimeType = MIME_TYPE.APPLICATION_OCTET_STREAM.mimeType();
+                                    mimeType = MIME.APPLICATION_OCTET_STREAM.mimeType();
                                 }
-                                response.setResponseCode(RES_CODE.RES200.code());
+                                response.setResponseCode(HTTP.RES200.code());
                                 response.addHeader("Content-Type", mimeType);
                                 response.setBody(resource.getBytes());
                                 this.host.getLogger().debug("DOWNLOAD RESOURCE MIME-TYPE: "+mimeType);    
                             }
                         } else {
-                            throw new HTTPException(RES_CODE.RES403, request.getContextPath());
+                            throw new HTTPException(HTTP.RES403, request.getContextPath());
                         }
                     } else {
-                        throw new HTTPException(RES_CODE.RES404, request.getContextPath());
+                        throw new HTTPException(HTTP.RES404, request.getContextPath());
                     }
                 }
             }                 
@@ -192,9 +186,8 @@ public class LeapRequestHandler implements Runnable {
                 httpTransfer.sendResponse(response);
             }
         } catch(SocketTimeoutException e) {
-            this.host.getLogger().error("[SOCKET TIME OUT] Client socket timeout occurred.");
+            host.getLogger().error("[SOCKET TIME OUT] Client socket timeout occurred.");
         } catch(Exception e) {           
-            e.printStackTrace(); 
             try {
                 if(!httpTransfer.isClosed()) {                   
                     processError(httpTransfer, e);
@@ -213,7 +206,6 @@ public class LeapRequestHandler implements Runnable {
     /**
      * Process error
      * @param httpTransfer
-     * @param redirectionURL
      * @param error
      * @return
      * @throws Exception
@@ -227,23 +219,22 @@ public class LeapRequestHandler implements Runnable {
         String hostId = httpTransfer.getHost().getHostId();
         Map<String, List<String>> headers = new HashMap<>();
         if(throwable instanceof HTTPException) {
-            HTTPException e = (HTTPException)throwable;
+            HTTPException e = (HTTPException) throwable;
             headers.putAll(e.getHeaders());
             resCode = e.code();
             msgType = e.getMessageType();
-            if(Context.getHost(hostId).<Boolean> getErrorDetails()) {
-                message += e.getMessage();
+            if(Context.host(hostId).<Boolean> getErrorDetails()) {
+                message += "<pre>" + e.getStackTraceMessage() + "<pre>";
             }
         } else {
-            resCode = RES_CODE.RES500.code();
-            
+            resCode = HTTP.RES500.code();            
         }
-        if(!Context.getHosts().isExistHostname(hostId)) {
-            hostId = Context.getHosts().getDefaultHost().getHostId();
+        if(!Context.hosts().isExistHostname(hostId)) {
+            hostId = Context.hosts().getDefaultHost().getHostId();
         }
         //throwable.printStackTrace();
-        System.out.println(msgType+"  "+resCode+"  "+message+"  "+throwable);
-        String body = TemplateBuilder.buildErrorHtml(Context.getHost(hostId), msgType, resCode, message);
+        //System.out.println(msgType+"  "+resCode+"  "+message+"  "+throwable);
+        String body = TemplateBuilder.buildErrorHtml(Context.host(hostId), msgType, resCode, message);
         httpTransfer.sendResponse(hostId, resCode, headers, body);
     }
 

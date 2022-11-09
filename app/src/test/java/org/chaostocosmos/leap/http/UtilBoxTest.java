@@ -10,8 +10,10 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -112,9 +114,31 @@ class UtilBoxTest {
         System.out.println(json);
     }
 
-    public static void main(String[] args) {
-        int val = 1 / 12;
-        System.out.println(val);
-    }
+    public static final long BYTE = 1L;
+    public static final long KiB = BYTE << 10;
+    public static final long MiB = KiB << 10;
+    public static final long GiB = MiB << 10;
+    public static final long TiB = GiB << 10;
+    public static final long PiB = TiB << 10;
+    public static final long EiB = PiB << 10;    
 
+    private static long KB = BYTE * 1000;
+    private static long MB = KB * 1000;
+    private static long GB = MB * 1000;
+    private static long TB = GB * 1000;
+    private static long PB = TB * 1000;
+    private static long EB = PB * 1000;   
+
+    public static void main(String[] args) {
+        Date now = new Date();
+
+        DateFormat format1 = DateFormat.getDateInstance(DateFormat.FULL);
+        System.out.println(format1.format(now));
+        DateFormat format2 = DateFormat.getDateInstance(DateFormat.LONG);
+        System.out.println(format2.format(now));
+        DateFormat format3 = DateFormat.getDateInstance(DateFormat.MEDIUM);
+        System.out.println(format3.format(now));
+        DateFormat format4 = DateFormat.getDateInstance(DateFormat.SHORT);
+        System.out.println(format4.format(now));
+    }
 }

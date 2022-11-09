@@ -9,11 +9,10 @@ import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.http.HTTPException;
 import org.chaostocosmos.leap.http.common.Constants;
-import org.chaostocosmos.leap.http.common.LoggerFactory;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.META;
 import org.chaostocosmos.leap.http.context.User;
-import org.chaostocosmos.leap.http.enums.RES_CODE;
+import org.chaostocosmos.leap.http.enums.HTTP;
 import org.chaostocosmos.leap.http.service.model.IAuthenticate;
 
 import ch.qos.logback.classic.Logger;
@@ -39,8 +38,8 @@ public class SecurityManager implements IAuthenticate {
      * @param context
      */
     public SecurityManager(String hostId) {
-        this.logger = Context.getHost(hostId).getLogger();
-        this.users = Context.getHosts().getHost(hostId).<List<Map<String, Object>>>getUsers().stream().map(m -> new User(m)).collect(Collectors.toList());
+        this.logger = Context.host(hostId).getLogger();
+        this.users = Context.hosts().getHost(hostId).<List<Map<String, Object>>>getUsers().stream().map(m -> new User(m)).collect(Collectors.toList());
     }
 
     @Override
@@ -48,16 +47,16 @@ public class SecurityManager implements IAuthenticate {
         User user = this.users.stream().filter(u -> u.getUsername().equals(username)).findFirst().orElse(null);
         if(user != null) {
             user.getSession().invalidate();
-            this.users.remove(user);    
+            this.users.remove(user);
         }
         return null;
     }
 
     @Override
     public User login(String username, String password) throws HTTPException {
-        User user = this.users.stream().filter(u -> u.getUsername().equals(username)).findAny().orElseThrow(() -> new HTTPException(RES_CODE.RES401, Context.getMessages().<String>getErrorMsg(25, username)));
-        if(user != null && !user.getPassword().equals(password)) {
-            throw new HTTPException(RES_CODE.RES401, Context.getMessages().<String>getErrorMsg(16, password));
+        User user = this.users.stream().filter(u -> u.getUsername().equals(username)).findAny().orElseThrow(() -> new HTTPException(HTTP.RES401, 25, username));
+        if(!user.getPassword().equals(password)) {
+            throw new HTTPException(HTTP.RES401, 16, password);
         }
         return user;
     }
@@ -65,10 +64,10 @@ public class SecurityManager implements IAuthenticate {
     @Override
     public void register(User user) throws HTTPException {
         if(this.users.stream().anyMatch(u -> u.getUsername().equals(user.getUsername()))) {
-            throw new HTTPException(RES_CODE.RES401, Context.getMessages().<String>getErrorMsg(17, user.getUsername())); 
+            throw new HTTPException(HTTP.RES401, 17, user.getUsername()); 
         }
         if(!Constants.PASSWORD_REGEX.matcher(user.getPassword()).matches()) {
-            throw new HTTPException(RES_CODE.RES401, Context.getMessages().<String>getErrorMsg(18));
+            throw new HTTPException(HTTP.RES401, 18);
         }
         this.users.add(user);
         save(this.users);
@@ -79,25 +78,20 @@ public class SecurityManager implements IAuthenticate {
      * @param authorization
      * @return
      */
-    public synchronized User loginBasicAuth(String authorization) {
+    public synchronized User authenticate(String authorization) {
         if (authorization != null && authorization.trim().startsWith("Basic")) {
             String base64Credentials = authorization.trim().substring("Basic".length()).trim();
             byte[] credDecoded = Base64.getDecoder().decode(base64Credentials);
             String credentials = new String(credDecoded, StandardCharsets.UTF_8);
-            final String[] values = credentials.split(":", 2);
+            String[] values = credentials.split(":", 2);
             //System.out.println(values[0]+" "+values[1]);
             User user = login(values[0], values[1]);
-            if(user == null) {
-                HTTPException httpe = new HTTPException(RES_CODE.RES401, new HashMap<>(), "User( "+values[0]+" ) not found in server." );
-                httpe.addHeader("WWW-Authenticate", "Basic");
-                throw httpe;
-            }
+            this.logger.debug("==================================================");  
             this.logger.debug("User "+values[0]+" is login.");  
+            this.logger.debug("==================================================");  
             return user;
         }
-        HTTPException httpe = new HTTPException(RES_CODE.RES401, new HashMap<>(), "Auth information not found!!!" );                
-        httpe.addHeader("WWW-Authenticate", "Basic");
-        throw httpe;
+        throw new HTTPException(HTTP.RES401, 28, authorization);
     }
 
     /**
@@ -125,7 +119,7 @@ public class SecurityManager implements IAuthenticate {
      */
     public void save(List<User> users) throws HTTPException {
         List<Map<String, Object>> list = users.stream().map(u -> u.getUserMap()).collect(Collectors.toList());
-        Context.getServer().setValue("server.users", list);
+        Context.server().setValue("server.users", list);
         Context.save(META.SERVER);
     }
 }

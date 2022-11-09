@@ -18,9 +18,9 @@ import org.chaostocosmos.leap.http.common.Constants;
 import org.chaostocosmos.leap.http.common.LoggerFactory;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Host;
-import org.chaostocosmos.leap.http.enums.MIME_TYPE;
+import org.chaostocosmos.leap.http.enums.MIME;
 import org.chaostocosmos.leap.http.enums.MSG_TYPE;
-import org.chaostocosmos.leap.http.enums.RES_CODE;
+import org.chaostocosmos.leap.http.enums.HTTP;
 import org.chaostocosmos.leap.http.resource.TemplateBuilder;
 
 /**
@@ -70,7 +70,7 @@ public class HttpTransfer {
      * @throws IOException
      */
     public HttpTransfer(String hostId, Socket socket) throws IOException {
-        this.host = Context.getHosts().getHost(hostId);
+        this.host = Context.hosts().getHost(hostId);
         this.socket = socket;
         this.inStream = socket.getInputStream();
         this.outStream = socket.getOutputStream();
@@ -120,8 +120,8 @@ public class HttpTransfer {
      */
     public Response getResponse() throws Exception {
         if(this.response == null) {
-            String msg = TemplateBuilder.buildResponseHtml(this.host, MSG_TYPE.HTTP, 200, Context.getMessages().getHttpMsg(200));
-            Map<String, List<String>> headers = addHeader(new HashMap<>(), "Content-Type", MIME_TYPE.TEXT_HTML.mimeType());
+            String msg = TemplateBuilder.buildResponseHtml(this.host, MSG_TYPE.HTTP, 200, Context.messages().http(200));
+            Map<String, List<String>> headers = addHeader(new HashMap<>(), "Content-Type", MIME.TEXT_HTML.mimeType());
             headers = addHeader(new HashMap<>(), "Content-Length", String.valueOf(msg.getBytes().length));
             headers = addHeader(new HashMap<>(), "Charset", this.host.<String> charset());
             this.response = HttpResponseBuilder.getBuilder().build(this.request)
@@ -161,13 +161,13 @@ public class HttpTransfer {
      * @throws IOException
      */
     public void sendResponse(String hostId, int resCode, Map<String, List<String>> headers, Object body) throws IOException {
-        Charset charset = Context.getHosts().charset(hostId);
-        String protocol = Context.getHosts().getHost(hostId).<String> getProtocol();
+        Charset charset = Context.hosts().charset(hostId);
+        String protocol = Context.hosts().getHost(hostId).<String> getProtocol();
         String resMsg = null;
         if(resCode >= 200 && resCode <= 600) {
-            resMsg = RES_CODE.valueOf("RES"+resCode).msg();
+            resMsg = HTTP.valueOf("RES"+resCode).status();
         } else {
-            resMsg = Context.getMessages().getErrorMsg(resCode, hostId);
+            resMsg = Context.messages().error(resCode, hostId);
         }
         String res = protocol+"/"+Constants.HTTP_VERSION+" "+resCode+" "+resMsg+"\r\n"; 
         this.outStream.write(res.getBytes());
@@ -185,7 +185,7 @@ public class HttpTransfer {
         } else if(body instanceof File) {
             contentLength = ((File)body).length();
         } else {
-            throw new HTTPException(RES_CODE.RES501, Context.getMessages().<String>getErrorMsg(4, body.getClass().getName()));
+            throw new HTTPException(HTTP.RES501, Context.messages().<String>error(4, body.getClass().getName()));
         }
         List<String> values = new ArrayList<>();
         values.add(String.valueOf(contentLength));
@@ -209,9 +209,9 @@ public class HttpTransfer {
             if(body instanceof String) {                                       
                 this.outStream.write(body.toString().getBytes(charset));
             } else if(body instanceof File) {
-                writeToStream((File)body, this.outStream, Context.getServer().getFileBufferSize());
+                writeToStream((File)body, this.outStream, Context.server().getFileBufferSize());
             } else if(body instanceof Path) {
-                writeToStream(((Path)body).toFile(), this.outStream, Context.getServer().getFileBufferSize());
+                writeToStream(((Path)body).toFile(), this.outStream, Context.server().getFileBufferSize());
             } else {
                 throw new IllegalArgumentException("Not supported response body type: "+body.getClass().getName());
             }
@@ -270,7 +270,7 @@ public class HttpTransfer {
             }
             if(this.socket != null && !this.socket.isClosed()) {
                 this.socket.close();
-            }    
+            }
         } catch(Exception e) {
             LoggerFactory.getLogger(this.host.getHost()).error(e.getMessage(), e);
         }

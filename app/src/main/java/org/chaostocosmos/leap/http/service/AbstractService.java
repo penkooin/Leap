@@ -9,15 +9,15 @@ import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.Response;
 import org.chaostocosmos.leap.http.ServiceInvoker;
 import org.chaostocosmos.leap.http.ServiceManager;
-import org.chaostocosmos.leap.http.annotation.AnnotationHelper;
-import org.chaostocosmos.leap.http.annotation.AnnotationOpr;
-import org.chaostocosmos.leap.http.annotation.FieldIndicates;
-import org.chaostocosmos.leap.http.annotation.PostFilterIndicates;
-import org.chaostocosmos.leap.http.annotation.PreFilterIndicates;
 import org.chaostocosmos.leap.http.common.LoggerFactory;
 import org.chaostocosmos.leap.http.context.Context;
-import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
-import org.chaostocosmos.leap.http.enums.RES_CODE;
+import org.chaostocosmos.leap.http.enums.REQUEST;
+import org.chaostocosmos.leap.http.inject.AnnotationHelper;
+import org.chaostocosmos.leap.http.inject.FieldIndicates;
+import org.chaostocosmos.leap.http.inject.InjectionOperator;
+import org.chaostocosmos.leap.http.inject.PostFilterIndicates;
+import org.chaostocosmos.leap.http.inject.PreFilterIndicates;
+import org.chaostocosmos.leap.http.enums.HTTP;
 import org.chaostocosmos.leap.http.resource.ResourcesModel;
 import org.chaostocosmos.leap.http.resource.SpringJPAManager;
 import org.chaostocosmos.leap.http.service.filter.IFilter;
@@ -99,13 +99,13 @@ public abstract class AbstractService implements GetServiceModel, PostServiceMod
             }
         }        
         //Set service method
-        this.targetMethod = this.serviceManager.getServiceMethod(REQUEST_TYPE.GET, request.getContextPath(), this);
+        this.targetMethod = this.serviceManager.getServiceMethod(REQUEST.GET, request.getContextPath(), this);
         Class<?>[] paramTypes = this.targetMethod.getParameterTypes();
         if(paramTypes.length != 2 || paramTypes[0] != request.getClass() || paramTypes[1] != response.getClass()) {
-            throw new HTTPException(RES_CODE.RES501, Context.getMessages().<String> getErrorMsg(201, this.targetMethod.getName()));
+            throw new HTTPException(HTTP.RES501, Context.messages().<String> error(201, this.targetMethod.getName()));
         }
         //setting JPA link
-        AnnotationOpr<ServiceModel> annotaionOpr = new AnnotationOpr<>(httpTransfer.getHost().getHost(), this);
+        InjectionOperator<ServiceModel> annotaionOpr = new InjectionOperator<>(httpTransfer.getHost().getHost(), this);
         annotaionOpr.injectToAutowired();
         switch(this.request.getRequestType()) {
             case GET :
@@ -121,7 +121,7 @@ public abstract class AbstractService implements GetServiceModel, PostServiceMod
             DELETE(this.request, this.response);
             break;
             default :
-            throw new HTTPException(RES_CODE.RES405, "Requested method is not allowed: "+request.getRequestType().name());
+            throw new HTTPException(HTTP.RES405, "Requested method is not allowed: "+request.getRequestType().name());
         }        
         if(this.postFilters != null) {
             for(IFilter filter : this.postFilters) {

@@ -21,7 +21,7 @@ import org.chaostocosmos.leap.http.client.LeapClient;
 import org.chaostocosmos.leap.http.client.MIME;
 import org.chaostocosmos.leap.http.common.Constants;
 import org.chaostocosmos.leap.http.common.LoggerFactory;
-import org.chaostocosmos.leap.http.common.UNIT;
+import org.chaostocosmos.leap.http.common.SIZE;
 import org.chaostocosmos.leap.http.context.Chart;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Metadata;
@@ -42,7 +42,7 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
     /**
      * Unit of data size
      */
-    private UNIT unit;
+    private SIZE unit;
 
     /**
      * Fraction point of digit
@@ -108,12 +108,12 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
      */
     private ResourceMonitor() throws NotSupportedException {
         super(buildMonitorSchema());
-        this.unit = UNIT.valueOf(Context.getServer().<String> getMonitoringUnit());
+        this.unit = SIZE.valueOf(Context.server().<String> getMonitoringUnit());
         this.fractionPoint = Constants.DEFAULT_FRACTION_POINT;
-        this.interval = Context.getServer().<Integer> getMonitoringInterval().longValue();
+        this.interval = Context.server().<Integer> getMonitoringInterval().longValue();
         this.logger = LoggerFactory.createLoggerFor("monitoring", 
-                      LeapApp.getHomePath().resolve(Context.getServer().<String> getMonitoringLogs()).normalize().toString(), 
-                      Arrays.asList(Context.getServer().<String> getMonitoringLogLevel().split(",")).stream().map(s -> Level.valueOf(s)).collect(Collectors.toList()));        
+                      LeapApp.getHomePath().resolve(Context.server().<String> getMonitoringLogs()).normalize().toString(), 
+                      Arrays.asList(Context.server().<String> getMonitoringLogLevel().split(",")).stream().map(s -> Level.valueOf(s)).collect(Collectors.toList()));        
     }
 
     /**
@@ -121,7 +121,7 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
      * @return
      */
     private static Map<String, Object> buildMonitorSchema() {
-        Chart<Map<String, Object>> chart = Context.getChart();
+        Chart<Map<String, Object>> chart = Context.chart();
         //Setting x index values
         chart.setValue("cpu.x-index", IntStream.range(0, chart.getValue("cpu.x-index")).mapToObj(i -> i % 2 == 0 ? i+"" : "").collect(Collectors.toList()));        
         chart.setValue("memory.x-index", IntStream.range(0, chart.getValue("memory.x-index")).mapToObj(i -> i % 2 == 0 ? i+"" : "").collect(Collectors.toList()));
@@ -156,9 +156,9 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
                             + "  Process Free: "+getFreeMemory()+" "+unit.name()
                             + "  Physical Total: "+getPhysicalTotalMemory()+" "+unit.name()
                             + "  Physical Free: "+getPhysicalFreeMemory()+" "+unit.name()
-                            + "  Process CPU load: "+getProcessCpuLoad()+" "+UNIT.PCT.name()
-                            + "  Process CPU time: "+getProcessCpuTime()+" "+UNIT.SE.name()
-                            + "  System CPU load: "+getSystemCpuLoad()+" "+UNIT.PCT.name()
+                            + "  Process CPU load: "+getProcessCpuLoad()+" "+SIZE.PERCENTAGE.name()
+                            + "  Process CPU time: "+getProcessCpuTime()+" "+SIZE.PERCENTAGE.name()
+                            + "  System CPU load: "+getSystemCpuLoad()+" "+SIZE.PERCENTAGE.name()
                         );             
                         setProbingValues();           
                         requestMonitorings();
@@ -248,7 +248,7 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
     private void requestMonitorings() throws IOException {
         String monitorJson = this.mapper.writerWithDefaultPrettyPrinter().writeValueAsString(super.getMeta());
         Map<String, FormData<?>> formDatas = Map.of("chart", new FormData<byte[]>(MIME.TEXT_JSON, monitorJson.getBytes()));
-        LeapClient.build(Context.getHosts().getDefaultHost().getHost(), Context.getHosts().getDefaultHost().getPort())
+        LeapClient.build(Context.hosts().getDefaultHost().getHost(), Context.hosts().getDefaultHost().getPort())
                   .addHeader("charset", "utf-8")
                   .addHeader("body-in-stream", false)
                   .post("/monitor/chart/image", null, formDatas);
@@ -381,7 +381,7 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
 	 */
 	public double getProcessHeapInit() {
 		long value = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getInit();
-		return (double) this.unit.applyUnit(value, this.fractionPoint);
+		return (double) this.unit.get(value, this.fractionPoint);
 	}	
     /**
      * Get used heap memory amount
@@ -389,7 +389,7 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
      */
     public double getProcessHeapUsed() {
         long value = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getUsed();
-        return (double) this.unit.applyUnit(value, this.fractionPoint);
+        return (double) this.unit.get(value, this.fractionPoint);
     }
 	/**
      * Get commited heap memory amount
@@ -398,7 +398,7 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
 	 */
 	public double getProcessHeapCommitted() {
 		long value = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getCommitted();
-		return (double) this.unit.applyUnit(value, this.fractionPoint);
+		return (double) this.unit.get(value, this.fractionPoint);
 	}	
 	/**
      * Get heap memory max amount
@@ -407,7 +407,7 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
 	 */
 	public double getProcessHeapMax() {
 		long value = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getMax();
-		return (double) this.unit.applyUnit(value, this.fractionPoint);
+		return (double) this.unit.get(value, this.fractionPoint);
 	}
     /**
      * Get available processors
@@ -430,7 +430,7 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
             // INTERPOLATE.NEVILLE
             // INTERPOLATE.SPLINE
             // INTERPOLATE.NONE
-            UNIT unit = Context.getServer().getMonitoringUnit();
+            SIZE unit = SIZE.valueOf(Context.server().getMonitoringUnit());
             double totalMemory = unit.get(((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getTotalPhysicalMemorySize(), Constants.DEFAULT_FRACTION_POINT);
             double usedMemory = unit.get(((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getTotalPhysicalMemorySize() - ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getFreePhysicalMemorySize(), Constants.DEFAULT_FRACTION_POINT);
             double processMemory = unit.get(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory(), Constants.DEFAULT_FRACTION_POINT);
@@ -438,8 +438,8 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
             double heapInit = unit.get(ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getInit(), Constants.DEFAULT_FRACTION_POINT);
             double heapMax = unit.get(ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getMax(), Constants.DEFAULT_FRACTION_POINT);
             double heapCommitted = unit.get(ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getCommitted(), Constants.DEFAULT_FRACTION_POINT);
-            int threadMax = Context.getServer().getThreadPoolMaxSize();
-            int threadCore = Context.getServer().getThreadPoolCoreSize();
+            int threadMax = Context.server().getThreadPoolMaxSize();
+            int threadCore = Context.server().getThreadPoolCoreSize();
             put("cpu", new HashMap<String, Object>() {{
                 put("id", "cpu");
                 put("title", "cpu");

@@ -1,17 +1,19 @@
 package org.chaostocosmos.leap.http.session;
 
-import java.net.URI;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
-import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.HTTPException;
-import org.chaostocosmos.leap.http.context.Context;
+import org.chaostocosmos.leap.http.Response;
+import org.chaostocosmos.leap.http.common.Constants;
+import org.chaostocosmos.leap.http.common.DateUtils;
+import org.chaostocosmos.leap.http.common.TIME;
 import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.enums.PROTOCOL;
-import org.chaostocosmos.leap.http.enums.RES_CODE;
+import org.chaostocosmos.leap.http.enums.HTTP;
 
 /**
  * WebSession
@@ -19,6 +21,11 @@ import org.chaostocosmos.leap.http.enums.RES_CODE;
  * @author 9ins
  */
 public class HttpSession implements Session {
+    /**
+     * Host 
+     */
+    final Host<?> host;    
+
     /**
      *  Http session attribute Map
      */    
@@ -28,11 +35,6 @@ public class HttpSession implements Session {
      * Session manager
      */
     final SessionManager sessionManager;
-
-    /** 
-     * Http request
-     */
-    final Request request;
 
     /**
      * Session ID
@@ -78,21 +80,21 @@ public class HttpSession implements Session {
      * @param maxInactiveIntervalSecond
      * @param request
      */
-    public HttpSession(SessionManager sessionManager, String sessionId, long creationTime, long lastAccessedTime, int maxInactiveIntervalSecond, Request request) {
+    public HttpSession(SessionManager sessionManager, String sessionId, long creationTime, long lastAccessedTime, int maxInactiveIntervalSecond) {
         this.sessionManager = sessionManager;
-        this.request = request;
+        this.host = this.sessionManager.getHost();
         this.sessionId = sessionId;
         this.creationTime = creationTime;
         this.lastAccessedTime = lastAccessedTime;
         this.maxInactiveIntervalSecond = maxInactiveIntervalSecond;
-        this.isSecure = request.getProtocol() == PROTOCOL.HTTPS ? true : false;
+        this.isSecure = this.host.getProtocol() == PROTOCOL.HTTPS ? true : false;
         this.isNew = true;
         this.isAuthenticated = false;
     }
 
     @Override
     public Host<?> getHost() {
-        return Context.getHost(this.request.getHostId());
+        return this.host;
     }
 
     @Override
@@ -131,13 +133,8 @@ public class HttpSession implements Session {
     }
 
     @Override
-    public String getContextPath() {
-        return this.request.getContextPath();
-    }
-
-    @Override
-    public URI getRequestURI() {
-        return this.request.getRequestURI();
+    public void setLastAccessedTime(long timeMillis) {
+        this.lastAccessedTime = timeMillis;
     }
 
     @Override
@@ -172,7 +169,7 @@ public class HttpSession implements Session {
 
     @Override
     public PROTOCOL getProtocol() {
-        return this.request.getProtocol();
+        return this.host.getProtocol();
     }
 
     @Override
@@ -182,21 +179,34 @@ public class HttpSession implements Session {
 
     @Override
     public void close() {
-        throw new HTTPException(RES_CODE.RES500, "This connection is unexpected to close.");
+        throw new HTTPException(HTTP.RES500, "This connection is unexpected to close.");
+    }
+
+    @Override
+    public Response setSessionToResponse(Response response) {
+        Object maxAge = getAttribute("Max-Age");
+        Object expires = getAttribute("Expires");
+        Object path = getAttribute("Path");
+        response.addSetCookie(Constants.SESSION_ID_KEY, getId());
+        //if(maxAge != null)  response.addSetCookie("Max-Age", maxAge.toString());
+        //if(expires != null) response.addSetCookie("Expires", expires.toString());
+        //if(path != null)    response.addSetCookie("Path", path.toString());
+        return response;
     }
 
     @Override
     public String toString() {
         return "{" +
-            " protocol='" + getProtocol() + "'" +
-            ", contextPath='" + getContextPath() + "'" +
+            " host='" + host + "'" +
+            ", attributeMap='" + attributeMap + "'" +
+            ", sessionManager='" + sessionManager + "'" +
             ", sessionId='" + sessionId + "'" +
             ", creationTime='" + creationTime + "'" +
             ", lastAccessedTime='" + lastAccessedTime + "'" +
-            ", maxInteractiveInteralSecond='" + maxInactiveIntervalSecond + "'" +
+            ", maxInactiveIntervalSecond='" + maxInactiveIntervalSecond + "'" +
             ", isNew='" + isNew + "'" +
             ", isSecure='" + isSecure + "'" +
-            ", attributeMap='" + attributeMap + "'" +
+            ", isAuthenticated='" + isAuthenticated + "'" +
             "}";
     }    
 }

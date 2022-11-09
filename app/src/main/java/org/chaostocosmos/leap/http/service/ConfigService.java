@@ -2,10 +2,10 @@ package org.chaostocosmos.leap.http.service;
 
 import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.Response;
-import org.chaostocosmos.leap.http.annotation.FilterIndicates;
-import org.chaostocosmos.leap.http.annotation.MethodIndicates;
-import org.chaostocosmos.leap.http.annotation.ServiceIndicates;
-import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
+import org.chaostocosmos.leap.http.enums.REQUEST;
+import org.chaostocosmos.leap.http.inject.FilterIndicates;
+import org.chaostocosmos.leap.http.inject.MethodIndicates;
+import org.chaostocosmos.leap.http.inject.ServiceIndicates;
 import org.chaostocosmos.leap.http.service.filter.BasicAuthFilter;
 import org.chaostocosmos.leap.http.service.filter.ConfigRequestFilter;
 
@@ -18,12 +18,12 @@ import org.chaostocosmos.leap.http.service.filter.ConfigRequestFilter;
 public class ConfigService extends AbstractService {
 
     @FilterIndicates(preFilters = { BasicAuthFilter.class, ConfigRequestFilter.class })
-    @MethodIndicates(mappingMethod = REQUEST_TYPE.POST, path="/set")
+    @MethodIndicates(method = REQUEST.POST, path="/set")
     public void setConfig(Request request) {
     }
 
     @FilterIndicates(preFilters = { BasicAuthFilter.class, ConfigRequestFilter.class })
-    @MethodIndicates(mappingMethod = REQUEST_TYPE.POST, path="/save")
+    @MethodIndicates(method = REQUEST.POST, path="/save")
     public void saveConfig(Request request) {
 
     }

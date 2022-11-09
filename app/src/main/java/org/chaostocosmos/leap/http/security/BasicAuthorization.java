@@ -3,10 +3,10 @@ package org.chaostocosmos.leap.http.security;
 import java.util.HashMap;
 
 import org.chaostocosmos.leap.http.HTTPException;
-import org.chaostocosmos.leap.http.annotation.FieldIndicates;
 import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.context.User;
-import org.chaostocosmos.leap.http.enums.RES_CODE;
+import org.chaostocosmos.leap.http.enums.HTTP;
+import org.chaostocosmos.leap.http.inject.FieldIndicates;
 import org.chaostocosmos.leap.http.service.model.IAuthenticate;
 import org.chaostocosmos.leap.http.session.SessionManager;
 
@@ -33,7 +33,7 @@ public class BasicAuthorization implements IAuthenticate {
     public User login(String username, String password) throws HTTPException {
         User user = this.securityManager.login(username, password);
         if(user == null) {            
-            HTTPException httpe = new HTTPException(RES_CODE.RES401, new HashMap<>(), "User( "+username+" ) not found in server." );
+            HTTPException httpe = new HTTPException(HTTP.RES401, "User( "+username+" ) not found in server." );
             httpe.addHeader("WWW-Authenticate", "Basic");
             throw httpe;
         }

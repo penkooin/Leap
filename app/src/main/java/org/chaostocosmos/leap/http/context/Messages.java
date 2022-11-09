@@ -28,18 +28,33 @@ public class Messages <T> extends Metadata <T> {
      * @param args
      * @return
      */
+    public <V> V get(MSG_TYPE type, int code, Object ... args) {
+        return get(type, type.name().toLowerCase()+String.format("%03d", code), args);
+    }
+
+    /**
+     * Get message from messages.yml
+     * @param <V>
+     * @param type
+     * @param code
+     * @param args
+     * @return
+     */
     @SuppressWarnings("unchecked")
-    public <V> V getMsg(MSG_TYPE type, int code, Object ... args) {
-        V msg = super.getValue("messages."+type.name().toLowerCase()+"."+type.name().toLowerCase()+code);
+    public <V> V get(MSG_TYPE type, String code, Object ... args) {
+        V msg = super.getValue("messages."+type.name().toLowerCase()+"."+code);
+        if(args.length == 0) {
+            return (V) msg.toString().replace("{}", "");
+        }
         return (V) Arrays.stream(args).filter(a -> a != null).reduce(msg, (ap, a) -> ap.toString().replaceFirst("\\{\\}", a.toString())).toString();
-    }    
+    }
 
    /**
      * Set value to messages
      * @param expr
      * @param value
      */
-    public <V> void setMsg(String expr, V value) {
+    public <V> void set(String expr, V value) {
         super.setValue(expr, value);
     }    
 
@@ -48,38 +63,90 @@ public class Messages <T> extends Metadata <T> {
      * @param code
      * @return
      */
-    public <V> V getHttpMsg(int code) {
-        return getMsg(MSG_TYPE.HTTP, code);
+    public <V> V http(int code) {
+        return get(MSG_TYPE.HTTP, code);
     }
 
     /**
-     * Get HTTP message from messages.yml
+     * Get HTTP message
      * @param code
      * @param args
      * @return
      */
-    public <V> V getHttpMsg(int code, Object... args) {
-        return getMsg(MSG_TYPE.HTTP, code, args);
+    public <V> V http(int code, Object... args) {
+        return get(MSG_TYPE.HTTP, code, args);
     }
 
     /**
-     * Get debug message from messages.yml
+     * Get HTTP message
+     * @param <V>
+     * @param code
+     * @return
+     */
+    public <V> V http(String code) {
+        return get(MSG_TYPE.HTTP, code);
+    }
+
+    /**
+     * Get HTTP message
+     * @param <V>
      * @param code
      * @param args
      * @return
      */
-    public <V> V getDebugMsg(int code, Object... args) {
-        return getMsg(MSG_TYPE.DEBUG, code, args);
+    public <V> V http(String code, Object ... args) {
+        return get(MSG_TYPE.HTTP, code);
+    }
+
+    /**
+     * Get debug message
+     * @param code
+     * @param args
+     * @return
+     */
+    public <V> V debug(int code) {
+        return get(MSG_TYPE.DEBUG, code);
     } 
 
     /**
-     * Get info message from messages.yml
+     * Get debug message
      * @param code
      * @param args
      * @return
      */
-    public <V> V getInfoMsg(int code, Object ... args) {
-        return getMsg(MSG_TYPE.INFO, code, args);
+    public <V> V debug(int code, Object... args) {
+        return get(MSG_TYPE.DEBUG, code, args);
+    } 
+
+    /**
+     * Get debug message
+     * @param <V>
+     * @param code
+     * @return
+     */
+    public <V> V debug(String code) {
+        return get(MSG_TYPE.DEBUG, code);
+    }
+
+    /**
+     * Get debug message
+     * @param <V>
+     * @param code
+     * @param args
+     * @return
+     */
+    public <V> V debug(String code, Object... args) {
+        return get(MSG_TYPE.DEBUG, code);
+    }
+
+    /**
+     * Get info message
+     * @param code
+     * @param args
+     * @return
+     */
+    public <V> V info(int code, Object ... args) {
+        return get(MSG_TYPE.INFO, code, args);
     }
 
     /**
@@ -88,8 +155,18 @@ public class Messages <T> extends Metadata <T> {
      * @param args
      * @return
      */
-    public <V> V getWarnMsg(int code, Object ... args) {
-        return getMsg(MSG_TYPE.WARN, code, args);
+    public <V> V warn(int code, Object ... args) {
+        return get(MSG_TYPE.WARN, code, args);
+    }
+
+    /**
+     * Get warn message from messages.yml
+     * @param code
+     * @param args
+     * @return
+     */
+    public <V> V warn(String code, Object ... args) {
+        return get(MSG_TYPE.WARN, code, args);
     }
 
     /**
@@ -98,7 +175,17 @@ public class Messages <T> extends Metadata <T> {
      * @param args
      * @return
      */
-    public <V> V getErrorMsg(int code, Object ... args) {
-        return getMsg(MSG_TYPE.ERROR, code, args);
+    public <V> V error(int code, Object ... args) {
+        return get(MSG_TYPE.ERROR, code, args);
+    }
+
+    /**
+     * Get error message from messages.yml
+     * @param code
+     * @param args
+     * @return
+     */
+    public <V> V error(String code, Object ... args) {
+        return get(MSG_TYPE.ERROR, code, args);
     }
 }

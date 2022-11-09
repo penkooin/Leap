@@ -26,7 +26,7 @@ import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.context.MetaEvent;
 import org.chaostocosmos.leap.http.context.MetaListener;
-import org.chaostocosmos.leap.http.enums.HOST_STATUS;
+import org.chaostocosmos.leap.http.enums.STATUS;
 import org.chaostocosmos.leap.http.resource.ClassUtils;
 import org.chaostocosmos.leap.http.resource.ResourceHelper;
 import org.chaostocosmos.leap.http.resource.ResourceManager;
@@ -133,7 +133,7 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
 
         //set log level
         String optionL = cmdLine.getOptionValue("l");
-        logger = LoggerFactory.getLogger(Context.getHosts().getDefaultHost().getHostId());
+        logger = LoggerFactory.getLogger(Context.hosts().getDefaultHost().getHostId());
         if(optionL != null) {
             Level level = Level.toLevel(optionL); 
             logger.setLevel(level);
@@ -165,23 +165,23 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
     public void start() throws Exception {
         //NetworkInterfaces.getAllNetworkAddresses().stream().forEach(i -> System.out.println(i.getHostName())); 
         //Spring JPA 
-        if((boolean) Context.getServer().isSupportSpringJPA()) {
+        if((boolean) Context.server().isSupportSpringJPA()) {
             jpaManager = SpringJPAManager.get();
         }
         //initialize thread queue
         threadQueue = new LinkedBlockingQueue<Runnable>();        
         //initialize thread pool
-        threadpool = new ThreadPoolExecutor(Context.getServer().<Integer> getThreadPoolCoreSize(), Context.getServer().<Integer> getThreadPoolMaxSize(), Context.getServer().<Integer> getThreadPoolKeepAlive(), TimeUnit.SECONDS, threadQueue);                
+        threadpool = new ThreadPoolExecutor(Context.server().<Integer> getThreadPoolCoreSize(), Context.server().<Integer> getThreadPoolMaxSize(), Context.server().<Integer> getThreadPoolKeepAlive(), TimeUnit.SECONDS, threadQueue);                
         logger.info("====================================================================================================");
-        logger.info("ThreadPool initialized - CORE: "+Context.getServer().<Integer> getThreadPoolCoreSize()+"   MAX: "+Context.getServer().<Integer> getThreadPoolMaxSize()+"   KEEP-ALIVE WHEN IDLE(seconds): "+Context.getServer().<Integer> getThreadPoolKeepAlive());    
+        logger.info("ThreadPool initialized - CORE: "+Context.server().<Integer> getThreadPoolCoreSize()+"   MAX: "+Context.server().<Integer> getThreadPoolMaxSize()+"   KEEP-ALIVE WHEN IDLE(seconds): "+Context.server().<Integer> getThreadPoolKeepAlive());    
 
         // initialize resource manager
         resourceManager = ResourceManager.initialize();
 
         //initialize Leap hosts
-        for(Host<?> host : Context.getHosts().getAllHost()) {
+        for(Host<?> host : Context.hosts().getAllHost()) {
             // set host server status to NONE
-            host.setHostStatus(HOST_STATUS.NONE);
+            host.setHostStatus(STATUS.NONE);
             InetAddress hostAddress = InetAddress.getByName(host.getHost());
             String hostName = hostAddress.getHostAddress()+":"+host.getPort();
             if(leapServerMap.containsKey(hostName)) {
@@ -209,7 +209,7 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
         }
 
         //initialize resource monitor
-        if((boolean) Context.getServer().isSupportMonitoring()) {
+        if((boolean) Context.server().isSupportMonitoring()) {
             resourceMonitor = ResourceMonitor.get();
         } else {
             logger.info("[MONITOR OFF] Leap system monitor turned off.");

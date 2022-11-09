@@ -5,7 +5,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.util.Map;
 
-import org.chaostocosmos.leap.http.enums.MIME_TYPE;
+import org.chaostocosmos.leap.http.enums.MIME;
 
 /**
  * Request part model
@@ -16,7 +16,7 @@ public interface Part {
      * Get content type
      * @return
      */
-    public MIME_TYPE getContentType();
+    public MIME getContentType();
 
     /**
      * Get content length

@@ -1,8 +1,8 @@
 package org.chaostocosmos.leap.http.session;
 
-import java.net.URI;
 import java.util.Enumeration;
 
+import org.chaostocosmos.leap.http.Response;
 import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.enums.PROTOCOL;
 
@@ -62,22 +62,16 @@ public interface Session {
     public long getLastAccessedTime();
 
     /**
+     * Set last accessed time milliseconds
+     * @param timeMillis
+     */
+    public void setLastAccessedTime(long timeMillis);
+
+    /**
      * Get max inactive interval
      * @return
      */
     public int getMaxInactiveIntervalSecond();
-
-    /**
-     * Get context path
-     * @return
-     */
-    public String getContextPath();
-
-    /**
-     * Get request URI
-     * @return
-     */
-    public URI getRequestURI();
 
     /**
      * Invalidate the session
@@ -125,4 +119,11 @@ public interface Session {
      * Close session
      */
     public void close();
+
+    /**
+     * Set session information to response object
+     * @param response
+     * @return
+     */
+    public Response setSessionToResponse(Response response);
 }

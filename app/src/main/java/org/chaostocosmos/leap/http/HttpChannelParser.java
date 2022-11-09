@@ -5,7 +5,7 @@ import java.net.Socket;
 import java.util.List;
 import java.util.Map;
 
-import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
+import org.chaostocosmos.leap.http.enums.REQUEST;
 
 /**
  * HttpChannelParser
@@ -52,7 +52,7 @@ public class HttpChannelParser {
      * @return
      */
     public static boolean isValidType(String requestType) {
-        if(REQUEST_TYPE.GET.name().equals(requestType) || REQUEST_TYPE.POST.name().equals(requestType) || REQUEST_TYPE.PUT.name().equals(requestType) || REQUEST_TYPE.DELETE.name().equals(requestType)) {
+        if(REQUEST.GET.name().equals(requestType) || REQUEST.POST.name().equals(requestType) || REQUEST.PUT.name().equals(requestType) || REQUEST.DELETE.name().equals(requestType)) {
             return true;
         }
         return false; 

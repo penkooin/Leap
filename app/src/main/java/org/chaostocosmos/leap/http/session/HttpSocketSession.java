@@ -5,9 +5,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
-import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.context.Context;
-import org.chaostocosmos.leap.http.enums.RES_CODE;
+import org.chaostocosmos.leap.http.enums.HTTP;
 import org.chaostocosmos.leap.http.service.entity.Message;
 
 /**
@@ -42,8 +41,8 @@ public class HttpSocketSession extends HttpSession {
      * @param socket
      * @throws IOException
      */
-    public HttpSocketSession(SessionManager sessionManager, String sessionId, long creationTime, long lastAccessedTime, int maxInteractiveInteralSecond, Request request, Socket socket) throws IOException {
-        super(sessionManager, sessionId, creationTime, lastAccessedTime, maxInteractiveInteralSecond, request);
+    public HttpSocketSession(SessionManager sessionManager, String sessionId, long creationTime, long lastAccessedTime, int maxInteractiveInteralSecond, Socket socket) throws IOException {
+        super(sessionManager, sessionId, creationTime, lastAccessedTime, maxInteractiveInteralSecond);
         this.socket = socket;
         this.inStream = socket.getInputStream();
         this.outStream = socket.getOutputStream();
@@ -52,7 +51,7 @@ public class HttpSocketSession extends HttpSession {
     @Override
     public void close() {
         Message msg = new Message();
-        msg.setContent(Context.getMessages().getHttpMsg(RES_CODE.RES500.code()));
+        msg.setContent(Context.messages().http(HTTP.RES500.code()));
         try {
             this.inStream.close();
             this.outStream.write(msg.getContent().getBytes());

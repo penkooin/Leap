@@ -4,7 +4,7 @@ import java.net.InetAddress;
 import java.util.List;
 
 import org.chaostocosmos.leap.http.Request;
-import org.chaostocosmos.leap.http.annotation.PreFilterIndicates;
+import org.chaostocosmos.leap.http.inject.PreFilterIndicates;
 import org.chaostocosmos.leap.http.resource.SpringJPAManager;
 
 /**

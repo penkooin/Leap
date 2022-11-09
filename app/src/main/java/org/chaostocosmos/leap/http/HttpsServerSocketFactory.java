@@ -42,7 +42,7 @@ public class HttpsServerSocketFactory {
     /**
      * Logger
      */
-    Logger logger = LoggerFactory.getLogger(Context.getHosts().getDefaultHost().getHostId());
+    Logger logger = LoggerFactory.getLogger(Context.hosts().getDefaultHost().getHostId());
 
     /**
      * Get SSL ServerSocket or if type isn't TLS, return normal ServerSocket

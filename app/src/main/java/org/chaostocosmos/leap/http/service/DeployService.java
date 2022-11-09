@@ -16,14 +16,14 @@ import javax.transaction.NotSupportedException;
 import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.Response;
 import org.chaostocosmos.leap.http.HTTPException;
-import org.chaostocosmos.leap.http.annotation.FilterIndicates;
-import org.chaostocosmos.leap.http.annotation.MethodIndicates;
-import org.chaostocosmos.leap.http.annotation.ServiceIndicates;
 import org.chaostocosmos.leap.http.common.ExceptionUtils;
 import org.chaostocosmos.leap.http.context.Context;
-import org.chaostocosmos.leap.http.enums.MIME_TYPE;
-import org.chaostocosmos.leap.http.enums.REQUEST_TYPE;
-import org.chaostocosmos.leap.http.enums.RES_CODE;
+import org.chaostocosmos.leap.http.enums.MIME;
+import org.chaostocosmos.leap.http.enums.REQUEST;
+import org.chaostocosmos.leap.http.inject.FilterIndicates;
+import org.chaostocosmos.leap.http.inject.MethodIndicates;
+import org.chaostocosmos.leap.http.inject.ServiceIndicates;
+import org.chaostocosmos.leap.http.enums.HTTP;
 import org.chaostocosmos.leap.http.part.MultiPart;
 import org.chaostocosmos.leap.http.part.Part;
 import org.chaostocosmos.leap.http.service.filter.BasicAuthFilter;
@@ -33,24 +33,24 @@ import org.chaostocosmos.leap.http.service.model.ServiceModel;
 @ServiceIndicates(path="/deploy")
 public class DeployService extends AbstractService implements DeployModel {
     
-    @MethodIndicates(mappingMethod = REQUEST_TYPE.POST, path = "/service/add")
+    @MethodIndicates(method = REQUEST.POST, path = "/service/add")
     @FilterIndicates(preFilters = BasicAuthFilter.class)
     public void add(Request request, Response response) throws HTTPException, IOException {
         final Map<String, String> headers = request.getReqHeader();
         final Part bodyPart = request.getBodyPart();
         if(bodyPart == null) {
-            throw new HTTPException(RES_CODE.RES417, Context.getMessages().<String>getErrorMsg(400, "Service class file data is missing in request."));
-        } else if(bodyPart.getContentType() == MIME_TYPE.MULTIPART_FORM_DATA) {            
+            throw new HTTPException(HTTP.RES417, Context.messages().<String>error(400, "Service class file data is missing in request."));
+        } else if(bodyPart.getContentType() == MIME.MULTIPART_FORM_DATA) {            
             String qualifiedClassName = headers.get("serviceClassNames");
             if(qualifiedClassName.startsWith("[") && qualifiedClassName.endsWith("]")) {
                 qualifiedClassName = qualifiedClassName.substring(qualifiedClassName.indexOf("[")+1, qualifiedClassName.lastIndexOf("]"));
                 if(qualifiedClassName == null || qualifiedClassName.equals("")) {
-                    throw new HTTPException(RES_CODE.RES412, "Service class name array is empty!!!");
+                    throw new HTTPException(HTTP.RES412, "Service class name array is empty!!!");
                 }
                 super.logger.debug("Deploying service... "+request.getReqHeader().toString());
                 Arrays.asList(qualifiedClassName.split(",")).stream().forEach(cls -> {
                     if(cls == null) {
-                        throw new HTTPException(RES_CODE.RES412, Context.getMessages().<String>getErrorMsg(400, "Service full qualifiedClassName is missing in header of request."));
+                        throw new HTTPException(HTTP.RES412, Context.messages().<String>error(400, "Service full qualifiedClassName is missing in header of request."));
                     }        
                     cls = cls.trim();
                     Path serviceClassPath = super.serviceManager.getHost().getDynamicClasspaths();                
@@ -69,20 +69,20 @@ public class DeployService extends AbstractService implements DeployModel {
                         super.serviceManager.initialize();
                     } catch(NoClassDefFoundError | Exception e) {
                         multipart.getFilePaths().stream().forEach(p -> deleteClean(serviceClassPath.getFileName().toString(), p));
-                        super.logger.error(Context.getMessages().getErrorMsg(19, e.getMessage()), e);
+                        super.logger.error(Context.messages().error(19, e.getMessage()), e);
                         super.logger.debug("[DEPLOY] Exception in servie deploy process: "+serviceClassPath.resolve(qualifiedClassPath).toString());
-                        throw new HTTPException(RES_CODE.RES412, ExceptionUtils.getStackTraces(e));
+                        throw new HTTPException(HTTP.RES412, ExceptionUtils.getStackTraces(e));
                     }        
                 });
             } else {
-                throw new HTTPException(RES_CODE.RES404, "Service class name must be array!!!");
+                throw new HTTPException(HTTP.RES404, "Service class name must be array!!!");
             }            
         } else {
-            throw new HTTPException(RES_CODE.RES405, "Requested: "+bodyPart.getContentType().name());
+            throw new HTTPException(HTTP.RES405, "Requested: "+bodyPart.getContentType().name());
         }
     }
 
-    @MethodIndicates(mappingMethod = REQUEST_TYPE.GET, path = "/service/delete")
+    @MethodIndicates(method = REQUEST.GET, path = "/service/delete")
     @FilterIndicates(preFilters = BasicAuthFilter.class)
     public void delete(Request request, Response response) throws IOException, 
                                                                   URISyntaxException, 
@@ -98,7 +98,7 @@ public class DeployService extends AbstractService implements DeployModel {
         if(qualifiedClassName.startsWith("[") && qualifiedClassName.endsWith("]")) {
             qualifiedClassName = qualifiedClassName.substring(qualifiedClassName.indexOf("[")+1, qualifiedClassName.lastIndexOf("]"));
             if(qualifiedClassName == null || qualifiedClassName.equals("")) {
-                throw new HTTPException(RES_CODE.RES412, "Service class name is empty!!!");
+                throw new HTTPException(HTTP.RES412, "Service class name is empty!!!");
             }
             List<String> classNames = Arrays.asList(qualifiedClassName.split(",")).stream().map(c -> c.trim()).collect(Collectors.toList());
             for(String className : classNames) {
@@ -108,11 +108,11 @@ public class DeployService extends AbstractService implements DeployModel {
                     serviceClassPath.toFile().delete();
                     super.logger.info("[DEPLOY] Delete service -  class: "+className+"  path: "+serviceClassPath.toString());
                 } else {
-                    throw new HTTPException(RES_CODE.RES404, "Service class file not found: "+serviceClassPath.toString());
+                    throw new HTTPException(HTTP.RES404, "Service class file not found: "+serviceClassPath.toString());
                 }
             }
         } else {
-            throw new HTTPException(RES_CODE.RES404, "Service class name must be array!!!");
+            throw new HTTPException(HTTP.RES404, "Service class name must be array!!!");
         }
     }
 

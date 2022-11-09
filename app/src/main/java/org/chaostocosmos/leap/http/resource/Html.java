@@ -20,7 +20,7 @@ public class Html {
     public static String makeRedirectHtml(String protocol, int seconds, String url) {
         return protocol+" 200 Leap Load-Balance redirect.\r\n"
                 +"Date: "+new Date()+"\r\n"
-                +"Server: Leap?/"+Context.getServer().getLeapVersion()+"("+System.getProperty("os.name")+") java/"+System.getProperty("java.version")+"\r\n"
+                +"Server: Leap?/"+Context.server().getLeapVersion()+"("+System.getProperty("os.name")+") java/"+System.getProperty("java.version")+"\r\n"
                 +"Content-Type: text/html; charset=iso-8859-1\r\n"
                 +"\r\n"
                 +"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 3.2 Final//EN\">"
@@ -38,7 +38,7 @@ public class Html {
     public static String makeRedirect(String protocol, int seconds, String url) {
         return protocol+" 307 Leap Load-Balance redirect.\r\n"
                +"Date: "+new Date()+"\r\n"
-               +"Server: Leap?/"+Context.getServer().getLeapVersion()+"("+System.getProperty("os.name")+") java/"+System.getProperty("java.version")+"\r\n"
+               +"Server: Leap?/"+Context.server().getLeapVersion()+"("+System.getProperty("os.name")+") java/"+System.getProperty("java.version")+"\r\n"
                +"Refresh: "+seconds+"; URL="+url+"\r\n"
                +"Connection: close"+"\r\n"
                +"Content-Type: text/html; charset=iso-8859-1\r\n\r\n";

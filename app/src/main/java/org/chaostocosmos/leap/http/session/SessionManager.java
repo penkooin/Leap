@@ -5,8 +5,6 @@ import java.util.Map;
 
 import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.common.Constants;
-import org.chaostocosmos.leap.http.common.DateUtils;
-import org.chaostocosmos.leap.http.common.UNIT;
 import org.chaostocosmos.leap.http.context.Context;
 import org.chaostocosmos.leap.http.context.Host;
 import org.chaostocosmos.leap.http.security.SessionIDGenerator;
@@ -40,7 +38,7 @@ public class SessionManager {
      * @return
      */
     public boolean isApplySession() {
-        return this.host.getApplySession();
+        return this.host.isSessionApply();
     }
 
     /**
@@ -48,7 +46,7 @@ public class SessionManager {
      * @param applySession
      */
     public void setApplySession(boolean applySession) {
-        this.host.setApplySession(applySession);
+        this.host.setSessionApply(applySession);
     }
 
     /**
@@ -69,14 +67,15 @@ public class SessionManager {
      * @param sessionId
      * @return
      */
-    public synchronized Session getSessionCreateIfNotExists(Request request) {
-        String sessionId = request.getCookie(Constants.SESSION_ID_KEY);                
+    public synchronized Session getSessionCreateIfNotExists(String sessionId) {        
         if(this.sessionMap.containsKey(sessionId)) {
-            return this.sessionMap.get(sessionId);
-        } else {
-            Session session = createSession(request);
-            this.addSession(session);
+            Session session = this.sessionMap.get(sessionId);
+            session.setNew(false);            
             return session;
+        } else {
+            Session session = createSession(sessionId);
+            addSession(session);
+            return session;    
         }
     }
 
@@ -85,15 +84,17 @@ public class SessionManager {
      * @param request
      * @return
      */
-    public synchronized Session createSession(Request request) {
-        int idLength = Context.getHost(this.host.getHostId()).getSessionIDLength();
+    public synchronized Session createSession(String sessionId) {
+        int idLength = Context.host(this.host.getHostId()).getSessionIDLength();
         long creationTime = System.currentTimeMillis();
         long lastAccessedTime = creationTime;
-        int maxInteractiveInteralSecond = Context.getHost(this.host.getHostId()).<Integer> getSessionTimeout();
-        String sessionId = SessionIDGenerator.get(this.host.<String> getHostId()).generateSessionId(idLength);
-        Session session = new HttpSession(this, sessionId, creationTime, lastAccessedTime, maxInteractiveInteralSecond, request); 
-        session.setAttribute("Expires", DateUtils.getDateLocalAddedOffset(System.currentTimeMillis() + this.host.<Integer>getExpires() * (int) UNIT.DY.getUnit()));
-        session.setAttribute("Max-Age", this.host.<Integer> getMaxAge());
+        int maxInteractiveInteralSecond = Context.host(this.host.getHostId()).<Integer> getSessionTimeoutSeconds();
+        sessionId = sessionId != null && !sessionId.equals("") ? sessionId : SessionIDGenerator.get(this.host.<String> getHostId()).generateSessionId(idLength);
+        //System.out.println(sessionId+"================================");
+        Session session = new HttpSession(this, sessionId, creationTime, lastAccessedTime, maxInteractiveInteralSecond);         
+        //System.out.println(session.toString());
+        //session.setAttribute("Expires", DateUtils.getDateAddedOffset(this.host.<Integer>getExpireDays(), this.host.<String> getLocale()));
+        //session.setAttribute("Max-Age", TIME.HOUR.duration(this.host.<Integer> getMaxAgeHours(), TimeUnit.SECONDS));
         session.setAttribute("Path", this.host.<String> getPath());
         return session;
     }
@@ -142,11 +143,19 @@ public class SessionManager {
         return this.sessionMap;
     }
 
+    /**
+     * Get Host object
+     * @return
+     */
+    public Host<?> getHost() {
+        return this.host;
+    }
+
     @Override
     public String toString() {
         return "{" +
             " host='" + host + "'" +
-            ", sessionMap='" + sessionMap + "'" +
+            //", sessionMap='" + sessionMap + "'" +
             "}";
     }    
 }

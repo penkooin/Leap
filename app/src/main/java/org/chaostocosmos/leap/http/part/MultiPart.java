@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 import org.chaostocosmos.leap.http.HTTPException;
 import org.chaostocosmos.leap.http.common.StreamUtils;
 import org.chaostocosmos.leap.http.context.Context;
-import org.chaostocosmos.leap.http.enums.MIME_TYPE;
-import org.chaostocosmos.leap.http.enums.RES_CODE;
+import org.chaostocosmos.leap.http.enums.MIME;
+import org.chaostocosmos.leap.http.enums.HTTP;
 
 /**
  * Multi part descriptor
@@ -37,7 +37,7 @@ public class MultiPart extends BodyPart {
     boolean preLoadBody;
     /**
      * Constructor of Multipart
-     * @param host
+     * @param hostId
      * @param contentType
      * @param boundary
      * @param contentLength
@@ -46,8 +46,8 @@ public class MultiPart extends BodyPart {
      * @param charset
      * @throws IOException
      */
-    public MultiPart(String host, MIME_TYPE contentType, String boundary, long contentLength, InputStream requestStream, boolean preLoadBody, Charset charset) throws IOException {
-        super(host, contentType, contentLength, requestStream, false, charset);
+    public MultiPart(String hostId, MIME contentType, String boundary, long contentLength, InputStream requestStream, boolean preLoadBody, Charset charset) throws IOException {
+        super(hostId, contentType, contentLength, requestStream, false, charset);
         this.filePaths = new ArrayList<>();
         this.boundary = boundary;
         this.preLoadBody = preLoadBody;
@@ -59,7 +59,7 @@ public class MultiPart extends BodyPart {
     @Override
     public Map<String, byte[]> getBody() throws IOException {
         if(super.body == null) {
-            return StreamUtils.getMultiPartContents(this.host, this.requestStream, this.boundary, super.charset);
+            return StreamUtils.getMultiPartContents(this.hostId, this.requestStream, this.boundary, super.charset);
         }
         return super.body;
     }
@@ -87,8 +87,8 @@ public class MultiPart extends BodyPart {
     
     @Override
     public void save(final Path targetPath) throws IOException {
-        if(contentType != MIME_TYPE.MULTIPART_FORM_DATA || contentType != MIME_TYPE.MULTIPART_BYTERANGES) {
-            throw new HTTPException(RES_CODE.RES406, "Can not save content. Not supported on Multi Part Operation.");
+        if(contentType != MIME.MULTIPART_FORM_DATA || contentType != MIME.MULTIPART_BYTERANGES) {
+            throw new HTTPException(HTTP.RES406, "Can not save content. Not supported on Multi Part Operation.");
         }        
         if(targetPath.toFile().isDirectory()) {
             throw new IOException("Multi part saving must be provided directory Path: "+targetPath.toString());
@@ -104,7 +104,7 @@ public class MultiPart extends BodyPart {
                 }
             });
         } else {
-            this.filePaths = StreamUtils.saveMultiPart(this.host, super.requestStream, targetPath.normalize(), Context.getServer().getFileBufferSize(), this.boundary, super.charset);    
+            this.filePaths = StreamUtils.saveMultiPart(this.hostId, super.requestStream, targetPath.normalize(), Context.server().getFileBufferSize(), this.boundary, super.charset);    
         }
         super.logger.debug("[MULTI-PART] "+super.contentType.name()+" saved: "+targetPath.normalize().toString()+"  Size: "+filePaths.stream().map(p -> p.toFile()).map(f -> f.getName()+": "+f.length()).collect(Collectors.joining(", ")));
     }    

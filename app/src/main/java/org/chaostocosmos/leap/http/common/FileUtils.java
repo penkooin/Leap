@@ -30,7 +30,7 @@ public class FileUtils {
      * @throws IOException
      */
     public static void saveBinary(byte[] data, Path target) throws IOException {
-        saveBinary(data, target, Context.getServer().getFileBufferSize());
+        saveBinary(data, target, Context.server().getFileBufferSize());
     }
 
     /**

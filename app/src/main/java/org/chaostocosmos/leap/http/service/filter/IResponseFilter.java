@@ -1,6 +1,6 @@
 package org.chaostocosmos.leap.http.service.filter;
 
-import org.chaostocosmos.leap.http.annotation.PostFilterIndicates;
+import org.chaostocosmos.leap.http.inject.PostFilterIndicates;
 
 /**
  * IHttpResponseFilter
