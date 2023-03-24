@@ -16,7 +16,7 @@ import java.nio.channels.SocketChannel;
 import java.util.List;
 import java.util.Map;
 
-import org.chaostocosmos.leap.http.common.ChannelUtils;
+import org.chaostocosmos.leap.common.ChannelUtils;
 import org.junit.Before;
 import org.junit.Test;
 

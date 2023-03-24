@@ -5,7 +5,7 @@ import java.net.Socket;
 import java.util.List;
 import java.util.Map;
 
-import org.chaostocosmos.leap.http.enums.REQUEST;
+import org.chaostocosmos.leap.enums.REQUEST;
 
 /**
  * HttpChannelParser

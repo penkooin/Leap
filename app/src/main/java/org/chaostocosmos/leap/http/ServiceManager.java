@@ -12,22 +12,21 @@ import java.util.stream.Collectors;
 
 import javax.transaction.NotSupportedException;
 
-import org.chaostocosmos.leap.http.annotation.MethodMapper;
-import org.chaostocosmos.leap.http.annotation.PostFilters;
-import org.chaostocosmos.leap.http.annotation.PreFilters;
-import org.chaostocosmos.leap.http.annotation.ServiceMapper;
-import org.chaostocosmos.leap.http.common.LoggerFactory;
-import org.chaostocosmos.leap.http.context.Context;
-import org.chaostocosmos.leap.http.context.Host;
-import org.chaostocosmos.leap.http.enums.HTTP;
-import org.chaostocosmos.leap.http.enums.REQUEST;
-import org.chaostocosmos.leap.http.resource.ClassUtils;
-import org.chaostocosmos.leap.http.resource.LeapURLClassLoader;
-import org.chaostocosmos.leap.http.resource.ResourcesModel;
-import org.chaostocosmos.leap.http.security.SecurityManager;
-import org.chaostocosmos.leap.http.service.filter.IFilter;
-import org.chaostocosmos.leap.http.service.model.ServiceModel;
-import org.chaostocosmos.leap.http.session.SessionManager;
+import org.chaostocosmos.leap.annotation.MethodMapper;
+import org.chaostocosmos.leap.annotation.PostFilters;
+import org.chaostocosmos.leap.annotation.PreFilters;
+import org.chaostocosmos.leap.annotation.ServiceMapper;
+import org.chaostocosmos.leap.common.LoggerFactory;
+import org.chaostocosmos.leap.context.Context;
+import org.chaostocosmos.leap.context.Host;
+import org.chaostocosmos.leap.enums.HTTP;
+import org.chaostocosmos.leap.enums.REQUEST;
+import org.chaostocosmos.leap.resource.ClassUtils;
+import org.chaostocosmos.leap.resource.LeapURLClassLoader;
+import org.chaostocosmos.leap.resource.ResourcesModel;
+import org.chaostocosmos.leap.service.filter.IFilter;
+import org.chaostocosmos.leap.service.model.ServiceModel;
+import org.chaostocosmos.leap.session.SessionManager;
 
 import ch.qos.logback.classic.Logger;
 
@@ -51,7 +50,7 @@ public class ServiceManager {
     /**
      * Leap security manager object
      */
-    private SecurityManager userManager;
+    private org.chaostocosmos.leap.security.SecurityManager securityManager;
 
     /**
      * Session manager
@@ -77,7 +76,7 @@ public class ServiceManager {
      * Constructor
      * 
      * @param host
-     * @param userManager 
+     * @param securityManager 
      * @param sessionManager 
      * @param resourcesModel
      * @param classLoader
@@ -85,9 +84,9 @@ public class ServiceManager {
      * @throws URISyntaxException
      * @throws IOException
      */
-    public ServiceManager(Host<?> host, SecurityManager userManager, SessionManager sessionManager, ResourcesModel resourcesModel, LeapURLClassLoader classLoader) throws IOException, URISyntaxException, NotSupportedException {
+    public ServiceManager(Host<?> host, org.chaostocosmos.leap.security.SecurityManager securityManager, SessionManager sessionManager, ResourcesModel resourcesModel, LeapURLClassLoader classLoader) throws IOException, URISyntaxException, NotSupportedException {
         this.host = host;
-        this.userManager  = userManager;
+        this.securityManager  = securityManager;
         this.sessionManager = sessionManager;
         this.resourcesModel = resourcesModel;
         this.classLoader = classLoader;
@@ -191,8 +190,8 @@ public class ServiceManager {
      * Get user manager object
      * @return
      */
-    public SecurityManager getUserManager() {
-        return this.userManager;
+    public org.chaostocosmos.leap.security.SecurityManager getSecurityManager() {
+        return this.securityManager;
     }
 
     /**

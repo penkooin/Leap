@@ -14,14 +14,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.http.common.Constants;
-import org.chaostocosmos.leap.http.common.LoggerFactory;
-import org.chaostocosmos.leap.http.context.Context;
-import org.chaostocosmos.leap.http.context.Host;
-import org.chaostocosmos.leap.http.enums.MIME;
-import org.chaostocosmos.leap.http.enums.MSG_TYPE;
-import org.chaostocosmos.leap.http.enums.HTTP;
-import org.chaostocosmos.leap.http.resource.TemplateBuilder;
+import org.chaostocosmos.leap.common.Constants;
+import org.chaostocosmos.leap.common.LoggerFactory;
+import org.chaostocosmos.leap.context.Context;
+import org.chaostocosmos.leap.context.Host;
+import org.chaostocosmos.leap.enums.HTTP;
+import org.chaostocosmos.leap.enums.MIME;
+import org.chaostocosmos.leap.enums.MSG_TYPE;
+import org.chaostocosmos.leap.resource.TemplateBuilder;
 
 /**
  * HttpTransfer object

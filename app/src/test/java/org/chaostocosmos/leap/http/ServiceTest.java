@@ -1,6 +1,6 @@
 package org.chaostocosmos.leap.http;
 
-import org.chaostocosmos.leap.http.service.TimeServiceImpl;
+import org.chaostocosmos.leap.service.TimeServiceImpl;
 
 public class ServiceTest {
 

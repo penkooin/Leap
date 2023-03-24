@@ -14,20 +14,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.chaostocosmos.leap.http.common.Constants;
-import org.chaostocosmos.leap.http.common.LoggerFactory;
+import org.chaostocosmos.leap.common.Constants;
+import org.chaostocosmos.leap.common.LoggerFactory;
+import org.chaostocosmos.leap.context.Context;
+import org.chaostocosmos.leap.context.Host;
+import org.chaostocosmos.leap.enums.HTTP;
+import org.chaostocosmos.leap.enums.MIME;
+import org.chaostocosmos.leap.enums.PROTOCOL;
+import org.chaostocosmos.leap.enums.REQUEST;
 import org.chaostocosmos.leap.http.common.StreamUtils;
-import org.chaostocosmos.leap.http.context.Context;
-import org.chaostocosmos.leap.http.context.Host;
-import org.chaostocosmos.leap.http.enums.MIME;
-import org.chaostocosmos.leap.http.enums.PROTOCOL;
-import org.chaostocosmos.leap.http.enums.REQUEST;
-import org.chaostocosmos.leap.http.enums.HTTP;
-import org.chaostocosmos.leap.http.part.BinaryPart;
-import org.chaostocosmos.leap.http.part.BodyPart;
-import org.chaostocosmos.leap.http.part.KeyValuePart;
-import org.chaostocosmos.leap.http.part.MultiPart;
-import org.chaostocosmos.leap.http.part.TextPart;
+import org.chaostocosmos.leap.part.BinaryPart;
+import org.chaostocosmos.leap.part.BodyPart;
+import org.chaostocosmos.leap.part.KeyValuePart;
+import org.chaostocosmos.leap.part.MultiPart;
+import org.chaostocosmos.leap.part.TextPart;
 
 /**
  * Http parsing factory object

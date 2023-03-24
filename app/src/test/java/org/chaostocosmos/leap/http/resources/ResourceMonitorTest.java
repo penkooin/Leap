@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.transaction.NotSupportedException;
 
-import org.chaostocosmos.leap.http.resource.ResourceMonitor;
+import org.chaostocosmos.leap.resource.ResourceMonitor;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "LeapApp",
+            "request": "launch",
+            "mainClass": "org.chaostocosmos.leap.LeapApp",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
             "name": "Launch StringTools",
             "request": "launch",
             "mainClass": "org.chaostocosmos.metadata.StringTools",

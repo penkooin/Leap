@@ -3,9 +3,9 @@ package org.chaostocosmos.leap.http;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
-import org.chaostocosmos.leap.http.common.LoggerFactory;
-import org.chaostocosmos.leap.http.context.Context;
-import org.chaostocosmos.leap.http.service.AbstractService;
+import org.chaostocosmos.leap.common.LoggerFactory;
+import org.chaostocosmos.leap.context.Context;
+import org.chaostocosmos.leap.service.AbstractService;
 import org.slf4j.Logger;
 
 /**

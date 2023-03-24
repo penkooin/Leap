@@ -6,7 +6,7 @@ import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import org.chaostocosmos.leap.http.client.LeapClient;
+import org.chaostocosmos.leap.client.LeapClient;
 
 /**
  * Leap request test

@@ -2,7 +2,7 @@ package org.chaostocosmos.leap.http.commons;
 
 import java.util.concurrent.TimeUnit;
 
-import org.chaostocosmos.leap.http.common.TIME;
+import org.chaostocosmos.leap.common.TIME;
 
 public class TimeTest {
 

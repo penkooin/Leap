@@ -9,23 +9,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import org.chaostocosmos.leap.http.common.Constants;
-import org.chaostocosmos.leap.http.common.DateUtils;
-import org.chaostocosmos.leap.http.common.TIME;
-import org.chaostocosmos.leap.http.common.UtilBox;
-import org.chaostocosmos.leap.http.context.Context;
-import org.chaostocosmos.leap.http.context.Host;
-import org.chaostocosmos.leap.http.enums.MIME;
-import org.chaostocosmos.leap.http.enums.MSG_TYPE;
-import org.chaostocosmos.leap.http.enums.REQUEST;
-import org.chaostocosmos.leap.http.enums.HTTP;
-import org.chaostocosmos.leap.http.resource.Resource;
-import org.chaostocosmos.leap.http.resource.ResourceHelper;
-import org.chaostocosmos.leap.http.resource.TemplateBuilder;
-import org.chaostocosmos.leap.http.security.SecurityManager;
-import org.chaostocosmos.leap.http.security.UserCredentials;
-import org.chaostocosmos.leap.http.session.Session;
-import org.chaostocosmos.leap.http.session.SessionManager;
+import org.chaostocosmos.leap.common.Constants;
+import org.chaostocosmos.leap.common.DateUtils;
+import org.chaostocosmos.leap.common.TIME;
+import org.chaostocosmos.leap.common.UtilBox;
+import org.chaostocosmos.leap.context.Context;
+import org.chaostocosmos.leap.context.Host;
+import org.chaostocosmos.leap.enums.HTTP;
+import org.chaostocosmos.leap.enums.MIME;
+import org.chaostocosmos.leap.enums.MSG_TYPE;
+import org.chaostocosmos.leap.enums.REQUEST;
+import org.chaostocosmos.leap.resource.Resource;
+import org.chaostocosmos.leap.resource.ResourceHelper;
+import org.chaostocosmos.leap.resource.TemplateBuilder;
+import org.chaostocosmos.leap.security.UserCredentials;
+import org.chaostocosmos.leap.session.Session;
+import org.chaostocosmos.leap.session.SessionManager;
 
 /**
  * Client request handing object
@@ -60,7 +59,7 @@ public class LeapRequestHandler implements Runnable {
     /**
      * Security manager object
      */
-    SecurityManager securityManager;
+    org.chaostocosmos.leap.security.SecurityManager securityManager;
 
     /**
      * Client socket

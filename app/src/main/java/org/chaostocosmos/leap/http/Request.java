@@ -7,12 +7,12 @@ import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.chaostocosmos.leap.http.common.LoggerFactory;
-import org.chaostocosmos.leap.http.enums.MIME;
-import org.chaostocosmos.leap.http.enums.PROTOCOL;
-import org.chaostocosmos.leap.http.enums.REQUEST;
-import org.chaostocosmos.leap.http.part.Part;
-import org.chaostocosmos.leap.http.session.Session;
+import org.chaostocosmos.leap.common.LoggerFactory;
+import org.chaostocosmos.leap.enums.MIME;
+import org.chaostocosmos.leap.enums.PROTOCOL;
+import org.chaostocosmos.leap.enums.REQUEST;
+import org.chaostocosmos.leap.part.Part;
+import org.chaostocosmos.leap.session.Session;
 
 import ch.qos.logback.classic.Logger;
 
