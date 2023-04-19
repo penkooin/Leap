@@ -5,6 +5,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -107,8 +108,14 @@ public class Hosts <T> extends Metadata <T> {
      * Get all of dynamic classpath list
      * @return
      */
-    public <V> List<V> getAllDynamicClasspaths() {
-        return getAllHost().stream().map(h -> h.<V>getDynamicClasspaths()).collect(Collectors.toList());
+    public List<Path> getAllDynamicClasspaths() {
+        return getAllHost().stream().flatMap(h -> h.<List<String>>getDynamicClasspaths().stream()).reduce(new ArrayList<Path>(), (accum, i) -> {
+            accum.add(Paths.get(i));
+            return accum;            
+        }, (e1, e2) -> {
+            e1.addAll(e2);
+            return e1;
+        });
     }
 
     /**

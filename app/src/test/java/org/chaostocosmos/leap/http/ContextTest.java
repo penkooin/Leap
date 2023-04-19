@@ -16,6 +16,8 @@ import org.junit.jupiter.api.Test;
 public class ContextTest {
 
     public ContextTest() throws URISyntaxException, IOException, HTTPException {    
+        Context.init(Paths.get("./config"));
+        Context.host("leap").getLogPath();
     }
 
     @Test
@@ -56,8 +58,6 @@ public class ContextTest {
     }
 
     public static void main(String[] args) throws Exception {
-        Path path = Paths.get("/a/b/c/aaa.txt");
-        Path path1 = Paths.get("/a/b");
-        System.out.println(path.toString().substring(path1.toString().length()));
+        new ContextTest();
     }
 }

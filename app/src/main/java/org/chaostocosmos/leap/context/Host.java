@@ -435,7 +435,7 @@ public class Host <T> extends Metadata<T> {
      * @return 
      */
     public <V> V getSessionIDLength() {
-        return super.getValue("session.id-length");
+        return super.getValue("session.length");
     }
 
     /**
@@ -443,7 +443,7 @@ public class Host <T> extends Metadata<T> {
      * @param sessionIdLength
      */
     public <V> void setSessionIDLength(V sessionIdLength) {
-        super.setValue("session.id-length", sessionIdLength);
+        super.setValue("session.length", sessionIdLength);
     }
 
     /**
@@ -524,7 +524,7 @@ public class Host <T> extends Metadata<T> {
      * @return
      */
     public <V> V getPath() {
-        return super.getValue("session.path");
+        return super.getValue("path");
     }
 
     /**
@@ -533,7 +533,7 @@ public class Host <T> extends Metadata<T> {
      * @param path
      */
     public <V> void setPath(V path) {
-        super.setValue("session.path", path);
+        super.setValue("path", path);
     }
 
     /**
@@ -569,7 +569,7 @@ public class Host <T> extends Metadata<T> {
      * @return
      */    
     public Path getDocroot() {
-        return Paths.get((String)super.getValue("doc-root")).normalize().toAbsolutePath();
+        return Paths.get((String)super.getValue("docroot")).normalize().toAbsolutePath();
     }
 
     /**
@@ -631,7 +631,7 @@ public class Host <T> extends Metadata<T> {
      * @return
      */
     public Path getLogPath() {
-        return getDocroot().resolve((String) super.getValue("logs"));
+        return getDocroot().resolve((String) super.getValue("logs.path"));
     }
 
     /**
@@ -647,7 +647,7 @@ public class Host <T> extends Metadata<T> {
      * @return
      */
     public List<Level> getLogLevel() {
-        return Arrays.asList(super.getValue("log-level").toString().split(",")).stream().map(l -> Level.toLevel(l.trim())).collect(Collectors.toList());
+        return Arrays.asList(super.getValue("logs.level").toString().split(",")).stream().map(l -> Level.toLevel(l.trim())).collect(Collectors.toList());
     }
 
     /**
@@ -655,7 +655,7 @@ public class Host <T> extends Metadata<T> {
      * @param logLevel
      */
     public <V> void setLogLevel(List<Level> logLevel) {
-        super.setValue("log-level", logLevel.stream().map(l -> l.toString()).collect(Collectors.joining(", ")));
+        super.setValue("logs.level", logLevel.stream().map(l -> l.toString()).collect(Collectors.joining(", ")));
     }
 
     /**

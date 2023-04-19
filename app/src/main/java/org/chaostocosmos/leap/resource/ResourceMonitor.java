@@ -247,7 +247,7 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
      */
     private void requestMonitorings() throws IOException {
         String monitorJson = this.mapper.writerWithDefaultPrettyPrinter().writeValueAsString(super.getMeta());
-        Map<String, FormData<?>> formDatas = Map.of("chart", new FormData<byte[]>(MIME.TEXT_JSON, monitorJson.getBytes()));
+        Map<String, FormData<?>> formDatas = Map.of("chart", new FormData<byte[]>(MIME.TEXT_JSON, monitorJson.getBytes()));        
         LeapClient.build(Context.hosts().getDefaultHost().getHost(), Context.hosts().getDefaultHost().getPort())
                   .addHeader("charset", "utf-8")
                   .addHeader("body-in-stream", false)

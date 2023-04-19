@@ -153,11 +153,11 @@ public class LeapHttpServer extends Thread {
     public LeapHttpServer(Path homePath) throws IOException, InterruptedException, URISyntaxException, NotSupportedException {
         this(homePath, 
              Context.hosts().getHost(Context.hosts().getDefaultHost().getHostId()), 
-             new ThreadPoolExecutor(Context.server().getThreadPoolCoreSize(), 
-                                    Context.server().getThreadPoolMaxSize(), 
-                                    Context.server().getThreadPoolKeepAlive(), 
-                                    TimeUnit.SECONDS, 
-                                    new LinkedBlockingQueue<Runnable>())
+                                    new ThreadPoolExecutor(Context.server().getThreadPoolCoreSize(), 
+                                                           Context.server().getThreadPoolMaxSize(), 
+                                                           Context.server().getThreadPoolKeepAlive(), 
+                                                           TimeUnit.SECONDS, 
+                                                           new LinkedBlockingQueue<Runnable>())
         );
     }
 

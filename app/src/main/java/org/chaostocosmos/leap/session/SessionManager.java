@@ -2,8 +2,11 @@ package org.chaostocosmos.leap.session;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.chaostocosmos.leap.common.Constants;
+import org.chaostocosmos.leap.common.DateUtils;
+import org.chaostocosmos.leap.common.TIME;
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.http.Request;
@@ -93,9 +96,9 @@ public class SessionManager {
         //System.out.println(sessionId+"================================");
         Session session = new HttpSession(this, sessionId, creationTime, lastAccessedTime, maxInteractiveInteralSecond);         
         //System.out.println(session.toString());
-        //session.setAttribute("Expires", DateUtils.getDateAddedOffset(this.host.<Integer>getExpireDays(), this.host.<String> getLocale()));
-        //session.setAttribute("Max-Age", TIME.HOUR.duration(this.host.<Integer> getMaxAgeHours(), TimeUnit.SECONDS));
-        session.setAttribute("Path", this.host.<String> getPath());
+        session.setAttribute("Expires", DateUtils.getDateAddedOffset(this.host.<Integer>getExpireDays(), this.host.<String> getLocale()));
+        session.setAttribute("Max-Age", TIME.HOUR.duration(this.host.<Integer> getMaxAgeHours(), TimeUnit.SECONDS));
+        //session.setAttribute("Path", this.host.<String> getPath());
         return session;
     }
 
