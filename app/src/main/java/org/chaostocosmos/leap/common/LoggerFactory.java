@@ -6,9 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.context.Host;
-import org.chaostocosmos.leap.http.HTTPException;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
@@ -46,7 +46,7 @@ public class LoggerFactory {
      * Get logger object
      * @param hostId
      * @return
-     * @throws HTTPException
+     * @throws LeapException
      * @throws IOException
      * @throws URISyntaxException
      */

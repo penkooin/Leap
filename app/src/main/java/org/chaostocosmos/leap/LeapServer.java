@@ -1,4 +1,4 @@
-package org.chaostocosmos.leap.http;
+package org.chaostocosmos.leap;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,6 +28,8 @@ import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.PROTOCOL;
 import org.chaostocosmos.leap.enums.STATUS;
+import org.chaostocosmos.leap.http.HttpsServerSocketFactory;
+import org.chaostocosmos.leap.http.ServiceManager;
 import org.chaostocosmos.leap.resource.ClassUtils;
 import org.chaostocosmos.leap.resource.Html;
 import org.chaostocosmos.leap.resource.LeapURLClassLoader;
@@ -44,7 +46,7 @@ import ch.qos.logback.classic.Logger;
  * @author 9ins
  * @since 2021.09.15
  */
-public class LeapHttpServer extends Thread {
+public class LeapServer extends Thread {
     /**
      * logger
      */
@@ -137,7 +139,7 @@ public class LeapHttpServer extends Thread {
      * @throws InterruptedException
      * @throws IOException
      */
-    public LeapHttpServer() throws IOException, InterruptedException, URISyntaxException, NotSupportedException {
+    public LeapServer() throws IOException, InterruptedException, URISyntaxException, NotSupportedException {
         this(Constants.DEFAULT_HOME_PATH);
     }
 
@@ -150,7 +152,7 @@ public class LeapHttpServer extends Thread {
      * @throws InterruptedException
      * @throws IOException
      */
-    public LeapHttpServer(Path homePath) throws IOException, InterruptedException, URISyntaxException, NotSupportedException {
+    public LeapServer(Path homePath) throws IOException, InterruptedException, URISyntaxException, NotSupportedException {
         this(homePath, 
              Context.hosts().getHost(Context.hosts().getDefaultHost().getHostId()), 
                                     new ThreadPoolExecutor(Context.server().getThreadPoolCoreSize(), 
@@ -172,7 +174,7 @@ public class LeapHttpServer extends Thread {
      * @throws InterruptedException
      * @throws IOException
      */
-    public LeapHttpServer(Path homePath, Host<?> host, ThreadPoolExecutor threadpool) throws IOException, InterruptedException, URISyntaxException, NotSupportedException {
+    public LeapServer(Path homePath, Host<?> host, ThreadPoolExecutor threadpool) throws IOException, InterruptedException, URISyntaxException, NotSupportedException {
         this(homePath, host, threadpool, ClassUtils.getClassLoader());
     }
 
@@ -188,7 +190,7 @@ public class LeapHttpServer extends Thread {
      * @throws InterruptedException
      * @throws IOException
      */
-    public LeapHttpServer(Path homePath, Host<?> host, ThreadPoolExecutor threadpool, LeapURLClassLoader classLoader) throws IOException, InterruptedException, URISyntaxException, NotSupportedException {
+    public LeapServer(Path homePath, Host<?> host, ThreadPoolExecutor threadpool, LeapURLClassLoader classLoader) throws IOException, InterruptedException, URISyntaxException, NotSupportedException {
         this(true, Context.getHomePath(), host.getDocroot(), PROTOCOL.valueOf(host.getProtocol()), new InetSocketAddress(InetAddress.getByName(host.getHost()), host.getPort()), Context.server().getBackLog(), threadpool, host, classLoader);
     }
 
@@ -209,7 +211,7 @@ public class LeapHttpServer extends Thread {
      * @throws IOException
      * @throws NotSupportedException
      */
-    public LeapHttpServer(boolean isDefaultHost, Path homePath, Path docroot, PROTOCOL protocol, InetSocketAddress inetSocketAddress, int backlog, ThreadPoolExecutor threadpool, Host<?> host, LeapURLClassLoader classLoader) throws IOException, InterruptedException, URISyntaxException, NotSupportedException {
+    public LeapServer(boolean isDefaultHost, Path homePath, Path docroot, PROTOCOL protocol, InetSocketAddress inetSocketAddress, int backlog, ThreadPoolExecutor threadpool, Host<?> host, LeapURLClassLoader classLoader) throws IOException, InterruptedException, URISyntaxException, NotSupportedException {
         this.host = host;
         this.host.setHostStatus(STATUS.SETUP);
         this.isDefaultHost = true;
@@ -301,7 +303,7 @@ public class LeapHttpServer extends Thread {
                 if(this.ipAllowedFilters.include(ipAddress) || this.ipForbiddenFilters.exclude(ipAddress)) {
                     if(queueSize < Context.server().<Integer> getThreadQueueSize()) {
                         this.logger.info("[CLIENT DETECTED] Client request accepted. Submitting thread. "+ipAddress+" - "+connection.getPort()+"  Thread queue size - "+queueSize);
-                        this.threadpool.submit(new LeapRequestHandler(this, this.docroot, connection, this.host));
+                        this.threadpool.submit(new LeapHandler(this, this.docroot, connection, this.host));
                     } else {
                         String redirectHost = redirectHostSelection.getSelectedHost();
                         String redirectPage = Html.makeRedirect(this.protocol.protocol(), 0, redirectHost);

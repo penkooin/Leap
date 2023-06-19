@@ -5,11 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.common.LoggerFactory;
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.REQUEST;
-import org.chaostocosmos.leap.http.HTTPException;
 import org.chaostocosmos.leap.http.Http;
 import org.chaostocosmos.leap.http.HttpTransfer;
 import org.chaostocosmos.leap.http.Request;
@@ -66,10 +66,10 @@ public abstract class AbstractService implements ServiceModel {
         Map<Class<? extends Http>, Object> paramMap = Map.of(HttpTransfer.class, httpTransfer, Request.class, request, Response.class, response);
 
         //Set service method
-        Method targetMethod = this.serviceManager.getServiceMethod(REQUEST.GET, request.getContextPath(), this);
+        Method targetMethod = this.serviceManager.getServiceMethod(httpTransfer.getRequest().getRequestType(), request.getContextPath(), this);
         Class<?>[] paramTypes = targetMethod.getParameterTypes();
         if(paramTypes.length != 2 || paramTypes[0] != request.getClass() || paramTypes[1] != response.getClass()) {
-            throw new HTTPException(HTTP.RES501, Context.messages().<String> error(201, targetMethod.getName()));
+            throw new LeapException(HTTP.RES501, Context.messages().<String> error(201, targetMethod.getName()));
         }
         Object[] params = Arrays.asList(paramTypes).stream().map(c -> paramMap.get(c)).toArray();
         targetMethod.invoke(this, params);

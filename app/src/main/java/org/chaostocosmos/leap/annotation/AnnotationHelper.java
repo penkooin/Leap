@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.common.LoggerFactory;
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.REQUEST;
-import org.chaostocosmos.leap.http.HTTPException;
 import org.chaostocosmos.leap.resource.ClassUtils;
 import org.chaostocosmos.leap.service.filter.IFilter;
 import org.chaostocosmos.leap.service.model.ServiceModel;
@@ -71,15 +71,15 @@ public class AnnotationHelper {
      * Get service method Map
      * @param service
      * @return
-     * @throws HTTPException
+     * @throws LeapException
      */
-    public static Map<String, Method> getServiceMethodMap(ServiceModel service) throws HTTPException {
+    public static Map<String, Method> getServiceMethodMap(ServiceModel service) throws LeapException {
         Map<String, Method> methodMap = new HashMap<>();
         ServiceMapper serviceIndicator = service.getClass().getDeclaredAnnotation(ServiceMapper.class);
         if(serviceIndicator != null) {
             String sPath = serviceIndicator.mappingPath();
             if(sPath == null) {
-                throw new HTTPException(HTTP.RES500, new Exception(Context.messages(). <String>error(6, service.getClass().getName())));
+                throw new LeapException(HTTP.RES500, new Exception(Context.messages(). <String>error(6, service.getClass().getName())));
             }
             Method[] methods = service.getClass().getDeclaredMethods();
             for(Method method : methods) {
@@ -87,11 +87,11 @@ public class AnnotationHelper {
                 if(methodIndicator != null) {
                     String mPath = methodIndicator.mappingPath();
                     if(mPath == null) {
-                        throw new HTTPException(HTTP.RES500, new Exception(Context.messages(). <String>error(7, method.getName())));
+                        throw new LeapException(HTTP.RES500, new Exception(Context.messages(). <String>error(7, method.getName())));
                     }        
                     String fullPath = sPath + mPath;
                     if(methodMap.containsKey(fullPath)) {
-                        throw new HTTPException(HTTP.RES500, new Exception(Context.messages(). <String>error(8, methodMap.get(fullPath).getName())));
+                        throw new LeapException(HTTP.RES500, new Exception(Context.messages(). <String>error(8, methodMap.get(fullPath).getName())));
                     }
                     methodMap.put(fullPath, method);
                 }
@@ -162,7 +162,7 @@ public class AnnotationHelper {
      * Get servlet conext mappings Map
      * @param classes
      * @return
-     * @throws HTTPException
+     * @throws LeapException
      */
     public static Map<String, ServiceModel> getServiceContextMappings(List<String> classes) throws Exception {
         Map<String, ServiceModel> serviceContextMappings = new HashMap<>();
@@ -199,7 +199,7 @@ public class AnnotationHelper {
      * Get service method 
      * @param classes
      * @return
-     * @throws HTTPException
+     * @throws LeapException
      */
     public static Map<String, Method> getServiceHolderMap(List<String> classes) throws Exception {
         Map<String, Method> serviceContextMappings = new HashMap<>();

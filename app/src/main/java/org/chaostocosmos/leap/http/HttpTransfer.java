@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.common.Constants;
 import org.chaostocosmos.leap.common.LoggerFactory;
 import org.chaostocosmos.leap.context.Context;
@@ -185,7 +186,7 @@ public class HttpTransfer implements Http {
         } else if(body instanceof File) {
             contentLength = ((File)body).length();
         } else {
-            throw new HTTPException(HTTP.RES501, Context.messages().<String>error(4, body.getClass().getName()));
+            throw new LeapException(HTTP.RES501, Context.messages().<String>error(4, body.getClass().getName()));
         }
         List<String> values = new ArrayList<>();
         values.add(String.valueOf(contentLength));

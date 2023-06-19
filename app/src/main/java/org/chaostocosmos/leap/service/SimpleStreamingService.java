@@ -20,8 +20,8 @@ public class SimpleStreamingService extends AbstractStreamingService {
     } 
 
     @MethodMapper(method = REQUEST.GET, mappingPath = "/video")
-    public void streaming(Request request, Response response) {
-        
+    public void streaming(Request request, Response response) throws Exception {
+        super.streaming(request, response);        
     }
 
     @Override

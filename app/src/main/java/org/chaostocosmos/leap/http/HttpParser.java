@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.common.Constants;
 import org.chaostocosmos.leap.common.LoggerFactory;
 import org.chaostocosmos.leap.context.Context;
@@ -105,7 +106,7 @@ public class HttpParser {
         /**
          * Parse request
          * @throws IOException
-         * @throws HTTPException
+         * @throws LeapException
          */
         public Request parseRequest(InetAddress inetAddress, InputStream inStream) throws Exception {
             long requestMillis = System.currentTimeMillis();
@@ -118,11 +119,11 @@ public class HttpParser {
             debug.append("============================== [REQUEST] "+requestLine+" =============================="+System.lineSeparator());
             String[] linesplited = requestLine.split(" ");
             if(linesplited.length != 3) {
-                throw new HTTPException(HTTP.RES417, Context.messages().<String>error(400, "Requested line is something wrong: "+requestLine));
+                throw new LeapException(HTTP.RES417, Context.messages().<String>error(400, "Requested line is something wrong: "+requestLine));
             }
             String method = linesplited[0];
             if(!Arrays.asList(REQUEST.values()).stream().anyMatch(R -> R.name().equals(method))) {
-                throw new HTTPException(HTTP.RES405, Context.messages().<String>error(26, method));
+                throw new LeapException(HTTP.RES405, Context.messages().<String>error(26, method));
             }
             String contextPath = linesplited[1];
             String protocolVersion = requestLine.substring(requestLine.lastIndexOf(" ") + 1);
@@ -135,7 +136,7 @@ public class HttpParser {
                     break;
                 int idx = header.indexOf(":");
                 if (idx == -1) {
-                    throw new HTTPException(HTTP.RES417, Context.messages().<String>error(3, header));
+                    throw new LeapException(HTTP.RES417, Context.messages().<String>error(3, header));
                 }
                 debug.append(header.substring(0, idx)+":   "+header.substring(idx + 1, header.length()).trim()+Constants.LS);
                 headerMap.put(header.substring(0, idx), header.substring(idx + 1, header.length()).trim());
@@ -161,7 +162,7 @@ public class HttpParser {
             //Get Host object by requested host name
             Host<?> host = Context.host(hostId);
             if(host == null) {
-                throw new HTTPException(HTTP.RES417, Context.messages().<String>error(24, hostName));
+                throw new LeapException(HTTP.RES417, Context.messages().<String>error(24, hostName));
             }
             //Get content type from requested header
             String contentType = headerMap.get("Content-Type");
@@ -182,10 +183,10 @@ public class HttpParser {
             long contentLength = headerMap.get("Content-Length") != null ? Long.parseLong(headerMap.get("Content-Length")) : 0L;
             if(!headerMap.containsKey("Range") && !host.checkRequestAttack(inetAddress.getHostAddress(), protocol+"://"+hostName + contextPath)) {
                 LoggerFactory.getLogger(requestedHost).warn("[CLIENT BLOCKED] Too many requested client blocking: "+inetAddress.getHostAddress());
-                throw new HTTPException(HTTP.RES429, requestedHost+" requested too many on short period!!!");
+                throw new LeapException(HTTP.RES429, requestedHost+" requested too many on short period!!!");
             }
             if(!Context.hosts().isExistHostname(hostName)) {
-                throw new HTTPException(HTTP.RES417, Context.messages().<String>error(400, "Requested host ID not exist in this server. ID: "+hostName));
+                throw new LeapException(HTTP.RES417, Context.messages().<String>error(400, "Requested host ID not exist in this server. ID: "+hostName));
             }            
             debug.append("Host ID: "+hostId);
             Charset charset = Context.hosts().charset(hostId);
@@ -248,7 +249,7 @@ public class HttpParser {
         /**
          * parse response
          * @return
-         * @throws HTTPException
+         * @throws LeapException
          */
         public Response buildResponse(final Request request, 
                                       final int statusCode, 

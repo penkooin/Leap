@@ -3,6 +3,7 @@ package org.chaostocosmos.leap.http;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
+import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.common.LoggerFactory;
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.service.AbstractService;
@@ -45,7 +46,7 @@ public class ServiceInvoker {
      * @param object
      * @param method
      * @param params
-     * @throws HTTPException
+     * @throws LeapException
      */
     public static void invokeMethod(Object object, String methodName, Object... params) throws Exception {
         Method method = object.getClass().getDeclaredMethod(methodName, Arrays.asList(params).stream().map(o -> o.getClass()).toArray(Class[]::new));
@@ -57,7 +58,7 @@ public class ServiceInvoker {
      * @param object
      * @param method
      * @param params
-     * @throws HTTPException
+     * @throws LeapException
      */
     public static void invokeMethod(Object object, Method method, Object... params) throws Exception {
         method.invoke(object, params);

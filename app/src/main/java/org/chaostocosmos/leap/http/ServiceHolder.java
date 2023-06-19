@@ -72,6 +72,10 @@ public class ServiceHolder {
         this.serviceModel = service;
     }
 
+    public String getServiceClassName() {
+        return this.serviceModel.getClass().getCanonicalName();
+    }
+
     @Override
     public String toString() {
         return "{" +

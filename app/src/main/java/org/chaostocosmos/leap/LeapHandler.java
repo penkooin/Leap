@@ -1,4 +1,4 @@
-package org.chaostocosmos.leap.http;
+package org.chaostocosmos.leap;
 
 import java.net.Socket;
 import java.net.SocketTimeoutException;
@@ -19,6 +19,13 @@ import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.MIME;
 import org.chaostocosmos.leap.enums.MSG_TYPE;
 import org.chaostocosmos.leap.enums.REQUEST;
+import org.chaostocosmos.leap.http.HttpTransfer;
+import org.chaostocosmos.leap.http.HttpTransferBuilder;
+import org.chaostocosmos.leap.http.Request;
+import org.chaostocosmos.leap.http.Response;
+import org.chaostocosmos.leap.http.ServiceHolder;
+import org.chaostocosmos.leap.http.ServiceInvoker;
+import org.chaostocosmos.leap.http.ServiceManager;
 import org.chaostocosmos.leap.resource.Resource;
 import org.chaostocosmos.leap.resource.ResourceHelper;
 import org.chaostocosmos.leap.resource.TemplateBuilder;
@@ -35,7 +42,7 @@ import org.chaostocosmos.leap.session.SessionManager;
  * @author 9ins
  * @since 2021.09.16
  */
-public class LeapRequestHandler implements Runnable {
+public class LeapHandler implements Runnable {
     /**
      * Leap server home path
      */
@@ -44,7 +51,7 @@ public class LeapRequestHandler implements Runnable {
     /**
      * Server
      */
-    LeapHttpServer httpServer;
+    LeapServer httpServer;
 
     /**
      * Service manager object
@@ -78,7 +85,7 @@ public class LeapRequestHandler implements Runnable {
      * @param client
      * @param host
      */
-    public LeapRequestHandler(LeapHttpServer httpServer, Path LEAP_HOME, Socket client, Host<?> host) {
+    public LeapHandler(LeapServer httpServer, Path LEAP_HOME, Socket client, Host<?> host) {
         this.httpServer = httpServer;
         this.LEAP_HOME = LEAP_HOME;
         this.client = client;
@@ -112,12 +119,12 @@ public class LeapRequestHandler implements Runnable {
                         user.setSession(session);
                     }
                     if(!session.isNew() && DateUtils.getMillis() > session.getLastAccessedTime() + TIME.SECOND.duration(this.host.<Integer> getSessionTimeoutSeconds(), TimeUnit.MILLISECONDS)) {
-                        throw new HTTPException(HTTP.RES401, "  Session timeout: "+host.getSessionTimeoutSeconds()+" sec.  Current Date: "+new Date(DateUtils.getMillis())+"  Timeout Date: "+new Date(session.getLastAccessedTime() + session.getMaxInactiveIntervalSecond() * 1000L));
+                        throw new LeapException(HTTP.RES401, "  Session timeout: "+host.getSessionTimeoutSeconds()+" sec.  Current Date: "+new Date(DateUtils.getMillis())+"  Timeout Date: "+new Date(session.getLastAccessedTime() + session.getMaxInactiveIntervalSecond() * 1000L));
                     }
                     session.setNew(false);
                     session.setLastAccessedTime(DateUtils.getMillis());
                     session.setSessionToResponse(response);
-                } catch(HTTPException httpe) {
+                } catch(LeapException httpe) {
                     httpe.printStackTrace();
                     this.sessionManager.removeSession(session);
                     throw httpe;
@@ -129,18 +136,18 @@ public class LeapRequestHandler implements Runnable {
             if (serviceHolder != null) {
                 // Request method validation
                 if(serviceHolder.getRequestType() != request.getRequestType()) {
-                    throw new HTTPException(HTTP.RES405, "Not supported: "+request.getRequestType().name());
+                    throw new LeapException(HTTP.RES405, "Not supported: "+request.getRequestType().name());
                 } else {
                     // Do requested service to execute by cloned service of request
                     response = ServiceInvoker.invokeServiceMethod(serviceHolder, httpTransfer);
                 }
             } else { // When client request static resources
                 if(request.getRequestType() != REQUEST.GET) {
-                    throw new HTTPException(HTTP.RES405, "Static content can't be provided by "+request.getRequestType().name());
+                    throw new LeapException(HTTP.RES405, "Static content can't be provided by "+request.getRequestType().name());
                 }
                 Path resourcePath = ResourceHelper.getResourcePath(request);
                 if(request.getContextPath().equals("/")) {
-                    String body = TemplateBuilder.buildWelcomeResourceHtml(request.getContextPath(), host);
+                    String body = TemplateBuilder.buildWelcomeResourceHtml(request.getContextPath(), host);                    
                     response.addHeader("Content-Type", MIME.TEXT_HTML.mimeType()+"; charset="+host.<String> charset());
                     response.setBody(body.getBytes());
                     response.setResponseCode(HTTP.RES200.code());
@@ -170,10 +177,10 @@ public class LeapRequestHandler implements Runnable {
                                 this.host.getLogger().debug("DOWNLOAD RESOURCE MIME-TYPE: "+mimeType);    
                             }
                         } else {
-                            throw new HTTPException(HTTP.RES403, request.getContextPath());
+                            throw new LeapException(HTTP.RES403, request.getContextPath());
                         }
                     } else {
-                        throw new HTTPException(HTTP.RES404, request.getContextPath());
+                        throw new LeapException(HTTP.RES404, request.getContextPath());
                     }
                 }
             }                 
@@ -185,7 +192,7 @@ public class LeapRequestHandler implements Runnable {
             host.getLogger().error("[SOCKET TIME OUT] Client socket timeout occurred.");
         } catch(Exception e) {           
             try {                
-                if(!httpTransfer.isClosed()) {                   
+                if(httpTransfer != null && !httpTransfer.isClosed()) {
                     processError(httpTransfer, e);
                 }
             } catch (Exception ex) {                
@@ -214,8 +221,8 @@ public class LeapRequestHandler implements Runnable {
         String message = throwable.getMessage();
         String hostId = httpTransfer.getHost().getHostId();
         Map<String, List<String>> headers = new HashMap<>();
-        if(throwable instanceof HTTPException) {
-            HTTPException e = (HTTPException) throwable;
+        if(throwable instanceof LeapException) {
+            LeapException e = (LeapException) throwable;
             headers.putAll(e.getHeaders());
             resCode = e.code();
             msgType = e.getMessageType();
@@ -242,7 +249,7 @@ public class LeapRequestHandler implements Runnable {
     public Throwable getCaused(String host, Throwable e) {        
         int level = 0;
         do {
-            if(e instanceof HTTPException || e == null) {
+            if(e instanceof LeapException || e == null) {
                 break;
             }
             e = e.getCause();

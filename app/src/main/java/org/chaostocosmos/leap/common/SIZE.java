@@ -13,41 +13,60 @@ public enum SIZE {
     GB(SizeConstants.GiB),
     TB(SizeConstants.TiB),
     PB(SizeConstants.PiB),
-    PERCENTAGE(SizeConstants.PERCENTAGE);
+    PCT(SizeConstants.PCT),
+    CNT(SizeConstants.CNT);
 
-    long amount;
+    long size;
 
-    SIZE(long amount) {
-        this.amount = amount;
+    SIZE(long size) {
+        this.size = size;
     }
 
     /**
      * Get amount by default fraction point
-     * @param size
+     * @param amount
      * @return
      */
-    public double get(long size) {
-        return get(size, Constants.DEFAULT_FRACTION_POINT);
+    public double get(long amount) {
+        return get(amount, Constants.DEFAULT_FRACTION_POINT);
     }
 
     /**
      * Get amount with specified fraction point
-     * @param size
+     * @param amount
      * @param decimalPoint
      * @return
      */
-    public double get(long size, int decimalPoint) {
-        return Math.round((size / (double)this.amount) * Math.pow(10, decimalPoint)) / Math.pow(10, decimalPoint);
+    public double get(long amount, int decimalPoint) {
+        return get((double)amount, decimalPoint);
+    }
+
+    /**
+     * Get amount with specified fraction point
+     * @param amount
+     * @param decimalPoint
+     * @return
+     */
+    public double get(double amount, int decimalPoint) {
+        return Math.round((amount / (double)this.size) * Math.pow(10, decimalPoint)) / Math.pow(10, decimalPoint);
+    }
+
+    /**
+     * Get unit size
+     * @return
+     */
+    public long getUnitSize() {
+        return this.size;
     }
 
     /**
      * Percentage of a size of total 
      * @param total
-     * @param size
+     * @param amount
      * @param decimalPoint
      * @return
      */
-    public double ratio(long total, long size, int decimalPoint) {
-        return Math.round(((size / (double)total) * this.amount) * Math.pow(10, decimalPoint)) / Math.pow(10, decimalPoint);
+    public double ratio(long total, long amount, int decimalPoint) {
+        return Math.round(((amount / (double)total) * this.size) * Math.pow(10, decimalPoint)) / Math.pow(10, decimalPoint);
     }
 }

@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.common.Constants;
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.context.META;
 import org.chaostocosmos.leap.enums.HTTP;
-import org.chaostocosmos.leap.http.HTTPException;
 
 import ch.qos.logback.classic.Logger;
 
@@ -48,17 +48,17 @@ public class SecurityManager {
         return null;
     }
 
-    public UserCredentials login(String username, String password) throws HTTPException {
-        UserCredentials user = this.users.stream().filter(u -> u.getUsername().equals(username)).findAny().orElseThrow(() -> new HTTPException(HTTP.RES401, 25, username));
+    public UserCredentials login(String username, String password) throws LeapException {
+        UserCredentials user = this.users.stream().filter(u -> u.getUsername().equals(username)).findAny().orElseThrow(() -> new LeapException(HTTP.RES401, 25, username));
         return user;
     }
 
-    public void register(UserCredentials user) throws HTTPException {
+    public void register(UserCredentials user) throws LeapException {
         if(this.users.stream().anyMatch(u -> u.getUsername().equals(user.getUsername()))) {
-            throw new HTTPException(HTTP.RES401, 17, user.getUsername()); 
+            throw new LeapException(HTTP.RES401, 17, user.getUsername()); 
         }
         if(!Constants.PASSWORD_REGEX.matcher(user.getPassword()).matches()) {
-            throw new HTTPException(HTTP.RES401, 18);
+            throw new LeapException(HTTP.RES401, 18);
         }
         this.users.add(user);
         save(this.users);
@@ -82,7 +82,7 @@ public class SecurityManager {
             this.logger.debug("==================================================");  
             return user;
         }
-        throw new HTTPException(HTTP.RES401, 28, authorization);
+        throw new LeapException(HTTP.RES401, 28, authorization);
     }
 
     /**
@@ -106,9 +106,9 @@ public class SecurityManager {
     /**
      * Save user list
      * @param users
-     * @throws HTTPException
+     * @throws LeapException
      */
-    public void save(List<UserCredentials> users) throws HTTPException {
+    public void save(List<UserCredentials> users) throws LeapException {
         List<Map<String, Object>> list = users.stream().map(u -> u.getUserCredentialsMap()).collect(Collectors.toList());
         Context.server().setValue("server.users", list);
         Context.save(META.SERVER);

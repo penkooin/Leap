@@ -16,7 +16,7 @@ public interface IRequestFilter<R> extends IPreFilter, ISessionFilter {
      * Check URL is valied
      * @param url
      * @return
-     * @throws HTTPException 
+     * @throws LeapException 
      */
     public boolean isValidURL(String url); 
 }

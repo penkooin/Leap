@@ -1,6 +1,6 @@
 package org.chaostocosmos.leap.security;
 
-import org.chaostocosmos.leap.http.HTTPException;
+import org.chaostocosmos.leap.LeapException;
 
 /**
  * User authentication interface
@@ -12,15 +12,15 @@ public interface IAuthenticate {
      * Retrive UserCredentials object for authentication
      * @param username
      * @return
-     * @throws HTTPException
+     * @throws LeapException
      */
-    public UserCredentials userCredentials(String username) throws HTTPException;
+    public UserCredentials userCredentials(String username) throws LeapException;
 
     /**
      * Logout with username
      * @param username
      * @return
-     * @throws HTTPException
+     * @throws LeapException
      */
-    public boolean logout(String username) throws HTTPException;
+    public boolean logout(String username) throws LeapException;
 }

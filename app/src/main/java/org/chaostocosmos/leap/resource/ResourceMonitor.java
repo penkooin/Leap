@@ -30,6 +30,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import antlr.PythonCharFormatter;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 
@@ -42,7 +43,7 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
     /**
      * Unit of data size
      */
-    private SIZE unit;
+    //private SIZE unit;
 
     /**
      * Fraction point of digit
@@ -90,6 +91,11 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
     private static int xIndexCnt = 100;
 
     /**
+     * X axis indent count
+     */
+    private static int xIndexIndent = 10;
+
+    /**
      * Get resource monitor
      * @return
      * @throws NotSupportedException
@@ -108,7 +114,6 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
      */
     private ResourceMonitor() throws NotSupportedException {
         super(buildMonitorSchema());
-        this.unit = SIZE.valueOf(Context.server().<String> getMonitoringUnit());
         this.fractionPoint = Constants.DEFAULT_FRACTION_POINT;
         this.interval = Context.server().<Integer> getMonitoringInterval().longValue();
         this.logger = LoggerFactory.createLoggerFor("monitoring", 
@@ -123,10 +128,10 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
     private static Map<String, Object> buildMonitorSchema() {
         Chart<Map<String, Object>> chart = Context.chart();
         //Setting x index values
-        chart.setValue("cpu.x-index", IntStream.range(0, chart.getValue("cpu.x-index")).mapToObj(i -> i % 2 == 0 ? i+"" : "").collect(Collectors.toList()));        
-        chart.setValue("memory.x-index", IntStream.range(0, chart.getValue("memory.x-index")).mapToObj(i -> i % 2 == 0 ? i+"" : "").collect(Collectors.toList()));
-        chart.setValue("thread.x-index", IntStream.range(0, chart.getValue("thread.x-index")).mapToObj(i -> i % 2 == 0 ? i+"" : "").collect(Collectors.toList()));
-        chart.setValue("heap.x-index", IntStream.range(0, chart.getValue("heap.x-index")).mapToObj(i -> i % 2 == 0 ? i+"" : "").collect(Collectors.toList()));                       
+        chart.setValue("cpu.x-index", IntStream.range(0, chart.getValue("cpu.x-index")).mapToObj(i -> i % xIndexIndent == 0 ? i+"" : "").collect(Collectors.toList()));        
+        chart.setValue("memory.x-index", IntStream.range(0, chart.getValue("memory.x-index")).mapToObj(i -> i % xIndexIndent == 0 ? i+"" : "").collect(Collectors.toList()));
+        chart.setValue("thread.x-index", IntStream.range(0, chart.getValue("thread.x-index")).mapToObj(i -> i % xIndexIndent == 0 ? i+"" : "").collect(Collectors.toList()));
+        chart.setValue("heap.x-index", IntStream.range(0, chart.getValue("heap.x-index")).mapToObj(i -> i % xIndexIndent == 0 ? i+"" : "").collect(Collectors.toList()));                       
         return chart.getMeta();
     }
 
@@ -151,14 +156,14 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
                         );
                         logger.info(
                             "[MEMORY-MONITOR] "
-                            + "  Process Max: "+getMaxMemory()+" "+unit.name()
-                            + "  Process Used: "+getUsedMemory()+" "+unit.name()
-                            + "  Process Free: "+getFreeMemory()+" "+unit.name()
-                            + "  Physical Total: "+getPhysicalTotalMemory()+" "+unit.name()
-                            + "  Physical Free: "+getPhysicalFreeMemory()+" "+unit.name()
-                            + "  Process CPU load: "+getProcessCpuLoad()+" "+SIZE.PERCENTAGE.name()
-                            + "  Process CPU time: "+getProcessCpuTime()+" "+SIZE.PERCENTAGE.name()
-                            + "  System CPU load: "+getSystemCpuLoad()+" "+SIZE.PERCENTAGE.name()
+                            + "  Process Max: "+getMaxMemory()
+                            + "  Process Used: "+getUsedMemory()
+                            + "  Process Free: "+getFreeMemory()
+                            + "  Physical Total: "+getPhysicalTotalMemory()
+                            + "  Physical Free: "+getPhysicalFreeMemory()
+                            + "  Process CPU load: "+getProcessCpuLoad()
+                            + "  Process CPU time: "+getProcessCpuTime()
+                            + "  System CPU load: "+getSystemCpuLoad()
                         );             
                         setProbingValues();           
                         requestMonitorings();
@@ -187,59 +192,72 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
         List<Object> values = null;
         values = super.getValue("cpu.elements.0.values");
         if(values.size() > xIndexCnt) values.remove(0);
-        values.add(getProcessCpuLoad());                
+        double processCpuLoad = SIZE.valueOf(super.getValue("cpu.unit")).get(getProcessCpuLoad(), fractionPoint);
+        values.add(processCpuLoad);
         values = super.getValue("cpu.elements.1.values");
         if(values.size() > xIndexCnt) values.remove(0);
-        values.add(getSystemCpuLoad());
-        super.setValue("cpu.y-index.0", getProcessCpuLoad());
-        super.setValue("cpu.y-index.1", getSystemCpuLoad());
+        double systemCpuLoad = SIZE.valueOf(super.getValue("cpu.unit")).get(getSystemCpuLoad(), fractionPoint);
+        values.add(systemCpuLoad);
+        super.setValue("cpu.y-index.0", processCpuLoad);
+        super.setValue("cpu.y-index.1", systemCpuLoad);
         
         values = super.getValue("memory.elements.0.values");
         if(values.size() > xIndexCnt) values.remove(0);
-        values.add(getPhysicalUsedMemory());                
+        double physicalUsedMemory = SIZE.valueOf(super.getValue("memory.unit")).get(getPhysicalUsedMemory(), fractionPoint);
+        values.add(physicalUsedMemory);                
         values = super.getValue("memory.elements.1.values");
         if(values.size() > xIndexCnt) values.remove(0);
-        values.add(getFreeMemory());
+        double freeMemory = SIZE.valueOf(super.getValue("memory.unit")).get(getFreeMemory(), fractionPoint);
+        values.add(freeMemory);
         values = super.getValue("memory.elements.2.values");
         if(values.size() > xIndexCnt) values.remove(0);
-        values.add(getUsedMemory());
-        super.setValue("memory.y-index.0", getPhysicalUsedMemory());
-        super.setValue("memory.y-index.1", getFreeMemory());
-        super.setValue("memory.y-index.2", getUsedMemory());
+        double usedMemory = SIZE.valueOf(super.getValue("memory.unit")).get(getUsedMemory(), fractionPoint);
+        values.add(usedMemory);
+        super.setValue("memory.y-index.0", physicalUsedMemory);
+        super.setValue("memory.y-index.1", freeMemory);
+        super.setValue("memory.y-index.2", usedMemory);
 
         values = super.getValue("thread.elements.0.values");
         if(values.size() > xIndexCnt) values.remove(0);
-        values.add(getCorePoolSize());
+        int corePoolSize = getCorePoolSize();
+        values.add(corePoolSize);
         values = super.getValue("thread.elements.1.values");
         if(values.size() > xIndexCnt) values.remove(0);
-        values.add(getTaskCount() - getCompletedTaskCount());
+        long activeTaskSize = getTaskCount() - getCompletedTaskCount();
+        values.add(activeTaskSize);
         values = super.getValue("thread.elements.2.values");
         if(values.size() > xIndexCnt) values.remove(0);
-        values.add(getMaximumPoolSize());
+        int maximumPoolSize = getMaximumPoolSize();
+        values.add(maximumPoolSize);
         values = super.getValue("thread.elements.3.values");
         if(values.size() > xIndexCnt) values.remove(0);
-        values.add(getQueuedTaskCount());
-        super.setValue("thread.y-index.0", getCorePoolSize());
-        super.setValue("thread.y-index.1", getTaskCount());
-        super.setValue("thread.y-index.2", getMaximumPoolSize());
-        super.setValue("thread.y-index.3", getQueuedTaskCount());
+        int queuedTaskSize = getQueuedTaskCount();
+        values.add(queuedTaskSize);
+        super.setValue("thread.y-index.0", corePoolSize);
+        super.setValue("thread.y-index.1", activeTaskSize);
+        super.setValue("thread.y-index.2", maximumPoolSize);
+        super.setValue("thread.y-index.3", queuedTaskSize);
 
         values = super.getValue("heap.elements.0.values");
         if(values.size() > xIndexCnt) values.remove(0);
-        values.add(getProcessHeapMax());
+        double processHeapMax = SIZE.valueOf(super.getValue("heap.unit")).get(getProcessHeapMax(), fractionPoint);
+        values.add(processHeapMax);
         values = super.getValue("heap.elements.1.values");
         if(values.size() > xIndexCnt) values.remove(0);
-        values.add(getProcessHeapInit());
+        double processHeapInit = SIZE.valueOf(super.getValue("heap.unit")).get(getProcessHeapInit(), fractionPoint);
+        values.add(processHeapInit);
         values = super.getValue("heap.elements.2.values");
         if(values.size() > xIndexCnt) values.remove(0);
-        values.add(getProcessHeapCommitted());
+        double processHeapCommitted = SIZE.valueOf(super.getValue("heap.unit")).get(getProcessHeapCommitted(), fractionPoint);
+        values.add(processHeapCommitted);
         values = super.getValue("heap.elements.3.values");
         if(values.size() > xIndexCnt) values.remove(0);
-        values.add(getProcessHeapUsed());
-        super.setValue("heap.y-index.0", getProcessHeapMax());
-        super.setValue("heap.y-index.1", getProcessHeapInit());
-        super.setValue("heap.y-index.2", getProcessHeapCommitted());
-        super.setValue("heap.y-index.3", getProcessHeapUsed());
+        double processHeapUsed = SIZE.valueOf(super.getValue("heap.unit")).get(getProcessHeapUsed(), fractionPoint);
+        values.add(processHeapUsed);
+        super.setValue("heap.y-index.0", processHeapMax);
+        super.setValue("heap.y-index.1", processHeapInit);
+        super.setValue("heap.y-index.2", processHeapCommitted);
+        super.setValue("heap.y-index.3", processHeapUsed);
     }
     /**
      * Request monitoring data to monitoring service
@@ -300,47 +318,47 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
      * @return
      * @throws NotSupportedException
      */
-    public double getMaxMemory() throws NotSupportedException {
-        return unit.get(ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getMax(), fractionPoint);
+    public long getMaxMemory() throws NotSupportedException {
+        return ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getMax();
     }
     /**
      * Get used memory size
      * @return
      * @throws NotSupportedException
      */
-    public double getUsedMemory() throws NotSupportedException {
-        return unit.get(ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getUsed(), fractionPoint);
+    public long getUsedMemory() throws NotSupportedException {
+        return ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getUsed();
     }
     /**
      * Get free memory size
      * @return
      * @throws NotSupportedException
      */
-    public double getFreeMemory() throws NotSupportedException {
-        return unit.get(ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getMax() - ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getUsed(), fractionPoint);
+    public long getFreeMemory() throws NotSupportedException {
+        return ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getMax() - ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getUsed();
     }
     /**
      * Get total physical memory size
      * @return
      * @throws NotSupportedException
      */
-    public double getPhysicalTotalMemory() throws NotSupportedException {
-        return unit.get(((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getTotalPhysicalMemorySize(), fractionPoint);
+    public long getPhysicalTotalMemory() throws NotSupportedException {
+        return ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getTotalPhysicalMemorySize();
     }
     /**
      * Get total physical used memory
      * @return
      */
-    public double getPhysicalUsedMemory() {
-        return unit.get(((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getTotalPhysicalMemorySize() - ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getFreePhysicalMemorySize(), fractionPoint);
+    public long getPhysicalUsedMemory() {
+        return ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getTotalPhysicalMemorySize() - ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getFreePhysicalMemorySize();
     }
     /**
      * Get free physical memory size
      * @return
      * @throws NotSupportedException
      */
-    public double getPhysicalFreeMemory() throws NotSupportedException {
-        return unit.get(((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getFreePhysicalMemorySize(), fractionPoint);
+    public long getPhysicalFreeMemory() throws NotSupportedException {
+        return ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getFreePhysicalMemorySize();
     }
     /**
      * Get process CPU load
@@ -355,7 +373,7 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
      * @return
      * @throws NotSupportedException
      */
-    public double getProcessCpuTime() throws NotSupportedException {
+    public long getProcessCpuTime() throws NotSupportedException {
         long nano = ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getProcessCpuTime();
         return TimeUnit.SECONDS.convert(nano, TimeUnit.NANOSECONDS);
     }
@@ -379,35 +397,35 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
 	 * @param unit
 	 * @return
 	 */
-	public double getProcessHeapInit() {
+	public long getProcessHeapInit() {
 		long value = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getInit();
-		return (double) this.unit.get(value, this.fractionPoint);
+		return value;
 	}	
     /**
      * Get used heap memory amount
      * @return
      */
-    public double getProcessHeapUsed() {
+    public long getProcessHeapUsed() {
         long value = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getUsed();
-        return (double) this.unit.get(value, this.fractionPoint);
+        return value;
     }
 	/**
      * Get commited heap memory amount
 	 * @param unit
 	 * @return
 	 */
-	public double getProcessHeapCommitted() {
+	public long getProcessHeapCommitted() {
 		long value = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getCommitted();
-		return (double) this.unit.get(value, this.fractionPoint);
+		return value;
 	}	
 	/**
      * Get heap memory max amount
 	 * @param unit
 	 * @return
 	 */
-	public double getProcessHeapMax() {
+	public long getProcessHeapMax() {
 		long value = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getMax();
-		return (double) this.unit.get(value, this.fractionPoint);
+		return value;
 	}
     /**
      * Get available processors
@@ -421,161 +439,161 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
      * Build monitor schema Map
      * @return
      */
-    private static Map<String, Object> buildMonitorSchema1() {
-        return new HashMap<>() {{ 
-            // INTERPOLATE.AKIMA
-            // INTERPOLATE.DIVIDED_DIFFERENCE
-            // INTERPOLATE.LINEAR
-            // INTERPOLATE.LOESS
-            // INTERPOLATE.NEVILLE
-            // INTERPOLATE.SPLINE
-            // INTERPOLATE.NONE
-            SIZE unit = SIZE.valueOf(Context.server().getMonitoringUnit());
-            double totalMemory = unit.get(((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getTotalPhysicalMemorySize(), Constants.DEFAULT_FRACTION_POINT);
-            double usedMemory = unit.get(((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getTotalPhysicalMemorySize() - ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getFreePhysicalMemorySize(), Constants.DEFAULT_FRACTION_POINT);
-            double processMemory = unit.get(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory(), Constants.DEFAULT_FRACTION_POINT);
-            double heapUsed = unit.get(ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getUsed(), Constants.DEFAULT_FRACTION_POINT);
-            double heapInit = unit.get(ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getInit(), Constants.DEFAULT_FRACTION_POINT);
-            double heapMax = unit.get(ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getMax(), Constants.DEFAULT_FRACTION_POINT);
-            double heapCommitted = unit.get(ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getCommitted(), Constants.DEFAULT_FRACTION_POINT);
-            int threadMax = Context.server().getThreadPoolMaxSize();
-            int threadCore = Context.server().getThreadPoolCoreSize();
-            put("cpu", new HashMap<String, Object>() {{
-                put("id", "cpu");
-                put("title", "cpu");
-                put("codec", "png");
-                put("save_path", "monitor/cpu.png");
-                put("graph", "line");
-                put("alpha", 0.6);
-                put("interpolate", "linear");
-                put("width", 800);
-                put("height", 500);
-                put("xindex", IntStream.range(0, xIndexCnt).mapToObj(i -> i % 2 == 0 ? i+"" : "").collect(Collectors.toList()));
-                put("yindex", Arrays.asList(50, 100));
-                put("limit", 100);
-                put("unit", " %");
-                put("elements", Arrays.asList(
-                    new HashMap<String, Object>() {{ 
-                        put("element", "Leap");
-                        put("color", Arrays.asList(180,130,130));
-                        put("values", new ArrayList<>());
-                    }},
-                    new HashMap<String, Object>() {{ 
-                        put("element", "System");
-                        put("color", Arrays.asList(180,180,140));
-                        put("values", new ArrayList<>());
-                    }}
-                    )
-                );                
-            }});            
-            put("memory", new HashMap<String, Object>() {{
-                put("id", "memory");
-                put("title", "memory");
-                put("codec", "png");
-                put("save_path", "monitor/memory.png");
-                put("graph", "area");
-                put("alpha", 0.6);
-                put("interpolate", "spline");
-                put("width", 800);
-                put("height", 500);
-                put("xindex", IntStream.range(0, xIndexCnt).mapToObj(i -> i % 2 == 0 ? i+"" : "").collect(Collectors.toList()));
-                put("yindex", Arrays.asList(processMemory, usedMemory));
-                put("limit", totalMemory);
-                put("unit", " "+unit.name());
-                put("elements", Arrays.asList(
-                    new HashMap<String, Object>() {{ 
-                        put("element", "Physical Used");
-                        put("color", Arrays.asList(133, 193, 233));
-                        put("values", new ArrayList<>());
-                    }},
-                    new HashMap<String, Object>() {{ 
-                        put("element", "Physical Free");
-                        put("color", Arrays.asList(178, 186, 187));
-                        put("values", new ArrayList<>());
-                    }},
-                    new HashMap<String, Object>() {{ 
-                        put("element", "Leap Used");
-                        put("color", Arrays.asList(127,0,244));
-                        put("values", new ArrayList<>());
-                    }}               
-                    )
-                );
-            }});     
-            put("heap", new HashMap<String, Object>() {{
-                put("id", "heap");
-                put("title", "heap");
-                put("codec", "png");
-                put("save_path", "monitor/heap.png");
-                put("graph", "area");
-                put("alpha", 0.6);
-                put("interpolate", "spline");
-                put("width", 800);
-                put("height", 500);
-                put("xindex", IntStream.range(0, xIndexCnt).mapToObj(i -> i % 2 == 0 ? i+"" : "").collect(Collectors.toList()));
-                put("yindex", Arrays.asList(heapMax, heapInit, heapCommitted, heapUsed));
-                put("limit", heapMax * 1.3);
-                put("unit", " "+unit.name());
-                put("elements", Arrays.asList(
-                    new HashMap<String, Object>() {{ 
-                        put("element", "Max");
-                        put("color", Arrays.asList(133, 157, 233));
-                        put("values", new ArrayList<>());
-                    }},
-                    new HashMap<String, Object>() {{ 
-                        put("element", "Committed");
-                        put("color", Arrays.asList(233, 138, 133));
-                        put("values", new ArrayList<>());
-                    }},
-                    new HashMap<String, Object>() {{ 
-                        put("element", "Init");
-                        put("color", Arrays.asList(200, 133, 233));
-                        put("values", new ArrayList<>());
-                    }},
-                    new HashMap<String, Object>() {{ 
-                        put("element", "Used");
-                        put("color", Arrays.asList(131, 203, 124));
-                        put("values", new ArrayList<>());
-                    }}               
-                    )
-                );
-            }});     
-            put("thread", new HashMap<String, Object>() {{
-                put("id", "thread");
-                put("title", "thread pool");
-                put("codec", "png");
-                put("save_path", "monitor/thread.png");
-                put("graph", "line");
-                put("alpha", 0.6);
-                put("interpolate", "spline");
-                put("width", 800);
-                put("height", 500);
-                put("xindex", IntStream.range(0, xIndexCnt).mapToObj(i -> i % 2 == 0 ? i+"" : "").collect(Collectors.toList()));
-                put("yindex", Arrays.asList(threadCore, threadMax));
-                put("limit", threadMax * 3);
-                put("unit", " n");
-                put("elements", Arrays.asList(
-                    new HashMap<String, Object>() {{ 
-                        put("element", "Max");
-                        put("color", Arrays.asList(180,130,130));
-                        put("values", new ArrayList<>());
-                    }},
-                    new HashMap<String, Object>() {{ 
-                        put("element", "Core");
-                        put("color", Arrays.asList(150,200,158));
-                        put("values", new ArrayList<>());
-                    }},
-                    new HashMap<String, Object>() {{ 
-                        put("element", "Active");
-                        put("color", Arrays.asList(150,130,158));
-                        put("values", new ArrayList<>());
-                    }},
-                    new HashMap<String, Object>() {{ 
-                        put("element", "Queued");
-                        put("color", Arrays.asList(130,180,110));
-                        put("values", new ArrayList<>());
-                    }})
-                );
-            }});   
-        }};     
-    }
+    // private static Map<String, Object> buildMonitorSchema1() {
+    //     return new HashMap<>() {{ 
+    //         // INTERPOLATE.AKIMA
+    //         // INTERPOLATE.DIVIDED_DIFFERENCE
+    //         // INTERPOLATE.LINEAR
+    //         // INTERPOLATE.LOESS
+    //         // INTERPOLATE.NEVILLE
+    //         // INTERPOLATE.SPLINE
+    //         // INTERPOLATE.NONE
+    //         SIZE unit = SIZE.valueOf(Context.server().getMonitoringUnit());
+    //         double totalMemory = unit.get(((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getTotalPhysicalMemorySize(), Constants.DEFAULT_FRACTION_POINT);
+    //         double usedMemory = unit.get(((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getTotalPhysicalMemorySize() - ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getFreePhysicalMemorySize(), Constants.DEFAULT_FRACTION_POINT);
+    //         double processMemory = unit.get(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory(), Constants.DEFAULT_FRACTION_POINT);
+    //         double heapUsed = unit.get(ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getUsed(), Constants.DEFAULT_FRACTION_POINT);
+    //         double heapInit = unit.get(ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getInit(), Constants.DEFAULT_FRACTION_POINT);
+    //         double heapMax = unit.get(ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getMax(), Constants.DEFAULT_FRACTION_POINT);
+    //         double heapCommitted = unit.get(ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getCommitted(), Constants.DEFAULT_FRACTION_POINT);
+    //         int threadMax = Context.server().getThreadPoolMaxSize();
+    //         int threadCore = Context.server().getThreadPoolCoreSize();
+    //         put("cpu", new HashMap<String, Object>() {{
+    //             put("id", "cpu");
+    //             put("title", "cpu");
+    //             put("codec", "png");
+    //             put("save_path", "monitor/cpu.png");
+    //             put("graph", "line");
+    //             put("alpha", 0.6);
+    //             put("interpolate", "linear");
+    //             put("width", 800);
+    //             put("height", 500);
+    //             put("xindex", IntStream.range(0, xIndexCnt).mapToObj(i -> i % xIndexIndent == 0 ? i+"" : "").collect(Collectors.toList()));
+    //             put("yindex", Arrays.asList(50, 100));
+    //             put("limit", 100);
+    //             put("unit", " %");
+    //             put("elements", Arrays.asList(
+    //                 new HashMap<String, Object>() {{ 
+    //                     put("element", "Leap");
+    //                     put("color", Arrays.asList(180,130,130));
+    //                     put("values", new ArrayList<>());
+    //                 }},
+    //                 new HashMap<String, Object>() {{ 
+    //                     put("element", "System");
+    //                     put("color", Arrays.asList(180,180,140));
+    //                     put("values", new ArrayList<>());
+    //                 }}
+    //                 )
+    //             );                
+    //         }});            
+    //         put("memory", new HashMap<String, Object>() {{
+    //             put("id", "memory");
+    //             put("title", "memory");
+    //             put("codec", "png");
+    //             put("save_path", "monitor/memory.png");
+    //             put("graph", "area");
+    //             put("alpha", 0.6);
+    //             put("interpolate", "spline");
+    //             put("width", 800);
+    //             put("height", 500);
+    //             put("xindex", IntStream.range(0, xIndexCnt).mapToObj(i -> i % xIndexIndent == 0 ? i+"" : "").collect(Collectors.toList()));
+    //             put("yindex", Arrays.asList(processMemory, usedMemory));
+    //             put("limit", totalMemory);
+    //             put("unit", " "+unit.name());
+    //             put("elements", Arrays.asList(
+    //                 new HashMap<String, Object>() {{ 
+    //                     put("element", "Physical Used");
+    //                     put("color", Arrays.asList(133, 193, 233));
+    //                     put("values", new ArrayList<>());
+    //                 }},
+    //                 new HashMap<String, Object>() {{ 
+    //                     put("element", "Physical Free");
+    //                     put("color", Arrays.asList(178, 186, 187));
+    //                     put("values", new ArrayList<>());
+    //                 }},
+    //                 new HashMap<String, Object>() {{ 
+    //                     put("element", "Leap Used");
+    //                     put("color", Arrays.asList(127,0,244));
+    //                     put("values", new ArrayList<>());
+    //                 }}               
+    //                 )
+    //             );
+    //         }});     
+    //         put("heap", new HashMap<String, Object>() {{
+    //             put("id", "heap");
+    //             put("title", "heap");
+    //             put("codec", "png");
+    //             put("save_path", "monitor/heap.png");
+    //             put("graph", "area");
+    //             put("alpha", 0.6);
+    //             put("interpolate", "spline");
+    //             put("width", 800);
+    //             put("height", 500);
+    //             put("xindex", IntStream.range(0, xIndexCnt).mapToObj(i -> i % xIndexIndent == 0 ? i+"" : "").collect(Collectors.toList()));
+    //             put("yindex", Arrays.asList(heapMax, heapInit, heapCommitted, heapUsed));
+    //             put("limit", heapMax * 1.3);
+    //             put("unit", " "+unit.name());
+    //             put("elements", Arrays.asList(
+    //                 new HashMap<String, Object>() {{ 
+    //                     put("element", "Max");
+    //                     put("color", Arrays.asList(133, 157, 233));
+    //                     put("values", new ArrayList<>());
+    //                 }},
+    //                 new HashMap<String, Object>() {{ 
+    //                     put("element", "Committed");
+    //                     put("color", Arrays.asList(233, 138, 133));
+    //                     put("values", new ArrayList<>());
+    //                 }},
+    //                 new HashMap<String, Object>() {{ 
+    //                     put("element", "Init");
+    //                     put("color", Arrays.asList(200, 133, 233));
+    //                     put("values", new ArrayList<>());
+    //                 }},
+    //                 new HashMap<String, Object>() {{ 
+    //                     put("element", "Used");
+    //                     put("color", Arrays.asList(131, 203, 124));
+    //                     put("values", new ArrayList<>());
+    //                 }}               
+    //                 )
+    //             );
+    //         }});     
+    //         put("thread", new HashMap<String, Object>() {{
+    //             put("id", "thread");
+    //             put("title", "thread pool");
+    //             put("codec", "png");
+    //             put("save_path", "monitor/thread.png");
+    //             put("graph", "line");
+    //             put("alpha", 0.6);
+    //             put("interpolate", "spline");
+    //             put("width", 800);
+    //             put("height", 500);
+    //             put("xindex", IntStream.range(0, xIndexCnt).mapToObj(i -> i % xIndexIndent == 0 ? i+"" : "").collect(Collectors.toList()));
+    //             put("yindex", Arrays.asList(threadCore, threadMax));
+    //             put("limit", threadMax * 3);
+    //             put("unit", " n");
+    //             put("elements", Arrays.asList(
+    //                 new HashMap<String, Object>() {{ 
+    //                     put("element", "Max");
+    //                     put("color", Arrays.asList(180,130,130));
+    //                     put("values", new ArrayList<>());
+    //                 }},
+    //                 new HashMap<String, Object>() {{ 
+    //                     put("element", "Core");
+    //                     put("color", Arrays.asList(150,200,158));
+    //                     put("values", new ArrayList<>());
+    //                 }},
+    //                 new HashMap<String, Object>() {{ 
+    //                     put("element", "Active");
+    //                     put("color", Arrays.asList(150,130,158));
+    //                     put("values", new ArrayList<>());
+    //                 }},
+    //                 new HashMap<String, Object>() {{ 
+    //                     put("element", "Queued");
+    //                     put("color", Arrays.asList(130,180,110));
+    //                     put("values", new ArrayList<>());
+    //                 }})
+    //             );
+    //         }});   
+    //     }};     
+    // }
 }

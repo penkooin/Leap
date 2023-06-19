@@ -18,6 +18,7 @@ import javax.media.jai.PlanarImage;
 import org.chaostocosmos.chaosgraph.Graph;
 import org.chaostocosmos.chaosgraph.GraphUtility.CODEC;
 import org.chaostocosmos.chaosgraph.NotSuppotedEncodingFormatException;
+import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.annotation.MethodMapper;
 import org.chaostocosmos.leap.annotation.ServiceMapper;
 import org.chaostocosmos.leap.context.Context;
@@ -25,7 +26,6 @@ import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.MIME;
 import org.chaostocosmos.leap.enums.REQUEST;
-import org.chaostocosmos.leap.http.HTTPException;
 import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.Response;
 import org.chaostocosmos.leap.part.MultiPart;
@@ -49,7 +49,7 @@ public class SystemMonitorService extends AbstractChartService {
             response.addHeader("Content-Type", MIME.TEXT_HTML.mimeType());
             response.setResponseCode(HTTP.RES200.code());
         } else {
-            throw new HTTPException(HTTP.RES503, "Monitoring page not available now. Currently monitoring option is off !!!");
+            throw new LeapException(HTTP.RES503, "Monitoring page not available now. Currently monitoring option is off !!!");
         }
     } 
 
@@ -59,26 +59,28 @@ public class SystemMonitorService extends AbstractChartService {
         Map<String, String> header = request.getReqHeader();
         String charset = header.get("charset");
         if(charset == null || charset.equals("")) {
-            throw new HTTPException(HTTP.RES404, "Request has no charset field in header.");
+            throw new LeapException(HTTP.RES404, "Request has no charset field in header.");
         }
         if(request.getContentType() != MIME.MULTIPART_FORM_DATA) {
-            throw new HTTPException(HTTP.RES415, "Requested content type is not allowed on this service.");
+            throw new LeapException(HTTP.RES415, "Requested content type is not allowed on this service.");
         }
         MultiPart multiPart = (MultiPart)request.getBodyPart();
         byte[] body = multiPart.getBody().get("chart");
         if(body == null) {
-            throw new HTTPException(HTTP.RES404, "Request has no body data. Chart service must have JSON chart data.");
+            throw new LeapException(HTTP.RES404, "Request has no body data. Chart service must have JSON chart data.");
         }
         String chartJson = new String(body, charset);
         //super.logger.debug(chartJson);
-        Map<String, Object> jsonMap = gson.fromJson(chartJson, Map.class);
+        Map<String, Object> jsonMap = gson.fromJson(chartJson, Map.class);        
         List<Map<String, Object>> chartMap = jsonMap.values().stream().map(m -> (Map<String, Object>) m ).collect(Collectors.toList());
         for(Host<?> host : Context.hosts().getAllHost()) {
             for(Map<String, Object> map : chartMap) {
                 String savePath = (String) map.get("save-path"); 
                 boolean inMemory = (boolean) map.get("in-memory"); 
-                Graph<Double, String, Double> chart = super.createGraph(map);
+                Graph<Double, String, Double> chart = super.createGraph(map);                
                 if(chart == null) continue;
+                chart.setLeftIndent(70);
+                chart.setRightIndent(30);
                 if(!inMemory) {
                     saveBufferedImage(chart.getBufferedImage(), host.getStatic().resolve(savePath).toFile(), CODEC.PNG);
                     //super.logger.debug("[MONITOR] Chart image save to file: "+host.getStatic().resolve(savePath).toString());

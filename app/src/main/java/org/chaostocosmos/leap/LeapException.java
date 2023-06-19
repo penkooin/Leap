@@ -1,4 +1,4 @@
-package org.chaostocosmos.leap.http;
+package org.chaostocosmos.leap;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -17,7 +17,7 @@ import org.chaostocosmos.leap.enums.MSG_TYPE;
  * 
  * @author 9ins
  */
-public class HTTPException extends RuntimeException {
+public class LeapException extends RuntimeException {
     /**
      * Message type
      */
@@ -42,8 +42,8 @@ public class HTTPException extends RuntimeException {
      * Constructs with response code
      * @param resCode
      */
-    public HTTPException(HTTP resCode) {
-        this(resCode, new Exception("HTTP Exception strikes!!!"));
+    public LeapException(HTTP resCode) {
+        this(resCode, new Exception("HTTP Exception occurred!!!"));
     }
 
     /**
@@ -51,7 +51,7 @@ public class HTTPException extends RuntimeException {
      * @param resCode
      * @param errorCode
      */
-    public HTTPException(HTTP resCode, int errorCode) {
+    public LeapException(HTTP resCode, int errorCode) {
         this(resCode, Context.messages().<String> error(errorCode));
     }
 
@@ -61,7 +61,7 @@ public class HTTPException extends RuntimeException {
      * @param errorCode
      * @param errorParams
      */
-    public HTTPException(HTTP resCode, int errorCode, Object errorParams) {
+    public LeapException(HTTP resCode, int errorCode, Object errorParams) {
         this(resCode, Context.messages().<String> error(errorCode, errorParams));
     }
 
@@ -70,7 +70,7 @@ public class HTTPException extends RuntimeException {
      * @param resCode
      * @param message
      */
-    public HTTPException(HTTP resCode, String message) {
+    public LeapException(HTTP resCode, String message) {
         this(resCode, new Exception(message));
     }
 
@@ -79,7 +79,7 @@ public class HTTPException extends RuntimeException {
      * @param resCode
      * @param cause
      */
-    public HTTPException(HTTP resCode, Throwable cause) {
+    public LeapException(HTTP resCode, Throwable cause) {
         this(resCode, Context.messages().<String>http(resCode.code()), cause);
     }
 
@@ -89,7 +89,7 @@ public class HTTPException extends RuntimeException {
      * @param message
      * @param headers
      */
-    public HTTPException(HTTP resCode, String message, Map<String, List<String>> headers) {
+    public LeapException(HTTP resCode, String message, Map<String, List<String>> headers) {
         this(resCode, Context.messages().get(type, resCode.code()), new Exception(message), headers.entrySet().stream().map(e -> List.of(e.getKey(), e.getValue())).flatMap(l -> l.stream()).toArray());
     }
 
@@ -99,7 +99,7 @@ public class HTTPException extends RuntimeException {
      * @param cause
      * @param headers
      */
-    public HTTPException(HTTP resCode, Throwable cause, Map<String, List<String>> headers) {
+    public LeapException(HTTP resCode, Throwable cause, Map<String, List<String>> headers) {
         this(resCode, Context.messages().get(type, resCode.code()), cause, headers.entrySet().stream().map(e -> List.of(e.getKey(), e.getValue())).flatMap(l -> l.stream()).toArray());
     }
 
@@ -109,7 +109,7 @@ public class HTTPException extends RuntimeException {
      * @param message
      * @param headerkeyValue
      */
-    public HTTPException(HTTP resCode, String message, Object ... headerkeyValue) {
+    public LeapException(HTTP resCode, String message, Object ... headerkeyValue) {
         this(resCode, Context.messages().get(type, resCode.code()), new Exception(message), headerkeyValue);
     }
 
@@ -119,7 +119,7 @@ public class HTTPException extends RuntimeException {
      * @param cause
      * @param headerkeyValue
      */
-    public HTTPException(HTTP resCode, Throwable cause, Object ... headerkeyValue) {
+    public LeapException(HTTP resCode, Throwable cause, Object ... headerkeyValue) {
         this(resCode, Context.messages().get(type, resCode.code()), cause, headerkeyValue);
     }
 
@@ -130,7 +130,7 @@ public class HTTPException extends RuntimeException {
      * @param cause
      * @param headerKeyValue
      */
-    public HTTPException(HTTP resCode, String responseMessage, Throwable cause, Object ... headerkeyValue) {
+    public LeapException(HTTP resCode, String responseMessage, Throwable cause, Object ... headerkeyValue) {
         super(cause);
         this.resCode = resCode;
         this.responseMessage = responseMessage;

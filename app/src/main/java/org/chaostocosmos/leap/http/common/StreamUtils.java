@@ -22,10 +22,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.common.Constants;
 import org.chaostocosmos.leap.common.LoggerFactory;
 import org.chaostocosmos.leap.context.Context;
-import org.chaostocosmos.leap.http.HTTPException;
 
 import ch.qos.logback.classic.Logger;
 
@@ -274,7 +274,7 @@ public class StreamUtils {
      * @param savePath
      * @param bufferSize
      * @param boundary
-     * @throws HTTPException
+     * @throws LeapException
      */
     @SuppressWarnings("unchecked")
     private synchronized void saveMultiPart1(String host, InputStream inputStream, Path savePath, int bufferSize, String boundary, Charset charset) throws Exception {            

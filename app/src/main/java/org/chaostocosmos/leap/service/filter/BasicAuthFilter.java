@@ -3,10 +3,10 @@ package org.chaostocosmos.leap.service.filter;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
+import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.common.Constants;
 import org.chaostocosmos.leap.common.LoggerFactory;
 import org.chaostocosmos.leap.enums.HTTP;
-import org.chaostocosmos.leap.http.HTTPException;
 import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.security.UserCredentials;
 import org.chaostocosmos.leap.security.SecurityManager;
@@ -44,30 +44,30 @@ public class BasicAuthFilter extends AbstractRequestFilter {
                     user.setSession(session);
                     request.setSession(session);
                 } else {
-                    throw new HTTPException(HTTP.RES401, "User( "+values[0]+" ) not found in server." );
+                    throw new LeapException(HTTP.RES401, "User( "+values[0]+" ) not found in server." );
                 }
                 LoggerFactory.getLogger(request.getRequestedHost()).debug("User "+values[0]+" is login.");  
             } else {
-                throw new HTTPException(HTTP.RES401, "Auth information not found!!!" ); 
+                throw new LeapException(HTTP.RES401, "Auth information not found!!!" ); 
             }
         }
     }
 
-    public UserCredentials login(String username, String password) throws HTTPException {
+    public UserCredentials login(String username, String password) throws LeapException {
         if(this.securityManager == null) {
             throw new IllegalStateException("Leap security manager not set. Can not sing in with "+username+"/"+password);
         }
         return this.securityManager.login(username, password);
     }
 
-    public void register(UserCredentials user) throws HTTPException {
+    public void register(UserCredentials user) throws LeapException {
         if(this.securityManager == null) {
             throw new IllegalStateException("Leap security manager not set. Can not sing up with "+user.toString());
         }   
         this.securityManager.register(user);
     }
 
-    public UserCredentials logout(String username) throws HTTPException {
+    public UserCredentials logout(String username) throws LeapException {
         return this.securityManager.logout(username);
     }
 }

@@ -7,6 +7,7 @@ import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.context.Context;
 import org.junit.jupiter.api.Test; 
 
@@ -15,7 +16,7 @@ import org.junit.jupiter.api.Test;
  */
 public class ContextTest {
 
-    public ContextTest() throws URISyntaxException, IOException, HTTPException {    
+    public ContextTest() throws URISyntaxException, IOException, LeapException {    
         Context.init(Paths.get("./config"));
         Context.host("leap").getLogPath();
     }
@@ -35,7 +36,7 @@ public class ContextTest {
     }
 
     @Test
-    public void testGetResouce() throws IOException, URISyntaxException, HTTPException {
+    public void testGetResouce() throws IOException, URISyntaxException, LeapException {
         //int code = 404;
         //Path path = ResourceHelper.getResponseResourcePath("locahost");
         //byte[] bytes = ResourceHelper.getResourceContent("response.html");

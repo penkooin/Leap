@@ -5,6 +5,7 @@ import java.net.Socket;
 import java.util.List;
 import java.util.Map;
 
+import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.enums.REQUEST;
 
 /**
@@ -81,7 +82,7 @@ public class HttpChannelParser {
         /**
          * parse response
          * @return
-         * @throws HTTPException
+         * @throws LeapException
          */
         public Response buildResponse(final Request request, 
                                                     final int statusCode, 

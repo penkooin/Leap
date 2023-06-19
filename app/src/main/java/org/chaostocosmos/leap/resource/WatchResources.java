@@ -23,6 +23,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.common.Constants;
 import org.chaostocosmos.leap.common.Filtering;
 import org.chaostocosmos.leap.common.LoggerFactory;
@@ -32,7 +33,6 @@ import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.MIME;
-import org.chaostocosmos.leap.http.HTTPException;
 
 import com.google.gson.Gson;
 
@@ -382,7 +382,7 @@ public class WatchResources extends Thread implements ResourcesModel {
         if(resourcePath.getNameCount() == watchPath.getNameCount()) {
             return this.resourceTree;
         } else if(resourcePath.getNameCount() < watchPath.getNameCount()) {
-            throw new HTTPException(HTTP.RES403, "Requested path is not allowed.");
+            throw new LeapException(HTTP.RES403, "Requested path is not allowed.");
         }
         return getResource(this.resourceTree, resourcePath.subpath(this.watchPath.getNameCount(), resourcePath.getNameCount()).toString().split(Pattern.quote(File.separator)));
     }
@@ -425,7 +425,7 @@ public class WatchResources extends Thread implements ResourcesModel {
     public String getStaticPage(String contextPath, Map<String, Object> params) throws Exception {                
         Resource resourceInfo = getContextResource(contextPath);
         if(resourceInfo == null) {
-            throw new HTTPException(HTTP.RES404, " Static page not found in Resource manager: "+contextPath);
+            throw new LeapException(HTTP.RES404, " Static page not found in Resource manager: "+contextPath);
         }
         String page = new String((resourceInfo).getBytes(), Context.hosts().getHost(this.hostId).<String> charset());
         if(params != null) {

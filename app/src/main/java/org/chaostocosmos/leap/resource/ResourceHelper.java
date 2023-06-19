@@ -20,12 +20,12 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.chaostocosmos.leap.LeapApp;
+import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.common.LoggerFactory;
 import org.chaostocosmos.leap.common.UtilBox;
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.HTTP;
-import org.chaostocosmos.leap.http.HTTPException;
 import org.chaostocosmos.leap.http.Request;
 
 /**
@@ -102,7 +102,7 @@ public class ResourceHelper {
         Path docroot = hosts.getDocroot().toAbsolutePath();
         Path reqPath = getStaticPath(hostId).resolve(contextPath).toAbsolutePath();        
         if(!validatePath(docroot, reqPath)) {
-            throw new HTTPException(HTTP.RES403, contextPath);
+            throw new LeapException(HTTP.RES403, contextPath);
         }
         LoggerFactory.getLogger(hostId).debug("REQUEST PATH: "+reqPath.toString()); 
         return reqPath.normalize();
@@ -137,7 +137,7 @@ public class ResourceHelper {
         try {
             return Files.readAllBytes(resourcePath);
         } catch (IOException e) {
-            throw new HTTPException(HTTP.RES500, Context.messages().<String> error(14, resourcePath));
+            throw new LeapException(HTTP.RES500, Context.messages().<String> error(14, resourcePath));
         }
     }
 
@@ -182,7 +182,7 @@ public class ResourceHelper {
      * @param resourcePath
      * @param targetPath
      * @return
-     * @throws HTTPException
+     * @throws LeapException
      * @throws IOException
      * @throws URISyntaxException
      */
@@ -233,9 +233,9 @@ public class ResourceHelper {
      * Get WAS Home path
      * @param hostId
      * @return
-     * @throws HTTPException
+     * @throws LeapException
      */
-    public static Path getDocroot(String hostId) throws HTTPException {
+    public static Path getDocroot(String hostId) throws LeapException {
         return Context.hosts().getDocroot(hostId).normalize().toAbsolutePath();
     }
 
@@ -243,9 +243,9 @@ public class ResourceHelper {
      * Get webapp path
      * @param hostId
      * @return
-     * @throws HTTPException
+     * @throws LeapException
      */
-    public static Path getWebAppPath(String hostId) throws HTTPException {
+    public static Path getWebAppPath(String hostId) throws LeapException {
         return getDocroot(hostId).resolve("webapp");
     }
 
@@ -253,9 +253,9 @@ public class ResourceHelper {
      * Get webapp/WEB-INF path
      * @param hostId
      * @return
-     * @throws HTTPException
+     * @throws LeapException
      */
-    public static Path getWebInfPath(String hostId) throws HTTPException {
+    public static Path getWebInfPath(String hostId) throws LeapException {
         return getWebAppPath(hostId).resolve("WEB-INF");
     }
 
@@ -263,9 +263,9 @@ public class ResourceHelper {
      * Get webapp/WEB-INF/static path
      * @param hostId
      * @return
-     * @throws HTTPException
+     * @throws LeapException
      */
-    public static Path getStaticPath(String hostId) throws HTTPException {
+    public static Path getStaticPath(String hostId) throws LeapException {
         return getWebInfPath(hostId).resolve("static");
     }
 

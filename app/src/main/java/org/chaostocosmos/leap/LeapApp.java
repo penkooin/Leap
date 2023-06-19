@@ -27,8 +27,6 @@ import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.context.MetaEvent;
 import org.chaostocosmos.leap.context.MetaListener;
 import org.chaostocosmos.leap.enums.STATUS;
-import org.chaostocosmos.leap.http.HTTPException;
-import org.chaostocosmos.leap.http.LeapHttpServer;
 import org.chaostocosmos.leap.resource.ClassUtils;
 import org.chaostocosmos.leap.resource.ResourceHelper;
 import org.chaostocosmos.leap.resource.ResourceManager;
@@ -82,7 +80,7 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
     /**
      * Server Map
      */
-    public static Map<String, LeapHttpServer> leapServerMap;
+    public static Map<String, LeapServer> leapServerMap;
 
     /**
      * Thread pool
@@ -190,7 +188,7 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
                 String key = leapServerMap.keySet().stream().filter(k -> k.equals(hostName)).findAny().get();
                 throw new IllegalArgumentException("Mapping host address is collapse on network interace: "+hostAddress.toString()+":"+host.getPort()+" with "+key);
             }
-            LeapHttpServer server = new LeapHttpServer(Context.getHomePath(), host, threadpool, ClassUtils.getClassLoader());
+            LeapServer server = new LeapServer(Context.getHomePath(), host, threadpool, ClassUtils.getClassLoader());
             leapServerMap.put(hostAddress.getHostAddress()+":"+host.getPort(), server);
             if(host.<Boolean> isDefaultHost()) {
                 logger.info("[DEFAULT HOST] - Protocol: "+host.getProtocol()+"   Server: "+host.getHostId()+"   Host: "+host.getHost()+"   Port: "+host.getPort()+"   Doc-Root: "+host.getDocroot()+"   Logging path: "+host.getLogPath()+"   Level: "+host.getLogLevel().toString());                
@@ -201,7 +199,7 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
 
         logger.info("----------------------------------------------------------------------------------------------------");
         
-        for(LeapHttpServer server : leapServerMap.values()) {
+        for(LeapServer server : leapServerMap.values()) {
             server.setDaemon(false);
             server.start();
         }
@@ -227,7 +225,7 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
      */
     public void shutdown() throws InterruptedException, IOException, NotSupportedException { 
         ResourceMonitor.get().stop();
-        for(LeapHttpServer server : leapServerMap.values()) {
+        for(LeapServer server : leapServerMap.values()) {
             server.close();
             server.join();
         }
@@ -287,7 +285,7 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
 
     /**
      * Print trademark 
-     * @throws HTTPException
+     * @throws LeapException
      */
     private void trademark() throws Exception {
         System.out.println(ResourceHelper.getInstance().getTrademark());

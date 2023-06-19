@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.enums.HTTP;
-import org.chaostocosmos.leap.http.HTTPException;
 import org.chaostocosmos.leap.http.Request;
 
 import com.google.gson.Gson;
@@ -43,7 +43,7 @@ public class ConfigRequestFilter extends AbstractRequestFilter {
             try {
                 configMap.put(CONFIG.valueOf(key), (Map<String, Object>) this.gson.fromJson(new String(bodyMap.get(key), request.charset()), Map.class));
             } catch(Exception e) {
-                throw new HTTPException(HTTP.RES412, "Configuration extracting fail: "+e.getMessage());
+                throw new LeapException(HTTP.RES412, "Configuration extracting fail: "+e.getMessage());
             }
         }                        
         return configMap;

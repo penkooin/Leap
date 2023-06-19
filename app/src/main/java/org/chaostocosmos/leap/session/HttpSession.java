@@ -5,11 +5,11 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.common.Constants;
 import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.PROTOCOL;
-import org.chaostocosmos.leap.http.HTTPException;
 import org.chaostocosmos.leap.http.Response;
 
 /**
@@ -176,7 +176,7 @@ public class HttpSession implements Session {
 
     @Override
     public void close() {
-        throw new HTTPException(HTTP.RES500, "This connection is unexpected to close.");
+        throw new LeapException(HTTP.RES500, "This connection is unexpected to close.");
     }
 
     @Override

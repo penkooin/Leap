@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.chaostocosmos.leap.LeapException;
+
 /**
  * HttpResponseBuilder
  * 
@@ -42,9 +44,9 @@ public class HttpResponseBuilder {
      * Build response
      * @param request
      * @return
-     * @throws HTTPException
+     * @throws LeapException
      */
-    public HttpResponseBuilder build(Request request) throws HTTPException {
+    public HttpResponseBuilder build(Request request) throws LeapException {
         this.httpResponse =  HttpParser.buildResponseParser().buildResponse(request, -1, null, new HashMap<String, List<String>>()); 
         return httpResponseBuilder;
     }

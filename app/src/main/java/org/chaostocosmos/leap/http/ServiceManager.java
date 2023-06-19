@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 
 import javax.transaction.NotSupportedException;
 
+import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.annotation.MethodMapper;
 import org.chaostocosmos.leap.annotation.PostFilters;
 import org.chaostocosmos.leap.annotation.PreFilters;
@@ -90,7 +91,7 @@ public class ServiceManager {
         this.sessionManager = sessionManager;
         this.resourcesModel = resourcesModel;
         this.classLoader = classLoader;
-        //initialize();
+        initialize();
     }
 
     /**
@@ -126,7 +127,7 @@ public class ServiceManager {
      * @param serviceModel
      * @return
      */
-    public Method getServiceMethod(REQUEST requestType, String contextPath, ServiceModel serviceModel) {
+    public Method getServiceMethod(REQUEST requestType, String contextPath, ServiceModel serviceModel) {        
         ServiceMapper sm = serviceModel.getClass().getDeclaredAnnotation(ServiceMapper.class);
         if(sm == null) {
             return null;
@@ -143,7 +144,7 @@ public class ServiceManager {
                 return method;
             }
         }
-        throw new HTTPException(HTTP.RES404, "Requested context path is not found in Server.  Request METHOD: "+requestType.name()+"  Rquest context path: "+contextPath);
+        throw new LeapException(HTTP.RES404, "Requested context path is not found in Server.  Request METHOD: "+requestType.name()+"  Rquest context path: "+contextPath);
     }
 
     /**
@@ -153,11 +154,10 @@ public class ServiceManager {
      */
     public ServiceHolder createServiceHolder(String contextPath) {
         if(!this.serviceHolderMap.containsKey(contextPath)) {
-            //throw new WASException(MSG_TYPE.HTTP, RES_CODE.RES404.code(), "Not exist service mapped with specfied context path: "+contextPath);
             return null;
         }
         ServiceHolder serviceHolder = this.serviceHolderMap.get(contextPath); 
-        return new ServiceHolder(contextPath, createServiceModel(serviceHolder.getServiceModel().getClass().getCanonicalName()), serviceHolder.getRequestType());
+        return new ServiceHolder(contextPath, createServiceModel(serviceHolder.getServiceClassName()), serviceHolder.getRequestType());
     }
     
     /**
@@ -175,11 +175,15 @@ public class ServiceManager {
                 service.setSessionManager(this.sessionManager);
                 service.setResourcesModel(this.resourcesModel);
                 PreFilters preFilters = method.getDeclaredAnnotation(PreFilters.class);
-                List<IFilter> preFilterList = Arrays.asList(preFilters.filterClasses()).stream().map(c -> newFilterInstance(c.getName())).collect(Collectors.toList());
-                service.setPreFilters(preFilterList);
+                if(preFilters != null) {
+                    List<IFilter> preFilterList = Arrays.asList(preFilters.filterClasses()).stream().map(c -> newFilterInstance(c.getName())).collect(Collectors.toList());
+                    service.setPreFilters(preFilterList);
+                }
                 PostFilters postFilters = method.getDeclaredAnnotation(PostFilters.class);
-                List<IFilter> postFilterList = Arrays.asList(postFilters.filterClasses()).stream().map(c -> newFilterInstance(c.getName())).collect(Collectors.toList());
-                service.setPostFilters(postFilterList);                
+                if(postFilters != null) {
+                    List<IFilter> postFilterList = Arrays.asList(postFilters.filterClasses()).stream().map(c -> newFilterInstance(c.getName())).collect(Collectors.toList());
+                    service.setPostFilters(postFilterList);                
+                }
                 return service;
             }
         }

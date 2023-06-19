@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "LeapHttpServerTest",
+            "request": "launch",
+            "mainClass": "org.chaostocosmos.leap.http.LeapHttpServerTest",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
             "name": "LeapAppTest",
             "request": "launch",
             "mainClass": "org.chaostocosmos.leap.http.LeapAppTest",

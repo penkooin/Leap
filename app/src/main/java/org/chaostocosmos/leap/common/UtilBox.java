@@ -11,8 +11,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.enums.HTTP;
-import org.chaostocosmos.leap.http.HTTPException;
 
 import ch.qos.logback.classic.Level;
 
@@ -82,13 +82,13 @@ public class UtilBox {
      * Get contents type of resource
      * @param resourcePath
      * @return
-     * @throws HTTPException
+     * @throws LeapException
      */
-    public static String probeContentType(Path resourcePath) throws HTTPException {
+    public static String probeContentType(Path resourcePath) throws LeapException {
         try {
             return Files.probeContentType(resourcePath);
         } catch (IOException e) {
-            throw new HTTPException(HTTP.RES500, e);
+            throw new LeapException(HTTP.RES500, e);
         }
     }        
 }

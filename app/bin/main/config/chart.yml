@@ -8,12 +8,12 @@ cpu:
   bg-color: [214, 234, 248]
   graph-bg-color: [235, 237, 239]
   interpolate: LINEAR
-  width: 800
-  height: 500
+  width: 600
+  height: 300
   x-index: 100
   y-index: [0, 0]
   limit: 100
-  unit: '%'
+  unit: PCT
   elements: 
     - element: leap
       color: [180,130,130]
@@ -33,12 +33,12 @@ memory:
   bg-color: [214, 234, 248]
   graph-bg-color: [235, 237, 239]
   interpolate: SPLINE
-  width: 800
-  height: 500
+  width: 600
+  height: 300
   x-index: 100
   y-index: [0, 0, 0]
   limit: 34000
-  unit: mb
+  unit: GB
   elements: 
     - element: Physical Used
       color: [133,193,233]
@@ -61,12 +61,12 @@ heap:
   bg-color: [214, 234, 248]
   graph-bg-color: [235, 237, 239]
   interpolate: SPLINE
-  width: 800
-  height: 500
+  width: 600
+  height: 300
   x-index: 100
   y-index: [0, 0, 0, 0]
   limit: 3500
-  unit: mb
+  unit: GB
   elements: 
     - element: Max
       color: [133,157,233]
@@ -92,12 +92,12 @@ thread:
   bg-color: [214, 234, 248]
   graph-bg-color: [235, 237, 239]
   interpolate: SPLINE
-  width: 800
-  height: 500
+  width: 600
+  height: 300
   x-index: 100
   y-index: [0, 0, 0, 0]
   limit: 150
-  unit: cnt
+  unit: CNT
   elements: 
     - element: Max
       color: [180,130,130]

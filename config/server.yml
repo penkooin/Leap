@@ -13,9 +13,8 @@ server:
       queue-size: 1000
 
     monitoring:
-      support-monitoring: true
+      support-monitoring: false
       interval: 3000
-      unit: MB
       logs: ./logs/monitor.log
       log-level: DEBUG
 
@@ -38,9 +37,9 @@ server:
         password: "9393"
 
       spring-jpa-packages: [
-        "org.chaostocosmos.leap.http.services", 
-        "org.chaostocosmos.leap.http.services.datasource", 
-        "org.chaostocosmos.leap.http.services.entity", 
-        "org.chaostocosmos.leap.http.services.repository" 
+        "org.chaostocosmos.leap.service", 
+        "org.chaostocosmos.leap.service.datasource", 
+        "org.chaostocosmos.leap.service.entity", 
+        "org.chaostocosmos.leap.service.repository" 
       ]
 

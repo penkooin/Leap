@@ -12,11 +12,11 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
+import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.common.Filtering;
 import org.chaostocosmos.leap.common.LoggerFactory;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.STATUS;
-import org.chaostocosmos.leap.http.HTTPException;
 import org.chaostocosmos.leap.resource.ResourcesModel;
 
 import ch.qos.logback.classic.Level;
@@ -246,15 +246,15 @@ public class Host <T> extends Metadata<T> {
      */
     @SuppressWarnings("unchecked")
     public <V> V getDynamicPackages() {
-        return super.getValue("dynamic-packages") == null ? (V) new ArrayList<String>() : super.getValue("dynamic-packages");
+        return super.getValue("dynamic-classpath") == null ? (V) new ArrayList<String>() : super.getValue("dynamic-classpath");
     }
 
     /**
      * Set dynamic packages 
-     * @param dynamicPackages
+     * @param dynamicClasspath
      */
-    public <V> void setDynamicPackages(V dynamicPackages) {
-        super.setValue("dynamic-packages", dynamicPackages);
+    public <V> void setDynamicPackages(V dynamicClasspath) {
+        super.setValue("dynamic-classpath", dynamicClasspath);
     }
 
     /**
@@ -707,7 +707,7 @@ public class Host <T> extends Metadata<T> {
                 long preTimestemp = entry.getValue();
                 if(url.equals(preContext) && System.currentTimeMillis() - preTimestemp < Context.server().<Integer>getRequestBlockingInterval().longValue()) {
                     requestAttackBlockingMap.remove(ip);
-                    throw new HTTPException(HTTP.RES429, new Exception("You requested too many on short period!!!  URI: "+url));
+                    throw new LeapException(HTTP.RES429, new Exception("You requested too many on short period!!!  URI: "+url));
                 }
             }
             map.put(url, System.currentTimeMillis());
