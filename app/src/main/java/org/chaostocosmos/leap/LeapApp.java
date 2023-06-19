@@ -199,7 +199,8 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
             }
         }
 
-        logger.info("----------------------------------------------------------------------------------------------------");        
+        logger.info("----------------------------------------------------------------------------------------------------");
+        
         for(LeapHttpServer server : leapServerMap.values()) {
             server.setDaemon(false);
             server.start();

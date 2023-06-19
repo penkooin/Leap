@@ -184,7 +184,7 @@ public class LeapRequestHandler implements Runnable {
         } catch(SocketTimeoutException e) {
             host.getLogger().error("[SOCKET TIME OUT] Client socket timeout occurred.");
         } catch(Exception e) {           
-            try {
+            try {                
                 if(!httpTransfer.isClosed()) {                   
                     processError(httpTransfer, e);
                 }

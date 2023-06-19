@@ -9,7 +9,6 @@ public class SimpleSpringService {
         System.out.println("SimpleSpringService injected.......");
     }
 
-
     public String helloLeap() {
         return "Hello Leap?";
     }
