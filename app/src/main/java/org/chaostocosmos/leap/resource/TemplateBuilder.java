@@ -42,7 +42,7 @@ public class TemplateBuilder {
     public static String buildMonitoringPage(String contextPath, Host<?> host) throws Exception {
         String url = host.<String> getProtocol().toLowerCase()+"://"+host.getHost()+":"+host.getPort();
         String monitorPage = host.getResource().getTemplatePage("templates/monitor.html", Map.of("@url", url));        
-        String script = host.getResource().getTemplatePage("script/refreshImage.js", Map.of("@interval", Context.server().getMonitoringInterval(), "@url", url));
+        String script = host.getResource().getTemplatePage("script/refreshImage.js", Map.of("@interval", Context.get().server().getMonitoringInterval(), "@url", url));
         return host.getResource().getTemplatePage("templates/default.html", Map.of("@serverName", host.getHost(), "@script", script, "@body", monitorPage));
     }
 
@@ -84,7 +84,7 @@ public class TemplateBuilder {
      * @throws ImageProcessingException
      */
     public static String buildErrorHtml(Host<?> host, MSG_TYPE type, int errorCode, String message) throws Exception {
-        String title = Context.messages().http(errorCode, "- "+type.name());
+        String title = Context.get().messages().http(errorCode, "- "+type.name());
         String errorPage = host.getResource().getErrorPage(Map.of("@code", errorCode, "@type", title, "@message", message));;
         return host.getResource().getTemplatePage("templates/default.html", Map.of("@serverName", host.getHost(), "@script", "", "@body", errorPage));
     }

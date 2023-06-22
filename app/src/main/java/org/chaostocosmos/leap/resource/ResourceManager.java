@@ -40,7 +40,7 @@ public class ResourceManager {
      */
     private ResourceManager() throws IOException, InterruptedException, URISyntaxException {
         this.resourceMap = new HashMap<>();
-        for(Host<?> host : Context.hosts().getAllHost()) {
+        for(Host<?> host : Context.get().hosts().getAllHost()) {
             //initalize host environment
             ResourceHelper.extractResource("webapp", host.getDocroot());
             this.resourceMap.put(host.getHost(), new WatchResources(host, WATCH_KIND));
@@ -87,7 +87,7 @@ public class ResourceManager {
      */
     public ResourcesModel getResource(String hostId) throws IOException, InterruptedException {
         if(!this.resourceMap.containsKey(hostId)) {
-            this.resourceMap.put(hostId, new WatchResources(Context.hosts().getHost(hostId), WATCH_KIND));
+            this.resourceMap.put(hostId, new WatchResources(Context.get().hosts().getHost(hostId), WATCH_KIND));
         }
         return this.resourceMap.get(hostId);
     }

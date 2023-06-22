@@ -43,7 +43,7 @@ public class SystemMonitorService extends AbstractChartService {
 
     @MethodMapper(method = REQUEST.GET, mappingPath = "")
     public void getMonitorWebpage(Request request, Response response) throws Exception {
-        if(Context.server().<Boolean> isSupportMonitoring()) {
+        if(Context.get().server().<Boolean> isSupportMonitoring()) {
             String body = TemplateBuilder.buildMonitoringPage(request.getContextPath(), super.httpTransfer.getHost());
             response.setBody(body);
             response.addHeader("Content-Type", MIME.TEXT_HTML.mimeType());
@@ -73,7 +73,7 @@ public class SystemMonitorService extends AbstractChartService {
         //super.logger.debug(chartJson);
         Map<String, Object> jsonMap = gson.fromJson(chartJson, Map.class);        
         List<Map<String, Object>> chartMap = jsonMap.values().stream().map(m -> (Map<String, Object>) m ).collect(Collectors.toList());
-        for(Host<?> host : Context.hosts().getAllHost()) {
+        for(Host<?> host : Context.get().hosts().getAllHost()) {
             for(Map<String, Object> map : chartMap) {
                 String savePath = (String) map.get("save-path"); 
                 boolean inMemory = (boolean) map.get("in-memory"); 

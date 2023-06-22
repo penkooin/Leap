@@ -17,20 +17,21 @@ import org.junit.jupiter.api.Test;
 public class ContextTest {
 
     public ContextTest() throws URISyntaxException, IOException, LeapException {    
-        Context.init(Paths.get("./config"));
-        Context.host("leap").getLogPath();
+        Context context = Context.get(Paths.get("."));
+        //Path logPath = context.host("leap").getLogPath();
+        //System.out.println(logPath.toAbsolutePath());
     }
 
     @Test
     public void testGetServerPort() {
-        int port = Context.hosts().getDefaultPort();
+        int port = Context.get().hosts().getDefaultPort();
         System.out.println("port: "+port);
         assertEquals(8080, port);
     }
 
     @Test
     public void testGetThreadPoolCoreSize() {
-        int cnt = Context.server().getThreadPoolCoreSize();
+        int cnt = Context.get().server().getThreadPoolCoreSize();
         System.out.println("cnt: "+cnt);
         assertEquals(50, cnt);
     }
@@ -48,7 +49,7 @@ public class ContextTest {
     @Test
     public void testGetMsg() {
         int code = 1;
-        String str = Context.messages().debug(code, "a", "b", "c");
+        String str = Context.get().messages().debug(code, "a", "b", "c");
         System.out.println(str);
     }
 

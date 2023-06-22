@@ -113,17 +113,17 @@ public class HttpParser {
             StringBuffer debug = new StringBuffer();
             String requestLine = StreamUtils.readLine(inStream, StandardCharsets.ISO_8859_1);
             if(requestLine == null) {
-                throw new Exception(Context.messages().<String>error(1));
+                throw new Exception(Context.get().messages().<String>error(1));
             }
             requestLine = URLDecoder.decode(requestLine, StandardCharsets.UTF_8);
             debug.append("============================== [REQUEST] "+requestLine+" =============================="+System.lineSeparator());
             String[] linesplited = requestLine.split(" ");
             if(linesplited.length != 3) {
-                throw new LeapException(HTTP.RES417, Context.messages().<String>error(400, "Requested line is something wrong: "+requestLine));
+                throw new LeapException(HTTP.RES417, Context.get().messages().<String>error(400, "Requested line is something wrong: "+requestLine));
             }
             String method = linesplited[0];
             if(!Arrays.asList(REQUEST.values()).stream().anyMatch(R -> R.name().equals(method))) {
-                throw new LeapException(HTTP.RES405, Context.messages().<String>error(26, method));
+                throw new LeapException(HTTP.RES405, Context.get().messages().<String>error(26, method));
             }
             String contextPath = linesplited[1];
             String protocolVersion = requestLine.substring(requestLine.lastIndexOf(" ") + 1);
@@ -136,7 +136,7 @@ public class HttpParser {
                     break;
                 int idx = header.indexOf(":");
                 if (idx == -1) {
-                    throw new LeapException(HTTP.RES417, Context.messages().<String>error(3, header));
+                    throw new LeapException(HTTP.RES417, Context.get().messages().<String>error(3, header));
                 }
                 debug.append(header.substring(0, idx)+":   "+header.substring(idx + 1, header.length()).trim()+Constants.LS);
                 headerMap.put(header.substring(0, idx), header.substring(idx + 1, header.length()).trim());
@@ -158,11 +158,11 @@ public class HttpParser {
             }
             String hostName = requestedHost.indexOf(":") != -1 ? requestedHost.substring(0, requestedHost.indexOf(":")) : requestedHost;
             //Get host ID from request host name
-            String hostId = Context.hosts().getHostId(hostName);
+            String hostId = Context.get().hosts().getHostId(hostName);
             //Get Host object by requested host name
-            Host<?> host = Context.host(hostId);
+            Host<?> host = Context.get().host(hostId);
             if(host == null) {
-                throw new LeapException(HTTP.RES417, Context.messages().<String>error(24, hostName));
+                throw new LeapException(HTTP.RES417, Context.get().messages().<String>error(24, hostName));
             }
             //Get content type from requested header
             String contentType = headerMap.get("Content-Type");
@@ -185,11 +185,11 @@ public class HttpParser {
                 LoggerFactory.getLogger(requestedHost).warn("[CLIENT BLOCKED] Too many requested client blocking: "+inetAddress.getHostAddress());
                 throw new LeapException(HTTP.RES429, requestedHost+" requested too many on short period!!!");
             }
-            if(!Context.hosts().isExistHostname(hostName)) {
-                throw new LeapException(HTTP.RES417, Context.messages().<String>error(400, "Requested host ID not exist in this server. ID: "+hostName));
+            if(!Context.get().hosts().isExistHostname(hostName)) {
+                throw new LeapException(HTTP.RES417, Context.get().messages().<String>error(400, "Requested host ID not exist in this server. ID: "+hostName));
             }            
             debug.append("Host ID: "+hostId);
-            Charset charset = Context.hosts().charset(hostId);
+            Charset charset = Context.get().hosts().charset(hostId);
             LoggerFactory.getLogger(hostId).debug(debug.toString());
             BodyPart bodyPart = null;
             MIME mimeType = null;

@@ -69,7 +69,7 @@ public abstract class AbstractService implements ServiceModel {
         Method targetMethod = this.serviceManager.getServiceMethod(httpTransfer.getRequest().getRequestType(), request.getContextPath(), this);
         Class<?>[] paramTypes = targetMethod.getParameterTypes();
         if(paramTypes.length != 2 || paramTypes[0] != request.getClass() || paramTypes[1] != response.getClass()) {
-            throw new LeapException(HTTP.RES501, Context.messages().<String> error(201, targetMethod.getName()));
+            throw new LeapException(HTTP.RES501, Context.get().messages().<String> error(201, targetMethod.getName()));
         }
         Object[] params = Arrays.asList(paramTypes).stream().map(c -> paramMap.get(c)).toArray();
         targetMethod.invoke(this, params);

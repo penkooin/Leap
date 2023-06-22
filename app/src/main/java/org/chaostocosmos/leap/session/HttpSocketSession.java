@@ -51,7 +51,7 @@ public class HttpSocketSession extends HttpSession {
     @Override
     public void close() {
         Message msg = new Message();
-        msg.setContent(Context.messages().http(HTTP.RES500.code()));
+        msg.setContent(Context.get().messages().http(HTTP.RES500.code()));
         try {
             this.inStream.close();
             this.outStream.write(msg.getContent().getBytes());

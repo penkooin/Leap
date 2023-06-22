@@ -25,15 +25,14 @@ import com.google.gson.Gson;
  */
 public enum META {
 
-    SERVER(Context.getHomePath().resolve("config").resolve("server.yml")),
-    HOSTS(Context.getHomePath().resolve("config").resolve("hosts.yml")),
-    MESSAGES(Context.getHomePath().resolve("config").resolve("messages.yml")),
-    MIME(Context.getHomePath().resolve("config").resolve("mime.yml")),
-    CHART(Context.getHomePath().resolve("config").resolve("chart.yml"));    
+    SERVER(Context.get().getHomePath().resolve("config").resolve("server.yml")),
+    HOSTS(Context.get().getHomePath().resolve("config").resolve("hosts.yml")),
+    MESSAGES(Context.get().getHomePath().resolve("config").resolve("messages.yml")),
+    MIME(Context.get().getHomePath().resolve("config").resolve("mime.yml")),
+    CHART(Context.get().getHomePath().resolve("config").resolve("chart.yml"));    
 
     Path metaPath;
     Map<String, Object> metaMap;
-    Object meta;
 
     /**
      * Initializer
@@ -42,23 +41,33 @@ public enum META {
      * @throws NotSupportedException
      */
     META(Path metaPath) {
-        this.metaPath = metaPath;
+        this.metaPath = metaPath.toAbsolutePath().normalize();
         try {
-            load();
-        } catch (IOException | NotSupportedException e) {            
+            load(this.metaPath);
+        } catch (IOException | NotSupportedException e) { 
             e.printStackTrace();
         }        
     }
 
     /**
-     * Load metadata from file
+     * Reload metadata from file
      * @throws NotSupportedException
      * @throws IOException
      */
-    public void load() throws NotSupportedException, IOException {
+    public synchronized void reload() throws NotSupportedException, IOException {
+        load(this.metaPath);
+    }
+
+    /**
+     * Load metadata from file
+     * @param metaPath
+     * @throws NotSupportedException
+     * @throws IOException
+     */
+    public synchronized void load(Path metaPath) throws NotSupportedException, IOException {
         String metaName = metaPath.toFile().getName();
-        String metaType = metaName.substring(metaName.lastIndexOf(".")+1);
-        String metaString = Files.readString(metaPath, StandardCharsets.UTF_8);            
+        String metaType = metaName.substring(metaName.lastIndexOf(".") + 1);
+        String metaString = Files.readString(metaPath, StandardCharsets.UTF_8);
         if(metaType.equalsIgnoreCase("yml")) {
             this.metaMap = new Yaml().<Map<String, Object>> load(metaString);
         } else if(metaType.equalsIgnoreCase("json")) {
@@ -70,37 +79,28 @@ public enum META {
         } else {
             throw new NotSupportedException("Meta file not supported: "+metaName);
         }    
-        if(this.name().equals("SERVER")) {
-            this.meta = new Server<Map<String, Object>>(this.metaMap);
-        } else if(this.name().equals("HOSTS")) {
-            this.meta = new Hosts<Map<String, Object>>(this.metaMap);
-        } else if(this.name().equals("MESSAGES")) {
-            this.meta = new Messages<Map<String, Object>>(this.metaMap);
-        } else if(this.name().equals("MIME")) {
-            this.meta = new Mime<Map<String, Object>>(this.metaMap);
-        } else if(this.name().equals("CHART")) {
-            this.meta = new Chart<Map<String, Object>>(this.metaMap);
-        } else {
-            this.meta = this.metaMap;
-        }            
-    }
-
-    /**
-     * Get meta object
-     * @param <T>
-     * @return
-     */
-    @SuppressWarnings("unchecked")
-    public <T> T getMeta() {
-        return (T) this.meta;
+        // this.meta = new Metadata<Map<String, Object>>(this.metaMap);
+        // if(this.name().equals("SERVER")) {
+        //     this.meta = new Server<Map<String, Object>>(this.metaMap);
+        // } else if(this.name().equals("HOSTS")) {
+        //     this.meta = new Hosts<Map<String, Object>>(this.metaMap);
+        // } else if(this.name().equals("MESSAGES")) {
+        //     this.meta = new Messages<Map<String, Object>>(this.metaMap);
+        // } else if(this.name().equals("MIME")) {
+        //     this.meta = new Mime<Map<String, Object>>(this.metaMap);
+        // } else if(this.name().equals("CHART")) {
+        //     this.meta = new Chart<Map<String, Object>>(this.metaMap);
+        // } else {
+        //     this.meta = this.metaMap;
+        // }            
     }
 
     /**
      * Get meta data Map
      * @return
      */
-    public Map<String, Object> getMetaMap() {
-        return this.metaMap;
+    public <T> T getMeta() {
+        return (T) this.metaMap;
     }
 
     /**

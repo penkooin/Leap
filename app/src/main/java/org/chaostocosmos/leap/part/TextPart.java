@@ -33,7 +33,7 @@ public class TextPart extends BodyPart {
     @Override
     public void save(Path targetPath) throws IOException {
         if(super.isLoadedBody) {
-            FileUtils.saveText(new String(super.body.get("BODY"), super.charset), targetPath, Context.server().getFileBufferSize());
+            FileUtils.saveText(new String(super.body.get("BODY"), super.charset), targetPath, Context.get().server().getFileBufferSize());
         } else {
             StreamUtils.saveStream(super.hostId, super.requestStream, super.contentLength, targetPath, super.charset);
         }

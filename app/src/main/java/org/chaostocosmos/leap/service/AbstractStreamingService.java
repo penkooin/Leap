@@ -41,7 +41,7 @@ public abstract class AbstractStreamingService extends AbstractService implement
            && mimeType != MIME.APPLICATION_OCTET_STREAM 
            && mimeType != MIME.APPLICATION_ZIP 
            ) {
-           throw new LeapException(HTTP.RES415, Context.messages().<String>error(22, "Specified media type is not supported: "+mimeType.mimeType()));
+           throw new LeapException(HTTP.RES415, Context.get().messages().<String>error(22, "Specified media type is not supported: "+mimeType.mimeType()));
         }
     }
 
@@ -67,7 +67,7 @@ public abstract class AbstractStreamingService extends AbstractService implement
             position = startGroup.isEmpty() ? position : Integer.valueOf(startGroup);
             position = position < 0 ? 0 : position;
         }
-        int bufferSize = Context.host(request.getHostId()).getStreamingBufferSize();
+        int bufferSize = Context.get().host(request.getHostId()).getStreamingBufferSize();
         int length = position + bufferSize >= fileLength ? (int)fileLength - position : bufferSize;
         byte[] body = super.resourcesModel.getResource(resourcePath).getBytes2(position, length);
         int contentLength = body.length;

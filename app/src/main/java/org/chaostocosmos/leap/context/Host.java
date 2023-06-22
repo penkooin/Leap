@@ -703,9 +703,9 @@ public class Host <T> extends Metadata<T> {
         if(requestAttackBlockingMap.containsKey(ip)) {
             Map<String, Long> map = requestAttackBlockingMap.get(ip);
             for(Map.Entry<String, Long> entry : map.entrySet()) {
-                String preContext = entry.getKey();
+                String preContext = entry.getKey(); 
                 long preTimestemp = entry.getValue();
-                if(url.equals(preContext) && System.currentTimeMillis() - preTimestemp < Context.server().<Integer>getRequestBlockingInterval().longValue()) {
+                if(url.equals(preContext) && System.currentTimeMillis() - preTimestemp < Context.get().server().<Integer>getRequestBlockingInterval().longValue()) {
                     requestAttackBlockingMap.remove(ip);
                     throw new LeapException(HTTP.RES429, new Exception("You requested too many on short period!!!  URI: "+url));
                 }

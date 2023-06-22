@@ -88,10 +88,10 @@ public class SessionManager {
      * @return
      */
     public synchronized Session createSession(String sessionId) {
-        int idLength = Context.host(this.host.getHostId()).getSessionIDLength();
+        int idLength = Context.get().host(this.host.getHostId()).getSessionIDLength();
         long creationTime = System.currentTimeMillis();
         long lastAccessedTime = creationTime;
-        int maxInteractiveInteralSecond = Context.host(this.host.getHostId()).<Integer> getSessionTimeoutSeconds();
+        int maxInteractiveInteralSecond = Context.get().host(this.host.getHostId()).<Integer> getSessionTimeoutSeconds();
         sessionId = sessionId != null && !sessionId.equals("") ? sessionId : SessionIDGenerator.get(this.host.<String> getHostId()).generateSessionId(idLength);
         //System.out.println(sessionId+"================================");
         Session session = new HttpSession(this, sessionId, creationTime, lastAccessedTime, maxInteractiveInteralSecond);         

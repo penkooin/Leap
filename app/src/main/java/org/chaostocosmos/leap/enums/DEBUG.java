@@ -38,7 +38,7 @@ public enum DEBUG {
      * @return
      */
     public String message() {
-        return Context.messages().debug(this.code);
+        return Context.get().messages().debug(this.code);
     }
 
     /**
@@ -47,6 +47,6 @@ public enum DEBUG {
      * @return
      */
     public String message(Object ... parameters) {
-        return Context.messages().debug(this.code, parameters);
+        return Context.get().messages().debug(this.code, parameters);
     }
 }

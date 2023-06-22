@@ -328,7 +328,7 @@ public class StreamUtils {
                     //System.out.println("0."+line.trim());
                 } while(true);
             } catch(IOException e) {
-                throw new Exception(Context.messages(). <String>error(12, new Object[]{savePath.toString()}));
+                throw new Exception(Context.get().messages(). <String>error(12, new Object[]{savePath.toString()}));
             }
         }
     }

@@ -98,7 +98,7 @@ public class ResourceHelper {
      */
     public static Path getResourcePath(String hostId, String contextPath) {
         contextPath = contextPath.charAt(0) == '/' ? contextPath.substring(1) : contextPath;
-        Host<?> hosts = Context.hosts().getHost(hostId);
+        Host<?> hosts = Context.get().hosts().getHost(hostId);
         Path docroot = hosts.getDocroot().toAbsolutePath();
         Path reqPath = getStaticPath(hostId).resolve(contextPath).toAbsolutePath();        
         if(!validatePath(docroot, reqPath)) {
@@ -115,7 +115,7 @@ public class ResourceHelper {
      * @return
      */
     public static Path getResponseResourcePath(String hostId) {
-        return Context.hosts().getHost(hostId).getTemplates().resolve("response.html");
+        return Context.get().hosts().getHost(hostId).getTemplates().resolve("response.html");
     }    
 
     /**
@@ -137,7 +137,7 @@ public class ResourceHelper {
         try {
             return Files.readAllBytes(resourcePath);
         } catch (IOException e) {
-            throw new LeapException(HTTP.RES500, Context.messages().<String> error(14, resourcePath));
+            throw new LeapException(HTTP.RES500, Context.get().messages().<String> error(14, resourcePath));
         }
     }
 
@@ -173,7 +173,7 @@ public class ResourceHelper {
      * @throws IOException
      */
     public String getTrademark() throws FileNotFoundException, IOException {
-        File file = Context.getHomePath().resolve("config").resolve("trademark").toFile();
+        File file = Context.get().getHomePath().resolve("config").resolve("trademark").toFile();
         return UtilBox.readAllString(new FileInputStream(file)); 
     }
 
@@ -236,7 +236,7 @@ public class ResourceHelper {
      * @throws LeapException
      */
     public static Path getDocroot(String hostId) throws LeapException {
-        return Context.hosts().getDocroot(hostId).normalize().toAbsolutePath();
+        return Context.get().hosts().getDocroot(hostId).normalize().toAbsolutePath();
     }
 
     /**

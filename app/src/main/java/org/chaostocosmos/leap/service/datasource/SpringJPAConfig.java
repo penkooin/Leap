@@ -36,7 +36,7 @@ public class SpringJPAConfig {
       LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
       factory.setPersistenceUnitName("leap");
       factory.setJpaVendorAdapter(vendorAdapter);
-      factory.setPackagesToScan(Context.server().<List<String>> getSpringJPAPackage().toArray(new String[0]));
+      factory.setPackagesToScan(Context.get().server().<List<String>> getSpringJPAPackage().toArray(new String[0]));
       factory.setDataSource(getDataSource());
       return factory;
     }

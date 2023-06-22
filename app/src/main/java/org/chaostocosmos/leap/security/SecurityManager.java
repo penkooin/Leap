@@ -35,8 +35,8 @@ public class SecurityManager {
      * @param context
      */
     public SecurityManager(String hostId) {
-        this.logger = Context.host(hostId).getLogger();
-        this.users = Context.hosts().getHost(hostId).<List<Map<String, Object>>>getUsers().stream().map(m -> new UserCredentials(m)).collect(Collectors.toList());
+        this.logger = Context.get().host(hostId).getLogger();
+        this.users = Context.get().hosts().getHost(hostId).<List<Map<String, Object>>>getUsers().stream().map(m -> new UserCredentials(m)).collect(Collectors.toList());
     }
 
     public UserCredentials logout(String username) {
@@ -110,7 +110,7 @@ public class SecurityManager {
      */
     public void save(List<UserCredentials> users) throws LeapException {
         List<Map<String, Object>> list = users.stream().map(u -> u.getUserCredentialsMap()).collect(Collectors.toList());
-        Context.server().setValue("server.users", list);
-        Context.save(META.SERVER);
+        Context.get().server().setValue("server.users", list);
+        Context.get().save(META.SERVER);
     }
 }

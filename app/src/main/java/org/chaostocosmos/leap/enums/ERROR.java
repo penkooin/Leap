@@ -93,7 +93,7 @@ public enum ERROR {
      * @return
      */
     public String message() {
-        return Context.messages().error(this.code);
+        return Context.get().messages().error(this.code);
     }
 
     /**
@@ -102,7 +102,7 @@ public enum ERROR {
      * @return
      */
     public String message(Object ... parameters) {
-        return Context.messages().error(this.code, parameters);
+        return Context.get().messages().error(this.code, parameters);
     }
 }
 

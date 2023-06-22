@@ -115,10 +115,10 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
     private ResourceMonitor() throws NotSupportedException {
         super(buildMonitorSchema());
         this.fractionPoint = Constants.DEFAULT_FRACTION_POINT;
-        this.interval = Context.server().<Integer> getMonitoringInterval().longValue();
+        this.interval = Context.get().server().<Integer> getMonitoringInterval().longValue();
         this.logger = LoggerFactory.createLoggerFor("monitoring", 
-                      LeapApp.getHomePath().resolve(Context.server().<String> getMonitoringLogs()).normalize().toString(), 
-                      Arrays.asList(Context.server().<String> getMonitoringLogLevel().split(",")).stream().map(s -> Level.valueOf(s)).collect(Collectors.toList()));        
+                      LeapApp.getHomePath().resolve(Context.get().server().<String> getMonitoringLogs()).normalize().toString(), 
+                      Arrays.asList(Context.get().server().<String> getMonitoringLogLevel().split(",")).stream().map(s -> Level.valueOf(s)).collect(Collectors.toList()));        
     }
 
     /**
@@ -126,7 +126,7 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
      * @return
      */
     private static Map<String, Object> buildMonitorSchema() {
-        Chart<Map<String, Object>> chart = Context.chart();
+        Chart<Map<String, Object>> chart = Context.get().chart();
         //Setting x index values
         chart.setValue("cpu.x-index", IntStream.range(0, chart.getValue("cpu.x-index")).mapToObj(i -> i % xIndexIndent == 0 ? i+"" : "").collect(Collectors.toList()));        
         chart.setValue("memory.x-index", IntStream.range(0, chart.getValue("memory.x-index")).mapToObj(i -> i % xIndexIndent == 0 ? i+"" : "").collect(Collectors.toList()));
@@ -266,7 +266,7 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
     private void requestMonitorings() throws IOException {
         String monitorJson = this.mapper.writerWithDefaultPrettyPrinter().writeValueAsString(super.getMeta());
         Map<String, FormData<?>> formDatas = Map.of("chart", new FormData<byte[]>(MIME.TEXT_JSON, monitorJson.getBytes()));        
-        LeapClient.build(Context.hosts().getDefaultHost().getHost(), Context.hosts().getDefaultHost().getPort())
+        LeapClient.build(Context.get().hosts().getDefaultHost().getHost(), Context.get().hosts().getDefaultHost().getPort())
                   .addHeader("charset", "utf-8")
                   .addHeader("body-in-stream", false)
                   .post("/monitor/chart/image", null, formDatas);

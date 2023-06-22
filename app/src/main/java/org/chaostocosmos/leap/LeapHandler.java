@@ -226,18 +226,18 @@ public class LeapHandler implements Runnable {
             headers.putAll(e.getHeaders());
             resCode = e.code();
             msgType = e.getMessageType();
-            if(Context.host(hostId).<Boolean> getErrorDetails()) {
+            if(Context.get().host(hostId).<Boolean> getErrorDetails()) {
                 message += "<pre>" + e.getStackTraceMessage() + "<pre>";
             }
         } else {
             resCode = HTTP.RES500.code();            
         }
-        if(!Context.hosts().isExistHostname(hostId)) {
-            hostId = Context.hosts().getDefaultHost().getHostId();
+        if(!Context.get().hosts().isExistHostname(hostId)) {
+            hostId = Context.get().hosts().getDefaultHost().getHostId();
         }
         //throwable.printStackTrace();
         //System.out.println(msgType+"  "+resCode+"  "+message+"  "+throwable);
-        String body = TemplateBuilder.buildErrorHtml(Context.host(hostId), msgType, resCode, message);
+        String body = TemplateBuilder.buildErrorHtml(Context.get().host(hostId), msgType, resCode, message);
         httpTransfer.sendResponse(hostId, resCode, headers, body);
     }
 

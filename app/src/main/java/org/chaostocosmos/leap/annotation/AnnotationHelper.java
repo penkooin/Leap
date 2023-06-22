@@ -29,7 +29,7 @@ public class AnnotationHelper {
     /**
      * logger
      */
-    public static final Logger logger = LoggerFactory.getLogger(Context.hosts().getDefaultHost().getHostId()); 
+    public static final Logger logger = LoggerFactory.getLogger(Context.get().hosts().getDefaultHost().getHostId()); 
 
     /**
      * Servlet context mapping Map
@@ -79,7 +79,7 @@ public class AnnotationHelper {
         if(serviceIndicator != null) {
             String sPath = serviceIndicator.mappingPath();
             if(sPath == null) {
-                throw new LeapException(HTTP.RES500, new Exception(Context.messages(). <String>error(6, service.getClass().getName())));
+                throw new LeapException(HTTP.RES500, new Exception(Context.get().messages(). <String>error(6, service.getClass().getName())));
             }
             Method[] methods = service.getClass().getDeclaredMethods();
             for(Method method : methods) {
@@ -87,11 +87,11 @@ public class AnnotationHelper {
                 if(methodIndicator != null) {
                     String mPath = methodIndicator.mappingPath();
                     if(mPath == null) {
-                        throw new LeapException(HTTP.RES500, new Exception(Context.messages(). <String>error(7, method.getName())));
+                        throw new LeapException(HTTP.RES500, new Exception(Context.get().messages(). <String>error(7, method.getName())));
                     }        
                     String fullPath = sPath + mPath;
                     if(methodMap.containsKey(fullPath)) {
-                        throw new LeapException(HTTP.RES500, new Exception(Context.messages(). <String>error(8, methodMap.get(fullPath).getName())));
+                        throw new LeapException(HTTP.RES500, new Exception(Context.get().messages(). <String>error(8, methodMap.get(fullPath).getName())));
                     }
                     methodMap.put(fullPath, method);
                 }
@@ -123,11 +123,11 @@ public class AnnotationHelper {
                     }
                 }
             } else {
-                logger.info(Context.messages().info(1, service.getClass().getName()));
+                logger.info(Context.get().messages().info(1, service.getClass().getName()));
             }            
         }
         return null;
-    }
+    } 
 
     /**
      * Matches service object 
@@ -152,7 +152,7 @@ public class AnnotationHelper {
                     }
                 }
             } else {
-                logger.info(Context.messages().info(1, service.getClass().getName()));
+                logger.info(Context.get().messages().info(1, service.getClass().getName()));
             }            
         }
         return null;
@@ -171,7 +171,7 @@ public class AnnotationHelper {
             if(serviceDescriptor != null) {
                 String sPath = serviceDescriptor.mappingPath();
                 if(!sPath.substring(0, 1).equals("/") || sPath.substring(sPath.length()-1).equals("/")) {
-                    throw new Exception(Context.messages(). <String>error(9, service));
+                    throw new Exception(Context.get().messages(). <String>error(9, service));
                 }
                 Method[] methods = service.getClass().getDeclaredMethods();
                 for(Method method : methods) {
@@ -179,17 +179,17 @@ public class AnnotationHelper {
                     if(methodDescriptor != null) {
                         String mPath = methodDescriptor.mappingPath();
                         if(!mPath.substring(0, 1).equals("/") || mPath.substring(mPath.length()-1).equals("/")) {
-                            throw new Exception(Context.messages(). <String>error(10, method.getName()));
+                            throw new Exception(Context.get().messages(). <String>error(10, method.getName()));
                         }        
                         String fullPath = sPath + mPath;
                         if(serviceContextMappings.containsKey(fullPath)) {
-                            throw new Exception(Context.messages(). <String>error(11, new Object[]{service, fullPath}));
+                            throw new Exception(Context.get().messages(). <String>error(11, new Object[]{service, fullPath}));
                         }
                         serviceContextMappings.put(fullPath, (ServiceModel) ClassUtils.instantiate(ClassLoader.getSystemClassLoader(), service));
                     }
                 }
             } else {
-                logger.info(Context.messages().info(1, service.getClass().getName()));
+                logger.info(Context.get().messages().info(1, service.getClass().getName()));
             }                 
         }
         return serviceContextMappings;
@@ -208,7 +208,7 @@ public class AnnotationHelper {
             if(serviceMapper != null) {
                 String sPath = serviceMapper.mappingPath();
                 if(!sPath.substring(0, 1).equals("/") || sPath.substring(sPath.length()-1).equals("/")) {
-                    throw new Exception(Context.messages(). <String>error(9, service));
+                    throw new Exception(Context.get().messages(). <String>error(9, service));
                 }
                 Method[] methods = service.getClass().getDeclaredMethods();
                 for(Method method : methods) {
@@ -216,17 +216,17 @@ public class AnnotationHelper {
                     if(methodMapper != null) {
                         String mPath = methodMapper.mappingPath();
                         if(!mPath.substring(0, 1).equals("/") || mPath.substring(mPath.length()-1).equals("/")) {
-                            throw new Exception(Context.messages(). <String>error(10, method.getName()));
+                            throw new Exception(Context.get().messages(). <String>error(10, method.getName()));
                         }        
                         String fullPath = sPath + mPath;
                         if(serviceContextMappings.containsKey(fullPath)) {
-                            throw new Exception(Context.messages(). <String>error(8, new Object[]{service, fullPath}));
+                            throw new Exception(Context.get().messages(). <String>error(8, new Object[]{service, fullPath}));
                         }
                         serviceContextMappings.put(fullPath, method);
                     }
                 }
             } else {
-                logger.info(Context.messages().info(1, service.getClass().getName()));
+                logger.info(Context.get().messages().info(1, service.getClass().getName()));
             }                 
         }
         return serviceContextMappings;

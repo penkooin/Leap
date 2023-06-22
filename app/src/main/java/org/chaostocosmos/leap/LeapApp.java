@@ -46,47 +46,38 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
      * Logger
      */
     public static Logger logger;
-
     /**
      * Standard IO
      */
     public static PrintStream systemOut;
-
     /**
      * Home path
      */
     public static Path HOME_PATH;
-
     /**
      * Context
      */
     public static Context context;
-
     /**
      * Static resource manager
      */
     public static ResourceManager resourceManager;
-
     /**
      * Resource Monitor
      */
     public static ResourceMonitor resourceMonitor;
-
     /**
      * SpringJPAManager object
      */
     public static SpringJPAManager jpaManager;
-
     /**
      * Server Map
      */
     public static Map<String, LeapServer> leapServerMap;
-
     /**
      * Thread pool
      */
     public static ThreadPoolExecutor threadpool;
-
     /**
      * Thread Queue
      */
@@ -128,12 +119,12 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
         }
 
         //initialize environment and context
-        Context.init(HOME_PATH);
-        Context.addContextListener(this);
+        context = Context.get(HOME_PATH);        
+        context.addContextListener(this);
 
         //set log level
         String optionL = cmdLine.getOptionValue("l");
-        logger = LoggerFactory.getLogger(Context.hosts().getDefaultHost().getHostId());
+        logger = LoggerFactory.getLogger(context.hosts().getDefaultHost().getHostId());
         if(optionL != null) {
             Level level = Level.toLevel(optionL); 
             logger.setLevel(level);
@@ -165,21 +156,21 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
     public void start() throws Exception {
         //NetworkInterfaces.getAllNetworkAddresses().stream().forEach(i -> System.out.println(i.getHostName())); 
         //Spring JPA 
-        if((boolean) Context.server().isSupportSpringJPA()) {
+        if((boolean) context.server().isSupportSpringJPA()) {
             jpaManager = SpringJPAManager.get();
         }
         //initialize thread queue
         threadQueue = new LinkedBlockingQueue<Runnable>();        
         //initialize thread pool
-        threadpool = new ThreadPoolExecutor(Context.server().<Integer> getThreadPoolCoreSize(), Context.server().<Integer> getThreadPoolMaxSize(), Context.server().<Integer> getThreadPoolKeepAlive(), TimeUnit.SECONDS, threadQueue);                
+        threadpool = new ThreadPoolExecutor(context.server().<Integer> getThreadPoolCoreSize(), context.server().<Integer> getThreadPoolMaxSize(), context.server().<Integer> getThreadPoolKeepAlive(), TimeUnit.SECONDS, threadQueue);                
         logger.info("====================================================================================================");
-        logger.info("ThreadPool initialized - CORE: "+Context.server().<Integer> getThreadPoolCoreSize()+"   MAX: "+Context.server().<Integer> getThreadPoolMaxSize()+"   KEEP-ALIVE WHEN IDLE(seconds): "+Context.server().<Integer> getThreadPoolKeepAlive());    
+        logger.info("ThreadPool initialized - CORE: "+context.server().<Integer> getThreadPoolCoreSize()+"   MAX: "+context.server().<Integer> getThreadPoolMaxSize()+"   KEEP-ALIVE WHEN IDLE(seconds): "+context.server().<Integer> getThreadPoolKeepAlive());    
 
         // initialize resource manager
         resourceManager = ResourceManager.initialize();
 
         //initialize Leap hosts
-        for(Host<?> host : Context.hosts().getAllHost()) {
+        for(Host<?> host : context.hosts().getAllHost()) {
             // set host server status to NONE
             host.setHostStatus(STATUS.NONE);
             InetAddress hostAddress = InetAddress.getByName(host.getHost());
@@ -188,7 +179,7 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
                 String key = leapServerMap.keySet().stream().filter(k -> k.equals(hostName)).findAny().get();
                 throw new IllegalArgumentException("Mapping host address is collapse on network interace: "+hostAddress.toString()+":"+host.getPort()+" with "+key);
             }
-            LeapServer server = new LeapServer(Context.getHomePath(), host, threadpool, ClassUtils.getClassLoader());
+            LeapServer server = new LeapServer(context.getHomePath(), host, threadpool, ClassUtils.getClassLoader());
             leapServerMap.put(hostAddress.getHostAddress()+":"+host.getPort(), server);
             if(host.<Boolean> isDefaultHost()) {
                 logger.info("[DEFAULT HOST] - Protocol: "+host.getProtocol()+"   Server: "+host.getHostId()+"   Host: "+host.getHost()+"   Port: "+host.getPort()+"   Doc-Root: "+host.getDocroot()+"   Logging path: "+host.getLogPath()+"   Level: "+host.getLogLevel().toString());                
@@ -210,7 +201,7 @@ public class LeapApp implements MetaListener<Map<String, Object>> {
         }
 
         //initialize resource monitor
-        if((boolean) Context.server().isSupportMonitoring()) {
+        if((boolean) context.server().isSupportMonitoring()) {
             resourceMonitor = ResourceMonitor.get();
         } else {
             logger.info("[MONITOR OFF] Leap system monitor turned off.");

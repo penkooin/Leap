@@ -3,9 +3,12 @@ package org.chaostocosmos.leap.context;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.transaction.NotSupportedException;
 
@@ -17,47 +20,183 @@ import org.chaostocosmos.leap.resource.ResourceHelper;
  * @author Kooin-Shin
  * @since 2021.09.15
  */
-public class Context {
+public class Context extends Thread {
     /**
      * Context instance
      */
-    public static Context context;
-
+    private static Context context = null;
     /**
      * Home path
      */
-    private static Path HOME_PATH;
-
+    private Path HOME_PATH;
     /**
      * Config path
      */
-    private static Path CONFIG_PATH;
-
+    private Path CONFIG_PATH;
     /**
      * Context listener list
      */
-    private static List<MetaListener<?>> contextListeners = new ArrayList<>();
-
+    private List<MetaListener<?>> contextListeners = new ArrayList<>();
 
     /**
-     * Constructor with home path
-     * @param homePath
+     * META mod Map
+     */
+    Map<META, Long> metaFileModMap;
+
+    /**
+     * Wether over thread
+     */
+    boolean isDone;
+
+    /**
+     * Constructor 
+     * @param HOME_PATH
+     * @throws URISyntaxException
+     * @throws IOException
+     * @throws InterruptedException
+     */
+    private Context(Path HOME_PATH) throws IOException, URISyntaxException, InterruptedException {
+        System.out.println("Start context service.....................");
+        this.HOME_PATH = HOME_PATH;
+        this.CONFIG_PATH = this.HOME_PATH.resolve("config");        
+        //init metadata watcher
+        //build config environment
+        ResourceHelper.extractResource("config", this.HOME_PATH); 
+        //dispatch context events
+        dispatchContextEvent(new MetaEvent<Map<String, Object>, Object>(this, EVENT_TYPE.INITIALIZED, null, null, null));
+        System.out.println("////////////////////////////");
+    }
+
+    /**
+     * Get Context object 
+     * @return
      * @throws URISyntaxException
      * @throws IOException
      */
-    public static void init(Path homePath) throws IOException, URISyntaxException {
-        if(context == null) {
-            context = new Context();
-        }
-        HOME_PATH = homePath.normalize().toAbsolutePath();
-        CONFIG_PATH = HOME_PATH.resolve("config");
-
-        //build config environment
-        ResourceHelper.extractResource("config", homePath); 
-
-        //dispatch context events
-        dispatchContextEvent(new MetaEvent<Map<String, Object>, Object>(context, EVENT_TYPE.INITIALIZED, null, null, null));
+    public static Context get() {
+        return get(Paths.get(System.getProperty("user.dir")));
     }
+
+    /**
+     * Get Context object by specified Path
+     * @param HOME_PATH
+     * @return
+     * @throws URISyntaxException
+     * @throws IOException
+     */
+    public static Context get(Path HOME_PATH) {
+        if(context == null) {
+            try {
+                context = new Context(HOME_PATH);
+            } catch (IOException | URISyntaxException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        return context;
+    }    
+
+    /**
+     * Stop metadata watcher
+     * @throws InterruptedException
+     */
+    public void stopMetaWatcher() throws InterruptedException {
+        this.isDone = true;
+        interrupt();
+    }
+
+    @Override
+    public void run() {                
+        this.metaFileModMap = Arrays.asList(META.values()).stream().map(m -> new Object[]{m, m.getMetaPath().toFile().lastModified()}).collect(Collectors.toMap(k -> (META)k[0], v -> (Long)v[1]));
+        System.out.println("Start thread..........................");
+        while(!isDone) {
+            try {
+                // List<META> modMetas = Arrays.asList(META.values()).stream().filter(m -> m.getMetaPath().toFile().lastModified() > this.metaFileModMap.get(m)).collect(Collectors.toList());
+                // System.out.println("Meta mod count: "+modMetas.size());
+                // if(modMetas.size() > 0) {
+                //     for(int i=0; i<modMetas.size(); i++) {
+                //         META meta = modMetas.get(i);
+                //         System.out.println("META reloading. "+meta.getMetaPath().toString()+"  "+meta.getMetaPath().toFile().lastModified()+"  "+this.metaFileModMap.get(meta));
+                //         meta.reload();
+                //         this.metaFileModMap.put(meta, meta.getMetaPath().toFile().lastModified());
+                //     }
+                // }
+                Thread.sleep(1000);
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        }   
+    }    
+
+    /**
+     * MetaWatcher class
+     * 
+     * @author 9ins
+     */
+    // public class MetaWatcher extends Thread {
+    //     boolean isDone = false;
+    //     Path watchPath;        
+    //     WatchService watchService;
+    //     /**
+    //      * Metadata file modified time Map
+    //     */
+    //     private Map<META, Long> metaFileModMap;
+
+    //     /**
+    //      * Constructor
+    //      * @param watchPath
+    //      * @throws IOException
+    //      */
+    //     public MetaWatcher(Path watchPath) throws IOException {
+    //         this.watchPath = watchPath.toAbsolutePath();
+    //     }
+    //     /**
+    //      * End watch
+    //      * @throws InterruptedException
+    //      */
+    //     public void end() throws InterruptedException {
+    //         this.isDone = true;
+    //         this.interrupt();
+    //     }
+
+    //     @Override 
+    //     public void run() {            
+    //         long timestemp = System.currentTimeMillis();
+    //         int cnt = 0;
+    //         while(!this.isDone) {
+    //             try {
+    //                 WatchKey key = this.watchService.take();
+    //                 Path context = null;
+    //                 long eventMillis = System.currentTimeMillis();
+    //                 for(WatchEvent<?> event : key.pollEvents()) {
+    //                     WatchEvent.Kind<?> kind = event.kind();
+    //                     if(kind == StandardWatchEventKinds.ENTRY_MODIFY && eventMillis - timestemp > 50) {
+    //                         context = CONFIG_PATH.resolve(event.context().toString());
+    //                         break;
+    //                     }
+    //                 }
+    //                 boolean valid = key.reset(); 
+    //                 if (!valid) {
+    //                     break;
+    //                 }
+    //                 if(context != null) {
+    //                     final Path metaPath = context.toAbsolutePath().normalize();
+    //                     System.out.println(metaPath.toString()+"   "+(eventMillis - timestemp));
+    //                     META meta = Arrays.asList(META.values()).stream().filter(m -> m.getMetaPath().toAbsolutePath().normalize().equals(metaPath)).findFirst().orElseThrow(() -> new FileNotFoundException("File not found in event path: "+metaPath.toAbsolutePath()));
+    //                     meta.reload();
+    //                 }
+    //                 timestemp = eventMillis;
+    //             } catch(IOException | ClosedWatchServiceException | InterruptedException | NotSupportedException e) {
+    //                 e.printStackTrace();     
+    //             }
+    //         }
+    //         try {
+    //             this.watchService.close();
+    //         } catch (IOException e) {
+    //             e.printStackTrace();
+    //         }
+    //         LoggerFactory.getLogger().info("Config data watcher is closed...");
+    //     }
+    // }
 
     /**
      * Refresh all metadata
@@ -66,7 +205,7 @@ public class Context {
      */
     public static void refresh() throws NotSupportedException, IOException {
         for(META meta : META.values()) {
-            meta.load();
+            meta.reload(); 
         }
     }
 
@@ -76,7 +215,7 @@ public class Context {
      * @throws Exception
      */
     @SuppressWarnings("unchecked")
-    public static <T, V> void dispatchContextEvent(MetaEvent<T, V> me) {
+    public <T, V> void dispatchContextEvent(MetaEvent<T, V> me) { 
         for(MetaListener<?> listener : contextListeners) {
             try {
                 //String typeName = ((ParameterizedType)listener.getClass().getGenericSuperclass()).getActualTypeArguments()[0].getTypeName();            
@@ -92,7 +231,7 @@ public class Context {
      * @param meta
      * @param listener
      */
-    public static <T, V> void addContextListener(MetaListener<T> listener) {        
+    public <T, V> void addContextListener(MetaListener<T> listener) {        
         contextListeners.add(listener);
     }  
 
@@ -100,7 +239,7 @@ public class Context {
      * Remove context listener
      * @param listener
      */ 
-    public static <T, V> void removeContextListener(MetaListener<T> listener) {
+    public <T, V> void removeContextListener(MetaListener<T> listener) {
         contextListeners.remove(listener);
     }
 
@@ -108,7 +247,7 @@ public class Context {
      * Get home path
      * @return
      */
-    public static Path getHomePath() {
+    public Path getHomePath() {
         return HOME_PATH;
     }
 
@@ -116,7 +255,7 @@ public class Context {
      * Get config path
      * @return
      */
-    public static Path getConfigPath() {
+    public Path getConfigPath() {
         return CONFIG_PATH;
     }
 
@@ -124,7 +263,7 @@ public class Context {
      * Get template path
      * @return
      */
-    public static Path getTemplates(String hostId) {
+    public Path getTemplates(String hostId) {
         return hosts().getTemplates(hostId);
     }
 
@@ -132,40 +271,40 @@ public class Context {
      * Get Server context
      * @return
      */
-    public static <T> Server<T> server() {
-        return META.SERVER.getMeta();
+    public <T> Server<T> server() {
+        return new Server<T>(META.SERVER.getMeta());
     }
 
     /**
      * Get Hosts context
      * @return
      */
-    public static <T> Hosts<T> hosts() {
-        return META.HOSTS.<Hosts<T>>getMeta();
+    public <T> Hosts<T> hosts() {
+        return new Hosts<T>(META.HOSTS.getMeta());
     }
 
     /**
      * Get Messages context
      * @return
      */
-    public static <T> Messages<T> messages() {
-        return META.MESSAGES.getMeta();
+    public <T> Messages<T> messages() {
+        return new Messages<T>(META.MESSAGES.getMeta());
     }    
 
     /**
      * Get Mime context
      * @return
      */
-    public static <T> Mime<T> mime() {
-        return META.MIME.getMeta();
+    public <T> Mime<T> mime() {
+        return new Mime<T>(META.MIME.getMeta());
     }
 
     /**
      * Get Chart context
      * @return
      */
-    public static <T> Chart<T> chart() {
-        return META.CHART.getMeta();
+    public <T> Chart<T> chart() {
+        return new Chart<T>(META.CHART.getMeta());
     }
 
     /**
@@ -173,7 +312,7 @@ public class Context {
      * @param hostId
      * @return
      */
-    public static <T> Host<T> host(String hostId) {
+    public <T> Host<T> host(String hostId) {
         Hosts<T> hosts = hosts();
         return hosts.getHost(hostId);
     }
@@ -182,7 +321,7 @@ public class Context {
      * Get Host Map
      * @return
      */
-    public static <T> List<Host<T>> allHost() {
+    public <T> List<Host<T>> allHost() {
         Hosts<T> hosts = hosts();
         return hosts.getAllHost();
     }
@@ -194,7 +333,7 @@ public class Context {
      * @param expr
      * @return
      */
-    public static <T> T getMetadata(META metaType, String expr) {
+    public <T> T getMetadata(META metaType, String expr) {
         switch(metaType) {
             case SERVER:
                 return server().getValue(expr);
@@ -218,8 +357,13 @@ public class Context {
      * @param targetFile
      * @throws Exception
      */
-    public static <T, V> void save(META meta) {
+    public <T, V> void save(META meta) {
         meta.save(); 
-        dispatchContextEvent(new MetaEvent<T,V>(context, EVENT_TYPE.STORED, meta.getMeta(), null, null));       
-    }   
+        context.dispatchContextEvent(new MetaEvent<T,V>(context, EVENT_TYPE.STORED, meta.getMeta(), null, null));
+    }
+ 
+    public static void main(String[] args) throws IOException, URISyntaxException, InterruptedException {
+        Context context = new Context(Paths.get("."));        
+        context.start();
+    }
 }

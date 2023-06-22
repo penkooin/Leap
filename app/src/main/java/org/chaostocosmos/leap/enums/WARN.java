@@ -51,7 +51,7 @@ public enum WARN {
      * @return
      */
     public String message() {
-        return Context.messages().warn(this.code);
+        return Context.get().messages().warn(this.code);
     }
 
     /**
@@ -60,6 +60,6 @@ public enum WARN {
      * @return
      */
     public String message(Object ... parameters) {
-        return Context.messages().warn(this.code, parameters);
+        return Context.get().messages().warn(this.code, parameters);
     }
 }

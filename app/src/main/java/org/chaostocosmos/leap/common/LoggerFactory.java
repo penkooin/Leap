@@ -39,7 +39,7 @@ public class LoggerFactory {
      * @return
      */
     public static Logger getLogger() {
-        return getLogger(Context.hosts().getDefaultHost().getHostId());
+        return getLogger(Context.get().hosts().getDefaultHost().getHostId());
     }
 
     /**
@@ -55,7 +55,7 @@ public class LoggerFactory {
             loggerMap = new HashMap<String, Logger>();
         }
         if(!loggerMap.containsKey(hostId)) {
-            Host<?> hosts = Context.hosts().getHost(hostId);
+            Host<?> hosts = Context.get().hosts().getHost(hostId);
             Logger logger = createLoggerFor(hosts.getHostId(), hosts.getDocroot().resolve(hosts.getLogPath()).toAbsolutePath().toString(), hosts.getLogLevel());
             loggerMap.put(hosts.getHost(), logger);
             return logger;

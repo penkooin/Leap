@@ -42,15 +42,15 @@ public enum INFO {
      * @return
      */
     public String message() {
-        return Context.messages().info(this.code);
+        return Context.get().messages().info(this.code);
     }
-
+ 
     /**
      * Get info message with parameters
      * @param parameters
      * @return
      */
     public String message(Object ... parameters) {
-        return Context.messages().info(this.code, parameters);
+        return Context.get().messages().info(this.code, parameters);
     }
 }

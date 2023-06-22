@@ -71,7 +71,7 @@ public class HttpTransfer implements Http {
      * @throws IOException
      */
     public HttpTransfer(String hostId, Socket socket) throws IOException {
-        this.host = Context.hosts().getHost(hostId);
+        this.host = Context.get().hosts().getHost(hostId);
         this.socket = socket;
         this.inStream = socket.getInputStream();
         this.outStream = socket.getOutputStream();
@@ -121,7 +121,7 @@ public class HttpTransfer implements Http {
      */
     public Response getResponse() throws Exception {
         if(this.response == null) {
-            String msg = TemplateBuilder.buildResponseHtml(this.host, MSG_TYPE.HTTP, 200, Context.messages().http(200));
+            String msg = TemplateBuilder.buildResponseHtml(this.host, MSG_TYPE.HTTP, 200, Context.get().messages().http(200));
             Map<String, List<String>> headers = addHeader(new HashMap<>(), "Content-Type", MIME.TEXT_HTML.mimeType());
             headers = addHeader(new HashMap<>(), "Content-Length", String.valueOf(msg.getBytes().length));
             headers = addHeader(new HashMap<>(), "Charset", this.host.<String> charset());
@@ -162,13 +162,13 @@ public class HttpTransfer implements Http {
      * @throws IOException
      */
     public void sendResponse(String hostId, int resCode, Map<String, List<String>> headers, Object body) throws IOException {
-        Charset charset = Context.hosts().charset(hostId);
-        String protocol = Context.hosts().getHost(hostId).<String> getProtocol();
+        Charset charset = Context.get().hosts().charset(hostId);
+        String protocol = Context.get().hosts().getHost(hostId).<String> getProtocol();
         String resMsg = null;
         if(resCode >= 200 && resCode <= 600) {
             resMsg = HTTP.valueOf("RES"+resCode).status();
         } else {
-            resMsg = Context.messages().error(resCode, hostId);
+            resMsg = Context.get().messages().error(resCode, hostId);
         }
         String res = protocol+"/"+Constants.HTTP_VERSION+" "+resCode+" "+resMsg+"\r\n"; 
         this.outStream.write(res.getBytes());
@@ -186,7 +186,7 @@ public class HttpTransfer implements Http {
         } else if(body instanceof File) {
             contentLength = ((File)body).length();
         } else {
-            throw new LeapException(HTTP.RES501, Context.messages().<String>error(4, body.getClass().getName()));
+            throw new LeapException(HTTP.RES501, Context.get().messages().<String>error(4, body.getClass().getName()));
         }
         List<String> values = new ArrayList<>();
         values.add(String.valueOf(contentLength));
@@ -210,9 +210,9 @@ public class HttpTransfer implements Http {
             if(body instanceof String) {                                       
                 this.outStream.write(body.toString().getBytes(charset));
             } else if(body instanceof File) {
-                writeToStream((File)body, this.outStream, Context.server().getFileBufferSize());
+                writeToStream((File)body, this.outStream, Context.get().server().getFileBufferSize());
             } else if(body instanceof Path) {
-                writeToStream(((Path)body).toFile(), this.outStream, Context.server().getFileBufferSize());
+                writeToStream(((Path)body).toFile(), this.outStream, Context.get().server().getFileBufferSize());
             } else {
                 throw new IllegalArgumentException("Not supported response body type: "+body.getClass().getName());
             }

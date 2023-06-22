@@ -7,7 +7,6 @@ import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -29,11 +28,6 @@ import ch.qos.logback.classic.Logger;
  */
 public class Hosts <T> extends Metadata <T> {
     /**
-     * Host Map
-     */
-    private Map<String, Host<T>> hostMap = new HashMap<>();
-
-    /**
      * Constructor
      * @param hostsMap
      */
@@ -48,10 +42,7 @@ public class Hosts <T> extends Metadata <T> {
      * @return
      */
     public Host<T> getHost(String hostId) {
-        if(!hostMap.containsKey(hostId)) {
-            hostMap.put(hostId, new Host<T>(super.<List<T>>getValue("hosts").stream().filter(m -> ((Map<?, ?>)m).get("id").equals(hostId)).findFirst().orElseThrow(() -> new IllegalArgumentException("Host not found!!!"))));
-        }
-        return hostMap.get(hostId);
+        return new Host<T>(super.<List<T>>getValue("hosts").stream().filter(m -> ((Map<?, ?>)m).get("id").equals(hostId)).findFirst().orElseThrow(() -> new IllegalArgumentException("Host not found!!!")));
     }
 
     /**

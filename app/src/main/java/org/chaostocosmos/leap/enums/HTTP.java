@@ -159,7 +159,7 @@ public enum HTTP {
      * @return
      */
     public String status() {
-        return Context.messages().http(this.code);
+        return Context.get().messages().http(this.code);
     }
 
     /**
@@ -168,6 +168,6 @@ public enum HTTP {
      * @return
      */
     public String status(Object ... parameters) {
-        return Context.messages().http(this.code, parameters);
+        return Context.get().messages().http(this.code, parameters);
     }
 }

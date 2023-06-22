@@ -50,7 +50,7 @@ public class LeapServer extends Thread {
     /**
      * logger
      */
-    Logger logger = LoggerFactory.getLogger(Context.hosts().getDefaultHost().getHostId());
+    Logger logger = LoggerFactory.getLogger(Context.get().hosts().getDefaultHost().getHostId());
 
     /**
      * Whether default host
@@ -154,10 +154,10 @@ public class LeapServer extends Thread {
      */
     public LeapServer(Path homePath) throws IOException, InterruptedException, URISyntaxException, NotSupportedException {
         this(homePath, 
-             Context.hosts().getHost(Context.hosts().getDefaultHost().getHostId()), 
-                                    new ThreadPoolExecutor(Context.server().getThreadPoolCoreSize(), 
-                                                           Context.server().getThreadPoolMaxSize(), 
-                                                           Context.server().getThreadPoolKeepAlive(), 
+             Context.get().hosts().getHost(Context.get().hosts().getDefaultHost().getHostId()), 
+                                    new ThreadPoolExecutor(Context.get().server().getThreadPoolCoreSize(), 
+                                                           Context.get().server().getThreadPoolMaxSize(), 
+                                                           Context.get().server().getThreadPoolKeepAlive(), 
                                                            TimeUnit.SECONDS, 
                                                            new LinkedBlockingQueue<Runnable>())
         );
@@ -191,7 +191,7 @@ public class LeapServer extends Thread {
      * @throws IOException
      */
     public LeapServer(Path homePath, Host<?> host, ThreadPoolExecutor threadpool, LeapURLClassLoader classLoader) throws IOException, InterruptedException, URISyntaxException, NotSupportedException {
-        this(true, Context.getHomePath(), host.getDocroot(), PROTOCOL.valueOf(host.getProtocol()), new InetSocketAddress(InetAddress.getByName(host.getHost()), host.getPort()), Context.server().getBackLog(), threadpool, host, classLoader);
+        this(true, Context.get().getHomePath(), host.getDocroot(), PROTOCOL.valueOf(host.getProtocol()), new InetSocketAddress(InetAddress.getByName(host.getHost()), host.getPort()), Context.get().server().getBackLog(), threadpool, host, classLoader);
     }
 
     /**
@@ -223,7 +223,7 @@ public class LeapServer extends Thread {
         this.inetSocketAddress = inetSocketAddress;
         this.ipAllowedFilters = host.getIpAllowedFiltering();
         this.ipForbiddenFilters = host.getIpForbiddenFiltering();
-        this.redirectHostSelection = new RedirectHostSelection(Context.server().getLoadBalanceRedirects());
+        this.redirectHostSelection = new RedirectHostSelection(Context.get().server().getLoadBalanceRedirects());
         this.sessionManager = new SessionManager(host);
         this.userManager = new SecurityManager(host.getHostId());
         this.resourcesModel = ResourceManager.get(host.getHostId());
@@ -287,21 +287,21 @@ public class LeapServer extends Thread {
                 this.server.bind(this.inetSocketAddress, this.backlog);
                 this.logger.info("[HTTP SERVER START] Address: " + this.inetSocketAddress.toString());
             } else {
-                File keyStore = new File(Context.server().<String> getKeyStore());
-                String passphrase = Context.server().getPassphrase();
-                String sslProtocol = Context.server().getEncryptionMethod();
+                File keyStore = new File(Context.get().server().<String> getKeyStore());
+                String passphrase = Context.get().server().getPassphrase();
+                String sslProtocol = Context.get().server().getEncryptionMethod();
                 this.server = HttpsServerSocketFactory.getSSLServerSocket(keyStore, passphrase, sslProtocol, this.inetSocketAddress, this.backlog);
                 this.logger.info("[HTTPS SERVER START] Address: "+this.inetSocketAddress.toString()+"  Protocol: "+sslProtocol+"  KeyStore: "+keyStore.getName()+"  Supported Protocol: "+Arrays.toString(((SSLServerSocket)server).getSupportedProtocols())+"  KeyStore: "+keyStore.getName());
             }
             this.host.setHostStatus(STATUS.STARTED);
             while (this.host.getHostStatus() == STATUS.STARTED || this.host.getHostStatus() == STATUS.RUNNING) { 
                 Socket connection = this.server.accept();
-                connection.setSoTimeout(Context.server().getConnectionTimeout());
+                connection.setSoTimeout(Context.get().server().getConnectionTimeout());
                 //connection.setSoLinger(false, 1);
                 int queueSize = this.threadpool.getQueue().size();
                 String ipAddress = connection.getLocalAddress().toString();
                 if(this.ipAllowedFilters.include(ipAddress) || this.ipForbiddenFilters.exclude(ipAddress)) {
-                    if(queueSize < Context.server().<Integer> getThreadQueueSize()) {
+                    if(queueSize < Context.get().server().<Integer> getThreadQueueSize()) {
                         this.logger.info("[CLIENT DETECTED] Client request accepted. Submitting thread. "+ipAddress+" - "+connection.getPort()+"  Thread queue size - "+queueSize);
                         this.threadpool.submit(new LeapHandler(this, this.docroot, connection, this.host));
                     } else {

@@ -47,7 +47,7 @@ public class ClassUtils {
      */
     public static LeapURLClassLoader getClassLoader() {
         if(classLoader == null) {
-            classLoader = new LeapURLClassLoader(Context.hosts().getAllDynamicClasspathURLs());
+            classLoader = new LeapURLClassLoader(Context.get().hosts().getAllDynamicClasspathURLs());
         }
         return classLoader;
     }

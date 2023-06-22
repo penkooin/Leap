@@ -92,7 +92,7 @@ public class BodyPart implements Part {
      */
     private Map<String, byte[]> readBody() throws IOException {
         if(contentType == MIME.MULTIPART_FORM_DATA || contentType == MIME.MULTIPART_BYTERANGES) {
-            throw new LeapException(HTTP.RES406, Context.messages().<String> error(27));
+            throw new LeapException(HTTP.RES406, Context.get().messages().<String> error(27));
         }
         Map<String, byte[]> map = new HashMap<>();
         byte[] data = StreamUtils.readLength(this.requestStream, (int)this.contentLength);        
@@ -135,9 +135,9 @@ public class BodyPart implements Part {
             throw new LeapException(HTTP.RES406, "Can not save content. Not supported on Multi Part Operation.");
         }        
         if(this.isLoadedBody) {
-            StreamUtils.saveBinary(this.hostId, this.body.get("BODY"), targetPath, Context.server().getFileBufferSize());
+            StreamUtils.saveBinary(this.hostId, this.body.get("BODY"), targetPath, Context.get().server().getFileBufferSize());
         } else {
-            StreamUtils.saveBinary(this.hostId, this.requestStream, getContentLength(), targetPath, Context.server().getFileBufferSize());
+            StreamUtils.saveBinary(this.hostId, this.requestStream, getContentLength(), targetPath, Context.get().server().getFileBufferSize());
         }        
         this.logger.debug("[BODY-PART] "+contentType.name()+" saved: "+targetPath.normalize().toString()+"  Path: "+targetPath.toString());
     }    

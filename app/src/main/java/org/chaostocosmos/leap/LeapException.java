@@ -52,7 +52,7 @@ public class LeapException extends RuntimeException {
      * @param errorCode
      */
     public LeapException(HTTP resCode, int errorCode) {
-        this(resCode, Context.messages().<String> error(errorCode));
+        this(resCode, Context.get().messages().<String> error(errorCode));
     }
 
     /**
@@ -62,7 +62,7 @@ public class LeapException extends RuntimeException {
      * @param errorParams
      */
     public LeapException(HTTP resCode, int errorCode, Object errorParams) {
-        this(resCode, Context.messages().<String> error(errorCode, errorParams));
+        this(resCode, Context.get().messages().<String> error(errorCode, errorParams));
     }
 
     /**
@@ -80,7 +80,7 @@ public class LeapException extends RuntimeException {
      * @param cause
      */
     public LeapException(HTTP resCode, Throwable cause) {
-        this(resCode, Context.messages().<String>http(resCode.code()), cause);
+        this(resCode, Context.get().messages().<String>http(resCode.code()), cause);
     }
 
     /**
@@ -90,7 +90,7 @@ public class LeapException extends RuntimeException {
      * @param headers
      */
     public LeapException(HTTP resCode, String message, Map<String, List<String>> headers) {
-        this(resCode, Context.messages().get(type, resCode.code()), new Exception(message), headers.entrySet().stream().map(e -> List.of(e.getKey(), e.getValue())).flatMap(l -> l.stream()).toArray());
+        this(resCode, Context.get().messages().get(type, resCode.code()), new Exception(message), headers.entrySet().stream().map(e -> List.of(e.getKey(), e.getValue())).flatMap(l -> l.stream()).toArray());
     }
 
     /**
@@ -100,7 +100,7 @@ public class LeapException extends RuntimeException {
      * @param headers
      */
     public LeapException(HTTP resCode, Throwable cause, Map<String, List<String>> headers) {
-        this(resCode, Context.messages().get(type, resCode.code()), cause, headers.entrySet().stream().map(e -> List.of(e.getKey(), e.getValue())).flatMap(l -> l.stream()).toArray());
+        this(resCode, Context.get().messages().get(type, resCode.code()), cause, headers.entrySet().stream().map(e -> List.of(e.getKey(), e.getValue())).flatMap(l -> l.stream()).toArray());
     }
 
     /**
@@ -110,7 +110,7 @@ public class LeapException extends RuntimeException {
      * @param headerkeyValue
      */
     public LeapException(HTTP resCode, String message, Object ... headerkeyValue) {
-        this(resCode, Context.messages().get(type, resCode.code()), new Exception(message), headerkeyValue);
+        this(resCode, Context.get().messages().get(type, resCode.code()), new Exception(message), headerkeyValue);
     }
 
     /**
@@ -120,7 +120,7 @@ public class LeapException extends RuntimeException {
      * @param headerkeyValue
      */
     public LeapException(HTTP resCode, Throwable cause, Object ... headerkeyValue) {
-        this(resCode, Context.messages().get(type, resCode.code()), cause, headerkeyValue);
+        this(resCode, Context.get().messages().get(type, resCode.code()), cause, headerkeyValue);
     }
 
     /**

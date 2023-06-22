@@ -41,7 +41,7 @@ public class ServiceManager {
     /**
      * Logger 
      */
-    private static final Logger logger = LoggerFactory.getLogger(Context.hosts().getDefaultHost().getHostId());
+    private static final Logger logger = LoggerFactory.getLogger(Context.get().hosts().getDefaultHost().getHostId());
 
     /**
      * Host object 

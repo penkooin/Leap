@@ -18,12 +18,10 @@ public class Metadata <T> {
      * List of metadata event classes
      */
     private List<MetaListener<T>> metaListeners;
-
     /**
      * Metadata
      */
     T meta;
-
     /**
      * Constructs with metadata
      * @param meta
@@ -31,7 +29,6 @@ public class Metadata <T> {
     public Metadata(T meta) {
         this(meta, new ArrayList<>());
     }
-
     /**
      * Constructs with metadata, event classes
      * @param meta
@@ -41,7 +38,6 @@ public class Metadata <T> {
         this.meta = meta;
         this.metaListeners = metaListeners;
     }
-
     /**
      * Add target event class to be received from
      * @param metaListeners
@@ -53,34 +49,35 @@ public class Metadata <T> {
             throw new IllegalStateException("Specified event receiving class already exists in List: "+metaListeners.toString());
         }
     }
-
     /**
      * Remove target event receiving from
+     * @param metaListeners
      */
     public void removeEventClass(MetaListener<T> metaListeners) {
         this.metaListeners.remove(metaListeners);
-    }
-
+    } 
     /**
      * Get value by expression
+     * @param expr
      */
     public <V> V getValue(String expr) {
         V value = DataStructureOpr.<V> getValue(meta, expr);
         if(value != null) {
-            return value;
+            return value; 
         } else {
             throw new IllegalArgumentException("There isn't exist value on specified expresstion: "+expr);
         }
     }
     /**
      * Set value on specified position
+     * @param expr
+     * @param value
      */
     public <V> void setValue(String expr, V value) {
         DataStructureOpr.<V> setValue(meta, expr, value);
         //System.out.println(this.getClass().getCanonicalName()+"="+Chart.class.getCanonicalName());
-        Context.dispatchContextEvent(new MetaEvent<T,V>(this, EVENT_TYPE.CHANGED, this, expr, value));
+        Context.get().dispatchContextEvent(new MetaEvent<T,V>(this, EVENT_TYPE.CHANGED, this, expr, value));
     }
-
     /**
      * Add metadata value
      * @param expr
@@ -98,9 +95,8 @@ public class Metadata <T> {
         } else {
             throw new RuntimeException("Parent data type is wired. Context data structure failed: "+parent);
         }
-        Context.dispatchContextEvent(new MetaEvent<T,V>(this, EVENT_TYPE.ADDED, this, expr, value));
+        Context.get().dispatchContextEvent(new MetaEvent<T,V>(this, EVENT_TYPE.ADDED, this, expr, value));
     }
-
     /**
      * Remove metadata value
      * @param expr
@@ -112,18 +108,18 @@ public class Metadata <T> {
         if(parent == null) {
             throw new IllegalArgumentException("Specified expression's parent is not exist: "+expr);
         } else if(parent instanceof List) {
-            int idx = Integer.valueOf(expr.substring(expr.lastIndexOf(".")+1));
+            int idx = Integer.valueOf(expr.substring(expr.lastIndexOf(".") + 1));
             value = (V) ((List<Object>) parent).remove(idx);
         } else if(parent instanceof Map) {
             value = (V) ((Map<String, Object>) parent).remove(expr.substring(expr.lastIndexOf(".")+1));
         } else {
             throw new RuntimeException("Parent data type is wired. Context data structure failed: "+parent);
         }
-        Context.dispatchContextEvent(new MetaEvent<T,V>(this, EVENT_TYPE.REMOVED, this, expr, value));
+        Context.get().dispatchContextEvent(new MetaEvent<T,V>(this, EVENT_TYPE.REMOVED, this, expr, value));
     }
-
     /**
      * Exists context value by specified expression
+     * @param expr
      */
     public boolean exists(String expr) {
         Object value = DataStructureOpr.getValue(meta, expr);
@@ -133,14 +129,12 @@ public class Metadata <T> {
             return false;
         }
     }    
-
     /**
      * Get metadata
      */
     public T getMeta() {
         return this.meta;
     }
-
     @Override
     public String toString() {
         return meta.toString();

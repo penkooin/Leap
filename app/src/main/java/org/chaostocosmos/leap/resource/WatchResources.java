@@ -46,47 +46,38 @@ public class WatchResources extends Thread implements ResourcesModel {
      * host ID
      */
     String hostId;
-
     /**
      * Host object
      */
     Host<?> host;
-
     /**
      * Watch path
      */
     Path watchPath;
-
     /**
      * Watch kind
      */
     Kind<?>[] watchKind;
-
     /**
      * Filters
      */
     Filtering accessFiltering, forbiddenFiltering, inMemoryFiltering;
-
     /**
      * In-Memory resource limit size
      */
     long inMemoryLimitSize;
-
     /**
      * Resource root object
      */
     Resource resourceTree;
-
     /**
      * Watch path Map
      */
     Map<WatchKey, Path> watchMap;
-
     /**
      * Watch service object
      */
     WatchService watchService;
-
     /**
      * Gson object
      */
@@ -137,7 +128,7 @@ public class WatchResources extends Thread implements ResourcesModel {
         this.resourceTree = loadForkJoinResources();
         this.host.getLogger().info("[RESOURCE-LOAD] Host "+this.host.getHost()+" is complated: "+TIME.SECOND.duration(System.currentTimeMillis() - startMillis, TimeUnit.SECONDS));        
         //Have to set WatchResource to Hosts
-        Context.hosts().getHost(this.hostId).setResource(this);
+        Context.get().hosts().getHost(this.hostId).setResource(this);
         //Start watch thread
         start();
     }
@@ -148,7 +139,7 @@ public class WatchResources extends Thread implements ResourcesModel {
      * @throws IOException
      * @throws InterruptedException
      */
-    protected Resource loadForkJoinResources() throws IOException, InterruptedException {
+    protected synchronized Resource loadForkJoinResources() throws IOException, InterruptedException {
         ForkJoinPool pool = new ForkJoinPool((int)((com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean()).getAvailableProcessors());
         ResourceLoadProcessor proc = new ResourceLoadProcessor(new Resource(true, this.watchPath, false, this.host.getInMemorySplitUnit()));
         pool.execute(proc);
@@ -427,7 +418,7 @@ public class WatchResources extends Thread implements ResourcesModel {
         if(resourceInfo == null) {
             throw new LeapException(HTTP.RES404, " Static page not found in Resource manager: "+contextPath);
         }
-        String page = new String((resourceInfo).getBytes(), Context.hosts().getHost(this.hostId).<String> charset());
+        String page = new String((resourceInfo).getBytes(), Context.get().hosts().getHost(this.hostId).<String> charset());
         if(params != null) {
             page = resolvePage(page, params);
         }
@@ -436,7 +427,7 @@ public class WatchResources extends Thread implements ResourcesModel {
 
     @Override
     public String getWelcomePage(Map<String, Object> params) throws Exception {
-        return getStaticPage(Context.hosts().getHost(this.hostId).getWelcomeFile().getName(), params);
+        return getStaticPage(Context.get().hosts().getHost(this.hostId).getWelcomeFile().getName(), params);
     }
 
     @Override
