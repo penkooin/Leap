@@ -66,7 +66,7 @@ public class ClassUtils {
     @SuppressWarnings("unchecked")
     public static List<Class<? extends ServiceModel>> findAllLeapServices(URLClassLoader classLoader, boolean reloadConfig, Filtering filters) throws IOException, URISyntaxException, NotSupportedException {
         if(reloadConfig) {
-            Context.refresh();
+            Context.get().refresh();
         }
         List<Class<? extends ServiceModel>> services = findClasses(classLoader, ServiceModel.class, classLoader.getResource(""), null)
                                                        .stream()
@@ -360,7 +360,7 @@ public class ClassUtils {
             ipFilterMap.put("forbidden", host.getIpForbiddenFiltering());
         map.put("ip-filter", ipFilterMap);
         map.put("error-filters", host.getErrorFilters());
-        map.put("doc-root", host.getDocroot().toString());
+        map.put("home", host.getDocroot().toString());
         map.put("welcome", host.getWelcomeFile().toPath().toString());
         map.put("logs", host.getLogPath().toString());
         map.put("log-level", host.getLogLevel().stream().map(l -> l.toString()).collect(Collectors.joining(",")));

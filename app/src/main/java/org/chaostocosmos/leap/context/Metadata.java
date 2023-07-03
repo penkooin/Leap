@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.chaostocosmos.leap.common.DataStructureOpr;
+import org.chaostocosmos.leap.enums.EVENT_TYPE;
 
 /**
  * AbstractMeta
@@ -17,7 +18,7 @@ public class Metadata <T> {
     /**
      * List of metadata event classes
      */
-    private List<MetaListener<T>> metaListeners;
+    private List<MetaListener> metaListeners;
     /**
      * Metadata
      */
@@ -34,7 +35,7 @@ public class Metadata <T> {
      * @param meta
      * @param metaListeners
      */
-    public Metadata(T meta, List<MetaListener<T>> metaListeners) {
+    public Metadata(T meta, List<MetaListener> metaListeners) {
         this.meta = meta;
         this.metaListeners = metaListeners;
     }
@@ -42,7 +43,7 @@ public class Metadata <T> {
      * Add target event class to be received from
      * @param metaListeners
      */
-    public void addEventClass(MetaListener<T> metaListeners) {
+    public void addEventClass(MetaListener metaListeners) {
         if(!this.metaListeners.contains(metaListeners)) {
             this.metaListeners.add(metaListeners);
         } else {
@@ -53,7 +54,7 @@ public class Metadata <T> {
      * Remove target event receiving from
      * @param metaListeners
      */
-    public void removeEventClass(MetaListener<T> metaListeners) {
+    public void removeEventClass(MetaListener metaListeners) {
         this.metaListeners.remove(metaListeners);
     } 
     /**
@@ -73,10 +74,10 @@ public class Metadata <T> {
      * @param expr
      * @param value
      */
-    public <V> void setValue(String expr, V value) {
-        DataStructureOpr.<V> setValue(meta, expr, value);
+    public void setValue(String expr, Object value) {
+        DataStructureOpr.<Object> setValue(meta, expr, value);
         //System.out.println(this.getClass().getCanonicalName()+"="+Chart.class.getCanonicalName());
-        Context.get().dispatchContextEvent(new MetaEvent<T,V>(this, EVENT_TYPE.CHANGED, this, expr, value));
+        Context.get().dispatchContextEvent(new MetaEvent<Metadata<?>>(this, EVENT_TYPE.CHANGED, this, expr, value));
     }
     /**
      * Add metadata value
@@ -84,8 +85,8 @@ public class Metadata <T> {
      * @param value
      */
     @SuppressWarnings("unchecked")
-    public <V> void addValue(String expr, V value) {
-        Object parent = DataStructureOpr.<V> getValue(meta, expr.substring(0, expr.lastIndexOf(".")));
+    public void addValue(String expr, Object value) {
+        Object parent = DataStructureOpr.<Object> getValue(meta, expr.substring(0, expr.lastIndexOf(".")));
         if(parent == null) {
             throw new IllegalArgumentException("Specified expression's parent is not exist: "+expr);
         } else if(parent instanceof List) {
@@ -95,27 +96,27 @@ public class Metadata <T> {
         } else {
             throw new RuntimeException("Parent data type is wired. Context data structure failed: "+parent);
         }
-        Context.get().dispatchContextEvent(new MetaEvent<T,V>(this, EVENT_TYPE.ADDED, this, expr, value));
+        Context.get().dispatchContextEvent(new MetaEvent<Metadata<?>>(this, EVENT_TYPE.ADDED, this, expr, value));
     }
     /**
      * Remove metadata value
      * @param expr
      */
     @SuppressWarnings("unchecked")
-    public <V> void removeValue(String expr) {
-        Object parent = DataStructureOpr.<V> getValue(meta, expr.substring(0, expr.lastIndexOf(".")));
-        V value = null;
+    public void removeValue(String expr) {
+        Object parent = DataStructureOpr.<Object> getValue(meta, expr.substring(0, expr.lastIndexOf(".")));
+        Object value = null;
         if(parent == null) {
             throw new IllegalArgumentException("Specified expression's parent is not exist: "+expr);
         } else if(parent instanceof List) {
             int idx = Integer.valueOf(expr.substring(expr.lastIndexOf(".") + 1));
-            value = (V) ((List<Object>) parent).remove(idx);
+            value = ((List<Object>) parent).remove(idx);
         } else if(parent instanceof Map) {
-            value = (V) ((Map<String, Object>) parent).remove(expr.substring(expr.lastIndexOf(".")+1));
+            value = ((Map<String, Object>) parent).remove(expr.substring(expr.lastIndexOf(".")+1));
         } else {
             throw new RuntimeException("Parent data type is wired. Context data structure failed: "+parent);
         }
-        Context.get().dispatchContextEvent(new MetaEvent<T,V>(this, EVENT_TYPE.REMOVED, this, expr, value));
+        Context.get().dispatchContextEvent(new MetaEvent<Metadata<?>>(this, EVENT_TYPE.REMOVED, this, expr, value));
     }
     /**
      * Exists context value by specified expression

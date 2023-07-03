@@ -2,13 +2,16 @@ package org.chaostocosmos.leap.resource;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.file.Path;
 import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.WatchEvent.Kind;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.chaostocosmos.leap.common.LoggerFactory;
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.context.Host;
+import org.chaostocosmos.leap.enums.WEB_PATH;
 
 /**
  * StaticResourceManager
@@ -34,16 +37,18 @@ public class ResourceManager {
     /**
      * Default constructor
      * @throws IOException
-     * @throws InterruptedException
      * @throws URISyntaxException
-     * @throws ImageProcessingException
+     * @throws InterruptedException
      */
-    private ResourceManager() throws IOException, InterruptedException, URISyntaxException {
+    private ResourceManager() throws IOException, URISyntaxException, InterruptedException {
         this.resourceMap = new HashMap<>();
         for(Host<?> host : Context.get().hosts().getAllHost()) {
             //initalize host environment
-            ResourceHelper.extractResource("webapp", host.getDocroot());
-            this.resourceMap.put(host.getHost(), new WatchResources(host, WATCH_KIND));
+            String path = WEB_PATH.WEBAPP.name().toLowerCase();
+            ResourceHelper.extractResource(path, host.getDocroot());
+            if(!this.resourceMap.containsKey(host.getHostId())) {
+                this.resourceMap.put(host.getHostId(), new WatchResources(host, WATCH_KIND));
+            }
         }
     }
 
@@ -55,9 +60,13 @@ public class ResourceManager {
      * @throws URISyntaxException
      * @throws ImageProcessingException
      */
-    public static ResourceManager initialize() throws IOException, InterruptedException, URISyntaxException {
+    public static ResourceManager initialize() {
         if(manager == null) {
-            manager = new ResourceManager();
+            try {
+                manager = new ResourceManager();
+            } catch (IOException | URISyntaxException | InterruptedException e) {
+                LoggerFactory.getLogger().error(e.getMessage(), e);
+            }
         }        
         return manager;
     }
@@ -65,14 +74,14 @@ public class ResourceManager {
     /**
      * Get static WatchResource object
      * @return
-     * @throws IOException
-     * @throws InterruptedException
-     * @throws URISyntaxException
-     * @throws ImageProcessingException
      */
-    public static ResourcesModel get(String hostId) throws IOException, InterruptedException, URISyntaxException {
+    public static ResourcesModel get(String hostId) {
         if(manager == null) {
-            manager = new ResourceManager();
+            try {
+                manager = new ResourceManager();
+            } catch (IOException | InterruptedException | URISyntaxException e) {
+                LoggerFactory.getLogger(hostId).error(e.getMessage(), e);
+            }
         }
         return manager.getResource(hostId);
     }
@@ -81,14 +90,8 @@ public class ResourceManager {
      * Get Resource object for host
      * @param hostId
      * @return
-     * @throws IOException
-     * @throws InterruptedException
-     * @throws ImageProcessingException
      */
-    public ResourcesModel getResource(String hostId) throws IOException, InterruptedException {
-        if(!this.resourceMap.containsKey(hostId)) {
-            this.resourceMap.put(hostId, new WatchResources(Context.get().hosts().getHost(hostId), WATCH_KIND));
-        }
+    public ResourcesModel getResource(String hostId) {
         return this.resourceMap.get(hostId);
     }
 

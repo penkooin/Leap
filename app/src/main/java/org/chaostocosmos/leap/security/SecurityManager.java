@@ -5,10 +5,12 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.common.Constants;
 import org.chaostocosmos.leap.context.Context;
+import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.context.META;
 import org.chaostocosmos.leap.enums.HTTP;
 
@@ -24,44 +26,69 @@ public class SecurityManager {
      * Logger object
      */
     Logger logger;
-
     /**
-     * User list
+     * Host instance
      */
-    protected List<UserCredentials> users;
+    Host<?> host;
 
     /**
      * Default constructor
-     * @param context
+     * @param host
      */
-    public SecurityManager(String hostId) {
-        this.logger = Context.get().host(hostId).getLogger();
-        this.users = Context.get().hosts().getHost(hostId).<List<Map<String, Object>>>getUsers().stream().map(m -> new UserCredentials(m)).collect(Collectors.toList());
+    public SecurityManager(Host<?> host) {
+        this.host = host;
+        this.logger = this.host.getLogger();
     }
 
+    /**
+     * Get UserCredential List 
+     * @return
+     */
+    private Stream<UserCredentials> getUserCredentialStream() {
+        return this.host.<List<Map<String, Object>>> getUsers().stream().map(m -> new UserCredentials(m));
+    }
+
+    /**
+     * Logout
+     * @param username
+     * @return
+     */
     public UserCredentials logout(String username) {
-        UserCredentials user = this.users.stream().filter(u -> u.getUsername().equals(username)).findFirst().orElse(null);
+        UserCredentials user = getUserCredentialStream().filter(u -> u.getUsername().equals(username)).findFirst().orElse(null);
         if(user != null) {
             user.getSession().invalidate();
-            this.users.remove(user);
+            return user;
         }
         return null;
     }
 
+    /**
+     * Login
+     * @param username
+     * @param password
+     * @return
+     * @throws LeapException
+     */
     public UserCredentials login(String username, String password) throws LeapException {
-        UserCredentials user = this.users.stream().filter(u -> u.getUsername().equals(username)).findAny().orElseThrow(() -> new LeapException(HTTP.RES401, 25, username));
+        UserCredentials user = getUserCredentialStream().filter(u -> u.getUsername().equals(username)).findAny().orElseThrow(() -> new LeapException(HTTP.RES401, username));
         return user;
     }
 
+    /**
+     * Register UserCredential
+     * @param user
+     * @throws LeapException
+     */
     public void register(UserCredentials user) throws LeapException {
-        if(this.users.stream().anyMatch(u -> u.getUsername().equals(user.getUsername()))) {
-            throw new LeapException(HTTP.RES401, 17, user.getUsername()); 
+        if(getUserCredentialStream().anyMatch(u -> u.getUsername().equals(user.getUsername()))) {
+            throw new LeapException(HTTP.RES401, user.getUsername()); 
         }
         if(!Constants.PASSWORD_REGEX.matcher(user.getPassword()).matches()) {
-            throw new LeapException(HTTP.RES401, 18);
+            throw new LeapException(HTTP.RES401, user.getPassword());
         }
-        this.users.add(user);
-        save(this.users);
+        List<UserCredentials> users = getUserCredentialStream().collect(Collectors.toList());
+        users.add(user);
+        save(users);
     }
 
     /**
@@ -71,18 +98,31 @@ public class SecurityManager {
      */
     public synchronized UserCredentials authenticate(String authorization) {
         if (authorization != null && authorization.trim().startsWith("Basic")) {
-            String base64Credentials = authorization.trim().substring("Basic".length()).trim();
-            byte[] credDecoded = Base64.getDecoder().decode(base64Credentials);
-            String credentials = new String(credDecoded, StandardCharsets.UTF_8);
-            String[] values = credentials.split(":", 2);
             //System.out.println(values[0]+" "+values[1]);
+            String[] values = getUserPassword(authorization);
             UserCredentials user = login(values[0], values[1]);
             this.logger.debug("==================================================");  
             this.logger.debug("User "+values[0]+" is login.");  
             this.logger.debug("==================================================");  
             return user;
         }
-        throw new LeapException(HTTP.RES401, 28, authorization);
+        return null;//new LeapException(HTTP.RES401, 28, authorization);
+    }
+
+    /**
+     * Get user, password ordered by index of array
+     * @param authorization
+     * @return
+     */
+    public String[] getUserPassword(String authorization) {
+        if(authorization != null && authorization.trim().startsWith("Basic")) {
+            String base64Credentials = authorization.trim().substring("Basic".length()).trim();
+            byte[] credDecoded = Base64.getDecoder().decode(base64Credentials);
+            String credentials = new String(credDecoded, StandardCharsets.UTF_8);
+            String[] values = credentials.split(":", 2);
+            return values;            
+        }
+        return null;
     }
 
     /**
@@ -91,7 +131,7 @@ public class SecurityManager {
      * @return
      */
     public UserCredentials getUserByName(String username) {
-        return this.users.stream().filter(u -> u.getUsername().equals(username)).findAny().orElseThrow();
+        return getUserCredentialStream().filter(u -> u.getUsername().equals(username)).findAny().orElseThrow();
     }
 
     /**

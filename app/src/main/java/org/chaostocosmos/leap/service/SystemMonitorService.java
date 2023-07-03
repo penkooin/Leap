@@ -82,12 +82,12 @@ public class SystemMonitorService extends AbstractChartService {
                 chart.setLeftIndent(70);
                 chart.setRightIndent(30);
                 if(!inMemory) {
-                    saveBufferedImage(chart.getBufferedImage(), host.getStatic().resolve(savePath).toFile(), CODEC.PNG);
+                    saveBufferedImage(chart.getBufferedImage(), host.getView().resolve(savePath).toFile(), CODEC.PNG);
                     //super.logger.debug("[MONITOR] Chart image save to file: "+host.getStatic().resolve(savePath).toString());
                 } else {
                     ByteArrayOutputStream out = new ByteArrayOutputStream();
                     ImageIO.write(chart.getBufferedImage(), CODEC.PNG.name(), out);
-                    host.getResource().addResource(host.getStatic().resolve(savePath), out.toByteArray(), true);
+                    host.getResource().addResource(host.getView().resolve(savePath), out.toByteArray(), true);
                     //super.logger.debug("[MONITOR] Chart image add to In-Memory resource.");
                 }
             }

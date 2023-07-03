@@ -7,10 +7,10 @@ import java.util.EventListener;
  * 
  * @author 9ins
  */
-public interface MetaListener<T> extends EventListener {
+public interface MetaListener extends EventListener {
     /**
      * receive Server context
      */
-    public <V> void receiveContextEvent(MetaEvent<T, V> ce) throws Exception;
+    public void receiveContextEvent(MetaEvent<Metadata<?>> ce) throws Exception;
 }
 

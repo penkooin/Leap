@@ -1,11 +1,12 @@
 package org.chaostocosmos.leap.http;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.Socket;
 import java.util.List;
 import java.util.Map;
 
-import org.chaostocosmos.leap.LeapException;
+import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.REQUEST;
 
 /**
@@ -53,7 +54,10 @@ public class HttpChannelParser {
      * @return
      */
     public static boolean isValidType(String requestType) {
-        if(REQUEST.GET.name().equals(requestType) || REQUEST.POST.name().equals(requestType) || REQUEST.PUT.name().equals(requestType) || REQUEST.DELETE.name().equals(requestType)) {
+        if(REQUEST.GET.name().equals(requestType) 
+        || REQUEST.POST.name().equals(requestType) 
+        || REQUEST.PUT.name().equals(requestType) 
+        || REQUEST.DELETE.name().equals(requestType)) {
             return true;
         }
         return false; 
@@ -80,15 +84,16 @@ public class HttpChannelParser {
      */
     public static class ChannelResponseParser {
         /**
-         * parse response
+         * Build response
+         * @param host
+         * @param outputStream
+         * @param statusCode
+         * @param body
+         * @param headers
          * @return
-         * @throws LeapException
          */
-        public Response buildResponse(final Request request, 
-                                                    final int statusCode, 
-                                                    final Object body, 
-                                                    final Map<String, List<String>> headers) {
-            return new Response(request, statusCode, body, headers);
+        public Response buildResponse(final Host<?> host, final OutputStream outputStream, final int statusCode, final Object body, final Map<String, List<String>> headers) {
+            return new Response(host, outputStream, statusCode, body, headers);
         }
     }       
 }

@@ -152,8 +152,9 @@ public class ServiceManager {
      * @param contextPath
      * @return
      */
-    public ServiceHolder createServiceHolder(String contextPath) {
+    public ServiceHolder createServiceHolder(String contextPath) {        
         if(!this.serviceHolderMap.containsKey(contextPath)) {
+            this.host.getLogger().debug("Service Holder not found. request path: "+contextPath);
             return null;
         }
         ServiceHolder serviceHolder = this.serviceHolderMap.get(contextPath); 

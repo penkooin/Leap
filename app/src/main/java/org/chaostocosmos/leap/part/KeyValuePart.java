@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.MIME;
 import org.chaostocosmos.leap.http.common.StreamUtils;
 
@@ -30,7 +31,7 @@ public class KeyValuePart extends BodyPart {
      * @param charset
      * @throws IOException
      */
-    public KeyValuePart(String host, MIME contentType, long contentLength, InputStream requestStream, boolean preLoadBody, Charset charset) throws IOException {
+    public KeyValuePart(Host<?> host, MIME contentType, long contentLength, InputStream requestStream, boolean preLoadBody, Charset charset) throws IOException {
         super(host, contentType, contentLength, requestStream, preLoadBody, charset);
         this.keyValueMap = new HashMap<>();
     }

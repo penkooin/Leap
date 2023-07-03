@@ -2,12 +2,14 @@ package org.chaostocosmos.leap.context;
 
 import java.util.EventObject;
 
+import org.chaostocosmos.leap.enums.EVENT_TYPE;
+
 /**
  * Context Event object
  * 
  * @author 9ins
  */
-public class MetaEvent <T, V> extends EventObject {
+public class MetaEvent <T extends Metadata<?>> extends EventObject {
     /**
      * Metadata event type enum
      */
@@ -16,7 +18,7 @@ public class MetaEvent <T, V> extends EventObject {
     /**
      * Metadata 
      */
-    Metadata<T> metadata;
+    T metadata;
 
     /**
      * Metadata path expression
@@ -26,15 +28,17 @@ public class MetaEvent <T, V> extends EventObject {
     /**
      * Event value
      */
-    V value;
-    
+    Object value;
+
     /**
      * Constructor
-     * @param eventObject
-     * @param metaType
-     * @param contextMap
+     * @param eventSource
+     * @param eventType
+     * @param metadata
+     * @param expr
+     * @param value
      */
-    public MetaEvent(Object eventSource, EVENT_TYPE eventType, Metadata<T> metadata, String expr, V value) {
+    public MetaEvent(Object eventSource, EVENT_TYPE eventType, T metadata, String expr, Object value) {
         super(eventSource);
         this.eventType = eventType;
         this.metadata = metadata;
@@ -52,14 +56,14 @@ public class MetaEvent <T, V> extends EventObject {
      * Get meta type
      * @return
      */
-    public Metadata<T> getMetadata() {
+    public T getMetadata() {
         return this.metadata;
     }
     /**
      * Get value of
      * @return
      */
-    public V getValue() {
+    public Object getValue() {
         return this.value;
     }
     /**
@@ -73,7 +77,7 @@ public class MetaEvent <T, V> extends EventObject {
      * Get context map
      * @return
      */
-    public V getValue(String pathExpr) {
+    public Object getValue(String pathExpr) {
         return this.metadata.getValue(pathExpr);
     }    
 }

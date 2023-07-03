@@ -1,101 +1,64 @@
 messages:
   http:
-    http100: Continue.
-    http101: Switching Protocol.
-    http102: Processing.
-    http103: Early Hints.
-    http200: OK.
-    http201: Created.
-    http202: Accepted.
-    http203: No Content.
-    http204: No Content.
-    http205: Reset Content.
-    http206: Partial Content. (RFC 7233)
-    http207: Multi-Status.
-    http208: Multi-Status.
-    http226: IM Used (HTTP Delta encoding).
-    http300: Multiple Choices.
-    http301: Moved Permanently.
-    http302: Found.
-    http303: See Other (en-US).
-    http304: Not Modified.
-    http305: Use Proxy.
-    http306: Unused.
-    http307: Temporary Redirect. (since http/1.1)
-    http308: Permanent Redirect. (RFC 7538)
-    http400: Bad Request.
-    http401: Unauthorized. (RFC 7235)
-    http402: Payment Required.
-    http403: Forbidden.
-    http404: Resource Not Found.
-    http405: Method Not Allowed.
-    http406: Not Acceptable.
-    http407: Proxy Authentication Required. (RFC 7235)
-    http408: Request Timeout.
-    http409: Conflict.
-    http410: Gone. (en-US)
-    http411: Length Required.
-    http412: Precondition Failed. (RFC 7232)
-    http413: Payload Too Large. (RFC 7231)
-    http414: URI Too Long. (RFC 7231)
-    http415: Unsupported Media Type. (RFC 7231)
-    http417: Expectation Failed.
-    http416: Requested Range Not Satisfiable.
-    http418: I'm a teapot. (RFC 2324, RFC 7168)
-    http421: Misdirected Request. (RFC 7540)
-    http422: Unprocessable Entity.
-    http423: Locked. (WebDAV; RFC 4918)
-    http424: Failed Dependency.
-    http426: Upgrade Required. (en-US)
-    http428: Precondition Required. (en-US)
-    http429: Too Many Requests. (RFC 6585)
-    http431: Request Header Fields Too Large. (RFC 6585)
-    http451: Unavailable For Legal Reasons. (RFC 7725)
-    http500: Internal Server Error.
-    http501: Not Implemented.
-    http502: Bad Gateway.
-    http503: Service Unavailable.
-    http504: Gateway Timeout.
-    http505: http Version Not Supported.
-    http506: Variant Also Negotiates. (en-US)
-    http507: Insufficient Storage. (WebDAV; RFC 4918)
-    http508: Loop Detected. (WebDAV; RFC 5842)
-    http510: Not Extended. (RFC 2774)
-    http511: Network Authentication Required. (RFC 6585)
-  debug:
-    debug001: ''
-  info:
-    info001: ''
-  warn:
-    warn001: 'ServletDescriptor annotation not found in class: {}'
-    warn002: 'Some exception in service({}). System received Null value as exception value. Original error is : {}. Maybe service method must have HttpRequestDescriptor and HttpResponseDescriptor.'
-  error:
-    error001: 'Invalid request information. Wrong request'
-    error002: 'Request or response build process failed. It is probably HTTP protocol or SSL/TLS issue: {}'
-    error003: 'Invalid header parameter: {}'
-    error004: 'Specified type of response body object is not supported: {}'
-    error005: 'Can not represent trademark logo'
-    error006: 'Service object mapping path must be exist: {}, Service object: {}'
-    error007: 'Service operation method mapping path must be exist: {}, Service method: {}'
-    error008: 'Service operation method already exist!!! Check service object mapping. Path: {} Operation method: {}'
-    error009: 'Service mapper path expression is wrong: {}'
-    error010: 'Method mapper path expression is wrong: {}'
-    error011: 'Error in server setup process!!!'
-    error012: 'Error is occurred on rquested file writing process. Path: {}' 
-    error013: 'Cannot save configuration ({})'
-    error014: 'Cannot read binary resource: {}'
-    error015: 'Requested method is not matching with service: {}'
-    error016: 'Invalid Password'
-    error017: 'Password validation failed: (Password must have digit, lower case, upper case, special case at least once and no whilte space and more 8 places more)'
-    error018: 'Not found mapping service exist with requested path: {}'
-    error019: 'Deploy service process in error: {}'
-    error020: 'Resource not found: {}'
-    error021: 'Service method must have two parameter which is Request and Response. Called method: {}'
-    error022: 'Can not read template file: {}'
-    error023: 'Multi Part is in fault operation: {}'
-    error024: 'Requested host not found in this server: {}'
-    error025: 'User not found in this server. {}'
-    error026: 'Requested method({}) not allowed. Supported GET / POST / PUT / DELETE'
-    error027: 'Method not supported on MultiPart operation: readBody()'
-    error028: 'Auth information not collect. {}'
-
+    http100: Continue
+    http101: Switching Protocol
+    http102: Processing
+    http103: Early Hints
+    http200: OK
+    http201: Created
+    http202: Accepted
+    http203: No Content
+    http204: No Content
+    http205: Reset Content
+    http206: Partial Content (RFC 7233)
+    http207: Multi-Status
+    http208: Multi-Status
+    http226: IM Used (HTTP Delta encoding)
+    http300: Multiple Choices
+    http301: Moved Permanently
+    http302: Found
+    http303: See Other (en-US)
+    http304: Not Modified
+    http305: Use Proxy
+    http306: Unused
+    http307: Temporary Redirect (since http/11)
+    http308: Permanent Redirect (RFC 7538)
+    http400: Bad Request
+    http401: Unauthorized (RFC 7235)
+    http402: Payment Required
+    http403: Forbidden
+    http404: Resource Not Found
+    http405: Method Not Allowed
+    http406: Not Acceptable
+    http407: Proxy Authentication Required (RFC 7235)
+    http408: Request Timeout
+    http409: Conflict
+    http410: Gone (en-US)
+    http411: Length Required
+    http412: Precondition Failed (RFC 7232)
+    http413: Payload Too Large (RFC 7231)
+    http414: URI Too Long (RFC 7231)
+    http415: Unsupported Media Type (RFC 7231)
+    http417: Expectation Failed
+    http416: Requested Range Not Satisfiable
+    http418: I'm a teapot (RFC 2324, RFC 7168)
+    http421: Misdirected Request (RFC 7540)
+    http422: Unprocessable Entity
+    http423: Locked (WebDAV; RFC 4918)
+    http424: Failed Dependency
+    http426: Upgrade Required (en-US)
+    http428: Precondition Required (en-US)
+    http429: Too Many Requests (RFC 6585)
+    http431: Request Header Fields Too Large (RFC 6585)
+    http451: Unavailable For Legal Reasons (RFC 7725)
+    http500: Internal Server Error
+    http501: Not Implemented
+    http502: Bad Gateway
+    http503: Service Unavailable
+    http504: Gateway Timeout
+    http505: http Version Not Supported
+    http506: Variant Also Negotiates (en-US)
+    http507: Insufficient Storage (WebDAV; RFC 4918)
+    http508: Loop Detected (WebDAV; RFC 5842)
+    http510: Not Extended (RFC 2774)
+    http511: Network Authentication Required (RFC 6585)

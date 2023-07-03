@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.naming.NameNotFoundException;
+
 import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.common.LoggerFactory;
 import org.chaostocosmos.leap.context.Context;
@@ -16,6 +18,7 @@ import org.chaostocosmos.leap.enums.REQUEST;
 import org.chaostocosmos.leap.resource.ClassUtils;
 import org.chaostocosmos.leap.service.filter.IFilter;
 import org.chaostocosmos.leap.service.model.ServiceModel;
+import org.hibernate.MappingException;
 
 import ch.qos.logback.classic.Logger;  
 
@@ -79,7 +82,7 @@ public class AnnotationHelper {
         if(serviceIndicator != null) {
             String sPath = serviceIndicator.mappingPath();
             if(sPath == null) {
-                throw new LeapException(HTTP.RES500, new Exception(Context.get().messages(). <String>error(6, service.getClass().getName())));
+                throw new LeapException(HTTP.RES500, new MappingException("Service mapping path is not found: "+service.getClass().getName()));
             }
             Method[] methods = service.getClass().getDeclaredMethods();
             for(Method method : methods) {
@@ -87,11 +90,11 @@ public class AnnotationHelper {
                 if(methodIndicator != null) {
                     String mPath = methodIndicator.mappingPath();
                     if(mPath == null) {
-                        throw new LeapException(HTTP.RES500, new Exception(Context.get().messages(). <String>error(7, method.getName())));
+                        throw new LeapException(HTTP.RES500, new MappingException("Method mapping path is not found: "+method.getName()));
                     }        
                     String fullPath = sPath + mPath;
                     if(methodMap.containsKey(fullPath)) {
-                        throw new LeapException(HTTP.RES500, new Exception(Context.get().messages(). <String>error(8, methodMap.get(fullPath).getName())));
+                        throw new LeapException(HTTP.RES500, new MappingException("Duplicate mapping path: "+methodMap.get(fullPath).getName()));
                     }
                     methodMap.put(fullPath, method);
                 }
@@ -123,7 +126,7 @@ public class AnnotationHelper {
                     }
                 }
             } else {
-                logger.info(Context.get().messages().info(1, service.getClass().getName()));
+                logger.info("Service mapper is not found: "+service.getClass().getName());
             }            
         }
         return null;
@@ -152,7 +155,7 @@ public class AnnotationHelper {
                     }
                 }
             } else {
-                logger.info(Context.get().messages().info(1, service.getClass().getName()));
+                logger.info("Service mapper is not found: "+service.getClass().getName());
             }            
         }
         return null;
@@ -171,7 +174,7 @@ public class AnnotationHelper {
             if(serviceDescriptor != null) {
                 String sPath = serviceDescriptor.mappingPath();
                 if(!sPath.substring(0, 1).equals("/") || sPath.substring(sPath.length()-1).equals("/")) {
-                    throw new Exception(Context.get().messages(). <String>error(9, service));
+                    throw new MappingException("Service mapping path format is wrong: "+sPath);
                 }
                 Method[] methods = service.getClass().getDeclaredMethods();
                 for(Method method : methods) {
@@ -179,17 +182,17 @@ public class AnnotationHelper {
                     if(methodDescriptor != null) {
                         String mPath = methodDescriptor.mappingPath();
                         if(!mPath.substring(0, 1).equals("/") || mPath.substring(mPath.length()-1).equals("/")) {
-                            throw new Exception(Context.get().messages(). <String>error(10, method.getName()));
+                            throw new MappingException("Method mapping path format is wrong: "+mPath);
                         }        
                         String fullPath = sPath + mPath;
                         if(serviceContextMappings.containsKey(fullPath)) {
-                            throw new Exception(Context.get().messages(). <String>error(11, new Object[]{service, fullPath}));
+                            throw new MappingException("Duplicate mapping path: "+fullPath);
                         }
                         serviceContextMappings.put(fullPath, (ServiceModel) ClassUtils.instantiate(ClassLoader.getSystemClassLoader(), service));
                     }
                 }
             } else {
-                logger.info(Context.get().messages().info(1, service.getClass().getName()));
+                logger.info("Service mapper is not found: "+service.getClass().getName());
             }                 
         }
         return serviceContextMappings;
@@ -208,7 +211,7 @@ public class AnnotationHelper {
             if(serviceMapper != null) {
                 String sPath = serviceMapper.mappingPath();
                 if(!sPath.substring(0, 1).equals("/") || sPath.substring(sPath.length()-1).equals("/")) {
-                    throw new Exception(Context.get().messages(). <String>error(9, service));
+                    throw new MappingException("Service mapping path format is wrong: "+sPath);
                 }
                 Method[] methods = service.getClass().getDeclaredMethods();
                 for(Method method : methods) {
@@ -216,17 +219,17 @@ public class AnnotationHelper {
                     if(methodMapper != null) {
                         String mPath = methodMapper.mappingPath();
                         if(!mPath.substring(0, 1).equals("/") || mPath.substring(mPath.length()-1).equals("/")) {
-                            throw new Exception(Context.get().messages(). <String>error(10, method.getName()));
+                            throw new MappingException("Method mapping path format is wrong: "+mPath);
                         }        
                         String fullPath = sPath + mPath;
                         if(serviceContextMappings.containsKey(fullPath)) {
-                            throw new Exception(Context.get().messages(). <String>error(8, new Object[]{service, fullPath}));
+                            throw new MappingException("Duplicate mapping path: "+fullPath);
                         }
                         serviceContextMappings.put(fullPath, method);
                     }
                 }
             } else {
-                logger.info(Context.get().messages().info(1, service.getClass().getName()));
+                logger.info("Service mapper is not found: "+service.getClass().getName());
             }                 
         }
         return serviceContextMappings;

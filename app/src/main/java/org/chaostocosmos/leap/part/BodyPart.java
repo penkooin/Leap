@@ -10,6 +10,7 @@ import java.util.Map;
 import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.common.LoggerFactory;
 import org.chaostocosmos.leap.context.Context;
+import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.MIME;
 import org.chaostocosmos.leap.http.common.StreamUtils;
@@ -29,7 +30,7 @@ public class BodyPart implements Part {
     /**
      * Host
      */
-    String hostId;
+    Host<?> host;
     /**
      * Content type
      */
@@ -56,7 +57,7 @@ public class BodyPart implements Part {
     Charset charset;
     /**
      * Constructor
-     * @param hostId
+     * @param host
      * @param contentType
      * @param contentLength
      * @param requestStream
@@ -64,9 +65,9 @@ public class BodyPart implements Part {
      * @param charset
      * @throws IOException
      */
-    public BodyPart(String hostId, MIME contentType, long contentLength, InputStream requestStream, boolean loadBody, Charset charset) throws IOException {
-        this.logger = LoggerFactory.getLogger(hostId);
-        this.hostId = hostId;
+    public BodyPart(Host<?> host, MIME contentType, long contentLength, InputStream requestStream, boolean loadBody, Charset charset) throws IOException {
+        this.logger = host.getLogger();
+        this.host = host;
         this.contentType = contentType;
         this.contentLength = contentLength;
         this.requestStream = requestStream;        
@@ -78,11 +79,19 @@ public class BodyPart implements Part {
     }
 
     /**
-     * Get host
+     * Get host ID
      * @return
      */
     public String getHostId() {
-        return this.hostId;
+        return this.host.getHostId();
+    }
+
+    /**
+     * Get Host instance
+     * @return
+     */
+    public Host<?> getHost() {
+        return this.host;
     }
 
     /**
@@ -92,7 +101,7 @@ public class BodyPart implements Part {
      */
     private Map<String, byte[]> readBody() throws IOException {
         if(contentType == MIME.MULTIPART_FORM_DATA || contentType == MIME.MULTIPART_BYTERANGES) {
-            throw new LeapException(HTTP.RES406, Context.get().messages().<String> error(27));
+            throw new LeapException(HTTP.RES406, new Exception("Multipart form data or byteranges can not use this method"));
         }
         Map<String, byte[]> map = new HashMap<>();
         byte[] data = StreamUtils.readLength(this.requestStream, (int)this.contentLength);        
@@ -135,9 +144,9 @@ public class BodyPart implements Part {
             throw new LeapException(HTTP.RES406, "Can not save content. Not supported on Multi Part Operation.");
         }        
         if(this.isLoadedBody) {
-            StreamUtils.saveBinary(this.hostId, this.body.get("BODY"), targetPath, Context.get().server().getFileBufferSize());
+            StreamUtils.saveBinary(this.body.get("BODY"), targetPath, Context.get().server().getFileBufferSize());
         } else {
-            StreamUtils.saveBinary(this.hostId, this.requestStream, getContentLength(), targetPath, Context.get().server().getFileBufferSize());
+            StreamUtils.saveBinary(this.requestStream, getContentLength(), targetPath, Context.get().server().getFileBufferSize());
         }        
         this.logger.debug("[BODY-PART] "+contentType.name()+" saved: "+targetPath.normalize().toString()+"  Path: "+targetPath.toString());
     }    
@@ -146,7 +155,7 @@ public class BodyPart implements Part {
     public String toString() {
         return "{" +
             " logger='" + logger + "'" +
-            ", host='" + hostId + "'" +
+            ", host='" + getHostId() + "'" +
             ", contentType='" + contentType + "'" +
             ", contentLength='" + contentLength + "'" +
             ", requestStream='" + requestStream + "'" +

@@ -2,7 +2,7 @@ package org.chaostocosmos.leap.security;
 
 import java.util.Map;
 
-import org.chaostocosmos.leap.context.GRANT;
+import org.chaostocosmos.leap.enums.GRANT;
 import org.chaostocosmos.leap.session.Session;
 
 /**

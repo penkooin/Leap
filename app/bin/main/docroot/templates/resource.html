@@ -1,0 +1,17 @@
+<body class="content">        
+<script>
+    const resJson = '<!--@resourceList-->';
+    window.onload = () => genDir(resJson);
+</script>
+<div>
+    <p class="font-xx-large"><span id="host" class="font-bold"></span></p>
+    <!-- <p id="path" class="font-large font-bold">/</p> -->
+    <p class="font-medium">The directories linked below contain current resources from Leap server</p>
+    <p class="font-large font-bold">List of resources.</p>
+    <span class="file-name" style="width:30%;display:inline-block;">Name</span><span class="last-modified" style="width:30%;display:inline-block;">Last modified</span><span class="file-size" style="width:20%;display:inline-block;">Size</span><span class="desc" style="width:20%;display:inline-block;">Desc</span>
+    <br>
+    <a id="parent" class="font-medium" href="">..</a>
+    <br>
+    <p id="resource-list"></p>
+</div>
+</body>

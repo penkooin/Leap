@@ -15,8 +15,10 @@ import java.util.stream.Collectors;
 import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.common.Filtering;
 import org.chaostocosmos.leap.common.LoggerFactory;
+import org.chaostocosmos.leap.enums.AUTH;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.STATUS;
+import org.chaostocosmos.leap.resource.ResourceManager;
 import org.chaostocosmos.leap.resource.ResourcesModel;
 
 import ch.qos.logback.classic.Level;
@@ -93,6 +95,24 @@ public class Host <T> extends Metadata<T> {
      */
     public <V> void setProtocol(V protocol) {
         super.setValue("protocol", protocol);
+    }
+
+    /**
+     * Get protocol version
+     * @param <V>
+     * @return
+     */
+    public <V> V getProtocolVersion() {
+        return super.getValue("protocol-version");
+    }
+
+    /**
+     * Set protocol version
+     * @param <V>
+     * @param protocolVersion
+     */
+    public <V> void setProtocolVersion(V protocolVersion) {
+        super.setValue("protocol-version", protocolVersion);
     }
 
     /**
@@ -372,7 +392,7 @@ public class Host <T> extends Metadata<T> {
      * @param docroot
      */
     public <V> void setDocroot(V docroot) {
-        super.setValue("doc-root", docroot);
+        super.setValue("docroot", docroot);
     }
 
     /**
@@ -400,6 +420,14 @@ public class Host <T> extends Metadata<T> {
      */
     public <V> V getAuthentication() {
         return super.getValue("authentication");
+    }
+
+    /**
+     * Whether authorization
+     * @return
+     */
+    public boolean isAuthentication() {
+        return AUTH.valueOf(this.<String>getAuthentication()) == AUTH.NONE ? false : true;
     }
 
     /**
@@ -589,25 +617,25 @@ public class Host <T> extends Metadata<T> {
     }
 
     /**
-     * Get static content path
+     * Get view content path
      * @return
      */
-    public Path getStatic() {
-        return getWebInf().resolve("static");
+    public Path getView() {
+        return getDocroot().resolve("views");
     }
 
     /**
-     * Get services path
+     * Get services and classes path
      */
-    public Path getServices() {
-        return getWebApp().resolve("services");
+    public Path getClasses() {
+        return getDocroot().resolve("classes");
     }
 
     /**
      * get templates path
      */
     public Path getTemplates() {
-        return getStatic().resolve("templates");
+        return getDocroot().resolve("templates");
     }
 
     /**
@@ -615,7 +643,7 @@ public class Host <T> extends Metadata<T> {
      * @return
      */
     public File getWelcomeFile() {
-        return getStatic().resolve((String) super.getValue("welcome")).toFile();
+        return getTemplates().resolve((String) super.getValue("welcome")).toFile();
     }
 
     /**
@@ -663,14 +691,8 @@ public class Host <T> extends Metadata<T> {
      * @return
      */
     public ResourcesModel getResource() {
-        return super.getValue("resources.resource");
-    }
-
-    /**
-     * Set resource for host object
-     */
-    public void setResource(ResourcesModel resource) {
-        super.setValue("resources.resource", resource);
+        ResourcesModel model = ResourceManager.get(getHostId());
+        return model;
     }
 
     /**

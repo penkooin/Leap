@@ -1,6 +1,7 @@
 package org.chaostocosmos.leap.resource;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Date;
@@ -12,7 +13,8 @@ import java.util.stream.Collectors;
 import org.chaostocosmos.leap.common.SIZE;
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.context.Host;
-import org.chaostocosmos.leap.enums.MSG_TYPE;
+import org.chaostocosmos.leap.enums.TEMPLATE;
+import org.chaostocosmos.leap.enums.WEB_PATH;
 
 import com.google.gson.Gson;
 
@@ -41,9 +43,9 @@ public class TemplateBuilder {
      */
     public static String buildMonitoringPage(String contextPath, Host<?> host) throws Exception {
         String url = host.<String> getProtocol().toLowerCase()+"://"+host.getHost()+":"+host.getPort();
-        String monitorPage = host.getResource().getTemplatePage("templates/monitor.html", Map.of("@url", url));        
-        String script = host.getResource().getTemplatePage("script/refreshImage.js", Map.of("@interval", Context.get().server().getMonitoringInterval(), "@url", url));
-        return host.getResource().getTemplatePage("templates/default.html", Map.of("@serverName", host.getHost(), "@script", script, "@body", monitorPage));
+        String monitorPage = host.getResource().getTemplatePage(TEMPLATE.MONITOR.path(), Map.of("@url", url));         
+        String script = host.getResource().getTemplatePage(WEB_PATH.SCRIPT.path()+"/refreshImage.js", Map.of("@interval", Context.get().server().getMonitoringInterval(), "@url", url));
+        return host.getResource().getTemplatePage(TEMPLATE.DEFAULT.path(), Map.of("@serverName", host.getHost(), "@script", script, "@body", monitorPage));
     }
 
     /**
@@ -56,8 +58,8 @@ public class TemplateBuilder {
     public static String buildWelcomeResourceHtml(String contextPath, Host<?> host) throws Exception {
         String resourcePage = host.getResource().getResourcePage(Map.of("@resourceList", buildResourceJson(contextPath, host)));
         String welcomePage = host.getResource().getWelcomePage(Map.of("@serverName", host.getHost(), "@body", resourcePage));
-        String script = host.getResource().getTemplatePage("script/genDir.js", null);
-        return host.getResource().getTemplatePage("templates/default.html", Map.of("@serverName", host.getHost(), "@script", script, "@body", welcomePage));
+        String script = host.getResource().getTemplatePage("/script/genDir.js", null);
+        return host.getResource().getTemplatePage(TEMPLATE.DEFAULT.path(), Map.of("@serverName", host.getHost(), "@script", script, "@body", welcomePage));
     }
 
     /**
@@ -69,39 +71,36 @@ public class TemplateBuilder {
      */
     public static String buildResourceHtml(String contextPath, Host<?> host) throws Exception {
         String resourcePage = host.getResource().getResourcePage(Map.of("@resourceList", buildResourceJson(contextPath, host)));
-        String script = host.getResource().getTemplatePage("script/genDir.js", null);
-        return host.getResource().getTemplatePage("templates/default.html", Map.of("@serverName", host.getHost(), "@script", script, "@body", resourcePage));
+        String script = host.getResource().getTemplatePage("/script/genDir.js", null);
+        return host.getResource().getTemplatePage(TEMPLATE.DEFAULT.path(), Map.of("@serverName", host.getHost(), "@script", script, "@body", resourcePage));
     }
 
     /**
      * Build http error page
      * @param host
-     * @param type
      * @param errorCode
      * @param message
+     * @param stackTrace
      * @return
-     * @throws Exception
-     * @throws ImageProcessingException
+     * @throws IOException
      */
-    public static String buildErrorHtml(Host<?> host, MSG_TYPE type, int errorCode, String message) throws Exception {
-        String title = Context.get().messages().http(errorCode, "- "+type.name());
-        String errorPage = host.getResource().getErrorPage(Map.of("@code", errorCode, "@type", title, "@message", message));;
-        return host.getResource().getTemplatePage("templates/default.html", Map.of("@serverName", host.getHost(), "@script", "", "@body", errorPage));
+    public static String buildErrorHtml(Host<?> host, int errorCode, String message, String stackTrace) throws IOException {
+        String title = Context.get().messages().http(errorCode);
+        String errorPage = host.getResource().getErrorPage(Map.of("@code", errorCode, "@type", title, "@title", message, "@message", stackTrace));
+        return host.getResource().getTemplatePage(TEMPLATE.DEFAULT.path(), Map.of("@serverName", host.getHost(), "@script", "", "@body", errorPage));
     }
 
     /**
      * Create http response page
      * @param host
-     * @param type
      * @param code
      * @param message
      * @return
-     * @throws Exception
-     * @throws ImageProcessingException
+     * @throws IOException
      */
-    public static String buildResponseHtml(Host<?> host, MSG_TYPE type, int code, String message) throws Exception {
-        String responsePage = host.getResource().getResponsePage(Map.of("@code", code, "@type", type.name(), "@message", message));
-        return host.getResource().getTemplatePage("templates/default.html", Map.of("@serverName", host.getHost(), "@javascript", "", "@body", responsePage));
+    public static String buildResponseHtml(Host<?> host, int code, String message) throws IOException {
+        String responsePage = host.getResource().getResponsePage(Map.of("@code", code, "@type", "", "@message", message));
+        return host.getResource().getTemplatePage(TEMPLATE.DEFAULT.path(), Map.of("@serverName", host.getHost(), "@javascript", "", "@body", responsePage));
     }        
 
     /**
@@ -114,7 +113,7 @@ public class TemplateBuilder {
     public static String buildResourceJson(String contextPath, Host<?> host) {
         String path = contextPath.charAt(contextPath.length() - 1) == '/' ? contextPath.substring(0, contextPath.lastIndexOf('/')) : contextPath;
         final String path1 = path.equals("") ? "/" : path;
-        List<File> resourceInfos = Arrays.asList(host.getStatic().resolve(path1.substring(1)).toFile().listFiles())
+        List<File> resourceInfos = Arrays.asList(host.getWebInf().resolve(path1.substring(1)).toFile().listFiles())
                                          .stream()
                                          .sorted(Comparator.comparing(f -> f.isDirectory() ? -1 : 1))
                                          .filter(f -> host.getForbiddenFiltering().exclude(f.getName()))
@@ -133,6 +132,7 @@ public class TemplateBuilder {
                         String inMemory = f.isDirectory() ? "-" : host.getResource().isInMemory(f.toPath()) ? "In-Memory resource" : "File resource";
                         return Map.of("img", img, "file", file, "uri", uri, "lastModified", new Date(lastModified).toString(), "size", size, "desc", inMemory);
         }).collect(Collectors.toList()));
-        return new Gson().toJson(params);
+        String json = new Gson().toJson(params);
+        return json;
     }    
 }

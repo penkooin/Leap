@@ -7,6 +7,7 @@ import java.nio.file.FileSystemException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.WatchEvent;
@@ -33,6 +34,7 @@ import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.MIME;
+import org.chaostocosmos.leap.enums.TEMPLATE;
 
 import com.google.gson.Gson;
 
@@ -50,6 +52,10 @@ public class WatchResources extends Thread implements ResourcesModel {
      * Host object
      */
     Host<?> host;
+    /**
+     * Host home path
+     */
+    Path homePath;
     /**
      * Watch path
      */
@@ -90,7 +96,7 @@ public class WatchResources extends Thread implements ResourcesModel {
      * @throws IOException
      * @throws InterruptedException
      */
-    public WatchResources(Host<?> host, Kind<?>[] watchKinds) throws IOException, InterruptedException {
+    public WatchResources(Host<?> host, Kind<?>[] watchKinds) throws InterruptedException, IOException {
         this(host, watchKinds, Constants.IN_MEMORY_LIMIT_SIZE);
     }
 
@@ -102,12 +108,13 @@ public class WatchResources extends Thread implements ResourcesModel {
      * @throws IOException
      * @throws InterruptedException
      */
-    public WatchResources(Host<?> host, Kind<?>[] watchKinds, long inMemoryLimitSize) throws IOException, InterruptedException {
+    public WatchResources(Host<?> host, Kind<?>[] watchKinds, long inMemoryLimitSize) throws InterruptedException, IOException {
         this.host = host;
         this.watchKind = watchKinds;
         this.inMemoryLimitSize = inMemoryLimitSize;
         this.hostId = host.getHostId();
-        this.watchPath = host.getStatic().normalize();
+        this.homePath = Context.get().getHome();
+        this.watchPath = host.getWebInf();
         this.accessFiltering = host.getAccessFiltering();
         this.accessFiltering.addFilter(host.getWelcomeFile().getName());
         this.forbiddenFiltering = host.getForbiddenFiltering();
@@ -118,7 +125,7 @@ public class WatchResources extends Thread implements ResourcesModel {
             try {
                 return new Object[]{ p.register(this.watchService, this.watchKind), p };
             } catch (IOException e) {
-                e.printStackTrace();
+                host.getLogger().error(e.getMessage(), e);
                 return null;
             }
         }).filter(arr -> arr != null).collect(Collectors.toMap(k -> (WatchKey)k[0], v -> (Path)v[1]));
@@ -127,8 +134,6 @@ public class WatchResources extends Thread implements ResourcesModel {
         //this.resourceTree = loadResoureTree(this.watchPath, this.resourceTree);
         this.resourceTree = loadForkJoinResources();
         this.host.getLogger().info("[RESOURCE-LOAD] Host "+this.host.getHost()+" is complated: "+TIME.SECOND.duration(System.currentTimeMillis() - startMillis, TimeUnit.SECONDS));        
-        //Have to set WatchResource to Hosts
-        Context.get().hosts().getHost(this.hostId).setResource(this);
         //Start watch thread
         start();
     }
@@ -139,7 +144,7 @@ public class WatchResources extends Thread implements ResourcesModel {
      * @throws IOException
      * @throws InterruptedException
      */
-    protected synchronized Resource loadForkJoinResources() throws IOException, InterruptedException {
+    protected synchronized Resource loadForkJoinResources() throws InterruptedException, IOException {
         ForkJoinPool pool = new ForkJoinPool((int)((com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean()).getAvailableProcessors());
         ResourceLoadProcessor proc = new ResourceLoadProcessor(new Resource(true, this.watchPath, false, this.host.getInMemorySplitUnit()));
         pool.execute(proc);
@@ -160,7 +165,6 @@ public class WatchResources extends Thread implements ResourcesModel {
          * ResourceInfo  
          */        
         private Resource res;
-
         /**
          * Constructe with ResourceInfo object
          * 
@@ -169,7 +173,6 @@ public class WatchResources extends Thread implements ResourcesModel {
         public ResourceLoadProcessor(Resource res) {
             this.res = res;
         }
-
         @Override
         protected Resource compute() {
             try {
@@ -196,7 +199,7 @@ public class WatchResources extends Thread implements ResourcesModel {
                     }
                 }    
             } catch(Exception e) {
-                e.printStackTrace();
+                host.getLogger().error(e.getMessage(), e);
             }
             return this.res;
         }            
@@ -330,7 +333,7 @@ public class WatchResources extends Thread implements ResourcesModel {
     }
 
     @Override
-    public void addResource(Path resourcePath) throws Exception {
+    public void addResource(Path resourcePath) throws IOException {
         if(this.accessFiltering.include(resourcePath.toFile().getName()) && this.forbiddenFiltering.exclude(resourcePath.toFile().getName())) {            
             Path path = resourcePath.subpath(this.watchPath.getNameCount(), resourcePath.getNameCount());
             if(this.inMemoryFiltering.include(resourcePath.toFile().getName())) {
@@ -346,7 +349,7 @@ public class WatchResources extends Thread implements ResourcesModel {
     }
 
     @Override
-    public void addResource(Path resourcePath, byte[] resourceRawData, boolean inMemoryFlag) throws Exception {
+    public void addResource(Path resourcePath, byte[] resourceRawData, boolean inMemoryFlag) throws IOException {
         if(this.accessFiltering.include(resourcePath.toFile().getName()) && this.forbiddenFiltering.exclude(resourcePath.toFile().getName())) {
             Path path = resourcePath.subpath(this.watchPath.getNameCount(), resourcePath.getNameCount());
             if(this.inMemoryFiltering.include(resourcePath.toFile().getName())) {
@@ -362,14 +365,14 @@ public class WatchResources extends Thread implements ResourcesModel {
     }
 
     @Override
-    public void removeResource(Path resourcePath) throws Exception {
+    public void removeResource(Path resourcePath) {
         String subPath = resourcePath.subpath(this.watchPath.getNameCount(), resourcePath.getNameCount()).toString();
         removeResource(this.resourceTree, subPath.split(Pattern.quote(File.separator)));
     }
 
     @Override
-    public Resource getResource(Path resourcePath) throws Exception {
-        resourcePath = resourcePath.normalize().toAbsolutePath();
+    public Resource getResource(Path resourcePath) throws IOException {
+        resourcePath = resourcePath.toAbsolutePath().normalize();
         if(resourcePath.getNameCount() == watchPath.getNameCount()) {
             return this.resourceTree;
         } else if(resourcePath.getNameCount() < watchPath.getNameCount()) {
@@ -379,12 +382,12 @@ public class WatchResources extends Thread implements ResourcesModel {
     }
 
     @Override
-    public byte[] getResourceData(Path resourcePath, long position, int length) throws Exception {        
+    public byte[] getResourceData(Path resourcePath, long position, int length) throws IOException {        
         return getResource(resourcePath).getBytes1(position, length);
     }
 
     @Override
-    public byte[] getFilePartial(Path resourcePath, long position, int length) throws Exception {
+    public byte[] getFilePartial(Path resourcePath, long position, int length) throws IOException {
         return getResource(resourcePath).getFilePartial(position, length);
     }   
 
@@ -394,16 +397,16 @@ public class WatchResources extends Thread implements ResourcesModel {
     }
 
     @Override
-    public Path resolveRealPath(String contextPath) {
-        Path staticPath = this.host.getStatic();
+    public Path resolveRealPath(String contextPath) throws IOException {
+        Path staticPath = this.host.getView();
         contextPath = contextPath.charAt(0) == '/' ? contextPath.substring(0) : contextPath;
         contextPath = contextPath.charAt(contextPath.length() - 1) == '/' ? contextPath.substring(0, contextPath.lastIndexOf('/')) : contextPath;
         return staticPath.resolve(contextPath);
     }
 
     @Override
-    public Resource getContextResource(String contextPath) throws Exception { 
-        return getResource(this.watchPath.resolve(contextPath));
+    public Resource getContextResource(String contextPath) throws IOException {      
+        return getResource(this.watchPath.resolve(contextPath.charAt(0) == '/' ? contextPath.substring(1) : contextPath));
     }
 
     @Override
@@ -413,10 +416,10 @@ public class WatchResources extends Thread implements ResourcesModel {
     }
 
     @Override
-    public String getStaticPage(String contextPath, Map<String, Object> params) throws Exception {                
+    public String getViewPage(String contextPath, Map<String, Object> params) throws IOException {                
         Resource resourceInfo = getContextResource(contextPath);
         if(resourceInfo == null) {
-            throw new LeapException(HTTP.RES404, " Static page not found in Resource manager: "+contextPath);
+            throw new LeapException(HTTP.RES404, " View page not found in Resource manager: "+contextPath);
         }
         String page = new String((resourceInfo).getBytes(), Context.get().hosts().getHost(this.hostId).<String> charset());
         if(params != null) {
@@ -426,13 +429,13 @@ public class WatchResources extends Thread implements ResourcesModel {
     }
 
     @Override
-    public String getWelcomePage(Map<String, Object> params) throws Exception {
-        return getStaticPage(Context.get().hosts().getHost(this.hostId).getWelcomeFile().getName(), params);
+    public String getWelcomePage(Map<String, Object> params) throws IOException {
+        return getViewPage(TEMPLATE.WELCOME.path(), params);
     }
 
     @Override
-    public String getTemplatePage(String templatePath, Map<String, Object> params) throws Exception {
-        String page = getStaticPage(templatePath, params);
+    public String getTemplatePage(String templatePath, Map<String, Object> params) throws IOException {
+        String page = getViewPage(templatePath, params);
         if(params != null) {
             for(Entry<String, Object> e : params.entrySet()) {
                 page = page.replace(e.getKey(), e.getValue()+"");
@@ -442,18 +445,18 @@ public class WatchResources extends Thread implements ResourcesModel {
     }
 
     @Override
-    public String getResponsePage(Map<String, Object> params) throws Exception {
-        return getTemplatePage("templates/response.html", params);
+    public String getResponsePage(Map<String, Object> params) throws IOException {
+        return getTemplatePage(TEMPLATE.RESPONSE.path(), params);
     }
 
     @Override
-    public String getErrorPage(Map<String, Object> params) throws Exception {
-        return getTemplatePage("templates/error.html", params);
+    public String getErrorPage(Map<String, Object> params) throws IOException {
+        return getTemplatePage(TEMPLATE.ERROR.path(), params);
     }
 
     @Override
-    public String getResourcePage(Map<String, Object> params) throws Exception {        
-        return getTemplatePage("templates/resource.html", params);
+    public String getResourcePage(Map<String, Object> params) throws IOException {        
+        return getTemplatePage(TEMPLATE.RESOURCE.path(), params);
     }
 
     @Override

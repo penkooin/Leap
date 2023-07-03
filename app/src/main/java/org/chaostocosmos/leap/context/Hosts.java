@@ -33,7 +33,6 @@ public class Hosts <T> extends Metadata <T> {
      */
     public Hosts(T hostsMap) {
         super(hostsMap);
-        getAllHost();
     }  
     
     /**
@@ -57,7 +56,7 @@ public class Hosts <T> extends Metadata <T> {
      * Get all host list
      * @return
      */
-    public List<Host<T>> getAllHost() {
+    public List<Host<?>> getAllHost() {
         List<String> hostIds = super.<List<Map<String, Object>>> getValue("hosts").stream().map(m -> (String) m.get("id")).collect(Collectors.toList());
         return hostIds.stream().map(s -> getHost(s)).collect(Collectors.toList());
     }
@@ -176,7 +175,7 @@ public class Hosts <T> extends Metadata <T> {
      * Get virtual host list
      * @return
      */
-    public List<Host<T>> getVirtualHosts() {
+    public List<Host<?>> getVirtualHosts() {
         return getAllHost().stream().filter(h -> !h.<Boolean> isDefaultHost()).collect(Collectors.toList());
     }
 

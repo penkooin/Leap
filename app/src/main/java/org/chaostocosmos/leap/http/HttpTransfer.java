@@ -1,11 +1,14 @@
 package org.chaostocosmos.leap.http;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintStream;
 import java.net.Socket;
+import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -14,15 +17,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.transaction.NotSupportedException;
+
 import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.common.Constants;
+import org.chaostocosmos.leap.common.ExceptionUtils;
 import org.chaostocosmos.leap.common.LoggerFactory;
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.context.Host;
+import org.chaostocosmos.leap.enums.AUTH;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.MIME;
-import org.chaostocosmos.leap.enums.MSG_TYPE;
+import org.chaostocosmos.leap.enums.REQUEST_LINE;
+import org.chaostocosmos.leap.resource.Html;
 import org.chaostocosmos.leap.resource.TemplateBuilder;
+import org.chaostocosmos.leap.session.Session;
+
+import ch.qos.logback.classic.Logger;
 
 /**
  * HttpTransfer object
@@ -33,50 +44,51 @@ public class HttpTransfer implements Http {
      * Hosts, Information configured in config.yml
      */
     private Host<?> host;
-
     /**
      * Client Socket
      */
     private Socket socket;
-
     /**
      * InputStream
      */
-    private InputStream inStream;
-
+    private InputStream inputStream;
     /**
      * OutputStream
      */
     private OutputStream outStream;
-
     /**
-     * Http request
+     * Http parser
+     */
+    private HttpParser httpParser;
+    /**
+     * Request
      */
     private Request request;
-
     /**
-     * Http response
+     * Response
      */
     private Response response;
-
+    /**
+     * Http session
+     */
+    private Session session;
     /**
      * Whether closed
      */
     boolean isClosed = false;
-
     /**
      * Construct with request host and client socket
-     * @param hostId
+     * @param host
      * @param socket
      * @throws IOException
      */
-    public HttpTransfer(String hostId, Socket socket) throws IOException {
-        this.host = Context.get().hosts().getHost(hostId);
+    public HttpTransfer(Host<?> host, Socket socket) throws IOException {
+        this.host = host;
         this.socket = socket;
-        this.inStream = socket.getInputStream();
+        this.inputStream = socket.getInputStream();
         this.outStream = socket.getOutputStream();
+        this.httpParser = new HttpParser(this.host, this.inputStream, this.outStream);
     }
-
     /**
      * Get requested host
      * @return
@@ -84,15 +96,20 @@ public class HttpTransfer implements Http {
     public Host<?> getHost() {
         return this.host;
     }
-
+    /**
+     * Get logger for this HttpTransfer
+     * @return
+     */
+    public Logger getLogger() {
+        return this.host.getLogger();
+    }
     /**
      * Get client InputStream
      * @return
      */
     public InputStream getClientInputStream() {
-        return inStream;
+        return inputStream;
     }
-
     /**
      * Get client OutputStream
      * @return
@@ -100,80 +117,107 @@ public class HttpTransfer implements Http {
     public OutputStream getClientOutputStream() {
         return outStream;
     }
-
     /**
-     * Get HttpRequestDescriptor
+     * Get request first line
      * @return
-     * @throws Exception
+     * @throws IOException
      */
-    public Request getRequest() throws Exception {
+    public Map<REQUEST_LINE, String> getRequestLine() throws IOException {
+        return this.httpParser.parseRequestLine();
+    }
+    /**
+     * Get request headers map
+     * @return
+     * @throws IOException
+     */
+    public Map<String, String> getRequestHeaders() throws IOException {        
+        return this.httpParser.parseRequestHeaders();
+    }
+    /**
+     * Get request cookies map
+     * @return
+     * @throws IOException
+     */
+    public Map<String, String> getRequestCookies() throws IOException {
+        return this.httpParser.parseRequestCookies();
+    }
+    /**
+     * Get http request
+     * @return
+     * @throws URISyntaxException
+     * @throws IOException
+     */
+    public Request getRequest() throws IOException, URISyntaxException {
         if(this.request == null) {
-            this.request = parseRequest();
+            this.request = this.httpParser.parseRequest();
         }
         return this.request;
     }
-
     /**
-     * Get HttpResponseDescriptor
+     * Get http response
      * @return
-     * @throws Exception
-     * @throws ImageProcessingException
+     * @throws IOException
      */
-    public Response getResponse() throws Exception {
+    public Response getResponse() throws IOException {
         if(this.response == null) {
-            String msg = TemplateBuilder.buildResponseHtml(this.host, MSG_TYPE.HTTP, 200, Context.get().messages().http(200));
+            String msg = TemplateBuilder.buildResponseHtml(this.host, 200, HTTP.RES200.status());
             Map<String, List<String>> headers = addHeader(new HashMap<>(), "Content-Type", MIME.TEXT_HTML.mimeType());
             headers = addHeader(new HashMap<>(), "Content-Length", String.valueOf(msg.getBytes().length));
             headers = addHeader(new HashMap<>(), "Charset", this.host.<String> charset());
-            this.response = HttpResponseBuilder.getBuilder().build(this.request)
-                                                            .setStatusCode(200)
-                                                            .setBody(msg)
-                                                            .setHeaders(headers)
-                                                            .get();
+            this.response = this.httpParser.buildResponse(HTTP.RES200.code(), msg, headers);
         }
         return this.response;
-    }
-
+    }    
     /**
-     * Get HttpRequestDescriptor object
+     * Get session instance
      * @return
-     * @throws Exception
      */
-    private Request parseRequest() throws Exception {
-        Request request = HttpParser.buildRequestParser().parseRequest(this.socket.getInetAddress(), this.inStream);
-        return request;
+    public Session getSession() {
+        return this.session;
     }
-
     /**
-     * Send response to client by HttpResponseDescriptor object
+     * Set session instance
+     * @param session
+     */
+    public void setSession(Session session) {
+        this.session = session;
+    }
+    /**
+     * Get HttpParser
+     * @return
+     */
+    public HttpParser getHttpParser() {
+        return this.httpParser;
+    }
+    /**
+     * Send respose to client
+     * @throws IOException
+     */
+    public void sendResponse() {
+        sendResponse(this.response);
+    }
+    /**
+     * Send response to client by Response object
      * @param response
      * @throws IOException
      */
-    public void sendResponse(Response response) throws Exception {
-        sendResponse(response.getHostId(), response.getResponseCode(), response.getHeaders(), response.getBody());
+    public void sendResponse(Response response) {
+        sendResponse(this.host, response.getResponseCode(), response.getHeaders(), response.getBody());
     }
-
     /**
      * Send response to client by requested host, status code, reponse headers, body object
-     * @param hostId
+     * @param host
      * @param resCode
      * @param headers
      * @param body
-     * @throws IOException
      */
-    public void sendResponse(String hostId, int resCode, Map<String, List<String>> headers, Object body) throws IOException {
-        Charset charset = Context.get().hosts().charset(hostId);
-        String protocol = Context.get().hosts().getHost(hostId).<String> getProtocol();
-        String resMsg = null;
-        if(resCode >= 200 && resCode <= 600) {
-            resMsg = HTTP.valueOf("RES"+resCode).status();
-        } else {
-            resMsg = Context.get().messages().error(resCode, hostId);
-        }
+    public void sendResponse(Host<?> host, int resCode, Map<String, List<String>> headers, Object body) {
+        Charset charset = Charset.forName(this.host.charset());
+        String protocol = this.host.<String> getProtocol();
+        String resMsg = HTTP.valueOf("RES"+resCode).status();
         String res = protocol+"/"+Constants.HTTP_VERSION+" "+resCode+" "+resMsg+"\r\n"; 
-        this.outStream.write(res.getBytes());
         if(body == null) {
-            LoggerFactory.getLogger(hostId).warn("Response body is Null: "+resCode);
+            this.host.getLogger().warn("Response body is Null: "+resCode);
             return ;
         }    
         long contentLength = -1;
@@ -186,7 +230,7 @@ public class HttpTransfer implements Http {
         } else if(body instanceof File) {
             contentLength = ((File)body).length();
         } else {
-            throw new LeapException(HTTP.RES501, Context.get().messages().<String>error(4, body.getClass().getName()));
+            throw new LeapException(HTTP.RES501, new NotSupportedException("Not support response body type: "+body.getClass().getName()));
         }
         List<String> values = new ArrayList<>();
         values.add(String.valueOf(contentLength));
@@ -194,32 +238,83 @@ public class HttpTransfer implements Http {
 
         //LoggerFactory.getLogger(response.getRequestedHost()).debug(response.toString());
         StringBuffer resStr = new StringBuffer();
-        resStr.append("============================== [RESPONSE] : "+res.trim()+" - "+this.socket.getRemoteSocketAddress().toString()+" =============================="+System.lineSeparator());
+        resStr.append("////////////////////////////// [RESPONSE] : "+res.trim()+" - "+this.socket.getRemoteSocketAddress().toString()+" //////////////////////////////"+System.lineSeparator());
         resStr.append("RES CODE: "+resCode+System.lineSeparator());
-        for(Map.Entry<String, List<String>> e : headers.entrySet()) {
-            String hv = e.getValue().stream().map(v -> v.toString()).collect(Collectors.joining("; "));
-            this.outStream.write((e.getKey()+": "+hv+"\r\n").getBytes());
-            resStr.append(e.getKey()+": "+hv+System.lineSeparator());
-        }
-        LoggerFactory.getLogger(hostId).debug(resStr.substring(0, resStr.length()-1));
-        this.outStream.write("\r\n".getBytes()); 
-        this.outStream.flush(); 
-        if(body instanceof byte[]) {
-            this.outStream.write((byte[]) body);
-        } else { 
-            if(body instanceof String) {                                       
-                this.outStream.write(body.toString().getBytes(charset));
-            } else if(body instanceof File) {
-                writeToStream((File)body, this.outStream, Context.get().server().getFileBufferSize());
-            } else if(body instanceof Path) {
-                writeToStream(((Path)body).toFile(), this.outStream, Context.get().server().getFileBufferSize());
-            } else {
-                throw new IllegalArgumentException("Not supported response body type: "+body.getClass().getName());
+        try {
+            this.outStream.write(res.getBytes());
+            for(Map.Entry<String, List<String>> e : headers.entrySet()) {
+                String hv = e.getValue().stream().map(v -> v.toString()).collect(Collectors.joining("; "));
+                this.outStream.write((e.getKey()+": "+hv+"\r\n").getBytes());
+                resStr.append(e.getKey()+": "+hv+System.lineSeparator());
             }
+            this.host.getLogger().debug(resStr.substring(0, resStr.length()-1));
+            this.outStream.write("\r\n".getBytes()); 
+            this.outStream.flush(); 
+            if(body instanceof byte[]) {
+                this.outStream.write((byte[]) body);
+            } else { 
+                if(body instanceof String) {                                       
+                    this.outStream.write(body.toString().getBytes());
+                } else if(body instanceof File) {
+                    writeToStream((File)body, this.outStream, Context.get().server().getFileBufferSize());
+                } else if(body instanceof Path) {
+                    writeToStream(((Path)body).toFile(), this.outStream, Context.get().server().getFileBufferSize());
+                } else {
+                    throw new IllegalArgumentException("Not supported response body type: "+body.getClass().getName());
+                }
+            }
+            this.outStream.flush();
+        } catch(IOException e) {
+            this.host.getLogger().error(e.getMessage(), e);
         }
-        this.outStream.flush();
     }
-
+    /**
+     * Process error
+     * @param err
+     */
+    public void processError(Exception err) {        
+        this.host.getLogger().error(err.getMessage(), err);
+        if(this.response == null) {
+            try {
+                this.response = getResponse();
+            } catch (IOException e) {
+                this.host.getLogger().error(e.getMessage(), e);
+            }
+        }        
+        String message = err.getMessage();
+        String stackTrace = ExceptionUtils.getStackTraces(err);
+        String hostId = this.host.getHostId();
+        int resCode = -1;
+        if(err instanceof LeapException) {
+            LeapException le = (LeapException) err;
+            resCode = le.code();
+            if(le.code() == HTTP.RES401.code() && AUTH.valueOf(host.getAuthentication()) == AUTH.BASIC) {
+                this.response.addHeader("WWW-Authenticate", "Basic");
+            } else if(le.code() == HTTP.RES307.code()) {
+                RedirectException redirect = (RedirectException) err;
+                this.response.removeAllHeader();
+                Html.makeRedirectHeader(0, redirect.getURLString()).entrySet().stream().forEach(e -> this.response.addHeader(e.getKey(), e.getValue()));
+                this.response.addHeader("Location", redirect.getURLString());
+            }
+            if(Context.get().host(hostId).<Boolean> getErrorDetails()) {
+                stackTrace = "<pre>" + le.getStackTraceMessage() + "<pre>";
+            }
+        } else {
+            resCode = HTTP.RES500.code();            
+        }
+        if(!Context.get().hosts().isExistHostname(hostId)) {
+            hostId = Context.get().hosts().getDefaultHost().getHostId();
+        }        
+        try {
+            Object body = TemplateBuilder.buildErrorHtml(Context.get().host(hostId), resCode, message, stackTrace);            
+            this.response.setResponseCode(resCode);
+            this.response.setContentLength(body.toString().length());
+            this.response.setBody(body);
+            sendResponse();
+        } catch (IOException e) {
+            this.host.getLogger().error(e.getMessage(), e);            
+        }
+    }
     /**
      * Write resource to OutputStream for client
      * @param resource
@@ -235,8 +330,7 @@ public class HttpTransfer implements Http {
             out.write(buffer, 0, len);
         }
         in.close();
-    }
-    
+    }    
     /**
      * Add key-value to header Map
      * @param headers
@@ -245,7 +339,7 @@ public class HttpTransfer implements Http {
      * @return
      */
     public static Map<String, List<String>> addHeader(Map<String, List<String>> headers, String key, String value) {
-        if(headers != null) {
+        if(headers == null) {
             headers = new HashMap<>();
         }
         List<String> values = headers.get(key);
@@ -256,28 +350,25 @@ public class HttpTransfer implements Http {
         headers.put(key, values);
         return headers;
     }
-
     /**
      * Close client connection
-     * @throws IOException
      */
     public void close() {
         try {
-            if(this.inStream != null) {
-                this.inStream.close();
-            }
-            if(this.outStream != null) {
-                this.outStream.close();
-            }
+            // if(this.inputStream != null) {
+            //     this.inputStream.close();
+            // }
+            // if(this.outStream != null) {
+            //     this.outStream.close();
+            // }
             if(this.socket != null && !this.socket.isClosed()) {
                 this.socket.close();
             }
         } catch(Exception e) {
             LoggerFactory.getLogger(this.host.getHost()).error(e.getMessage(), e);
         }
-        LoggerFactory.getLogger(this.host.getHost()).info("Client closing......"+socket.getInetAddress().toString());
+        LoggerFactory.getLogger(this.host.getHost()).info("CLIENT SOCKET CLOSED: "+socket.getInetAddress().toString());
     }
-
     /**
      * Whether client socket is closed
      * @return

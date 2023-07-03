@@ -137,6 +137,7 @@ public enum HTTP {
      * Response code
      */
     int code;
+    float version;
 
     /**
      * Initializer
@@ -144,8 +145,7 @@ public enum HTTP {
      */
     HTTP(int code) {
         this.code = code;
-    }    
-
+    }
     /**
      * Get response code
      * @return
@@ -153,7 +153,6 @@ public enum HTTP {
     public int code() {
         return code;
     }
-
     /**
      * Get response status message
      * @return
@@ -161,13 +160,37 @@ public enum HTTP {
     public String status() {
         return Context.get().messages().http(this.code);
     }
-
     /**
-     * Get response status message
-     * @param parameters
+     * Get host protocol
+     * @param hostId
      * @return
      */
-    public String status(Object ... parameters) {
-        return Context.get().messages().http(this.code, parameters);
+    public String getProtocol(String hostId) {
+        return Context.get().host(hostId).getProtocol();
+    }
+    /**
+     * Get Http version
+     * @param hostId
+     * @return
+     */
+    public String getVersion(String hostId) {
+        return Context.get().host(hostId).getProtocolVersion().toString();
+    }
+    /**
+     * Get Http protocol version string
+     * @param hostId
+     * @return
+     */
+    public String getProtocolVersion(String hostId) {
+        return Context.get().host(hostId).getProtocol()+"/"+Context.get().host(hostId).getProtocolVersion();
+    }
+    /**
+     * Extract PROTOCOL from String
+     * @param protocol
+     * @return
+     */
+    public static String extractProtocol(String protocol) {
+        String proto = protocol.replaceAll("[/]|[.]", "_");
+        return proto;
     }
 }

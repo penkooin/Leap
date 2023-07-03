@@ -2,6 +2,8 @@ package org.chaostocosmos.leap.enums;
 
 /**
  * Host status enum
+ * 
+ * @author 9ins
  */
 public enum STATUS {
 
@@ -14,10 +16,18 @@ public enum STATUS {
 
     int code;
 
+    /**
+     * Initializer
+     * @param code
+     */
     STATUS(int code) {
         this.code = code;
     }
 
+    /**
+     * Get status code
+     * @return
+     */
     public int code() {
         return this.code;
     }

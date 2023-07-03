@@ -25,11 +25,11 @@ import com.google.gson.Gson;
  */
 public enum META {
 
-    SERVER(Context.get().getHomePath().resolve("config").resolve("server.yml")),
-    HOSTS(Context.get().getHomePath().resolve("config").resolve("hosts.yml")),
-    MESSAGES(Context.get().getHomePath().resolve("config").resolve("messages.yml")),
-    MIME(Context.get().getHomePath().resolve("config").resolve("mime.yml")),
-    CHART(Context.get().getHomePath().resolve("config").resolve("chart.yml"));    
+    SERVER(Context.get().getHome().resolve("config").resolve("server.yml")),
+    HOSTS(Context.get().getHome().resolve("config").resolve("hosts.yml")),
+    MESSAGES(Context.get().getHome().resolve("config").resolve("messages.yml")),
+    MIME(Context.get().getHome().resolve("config").resolve("mime.yml")),
+    CHART(Context.get().getHome().resolve("config").resolve("chart.yml"));    
 
     Path metaPath;
     Map<String, Object> metaMap;
@@ -79,28 +79,26 @@ public enum META {
         } else {
             throw new NotSupportedException("Meta file not supported: "+metaName);
         }    
-        // this.meta = new Metadata<Map<String, Object>>(this.metaMap);
-        // if(this.name().equals("SERVER")) {
-        //     this.meta = new Server<Map<String, Object>>(this.metaMap);
-        // } else if(this.name().equals("HOSTS")) {
-        //     this.meta = new Hosts<Map<String, Object>>(this.metaMap);
-        // } else if(this.name().equals("MESSAGES")) {
-        //     this.meta = new Messages<Map<String, Object>>(this.metaMap);
-        // } else if(this.name().equals("MIME")) {
-        //     this.meta = new Mime<Map<String, Object>>(this.metaMap);
-        // } else if(this.name().equals("CHART")) {
-        //     this.meta = new Chart<Map<String, Object>>(this.metaMap);
-        // } else {
-        //     this.meta = this.metaMap;
-        // }            
     }
 
     /**
      * Get meta data Map
      * @return
      */
-    public <T> T getMeta() {
-        return (T) this.metaMap;
+    public Metadata<?> getMeta() {
+        if(this.name().equals("SERVER")) {
+            return new Server<Map<String, Object>>(this.metaMap);
+        } else if(this.name().equals("HOSTS")) {
+            return new Hosts<Map<String, Object>>(this.metaMap);
+        } else if(this.name().equals("MESSAGES")) {
+            return new Messages<Map<String, Object>>(this.metaMap);
+        } else if(this.name().equals("MIME")) {
+            return new Mime<Map<String, Object>>(this.metaMap);
+        } else if(this.name().equals("CHART")) {
+            return new Chart<Map<String, Object>>(this.metaMap);
+        } else {
+            return new Metadata<Map<String, Object>>(this.metaMap);
+        }            
     }
 
     /**

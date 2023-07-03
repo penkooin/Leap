@@ -22,6 +22,7 @@ import org.chaostocosmos.leap.client.MIME;
 import org.chaostocosmos.leap.common.Constants;
 import org.chaostocosmos.leap.common.LoggerFactory;
 import org.chaostocosmos.leap.common.SIZE;
+import org.chaostocosmos.leap.common.ThreadPoolManager;
 import org.chaostocosmos.leap.context.Chart;
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.context.Metadata;
@@ -39,7 +40,7 @@ import ch.qos.logback.classic.Logger;
  * 
  * @author 9ins
  */
-public class ResourceMonitor extends Metadata<Map<String, Object>> {
+public class ResourceMonitor {
     /**
      * Unit of data size
      */
@@ -96,6 +97,11 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
     private static int xIndexIndent = 10;
 
     /**
+     * Chart metadata
+     */
+    Chart<?> chart;
+
+    /**
      * Get resource monitor
      * @return
      * @throws NotSupportedException
@@ -113,7 +119,7 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
      * @throws NotSupportedException
      */
     private ResourceMonitor() throws NotSupportedException {
-        super(buildMonitorSchema());
+        this.chart = buildMonitorSchema();        
         this.fractionPoint = Constants.DEFAULT_FRACTION_POINT;
         this.interval = Context.get().server().<Integer> getMonitoringInterval().longValue();
         this.logger = LoggerFactory.createLoggerFor("monitoring", 
@@ -125,14 +131,14 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
      * Build monitoring schema
      * @return
      */
-    private static Map<String, Object> buildMonitorSchema() {
-        Chart<Map<String, Object>> chart = Context.get().chart();
+    private static Chart<?> buildMonitorSchema() {
+        Chart<?> chart = Context.get().chart();
         //Setting x index values
         chart.setValue("cpu.x-index", IntStream.range(0, chart.getValue("cpu.x-index")).mapToObj(i -> i % xIndexIndent == 0 ? i+"" : "").collect(Collectors.toList()));        
         chart.setValue("memory.x-index", IntStream.range(0, chart.getValue("memory.x-index")).mapToObj(i -> i % xIndexIndent == 0 ? i+"" : "").collect(Collectors.toList()));
         chart.setValue("thread.x-index", IntStream.range(0, chart.getValue("thread.x-index")).mapToObj(i -> i % xIndexIndent == 0 ? i+"" : "").collect(Collectors.toList()));
         chart.setValue("heap.x-index", IntStream.range(0, chart.getValue("heap.x-index")).mapToObj(i -> i % xIndexIndent == 0 ? i+"" : "").collect(Collectors.toList()));                       
-        return chart.getMeta();
+        return chart;
     }
 
     /**
@@ -147,12 +153,12 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
                     try {
                         logger.info(
                             "[THREAD-MONITOR] "
-                            + "  Core: " + getCorePoolSize()
-                            + "  Max: " + getMaximumPoolSize()
-                            + "  Active: "+getTaskCount()
-                            + "  Largest: "+getLargestPoolSize()
-                            + "  Queued size: "+getQueuedTaskCount()
-                            + "  Task completed: "+getCompletedTaskCount()
+                            + "  Core: " + ThreadPoolManager.get().getCorePoolSize()
+                            + "  Max: " + ThreadPoolManager.get().getMaximumPoolSize()
+                            + "  Active: "+ThreadPoolManager.get().getTaskCount()
+                            + "  Largest: "+ThreadPoolManager.get().getLargestPoolSize()
+                            + "  Queued size: "+ThreadPoolManager.get().getQueuedTaskCount()
+                            + "  Task completed: "+ThreadPoolManager.get().getCompletedTaskCount()
                         );
                         logger.info(
                             "[MEMORY-MONITOR] "
@@ -190,129 +196,87 @@ public class ResourceMonitor extends Metadata<Map<String, Object>> {
      */
     private void setProbingValues() throws NotSupportedException {
         List<Object> values = null;
-        values = super.getValue("cpu.elements.0.values");
+        values = this.chart.getValue("cpu.elements.0.values");
         if(values.size() > xIndexCnt) values.remove(0);
-        double processCpuLoad = SIZE.valueOf(super.getValue("cpu.unit")).get(getProcessCpuLoad(), fractionPoint);
+        double processCpuLoad = SIZE.valueOf(this.chart.getValue("cpu.unit")).get(getProcessCpuLoad(), fractionPoint);
         values.add(processCpuLoad);
-        values = super.getValue("cpu.elements.1.values");
+        values = this.chart.getValue("cpu.elements.1.values");
         if(values.size() > xIndexCnt) values.remove(0);
-        double systemCpuLoad = SIZE.valueOf(super.getValue("cpu.unit")).get(getSystemCpuLoad(), fractionPoint);
+        double systemCpuLoad = SIZE.valueOf(this.chart.getValue("cpu.unit")).get(getSystemCpuLoad(), fractionPoint);
         values.add(systemCpuLoad);
-        super.setValue("cpu.y-index.0", processCpuLoad);
-        super.setValue("cpu.y-index.1", systemCpuLoad);
+        this.chart.setValue("cpu.y-index.0", processCpuLoad);
+        this.chart.setValue("cpu.y-index.1", systemCpuLoad);
         
-        values = super.getValue("memory.elements.0.values");
+        values = this.chart.getValue("memory.elements.0.values");
         if(values.size() > xIndexCnt) values.remove(0);
-        double physicalUsedMemory = SIZE.valueOf(super.getValue("memory.unit")).get(getPhysicalUsedMemory(), fractionPoint);
+        double physicalUsedMemory = SIZE.valueOf(this.chart.getValue("memory.unit")).get(getPhysicalUsedMemory(), fractionPoint);
         values.add(physicalUsedMemory);                
-        values = super.getValue("memory.elements.1.values");
+        values = this.chart.getValue("memory.elements.1.values");
         if(values.size() > xIndexCnt) values.remove(0);
-        double freeMemory = SIZE.valueOf(super.getValue("memory.unit")).get(getFreeMemory(), fractionPoint);
+        double freeMemory = SIZE.valueOf(this.chart.getValue("memory.unit")).get(getFreeMemory(), fractionPoint);
         values.add(freeMemory);
-        values = super.getValue("memory.elements.2.values");
+        values = this.chart.getValue("memory.elements.2.values");
         if(values.size() > xIndexCnt) values.remove(0);
-        double usedMemory = SIZE.valueOf(super.getValue("memory.unit")).get(getUsedMemory(), fractionPoint);
+        double usedMemory = SIZE.valueOf(this.chart.getValue("memory.unit")).get(getUsedMemory(), fractionPoint);
         values.add(usedMemory);
-        super.setValue("memory.y-index.0", physicalUsedMemory);
-        super.setValue("memory.y-index.1", freeMemory);
-        super.setValue("memory.y-index.2", usedMemory);
+        this.chart.setValue("memory.y-index.0", physicalUsedMemory);
+        this.chart.setValue("memory.y-index.1", freeMemory);
+        this.chart.setValue("memory.y-index.2", usedMemory);
 
-        values = super.getValue("thread.elements.0.values");
+        values = this.chart.getValue("thread.elements.0.values");
         if(values.size() > xIndexCnt) values.remove(0);
-        int corePoolSize = getCorePoolSize();
+        int corePoolSize = ThreadPoolManager.get().getCorePoolSize();
         values.add(corePoolSize);
-        values = super.getValue("thread.elements.1.values");
+        values = this.chart.getValue("thread.elements.1.values");
         if(values.size() > xIndexCnt) values.remove(0);
-        long activeTaskSize = getTaskCount() - getCompletedTaskCount();
+        long activeTaskSize = ThreadPoolManager.get().getTaskCount() - ThreadPoolManager.get().getCompletedTaskCount();
         values.add(activeTaskSize);
-        values = super.getValue("thread.elements.2.values");
+        values = this.chart.getValue("thread.elements.2.values");
         if(values.size() > xIndexCnt) values.remove(0);
-        int maximumPoolSize = getMaximumPoolSize();
+        int maximumPoolSize = ThreadPoolManager.get().getMaximumPoolSize();
         values.add(maximumPoolSize);
-        values = super.getValue("thread.elements.3.values");
+        values = this.chart.getValue("thread.elements.3.values");
         if(values.size() > xIndexCnt) values.remove(0);
-        int queuedTaskSize = getQueuedTaskCount();
+        int queuedTaskSize = ThreadPoolManager.get().getQueuedTaskCount();
         values.add(queuedTaskSize);
-        super.setValue("thread.y-index.0", corePoolSize);
-        super.setValue("thread.y-index.1", activeTaskSize);
-        super.setValue("thread.y-index.2", maximumPoolSize);
-        super.setValue("thread.y-index.3", queuedTaskSize);
+        this.chart.setValue("thread.y-index.0", corePoolSize);
+        this.chart.setValue("thread.y-index.1", activeTaskSize);
+        this.chart.setValue("thread.y-index.2", maximumPoolSize);
+        this.chart.setValue("thread.y-index.3", queuedTaskSize);
 
-        values = super.getValue("heap.elements.0.values");
+        values = this.chart.getValue("heap.elements.0.values");
         if(values.size() > xIndexCnt) values.remove(0);
-        double processHeapMax = SIZE.valueOf(super.getValue("heap.unit")).get(getProcessHeapMax(), fractionPoint);
+        double processHeapMax = SIZE.valueOf(this.chart.getValue("heap.unit")).get(getProcessHeapMax(), fractionPoint);
         values.add(processHeapMax);
-        values = super.getValue("heap.elements.1.values");
+        values = this.chart.getValue("heap.elements.1.values");
         if(values.size() > xIndexCnt) values.remove(0);
-        double processHeapInit = SIZE.valueOf(super.getValue("heap.unit")).get(getProcessHeapInit(), fractionPoint);
+        double processHeapInit = SIZE.valueOf(this.chart.getValue("heap.unit")).get(getProcessHeapInit(), fractionPoint);
         values.add(processHeapInit);
-        values = super.getValue("heap.elements.2.values");
+        values = this.chart.getValue("heap.elements.2.values");
         if(values.size() > xIndexCnt) values.remove(0);
-        double processHeapCommitted = SIZE.valueOf(super.getValue("heap.unit")).get(getProcessHeapCommitted(), fractionPoint);
+        double processHeapCommitted = SIZE.valueOf(this.chart.getValue("heap.unit")).get(getProcessHeapCommitted(), fractionPoint);
         values.add(processHeapCommitted);
-        values = super.getValue("heap.elements.3.values");
+        values = this.chart.getValue("heap.elements.3.values");
         if(values.size() > xIndexCnt) values.remove(0);
-        double processHeapUsed = SIZE.valueOf(super.getValue("heap.unit")).get(getProcessHeapUsed(), fractionPoint);
+        double processHeapUsed = SIZE.valueOf(this.chart.getValue("heap.unit")).get(getProcessHeapUsed(), fractionPoint);
         values.add(processHeapUsed);
-        super.setValue("heap.y-index.0", processHeapMax);
-        super.setValue("heap.y-index.1", processHeapInit);
-        super.setValue("heap.y-index.2", processHeapCommitted);
-        super.setValue("heap.y-index.3", processHeapUsed);
+        this.chart.setValue("heap.y-index.0", processHeapMax);
+        this.chart.setValue("heap.y-index.1", processHeapInit);
+        this.chart.setValue("heap.y-index.2", processHeapCommitted);
+        this.chart.setValue("heap.y-index.3", processHeapUsed);
     }
     /**
      * Request monitoring data to monitoring service
      * @throws IOException
      */
     private void requestMonitorings() throws IOException {
-        String monitorJson = this.mapper.writerWithDefaultPrettyPrinter().writeValueAsString(super.getMeta());
+        String monitorJson = this.mapper.writerWithDefaultPrettyPrinter().writeValueAsString(this.chart.getMeta());
         Map<String, FormData<?>> formDatas = Map.of("chart", new FormData<byte[]>(MIME.TEXT_JSON, monitorJson.getBytes()));        
         LeapClient.build(Context.get().hosts().getDefaultHost().getHost(), Context.get().hosts().getDefaultHost().getPort())
                   .addHeader("charset", "utf-8")
                   .addHeader("body-in-stream", false)
                   .post("/monitor/chart/image", null, formDatas);
     }    
-    /**
-     * Get thread pool core pool size
-     * @return
-     */
-    public int getCorePoolSize() {
-        return LeapApp.getThreadPool().getCorePoolSize();
-    }
-    /**
-     * Get thread pool active count
-     * @return
-     */
-    public long getTaskCount() {
-        return LeapApp.getThreadPool().getTaskCount();
-    }
-    /**
-     * Get thread pool largest size
-     * @return
-     */
-    public int getLargestPoolSize() {
-        return LeapApp.getThreadPool().getLargestPoolSize();
-    }
-    /**
-     * Get thread pool maximum size
-     * @return
-     */
-    public int getMaximumPoolSize() {
-        return LeapApp.getThreadPool().getMaximumPoolSize();
-    }
-    /**
-     * Get thread pool complated task count
-     * @return
-     */
-    public long getCompletedTaskCount() {
-        return LeapApp.getThreadPool().getCompletedTaskCount();
-    }
-    /**
-     * Get current queued task count in thread pool
-     * @return
-     */
-    public int getQueuedTaskCount() {
-        return LeapApp.getThreadPool().getQueue().size();
-    }
     /**
      * Get max memory bytes applied
      * @return

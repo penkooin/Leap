@@ -73,4 +73,14 @@ public class Constants {
      * Session ID key 
      */
     public static final String SESSION_ID_KEY = "__Leap-Session-ID";
+
+    /**
+     * Authorization key
+     */
+    public static final String AUTHORIZATION = "Authorization";
+
+    /**
+     * Clear site data key
+     */
+    public static final String CLEAR_SITE_DATA = "Clear-Site-Data";
 }

@@ -201,11 +201,12 @@ public class LeapClient {
     }
     /**
      * Write context with params
+     * @param method
      * @param contextPath
      * @param contextParams
      * @throws IOException
      */
-    private void writeContextParams(REQUEST method, String contextPath, Map<String, String> contextParams) throws IOException {
+    private void writeContextParams(REQUEST_TYPE method, String contextPath, Map<String, String> contextParams) throws IOException {
         String requestLine = method.name()+" "+contextPath+""+(contextParams == null ? "" : "?"+contextParams.entrySet().stream().map(e -> URLEncoder.encode(e.getKey(), charset)+"="+URLEncoder.encode(e.getValue(), charset)).collect(Collectors.joining("&")))+" HTTP/1.1\r\n";        
         this.outputStream.write(requestLine.getBytes(StandardCharsets.ISO_8859_1));        
         this.outputStream.flush();
@@ -336,7 +337,7 @@ public class LeapClient {
     public synchronized LeapClient get(String contextPath, Map<String, String> contextParams) throws IOException {
         this.requestHeaders.put("Host", this.host+":"+this.port);
         connect();
-        writeContextParams(REQUEST.GET, contextPath, contextParams);
+        writeContextParams(REQUEST_TYPE.GET, contextPath, contextParams);
         writeHeaders(this.requestHeaders);
         processResponse(this.inputStream);
         this.outputStream.close();
@@ -355,7 +356,7 @@ public class LeapClient {
      */
     public synchronized LeapClient post(String contextPath, Map<String, String> contextParams, Map<String, FormData<?>> formDataMap) throws IOException {
         connect();
-        writeContextParams(REQUEST.POST, contextPath, contextParams);
+        writeContextParams(REQUEST_TYPE.POST, contextPath, contextParams);
 
         long contentLength = formDataMap.values().stream().mapToInt(f -> f.getContentLength()).sum();
         this.requestHeaders.put("Content-Type", "multipart/form-data; boundary=--------------------------LeapClient");

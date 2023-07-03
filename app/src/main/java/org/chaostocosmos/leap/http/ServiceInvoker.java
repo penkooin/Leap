@@ -36,7 +36,7 @@ public class ServiceInvoker {
             if(service.errorHandling(httpTransfer.getResponse(), e) != null) {
                 throw e;
             }
-            logger.error(Context.get().messages().warn(2, serviceHolder.getServiceModel().getClass().getName(), e.getMessage()));
+            logger.error("There is problem in handle server: "+serviceHolder.getServiceModel().getClass().getName(), e);
         }
         return response;
     }

@@ -27,7 +27,6 @@ public class RedirectException extends LeapException {
      */
     public RedirectException(URL url) {
         super(HTTP.RES307, "Redirect to "+url.toString());
-        super.addHeader("Location", url.toString());
         this.url = url;
     }    
 
@@ -37,5 +36,13 @@ public class RedirectException extends LeapException {
      */
     public URL getURL() {
         return this.url;        
+    }
+
+    /**
+     * Get url string
+     * @return
+     */
+    public String getURLString() {
+        return this.url.toExternalForm();
     }
 }

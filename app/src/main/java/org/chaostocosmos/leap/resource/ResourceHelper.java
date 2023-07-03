@@ -26,6 +26,7 @@ import org.chaostocosmos.leap.common.UtilBox;
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.HTTP;
+import org.chaostocosmos.leap.enums.WEB_PATH;
 import org.chaostocosmos.leap.http.Request;
 
 /**
@@ -87,24 +88,23 @@ public class ResourceHelper {
      * @return
      */
     public static Path getResourcePath(Request request) {
-        return getResourcePath(request.getHostId(), request.getContextPath());
+        return getResourcePath(Context.get().host(request.getHostId()), request.getContextPath());
     }
 
     /**
      * Get resource Path
-     * @param serverName
+     * @param host
      * @param contextPath
      * @return
      */
-    public static Path getResourcePath(String hostId, String contextPath) {
+    public static Path getResourcePath(Host<?> host, String contextPath) {
         contextPath = contextPath.charAt(0) == '/' ? contextPath.substring(1) : contextPath;
-        Host<?> hosts = Context.get().hosts().getHost(hostId);
-        Path docroot = hosts.getDocroot().toAbsolutePath();
-        Path reqPath = getStaticPath(hostId).resolve(contextPath).toAbsolutePath();        
-        if(!validatePath(docroot, reqPath)) {
+        Path webinf = host.getWebInf().toAbsolutePath();
+        Path reqPath = webinf.resolve(contextPath).toAbsolutePath();        
+        if(!validatePath(webinf, reqPath)) {
             throw new LeapException(HTTP.RES403, contextPath);
         }
-        LoggerFactory.getLogger(hostId).debug("REQUEST PATH: "+reqPath.toString()); 
+        host.getLogger().debug("REQUEST PATH: "+reqPath.toString()); 
         return reqPath.normalize();
     }
 
@@ -119,16 +119,6 @@ public class ResourceHelper {
     }    
 
     /**
-     * Get static resource path
-     * @param hostId
-     * @param resourceName
-     * @return
-     */
-    public static Path getStaticResourcePath(String hostId, String resourceName) {
-        return getResourcePath(hostId, resourceName);
-    }
-
-    /**
      * Get binary data
      * @param resourcePath
      * @return
@@ -137,7 +127,7 @@ public class ResourceHelper {
         try {
             return Files.readAllBytes(resourcePath);
         } catch (IOException e) {
-            throw new LeapException(HTTP.RES500, Context.get().messages().<String> error(14, resourcePath));
+            throw new LeapException(HTTP.RES500, e);
         }
     }
 
@@ -173,32 +163,32 @@ public class ResourceHelper {
      * @throws IOException
      */
     public String getTrademark() throws FileNotFoundException, IOException {
-        File file = Context.get().getHomePath().resolve("config").resolve("trademark").toFile();
+        File file = Context.get().getHome().resolve(WEB_PATH.CONFIG.name().toLowerCase()).resolve("trademark").toFile();
         return UtilBox.readAllString(new FileInputStream(file)); 
     }
 
     /**
      * Extract resurces from jar or file
-     * @param resourcePath
+     * @param res
      * @param targetPath
      * @return
      * @throws LeapException
      * @throws IOException
      * @throws URISyntaxException
      */
-    public static List<File> extractResource(String resourcePath, final Path targetPath) throws IOException, URISyntaxException {
+    public static List<File> extractResource(String res, final Path targetPath) throws IOException, URISyntaxException {        
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        URL res = classLoader.getResource(resourcePath);
-        String protocol = res.getProtocol();
+        URL url = classLoader.getResource(res);
+        String protocol = url.getProtocol();
         Stream<Path> pStream;
         if(protocol.equals("jar")) {
-            try (FileSystem fileSystem = FileSystems.newFileSystem(res.toURI(), new HashMap<>())) {
-                pStream = Files.walk(fileSystem.getPath(resourcePath)); 
+            try (FileSystem fileSystem = FileSystems.newFileSystem(url.toURI(), new HashMap<>())) {
+                pStream = Files.walk(fileSystem.getPath(res)); 
             }
         } else if(protocol.equals("file")) {
-            pStream = Files.walk(Paths.get(res.toURI()));
+            pStream = Files.walk(Paths.get(url.toURI()));
         } else {
-            throw new IllegalArgumentException("Resource protocol isn't supported!!! : "+res.getProtocol());
+            throw new IllegalArgumentException("Resource protocol isn't supported!!! : "+url.getProtocol());
         }
         List<File> results = pStream.map(p -> {
             try {
@@ -206,8 +196,7 @@ public class ResourceHelper {
                 String ps = p.toString().replace("\\", "/");
                 Path path = protocol.equals("jar") 
                             ? targetPath.resolve(ps) 
-                            : Paths.get(targetPath.toAbsolutePath().toString(), 
-                            ps.toString().substring(ps.toString().indexOf(resourcePath)-1).replace("\\", "/"));
+                            : Paths.get(targetPath.toAbsolutePath().toString(), ps.substring(ps.indexOf(res)-1).replace("\\", "/"));
                 if(Files.isDirectory(p)) {
                     path.toFile().mkdirs();
                 } else { 
@@ -215,7 +204,8 @@ public class ResourceHelper {
                         path.toFile().delete(); 
                     }
                     if(!path.toFile().exists()) {
-                        File file = Files.write(path, Files.readAllBytes(p), StandardOpenOption.CREATE).toFile();
+                        byte[] bytes = Files.readAllBytes(p);
+                        File file = Files.write(path, bytes, StandardOpenOption.CREATE).toFile();
                         file.setLastModified(modMillis);
                         return file;
                     }
@@ -236,7 +226,7 @@ public class ResourceHelper {
      * @throws LeapException
      */
     public static Path getDocroot(String hostId) throws LeapException {
-        return Context.get().hosts().getDocroot(hostId).normalize().toAbsolutePath();
+        return WEB_PATH.DOCROOT.getPath(hostId);
     }
 
     /**
@@ -246,7 +236,7 @@ public class ResourceHelper {
      * @throws LeapException
      */
     public static Path getWebAppPath(String hostId) throws LeapException {
-        return getDocroot(hostId).resolve("webapp");
+        return WEB_PATH.WEBAPP.getPath(hostId);
     }
 
     /**
@@ -256,7 +246,7 @@ public class ResourceHelper {
      * @throws LeapException
      */
     public static Path getWebInfPath(String hostId) throws LeapException {
-        return getWebAppPath(hostId).resolve("WEB-INF");
+        return WEB_PATH.WEBINF.getPath(hostId);
     }
 
     /**
@@ -265,8 +255,8 @@ public class ResourceHelper {
      * @return
      * @throws LeapException
      */
-    public static Path getStaticPath(String hostId) throws LeapException {
-        return getWebInfPath(hostId).resolve("static");
+    public static Path getViewsPath(String hostId) throws LeapException {
+        return WEB_PATH.VIEWS.getPath(hostId);
     }
 
 }

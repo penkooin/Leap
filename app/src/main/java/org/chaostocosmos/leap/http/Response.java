@@ -1,9 +1,12 @@
 package org.chaostocosmos.leap.http;
 
 import java.io.File;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import org.chaostocosmos.leap.context.Host;
 
 /**
  * Http response descriptor
@@ -13,44 +16,41 @@ import java.util.Map;
  */
 public class Response implements Http {
     /**
-     * Reponse host ID
+     * Host
      */
-    final String hostId;
+    private final Host<?> host;
     /**
-     * Http request
+     * OutputStream
      */
-    final private Request request;
-    
+    private final OutputStream outputStream;
     /**
      * Response code
      */
-    private int responseCode;    
-    
+    private int responseCode; 
     /**
      * Response body
      */
-    private Object responseBody;
-    
+    private Object responseBody;    
     /**
      * Body length
      */
-    private long contentLength;
-    
+    private long contentLength;    
     /**
      * Response header map
      */
-    private Map<String, List<String>> headers;
-
+    private final Map<String, List<String>> headers;
     /**
      * Construct with parameters
-     * @param request
+     * @param host
+     * @param outputStream
      * @param statusCode
+     * @param request
      * @param responseBody
      * @param headers
      */ 
-    public Response(final Request request, int statusCode, Object responseBody, Map<String, List<String>> headers) {
-        this.request = request;
-        this.hostId = request.getHostId();
+    public Response(Host<?> host, OutputStream outputStream, int statusCode, Object responseBody, Map<String, List<String>> headers) {
+        this.host = host;
+        this.outputStream = outputStream;
         this.responseCode = statusCode;
         this.responseBody = responseBody;
         this.headers = headers;
@@ -63,23 +63,8 @@ public class Response implements Http {
      * Get host ID
      * @return
      */
-    public final String getHostId() {
-        return this.hostId;
-    }
-
-    /**
-     * Get HttpRequestDescriptor object
-     * @return
-     */
-    public final Request getRequest() {
-        return this.request;
-    }
-
-    public final String getRequestedHost() {
-        if(this.request != null) {
-            return this.request.getRequestedHost();
-        }
-        return null;
+    public final Host<?> getHost() {
+        return this.host;
     }
 
     public int getResponseCode() {
@@ -103,18 +88,16 @@ public class Response implements Http {
         return this.headers;
     }
 
-    public void setHeaders(Map<String, List<String>> responseHeader) {
-        this.headers = responseHeader;
+    public void addHeader(String key, String value) {
+        addHeader(key, List.of(value));
     }
 
-    public void addHeader(String name, String value) {
-        if(!this.headers.containsKey(name)) {
-            List<String> values = new ArrayList<>();
-            values.add(value);
-            this.headers.put(name, values);
-        } else {
-            this.headers.get(name).add(value);
-        }
+    public void addHeader(String key, List<String> value) {
+        this.headers.putIfAbsent(key, value);
+    }
+
+    public void removeAllHeader() {
+        this.headers.clear();
     }
 
     public void setHeader(String name, String value) {
@@ -143,7 +126,7 @@ public class Response implements Http {
             cookieList = new ArrayList<>();
             this.headers.put("Set-Cookie", cookieList);
         }        
-        cookieList.add(attrKey+"="+attrValue);        
+        this.headers.get("Set-Cookie").add(attrKey+"="+attrValue);        
     }
 
     public String getSetCookie(String attrKey) {
@@ -154,11 +137,11 @@ public class Response implements Http {
     @Override
     public String toString() {
         return "{" +
-            " httpRequestDescriptor='" + request + "'" +
+            " host='" + this.host.toString() + "'" +
             ", responseCode='" + responseCode + "'" +
             ", responseBody='" + responseBody + "'" +
             ", contentLength='" + contentLength + "'" +
             ", headers='" + headers + "'" +
             "}";
-    }    
+    }
 }

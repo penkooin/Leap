@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.context.Context;
+import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.MIME;
 import org.chaostocosmos.leap.http.common.StreamUtils;
@@ -46,8 +47,8 @@ public class MultiPart extends BodyPart {
      * @param charset
      * @throws IOException
      */
-    public MultiPart(String hostId, MIME contentType, String boundary, long contentLength, InputStream requestStream, boolean preLoadBody, Charset charset) throws IOException {
-        super(hostId, contentType, contentLength, requestStream, false, charset);
+    public MultiPart(Host<?> host, MIME contentType, String boundary, long contentLength, InputStream requestStream, boolean preLoadBody, Charset charset) throws IOException {
+        super(host, contentType, contentLength, requestStream, false, charset);
         this.filePaths = new ArrayList<>();
         this.boundary = boundary;
         this.preLoadBody = preLoadBody;
@@ -59,7 +60,7 @@ public class MultiPart extends BodyPart {
     @Override
     public Map<String, byte[]> getBody() throws IOException {
         if(super.body == null) {
-            return StreamUtils.getMultiPartContents(this.hostId, this.requestStream, this.boundary, super.charset);
+            return StreamUtils.getMultiPartContents(this.requestStream, this.boundary, super.charset);
         }
         return super.body;
     }
@@ -104,7 +105,7 @@ public class MultiPart extends BodyPart {
                 }
             });
         } else {
-            this.filePaths = StreamUtils.saveMultiPart(this.hostId, super.requestStream, targetPath.normalize(), Context.get().server().getFileBufferSize(), this.boundary, super.charset);    
+            this.filePaths = StreamUtils.saveMultiPart(super.requestStream, targetPath.normalize(), Context.get().server().getFileBufferSize(), this.boundary, super.charset);    
         }
         super.logger.debug("[MULTI-PART] "+super.contentType.name()+" saved: "+targetPath.normalize().toString()+"  Size: "+filePaths.stream().map(p -> p.toFile()).map(f -> f.getName()+": "+f.length()).collect(Collectors.joining(", ")));
     }    

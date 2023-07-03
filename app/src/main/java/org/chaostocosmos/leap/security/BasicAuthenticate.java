@@ -26,7 +26,6 @@ public class BasicAuthenticate implements IAuthenticate {
         UserCredentials user = this.securityManager.login(username, null);
         if(user == null) {
             LeapException httpe = new LeapException(HTTP.RES401, "User( "+username+" ) not found in server."); 
-            httpe.addHeader("WWW-Authenticate", "Basic");
             throw httpe;
         }
         host.getLogger().debug("User "+username+" is login.");

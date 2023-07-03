@@ -48,8 +48,7 @@ public class ContextTest {
     
     @Test
     public void testGetMsg() {
-        int code = 1;
-        String str = Context.get().messages().debug(code, "a", "b", "c");
+        String str = Context.get().messages().http(500);
         System.out.println(str);
     }
 

@@ -36,7 +36,7 @@ public class DeployService extends AbstractService implements DeployModel {
         final Map<String, String> headers = request.getReqHeader();
         final Part bodyPart = request.getBodyPart();
         if(bodyPart == null) {
-            throw new LeapException(HTTP.RES417, Context.get().messages().<String>error(400, "Service class file data is missing in request."));
+            throw new LeapException(HTTP.RES417, "Service class file data is missing in request.");
         } else if(bodyPart.getContentType() == MIME.MULTIPART_FORM_DATA) {            
             String qualifiedClassName = headers.get("serviceClassNames");
             if(qualifiedClassName.startsWith("[") && qualifiedClassName.endsWith("]")) {
@@ -47,7 +47,7 @@ public class DeployService extends AbstractService implements DeployModel {
                 super.logger.debug("Deploying service... "+request.getReqHeader().toString());
                 Arrays.asList(qualifiedClassName.split(",")).stream().forEach(cls -> {
                     if(cls == null) {
-                        throw new LeapException(HTTP.RES412, Context.get().messages().<String>error(400, "Service full qualifiedClassName is missing in header of request."));
+                        throw new LeapException(HTTP.RES412, "Service full qualifiedClassName is missing in header of request.");
                     }
                     cls = cls.trim();
                     Path serviceClassPath = super.serviceManager.getHost().getDynamicClasspaths();                
@@ -66,7 +66,7 @@ public class DeployService extends AbstractService implements DeployModel {
                         super.serviceManager.initialize();
                     } catch(NoClassDefFoundError | Exception e) {
                         multipart.getFilePaths().stream().forEach(p -> deleteClean(serviceClassPath.getFileName().toString(), p));
-                        super.logger.error(Context.get().messages().error(19, e.getMessage()), e);
+                        super.logger.error(e.getMessage(), e);
                         super.logger.debug("[DEPLOY] Exception in servie deploy process: "+serviceClassPath.resolve(qualifiedClassPath).toString());
                         throw new LeapException(HTTP.RES412, ExceptionUtils.getStackTraces(e));
                     }        

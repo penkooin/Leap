@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.chaostocosmos.leap.common.LoggerFactory;
+import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.MIME;
 import org.chaostocosmos.leap.enums.PROTOCOL;
 import org.chaostocosmos.leap.enums.REQUEST;
@@ -23,16 +24,16 @@ import ch.qos.logback.classic.Logger;
  * @since 2021.09.18
  */
 public class Request implements Http {
-    
+
+    final private Host<?> host; 
     final private long requestTimstamp;
     final private REQUEST requestType;    
-    final private String hostId;
     final private String requestedHost;
     final private MIME contentType;
     final private String httpVersion;
     final private Map<String, String> reqHeader;
     final private String contextPath;
-    final private Map<String, Object> queryParam;
+    final private Map<String, String> queryParam;
     final private Part bodyPart;
     final private long contentLength;
     final private Charset charset;
@@ -44,9 +45,9 @@ public class Request implements Http {
     /**
      * Constructor
      * 
+     * @param host
      * @param newTimeStamp
      * @param protocol
-     * @param hostId
      * @param requestHost
      * @param httpVersion
      * @param requestType
@@ -62,9 +63,10 @@ public class Request implements Http {
      * @param session
      * @throws URISyntaxException
      */
-    public Request(long newTimeStamp,
+    public Request(
+            Host<?> host,
+            long newTimeStamp,
             PROTOCOL protocol,
-            String hostId,
             String requestHost,
             String httpVersion, 
             REQUEST requestType, 
@@ -72,16 +74,16 @@ public class Request implements Http {
             MIME contentType,
             String contextPath,
             URI requestURI, 
-            Map<String, Object> queryParam,
+            Map<String, String> queryParam,
             Part bodyPart,
             long contentLength,
             Charset charset,
             Map<String, String> cookies, 
             Session session
         ) throws URISyntaxException {
+            this.host = host;
             this.requestTimstamp = newTimeStamp;
             this.protocol = protocol;
-            this.hostId = hostId;
             this.requestedHost = requestHost;
             this.httpVersion = httpVersion;
             this.requestType = requestType;
@@ -106,7 +108,7 @@ public class Request implements Http {
     }
 
     public final String getHostId() {
-        return this.hostId;
+        return this.host.getHostId();
     }
 
     public final String getRequestedHost() {
@@ -137,7 +139,7 @@ public class Request implements Http {
         return this.requestURI;
     }
 
-    public final Map<String, Object> getContextParam() {
+    public final Map<String, String> getContextParam() {
         return this.queryParam;
     }
 
@@ -192,7 +194,7 @@ public class Request implements Http {
     public String toString() {
         return "{" +
             " requestType='" + requestType + "'" +
-            ", hostId='" + hostId + "'" +
+            ", host='" + host + "'" +
             ", requestedHost='" + requestedHost + "'" +
             ", contentType='" + contentType + "'" +
             ", httpVersion='" + httpVersion + "'" +
