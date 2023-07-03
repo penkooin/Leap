@@ -4,24 +4,27 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.InetAddress;
+import java.io.OutputStream;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.transaction.NotSupportedException;
+
 import org.chaostocosmos.leap.LeapException;
-import org.chaostocosmos.leap.common.Constants;
-import org.chaostocosmos.leap.common.LoggerFactory;
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.MIME;
 import org.chaostocosmos.leap.enums.PROTOCOL;
+import org.chaostocosmos.leap.enums.REQUEST_LINE;
 import org.chaostocosmos.leap.enums.REQUEST;
 import org.chaostocosmos.leap.http.common.StreamUtils;
 import org.chaostocosmos.leap.part.BinaryPart;
@@ -37,51 +40,289 @@ import org.chaostocosmos.leap.part.TextPart;
  */
 public class HttpParser {
     /**
-     * Http request parser
+     * Host
      */
-    private static RequestParser requestParser;
-
+    Host<?> host;
     /**
-     * Http response parser
+     * InputStream
      */
-    private static ResponseParser responseParser;
-
+    InputStream inputStream;
     /**
-     * Get request parser object
-     * @return
+     * OutputStream
+     */
+    OutputStream outputStream;
+    /**
+     * Request first line Map
+     */
+    Map<REQUEST_LINE, Object> requestLines;
+    /**
+     * Request headers Map
+     */
+    Map<String, String> requestHeaders;
+    /**
+     * Request cookies Map
+     */
+    Map<String, String> requestCookies;
+    /**
+     * Request url query parameters Map
+     */
+    Map<String, String> queryParameters;
+    /**
+     * Request
+     */
+    Request request;
+    /**
+     * Response
+     */
+    Response response;
+    /**
+     * Constructor
+     * @param host
+     * @param inputStream
+     * @param outputStream
      * @throws IOException
      */
-    public static RequestParser buildRequestParser() {
-        if(requestParser == null) {
-            requestParser = new RequestParser();
-        }
-        return requestParser;
+    public HttpParser(Host<?> host, InputStream inputStream, OutputStream outputStream) throws IOException {
+        this.host = host;
+        this.inputStream = inputStream;
+        this.outputStream = outputStream;
     }
-
-    /**
-     * Get response parser object
-     * @return
-     */
-    public static ResponseParser buildResponseParser() {
-        if(responseParser == null) {
-            responseParser = new ResponseParser();
-        }
-        return responseParser;
-    }
-
     /**
      * Check request method
      * @param requestType
      * @return
      */
     public static boolean isValidType(String requestType) {
-        if( REQUEST.GET.name().equals(requestType) || 
-            REQUEST.POST.name().equals(requestType) || 
-            REQUEST.PUT.name().equals(requestType) || 
-            REQUEST.DELETE.name().equals(requestType)) {
+        if( REQUEST.GET.name().equals(requestType) || REQUEST.POST.name().equals(requestType) || REQUEST.PUT.name().equals(requestType) || REQUEST.DELETE.name().equals(requestType)) {
             return true;
         }
         return false; 
+    }
+    /**
+     * Parse request line
+     * @return
+     * @throws IOException
+     */
+    public final Map<REQUEST_LINE, String> parseRequestLine() throws IOException {        
+        if(this.requestLines != null) {
+            return this.requestLines;
+        }
+        this.requestLines = new HashMap<REQUEST_LINE, String>();
+        String readLine = StreamUtils.readLine(inputStream, StandardCharsets.UTF_8);
+        if(readLine == null) {
+            throw new LeapException(HTTP.RES400, "Invalid request line: "+readLine);
+        }
+        final String requestLine = URLDecoder.decode(readLine, StandardCharsets.UTF_8);
+        this.host.getLogger().info("============================== [REQUEST] "+requestLine+" =============================="+System.lineSeparator());
+        final String method = requestLine.substring(0, requestLine.indexOf(" "));
+        String contextPath = requestLine.substring(requestLine.indexOf(" ")+1, requestLine.lastIndexOf(" "));
+        
+        final String protocolVersion = requestLine.substring(requestLine.lastIndexOf(" ")).trim();
+        if(method == null || method == null || protocolVersion == null) {
+            throw new LeapException(HTTP.RES417, new IllegalStateException("Requested line format is wrong: "+requestLine));
+        }
+        if(!Arrays.asList(REQUEST.values()).stream().anyMatch(R -> R.name().equals(method))) {
+            throw new LeapException(HTTP.RES405, new NotSupportedException("Not suported request method: "+method));
+        }
+        String protocol = protocolVersion.substring(0, protocolVersion.indexOf("/"));
+        this.requestLines.put(REQUEST_LINE.LINE, requestLine);
+        this.requestLines.put(REQUEST_LINE.METHOD, method);
+        this.requestLines.put(REQUEST_LINE.PATH, contextPath);
+        this.requestLines.put(REQUEST_LINE.PARAMS, parseQueryParameters());
+        this.requestLines.put(REQUEST_LINE.VERSION, protocolVersion);
+        this.requestLines.put(REQUEST_LINE.PROTOCOL, protocol);
+        return this.requestLines;
+    }
+    /**
+     * Parse request header
+     * @return
+     * @throws IOException
+     */
+    public final Map<String, String> parseRequestHeaders() throws IOException {
+        if(this.requestLines == null) {
+            throw new LeapException(HTTP.RES500, "It must be parsed request first line before headers parsing.");
+        }
+        if(this.requestHeaders != null) {
+            return this.requestHeaders;
+        }
+        this.requestHeaders = new HashMap<>();
+        List<String> headerLines = StreamUtils.readHeaders(inputStream);        
+        for(String header : headerLines) {
+            if(header == null || header.length() == 0)
+                break;
+            int idx = header.indexOf(":");
+            if (idx == -1) {
+                throw new LeapException(HTTP.RES417, new IllegalStateException("Header format is wrong(Not found delimeter): "+header));
+            }
+            this.host.getLogger().debug(header.substring(0, idx)+":   "+header.substring(idx + 1, header.length()).trim());
+            this.requestHeaders.put(header.substring(0, idx), header.substring(idx + 1, header.length()).trim());
+        }
+        return this.requestHeaders;
+    }
+    /**
+     * Parse cookies of request header
+     * @return
+     */
+    public Map<String, String> parseRequestCookies() {
+        if(this.requestHeaders == null) {
+            throw new LeapException(HTTP.RES500, "It must be parsed request headers before cookies parsing.");
+        }
+        if(this.requestCookies != null) {
+            return this.requestCookies;
+        }
+        this.requestCookies = new HashMap<>();
+        if(requestHeaders.get("Cookie") != null) {
+            String[] cookieArr = requestHeaders.get("Cookie").trim().split(";");
+            for(String cookie : cookieArr) {
+                String key = cookie.substring(0, cookie.indexOf("=")).trim();
+                String value = cookie.substring(cookie.indexOf("=")+1);
+                this.requestCookies.putIfAbsent(key, value.equals("null") ? "" : value);
+            }
+        }
+        return this.requestCookies;
+    }
+    /**
+     * Parse query parameters
+     * @return
+     */
+    public Map<String, String> parseQueryParameters(String contextPath) {
+        if(this.requestLines == null) {
+            throw new LeapException(HTTP.RES500, "It must be parsed request first line before query parameters parsing.");
+        }
+        if(this.queryParameters != null) {
+            return this.queryParameters;
+        }
+        this.queryParameters = new HashMap<>();        
+        int paramsIndex = contextPath.indexOf("?");
+        String queryParamString = contextPath.substring(paramsIndex + 1);
+        if(paramsIndex != -1) {
+            contextPath = contextPath.substring(0, paramsIndex);
+            String[] params = queryParamString.split("&", -1);
+            for(String param : params) {
+                String[] keyValue = param.split("=", -1);
+                if(keyValue.length > 1) {
+                    this.queryParameters.put(keyValue[0], keyValue[1]);
+                }
+            }
+        }
+        return this.queryParameters;
+    }
+
+    /**
+     * Parse body part
+     * @param mimeType
+     * @param boundary
+     * @param contentLength
+     * @param preLoadBody
+     * @param charset
+     * @return
+     * @throws IOException
+     */
+    public BodyPart parseBodyParts(MIME mimeType, String boundary, long contentLength, boolean preLoadBody, Charset charset) throws IOException {
+        if(this.requestLines == null || this.requestHeaders == null || this.requestCookies == null || this.queryParameters == null) {
+            throw new LeapException(HTTP.RES500, "Can't parse body part because it was not parsed request first line / request header / request cookie / query parameter.");
+        }
+        this.host.getLogger().debug("Host ID: "+this.host.getHostId()+"  MIME: "+mimeType+"  BOUNDARY: "+boundary+"  PRE-LOAD-BODY: "+preLoadBody);
+        if(contentLength > 0) {
+            switch(mimeType) {
+                case MULTIPART_FORM_DATA:
+                    return new MultiPart(this.host, mimeType, boundary, contentLength, inputStream, preLoadBody, charset);
+                case APPLICATION_X_WWW_FORM_URLENCODED:
+                    return new KeyValuePart(this.host, mimeType, contentLength, inputStream, preLoadBody, charset);
+                case IMAGE_GIF:
+                case IMAGE_PNG:
+                case IMAGE_JPEG:
+                case IMAGE_BMP:
+                case IMAGE_WEBP:
+                case AUDIO_MIDI:
+                case AUDIO_MPEG:
+                case AUDIO_WEBM:
+                case AUDIO_OGG:
+                case AUDIO_WAV:
+                case VIDEO_WEBM:
+                case VIDEO_OGG:
+                    return new BinaryPart(this.host, mimeType, contentLength, inputStream, false, charset);
+                case TEXT_PLAIN:
+                case TEXT_CSS:
+                case TEXT_JAVASCRIPT:
+                case APPLICATION_XHTML_XML:
+                case APPLICATION_XML:
+                case TEXT_HTML:
+                case TEXT_XML:
+                case TEXT_JSON:
+                    return new TextPart(this.host, mimeType, contentLength, inputStream, false, charset);
+                default:
+                    return null;                        
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Parse request
+     * @throws IOException
+     * @throws URISyntaxException
+     */
+    public Request parseRequest() throws IOException, URISyntaxException {
+        if(this.request != null) {
+            return this.request;
+        }
+        long requestMillis = 0L;
+        //Parse request line
+        Map<REQUEST_LINE, String> requestLines = parseRequestLine();
+        //Parse request header 
+        Map<String, String> requestHeaders = parseRequestHeaders(); 
+        //Parse cookies from header
+        Map<String, String> cookies = parseRequestCookies();
+
+        String requestedHost = requestHeaders.get("Host").toString().trim();
+        String hostName = requestedHost.indexOf(":") != -1 ? requestedHost.substring(0, requestedHost.indexOf(":")) : requestedHost;
+        //Get host ID from request host name
+        String hostId = Context.get().hosts().getHostId(hostName);
+        if(!Context.get().hosts().isExistHostname(hostName)) {
+            throw new LeapException(HTTP.RES417, new Exception("Requested host ID not exist in this server. ID: "+hostName));
+        }
+        REQUEST requestType = REQUEST.valueOf(requestLines.get(REQUEST_LINE.METHOD));
+        String contextPath = requestLines.get(REQUEST_LINE.PATH);
+        String protocol = requestLines.get(REQUEST_LINE.PROTOCOL);
+        Charset charset = Charset.forName(requestHeaders.get("Charset") != null ? requestHeaders.get("Charset") : this.host.charset());
+        URI requestURI = new URI(protocol+"://"+requestedHost + Base64.getEncoder().encodeToString(contextPath.getBytes()));
+        //Get content type from requested header
+        String contentType = requestHeaders.get("Content-Type");
+        //Get content length from requested header
+        long contentLength = requestHeaders.get("Content-Length") != null ? Long.parseLong(requestHeaders.get("Content-Length")) : 0L;
+        //Get mime type
+        BodyPart bodyPart = null;            
+        MIME mimeType = null;
+        if(contentType != null && contentLength > 0) {
+            mimeType = contentType.indexOf(";") != -1 ? MIME.mimeType(contentType.substring(0, contentType.indexOf(";"))) : MIME.mimeType(contentType);
+            String boundary = contentType != null ? contentType.substring(contentType.indexOf(";")+1) : null;
+            String bodyInStream = requestHeaders.get("body-in-stream");
+            boolean preLoadBody = bodyInStream == null ? false : !Boolean.valueOf(bodyInStream);                
+            String[] splited = contentType.split("\\;");
+            contentType = splited[0].trim();
+            boundary = splited[1].substring(splited[1].indexOf("=") + 1).trim();                            
+            if(requestType == REQUEST.POST) {
+                bodyPart = parseBodyParts(mimeType, boundary, contentLength, preLoadBody, charset);
+            }
+        }
+        this.request = new Request(this.host, requestMillis, PROTOCOL.valueOf(protocol.toUpperCase()), hostName, protocol, requestType, requestHeaders, mimeType, contextPath, requestURI, queryparams, bodyPart, contentLength, charset, cookies, null);
+        return this.request;
+    }
+
+    /**
+     * Build response 
+     * @param outputStream
+     * @param statusCode
+     * @param body
+     * @param headers
+     * @return
+     */
+    public Response buildResponse(final int statusCode, final Object body, final Map<String, List<String>> headers) {
+        if(this.response == null) {
+            this.response = new Response(this.host, this.outputStream, statusCode, body, headers);
+        }        
+        return this.response;
     }
 
     /**
@@ -96,166 +337,6 @@ public class HttpParser {
             System.out.println(line);
         }
         in.close();
-    }
-    
-    /**
-     * Request parser inner class
-     * @author 9ins
-     */
-    public static class RequestParser {
-        /**
-         * Parse request
-         * @throws IOException
-         * @throws LeapException
-         */
-        public Request parseRequest(InetAddress inetAddress, InputStream inStream) throws Exception {
-            long requestMillis = System.currentTimeMillis();
-            StringBuffer debug = new StringBuffer();
-            String requestLine = StreamUtils.readLine(inStream, StandardCharsets.ISO_8859_1);
-            if(requestLine == null) {
-                throw new Exception(Context.get().messages().<String>error(1));
-            }
-            requestLine = URLDecoder.decode(requestLine, StandardCharsets.UTF_8);
-            debug.append("============================== [REQUEST] "+requestLine+" =============================="+System.lineSeparator());
-            String[] linesplited = requestLine.split(" ");
-            if(linesplited.length != 3) {
-                throw new LeapException(HTTP.RES417, Context.get().messages().<String>error(400, "Requested line is something wrong: "+requestLine));
-            }
-            String method = linesplited[0];
-            if(!Arrays.asList(REQUEST.values()).stream().anyMatch(R -> R.name().equals(method))) {
-                throw new LeapException(HTTP.RES405, Context.get().messages().<String>error(26, method));
-            }
-            String contextPath = linesplited[1];
-            String protocolVersion = requestLine.substring(requestLine.lastIndexOf(" ") + 1);
-            String protocol = protocolVersion.indexOf("/") != -1 ? protocolVersion.substring(0, protocolVersion.indexOf("/")).toLowerCase() : protocolVersion;
-            List<String> headerLines = StreamUtils.readHeaders(inStream);
-            Map<String, String> headerMap = new HashMap<>();
-            REQUEST requestType = REQUEST.valueOf(method);
-            for(String header : headerLines) {
-                if(header == null || header.length() == 0)
-                    break;
-                int idx = header.indexOf(":");
-                if (idx == -1) {
-                    throw new LeapException(HTTP.RES417, Context.get().messages().<String>error(3, header));
-                }
-                debug.append(header.substring(0, idx)+":   "+header.substring(idx + 1, header.length()).trim()+Constants.LS);
-                headerMap.put(header.substring(0, idx), header.substring(idx + 1, header.length()).trim());
-            }
-            String requestedHost = headerMap.get("Host").toString().trim();
-            Map<String, Object> queryParam = new HashMap<>();
-            int paramsIndex = contextPath.indexOf("?");
-            String queryParamString = contextPath.substring(paramsIndex + 1);
-            URI requestURI = new URI(protocol+"://"+requestedHost + contextPath);
-            if(paramsIndex != -1) {
-                contextPath = contextPath.substring(0, paramsIndex);
-                String[] params = queryParamString.split("&", -1);
-                for(String param : params) {
-                    String[] keyValue = param.split("=", -1);
-                    if(keyValue.length > 1) {
-                        queryParam.put(keyValue[0], keyValue[1]);
-                    }
-                }
-            }
-            String hostName = requestedHost.indexOf(":") != -1 ? requestedHost.substring(0, requestedHost.indexOf(":")) : requestedHost;
-            //Get host ID from request host name
-            String hostId = Context.get().hosts().getHostId(hostName);
-            //Get Host object by requested host name
-            Host<?> host = Context.get().host(hostId);
-            if(host == null) {
-                throw new LeapException(HTTP.RES417, Context.get().messages().<String>error(24, hostName));
-            }
-            //Get content type from requested header
-            String contentType = headerMap.get("Content-Type");
-            //System.out.println(headerMap.toString());
-            //Get cookies
-            Map<String, String> cookies = new HashMap<>();
-            if(headerMap.get("Cookie") != null) {
-                //System.out.println(headerMap.get("Cookie")+"  $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-                String[] cookieArr = headerMap.get("Cookie").trim().split(";");
-                //System.out.println(Arrays.toString(cookieArr));
-                for(String cookie : cookieArr) {
-                    String key = cookie.substring(0, cookie.indexOf("=")).trim();
-                    String value = cookie.substring(cookie.indexOf("=")+1);
-                    cookies.putIfAbsent(key, value.equals("null") ? "" : value);
-                }
-            }
-            //Get content length from requested header
-            long contentLength = headerMap.get("Content-Length") != null ? Long.parseLong(headerMap.get("Content-Length")) : 0L;
-            if(!headerMap.containsKey("Range") && !host.checkRequestAttack(inetAddress.getHostAddress(), protocol+"://"+hostName + contextPath)) {
-                LoggerFactory.getLogger(requestedHost).warn("[CLIENT BLOCKED] Too many requested client blocking: "+inetAddress.getHostAddress());
-                throw new LeapException(HTTP.RES429, requestedHost+" requested too many on short period!!!");
-            }
-            if(!Context.get().hosts().isExistHostname(hostName)) {
-                throw new LeapException(HTTP.RES417, Context.get().messages().<String>error(400, "Requested host ID not exist in this server. ID: "+hostName));
-            }            
-            debug.append("Host ID: "+hostId);
-            Charset charset = Context.get().hosts().charset(hostId);
-            LoggerFactory.getLogger(hostId).debug(debug.toString());
-            BodyPart bodyPart = null;
-            MIME mimeType = null;
-            if(contentType != null) {
-                mimeType = contentType.indexOf(";") != -1 ? MIME.mimeType(contentType.substring(0, contentType.indexOf(";"))) : MIME.mimeType(contentType);
-                String boundary = contentType != null ? contentType.substring(contentType.indexOf(";")+1) : null;
-                String bodyInStream = headerMap.get("body-in-stream");
-                boolean preLoadBody = bodyInStream == null ? false : !Boolean.valueOf(bodyInStream);
-                LoggerFactory.getLogger(hostId).debug("MIME: "+mimeType+"  BOUNDARY: "+boundary+"  PRE-LOAD-BODY: "+preLoadBody+"  CONTEXT-PARAMS: "+queryParam.toString());
+    } 
 
-                if(contentLength > 0) {
-                    switch(mimeType) {
-                        case MULTIPART_FORM_DATA:
-                            String[] splited = contentType.split("\\;");
-                            contentType = splited[0].trim();
-                            boundary = splited[1].substring(splited[1].indexOf("=") + 1).trim();                            
-                            bodyPart = new MultiPart(hostId, mimeType, boundary, contentLength, inStream, preLoadBody, charset);
-                            break;
-                        case APPLICATION_X_WWW_FORM_URLENCODED:
-                            bodyPart = new KeyValuePart(hostId, mimeType, contentLength, inStream, preLoadBody, charset);
-                            break;
-                        case IMAGE_GIF:
-                        case IMAGE_PNG:
-                        case IMAGE_JPEG:
-                        case IMAGE_BMP:
-                        case IMAGE_WEBP:
-                        case AUDIO_MIDI:
-                        case AUDIO_MPEG:
-                        case AUDIO_WEBM:
-                        case AUDIO_OGG:
-                        case AUDIO_WAV:
-                        case VIDEO_WEBM:
-                        case VIDEO_OGG:
-                            bodyPart = new BinaryPart(hostId, mimeType, contentLength, inStream, false, charset);
-                            break;
-                        case TEXT_PLAIN:
-                        case TEXT_CSS:
-                        case TEXT_JAVASCRIPT:
-                        case APPLICATION_XHTML_XML:
-                        case APPLICATION_XML:
-                        case TEXT_HTML:
-                        case TEXT_XML:
-                        case TEXT_JSON:
-                            bodyPart = new TextPart(hostId, mimeType, contentLength, inStream, false, charset);
-                        default:
-                    }
-                }
-            }            
-            return new Request(requestMillis, PROTOCOL.valueOf(protocol.toUpperCase()), hostId, hostName, protocol, requestType, headerMap, mimeType, contextPath, requestURI, queryParam, bodyPart, contentLength, charset, cookies, null);
-        }
-    }
-
-    /**
-     * Response parser inner class
-     */
-    public static class ResponseParser {
-        /**
-         * parse response
-         * @return
-         * @throws LeapException
-         */
-        public Response buildResponse(final Request request, 
-                                      final int statusCode, 
-                                      final Object body, 
-                                      final Map<String, List<String>> headers) {
-            return new Response(request, statusCode, body, headers);
-        }
-    }    
 }
