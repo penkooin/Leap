@@ -122,7 +122,7 @@ public class HttpTransfer implements Http {
      * @return
      * @throws IOException
      */
-    public Map<REQUEST_LINE, String> getRequestLine() throws IOException {
+    public Map<REQUEST_LINE, Object> getRequestLine() throws IOException {
         return this.httpParser.parseRequestLine();
     }
     /**
@@ -281,7 +281,7 @@ public class HttpTransfer implements Http {
                 this.host.getLogger().error(e.getMessage(), e);
             }
         }        
-        String message = err.getMessage();
+        String message = err.getCause().getMessage()+"";
         String stackTrace = ExceptionUtils.getStackTraces(err);
         String hostId = this.host.getHostId();
         int resCode = -1;

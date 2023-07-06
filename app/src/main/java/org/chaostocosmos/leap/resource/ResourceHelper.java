@@ -97,12 +97,12 @@ public class ResourceHelper {
      * @param contextPath
      * @return
      */
-    public static Path getResourcePath(Host<?> host, String contextPath) {
-        contextPath = contextPath.charAt(0) == '/' ? contextPath.substring(1) : contextPath;
+    public static Path getResourcePath(Host<?> host, final String contextPath) {
+        String path = contextPath.charAt(0) == '/' ? contextPath.substring(1) : contextPath;
         Path webinf = host.getWebInf().toAbsolutePath();
-        Path reqPath = webinf.resolve(contextPath).toAbsolutePath();        
+        Path reqPath = webinf.resolve(path).toAbsolutePath();        
         if(!validatePath(webinf, reqPath)) {
-            throw new LeapException(HTTP.RES403, contextPath);
+            throw new LeapException(HTTP.RES400,"Requested path is wrong: "+contextPath);
         }
         host.getLogger().debug("REQUEST PATH: "+reqPath.toString()); 
         return reqPath.normalize();

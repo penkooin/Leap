@@ -51,7 +51,7 @@ public abstract class AbstractStreamingService extends AbstractService implement
         if(reqFile == null || reqFile.equals("")) {
             throw new LeapException(HTTP.RES412, "Parameter not found(file). Streaming request must have field of file.");
         }
-        Path resourcePath = super.serviceManager.getHost().getView().resolve(reqFile);
+        Path resourcePath = super.serviceManager.getHost().getWebInf().resolve(reqFile);
         if(!resourcePath.toFile().exists()) {
             throw new LeapException(HTTP.RES404, "Specified resource not found: "+resourcePath.toAbsolutePath().toString().replace("\\", "/"));
         }

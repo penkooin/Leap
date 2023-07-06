@@ -103,11 +103,11 @@ public class HttpParser {
      * @return
      * @throws IOException
      */
-    public final Map<REQUEST_LINE, String> parseRequestLine() throws IOException {        
+    public final Map<REQUEST_LINE, Object> parseRequestLine() throws IOException {        
         if(this.requestLines != null) {
             return this.requestLines;
         }
-        this.requestLines = new HashMap<REQUEST_LINE, String>();
+        this.requestLines = new HashMap<REQUEST_LINE, Object>();
         String readLine = StreamUtils.readLine(inputStream, StandardCharsets.UTF_8);
         if(readLine == null) {
             throw new LeapException(HTTP.RES400, "Invalid request line: "+readLine);
@@ -116,7 +116,10 @@ public class HttpParser {
         this.host.getLogger().info("============================== [REQUEST] "+requestLine+" =============================="+System.lineSeparator());
         final String method = requestLine.substring(0, requestLine.indexOf(" "));
         String contextPath = requestLine.substring(requestLine.indexOf(" ")+1, requestLine.lastIndexOf(" "));
-        
+        this.queryParameters = parseQueryParameters(contextPath);
+        if(contextPath.contains("?")) {
+            contextPath = contextPath.substring(0, contextPath.indexOf("?"));
+        }        
         final String protocolVersion = requestLine.substring(requestLine.lastIndexOf(" ")).trim();
         if(method == null || method == null || protocolVersion == null) {
             throw new LeapException(HTTP.RES417, new IllegalStateException("Requested line format is wrong: "+requestLine));
@@ -128,7 +131,7 @@ public class HttpParser {
         this.requestLines.put(REQUEST_LINE.LINE, requestLine);
         this.requestLines.put(REQUEST_LINE.METHOD, method);
         this.requestLines.put(REQUEST_LINE.PATH, contextPath);
-        this.requestLines.put(REQUEST_LINE.PARAMS, parseQueryParameters());
+        this.requestLines.put(REQUEST_LINE.PARAMS, this.queryParameters);
         this.requestLines.put(REQUEST_LINE.VERSION, protocolVersion);
         this.requestLines.put(REQUEST_LINE.PROTOCOL, protocol);
         return this.requestLines;
@@ -269,7 +272,7 @@ public class HttpParser {
         }
         long requestMillis = 0L;
         //Parse request line
-        Map<REQUEST_LINE, String> requestLines = parseRequestLine();
+        Map<REQUEST_LINE, Object> requestLines = parseRequestLine();
         //Parse request header 
         Map<String, String> requestHeaders = parseRequestHeaders(); 
         //Parse cookies from header
@@ -282,9 +285,9 @@ public class HttpParser {
         if(!Context.get().hosts().isExistHostname(hostName)) {
             throw new LeapException(HTTP.RES417, new Exception("Requested host ID not exist in this server. ID: "+hostName));
         }
-        REQUEST requestType = REQUEST.valueOf(requestLines.get(REQUEST_LINE.METHOD));
-        String contextPath = requestLines.get(REQUEST_LINE.PATH);
-        String protocol = requestLines.get(REQUEST_LINE.PROTOCOL);
+        REQUEST requestType = REQUEST.valueOf(requestLines.get(REQUEST_LINE.METHOD).toString());
+        String contextPath = requestLines.get(REQUEST_LINE.PATH).toString();
+        String protocol = requestLines.get(REQUEST_LINE.PROTOCOL).toString();
         Charset charset = Charset.forName(requestHeaders.get("Charset") != null ? requestHeaders.get("Charset") : this.host.charset());
         URI requestURI = new URI(protocol+"://"+requestedHost + Base64.getEncoder().encodeToString(contextPath.getBytes()));
         //Get content type from requested header
@@ -306,7 +309,7 @@ public class HttpParser {
                 bodyPart = parseBodyParts(mimeType, boundary, contentLength, preLoadBody, charset);
             }
         }
-        this.request = new Request(this.host, requestMillis, PROTOCOL.valueOf(protocol.toUpperCase()), hostName, protocol, requestType, requestHeaders, mimeType, contextPath, requestURI, queryparams, bodyPart, contentLength, charset, cookies, null);
+        this.request = new Request(this.host, requestMillis, PROTOCOL.valueOf(protocol.toUpperCase()), hostName, protocol, requestType, requestHeaders, mimeType, contextPath, requestURI, this.queryParameters, bodyPart, contentLength, charset, cookies, null);
         return this.request;
     }
 
