@@ -2,6 +2,7 @@ package org.chaostocosmos.leap.service.model;
 
 import java.util.List;
 
+import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.http.HttpTransfer;
 import org.chaostocosmos.leap.http.Response;
 import org.chaostocosmos.leap.http.ServiceManager;
@@ -15,6 +16,19 @@ import org.chaostocosmos.leap.session.SessionManager;
  * @since 2021.09.15
  */
 public interface ServiceModel extends SpringJPAModel, Cloneable {
+
+    /**
+     * Get Host object using this service 
+     * @return
+     */
+    public Host<?> getHost();
+
+    /**
+     * Get Host object to the service
+     * @param host
+     */
+    public void setHost(Host<?> host);
+
     /**
      * First entry point of client requets
      * @param httpTransfer

@@ -14,7 +14,6 @@ import org.chaostocosmos.leap.common.SIZE;
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.TEMPLATE;
-import org.chaostocosmos.leap.enums.WEB_PATH;
 
 import com.google.gson.Gson;
 
@@ -43,8 +42,10 @@ public class TemplateBuilder {
      */
     public static String buildMonitoringPage(String contextPath, Host<?> host) throws Exception {
         String url = host.<String> getProtocol().toLowerCase()+"://"+host.getHost()+":"+host.getPort();
-        String monitorPage = host.getResource().getTemplatePage(TEMPLATE.MONITOR.path(), Map.of("@url", url));         
-        String script = host.getResource().getTemplatePage(WEB_PATH.SCRIPT.path()+"/refreshImage.js", Map.of("@interval", Context.get().server().getMonitoringInterval(), "@url", url));
+        String monitorPage = host.getResource().getTemplatePage(TEMPLATE.MONITOR.path(), Map.of("@url", url));                 
+        String script = host.getResource().getTemplatePage("/script/refreshImage.js", Map.of("@interval", Context.get().server().getMonitoringInterval(), "@url", url));
+        System.out.println(script+"-----------------------------------------------");
+        System.out.println(monitorPage+"-----------------------------------------------");
         return host.getResource().getTemplatePage(TEMPLATE.DEFAULT.path(), Map.of("@serverName", host.getHost(), "@script", script, "@body", monitorPage));
     }
 
@@ -58,7 +59,7 @@ public class TemplateBuilder {
     public static String buildWelcomeResourceHtml(String contextPath, Host<?> host) throws Exception {
         String resourcePage = host.getResource().getResourcePage(Map.of("@resourceList", buildResourceJson(contextPath, host)));
         String welcomePage = host.getResource().getWelcomePage(Map.of("@serverName", host.getHost(), "@body", resourcePage));
-        String script = host.getResource().getTemplatePage("/script/genDir.js", null);
+        String script = host.getResource().getTemplatePage("/script/genDir.js", null);        
         return host.getResource().getTemplatePage(TEMPLATE.DEFAULT.path(), Map.of("@serverName", host.getHost(), "@script", script, "@body", welcomePage));
     }
 

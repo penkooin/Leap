@@ -430,7 +430,7 @@ public class WatchResources extends Thread implements ResourcesModel {
 
     @Override
     public String getWelcomePage(Map<String, Object> params) throws IOException {
-        return getViewPage(TEMPLATE.WELCOME.path(), params);
+        return getViewPage(this.host.<String> getWelcome(), params);
     }
 
     @Override

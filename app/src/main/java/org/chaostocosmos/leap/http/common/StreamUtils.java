@@ -41,7 +41,7 @@ public class StreamUtils {
      * @throws FileNotFoundException
      * @throws IOException
      */
-    public static synchronized void saveBinary(byte[] data, Path savePath, int flushSize) throws FileNotFoundException, IOException {
+    public static void saveBinary(byte[] data, Path savePath, int flushSize) throws FileNotFoundException, IOException {
         try(FileOutputStream target = new FileOutputStream(savePath.toFile())) {
             target.write(data);
         }
@@ -55,7 +55,7 @@ public class StreamUtils {
      * @param flushSize
      * @throws IOException
      */
-    public static synchronized void saveBinary(InputStream requestStream, long contentLength, Path savePath, int flushSize) throws IOException {
+    public static void saveBinary(InputStream requestStream, long contentLength, Path savePath, int flushSize) throws IOException {
         //String line = readLine(requestStream, StandardCharsets.ISO_8859_1);
         try(FileOutputStream target = new FileOutputStream(savePath.toFile())) {
             byte[] buffer = new byte[flushSize];
@@ -79,7 +79,7 @@ public class StreamUtils {
      * @param charset
      * @throws IOException
      */
-    public static synchronized void saveStream(InputStream requestStream, long contentLength, Path savePath, Charset charset) throws IOException {
+    public static void saveStream(InputStream requestStream, long contentLength, Path savePath, Charset charset) throws IOException {
         try(FileOutputStream fos = new FileOutputStream(savePath.toFile())) {
             int total =0;
             int read;
@@ -102,7 +102,7 @@ public class StreamUtils {
      * @return
      * @throws IOException
      */
-    public static synchronized Map<String, byte[]> getMultiPartContents(InputStream inputStream, String boundary, Charset charset) throws IOException {
+    public static Map<String, byte[]> getMultiPartContents(InputStream inputStream, String boundary, Charset charset) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
         String line = reader.readLine();
         Map<String, byte[]> multiPartMap = new HashMap<>();
@@ -162,7 +162,7 @@ public class StreamUtils {
      * @param charset
      * @throws IOException
      */
-    public static synchronized List<Path> saveMultiPart(InputStream inputStream, Path savePath, int flushSize, String boundary, Charset charset) throws IOException {
+    public static List<Path> saveMultiPart(InputStream inputStream, Path savePath, int flushSize, String boundary, Charset charset) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
         String line = reader.readLine();
         boolean isLast = false;
@@ -245,7 +245,7 @@ public class StreamUtils {
      * @param contentDesposition
      * @return
      */
-    public static synchronized Map<String, String> getBoundaryMap(String contentDesposition) {
+    public static Map<String, String> getBoundaryMap(String contentDesposition) {
         contentDesposition = contentDesposition.substring(contentDesposition.indexOf(":")+1).trim();
         //System.out.println(contentDesposition);
         String[] splited = contentDesposition.split(";");
@@ -267,8 +267,7 @@ public class StreamUtils {
      * @throws IOException
      * @throws LeapException
      */
-    @SuppressWarnings("unchecked")
-    private synchronized void saveMultiPart1(String host, InputStream inputStream, Path savePath, int bufferSize, String boundary, Charset charset) throws IOException {            
+    private void saveMultiPart1(String host, InputStream inputStream, Path savePath, int bufferSize, String boundary, Charset charset) throws IOException {            
         if(inputStream != null) {
             InputStreamReader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
             boundary = "--"+boundary;
@@ -327,7 +326,7 @@ public class StreamUtils {
      * @return
      * @throws IOException
      */
-    public static synchronized String readLine(Reader is, Charset charset) throws IOException {
+    public static String readLine(Reader is, Charset charset) throws IOException {
         int c, n = 0x00;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         do {
@@ -349,7 +348,7 @@ public class StreamUtils {
      * @return
      * @throws IOException
      */
-    public static synchronized String readLine(InputStream is, Charset charset) throws IOException {
+    public static String readLine(InputStream is, Charset charset) throws IOException {
         int c;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         while((c = is.read()) > 0 || baos.size() < 1) {
@@ -370,7 +369,7 @@ public class StreamUtils {
      * @return
      * @throws IOException
      */
-    public static synchronized List<String> readHeaders(InputStream is) throws IOException {
+    public static List<String> readHeaders(InputStream is) throws IOException {
         String allLines = "";
         String line;
         while((line=readLine(is, StandardCharsets.UTF_8)) != null) {            
@@ -386,7 +385,7 @@ public class StreamUtils {
      * @return
      * @throws IOException
      */
-    public static synchronized byte[] readLength(InputStream is, int length) throws IOException {
+    public static byte[] readLength(InputStream is, int length) throws IOException {
         byte[] data = new byte[length];
         is.read(data, 0, length);
         return data;

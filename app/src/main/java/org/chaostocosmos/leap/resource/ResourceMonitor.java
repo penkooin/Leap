@@ -2,6 +2,7 @@ package org.chaostocosmos.leap.resource;
 
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -25,13 +26,11 @@ import org.chaostocosmos.leap.common.SIZE;
 import org.chaostocosmos.leap.common.ThreadPoolManager;
 import org.chaostocosmos.leap.context.Chart;
 import org.chaostocosmos.leap.context.Context;
-import org.chaostocosmos.leap.context.Metadata;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import antlr.PythonCharFormatter;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 
@@ -173,8 +172,10 @@ public class ResourceMonitor {
                         );             
                         setProbingValues();           
                         requestMonitorings();
+                    } catch(SocketTimeoutException ste) {
+                        
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        logger.error(e.getMessage(), e);
                     }
                 }
             }, 0, this.interval);    

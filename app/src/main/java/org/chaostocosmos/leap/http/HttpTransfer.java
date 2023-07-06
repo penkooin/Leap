@@ -264,8 +264,10 @@ public class HttpTransfer implements Http {
                 }
             }
             this.outStream.flush();
-        } catch(IOException e) {
+        } catch(Exception e) {
             this.host.getLogger().error(e.getMessage(), e);
+        } finally {
+            close();
         }
     }
     /**
@@ -280,18 +282,22 @@ public class HttpTransfer implements Http {
             } catch (IOException e) {
                 this.host.getLogger().error(e.getMessage(), e);
             }
-        }        
-        String message = err.getCause().getMessage()+"";
-        String stackTrace = ExceptionUtils.getStackTraces(err);
+        }
+        Throwable throwable = err;
+        while(throwable.getCause() != null) {
+            throwable = throwable.getCause();
+        }
+        String message = throwable.getMessage()+"";
+        String stackTrace = ExceptionUtils.getStackTraces(throwable);
         String hostId = this.host.getHostId();
         int resCode = -1;
-        if(err instanceof LeapException) {
-            LeapException le = (LeapException) err;
+        if(throwable instanceof LeapException) {
+            LeapException le = (LeapException) throwable;
             resCode = le.code();
             if(le.code() == HTTP.RES401.code() && AUTH.valueOf(host.getAuthentication()) == AUTH.BASIC) {
                 this.response.addHeader("WWW-Authenticate", "Basic");
             } else if(le.code() == HTTP.RES307.code()) {
-                RedirectException redirect = (RedirectException) err;
+                RedirectException redirect = (RedirectException) throwable;
                 this.response.removeAllHeader();
                 Html.makeRedirectHeader(0, redirect.getURLString()).entrySet().stream().forEach(e -> this.response.addHeader(e.getKey(), e.getValue()));
                 this.response.addHeader("Location", redirect.getURLString());
@@ -308,7 +314,7 @@ public class HttpTransfer implements Http {
         try {
             Object body = TemplateBuilder.buildErrorHtml(Context.get().host(hostId), resCode, message, stackTrace);            
             this.response.setResponseCode(resCode);
-            this.response.setContentLength(body.toString().length());
+            this.response.setContentLength(body.toString().getBytes().length);
             this.response.setBody(body);
             sendResponse();
         } catch (IOException e) {
@@ -355,12 +361,12 @@ public class HttpTransfer implements Http {
      */
     public void close() {
         try {
-            // if(this.inputStream != null) {
-            //     this.inputStream.close();
-            // }
-            // if(this.outStream != null) {
-            //     this.outStream.close();
-            // }
+            if(this.inputStream != null) {
+                this.inputStream.close();
+            }
+            if(this.outStream != null) {
+                this.outStream.close();
+            }
             if(this.socket != null && !this.socket.isClosed()) {
                 this.socket.close();
             }

@@ -168,10 +168,11 @@ public class ServiceManager {
      */
     public ServiceModel createServiceModel(final String serviceClassName) {
         ServiceModel service = newServiceInstance(serviceClassName);
+        service.setHost(this.host);        
         Method[] methods = service.getClass().getDeclaredMethods();
         for(Method method : methods) {
             MethodMapper mm = method.getDeclaredAnnotation(MethodMapper.class);
-            if(mm != null) {
+            if(mm != null) {                
                 service.setServiceManager(this);
                 service.setSessionManager(this.sessionManager);
                 service.setResourcesModel(this.resourcesModel);

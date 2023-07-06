@@ -138,42 +138,35 @@ public class LeapHandler implements Runnable {
                     response.setBody(body.getBytes(host.<String> charset()));
                     response.setResponseCode(HTTP.RES200.code());
                 } else {
-                    if (host.getResource().exists(resourcePath)) {
-                        //Get requested resource data
-                        Resource resource = host.getResource().getResource(resourcePath);
-                        if(resource == null) {
-                            host.getResource().addResource(resourcePath);
-                            resource = host.getResource().getResource(resourcePath);
-                        }
-                        if(resource != null) {
-                            if(resource.isNode()) {
-                                String body = TemplateBuilder.buildResourceHtml(request.getContextPath(), host);
-                                String mimeType = MIME.TEXT_HTML.mimeType();
-                                response.setResponseCode(HTTP.RES200.code());
-                                response.addHeader("Content-Type", mimeType+"; Charset="+host.<String> charset());
-                                response.setBody(body);
-                            } else {
-                                String mimeType = UtilBox.probeContentType(resourcePath);
-                                if(mimeType == null) {
-                                    mimeType = MIME.APPLICATION_OCTET_STREAM.mimeType();
-                                }
-                                response.setResponseCode(HTTP.RES200.code());
-                                response.addHeader("Content-Type", mimeType);
-                                response.setBody(resource.getBytes());
-                                this.host.getLogger().debug("DOWNLOAD RESOURCE MIME-TYPE: "+mimeType);
-                            }
+                    if(resourcePath.toFile().exists() && !host.getResource().exists(resourcePath)) {
+                        host.getResource().addResource(resourcePath);
+                    }
+                    //Get requested resource
+                    Resource resource = host.getResource().getResource(resourcePath);
+                    if(resource != null) {
+                        if(resource.isNode()) {
+                            String body = TemplateBuilder.buildResourceHtml(request.getContextPath(), host);
+                            String mimeType = MIME.TEXT_HTML.mimeType();
+                            response.setResponseCode(HTTP.RES200.code());
+                            response.addHeader("Content-Type", mimeType+"; Charset="+host.<String> charset());
+                            response.setBody(body);
                         } else {
-                            throw new LeapException(HTTP.RES403, "Specified resource not found: "+request.getContextPath());
+                            String mimeType = UtilBox.probeContentType(resourcePath);
+                            if(mimeType == null) {
+                                mimeType = MIME.APPLICATION_OCTET_STREAM.mimeType();
+                            }
+                            response.setResponseCode(HTTP.RES200.code());
+                            response.addHeader("Content-Type", mimeType);
+                            response.setBody(resource.getBytes());
+                            this.host.getLogger().debug("DOWNLOAD RESOURCE MIME-TYPE: "+mimeType);
                         }
                     } else {
-                        throw new LeapException(HTTP.RES404, "Specified resource not found in path: "+request.getContextPath());
+                        throw new LeapException(HTTP.RES403, "Specified resource not found: "+request.getContextPath());
                     }
                 }
             } 
             // Send response to client
             this.httpTransfer.sendResponse();
-            //Close HttpTransfer           
-            this.httpTransfer.close();
         } catch(Exception le) {           
             try {                
                 if(this.httpTransfer != null) {

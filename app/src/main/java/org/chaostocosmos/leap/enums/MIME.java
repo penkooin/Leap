@@ -1,9 +1,11 @@
 package org.chaostocosmos.leap.enums;
 
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.chaostocosmos.leap.common.UtilBox;
 import org.chaostocosmos.leap.context.Context;
 
 /**
@@ -133,6 +135,14 @@ public enum MIME {
                                          .replace(".", "_")
                                          .replace("+", "_")
                                          );
+    }
+    /**
+     * Get mime type object by specified resource
+     * @param resourcePath
+     * @return
+     */
+    public static MIME mimeType(Path resourcePath) {
+        return mimeType(UtilBox.probeContentType(resourcePath));
     }
     /**
      * Get mime type list of specfied parameter

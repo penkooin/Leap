@@ -44,7 +44,8 @@ public class ResourceManager {
         this.resourceMap = new HashMap<>();
         for(Host<?> host : Context.get().hosts().getAllHost()) {
             //initalize host environment
-            ResourceHelper.extractResource("docroot", host.getDocroot());
+            String path = WEB_PATH.WEBAPP.name().toLowerCase();
+            ResourceHelper.extractResource(path, host.getDocroot());
             if(!this.resourceMap.containsKey(host.getHostId())) {
                 this.resourceMap.put(host.getHostId(), new WatchResources(host, WATCH_KIND));
             }

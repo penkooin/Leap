@@ -26,6 +26,7 @@ import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.MIME;
 import org.chaostocosmos.leap.enums.REQUEST;
+import org.chaostocosmos.leap.enums.TEMPLATE;
 import org.chaostocosmos.leap.http.Request;
 import org.chaostocosmos.leap.http.Response;
 import org.chaostocosmos.leap.part.MultiPart;
@@ -36,12 +37,20 @@ import com.google.gson.GsonBuilder;
 import com.sun.media.jai.codec.ImageCodec;
 import com.sun.media.jai.codec.ImageEncoder;
 
-@ServiceMapper(mappingPath = "/monitor")
+/**
+ * Leap monitoring service
+ * 
+ * @author 9ins
+ */
+@ServiceMapper(mappingPath = "")
 public class SystemMonitorService extends AbstractChartService {
 
+    /**
+     * Gson object
+     */
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    @MethodMapper(method = REQUEST.GET, mappingPath = "")
+    @MethodMapper(method = REQUEST.GET, mappingPath = "/monitor")
     public void getMonitorWebpage(Request request, Response response) throws Exception {
         if(Context.get().server().<Boolean> isSupportMonitoring()) {
             String body = TemplateBuilder.buildMonitoringPage(request.getContextPath(), super.httpTransfer.getHost());
@@ -53,7 +62,17 @@ public class SystemMonitorService extends AbstractChartService {
         }
     } 
 
-    @MethodMapper(method = REQUEST.POST, mappingPath = "/chart/image")
+    @MethodMapper(method = REQUEST.GET, mappingPath = "/script/refreshImage.js")
+    public void getRefreshImageScript(Request request, Response response) throws IOException {
+        Host<?> host = super.getHost();
+        String url = host.<String> getProtocol().toLowerCase()+"://"+host.getHost()+":"+host.getPort();
+        String script = host.getResource().getTemplatePage("/script/refreshImage.js", Map.of("@interval", Context.get().server().getMonitoringInterval(), "@url", url));
+        response.setBody(script);
+        response.addHeader("Content-Type", MIME.TEXT_JAVASCRIPT.mimeType());
+        response.setResponseCode(HTTP.RES200.code());
+    }
+
+    @MethodMapper(method = REQUEST.POST, mappingPath = "/monitor/chart/image")
     @SuppressWarnings("unchecked")
     public void getResources(Request request, Response response) throws Exception {
         Map<String, String> header = request.getReqHeader();
@@ -82,13 +101,13 @@ public class SystemMonitorService extends AbstractChartService {
                 chart.setLeftIndent(70);
                 chart.setRightIndent(30);
                 if(!inMemory) {
-                    saveBufferedImage(chart.getBufferedImage(), host.getView().resolve(savePath).toFile(), CODEC.PNG);
+                    saveBufferedImage(chart.getBufferedImage(), host.getWebInf().resolve(savePath).toFile(), CODEC.PNG);
                     //super.logger.debug("[MONITOR] Chart image save to file: "+host.getStatic().resolve(savePath).toString());
                 } else {
                     ByteArrayOutputStream out = new ByteArrayOutputStream();
                     ImageIO.write(chart.getBufferedImage(), CODEC.PNG.name(), out);
-                    host.getResource().addResource(host.getView().resolve(savePath), out.toByteArray(), true);
-                    //super.logger.debug("[MONITOR] Chart image add to In-Memory resource.");
+                    host.getResource().addResource(host.getWebInf().resolve(savePath), out.toByteArray(), true);
+                    super.logger.debug("[MONITOR] Chart image add to In-Memory resource.");
                 }
             }
         }

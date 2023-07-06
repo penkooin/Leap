@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.chaostocosmos.leap.LeapException;
+import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.http.Http;
 import org.chaostocosmos.leap.http.HttpTransfer;
@@ -31,7 +32,10 @@ public abstract class AbstractService implements ServiceModel {
      * Logger
      */
     protected Logger logger;
-
+    /**
+     * Host object
+     */
+    Host<?> host;
     /**
      * SessionManager object
      */
@@ -51,6 +55,16 @@ public abstract class AbstractService implements ServiceModel {
      * HttpTransfer object
      */
     protected HttpTransfer httpTransfer;
+
+    @Override
+    public Host<?> getHost() {
+        return this.host;
+    }
+
+    @Override
+    public void setHost(Host<?> host) {
+        this.host = host;
+    }
 
     @Override
     public Response handle(final HttpTransfer httpTransfer) throws Exception { 
@@ -80,7 +94,6 @@ public abstract class AbstractService implements ServiceModel {
     @Override
     public void sendResponse(final Response response) throws Exception {
         this.httpTransfer.sendResponse(response);
-        this.httpTransfer.close();
     }
 
     @Override

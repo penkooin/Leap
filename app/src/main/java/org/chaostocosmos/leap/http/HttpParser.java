@@ -107,8 +107,8 @@ public class HttpParser {
         if(this.requestLines != null) {
             return this.requestLines;
         }
-        this.requestLines = new HashMap<REQUEST_LINE, Object>();
-        String readLine = StreamUtils.readLine(inputStream, StandardCharsets.UTF_8);
+        this.requestLines = new HashMap<REQUEST_LINE, Object>();        
+        String readLine = StreamUtils.readLine(this.inputStream, StandardCharsets.UTF_8);
         if(readLine == null) {
             throw new LeapException(HTTP.RES400, "Invalid request line: "+readLine);
         }

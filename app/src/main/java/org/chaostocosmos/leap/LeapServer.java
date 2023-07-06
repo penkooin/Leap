@@ -262,7 +262,7 @@ public class LeapServer extends Thread {
                     this.logger.info("[CONNECTED] CLIENT CONNECTED: "+client.getInetAddress().toString());
                     //Create HttpTransfer object
                     httpTransfer = new HttpTransfer(this.host, client);
-                    Map<REQUEST_LINE, Object> requestLine = httpTransfer.getRequestLine();
+                    Map<REQUEST_LINE, Object> requestLine = httpTransfer.getRequestLine();                    
                     Map<String, String> headers = httpTransfer.getRequestHeaders();
                     Map<String, String> cookies = httpTransfer.getRequestCookies();
                     client.setSoTimeout(Context.get().server().getConnectionTimeout());

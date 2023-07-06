@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import javax.naming.NameNotFoundException;
-
 import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.common.LoggerFactory;
 import org.chaostocosmos.leap.context.Context;
