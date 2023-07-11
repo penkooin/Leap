@@ -5,27 +5,32 @@
             <span class="font-bold font-x-large">Welcome to <!--@serverName--> built by Leap!!!</span>
         <p>
         <p class="font-small align-left">
-            Leap? is alternatives of Web Server or Web Application Server and can be powerful alternatives of Spring-Boot. Leap provides sustainable, durable and performance guaranteed for Web Services. <br>
-            It just looks like web server but can be used to heavy-duty service, rapid response needed service or quranteed Web/App back-end service accoding to what you need, even Video/Audio(HTML 5) streaming service. <br>
-            Leap? provides simple ways to build your web-based service and easy to configurate by well formatted method. You can easily build up your services by just developping service classes. <br>
-            Leap? can have a various filters for security, parsing and authenticating, It will be enhancing your Web Service more powerful and Secured. <br>
-            The remote deploy is to get achieving of varieties of service functionalities on running time in server, don't need to shutdown and start-up, so that user do not need to be down server for new service deployment. <br>
-            Also MultiPart or Binary streaming save could get to achive decrease of server memory and increase server performance when huge file is uploaded.<br>
-            And Enhanced Resource Manager will provides a resources of server to users more quickly and no waiting by holding resource on memory if system can privide a capacities. <br>
-            Especially supporting Video / Audio streaming service makes you can build up excellent streaming server by following Web standard. <br>
+            Leap? is a application server for building web service with providing easy way to configurate user's goal and great performance.<br>
+            Leap provides sustainable, durable, veriaty, and performance guaranteed functionalities for Web Services.<br>
+            It just looks like web server but can be used to heavy-duty service, rapid response needed service or guaranteed Web/App back-end service accoding to what you need.<br>
+            In general, using by API service, resource provider and even Video/Audio(HTML 5) streaming service also.<br>
+            Leap? provides a simple way to build your web-based service and easy to be set by well formatted method of configuration.<br>
+            You can easily build up your services not only HTML/Javascript based services but also developping user custom application by which user develop it for you purpose.<br>
+            Leap? can provide a various filters for security, parsing and authenticating, It will be enhancing your Web Service more powerful and Secured.<br>
+            The remote deploy functionality is getting to achieve deploying variety of services on running time in server, don't need to shutdown and start-up, so that user do not need to down server for new service deployment.<br>
+            And real-time configuration apply can provide a easy way to configrate and apply configuration that user want to make up at even if Leap server's running time.<br>
+            JPA is most useful, powerful tool for managing persistant object related with DBMS in Java, at sense of this trandy perspective, Naturally, Leap provide that a efficent method of communicating with JPA components.<br>
+            Also multi-part or binary streaming saving obviously get to reduce time of upload and can be processing huge size of data with capable performance.<br>            
+            And enhanced resource manager will provides a resources of server to users more quickly and no wait-time using holding resources on memory if the system can afford to get capability of memory.<br>
+            So now, Ready to leap up with Leap?<br>
         </p>
         </div>
         <div>
             <p class="font-bold font-large">Resource Management of Leap</p>
             <p class="font-small align-left">
-                Leap has Fully-Managed Resource Management Architecture. It is dividing resources for two category which is consisted with Memory Resources and File Resources.<br>
-                Memory Resources contributes for processing more fast response and huge amount of request. And File Resources be used for big size data response or non critical of fast response as well.
-                If system has plenty of memory resource, It can be service for On-Demand contents service and Realtime Streaming service like OTT or Video platform e.g. Netflex, Youtube.<br>
-                In-Memory Resources can be having huge size, as a matter of fact, file size isn't important if the system physical memory is enough because of it's managing the file by splited parts on List.<br>
-                Resource Manager provides whole content of In-Memory resource by the mechanism to reassembling each part of it. Controversially, Registering to In-Memory resource process is worked to split to many part of it if it's size over the part size.<br>
-                Also Resource Manager has proper filters to manage resources to secure and ensure.<br>
-                Administrator can register filter set in configuration of Leap for allowed resources and forbidden resource to be more secure and ensure to managed resources.<br>
-                Resource Manager provides various functionalities for supporting to combine between requested context and real resources and client can be took resources by just requesting URL on browser or others.<br>
+                Leap has fully-managed resource management architecture. It's divided into two different methodical part for resource service which is consisted with memory resources and file system resources.<br>
+                Memory resources contributes with processing more faster response for huge amount of request and file resources is used for big size data response or non-critical on fast response as well.
+                If a system has plenty of memory resource, It can serve for On-demand contents service and realtime streaming service like OTT or video streaming platform etc.<br>
+                May if a system has a plenty of memory, In-memory resource can be having huge size of data. As a matter of fact, memory resource absolutely could provide more faster than file system.<br>
+                Because of managing resources with splited part size using disassemble-assemble machanism, single huge resource can be loaded to memory.<br>
+                It is able to let the server can provide single huge file to client more fast and stable. Also resource manager has proper filters to manage resources to secure and ensure.<br>
+                Administrator can register filters in configuration of Leap for allowed resources and forbidden resources to be more secure and ensure to managed resource.<br>
+                Resource manager provides various functionalities for supporting to combine between requested context and real resources and client can be took resources by just requesting URL on browser or others.<br>
             </p>
             <p class="font-bold font-small"><a href="/video/video.html">Video Streaming Sample Page</a></p>
         </div>
@@ -33,21 +38,26 @@
         <div>
             <p class="font-bold font-large">Server Monitoring of Leap</p>
             <p class="font-small align-left">
-                Leap has varius functionalities for more fast and responsive process of request. e.g. Multi-Thread, Fully-Managed resource management, Deploy Service In Realtime.<br>
-                To monitor for guaranteed and safe service, It provide some effective visualized monitoring methods. Providing CPU utilization, Memory Usages, Heap Memory Usages.<br>
-                Administrator can set visual chart config to configuration file for monitoring. It can modify monitor.html which is existed in template directory in each host(default / virtual) to compose dashboard for monitoring.                
+                Leap has various functionalities for more fast and responsive process of request. e.g. Multi-thread, Fully-managed resource management, Remote deploy service in realtime.<br>
+                To monitor for guaranteed, safe and stable service, It provides some effective visualized monitoring method. Providing chart of CPU utilization, Memory usages, Heap memory usages.<br>
+                Administrator can set visual chart attributes to configuration file for monitoring.
             </p>
             <p class="font-bold font-small"><a href="/monitor">Server Monitor Sample Page</a></p>
         </div>
         <br>
         <div>
-            <p class="font-bold font-large">Spring Data Access Support of Leap</p>
-            <p class="font-small align-left">                
+            <p class="font-bold font-large">JPA Support of Leap</p>
+                Leap has kind of methods to support using JPA component.<br>
+                Most of Spring Framework's components can be used on Leap without any modification and it's functions can work well same as it's own way to use.<br>
+                All of Spring Framework's annotation which for dealing with DBMS can be used on Leap service components and working well. e.g. @Service, @Entity...<br>
+                These features are achieved by put the annotations to where a profer place be needed in Leap service's type, field and method declaration.<br>
+                For instance, @AutowiredJPA is annotation for injecting Spring Repository or Service object into Leap service's specifing field.<br>
+            <p class="font-small align-left">
             </p>
         </div>
         <br>
         <div>
-            <p class="font-bold font-large">Leap Default / Virtual Host Management</p>
+            <p class="font-bold font-large">Leap default/virtual host structure</p>
             <pre>
 /root/- webapp/
      |        |
@@ -68,7 +78,7 @@
         <div>
         <p class="font-xx-small font-bold">
             <br><br><br>
-            It's included with allowed to use, contribute, participate to anyone for free, with under Apache 2.0 license. 
+            It includes with allowed to use, contribute, participate to anyone for free, with under Apache 2.0 license. 
             <br>
             Authored by 9ins.
             <br><br><br>

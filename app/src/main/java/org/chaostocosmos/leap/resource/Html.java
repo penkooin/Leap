@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.context.Context;
-import org.chaostocosmos.leap.context.Host;
 
 /**
  * Html handing

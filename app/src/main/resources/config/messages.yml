@@ -62,3 +62,6 @@ messages:
     http508: Loop Detected (WebDAV; RFC 5842)
     http510: Not Extended (RFC 2774)
     http511: Network Authentication Required (RFC 6585)
+  leap:
+    leap900: Received negative value from request. {}
+    leap901: Not supported option. {}             {}

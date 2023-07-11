@@ -28,18 +28,15 @@ server:
       passphrase: '939393'
 
     spring-jpa:
-      support-spring-jpa: false
+      support-spring-jpa: true
       datasource:
         driver-class: "org.mariadb.jdbc.Driver"
         url: "jdbc:mariadb://localhost:3306"
         schema: leap
-        user: "root"
-        password: "9393"
+        user: "root@localhost"
+        password: "1234"
 
       spring-jpa-packages: [
-        "org.chaostocosmos.leap.service", 
-        "org.chaostocosmos.leap.service.datasource", 
-        "org.chaostocosmos.leap.service.entity", 
-        "org.chaostocosmos.leap.service.repository" 
+        "org.chaostocosmos.leap.service"
       ]
 

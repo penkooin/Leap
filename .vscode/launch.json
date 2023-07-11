@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "LeapExceptionTest",
+            "request": "launch",
+            "mainClass": "org.chaostocosmos.leap.LeapExceptionTest",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
             "name": "Context",
             "request": "launch",
             "mainClass": "org.chaostocosmos.leap.context.Context",

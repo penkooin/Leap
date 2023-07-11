@@ -1,5 +1,6 @@
 package org.chaostocosmos.leap.enums;
 
+import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.context.Context;
 
 /**
@@ -131,7 +132,13 @@ public enum HTTP {
     // http510: Not Extended. (RFC 2774)   {}
     RES510(510),
     // http511: Network Authentication Required. (RFC 6585)   {}     
-    RES511(511);
+    RES511(511),
+
+    ////////////////////////////// Leap exclusive //////////////////////////////
+    // leap900: Received negative value from socket stream. {}
+    LEAP900(900),
+    // leap901: Not supported option. {}
+    LEAP901(901);
     
     /**
      * Response code
@@ -158,7 +165,13 @@ public enum HTTP {
      * @return
      */
     public String status() {
-        return Context.get().messages().http(this.code);
+        if(this.code >= 100 && this.code < 511) {
+            return Context.get().messages().http(this.code);
+        } else if(this.code >= 900 && this.code < 1000) {
+            return Context.get().messages().leap(this.code);
+        } else {
+            throw new LeapException(LEAP901);
+        }
     }
     /**
      * Get host protocol

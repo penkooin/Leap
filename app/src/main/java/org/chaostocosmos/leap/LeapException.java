@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.chaostocosmos.leap.common.ExceptionUtils;
+import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.enums.HTTP;
 
 /**
@@ -15,13 +16,21 @@ public class LeapException extends RuntimeException {
     /**
      * HTTP response code
      */
-    HTTP resCode;
+    HTTP resCode;    
     /**
      * Constructs with response code
      * @param resCode
      */
     public LeapException(HTTP resCode) {
-        this(resCode, ExceptionUtils.getStackTraces(new Exception()));
+        this(resCode, new Object[0]);
+    }
+    /**
+     * Constructs with response code and parameters
+     * @param resCode
+     * @param params
+     */
+    public LeapException(HTTP resCode, Object... params) {
+        this(resCode, new Throwable(resCode.status()), params);
     }
     /**
      * Constructs with response code and message
@@ -29,24 +38,16 @@ public class LeapException extends RuntimeException {
      * @param message
      */
     public LeapException(HTTP resCode, String message) {
-        this(resCode, new Throwable(message));
+        this(resCode, new Throwable(message), new Object[0]);
     } 
-    /**
-     * Constructs with response code and cause
-     * @param resCode
-     * @param cause
-     */
-    public LeapException(HTTP resCode, Throwable cause) {
-        this(resCode, resCode.status(), cause);
-    }
     /**
      * Constructs with response code, response, cause and headerKeyValue
      * @param resCode
-     * @param message
      * @param cause
+     * @param params
      */
-    public LeapException(HTTP resCode, String message, Throwable cause) {
-        super(message, cause);        
+    public LeapException(HTTP resCode, Throwable cause, Object... params) {
+        super(Context.get().messages().message(resCode.code(), params), cause);
         this.resCode = resCode;
     }
     /**

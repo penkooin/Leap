@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.chaostocosmos.leap.LeapException;
@@ -18,8 +17,8 @@ public class ContextTest {
 
     public ContextTest() throws URISyntaxException, IOException, LeapException {    
         Context context = Context.get(Paths.get("."));
-        //Path logPath = context.host("leap").getLogPath();
-        //System.out.println(logPath.toAbsolutePath());
+        String msg = context.messages().leap(901, "aaa", "bbb", "ccc", "DDD");
+        System.out.println(msg);
     }
 
     @Test

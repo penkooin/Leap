@@ -87,7 +87,7 @@ public class TemplateBuilder {
      */
     public static String buildErrorHtml(Host<?> host, int errorCode, String message, String stackTrace) throws IOException {
         String title = Context.get().messages().http(errorCode);
-        String errorPage = host.getResource().getErrorPage(Map.of("@code", errorCode, "@type", title, "@title", message, "@message", stackTrace));
+        String errorPage = host.getResource().getErrorPage(Map.of("@code", errorCode, "@type", title, "@title", message, "@stacktrace", stackTrace));
         return host.getResource().getTemplatePage(TEMPLATE.DEFAULT.path(), Map.of("@serverName", host.getHost(), "@script", "", "@body", errorPage));
     }
 

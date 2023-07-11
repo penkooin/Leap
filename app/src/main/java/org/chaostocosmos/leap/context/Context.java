@@ -165,7 +165,7 @@ public class Context extends Thread {
                     }
                     timestemp = eventMillis;
                 } catch(Exception e) {
-                    LoggerFactory.getLogger().error(e.getMessage(), e);
+                    //LoggerFactory.getLogger().error(e.getMessage(), e);
                 }
             }
             watchService.close();
