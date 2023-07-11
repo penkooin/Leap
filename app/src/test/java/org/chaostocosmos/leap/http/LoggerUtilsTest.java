@@ -3,8 +3,8 @@ package org.chaostocosmos.leap.http;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.common.LoggerFactory;
+import org.chaostocosmos.leap.exception.LeapException;
 import org.slf4j.Logger;
 
 public class LoggerUtilsTest {

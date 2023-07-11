@@ -1,7 +1,7 @@
 package org.chaostocosmos.leap.enums;
 
-import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.context.Context;
+import org.chaostocosmos.leap.exception.LeapException;
 
 /**
  * HTTP response code enum

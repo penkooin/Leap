@@ -3,8 +3,8 @@ package org.chaostocosmos.leap.service.filter;
 import java.net.InetAddress;
 import java.util.List;
 
-import org.chaostocosmos.leap.SpringJPAManager;
 import org.chaostocosmos.leap.http.HttpRequest;
+import org.chaostocosmos.leap.manager.SpringJPAManager;
 
 /**
  * Abstract ip filtering object

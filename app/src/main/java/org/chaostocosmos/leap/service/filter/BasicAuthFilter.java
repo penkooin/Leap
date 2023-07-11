@@ -3,13 +3,13 @@ package org.chaostocosmos.leap.service.filter;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
-import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.common.Constants;
 import org.chaostocosmos.leap.common.LoggerFactory;
 import org.chaostocosmos.leap.enums.HTTP;
+import org.chaostocosmos.leap.exception.LeapException;
 import org.chaostocosmos.leap.http.HttpRequest;
+import org.chaostocosmos.leap.manager.SecurityManager;
 import org.chaostocosmos.leap.security.UserCredentials;
-import org.chaostocosmos.leap.security.SecurityManager;
 import org.chaostocosmos.leap.session.Session;
 
 /**

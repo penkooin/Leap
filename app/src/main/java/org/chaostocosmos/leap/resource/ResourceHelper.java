@@ -20,12 +20,12 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.chaostocosmos.leap.LeapApp;
-import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.common.UtilBox;
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.WEB_PATH;
+import org.chaostocosmos.leap.exception.LeapException;
 import org.chaostocosmos.leap.http.HttpRequest;
 
 /**

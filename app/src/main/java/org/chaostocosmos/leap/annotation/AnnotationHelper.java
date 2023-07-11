@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.common.LoggerFactory;
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.REQUEST;
+import org.chaostocosmos.leap.exception.LeapException;
 import org.chaostocosmos.leap.resource.ClassUtils;
 import org.chaostocosmos.leap.service.filter.IFilter;
 import org.chaostocosmos.leap.service.model.ServiceModel;

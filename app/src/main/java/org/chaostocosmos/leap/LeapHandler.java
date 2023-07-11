@@ -8,7 +8,11 @@ import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.MIME;
 import org.chaostocosmos.leap.enums.REQUEST;
+import org.chaostocosmos.leap.exception.LeapException;
 import org.chaostocosmos.leap.http.HttpTransfer;
+import org.chaostocosmos.leap.manager.ServiceManager;
+import org.chaostocosmos.leap.manager.SessionManager;
+import org.chaostocosmos.leap.manager.SpringJPAManager;
 import org.chaostocosmos.leap.http.HttpRequest;
 import org.chaostocosmos.leap.http.HttpResponse;
 import org.chaostocosmos.leap.resource.Resource;
@@ -17,8 +21,8 @@ import org.chaostocosmos.leap.resource.TemplateBuilder;
 import org.chaostocosmos.leap.security.UserCredentials;
 import org.chaostocosmos.leap.service.ServiceHolder;
 import org.chaostocosmos.leap.service.ServiceInvoker;
+import org.chaostocosmos.leap.service.model.ServiceModel;
 import org.chaostocosmos.leap.session.Session;
-import org.chaostocosmos.leap.session.SessionManager;
 
 /**
  * Client request handing object
@@ -49,7 +53,7 @@ public class LeapHandler implements Runnable {
     /**
      * Security manager object
      */
-    org.chaostocosmos.leap.security.SecurityManager securityManager;
+    org.chaostocosmos.leap.manager.SecurityManager securityManager;
     /**
      * HttpTransfer instance
      */
@@ -79,14 +83,15 @@ public class LeapHandler implements Runnable {
     @Override
     public synchronized void run() {
         try {
+            //Create HttpRequest object
             HttpRequest request = this.httpTransfer.getRequest();
+            //Create HttpResponse object
             HttpResponse response = this.httpTransfer.getResponse();
+            //Get Host object from HttpTransfer object
             Host<?> host = this.httpTransfer.getHost();
             
             //Put requested host to request header Map for ip filter
             request.getReqHeader().put("@Client", host.getHost());
-            System.out.println(Context.get().host("leap").getAuthentication()+"++++++++++++++++++++++++++++++++++++++++++++++++");
-
             Session session = this.httpTransfer.getSession();
             if(host.isAuthentication()) {
                 try {
@@ -97,8 +102,10 @@ public class LeapHandler implements Runnable {
                             response.addSetCookie("__auth-trial", "1");
                             throw new LeapException(HTTP.RES401, "[AUTH] AUTHENTICATION FAIL "+authorization);
                         }
-                        session.setAuthenticated(true);
-                        userCredentials.setSession(session);
+                        if(session != null) {
+                            session.setAuthenticated(true);
+                            userCredentials.setSession(session);
+                        }
                     }
                 } catch(Exception e) {
                     if(session != null) {
@@ -112,16 +119,14 @@ public class LeapHandler implements Runnable {
             ServiceHolder serviceHolder = serviceManager.createServiceHolder(request.getContextPath());
             //If client request context path in Services.
             if (serviceHolder != null) {
-                // Request method validation
-                if(serviceHolder.getRequestType() != request.getRequestType()) {
-                    throw new LeapException(HTTP.RES405, "Not supported: "+request.getRequestType().name());
-                } else {
-                    // Do requested service to execute by cloned service of request
-                    response = ServiceInvoker.invokeServiceMethod(serviceHolder, this.httpTransfer);
-                }
+                if(Context.get().server().<Boolean> isSupportSpringJPA()) {
+                    SpringJPAManager.get().injectToAutoWired(serviceHolder.getServiceModel());
+                }                
+                // Do requested service to execute by cloned service of request
+                response = ServiceInvoker.invokeServiceMethod(serviceHolder, this.httpTransfer);
             } else { // When client request static resources
                 if(request.getRequestType() != REQUEST.GET) {
-                    throw new LeapException(HTTP.RES405, "Static content can't be provided by "+request.getRequestType().name());
+                    throw new LeapException(HTTP.RES405, "Static contents can't be provided by "+request.getRequestType().name());
                 }
                 Path resourcePath = ResourceHelper.getResourcePath(request);
                 if(request.getContextPath().equals("/")) {
@@ -153,7 +158,7 @@ public class LeapHandler implements Runnable {
                             this.host.getLogger().debug("DOWNLOAD RESOURCE MIME-TYPE: "+mimeType);
                         }
                     } else {
-                        throw new LeapException(HTTP.RES403, "Specified resource not found: "+request.getContextPath());
+                        throw new LeapException(HTTP.RES404, "Specified resource not found: "+request.getContextPath());
                     }
                 }
             } 

@@ -12,13 +12,11 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.LeapException;
-import org.chaostocosmos.leap.ResourceManager;
 import org.chaostocosmos.leap.common.Filtering;
 import org.chaostocosmos.leap.common.LoggerFactory;
 import org.chaostocosmos.leap.enums.AUTH;
-import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.STATUS;
+import org.chaostocosmos.leap.manager.ResourceManager;
 import org.chaostocosmos.leap.resource.ResourcesModel;
 
 import ch.qos.logback.classic.Level;
@@ -582,6 +580,23 @@ public class Host <T> extends Metadata<T> {
         }
     }
 
+    /**
+     * Get data sources Map
+     * @return
+     */
+    public List<Map<String, String>> getDataSources() {
+        return super.getValue("data-source");
+    }
+
+    /**
+     * Get data source
+     * @param dataSourceId
+     * @return
+     */
+    public Map<String, String> getDataSource(String dataSourceId) {
+        return getDataSources().stream().filter(m -> m.get("id").equals(dataSourceId)).findFirst().orElseThrow();
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////    
 
     /**
@@ -708,36 +723,6 @@ public class Host <T> extends Metadata<T> {
      */
     public Logger getLogger() {
         return LoggerFactory.getLogger(getHostId());
-    }
-
-    /**
-     * For blocking request attack (ip = timestemp)
-     */
-    private Map<String, Map<String, Long>> requestAttackBlockingMap = new ConcurrentHashMap<>();    
-
-    /**
-     * Check too many request attack on short time period.
-     * @param connection
-     * @return
-     * @throws IOException
-     */
-    public boolean checkRequestAttack(String ip, String url) throws IOException {
-        if(requestAttackBlockingMap.containsKey(ip)) {
-            Map<String, Long> map = requestAttackBlockingMap.get(ip);
-            for(Map.Entry<String, Long> entry : map.entrySet()) {
-                String preContext = entry.getKey(); 
-                long preTimestemp = entry.getValue();
-                if(url.equals(preContext) && System.currentTimeMillis() - preTimestemp < Context.get().server().<Integer>getRequestBlockingInterval().longValue()) {
-                    requestAttackBlockingMap.remove(ip);
-                    throw new LeapException(HTTP.RES429, new Exception("You requested too many on short period!!!  URI: "+url));
-                }
-            }
-            map.put(url, System.currentTimeMillis());
-        } else {
-            requestAttackBlockingMap.put(ip, new ConcurrentHashMap<String, Long>());
-        }
-        requestAttackBlockingMap.get(ip).put(url, System.currentTimeMillis());
-        return true;
     }
 
     @Override

@@ -3,8 +3,8 @@ package org.chaostocosmos.leap.http;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.enums.HTTP;
+import org.chaostocosmos.leap.exception.LeapException;
 
 /**
  * RedirectException

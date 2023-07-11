@@ -15,63 +15,59 @@ public class ServiceHolder {
      * Context path
      */
     String contextPath;
-
-    /**
-     * Request type
-     */
-    REQUEST requestType;
-
     /**
      * Leap service
      */
-    ServiceModel serviceModel;
-    
+    ServiceModel serviceModel;    
     /**
      * Service filter for pre process
      */
     protected List<IFilter> preFilters;
-
     /**
      * Service filter for post process
      */
     protected List<IFilter> postFilters;
-
     /**
      * Constructor with parameters
      * @param contextPath
      * @param serviceModel
-     * @param requestType
      */
-    public ServiceHolder(String contextPath, ServiceModel serviceModel, REQUEST requestType) {
+    public ServiceHolder(String contextPath, ServiceModel serviceModel) {
         this.contextPath = contextPath;
-        this.requestType = requestType;
         this.serviceModel = serviceModel;
     }
-
+    /**
+     * Get service path
+     * @return
+     */    
     public String getServicePath() {
         return this.contextPath;
     }
-
+    /**
+     * Set service path
+     * @param servicePath
+     */
     public void setServicePath(String servicePath) {
         this.contextPath = servicePath;
     }
-
-    public REQUEST getRequestType() {
-        return this.requestType;
-    }
-
-    public void setRequestType(REQUEST requestType) {
-        this.requestType = requestType;
-    }
-
+    /**
+     * Get service model
+     * @return
+     */
     public ServiceModel getServiceModel() {
         return this.serviceModel;
     }
-
+    /**
+     * Set service model
+     * @param service
+     */
     public void setServiceModel(ServiceModel service) {
         this.serviceModel = service;
     }
-
+    /**
+     * Get service class cannonical name
+     * @return
+     */
     public String getServiceClassName() {
         return this.serviceModel.getClass().getCanonicalName();
     }
@@ -80,7 +76,6 @@ public class ServiceHolder {
     public String toString() {
         return "{" +
             " contextPath='" + contextPath + "'" +
-            ", requestType='" + requestType + "'" +
             ", service='" + serviceModel + "'" +
             ", preFilters='" + preFilters + "'" +
             ", postFilters='" + postFilters + "'" +

@@ -3,10 +3,10 @@ package org.chaostocosmos.leap.service.filter;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.chaostocosmos.leap.SpringJPAManager;
 import org.chaostocosmos.leap.http.HttpRequest;
+import org.chaostocosmos.leap.manager.SessionManager;
+import org.chaostocosmos.leap.manager.SpringJPAManager;
 import org.chaostocosmos.leap.service.model.SpringJPAModel;
-import org.chaostocosmos.leap.session.SessionManager;
 
 /**
  * Filtering request URL

@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 
 import javax.transaction.NotSupportedException;
 
-import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.common.Constants;
 import org.chaostocosmos.leap.common.ExceptionUtils;
 import org.chaostocosmos.leap.common.LoggerFactory;
@@ -27,6 +26,7 @@ import org.chaostocosmos.leap.enums.AUTH;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.MIME;
 import org.chaostocosmos.leap.enums.REQUEST_LINE;
+import org.chaostocosmos.leap.exception.LeapException;
 import org.chaostocosmos.leap.resource.Html;
 import org.chaostocosmos.leap.resource.TemplateBuilder;
 import org.chaostocosmos.leap.session.Session;

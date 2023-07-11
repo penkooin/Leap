@@ -2,6 +2,7 @@ package org.chaostocosmos.leap;
 
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.enums.HTTP;
+import org.chaostocosmos.leap.exception.LeapException;
 import org.junit.jupiter.api.Test;
 
 public class LeapExceptionTest {

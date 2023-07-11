@@ -37,7 +37,7 @@ public class UserCredentials {
      * Constructs with user Map
      * @param userMap
      */
-    protected UserCredentials(Map<String, Object> userMap) {        
+    public UserCredentials(Map<String, Object> userMap) {        
         this((String) userMap.get("username"), (String) userMap.get("password"), (String) userMap.get("grant"));
     }
 

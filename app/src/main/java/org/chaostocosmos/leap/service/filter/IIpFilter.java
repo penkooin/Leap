@@ -1,6 +1,6 @@
 package org.chaostocosmos.leap.service.filter;
 
-import org.chaostocosmos.leap.LeapException;
+import org.chaostocosmos.leap.exception.LeapException;
 import org.chaostocosmos.leap.service.model.SpringJPAModel;
 
 /**

@@ -5,19 +5,19 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import org.chaostocosmos.leap.LeapException;
-import org.chaostocosmos.leap.ServiceManager;
-import org.chaostocosmos.leap.SpringJPAManager;
 import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.HTTP;
+import org.chaostocosmos.leap.exception.LeapException;
 import org.chaostocosmos.leap.http.Http;
 import org.chaostocosmos.leap.http.HttpTransfer;
+import org.chaostocosmos.leap.manager.ServiceManager;
+import org.chaostocosmos.leap.manager.SessionManager;
+import org.chaostocosmos.leap.manager.SpringJPAManager;
 import org.chaostocosmos.leap.http.HttpRequest;
 import org.chaostocosmos.leap.http.HttpResponse;
 import org.chaostocosmos.leap.resource.ResourcesModel;
 import org.chaostocosmos.leap.service.filter.IFilter;
 import org.chaostocosmos.leap.service.model.ServiceModel;
-import org.chaostocosmos.leap.session.SessionManager;
 
 import ch.qos.logback.classic.Logger;
 

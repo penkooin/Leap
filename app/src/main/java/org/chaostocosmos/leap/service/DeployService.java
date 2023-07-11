@@ -13,17 +13,17 @@ import java.util.stream.Collectors;
 
 import javax.transaction.NotSupportedException;
 
-import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.annotation.MethodMapper;
 import org.chaostocosmos.leap.annotation.ServiceMapper;
 import org.chaostocosmos.leap.common.ExceptionUtils;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.MIME;
 import org.chaostocosmos.leap.enums.REQUEST;
+import org.chaostocosmos.leap.exception.LeapException;
 import org.chaostocosmos.leap.http.HttpRequest;
 import org.chaostocosmos.leap.http.HttpResponse;
-import org.chaostocosmos.leap.part.MultiPart;
-import org.chaostocosmos.leap.part.Part;
+import org.chaostocosmos.leap.http.part.MultiPart;
+import org.chaostocosmos.leap.http.part.Part;
 import org.chaostocosmos.leap.service.model.DeployModel;
 import org.chaostocosmos.leap.service.model.ServiceModel;
 

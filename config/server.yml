@@ -37,6 +37,7 @@ server:
         password: "1234"
 
       spring-jpa-packages: [
-        "org.chaostocosmos.leap.service"
+        "org.chaostocosmos.leap.service",
+        "org.chaostocosmos.leap.spring"
       ]
 

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
 
-import org.chaostocosmos.leap.ResourceManager;
+import org.chaostocosmos.leap.manager.ResourceManager;
 import org.chaostocosmos.leap.resource.ResourcesModel;
 import org.junit.Before;
 import org.junit.Test;    

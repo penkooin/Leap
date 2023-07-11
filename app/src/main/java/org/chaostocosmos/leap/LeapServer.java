@@ -30,15 +30,18 @@ import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.PROTOCOL;
 import org.chaostocosmos.leap.enums.REQUEST_LINE;
 import org.chaostocosmos.leap.enums.STATUS;
+import org.chaostocosmos.leap.exception.LeapException;
 import org.chaostocosmos.leap.http.HttpTransfer;
 import org.chaostocosmos.leap.http.HttpsServerSocketFactory;
 import org.chaostocosmos.leap.http.RedirectException;
+import org.chaostocosmos.leap.manager.ResourceManager;
+import org.chaostocosmos.leap.manager.SecurityManager;
+import org.chaostocosmos.leap.manager.ServiceManager;
+import org.chaostocosmos.leap.manager.SessionManager;
 import org.chaostocosmos.leap.resource.ClassUtils;
 import org.chaostocosmos.leap.resource.LeapURLClassLoader;
 import org.chaostocosmos.leap.resource.ResourcesModel;
-import org.chaostocosmos.leap.security.SecurityManager;
 import org.chaostocosmos.leap.session.Session;
-import org.chaostocosmos.leap.session.SessionManager;
 
 import ch.qos.logback.classic.Logger;
 
@@ -267,7 +270,7 @@ public class LeapServer extends Thread {
                     //connection.setSoLinger(false, 1);
                     String hostName = headers.get("Host").trim().substring(0, headers.get("Host").indexOf(":"));
                     String url = requestLine.get(REQUEST_LINE.PROTOCOL) +"://"+ hostName + requestLine.get(REQUEST_LINE.PATH);
-                    if(!headers.containsKey("Range") && !host.checkRequestAttack(client.getInetAddress().getHostAddress(), url)) {
+                    if(!headers.containsKey("Range") && !this.securityManager.checkRequestAttack(client.getInetAddress().getHostAddress(), url)) {
                         this.host.getLogger().warn("[CLIENT BLOCKED] Too many requested client blocking: "+client.getInetAddress().getHostAddress());
                         throw new LeapException(HTTP.RES429, hostName+" requested too many on short period!!!");
                     }

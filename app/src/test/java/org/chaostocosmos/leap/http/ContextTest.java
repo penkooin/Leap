@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
 
-import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.context.Context;
+import org.chaostocosmos.leap.exception.LeapException;
 import org.junit.jupiter.api.Test; 
 
 /**

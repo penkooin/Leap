@@ -5,12 +5,13 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.common.Constants;
 import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.PROTOCOL;
+import org.chaostocosmos.leap.exception.LeapException;
 import org.chaostocosmos.leap.http.HttpResponse;
+import org.chaostocosmos.leap.manager.SessionManager;
 
 /**
  * WebSession

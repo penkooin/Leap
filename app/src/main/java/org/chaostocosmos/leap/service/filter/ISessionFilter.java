@@ -1,6 +1,6 @@
 package org.chaostocosmos.leap.service.filter;
 
-import org.chaostocosmos.leap.session.SessionManager;
+import org.chaostocosmos.leap.manager.SessionManager;
 
 /**
  * ISessionFilter

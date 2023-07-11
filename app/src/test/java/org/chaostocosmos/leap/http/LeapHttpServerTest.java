@@ -5,8 +5,8 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.URISyntaxException;
 
-import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.LeapServer;
+import org.chaostocosmos.leap.exception.LeapException;
 import org.junit.jupiter.api.Test;
 
 public class LeapHttpServerTest {

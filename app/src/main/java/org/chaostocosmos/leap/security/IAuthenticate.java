@@ -1,6 +1,6 @@
 package org.chaostocosmos.leap.security;
 
-import org.chaostocosmos.leap.LeapException;
+import org.chaostocosmos.leap.exception.LeapException;
 
 /**
  * User authentication interface

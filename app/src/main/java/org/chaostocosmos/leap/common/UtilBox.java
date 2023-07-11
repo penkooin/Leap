@@ -11,8 +11,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.enums.HTTP;
+import org.chaostocosmos.leap.exception.LeapException;
 
 import ch.qos.logback.classic.Level;
 

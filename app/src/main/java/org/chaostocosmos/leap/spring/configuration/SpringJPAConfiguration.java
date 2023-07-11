@@ -21,7 +21,7 @@ public class SpringJPAConfiguration {
 
     @Bean
     public DataSource getDataSource() {
-        DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
+        DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.driverClassName("org.mariadb.jdbc.Driver");
         dataSourceBuilder.url("jdbc:mariadb://localhost:3306/leap");
         dataSourceBuilder.username("root");

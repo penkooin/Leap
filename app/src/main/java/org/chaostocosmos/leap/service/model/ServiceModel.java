@@ -2,13 +2,13 @@ package org.chaostocosmos.leap.service.model;
 
 import java.util.List;
 
-import org.chaostocosmos.leap.ServiceManager;
 import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.http.HttpTransfer;
+import org.chaostocosmos.leap.manager.ServiceManager;
+import org.chaostocosmos.leap.manager.SessionManager;
 import org.chaostocosmos.leap.http.HttpResponse;
 import org.chaostocosmos.leap.resource.ResourcesModel;
 import org.chaostocosmos.leap.service.filter.IFilter;
-import org.chaostocosmos.leap.session.SessionManager;
 
 /**
  * Interface for servlet

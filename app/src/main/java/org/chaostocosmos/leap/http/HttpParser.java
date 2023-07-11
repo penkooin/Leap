@@ -18,19 +18,19 @@ import java.util.Map;
 
 import javax.transaction.NotSupportedException;
 
-import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.MIME;
 import org.chaostocosmos.leap.enums.PROTOCOL;
 import org.chaostocosmos.leap.enums.REQUEST_LINE;
+import org.chaostocosmos.leap.exception.LeapException;
+import org.chaostocosmos.leap.http.part.BinaryPart;
+import org.chaostocosmos.leap.http.part.BodyPart;
+import org.chaostocosmos.leap.http.part.KeyValuePart;
+import org.chaostocosmos.leap.http.part.MultiPart;
+import org.chaostocosmos.leap.http.part.TextPart;
 import org.chaostocosmos.leap.enums.REQUEST;
-import org.chaostocosmos.leap.part.BinaryPart;
-import org.chaostocosmos.leap.part.BodyPart;
-import org.chaostocosmos.leap.part.KeyValuePart;
-import org.chaostocosmos.leap.part.MultiPart;
-import org.chaostocosmos.leap.part.TextPart;
 
 /**
  * Http parsing factory object

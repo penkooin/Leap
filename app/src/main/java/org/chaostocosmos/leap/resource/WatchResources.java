@@ -23,7 +23,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.common.Constants;
 import org.chaostocosmos.leap.common.Filtering;
 import org.chaostocosmos.leap.common.LoggerFactory;
@@ -34,6 +33,7 @@ import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.MIME;
 import org.chaostocosmos.leap.enums.TEMPLATE;
+import org.chaostocosmos.leap.exception.LeapException;
 
 import com.google.gson.Gson;
 
@@ -540,7 +540,10 @@ public class WatchResources extends Thread implements ResourcesModel {
      * @return
      */
     private final Resource getResource(Resource tree, String[] res) {
-        if(res.length == 1) {
+        if(tree == null) {
+            return tree;
+        }
+        if(res.length == 1) {            
             return tree.get(res[0]);
         } else {
             return getResource(tree.get(res[0]), Arrays.copyOfRange(res, 1, res.length));

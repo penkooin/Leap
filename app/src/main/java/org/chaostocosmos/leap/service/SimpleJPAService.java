@@ -16,11 +16,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 public class SimpleJPAService extends AbstractService {
 
     @Autowired
-    @Qualifier("aaa")    
     private IUsersRespository usersRepo;    
 
     @Autowired
-    @Qualifier("bbb") 
     private SimpleSpringService springService;
 
     public SimpleJPAService() {

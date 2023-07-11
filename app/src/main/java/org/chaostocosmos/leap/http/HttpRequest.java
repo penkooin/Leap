@@ -12,7 +12,7 @@ import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.MIME;
 import org.chaostocosmos.leap.enums.PROTOCOL;
 import org.chaostocosmos.leap.enums.REQUEST;
-import org.chaostocosmos.leap.part.Part;
+import org.chaostocosmos.leap.http.part.Part;
 import org.chaostocosmos.leap.session.Session;
 
 import ch.qos.logback.classic.Logger;

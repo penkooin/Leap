@@ -25,6 +25,9 @@ import org.chaostocosmos.leap.context.MetaEvent;
 import org.chaostocosmos.leap.context.MetaListener;
 import org.chaostocosmos.leap.context.Metadata;
 import org.chaostocosmos.leap.enums.STATUS;
+import org.chaostocosmos.leap.exception.LeapException;
+import org.chaostocosmos.leap.manager.ResourceManager;
+import org.chaostocosmos.leap.manager.SpringJPAManager;
 import org.chaostocosmos.leap.resource.ClassUtils;
 import org.chaostocosmos.leap.resource.ResourceHelper;
 import org.chaostocosmos.leap.resource.ResourceMonitor;
@@ -165,19 +168,15 @@ public class LeapApp implements MetaListener {
                 logger.info("[VIRTUAL HOST] - Protocol: "+host.getProtocol()+"   Server: "+host.getHostId()+"   Host: "+host.getHost()+"   Port: "+host.getPort()+"   Home: "+host.getDocroot()+"   Logging path: "+host.getLogPath()+"   Level: "+host.getLogLevel().toString());
             }
         }
-
-        logger.info("----------------------------------------------------------------------------------------------------");
-        
+        logger.info("----------------------------------------------------------------------------------------------------");        
         for(LeapServer server : leapServerMap.values()) {
             server.setDaemon(false);
             server.start();
         }
-
         // Waiting for all host be started.
         if(leapServerMap.values().stream().allMatch(s -> !s.isClosed())) {
             Thread.sleep(100);
         }
-
         //initialize resource monitor
         if((boolean) context.server().isSupportMonitoring()) {
             resourceMonitor = ResourceMonitor.get();
@@ -205,7 +204,7 @@ public class LeapApp implements MetaListener {
             server.stopServer();
             server.join();
         }
-        logger.info("Leap server terminated...");
+        logger.info("Leap server terminated......");
     }
     /**
      * Get resource manager
