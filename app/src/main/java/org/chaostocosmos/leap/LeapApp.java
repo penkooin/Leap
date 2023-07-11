@@ -27,9 +27,7 @@ import org.chaostocosmos.leap.context.Metadata;
 import org.chaostocosmos.leap.enums.STATUS;
 import org.chaostocosmos.leap.resource.ClassUtils;
 import org.chaostocosmos.leap.resource.ResourceHelper;
-import org.chaostocosmos.leap.resource.ResourceManager;
 import org.chaostocosmos.leap.resource.ResourceMonitor;
-import org.chaostocosmos.leap.resource.SpringJPAManager;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
@@ -72,7 +70,6 @@ public class LeapApp implements MetaListener {
      * Server Map
      */
     public static Map<String, LeapServer> leapServerMap;
-
     /**
      * Constructor with arguments
      * @param args 
@@ -83,7 +80,6 @@ public class LeapApp implements MetaListener {
         leapServerMap = new HashMap<>();        
         setup(args);
     }
-
     /** 
      * Apply command line options
      * @param args
@@ -138,7 +134,6 @@ public class LeapApp implements MetaListener {
             logger.info("verbose mode on");
         }
     }
-
     /**
      * Start environment
      * @throws Exception
@@ -190,7 +185,6 @@ public class LeapApp implements MetaListener {
             logger.info("[MONITOR OFF] Leap system monitor turned off.");
         }
     }
-
     /**
      * Get home path
      * @return
@@ -198,7 +192,6 @@ public class LeapApp implements MetaListener {
     public static Path getHomePath() {
         return HOME_PATH;
     }
-
     /**
      * Shut down Leap WAS
      * @throws IOException
@@ -214,7 +207,6 @@ public class LeapApp implements MetaListener {
         }
         logger.info("Leap server terminated...");
     }
-
     /**
      * Get resource manager
      * @return
@@ -222,7 +214,6 @@ public class LeapApp implements MetaListener {
     public static ResourceManager getResourceManager() {
         return resourceManager;
     }
-
     /**
      * Get resource monitor
      * @return
@@ -230,7 +221,6 @@ public class LeapApp implements MetaListener {
     public static ResourceMonitor getResourceMonitor() {
         return resourceMonitor;
     }
-
     /**
      * Get execution parameter options
      * @return
@@ -242,7 +232,6 @@ public class LeapApp implements MetaListener {
         options.addOption(new Option("l", "logLevel", true, "log level setting"));
         return options;
     } 
-
     /**
      * Print trademark 
      * @throws LeapException
@@ -251,13 +240,11 @@ public class LeapApp implements MetaListener {
         System.out.println(ResourceHelper.getInstance().getTrademark());
         System.out.println();
     }
-
     @Override
     public void receiveContextEvent(MetaEvent<Metadata<?>> ce) throws Exception {
         System.out.println(ce.getPathExpression()+"  "+ce.getEventType()+"  ");
         
     }
-
     public static void main(String[] args) throws Exception {
         LeapApp leap = new LeapApp(args);
         leap.start();

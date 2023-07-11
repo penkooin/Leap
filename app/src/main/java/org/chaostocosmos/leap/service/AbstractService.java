@@ -6,15 +6,15 @@ import java.util.List;
 import java.util.Map;
 
 import org.chaostocosmos.leap.LeapException;
+import org.chaostocosmos.leap.ServiceManager;
+import org.chaostocosmos.leap.SpringJPAManager;
 import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.http.Http;
 import org.chaostocosmos.leap.http.HttpTransfer;
-import org.chaostocosmos.leap.http.Request;
-import org.chaostocosmos.leap.http.Response;
-import org.chaostocosmos.leap.http.ServiceManager;
+import org.chaostocosmos.leap.http.HttpRequest;
+import org.chaostocosmos.leap.http.HttpResponse;
 import org.chaostocosmos.leap.resource.ResourcesModel;
-import org.chaostocosmos.leap.resource.SpringJPAManager;
 import org.chaostocosmos.leap.service.filter.IFilter;
 import org.chaostocosmos.leap.service.model.ServiceModel;
 import org.chaostocosmos.leap.session.SessionManager;
@@ -67,32 +67,36 @@ public abstract class AbstractService implements ServiceModel {
     }
 
     @Override
-    public Response handle(final HttpTransfer httpTransfer) throws Exception { 
+    public HttpResponse handle(final HttpTransfer httpTransfer) { 
         this.logger = httpTransfer.getLogger();
         this.httpTransfer = httpTransfer;
         this.resourcesModel = httpTransfer.getHost().getResource();
-        Request request = httpTransfer.getRequest();
-        Response response = httpTransfer.getResponse();
+        try {
+            HttpRequest request = httpTransfer.getRequest();
+            HttpResponse response = httpTransfer.getResponse();
 
-        Map<Class<? extends Http>, Object> paramMap = Map.of(HttpTransfer.class, httpTransfer, Request.class, request, Response.class, response);
+            Map<Class<? extends Http>, Object> paramMap = Map.of(HttpTransfer.class, httpTransfer, HttpRequest.class, request, HttpResponse.class, response);
 
-        //Set service method
-        Method targetMethod = this.serviceManager.getServiceMethod(request.getRequestType(), request.getContextPath(), this);
-        Class<?>[] paramTypes = targetMethod.getParameterTypes();
-        if(paramTypes.length != 2 || paramTypes[0] != request.getClass() || paramTypes[1] != response.getClass()) {
-            throw new LeapException(HTTP.RES501, "There isn't exist target method: "+targetMethod.getName());
+            //Set service method
+            Method targetMethod = this.serviceManager.getServiceMethod(request.getRequestType(), request.getContextPath(), this);
+            Class<?>[] paramTypes = targetMethod.getParameterTypes();
+            if(paramTypes.length != 2 || paramTypes[0] != request.getClass() || paramTypes[1] != response.getClass()) {
+                throw new LeapException(HTTP.RES501, "There isn't exist target method: "+targetMethod.getName());
+            }
+            Object[] params = Arrays.asList(paramTypes).stream().map(c -> paramMap.get(c)).toArray();
+            targetMethod.invoke(this, params);
+            
+            //setting JPA link
+            InjectionMapper<ServiceModel> annotaionOpr = new InjectionMapper<>(httpTransfer.getHost().getHost(), this);
+            annotaionOpr.injectToAutowired();
+            return response;            
+        } catch(Exception e) {
+            throw new LeapException(HTTP.RES503, e);
         }
-        Object[] params = Arrays.asList(paramTypes).stream().map(c -> paramMap.get(c)).toArray();
-        targetMethod.invoke(this, params);
-        
-        //setting JPA link
-        InjectionMapper<ServiceModel> annotaionOpr = new InjectionMapper<>(httpTransfer.getHost().getHost(), this);
-        annotaionOpr.injectToAutowired();
-        return response;
     }
 
     @Override
-    public void sendResponse(final Response response) throws Exception {
+    public void sendResponse(final HttpResponse response) throws Exception {
         this.httpTransfer.sendResponse(response);
     }
 

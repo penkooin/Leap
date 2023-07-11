@@ -26,9 +26,8 @@ import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.MIME;
 import org.chaostocosmos.leap.enums.REQUEST;
-import org.chaostocosmos.leap.enums.TEMPLATE;
-import org.chaostocosmos.leap.http.Request;
-import org.chaostocosmos.leap.http.Response;
+import org.chaostocosmos.leap.http.HttpRequest;
+import org.chaostocosmos.leap.http.HttpResponse;
 import org.chaostocosmos.leap.part.MultiPart;
 import org.chaostocosmos.leap.resource.TemplateBuilder;
 
@@ -51,7 +50,7 @@ public class SystemMonitorService extends AbstractChartService {
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     @MethodMapper(method = REQUEST.GET, mappingPath = "/monitor")
-    public void getMonitorWebpage(Request request, Response response) throws Exception {
+    public void getMonitorWebpage(HttpRequest request, HttpResponse response) throws Exception {
         if(Context.get().server().<Boolean> isSupportMonitoring()) {
             String body = TemplateBuilder.buildMonitoringPage(request.getContextPath(), super.httpTransfer.getHost());
             response.setBody(body);
@@ -63,7 +62,7 @@ public class SystemMonitorService extends AbstractChartService {
     } 
 
     @MethodMapper(method = REQUEST.GET, mappingPath = "/script/refreshImage.js")
-    public void getRefreshImageScript(Request request, Response response) throws IOException {
+    public void getRefreshImageScript(HttpRequest request, HttpResponse response) throws IOException {
         Host<?> host = super.getHost();
         String url = host.<String> getProtocol().toLowerCase()+"://"+host.getHost()+":"+host.getPort();
         String script = host.getResource().getTemplatePage("/script/refreshImage.js", Map.of("@interval", Context.get().server().getMonitoringInterval(), "@url", url));
@@ -74,7 +73,7 @@ public class SystemMonitorService extends AbstractChartService {
 
     @MethodMapper(method = REQUEST.POST, mappingPath = "/monitor/chart/image")
     @SuppressWarnings("unchecked")
-    public void getResources(Request request, Response response) throws Exception {
+    public void getResources(HttpRequest request, HttpResponse response) throws Exception {
         Map<String, String> header = request.getReqHeader();
         String charset = header.get("charset");
         if(charset == null || charset.equals("")) {
@@ -136,7 +135,7 @@ public class SystemMonitorService extends AbstractChartService {
     }
 
     @Override
-    public Exception errorHandling(Response response, Exception throwable) {
+    public Exception errorHandling(HttpResponse response, Exception throwable) {
         throwable.printStackTrace();
         return throwable;
     }

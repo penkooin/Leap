@@ -4,8 +4,8 @@ import org.chaostocosmos.leap.annotation.MethodMapper;
 import org.chaostocosmos.leap.annotation.ServiceMapper;
 import org.chaostocosmos.leap.enums.MIME;
 import org.chaostocosmos.leap.enums.REQUEST;
-import org.chaostocosmos.leap.http.Request;
-import org.chaostocosmos.leap.http.Response;
+import org.chaostocosmos.leap.http.HttpRequest;
+import org.chaostocosmos.leap.http.HttpResponse;
 
 /**
  * SimpleStreamingService
@@ -20,12 +20,12 @@ public class SimpleStreamingService extends AbstractStreamingService {
     } 
 
     @MethodMapper(method = REQUEST.GET, mappingPath = "/video")
-    public void streaming(Request request, Response response) throws Exception {
+    public void streaming(HttpRequest request, HttpResponse response) throws Exception {
         super.streaming(request, response);        
     }
 
     @Override
-    public Exception errorHandling(Response response, Exception e) {
+    public Exception errorHandling(HttpResponse response, Exception e) {
         e.printStackTrace();
         return null;
     }    

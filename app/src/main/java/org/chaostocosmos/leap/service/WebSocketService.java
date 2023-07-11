@@ -1,7 +1,7 @@
 package org.chaostocosmos.leap.service;
 
 import org.chaostocosmos.leap.annotation.ServiceMapper;
-import org.chaostocosmos.leap.http.Response;
+import org.chaostocosmos.leap.http.HttpResponse;
 
 /**
  * AbstractWebSocketService
@@ -12,7 +12,7 @@ import org.chaostocosmos.leap.http.Response;
 public class WebSocketService extends AbstractService { 
 
     @Override
-    public Exception errorHandling(Response response, Exception t) {
+    public Exception errorHandling(HttpResponse response, Exception t) {
         return t;
     }
 

@@ -4,7 +4,7 @@ import java.util.Enumeration;
 
 import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.PROTOCOL;
-import org.chaostocosmos.leap.http.Response;
+import org.chaostocosmos.leap.http.HttpResponse;
 
 /**
  * Session model interface
@@ -125,5 +125,5 @@ public interface Session {
      * @param response
      * @return
      */
-    public Response setSessionToResponse(Response response);
+    public HttpResponse setSessionToResponse(HttpResponse response);
 }

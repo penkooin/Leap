@@ -1,19 +1,17 @@
 package org.chaostocosmos.leap.part;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.chaostocosmos.leap.LeapException;
-import org.chaostocosmos.leap.common.LoggerFactory;
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.MIME;
-import org.chaostocosmos.leap.http.common.StreamUtils;
+import org.chaostocosmos.leap.http.HttpRequestStream;
 
 import ch.qos.logback.classic.Logger;
 
@@ -42,7 +40,7 @@ public class BodyPart implements Part {
     /**
      * Request stream
      */
-    InputStream requestStream;
+    HttpRequestStream requestStream;
     /**
      * Whether body loaded
      */
@@ -65,7 +63,7 @@ public class BodyPart implements Part {
      * @param charset
      * @throws IOException
      */
-    public BodyPart(Host<?> host, MIME contentType, long contentLength, InputStream requestStream, boolean loadBody, Charset charset) throws IOException {
+    public BodyPart(Host<?> host, MIME contentType, long contentLength, HttpRequestStream requestStream, boolean loadBody, Charset charset) throws IOException {
         this.logger = host.getLogger();
         this.host = host;
         this.contentType = contentType;
@@ -104,7 +102,7 @@ public class BodyPart implements Part {
             throw new LeapException(HTTP.RES406, new Exception("Multipart form data or byteranges can not use this method"));
         }
         Map<String, byte[]> map = new HashMap<>();
-        byte[] data = StreamUtils.readLength(this.requestStream, (int)this.contentLength);        
+        byte[] data = this.requestStream.readLength((int)this.contentLength);        
         map.put("BODY", data);
         return map;
     }
@@ -144,9 +142,9 @@ public class BodyPart implements Part {
             throw new LeapException(HTTP.RES406, "Can not save content. Not supported on Multi Part Operation.");
         }        
         if(this.isLoadedBody) {
-            StreamUtils.saveBinary(this.body.get("BODY"), targetPath, Context.get().server().getFileBufferSize());
+            this.requestStream.saveBinary(this.body.get("BODY"), targetPath, Context.get().server().getFileBufferSize());
         } else {
-            StreamUtils.saveBinary(this.requestStream, getContentLength(), targetPath, Context.get().server().getFileBufferSize());
+            this.requestStream.saveBinary(getContentLength(), targetPath, Context.get().server().getFileBufferSize());
         }        
         this.logger.debug("[BODY-PART] "+contentType.name()+" saved: "+targetPath.normalize().toString()+"  Path: "+targetPath.toString());
     }    

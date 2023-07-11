@@ -3,8 +3,8 @@ package org.chaostocosmos.leap.service.filter;
 import java.net.InetAddress;
 import java.util.List;
 
-import org.chaostocosmos.leap.http.Request;
-import org.chaostocosmos.leap.resource.SpringJPAManager;
+import org.chaostocosmos.leap.SpringJPAManager;
+import org.chaostocosmos.leap.http.HttpRequest;
 
 /**
  * Abstract ip filtering object
@@ -28,8 +28,8 @@ public class RequestIpFilter<R> extends AbstractRequestFilter implements IIpFilt
     
     @Override
     public boolean allowedHost(R r) {
-        if(this.allowedHosts != null && r.getClass().isAssignableFrom(Request.class)) {
-            return this.allowedHosts.stream().anyMatch(i -> i.getHostName().equals(((Request)r).getReqHeader().get("@Client")));
+        if(this.allowedHosts != null && r.getClass().isAssignableFrom(HttpRequest.class)) {
+            return this.allowedHosts.stream().anyMatch(i -> i.getHostName().equals(((HttpRequest)r).getReqHeader().get("@Client")));
         } else {
             return false;
         }
@@ -37,8 +37,8 @@ public class RequestIpFilter<R> extends AbstractRequestFilter implements IIpFilt
 
     @Override
     public boolean forbiddenHost(R r) {
-        if(this.forbiddenHosts != null && r.getClass().isAssignableFrom(Request.class)) {
-            return !this.forbiddenHosts.stream().anyMatch(i -> i.getHostName().equals(((Request)r).getReqHeader().get("@Client")));
+        if(this.forbiddenHosts != null && r.getClass().isAssignableFrom(HttpRequest.class)) {
+            return !this.forbiddenHosts.stream().anyMatch(i -> i.getHostName().equals(((HttpRequest)r).getReqHeader().get("@Client")));
         } else {
             return false;
         }

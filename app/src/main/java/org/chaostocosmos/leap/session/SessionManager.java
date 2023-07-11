@@ -9,7 +9,7 @@ import org.chaostocosmos.leap.common.DateUtils;
 import org.chaostocosmos.leap.common.TIME;
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.context.Host;
-import org.chaostocosmos.leap.http.Request;
+import org.chaostocosmos.leap.http.HttpRequest;
 import org.chaostocosmos.leap.security.SessionIDGenerator;
 
 /**
@@ -57,7 +57,7 @@ public class SessionManager {
      * @param request
      * @return
      */
-    public synchronized boolean exists(Request request) {
+    public synchronized boolean exists(HttpRequest request) {
         String sessionId = request.getCookie(Constants.SESSION_ID_KEY);
         if(this.sessionMap.containsKey(sessionId)) {
             return true;

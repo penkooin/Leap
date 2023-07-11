@@ -21,13 +21,12 @@ import java.util.stream.Stream;
 
 import org.chaostocosmos.leap.LeapApp;
 import org.chaostocosmos.leap.LeapException;
-import org.chaostocosmos.leap.common.LoggerFactory;
 import org.chaostocosmos.leap.common.UtilBox;
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.WEB_PATH;
-import org.chaostocosmos.leap.http.Request;
+import org.chaostocosmos.leap.http.HttpRequest;
 
 /**
  * Resource helper object
@@ -78,7 +77,7 @@ public class ResourceHelper {
      * @param request
      * @return
      */
-    public static  String getMimeType(Request request) {
+    public static  String getMimeType(HttpRequest request) {
         return UtilBox.probeContentType(getResourcePath(request));
     }
 
@@ -87,7 +86,7 @@ public class ResourceHelper {
      * @param request
      * @return
      */
-    public static Path getResourcePath(Request request) {
+    public static Path getResourcePath(HttpRequest request) {
         return getResourcePath(Context.get().host(request.getHostId()), request.getContextPath());
     }
 
@@ -200,7 +199,7 @@ public class ResourceHelper {
                 if(Files.isDirectory(p)) {
                     path.toFile().mkdirs();
                 } else { 
-                    if(path.toFile().lastModified() != modMillis) {
+                    if(path.toFile().lastModified() != modMillis || path.toFile().length() != p.toFile().length()) {
                         path.toFile().delete(); 
                     }
                     if(!path.toFile().exists()) {

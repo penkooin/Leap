@@ -7,8 +7,8 @@ import org.chaostocosmos.leap.annotation.ServiceMapper;
 import org.chaostocosmos.leap.common.LoggerFactory;
 import org.chaostocosmos.leap.enums.MIME;
 import org.chaostocosmos.leap.enums.REQUEST;
-import org.chaostocosmos.leap.http.Request;
-import org.chaostocosmos.leap.http.Response;
+import org.chaostocosmos.leap.http.HttpRequest;
+import org.chaostocosmos.leap.http.HttpResponse;
 
 /**
  * Time serving servlet object
@@ -27,7 +27,7 @@ public class TimeServiceImpl extends AbstractService {
      * @param response
      */
     @MethodMapper(method = REQUEST.GET, mappingPath = "/GetTime", autheticated = {}, allowed = {}, forbidden = {})
-    public void getTime(Request request, Response response) {
+    public void getTime(HttpRequest request, HttpResponse response) {
         LoggerFactory.getLogger(request.getRequestedHost()).debug("getTime servlet started....+++++++++++++++++++++++++++++++++++++++++++++++++");
         String resBody = "<html><title>This is what time</title><body><h2>"+new Date().toString()+"</h2><body></html>";
         response.addHeader("Content-Type", MIME.TEXT_HTML.mimeType());
@@ -36,7 +36,7 @@ public class TimeServiceImpl extends AbstractService {
     }
 
     @Override
-    public Exception errorHandling(Response response, Exception e) {
+    public Exception errorHandling(HttpResponse response, Exception e) {
         return e;
     }
 } 

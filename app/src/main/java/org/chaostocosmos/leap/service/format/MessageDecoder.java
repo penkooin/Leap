@@ -1,6 +1,6 @@
 package org.chaostocosmos.leap.service.format;
 
-import org.chaostocosmos.leap.service.entity.Message;
+import org.chaostocosmos.leap.spring.entity.Message;
 
 import com.google.gson.Gson;
 

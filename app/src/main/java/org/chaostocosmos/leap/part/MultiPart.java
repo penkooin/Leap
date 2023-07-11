@@ -1,7 +1,6 @@
 package org.chaostocosmos.leap.part;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,7 +15,7 @@ import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.MIME;
-import org.chaostocosmos.leap.http.common.StreamUtils;
+import org.chaostocosmos.leap.http.HttpRequestStream;
 
 /**
  * Multi part descriptor
@@ -47,7 +46,7 @@ public class MultiPart extends BodyPart {
      * @param charset
      * @throws IOException
      */
-    public MultiPart(Host<?> host, MIME contentType, String boundary, long contentLength, InputStream requestStream, boolean preLoadBody, Charset charset) throws IOException {
+    public MultiPart(Host<?> host, MIME contentType, String boundary, long contentLength, HttpRequestStream requestStream, boolean preLoadBody, Charset charset) throws IOException {
         super(host, contentType, contentLength, requestStream, false, charset);
         this.filePaths = new ArrayList<>();
         this.boundary = boundary;
@@ -60,7 +59,7 @@ public class MultiPart extends BodyPart {
     @Override
     public Map<String, byte[]> getBody() throws IOException {
         if(super.body == null) {
-            return StreamUtils.getMultiPartContents(this.requestStream, this.boundary, super.charset);
+            return super.requestStream.getMultiPartContents(this.boundary, super.charset);
         }
         return super.body;
     }
@@ -105,7 +104,7 @@ public class MultiPart extends BodyPart {
                 }
             });
         } else {
-            this.filePaths = StreamUtils.saveMultiPart(super.requestStream, targetPath.normalize(), Context.get().server().getFileBufferSize(), this.boundary, super.charset);    
+            this.filePaths = super.requestStream.saveMultiPart(targetPath.normalize(), Context.get().server().getFileBufferSize(), this.boundary, super.charset);    
         }
         super.logger.debug("[MULTI-PART] "+super.contentType.name()+" saved: "+targetPath.normalize().toString()+"  Size: "+filePaths.stream().map(p -> p.toFile()).map(f -> f.getName()+": "+f.length()).collect(Collectors.joining(", ")));
     }    

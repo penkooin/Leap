@@ -3,8 +3,8 @@ package org.chaostocosmos.leap.service;
 import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 
+import org.chaostocosmos.leap.SpringJPAManager;
 import org.chaostocosmos.leap.annotation.AutowiredJPA;
-import org.chaostocosmos.leap.resource.SpringJPAManager;
 
 /**
  * Annotaion handler

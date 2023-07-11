@@ -11,8 +11,8 @@ import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.MIME;
-import org.chaostocosmos.leap.http.Request;
-import org.chaostocosmos.leap.http.Response;
+import org.chaostocosmos.leap.http.HttpRequest;
+import org.chaostocosmos.leap.http.HttpResponse;
 import org.chaostocosmos.leap.resource.ResourcesModel;
 import org.chaostocosmos.leap.service.model.StreamingModel;
 
@@ -45,7 +45,7 @@ public abstract class AbstractStreamingService extends AbstractService implement
         }
     }
 
-    public void streaming(final Request request, final Response response) throws Exception {
+    public void streaming(final HttpRequest request, final HttpResponse response) throws Exception {
         String reqFile = (String) request.getParameter("file");
         reqFile = reqFile.charAt(0) == '/' ? reqFile.substring(1) : reqFile;
         if(reqFile == null || reqFile.equals("")) {

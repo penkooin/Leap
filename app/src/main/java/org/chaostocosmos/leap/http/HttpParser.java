@@ -26,7 +26,6 @@ import org.chaostocosmos.leap.enums.MIME;
 import org.chaostocosmos.leap.enums.PROTOCOL;
 import org.chaostocosmos.leap.enums.REQUEST_LINE;
 import org.chaostocosmos.leap.enums.REQUEST;
-import org.chaostocosmos.leap.http.common.StreamUtils;
 import org.chaostocosmos.leap.part.BinaryPart;
 import org.chaostocosmos.leap.part.BodyPart;
 import org.chaostocosmos.leap.part.KeyValuePart;
@@ -44,9 +43,9 @@ public class HttpParser {
      */
     Host<?> host;
     /**
-     * InputStream
+     * RequestStream
      */
-    InputStream inputStream;
+    HttpRequestStream requestStream;
     /**
      * OutputStream
      */
@@ -70,11 +69,11 @@ public class HttpParser {
     /**
      * Request
      */
-    Request request;
+    HttpRequest request;
     /**
      * Response
      */
-    Response response;
+    HttpResponse response;
     /**
      * Constructor
      * @param host
@@ -84,7 +83,7 @@ public class HttpParser {
      */
     public HttpParser(Host<?> host, InputStream inputStream, OutputStream outputStream) throws IOException {
         this.host = host;
-        this.inputStream = inputStream;
+        this.requestStream = new HttpRequestStream(inputStream);
         this.outputStream = outputStream;
     }
     /**
@@ -108,18 +107,16 @@ public class HttpParser {
             return this.requestLines;
         }
         this.requestLines = new HashMap<REQUEST_LINE, Object>();        
-        String readLine = StreamUtils.readLine(this.inputStream, StandardCharsets.UTF_8);
-        if(readLine == null) {
-            throw new LeapException(HTTP.RES400, "Invalid request line: "+readLine);
+        String readLine = this.requestStream.readLine(StandardCharsets.UTF_8);
+        if(readLine.equals("") || readLine.charAt(0) == 63) {
+            throw new LeapException(HTTP.LEAP900, readLine);
         }
         final String requestLine = URLDecoder.decode(readLine, StandardCharsets.UTF_8);
+        System.out.println(Arrays.toString(requestLine.getBytes()));
         this.host.getLogger().info("============================== [REQUEST] "+requestLine+" =============================="+System.lineSeparator());
         final String method = requestLine.substring(0, requestLine.indexOf(" "));
         String contextPath = requestLine.substring(requestLine.indexOf(" ")+1, requestLine.lastIndexOf(" "));
-        this.queryParameters = parseQueryParameters(contextPath);
-        if(contextPath.contains("?")) {
-            contextPath = contextPath.substring(0, contextPath.indexOf("?"));
-        }        
+        this.queryParameters = parseQueryParameters(contextPath);        
         final String protocolVersion = requestLine.substring(requestLine.lastIndexOf(" ")).trim();
         if(method == null || method == null || protocolVersion == null) {
             throw new LeapException(HTTP.RES417, new IllegalStateException("Requested line format is wrong: "+requestLine));
@@ -130,7 +127,7 @@ public class HttpParser {
         String protocol = protocolVersion.substring(0, protocolVersion.indexOf("/"));
         this.requestLines.put(REQUEST_LINE.LINE, requestLine);
         this.requestLines.put(REQUEST_LINE.METHOD, method);
-        this.requestLines.put(REQUEST_LINE.PATH, contextPath);
+        this.requestLines.put(REQUEST_LINE.PATH, contextPath.indexOf("?") == -1 ? contextPath : contextPath.substring(0, contextPath.indexOf("?")));
         this.requestLines.put(REQUEST_LINE.PARAMS, this.queryParameters);
         this.requestLines.put(REQUEST_LINE.VERSION, protocolVersion);
         this.requestLines.put(REQUEST_LINE.PROTOCOL, protocol);
@@ -149,7 +146,7 @@ public class HttpParser {
             return this.requestHeaders;
         }
         this.requestHeaders = new HashMap<>();
-        List<String> headerLines = StreamUtils.readHeaders(inputStream);        
+        List<String> headerLines = this.requestStream.readHeaders(Charset.forName(this.host.charset()));        
         for(String header : headerLines) {
             if(header == null || header.length() == 0)
                 break;
@@ -229,9 +226,9 @@ public class HttpParser {
         if(contentLength > 0) {
             switch(mimeType) {
                 case MULTIPART_FORM_DATA:
-                    return new MultiPart(this.host, mimeType, boundary, contentLength, inputStream, preLoadBody, charset);
+                    return new MultiPart(this.host, mimeType, boundary, contentLength, this.requestStream, preLoadBody, charset);
                 case APPLICATION_X_WWW_FORM_URLENCODED:
-                    return new KeyValuePart(this.host, mimeType, contentLength, inputStream, preLoadBody, charset);
+                    return new KeyValuePart(this.host, mimeType, contentLength, this.requestStream, preLoadBody, charset);
                 case IMAGE_GIF:
                 case IMAGE_PNG:
                 case IMAGE_JPEG:
@@ -244,7 +241,7 @@ public class HttpParser {
                 case AUDIO_WAV:
                 case VIDEO_WEBM:
                 case VIDEO_OGG:
-                    return new BinaryPart(this.host, mimeType, contentLength, inputStream, false, charset);
+                    return new BinaryPart(this.host, mimeType, contentLength, this.requestStream, false, charset);
                 case TEXT_PLAIN:
                 case TEXT_CSS:
                 case TEXT_JAVASCRIPT:
@@ -253,7 +250,7 @@ public class HttpParser {
                 case TEXT_HTML:
                 case TEXT_XML:
                 case TEXT_JSON:
-                    return new TextPart(this.host, mimeType, contentLength, inputStream, false, charset);
+                    return new TextPart(this.host, mimeType, contentLength, this.requestStream, false, charset);
                 default:
                     return null;                        
             }
@@ -266,7 +263,7 @@ public class HttpParser {
      * @throws IOException
      * @throws URISyntaxException
      */
-    public Request parseRequest() throws IOException, URISyntaxException {
+    public HttpRequest parseRequest() throws IOException, URISyntaxException {
         if(this.request != null) {
             return this.request;
         }
@@ -309,7 +306,7 @@ public class HttpParser {
                 bodyPart = parseBodyParts(mimeType, boundary, contentLength, preLoadBody, charset);
             }
         }
-        this.request = new Request(this.host, requestMillis, PROTOCOL.valueOf(protocol.toUpperCase()), hostName, protocol, requestType, requestHeaders, mimeType, contextPath, requestURI, this.queryParameters, bodyPart, contentLength, charset, cookies, null);
+        this.request = new HttpRequest(this.host, requestMillis, PROTOCOL.valueOf(protocol.toUpperCase()), hostName, protocol, requestType, requestHeaders, mimeType, contextPath, requestURI, this.queryParameters, bodyPart, contentLength, charset, cookies, null);
         return this.request;
     }
 
@@ -321,9 +318,9 @@ public class HttpParser {
      * @param headers
      * @return
      */
-    public Response buildResponse(final int statusCode, final Object body, final Map<String, List<String>> headers) {
+    public HttpResponse buildResponse(final int statusCode, final Object body, final Map<String, List<String>> headers) {
         if(this.response == null) {
-            this.response = new Response(this.host, this.outputStream, statusCode, body, headers);
+            this.response = new HttpResponse(this.host, this.outputStream, statusCode, body, headers);
         }        
         return this.response;
     }

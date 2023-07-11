@@ -17,12 +17,11 @@ import org.chaostocosmos.leap.LeapException;
 import org.chaostocosmos.leap.annotation.MethodMapper;
 import org.chaostocosmos.leap.annotation.ServiceMapper;
 import org.chaostocosmos.leap.common.ExceptionUtils;
-import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.MIME;
 import org.chaostocosmos.leap.enums.REQUEST;
-import org.chaostocosmos.leap.http.Request;
-import org.chaostocosmos.leap.http.Response;
+import org.chaostocosmos.leap.http.HttpRequest;
+import org.chaostocosmos.leap.http.HttpResponse;
 import org.chaostocosmos.leap.part.MultiPart;
 import org.chaostocosmos.leap.part.Part;
 import org.chaostocosmos.leap.service.model.DeployModel;
@@ -32,7 +31,7 @@ import org.chaostocosmos.leap.service.model.ServiceModel;
 public class DeployService extends AbstractService implements DeployModel {
     
     @MethodMapper(method = REQUEST.POST, mappingPath = "/service/add")
-    public void add(Request request, Response response) throws LeapException, IOException {
+    public void add(HttpRequest request, HttpResponse response) throws LeapException, IOException {
         final Map<String, String> headers = request.getReqHeader();
         final Part bodyPart = request.getBodyPart();
         if(bodyPart == null) {
@@ -80,7 +79,7 @@ public class DeployService extends AbstractService implements DeployModel {
     }
 
     @MethodMapper(method = REQUEST.GET, mappingPath = "/service/delete")
-    public void delete(Request request, Response response) throws IOException, 
+    public void delete(HttpRequest request, HttpResponse response) throws IOException, 
                                                                   URISyntaxException, 
                                                                   NotSupportedException, 
                                                                   NoSuchMethodException, 
@@ -133,7 +132,7 @@ public class DeployService extends AbstractService implements DeployModel {
     }
 
     @Override
-    public Exception errorHandling(Response response, Exception throwable) {
+    public Exception errorHandling(HttpResponse response, Exception throwable) {
         //response.setStatusCode(response.getStatusCode());
         //response.setBody(throwable.getMessage());
         return throwable;

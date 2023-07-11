@@ -1,11 +1,11 @@
 package org.chaostocosmos.leap.part;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.charset.Charset;
 
 import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.MIME;
+import org.chaostocosmos.leap.http.HttpRequestStream;
 
 /**
  * BinaryPart
@@ -23,7 +23,7 @@ public class BinaryPart extends BodyPart {
      * @param charset
      * @throws IOException
      */
-    public BinaryPart(Host<?> host, MIME contentType, long contentLength, InputStream requestStream, boolean loadBody, Charset charset) throws IOException {
+    public BinaryPart(Host<?> host, MIME contentType, long contentLength, HttpRequestStream requestStream, boolean loadBody, Charset charset) throws IOException {
         super(host, contentType, contentLength, requestStream, loadBody, charset);
     }
 }

@@ -13,12 +13,12 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.LeapException;
+import org.chaostocosmos.leap.ResourceManager;
 import org.chaostocosmos.leap.common.Filtering;
 import org.chaostocosmos.leap.common.LoggerFactory;
 import org.chaostocosmos.leap.enums.AUTH;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.STATUS;
-import org.chaostocosmos.leap.resource.ResourceManager;
 import org.chaostocosmos.leap.resource.ResourcesModel;
 
 import ch.qos.logback.classic.Level;

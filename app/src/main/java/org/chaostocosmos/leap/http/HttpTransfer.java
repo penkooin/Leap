@@ -1,12 +1,10 @@
 package org.chaostocosmos.leap.http;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintStream;
 import java.net.Socket;
 import java.net.URISyntaxException;
 import java.nio.charset.Charset;
@@ -63,11 +61,11 @@ public class HttpTransfer implements Http {
     /**
      * Request
      */
-    private Request request;
+    private HttpRequest request;
     /**
      * Response
      */
-    private Response response;
+    private HttpResponse response;
     /**
      * Http session
      */
@@ -102,6 +100,13 @@ public class HttpTransfer implements Http {
      */
     public Logger getLogger() {
         return this.host.getLogger();
+    }
+    /**
+     * Get Client socket object
+     * @return
+     */
+    public Socket getSocket() {
+        return this.socket;
     }
     /**
      * Get client InputStream
@@ -147,7 +152,7 @@ public class HttpTransfer implements Http {
      * @throws URISyntaxException
      * @throws IOException
      */
-    public Request getRequest() throws IOException, URISyntaxException {
+    public HttpRequest getRequest() throws IOException, URISyntaxException {
         if(this.request == null) {
             this.request = this.httpParser.parseRequest();
         }
@@ -158,7 +163,7 @@ public class HttpTransfer implements Http {
      * @return
      * @throws IOException
      */
-    public Response getResponse() throws IOException {
+    public HttpResponse getResponse() throws IOException {
         if(this.response == null) {
             String msg = TemplateBuilder.buildResponseHtml(this.host, 200, HTTP.RES200.status());
             Map<String, List<String>> headers = addHeader(new HashMap<>(), "Content-Type", MIME.TEXT_HTML.mimeType());
@@ -201,7 +206,7 @@ public class HttpTransfer implements Http {
      * @param response
      * @throws IOException
      */
-    public void sendResponse(Response response) {
+    public void sendResponse(HttpResponse response) {
         sendResponse(this.host, response.getResponseCode(), response.getHeaders(), response.getBody());
     }
     /**
@@ -274,8 +279,8 @@ public class HttpTransfer implements Http {
      * Process error
      * @param err
      */
-    public void processError(Exception err) {        
-        this.host.getLogger().error(err.getMessage(), err);
+    public void processError(LeapException err) {        
+        //this.host.getLogger().error(err.getMessage(), err);
         if(this.response == null) {
             try {
                 this.response = getResponse();
@@ -288,22 +293,21 @@ public class HttpTransfer implements Http {
             throwable = throwable.getCause();
         }
         String message = throwable.getMessage()+"";
-        String stackTrace = ExceptionUtils.getStackTraces(throwable);
+        String stackTrace = "";
         String hostId = this.host.getHostId();
-        int resCode = -1;
-        if(throwable instanceof LeapException) {
-            LeapException le = (LeapException) throwable;
-            resCode = le.code();
-            if(le.code() == HTTP.RES401.code() && AUTH.valueOf(host.getAuthentication()) == AUTH.BASIC) {
+        int resCode = HTTP.RES500.code();
+        if(err instanceof LeapException) {
+            resCode = err.code();
+            if(err.code() == HTTP.RES401.code() && AUTH.valueOf(host.getAuthentication()) == AUTH.BASIC) {
                 this.response.addHeader("WWW-Authenticate", "Basic");
-            } else if(le.code() == HTTP.RES307.code()) {
+            } else if(err.code() == HTTP.RES307.code()) {
                 RedirectException redirect = (RedirectException) throwable;
                 this.response.removeAllHeader();
                 Html.makeRedirectHeader(0, redirect.getURLString()).entrySet().stream().forEach(e -> this.response.addHeader(e.getKey(), e.getValue()));
                 this.response.addHeader("Location", redirect.getURLString());
             }
             if(Context.get().host(hostId).<Boolean> getErrorDetails()) {
-                stackTrace = "<pre>" + le.getStackTraceMessage() + "<pre>";
+                stackTrace = "<pre>" + err.getStackTraceMessage() + "<pre>";
             }
         } else {
             resCode = HTTP.RES500.code();            

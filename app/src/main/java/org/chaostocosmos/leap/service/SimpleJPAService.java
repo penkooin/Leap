@@ -2,28 +2,33 @@ package org.chaostocosmos.leap.service;
 
 import java.util.List;
 
-import org.chaostocosmos.leap.annotation.AutowiredJPA;
 import org.chaostocosmos.leap.annotation.MethodMapper;
 import org.chaostocosmos.leap.annotation.ServiceMapper;
 import org.chaostocosmos.leap.enums.REQUEST;
-import org.chaostocosmos.leap.http.Request;
-import org.chaostocosmos.leap.http.Response;
-import org.chaostocosmos.leap.service.entity.Users;
-import org.chaostocosmos.leap.service.repository.IUsersRespository;
-import org.springframework.stereotype.Service;
+import org.chaostocosmos.leap.http.HttpRequest;
+import org.chaostocosmos.leap.http.HttpResponse;
+import org.chaostocosmos.leap.spring.entity.Users;
+import org.chaostocosmos.leap.spring.repository.IUsersRespository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 @ServiceMapper(mappingPath = "/simple/jpa")
-@Service
 public class SimpleJPAService extends AbstractService {
 
-    @AutowiredJPA
-    private IUsersRespository usersRepo;
+    @Autowired
+    @Qualifier("aaa")    
+    private IUsersRespository usersRepo;    
 
-    @AutowiredJPA
+    @Autowired
+    @Qualifier("bbb") 
     private SimpleSpringService springService;
 
+    public SimpleJPAService() {
+        System.out.println("Simple Spring service injected.............repo: "+usersRepo+"   sping serv: "+springService);
+    }
+
     @MethodMapper(method = REQUEST.GET, mappingPath="/users")
-    public void getUsers(Request request, Response response) {
+    public void getUsers(HttpRequest request, HttpResponse response) {
         System.out.println("Simple JPA Service called.......................................");
         System.out.println(usersRepo);
         List<Users> userList = usersRepo.findByName("Tim");
@@ -35,14 +40,13 @@ public class SimpleJPAService extends AbstractService {
             users.setJob("Developer");    
             usersRepo.save(users);
         }
-        System.out.println(userList.toString()+" ((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((");
         response.setResponseCode(200);
         //response.setBody(userList.toString());
         response.setBody(springService.helloLeap());
     }    
 
     @Override
-    public Exception errorHandling(Response response, Exception e) {
+    public Exception errorHandling(HttpResponse response, Exception e) {
         return e;
     }    
 }

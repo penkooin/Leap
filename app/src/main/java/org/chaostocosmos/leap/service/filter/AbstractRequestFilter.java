@@ -3,8 +3,8 @@ package org.chaostocosmos.leap.service.filter;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.chaostocosmos.leap.http.Request;
-import org.chaostocosmos.leap.resource.SpringJPAManager;
+import org.chaostocosmos.leap.SpringJPAManager;
+import org.chaostocosmos.leap.http.HttpRequest;
 import org.chaostocosmos.leap.service.model.SpringJPAModel;
 import org.chaostocosmos.leap.session.SessionManager;
 
@@ -13,14 +13,14 @@ import org.chaostocosmos.leap.session.SessionManager;
  * 
  * @author 9ins
  */
-public abstract class AbstractRequestFilter implements IRequestFilter<Request>, SpringJPAModel {
+public abstract class AbstractRequestFilter implements IRequestFilter<HttpRequest>, SpringJPAModel {
     /**
      * Session manager object
      */
     SessionManager sessionManager;
 
     @Override
-    public void filterRequest(Request request) throws Exception {        
+    public void filterRequest(HttpRequest request) throws Exception {        
     }
 
     @Override

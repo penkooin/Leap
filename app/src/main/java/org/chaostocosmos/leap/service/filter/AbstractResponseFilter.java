@@ -1,12 +1,12 @@
 package org.chaostocosmos.leap.service.filter;
 
-import org.chaostocosmos.leap.http.Response;
+import org.chaostocosmos.leap.http.HttpResponse;
 
-public abstract class AbstractResponseFilter implements IResponseFilter<Response> {
+public abstract class AbstractResponseFilter implements IResponseFilter<HttpResponse> {
 
     @Override
-    public void filterResponse(Response response) throws Exception {
-        if(response.getClass().isAssignableFrom(Response.class)) {
+    public void filterResponse(HttpResponse response) throws Exception {
+        if(response.getClass().isAssignableFrom(HttpResponse.class)) {
             response.getHost().getLogger().debug("Basic Http response filter processing......");
         }
     }

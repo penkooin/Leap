@@ -10,7 +10,7 @@ import org.chaostocosmos.leap.common.Constants;
 import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.PROTOCOL;
-import org.chaostocosmos.leap.http.Response;
+import org.chaostocosmos.leap.http.HttpResponse;
 
 /**
  * WebSession
@@ -180,7 +180,7 @@ public class HttpSession implements Session {
     }
 
     @Override
-    public Response setSessionToResponse(Response response) {
+    public HttpResponse setSessionToResponse(HttpResponse response) {
         Object maxAge = getAttribute("Max-Age");
         Object expires = getAttribute("Expires");
         Object path = getAttribute("Path");

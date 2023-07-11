@@ -2,10 +2,10 @@ package org.chaostocosmos.leap.service.model;
 
 import java.util.List;
 
+import org.chaostocosmos.leap.ServiceManager;
 import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.http.HttpTransfer;
-import org.chaostocosmos.leap.http.Response;
-import org.chaostocosmos.leap.http.ServiceManager;
+import org.chaostocosmos.leap.http.HttpResponse;
 import org.chaostocosmos.leap.resource.ResourcesModel;
 import org.chaostocosmos.leap.service.filter.IFilter;
 import org.chaostocosmos.leap.session.SessionManager;
@@ -34,7 +34,7 @@ public interface ServiceModel extends SpringJPAModel, Cloneable {
      * @param httpTransfer
      * @throws Exception
      */
-    public Response handle(final HttpTransfer httpTransfer) throws Exception;
+    public HttpResponse handle(final HttpTransfer httpTransfer);
 
     /**
      * Set pre-filter list
@@ -88,12 +88,12 @@ public interface ServiceModel extends SpringJPAModel, Cloneable {
      * @param response
      * @throws Throwable
      */
-    public void sendResponse(final Response response) throws Throwable;
+    public void sendResponse(final HttpResponse response) throws Throwable;
 
     /**
      * Service error handle method
      * @param response
      * @param t
      */
-    public Exception errorHandling(final Response response, Exception e) throws Exception;
+    public Exception errorHandling(final HttpResponse response, Exception e) throws Exception;
 }

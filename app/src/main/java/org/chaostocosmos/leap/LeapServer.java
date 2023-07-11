@@ -33,10 +33,8 @@ import org.chaostocosmos.leap.enums.STATUS;
 import org.chaostocosmos.leap.http.HttpTransfer;
 import org.chaostocosmos.leap.http.HttpsServerSocketFactory;
 import org.chaostocosmos.leap.http.RedirectException;
-import org.chaostocosmos.leap.http.ServiceManager;
 import org.chaostocosmos.leap.resource.ClassUtils;
 import org.chaostocosmos.leap.resource.LeapURLClassLoader;
-import org.chaostocosmos.leap.resource.ResourceManager;
 import org.chaostocosmos.leap.resource.ResourcesModel;
 import org.chaostocosmos.leap.security.SecurityManager;
 import org.chaostocosmos.leap.session.Session;
@@ -307,9 +305,9 @@ public class LeapServer extends Thread {
                     } else {
                         throw new LeapException(HTTP.RES406, "[CLIENT CANCELED] REQUEST CLIENT IP ADDRESS IS NO ALLOWED: "+ipAddress.toString());
                     }
-                } catch(SocketTimeoutException e) {
+                } catch(SocketTimeoutException | NegativeArraySizeException e) {
                     host.getLogger().error("[SOCKET TIME OUT] SOCKET TIMEOUT OCCURED.");
-                } catch(Exception le) {
+                } catch(LeapException le) {
                     if(httpTransfer != null) {
                         httpTransfer.processError(le);
                     }                    
