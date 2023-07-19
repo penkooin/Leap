@@ -1,0 +1,131 @@
+############################## Leap Server configuration ##############################
+server:
+    leap-version: 1.0
+    threadpool:
+      core: 300
+      max: 1000
+      keep-alive: 3000
+      queue-size: 1000
+    monitoring:
+      support-monitoring: false
+      interval: 3000
+      logs: ./logs/monitor.log
+      log-level: DEBUG
+    spring-jpa-support: false
+    spring-jpa-packages: [
+        "org.chaostocosmos.leap.service",
+      ]
+    data-source: 
+      - id: MYSQL        
+        driver-class: org.mariadb.jdbc.Driver
+        url: jdbc:mariadb://localhost:3306/leap
+        schema: leap
+        user: root
+        password: '1234'
+      - id: ORACLE
+        driver-class: oracle.jdbc.OracleDriver
+        url: jdbc:oracle:thin:@localhost:1521:XE
+        schema: leap
+        user: system
+        password: '9393'
+############################## Hosts configuration ##############################
+hosts:
+############################## Default host configuration ##############################  
+  - id: leap
+    default: true
+    host: localhost
+    port: 8080
+    connection-timeout: 5000
+    backlog: 300
+    file-buffer-size: 1024
+    request-blocking-interval: 10
+    protocol: HTTP
+    protocol-version: 1.1
+    docroot: ./home
+    welcome: /templates/welcome.html
+    locale: Asia/Seoul 
+    charset: utf-8
+    security:
+      encryption: 'TLS'
+      keystore: './config/ssl/leap-keystore.jks'
+      passphrase: '939393'
+    authentication: BASIC    
+    session:
+      apply: false
+      length: 16
+      encryption: SHA-256
+      expire-days: 10      # day
+      max-age-hours: 1     # hour
+      timeout-seconds: 10  # second
+    ip-filters: 
+      allowed : ['*']
+      forbidden : []
+    users:
+      - username: localhost
+        password: '9393'
+        role: ADMIN
+      - username: guest
+        password: '9393'
+        role: GUEST
+    logs: 
+      path: logs/leap.log
+      level: DEBUG
+      details: true
+    dynamic-classpath: ['']      
+    resources:
+      streaming-buffer-size: 102400
+      in-memory-split-unit: 1024000
+      in-memory-filters: ['*']
+      access-filters: ['*']
+      forbidden-filters: []    
+    traffic-redirect:
+      http://awesome:8082 : 20
+      http://www.leap1.org:8081 : 80
+
+############################## Virtual host configuration ##############################
+  - id: leap1
+    default: false
+    host: www.leap.org
+    port: 8081
+    connection-timeout: 5000
+    backlog: 300
+    file-buffer-size: 1024
+    request-blocking-interval: 10
+    protocol: HTTP
+    protocol-version: 1.1
+    docroot: ./home1
+    welcome: /templates/welcome.html
+    locale: Asia/Seoul 
+    charset: utf-8
+    authentication: BASIC
+    session:
+      apply: false
+      length: 16
+      encryption: SHA-256
+      expire-days: 10      # day
+      max-age-hours: 1     # hour
+      timeout-seconds: 10  # second
+    ip-filters: 
+      allowed : ['*']
+      forbidden : []
+    users:
+      - username: localhost
+        password: '9393'
+        role: ADMIN
+      - username: guest
+        password: '9393'
+        role: GUEST
+    logs: 
+      path: logs/leap.log
+      level: DEBUG
+      details: true
+    dynamic-classpath: ['']      
+    resources:
+      streaming-buffer-size: 102400
+      in-memory-split-unit: 1024000
+      in-memory-filters: ['*']
+      access-filters: ['*']
+      forbidden-filters: []    
+    traffic-redirect:
+      http://awesome:8082 : 20
+      http://www.leap1.org:8081 : 80

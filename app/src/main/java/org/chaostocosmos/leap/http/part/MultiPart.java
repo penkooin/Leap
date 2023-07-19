@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.MIME;
@@ -104,7 +103,7 @@ public class MultiPart extends BodyPart {
                 }
             });
         } else {
-            this.filePaths = super.requestStream.saveMultiPart(targetPath.normalize(), Context.get().server().getFileBufferSize(), this.boundary, super.charset);    
+            this.filePaths = super.requestStream.saveMultiPart(targetPath.normalize(), this.host.getFileBufferSize(), this.boundary, super.charset);    
         }
         super.logger.debug("[MULTI-PART] "+super.contentType.name()+" saved: "+targetPath.normalize().toString()+"  Size: "+filePaths.stream().map(p -> p.toFile()).map(f -> f.getName()+": "+f.length()).collect(Collectors.joining(", ")));
     }    

@@ -104,8 +104,8 @@ public class SecurityManager {
      * @param authorization
      * @return
      */
-    public synchronized UserCredentials authenticate(String authorization) {
-        if (authorization != null && authorization.trim().startsWith("Basic")) {
+    public UserCredentials authenticate(Object authorization) {
+        if (authorization != null && authorization.toString().startsWith("Basic")) {
             //System.out.println(values[0]+" "+values[1]);
             String[] values = getUserPassword(authorization);
             UserCredentials user = login(values[0], values[1]);
@@ -122,9 +122,9 @@ public class SecurityManager {
      * @param authorization
      * @return
      */
-    public String[] getUserPassword(String authorization) {
-        if(authorization != null && authorization.trim().startsWith("Basic")) {
-            String base64Credentials = authorization.trim().substring("Basic".length()).trim();
+    public String[] getUserPassword(Object authorization) {
+        if(authorization != null && authorization.toString().startsWith("Basic")) {
+            String base64Credentials = authorization.toString().substring("Basic".length()).trim();
             byte[] credDecoded = Base64.getDecoder().decode(base64Credentials);
             String credentials = new String(credDecoded, StandardCharsets.UTF_8);
             String[] values = credentials.split(":", 2);
@@ -174,7 +174,7 @@ public class SecurityManager {
             for(Map.Entry<String, Long> entry : map.entrySet()) {
                 String preContext = entry.getKey(); 
                 long preTimestemp = entry.getValue();
-                if(url.equals(preContext) && System.currentTimeMillis() - preTimestemp < Context.get().server().<Integer>getRequestBlockingInterval().longValue()) {
+                if(url.equals(preContext) && System.currentTimeMillis() - preTimestemp < this.host.<Integer>getRequestBlockingInterval().longValue()) {
                     requestAttackBlockingMap.remove(ip);
                     throw new LeapException(HTTP.RES429, new Exception("You requested too many on short period!!!  URI: "+url));
                 }

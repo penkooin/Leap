@@ -166,9 +166,9 @@ public enum HTTP {
      */
     public String status() {
         if(this.code >= 100 && this.code < 511) {
-            return Context.get().messages().http(this.code);
+            return Context.get().message().http(this.code);
         } else if(this.code >= 900 && this.code < 1000) {
-            return Context.get().messages().leap(this.code);
+            return Context.get().message().leap(this.code);
         } else {
             throw new LeapException(LEAP901);
         }

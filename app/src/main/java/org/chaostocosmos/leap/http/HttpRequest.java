@@ -5,6 +5,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.chaostocosmos.leap.common.LoggerFactory;
@@ -31,7 +32,7 @@ public class HttpRequest implements Http {
     final private String requestedHost;
     final private MIME contentType;
     final private String httpVersion;
-    final private Map<String, String> reqHeader;
+    final private Map<String, Object> reqHeader;
     final private String contextPath;
     final private Map<String, String> queryParam;
     final private Part bodyPart;
@@ -70,7 +71,7 @@ public class HttpRequest implements Http {
             String requestHost,
             String httpVersion, 
             REQUEST requestType, 
-            Map<String, String> reqHeader, 
+            Map<String, Object> reqHeader, 
             MIME contentType,
             String contextPath,
             URI requestURI, 
@@ -123,7 +124,7 @@ public class HttpRequest implements Http {
         return this.requestType;
     }
 
-    public final Map<String, String> getReqHeader() {
+    public final Map<String, Object> getReqHeader() {
         return this.reqHeader;
     }
 

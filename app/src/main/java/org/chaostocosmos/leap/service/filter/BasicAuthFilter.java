@@ -30,9 +30,9 @@ public class BasicAuthFilter extends AbstractRequestFilter {
         Session session = super.sessionManager.getSessionCreateIfNotExists(sessionId);
 
         if(session == null && request.getClass().isAssignableFrom(HttpRequest.class)) {
-            final String authorization = request.getReqHeader().get("Authorization");
-            if (authorization != null && authorization.trim().startsWith("Basic")) {
-                String base64Credentials = authorization.trim().substring("Basic".length()).trim();
+            final Object authorization = request.getReqHeader().get("Authorization");
+            if (authorization != null && authorization.toString().startsWith("Basic")) {
+                String base64Credentials = authorization.toString().substring("Basic".length()).trim();
                 byte[] credDecoded = Base64.getDecoder().decode(base64Credentials);
                 String credentials = new String(credDecoded, StandardCharsets.UTF_8);
                 final String[] values = credentials.split(":", 2);

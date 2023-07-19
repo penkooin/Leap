@@ -6,7 +6,6 @@ package org.chaostocosmos.leap.enums;
  * @author 9ins
  */
 public enum STATUS {
-
     NONE(0),
     SETUP(1),
     STARTING(2),
@@ -23,7 +22,6 @@ public enum STATUS {
     STATUS(int code) {
         this.code = code;
     }
-
     /**
      * Get status code
      * @return

@@ -15,6 +15,7 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.transaction.NotSupportedException;
 
@@ -23,6 +24,7 @@ import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.MIME;
 import org.chaostocosmos.leap.enums.PROTOCOL;
+import org.chaostocosmos.leap.enums.REQUEST;
 import org.chaostocosmos.leap.enums.REQUEST_LINE;
 import org.chaostocosmos.leap.exception.LeapException;
 import org.chaostocosmos.leap.http.part.BinaryPart;
@@ -30,7 +32,6 @@ import org.chaostocosmos.leap.http.part.BodyPart;
 import org.chaostocosmos.leap.http.part.KeyValuePart;
 import org.chaostocosmos.leap.http.part.MultiPart;
 import org.chaostocosmos.leap.http.part.TextPart;
-import org.chaostocosmos.leap.enums.REQUEST;
 
 /**
  * Http parsing factory object
@@ -57,7 +58,7 @@ public class HttpParser {
     /**
      * Request headers Map
      */
-    Map<String, String> requestHeaders;
+    Map<String, Object> requestHeaders;
     /**
      * Request cookies Map
      */
@@ -112,7 +113,7 @@ public class HttpParser {
             throw new LeapException(HTTP.LEAP900, readLine);
         }
         final String requestLine = URLDecoder.decode(readLine, StandardCharsets.UTF_8);
-        System.out.println(Arrays.toString(requestLine.getBytes()));
+        //System.out.println(Arrays.toString(requestLine.getBytes()));
         this.host.getLogger().info("============================== [REQUEST] "+requestLine+" =============================="+System.lineSeparator());
         final String method = requestLine.substring(0, requestLine.indexOf(" "));
         String contextPath = requestLine.substring(requestLine.indexOf(" ")+1, requestLine.lastIndexOf(" "));
@@ -138,7 +139,7 @@ public class HttpParser {
      * @return
      * @throws IOException
      */
-    public final Map<String, String> parseRequestHeaders() throws IOException {
+    public final Map<String, Object> parseRequestHeaders() throws IOException {
         if(this.requestLines == null) {
             throw new LeapException(HTTP.RES500, "It must be parsed request first line before headers parsing.");
         }
@@ -146,16 +147,20 @@ public class HttpParser {
             return this.requestHeaders;
         }
         this.requestHeaders = new HashMap<>();
-        List<String> headerLines = this.requestStream.readHeaders(Charset.forName(this.host.charset()));        
+        List<String> headerLines = this.requestStream.readLines(Charset.forName(this.host.charset()));        
         for(String header : headerLines) {
-            if(header == null || header.length() == 0)
+            this.host.getLogger().debug(header);
+            if(header == null || header.length() == 0) {
                 break;
+            }                
             int idx = header.indexOf(":");
             if (idx == -1) {
                 throw new LeapException(HTTP.RES417, new IllegalStateException("Header format is wrong(Not found delimeter): "+header));
             }
-            this.host.getLogger().debug(header.substring(0, idx)+":   "+header.substring(idx + 1, header.length()).trim());
-            this.requestHeaders.put(header.substring(0, idx), header.substring(idx + 1, header.length()).trim());
+            String headerKey = header.substring(0, idx);
+            String headerValue = header.substring(idx + 1, header.length());
+            Object headerValues = headerValue.contains(";") ? Arrays.asList(headerValue.split(";")).stream().map(v -> v.trim()).collect(Collectors.toList()) : headerValue.trim();
+            this.requestHeaders.put(headerKey, headerValues);
         }
         return this.requestHeaders;
     }
@@ -163,6 +168,7 @@ public class HttpParser {
      * Parse cookies of request header
      * @return
      */
+    @SuppressWarnings("unchecked")
     public Map<String, String> parseRequestCookies() {
         if(this.requestHeaders == null) {
             throw new LeapException(HTTP.RES500, "It must be parsed request headers before cookies parsing.");
@@ -172,7 +178,7 @@ public class HttpParser {
         }
         this.requestCookies = new HashMap<>();
         if(requestHeaders.get("Cookie") != null) {
-            String[] cookieArr = requestHeaders.get("Cookie").trim().split(";");
+            List<String> cookieArr = requestHeaders.get("Cookie") instanceof List ? (List<String>) requestHeaders.get("Cookie") : List.of(requestHeaders.get("Cookie").toString());
             for(String cookie : cookieArr) {
                 String key = cookie.substring(0, cookie.indexOf("=")).trim();
                 String value = cookie.substring(cookie.indexOf("=")+1);
@@ -271,11 +277,11 @@ public class HttpParser {
         //Parse request line
         Map<REQUEST_LINE, Object> requestLines = parseRequestLine();
         //Parse request header 
-        Map<String, String> requestHeaders = parseRequestHeaders(); 
+        Map<String, Object> requestHeaders = parseRequestHeaders(); 
         //Parse cookies from header
         Map<String, String> cookies = parseRequestCookies();
 
-        String requestedHost = requestHeaders.get("Host").toString().trim();
+        String requestedHost = requestHeaders.get("Host") != null ? requestHeaders.get("Host").toString() : "unknown";
         String hostName = requestedHost.indexOf(":") != -1 ? requestedHost.substring(0, requestedHost.indexOf(":")) : requestedHost;
         //Get host ID from request host name
         String hostId = Context.get().hosts().getHostId(hostName);
@@ -285,20 +291,20 @@ public class HttpParser {
         REQUEST requestType = REQUEST.valueOf(requestLines.get(REQUEST_LINE.METHOD).toString());
         String contextPath = requestLines.get(REQUEST_LINE.PATH).toString();
         String protocol = requestLines.get(REQUEST_LINE.PROTOCOL).toString();
-        Charset charset = Charset.forName(requestHeaders.get("Charset") != null ? requestHeaders.get("Charset") : this.host.charset());
+        Charset charset = Charset.forName(requestHeaders.get("Charset") != null ? requestHeaders.get("Charset").toString() : this.host.charset());
         URI requestURI = new URI(protocol+"://"+requestedHost + Base64.getEncoder().encodeToString(contextPath.getBytes()));
         //Get content type from requested header
-        String contentType = requestHeaders.get("Content-Type");
+        String contentType = requestHeaders.get("Content-Type") != null ? requestHeaders.get("Content-Type").toString() : null;
         //Get content length from requested header
-        long contentLength = requestHeaders.get("Content-Length") != null ? Long.parseLong(requestHeaders.get("Content-Length")) : 0L;
+        long contentLength = requestHeaders.get("Content-Length") != null ? Long.parseLong(requestHeaders.get("Content-Length").toString()) : 0L;
         //Get mime type
         BodyPart bodyPart = null;            
         MIME mimeType = null;
         if(contentType != null && contentLength > 0) {
             mimeType = contentType.indexOf(";") != -1 ? MIME.mimeType(contentType.substring(0, contentType.indexOf(";"))) : MIME.mimeType(contentType);
             String boundary = contentType != null ? contentType.substring(contentType.indexOf(";")+1) : null;
-            String bodyInStream = requestHeaders.get("body-in-stream");
-            boolean preLoadBody = bodyInStream == null ? false : !Boolean.valueOf(bodyInStream);                
+            Object bodyInStream = requestHeaders.get("body-in-stream");
+            boolean preLoadBody = bodyInStream == null ? false : !Boolean.valueOf(bodyInStream.toString());                
             String[] splited = contentType.split("\\;");
             contentType = splited[0].trim();
             boundary = splited[1].substring(splited[1].indexOf("=") + 1).trim();                            

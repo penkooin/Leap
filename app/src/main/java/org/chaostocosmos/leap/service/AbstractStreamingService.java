@@ -55,11 +55,11 @@ public abstract class AbstractStreamingService extends AbstractService implement
         if(!resourcePath.toFile().exists()) {
             throw new LeapException(HTTP.RES404, "Specified resource not found: "+resourcePath.toAbsolutePath().toString().replace("\\", "/"));
         }
-        String range = request.getReqHeader().get("Range");
+        Object range = request.getReqHeader().get("Range");
         if(range == null || range.equals("")) {
             throw new LeapException(HTTP.RES412, "Header field not found(Range). Streaming request header must have field of Range");
         }
-        Matcher matcher = RANGE_PATTERN.matcher(range);
+        Matcher matcher = RANGE_PATTERN.matcher(range.toString());
         long fileLength = resourcePath.toFile().length();
         int position = 0;
         if (matcher.matches()) {

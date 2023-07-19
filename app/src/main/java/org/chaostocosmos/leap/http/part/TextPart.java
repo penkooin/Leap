@@ -5,7 +5,6 @@ import java.nio.charset.Charset;
 import java.nio.file.Path;
 
 import org.chaostocosmos.leap.common.FileUtils;
-import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.MIME;
 import org.chaostocosmos.leap.http.HttpRequestStream;
@@ -33,7 +32,7 @@ public class TextPart extends BodyPart {
     @Override
     public void save(Path targetPath) throws IOException {
         if(super.isLoadedBody) {
-            FileUtils.saveText(new String(super.body.get("BODY"), super.charset), targetPath, Context.get().server().getFileBufferSize());
+            FileUtils.saveText(new String(super.body.get("BODY"), super.charset), targetPath, this.host.getFileBufferSize());
         } else {
             super.requestStream.saveStream(super.contentLength, targetPath);
         }

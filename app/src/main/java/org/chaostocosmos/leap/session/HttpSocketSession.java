@@ -8,7 +8,7 @@ import java.net.Socket;
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.manager.SessionManager;
-import org.chaostocosmos.leap.spring.entity.Message;
+import org.chaostocosmos.leap.service.entity.Message;
 
 /**
  * WebSocketSession
@@ -20,17 +20,14 @@ public class HttpSocketSession extends HttpSession {
      * Socket object
      */
     final Socket socket;
-
     /**
      * Client InputStream
      */
     final InputStream inStream;
-
     /**
      * Client OutputStream
      */
     final OutputStream outStream;
-
     /**
      * HttpSocketSession
      * @param sessionManager
@@ -52,7 +49,7 @@ public class HttpSocketSession extends HttpSession {
     @Override
     public void close() {
         Message msg = new Message();
-        msg.setContent(Context.get().messages().http(HTTP.RES500.code()));
+        msg.setContent(Context.get().message().http(HTTP.RES500.code()));
         try {
             this.inStream.close();
             this.outStream.write(msg.getContent().getBytes());

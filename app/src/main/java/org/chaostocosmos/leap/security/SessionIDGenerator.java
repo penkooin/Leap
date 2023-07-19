@@ -59,7 +59,7 @@ public class SessionIDGenerator {
      * @param length
      * @return
      */
-    public synchronized String generateSessionId(int length) {
+    public String generateSessionId(int length) {
         return generateSessionId(length, this.algorithm);
     }
 
@@ -69,7 +69,7 @@ public class SessionIDGenerator {
      * @param algorithm
      * @return
      */
-    public synchronized String generateSessionId(int length, String algorithm) {
+    public String generateSessionId(int length, String algorithm) {
         byte[] buffer = new byte[length];
         StringBuffer genId = new StringBuffer();
         int resultLenBytes = 0;
@@ -119,7 +119,7 @@ public class SessionIDGenerator {
      * Set MessageDigest algorithm
      * @param algorithm
      */
-    public synchronized void setAlgorithm(String algorithm)  {
+    public void setAlgorithm(String algorithm)  {
         this.algorithm = algorithm;
     }
 

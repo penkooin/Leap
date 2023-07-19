@@ -143,7 +143,7 @@ public class WatchResources extends Thread implements ResourcesModel {
      * @throws IOException
      * @throws InterruptedException
      */
-    protected synchronized Resource loadForkJoinResources() throws InterruptedException, IOException {
+    protected Resource loadForkJoinResources() throws InterruptedException, IOException {
         ForkJoinPool pool = new ForkJoinPool((int)((com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean()).getAvailableProcessors());
         ResourceLoadProcessor proc = new ResourceLoadProcessor(new Resource(true, this.watchPath, false, this.host.getInMemorySplitUnit()));
         pool.execute(proc);
@@ -499,7 +499,7 @@ public class WatchResources extends Thread implements ResourcesModel {
      * @param res
      * @throws IOException
      */
-    protected synchronized void addResource(Resource resourceTree, String[] res, Resource data) throws IOException {        
+    protected void addResource(Resource resourceTree, String[] res, Resource data) throws IOException {        
         if(res.length == 1) {            
             resourceTree.put(res[0], data);
         } else {

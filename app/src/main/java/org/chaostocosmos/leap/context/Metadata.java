@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.chaostocosmos.leap.common.DataStructureOpr;
-import org.chaostocosmos.leap.enums.EVENT_TYPE;
+import org.chaostocosmos.leap.enums.SERVER_EVENT;
 
 /**
  * AbstractMeta
@@ -77,7 +77,7 @@ public class Metadata <T> {
     public void setValue(String expr, Object value) {
         DataStructureOpr.<Object> setValue(meta, expr, value);
         //System.out.println(this.getClass().getCanonicalName()+"="+Chart.class.getCanonicalName());
-        Context.get().dispatchContextEvent(new MetaEvent<Metadata<?>>(this, EVENT_TYPE.CHANGED, this, expr, value));
+        Context.get().dispatchContextEvent(new MetaEvent<Metadata<?>>(this, SERVER_EVENT.CHANGED, this, expr, value));
     }
     /**
      * Add metadata value
@@ -96,7 +96,7 @@ public class Metadata <T> {
         } else {
             throw new RuntimeException("Parent data type is wired. Context data structure failed: "+parent);
         }
-        Context.get().dispatchContextEvent(new MetaEvent<Metadata<?>>(this, EVENT_TYPE.ADDED, this, expr, value));
+        Context.get().dispatchContextEvent(new MetaEvent<Metadata<?>>(this, SERVER_EVENT.ADDED, this, expr, value));
     }
     /**
      * Remove metadata value
@@ -116,7 +116,7 @@ public class Metadata <T> {
         } else {
             throw new RuntimeException("Parent data type is wired. Context data structure failed: "+parent);
         }
-        Context.get().dispatchContextEvent(new MetaEvent<Metadata<?>>(this, EVENT_TYPE.REMOVED, this, expr, value));
+        Context.get().dispatchContextEvent(new MetaEvent<Metadata<?>>(this, SERVER_EVENT.REMOVED, this, expr, value));
     }
     /**
      * Exists context value by specified expression

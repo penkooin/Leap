@@ -8,8 +8,10 @@ import java.net.InetAddress;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.transaction.NotSupportedException;
 
 import org.apache.commons.cli.CommandLine;
@@ -17,7 +19,9 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
+import org.chaostocosmos.leap.common.ClassUtils;
 import org.chaostocosmos.leap.common.LoggerFactory;
+import org.chaostocosmos.leap.common.NetworkInterfaces;
 import org.chaostocosmos.leap.common.ThreadPoolManager;
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.context.Host;
@@ -28,7 +32,6 @@ import org.chaostocosmos.leap.enums.STATUS;
 import org.chaostocosmos.leap.exception.LeapException;
 import org.chaostocosmos.leap.manager.ResourceManager;
 import org.chaostocosmos.leap.manager.SpringJPAManager;
-import org.chaostocosmos.leap.resource.ClassUtils;
 import org.chaostocosmos.leap.resource.ResourceHelper;
 import org.chaostocosmos.leap.resource.ResourceMonitor;
 
@@ -90,10 +93,7 @@ public class LeapApp implements MetaListener {
      */
     private void setup(String[] args) throws Exception {
         CommandLineParser parser = new DefaultParser();
-        CommandLine cmdLine;
-
-        cmdLine = parser.parse(getOptions(), args);
-
+        CommandLine cmdLine = parser.parse(getOptions(), args);
         //set HOME directory
         String optionH = cmdLine.getOptionValue("h");
         if(optionH != null) {
@@ -102,15 +102,12 @@ public class LeapApp implements MetaListener {
         } else {
             HOME_PATH = Paths.get("./").toAbsolutePath().normalize(); 
         }
-
         if(!HOME_PATH.toFile().isDirectory() || !HOME_PATH.toFile().exists()) {
-            throw new FileNotFoundException("Resource path must be directory and exist : "+HOME_PATH.toAbsolutePath().toString());
+            throw new FileNotFoundException("Resource path must be directory and exists in : "+HOME_PATH.toAbsolutePath().toString());
         }
-
         //initialize environment and context
         context = Context.get(HOME_PATH);        
         context.addContextListener(this);
-
         //set log level
         String optionL = cmdLine.getOptionValue("l");
         logger = LoggerFactory.getLogger(context.hosts().getDefaultHost().getHostId());
@@ -118,11 +115,9 @@ public class LeapApp implements MetaListener {
             Level level = Level.toLevel(optionL); 
             logger.setLevel(level);
         }
-        logger.info("Leap starting.");
-
+        logger.info("Leap starting......"+new Date());
         //print trade mark
         trademark();
-
         logger.info("====================================================================================================");
         //set verbose option to STD IO
         String optionV = cmdLine.getOptionValue("v");
@@ -139,17 +134,17 @@ public class LeapApp implements MetaListener {
     }
     /**
      * Start environment
+     * 
      * @throws Exception
      */
     public void start() throws Exception {
-        //NetworkInterfaces.getAllNetworkAddresses().stream().forEach(i -> System.out.println(i.getHostName())); 
+        //NetworkInterfaces.get().getAllNetworkAddresses().stream().forEach(i -> System.out.println(i.getHostName())); 
         //Spring JPA 
         if((boolean) context.server().isSupportSpringJPA()) {
             jpaManager = SpringJPAManager.get();
         }
         // initialize resource manager
         resourceManager = ResourceManager.initialize();
-
         //initialize Leap hosts
         for(Host<?> host : context.hosts().getAllHost()) {
             // set host server status to NONE

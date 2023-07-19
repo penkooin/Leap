@@ -135,7 +135,7 @@ public class HttpTransfer implements Http {
      * @return
      * @throws IOException
      */
-    public Map<String, String> getRequestHeaders() throws IOException {        
+    public Map<String, Object> getRequestHeaders() throws IOException {        
         return this.httpParser.parseRequestHeaders();
     }
     /**
@@ -217,35 +217,35 @@ public class HttpTransfer implements Http {
      * @param body
      */
     public void sendResponse(Host<?> host, int resCode, Map<String, List<String>> headers, Object body) {
-        Charset charset = Charset.forName(this.host.charset());
-        String protocol = this.host.<String> getProtocol();
-        String resMsg = HTTP.valueOf("RES"+resCode).status();
-        String res = protocol+"/"+Constants.HTTP_VERSION+" "+resCode+" "+resMsg+"\r\n"; 
-        if(body == null) {
-            this.host.getLogger().warn("Response body is Null: "+resCode);
-            return ;
-        }    
-        long contentLength = -1;
-        if(body instanceof byte[]) {
-            contentLength = ((byte[])body).length;
-        } else if(body instanceof String) {
-            contentLength = ((String)body).getBytes(charset).length;
-        } else if(body instanceof Path) {
-            contentLength = ((Path)body).toFile().length();
-        } else if(body instanceof File) {
-            contentLength = ((File)body).length();
-        } else {
-            throw new LeapException(HTTP.RES501, new NotSupportedException("Not support response body type: "+body.getClass().getName()));
-        }
-        List<String> values = new ArrayList<>();
-        values.add(String.valueOf(contentLength));
-        headers.put("Content-Length", values);
-
-        //LoggerFactory.getLogger(response.getRequestedHost()).debug(response.toString());
-        StringBuffer resStr = new StringBuffer();
-        resStr.append("////////////////////////////// [RESPONSE] : "+res.trim()+" - "+this.socket.getRemoteSocketAddress().toString()+" //////////////////////////////"+System.lineSeparator());
-        resStr.append("RES CODE: "+resCode+System.lineSeparator());
         try {
+            Charset charset = Charset.forName(this.host.charset());
+            String protocol = this.host.<String> getProtocol();
+            String resMsg = resCode < 900 ? HTTP.valueOf("RES"+resCode).status() : resCode >= 900 && resCode < 1000 ? HTTP.valueOf("LEAP"+resCode).status() : "Error code not supported: "+resCode;
+            String res = protocol+"/"+Constants.HTTP_VERSION+" "+resCode+" "+resMsg+"\r\n"; 
+            if(body == null) {
+                this.host.getLogger().warn("Response body is Null: "+resCode);
+                return ;
+            }    
+            long contentLength = -1;
+            if(body instanceof byte[]) {
+                contentLength = ((byte[])body).length;
+            } else if(body instanceof String) {
+                contentLength = ((String)body).getBytes(charset).length;
+            } else if(body instanceof Path) {
+                contentLength = ((Path)body).toFile().length();
+            } else if(body instanceof File) {
+                contentLength = ((File)body).length();
+            } else {
+                throw new LeapException(HTTP.RES501, new NotSupportedException("Not support response body type: "+body.getClass().getName()));
+            }
+            List<String> values = new ArrayList<>();
+            values.add(String.valueOf(contentLength));
+            headers.put("Content-Length", values);
+
+            //LoggerFactory.getLogger(response.getRequestedHost()).debug(response.toString());
+            StringBuffer resStr = new StringBuffer();
+            resStr.append("////////////////////////////// [RESPONSE] : "+res.trim()+" - "+this.socket.getRemoteSocketAddress().toString()+" //////////////////////////////"+System.lineSeparator());
+            resStr.append("RES CODE: "+resCode+System.lineSeparator());
             this.outStream.write(res.getBytes());
             for(Map.Entry<String, List<String>> e : headers.entrySet()) {
                 String hv = e.getValue().stream().map(v -> v.toString()).collect(Collectors.joining("; "));
@@ -261,9 +261,9 @@ public class HttpTransfer implements Http {
                 if(body instanceof String) {                                       
                     this.outStream.write(body.toString().getBytes());
                 } else if(body instanceof File) {
-                    writeToStream((File)body, this.outStream, Context.get().server().getFileBufferSize());
+                    writeToStream((File)body, this.outStream, this.host.getFileBufferSize());
                 } else if(body instanceof Path) {
-                    writeToStream(((Path)body).toFile(), this.outStream, Context.get().server().getFileBufferSize());
+                    writeToStream(((Path)body).toFile(), this.outStream, this.host.getFileBufferSize());
                 } else {
                     throw new IllegalArgumentException("Not supported response body type: "+body.getClass().getName());
                 }
@@ -278,8 +278,9 @@ public class HttpTransfer implements Http {
     /**
      * Process error
      * @param err
+     * @throws IOException
      */
-    public void processError(LeapException err) {        
+    public void processError(LeapException err) throws IOException {        
         //this.host.getLogger().error(err.getMessage(), err);
         if(this.response == null) {
             try {
@@ -306,7 +307,7 @@ public class HttpTransfer implements Http {
                 Html.makeRedirectHeader(0, redirect.getURLString()).entrySet().stream().forEach(e -> this.response.addHeader(e.getKey(), e.getValue()));
                 this.response.addHeader("Location", redirect.getURLString());
             }
-            if(Context.get().host(hostId).<Boolean> getErrorDetails()) {
+            if(Context.get().host(hostId).<Boolean> getLogsDetails()) {
                 stackTrace = "<pre>" + err.getStackTraceMessage() + "<pre>";
             }
         } else {
@@ -315,15 +316,11 @@ public class HttpTransfer implements Http {
         if(!Context.get().hosts().isExistHostname(hostId)) {
             hostId = Context.get().hosts().getDefaultHost().getHostId();
         }        
-        try {
-            Object body = TemplateBuilder.buildErrorHtml(Context.get().host(hostId), resCode, message, stackTrace);            
-            this.response.setResponseCode(resCode);
-            this.response.setContentLength(body.toString().getBytes().length);
-            this.response.setBody(body);
-            sendResponse();
-        } catch (IOException e) {
-            this.host.getLogger().error(e.getMessage(), e);            
-        }
+        Object body = TemplateBuilder.buildErrorHtml(Context.get().host(hostId), resCode, message, stackTrace);            
+        this.response.setResponseCode(resCode);
+        this.response.setContentLength(body.toString().getBytes().length);
+        this.response.setBody(body);
+        sendResponse();
     }
     /**
      * Write resource to OutputStream for client
@@ -365,15 +362,15 @@ public class HttpTransfer implements Http {
      */
     public void close() {
         try {
-            if(this.inputStream != null) {
+            //if(this.inputStream != null) {
                 this.inputStream.close();
-            }
-            if(this.outStream != null) {
+            //}
+            //if(this.outStream != null) {
                 this.outStream.close();
-            }
-            if(this.socket != null && !this.socket.isClosed()) {
+            //}
+            //if(this.socket != null && !this.socket.isClosed()) {
                 this.socket.close();
-            }
+            //}
         } catch(Exception e) {
             LoggerFactory.getLogger(this.host.getHost()).error(e.getMessage(), e);
         }

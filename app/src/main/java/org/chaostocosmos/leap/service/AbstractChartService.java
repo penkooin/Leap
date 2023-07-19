@@ -162,7 +162,7 @@ public abstract class AbstractChartService extends AbstractService implements Ch
     }
 
     @Override
-    public synchronized void saveImage(BufferedImage image, Path savePath, CODEC codec) throws Exception {       
+    public void saveImage(BufferedImage image, Path savePath, CODEC codec) throws Exception {       
         GraphUtility.saveBufferedImage(image, savePath.toFile(), CODEC.PNG);
     }
 

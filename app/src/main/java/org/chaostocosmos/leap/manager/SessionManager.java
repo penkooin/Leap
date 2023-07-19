@@ -47,19 +47,11 @@ public class SessionManager {
     }
 
     /**
-     * Set apply session support flag
-     * @param applySession
-     */
-    public void setApplySession(boolean applySession) {
-        this.host.setSessionApply(applySession);
-    }
-
-    /**
      * Whether request exists in sessions
      * @param request
      * @return
      */
-    public synchronized boolean exists(HttpRequest request) {
+    public boolean exists(HttpRequest request) {
         String sessionId = request.getCookie(Constants.SESSION_ID_KEY);
         if(this.sessionMap.containsKey(sessionId)) {
             return true;
@@ -72,7 +64,7 @@ public class SessionManager {
      * @param sessionId
      * @return
      */
-    public synchronized Session getSessionCreateIfNotExists(String sessionId) {        
+    public Session getSessionCreateIfNotExists(String sessionId) {        
         if(this.sessionMap.containsKey(sessionId)) {
             Session session = this.sessionMap.get(sessionId);
             session.setNew(false);            
@@ -89,7 +81,7 @@ public class SessionManager {
      * @param request
      * @return
      */
-    public synchronized Session createSession(String sessionId) {
+    public Session createSession(String sessionId) {
         int idLength = Context.get().host(this.host.getHostId()).getSessionIDLength();
         long creationTime = System.currentTimeMillis();
         long lastAccessedTime = creationTime;
@@ -108,7 +100,7 @@ public class SessionManager {
      * Add session
      * @param session
      */
-    public synchronized void addSession(Session session) {
+    public void addSession(Session session) {
         this.sessionMap.put(session.getId(), session);
     }
 
@@ -116,7 +108,7 @@ public class SessionManager {
      * Remove session
      * @param session
      */
-    public synchronized boolean removeSession(String sessionId) {
+    public boolean removeSession(String sessionId) {
         if(this.sessionMap.containsKey(sessionId)) {
             this.sessionMap.remove(sessionId);
             return true;
@@ -128,7 +120,7 @@ public class SessionManager {
      * Close session
      * @param session
      */
-    public synchronized boolean removeSession(Session session) {
+    public boolean removeSession(Session session) {
         return removeSession(session.getId());
     }
 

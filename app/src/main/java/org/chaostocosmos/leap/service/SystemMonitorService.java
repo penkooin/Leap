@@ -74,8 +74,8 @@ public class SystemMonitorService extends AbstractChartService {
     @MethodMapper(method = REQUEST.POST, mappingPath = "/monitor/chart/image")
     @SuppressWarnings("unchecked")
     public void getResources(HttpRequest request, HttpResponse response) throws Exception {
-        Map<String, String> header = request.getReqHeader();
-        String charset = header.get("charset");
+        Map<String, Object> header = request.getReqHeader();
+        String charset = header.get("Charset") != null ? header.get("Charset").toString() : super.getHost().charset();
         if(charset == null || charset.equals("")) {
             throw new LeapException(HTTP.RES404, "Request has no charset field in header.");
         }
@@ -120,7 +120,7 @@ public class SystemMonitorService extends AbstractChartService {
      * @throws IOException
      * @throws NotSuppotedEncodingFormatException
      */
-    public synchronized void saveBufferedImage(BufferedImage image, File saveFile, CODEC codec) throws IOException, NotSuppotedEncodingFormatException {
+    public void saveBufferedImage(BufferedImage image, File saveFile, CODEC codec) throws IOException, NotSuppotedEncodingFormatException {
     	String ext = saveFile.getName().substring(saveFile.getName().lastIndexOf(".") + 1);
     	if(!Stream.of(CODEC.values()).anyMatch(c -> c.name().equalsIgnoreCase(ext))) {
     		throw new NotSuppotedEncodingFormatException("Given file extention isn't exist in supported codec list.");

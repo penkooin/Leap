@@ -17,7 +17,10 @@ public class ContextTest {
 
     public ContextTest() throws URISyntaxException, IOException, LeapException {    
         Context context = Context.get(Paths.get("."));
-        String msg = context.messages().leap(901, "aaa", "bbb", "ccc", "DDD");
+        String msg = context.message().leap(901, "aaa", "bbb", "ccc", "DDD");
+        msg = context.server().getMonitoringLogLevel();
+        System.out.println(msg);
+        msg = context.server().getMonitoringInterval();
         System.out.println(msg);
     }
 
@@ -47,7 +50,7 @@ public class ContextTest {
     
     @Test
     public void testGetMsg() {
-        String str = Context.get().messages().http(500);
+        String str = Context.get().message().http(500);
         System.out.println(str);
     }
 

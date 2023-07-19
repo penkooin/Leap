@@ -21,6 +21,6 @@ public class Mime <T> extends Metadata <T> {
      * @return
      */
     public <V> V getMime(String mimeKey) {
-        return super.getValue("mime."+mimeKey);
+        return super.getValue(mimeKey);
     }
 }

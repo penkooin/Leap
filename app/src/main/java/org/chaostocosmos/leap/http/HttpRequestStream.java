@@ -348,21 +348,15 @@ public class HttpRequestStream {
      * @return
      * @throws IOException
      */
-    public String readLine(Charset charset) throws IOException {
-        int c;
-        int pc = -1;
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        while((c = inputStream.read()) != -1) {
-            //CR : 0x0D, //LF : 0x0A
-            if((pc == 0x0D && c == 0x0A)) {
-                break;
-            }
-            baos.write(c);
-            pc = c;
-        };
-        byte[] data = baos.toByteArray();
-        String line = new String(Arrays.copyOf(data, data.length - 1), charset);
-        return line.equals("") ? null : line;
+    public String readRequestLine(Charset charset) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        int c =  -1;
+        while ((c = this.inputStream.read()) != -1 && c != '\r' && c != '\n') {
+            char character = (char) c;
+            sb.append(character);
+        };        
+        String line = sb.toString().trim();
+        return line;
     }
 
     /**
@@ -372,15 +366,44 @@ public class HttpRequestStream {
      * @throws IOException
      */
     public List<String> readHeaders(Charset charset) throws IOException {
-        String allLines = "";
-        String line;
-        while((line=readLine(charset)) != null) {
-            if(line.equals("")) {
+        StringBuffer allLines = new StringBuffer();
+        int c = -1;
+        while((c = this.inputStream.read()) != -1) {
+            allLines.append((char) c);
+            if(allLines.indexOf("\r\n\r\n") != -1) {
                 break;
             }
-            allLines += line + System.lineSeparator();            
+        }        
+        return Arrays.asList(allLines.toString().split("\n")).stream().filter(l -> !l.trim().equals("")).collect(Collectors.toList());
+    }
+    /**
+     * Read line
+     * @param charset
+     * @return
+     * @throws IOException
+     */
+    public String readLine(Charset charset) throws IOException {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        int c = this.inputStream.read();
+        do {
+            out.write(c);
+        } while((c=this.inputStream.read()) != -1 && c != '\n');
+        byte[] data = out.toByteArray();
+        return data.length < 2 ? null : new String(Arrays.copyOf(data, data.length-1), charset);
+    }
+    /**
+     * Read lines
+     * @param charset
+     * @return
+     * @throws IOException
+     */
+    public List<String> readLines(Charset charset) throws IOException {
+        List<String> lines = new ArrayList<>();
+        String line;
+        while((line=readLine(charset)) != null) {
+            lines.add(line);
         }
-        return Arrays.asList(allLines.split(System.lineSeparator())).stream().collect(Collectors.toList());
+        return lines;
     }
 
     /**

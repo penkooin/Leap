@@ -9,19 +9,18 @@ import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.MIME;
 import org.chaostocosmos.leap.enums.REQUEST;
 import org.chaostocosmos.leap.exception.LeapException;
+import org.chaostocosmos.leap.http.HttpRequest;
+import org.chaostocosmos.leap.http.HttpResponse;
 import org.chaostocosmos.leap.http.HttpTransfer;
 import org.chaostocosmos.leap.manager.ServiceManager;
 import org.chaostocosmos.leap.manager.SessionManager;
 import org.chaostocosmos.leap.manager.SpringJPAManager;
-import org.chaostocosmos.leap.http.HttpRequest;
-import org.chaostocosmos.leap.http.HttpResponse;
 import org.chaostocosmos.leap.resource.Resource;
 import org.chaostocosmos.leap.resource.ResourceHelper;
 import org.chaostocosmos.leap.resource.TemplateBuilder;
 import org.chaostocosmos.leap.security.UserCredentials;
 import org.chaostocosmos.leap.service.ServiceHolder;
 import org.chaostocosmos.leap.service.ServiceInvoker;
-import org.chaostocosmos.leap.service.model.ServiceModel;
 import org.chaostocosmos.leap.session.Session;
 
 /**
@@ -81,7 +80,7 @@ public class LeapHandler implements Runnable {
     }
 
     @Override
-    public synchronized void run() {
+    public void run() {
         try {
             //Create HttpRequest object
             HttpRequest request = this.httpTransfer.getRequest();
@@ -96,7 +95,7 @@ public class LeapHandler implements Runnable {
             if(host.isAuthentication()) {
                 try {
                     if((session != null && !session.isAuthenticated()) && request.getCookie("__auth-trial") == null || !request.getCookie("__auth-trial").equals("1")) {
-                        String authorization = request.getReqHeader().get("Authorization");
+                        Object authorization = request.getReqHeader().get("Authorization");
                         UserCredentials userCredentials = this.securityManager.authenticate(authorization);
                         if(userCredentials == null) {
                             response.addSetCookie("__auth-trial", "1");
@@ -169,13 +168,13 @@ public class LeapHandler implements Runnable {
             if(e.getResCode() == HTTP.LEAP900) {
                 this.host.getLogger().info("[CONNECTION CLOSED BY CLIENT] Host: "+this.host.getHostId()+"  Client: "+this.httpTransfer.getSocket().getInetAddress().toString());
             } else {
-                // try {                
+                try {                
                     if(this.httpTransfer != null) {
                         this.httpTransfer.processError(e);
                     }                
-                // } catch (Exception ex) {                
-                //     this.host.getLogger().error(e.getMessage(), ex);
-                // }
+                } catch (Exception ex) {                
+                    this.host.getLogger().error(e.getMessage(), ex);
+                }
             }
         } catch(Exception e) {
             e.printStackTrace();

@@ -45,7 +45,7 @@ public class DataStructureOpr {
 				return findValue(list.get(idx), subKeys);
 			}
 		} else if (obj instanceof Map) {
-			Map<String, T> map = (Map<String, T>) obj;
+			Map<String, T> map = (Map<String, T>) obj;			
 			if (keys.length == 1 && map.containsKey(keys[0])) {
 				return (T) map.get(keys[0]);
 			} else if (keys.length > 1 && map.containsKey(keys[0])) {

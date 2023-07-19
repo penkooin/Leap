@@ -32,13 +32,17 @@ public class DeployService extends AbstractService implements DeployModel {
     
     @MethodMapper(method = REQUEST.POST, mappingPath = "/service/add")
     public void add(HttpRequest request, HttpResponse response) throws LeapException, IOException {
-        final Map<String, String> headers = request.getReqHeader();
+        final Map<String, Object> headers = request.getReqHeader();
         final Part bodyPart = request.getBodyPart();
         if(bodyPart == null) {
             throw new LeapException(HTTP.RES417, "Service class file data is missing in request.");
         } else if(bodyPart.getContentType() == MIME.MULTIPART_FORM_DATA) {            
-            String qualifiedClassName = headers.get("serviceClassNames");
-            if(qualifiedClassName.startsWith("[") && qualifiedClassName.endsWith("]")) {
+            Object className = headers.get("serviceClassNames");
+            if(className == null) {
+                throw new LeapException(HTTP.RES417, "Service class name is missiong in request.");
+            }
+            String qualifiedClassName = className.toString();
+            if(qualifiedClassName.toString().startsWith("[") && qualifiedClassName.toString().endsWith("]")) {
                 qualifiedClassName = qualifiedClassName.substring(qualifiedClassName.indexOf("[")+1, qualifiedClassName.lastIndexOf("]"));
                 if(qualifiedClassName == null || qualifiedClassName.equals("")) {
                     throw new LeapException(HTTP.RES412, "Service class name array is empty!!!");

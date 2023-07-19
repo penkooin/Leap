@@ -10,7 +10,6 @@ public enum PROTOCOL {
     HTTP(false, "HTTP"),
     HTTPS(true, "HTTPS"),
     WSS(true, "WSS");
-
     /**
      * SSL flag
      */
@@ -20,6 +19,11 @@ public enum PROTOCOL {
      */
     String protocol;
 
+    /**
+     * Init
+     * @param isSSL
+     * @param protocol
+     */
     PROTOCOL(boolean isSSL, String protocol) {
         this.isSecured = isSSL;
         this.protocol = protocol;

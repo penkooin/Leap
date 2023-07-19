@@ -3,7 +3,6 @@ package org.chaostocosmos.leap.exception;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.chaostocosmos.leap.common.ExceptionUtils;
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.enums.HTTP;
 
@@ -47,7 +46,7 @@ public class LeapException extends RuntimeException {
      * @param params
      */
     public LeapException(HTTP resCode, Throwable cause, Object... params) {
-        super(Context.get().messages().message(resCode.code(), params), cause);
+        super(Context.get().message().message(resCode.code(), params), cause);
         this.resCode = resCode;
     }
     /**

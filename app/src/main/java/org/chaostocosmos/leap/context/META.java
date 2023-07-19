@@ -10,12 +10,10 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Properties;
 import java.util.stream.Collectors;
-
 import javax.transaction.NotSupportedException;
-
 import org.chaostocosmos.leap.common.DataStructureOpr;
+import org.chaostocosmos.leap.common.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
-
 import com.google.gson.Gson;
 
 /**
@@ -24,12 +22,12 @@ import com.google.gson.Gson;
  * @author 9ins
  */
 public enum META {
-
-    SERVER(Context.get().getHome().resolve("config").resolve("server.yml")),
-    HOSTS(Context.get().getHome().resolve("config").resolve("hosts.yml")),
-    MESSAGES(Context.get().getHome().resolve("config").resolve("messages.yml")),
+    LEAP(Context.get().getHome().resolve("config").resolve("leap.yml")),
+    SERVER(Context.get().getHome().resolve("config").resolve("leap.yml")),
+    HOSTS(Context.get().getHome().resolve("config").resolve("leap.yml")),
+    MESSAGE(Context.get().getHome().resolve("config").resolve("message.yml")),
     MIME(Context.get().getHome().resolve("config").resolve("mime.yml")),
-    CHART(Context.get().getHome().resolve("config").resolve("chart.yml"));    
+    MONITOR(Context.get().getHome().resolve("config").resolve("monitor.yml"));    
 
     Path metaPath;
     Map<String, Object> metaMap;
@@ -37,34 +35,30 @@ public enum META {
     /**
      * Initializer
      * @param metaPath
-     * @throws IOException
-     * @throws NotSupportedException
      */
     META(Path metaPath) {
         this.metaPath = metaPath.toAbsolutePath().normalize();
         try {
             load(this.metaPath);
         } catch (IOException | NotSupportedException e) { 
-            e.printStackTrace();
+            LoggerFactory.getLogger().error(e.getMessage(), e);
         }        
     }
-
     /**
      * Reload metadata from file
      * @throws NotSupportedException
      * @throws IOException
      */
-    public synchronized void reload() throws NotSupportedException, IOException {
+    public void reload() throws NotSupportedException, IOException {
         load(this.metaPath);
     }
-
     /**
      * Load metadata from file
      * @param metaPath
      * @throws NotSupportedException
      * @throws IOException
      */
-    public synchronized void load(Path metaPath) throws NotSupportedException, IOException {
+    public void load(Path metaPath) throws NotSupportedException, IOException {
         String metaName = metaPath.toFile().getName();
         String metaType = metaName.substring(metaName.lastIndexOf(".") + 1);
         String metaString = Files.readString(metaPath, StandardCharsets.UTF_8);
@@ -80,43 +74,41 @@ public enum META {
             throw new NotSupportedException("Meta file not supported: "+metaName);
         }    
     }
-
     /**
      * Get meta data Map
      * @return
      */
     public Metadata<?> getMeta() {
-        if(this.name().equals("SERVER")) {
+        if(super.name().equals("LEAP")) {
+            return new Leap<Map<String, Object>>(this.metaMap);
+        } else if(super.name().equals("SERVER")) {
             return new Server<Map<String, Object>>(this.metaMap);
-        } else if(this.name().equals("HOSTS")) {
+        } else if(super.name().equals("HOSTS")) {            
             return new Hosts<Map<String, Object>>(this.metaMap);
-        } else if(this.name().equals("MESSAGES")) {
-            return new Messages<Map<String, Object>>(this.metaMap);
-        } else if(this.name().equals("MIME")) {
-            return new Mime<Map<String, Object>>(this.metaMap);
-        } else if(this.name().equals("CHART")) {
-            return new Chart<Map<String, Object>>(this.metaMap);
+        } else if(super.name().equals("MESSAGE")) {
+            return new Message<Map<String, Object>>(this.metaMap);            
+        } else if(super.name().equals("MIME")) {
+            return new Mime<Map<String, Object>>(this.metaMap);            
+        } else if(super.name().equals("MONITOR")) {
+            return new Monitor<Map<String, Object>>(this.metaMap);
         } else {
-            return new Metadata<Map<String, Object>>(this.metaMap);
-        }            
+            return new Metadata<>(this.metaMap);
+        }
     }
-
     /**
-     * Set meta data value
+     * Set metadata value
      * @param pathExpr
      * @param value
      */
     public <T> void setMetaValue(String pathExpr, T value) {
         DataStructureOpr.<T>setValue(this.metaMap, pathExpr, value);
     }
-
     /**
      * Get meta data value
      */
     public <T> T getMetaValue(String pathExpr) {
         return DataStructureOpr.<T>getValue(this.metaMap, pathExpr);
     }
-
     /**
      * Get meta data Path
      * @return
@@ -124,7 +116,6 @@ public enum META {
     public Path getMetaPath() {
         return this.metaPath;
     }
-
     /**
      * Save meta data
      */

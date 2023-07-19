@@ -4,19 +4,20 @@ import java.util.List;
 
 import org.chaostocosmos.leap.annotation.MethodMapper;
 import org.chaostocosmos.leap.annotation.ServiceMapper;
+import org.chaostocosmos.leap.enums.DATASOURCE;
 import org.chaostocosmos.leap.enums.REQUEST;
 import org.chaostocosmos.leap.http.HttpRequest;
 import org.chaostocosmos.leap.http.HttpResponse;
-import org.chaostocosmos.leap.spring.entity.Users;
-import org.chaostocosmos.leap.spring.repository.IUsersRespository;
+import org.chaostocosmos.leap.service.configuration.RoutingDataSource;
+import org.chaostocosmos.leap.service.entity.Users;
+import org.chaostocosmos.leap.service.repository.IUsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 @ServiceMapper(mappingPath = "/simple/jpa")
 public class SimpleJPAService extends AbstractService {
 
     @Autowired
-    private IUsersRespository usersRepo;    
+    private IUsersRepository usersRepo;    
 
     @Autowired
     private SimpleSpringService springService;
@@ -25,17 +26,19 @@ public class SimpleJPAService extends AbstractService {
         System.out.println("Simple Spring service injected.............repo: "+usersRepo+"   sping serv: "+springService);
     }
 
-    @MethodMapper(method = REQUEST.GET, mappingPath="/users")
+    @MethodMapper(method = REQUEST.GET, mappingPath="/users/oracle")    
     public void getUsers(HttpRequest request, HttpResponse response) {
         System.out.println("Simple JPA Service called.......................................");
         System.out.println(usersRepo);
+        RoutingDataSource.setDataSourceKey(DATASOURCE.MYSQL);
         List<Users> userList = usersRepo.findByName("Tim");
-        if(userList == null) {
+        System.out.println(usersRepo.getClass().getName()+"********************************************");
+        if(userList == null || userList.size() == 0) {
             Users users = new Users();
             users.setName("Tim");
             users.setAge(55);
             users.setAddress("Seoul, West Side");
-            users.setJob("Developer");    
+            users.setJob("Developer");
             usersRepo.save(users);
         }
         response.setResponseCode(200);

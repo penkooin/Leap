@@ -22,7 +22,7 @@ import org.chaostocosmos.leap.common.Constants;
 import org.chaostocosmos.leap.common.LoggerFactory;
 import org.chaostocosmos.leap.common.SIZE;
 import org.chaostocosmos.leap.common.ThreadPoolManager;
-import org.chaostocosmos.leap.context.Chart;
+import org.chaostocosmos.leap.context.Monitor;
 import org.chaostocosmos.leap.context.Context;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -42,62 +42,50 @@ public class ResourceMonitor {
      * Unit of data size
      */
     //private SIZE unit;
-
     /**
      * Fraction point of digit
      */
     private int fractionPoint;
-
     /**
      * Logger
      */
     private Logger logger;
-
     /**
      * Interval
      */
     private long interval;
-
     /**
      * Timer
      */
     private Timer timer;
-
     /**
      * Whether daemon thread
      */
     private boolean isDaemon;
-
     /**
      * Gson parser
      */
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
     /**
      * Jackson Json 
      */
     private final ObjectMapper mapper = new ObjectMapper();
-
     /**
      * Resource monitor instance
      */
     private static ResourceMonitor resourceMonitor = null;
-
     /**
      * X axis index count
      */
     private static int xIndexCnt = 100;
-
     /**
      * X axis indent count
      */
     private static int xIndexIndent = 10;
-
     /**
      * Chart metadata
      */
-    Chart<?> chart;
-
+    Monitor<?> chart;
     /**
      * Get resource monitor
      * @return
@@ -128,8 +116,8 @@ public class ResourceMonitor {
      * Build monitoring schema
      * @return
      */
-    private static Chart<?> buildMonitorSchema() {
-        Chart<?> chart = Context.get().chart();
+    private static Monitor<?> buildMonitorSchema() {
+        Monitor<?> chart = Context.get().monitor();
         //Setting x index values
         chart.setValue("cpu.x-index", IntStream.range(0, chart.getValue("cpu.x-index")).mapToObj(i -> i % xIndexIndent == 0 ? i+"" : "").collect(Collectors.toList()));        
         chart.setValue("memory.x-index", IntStream.range(0, chart.getValue("memory.x-index")).mapToObj(i -> i % xIndexIndent == 0 ? i+"" : "").collect(Collectors.toList()));

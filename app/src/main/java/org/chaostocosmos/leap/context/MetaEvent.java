@@ -2,7 +2,7 @@ package org.chaostocosmos.leap.context;
 
 import java.util.EventObject;
 
-import org.chaostocosmos.leap.enums.EVENT_TYPE;
+import org.chaostocosmos.leap.enums.SERVER_EVENT;
 
 /**
  * Context Event object
@@ -13,23 +13,19 @@ public class MetaEvent <T extends Metadata<?>> extends EventObject {
     /**
      * Metadata event type enum
      */
-    EVENT_TYPE eventType;
-
+    SERVER_EVENT eventType;
     /**
      * Metadata 
      */
     T metadata;
-
     /**
      * Metadata path expression
      */
     String expr;
-
     /**
      * Event value
      */
     Object value;
-
     /**
      * Constructor
      * @param eventSource
@@ -38,7 +34,7 @@ public class MetaEvent <T extends Metadata<?>> extends EventObject {
      * @param expr
      * @param value
      */
-    public MetaEvent(Object eventSource, EVENT_TYPE eventType, T metadata, String expr, Object value) {
+    public MetaEvent(Object eventSource, SERVER_EVENT eventType, T metadata, String expr, Object value) {
         super(eventSource);
         this.eventType = eventType;
         this.metadata = metadata;
@@ -49,7 +45,7 @@ public class MetaEvent <T extends Metadata<?>> extends EventObject {
      * Get event type
      * @return
      */
-    public EVENT_TYPE getEventType() {
+    public SERVER_EVENT getEventType() {
         return this.eventType;
     }
     /**

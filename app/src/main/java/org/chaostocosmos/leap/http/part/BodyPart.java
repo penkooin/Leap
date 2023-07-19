@@ -6,7 +6,6 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.MIME;
@@ -142,9 +141,9 @@ public class BodyPart implements Part {
             throw new LeapException(HTTP.RES406, "Can not save content. Not supported on Multi Part Operation.");
         }        
         if(this.isLoadedBody) {
-            this.requestStream.saveBinary(this.body.get("BODY"), targetPath, Context.get().server().getFileBufferSize());
+            this.requestStream.saveBinary(this.body.get("BODY"), targetPath, this.host.getFileBufferSize());
         } else {
-            this.requestStream.saveBinary(getContentLength(), targetPath, Context.get().server().getFileBufferSize());
+            this.requestStream.saveBinary(getContentLength(), targetPath, this.host.getFileBufferSize());
         }        
         this.logger.debug("[BODY-PART] "+contentType.name()+" saved: "+targetPath.normalize().toString()+"  Path: "+targetPath.toString());
     }    

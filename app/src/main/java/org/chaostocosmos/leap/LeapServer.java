@@ -11,12 +11,14 @@ import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.SSLServerSocket;
 import javax.transaction.NotSupportedException;
 
+import org.chaostocosmos.leap.common.ClassUtils;
 import org.chaostocosmos.leap.common.Constants;
 import org.chaostocosmos.leap.common.DateUtils;
 import org.chaostocosmos.leap.common.Filtering;
@@ -38,7 +40,6 @@ import org.chaostocosmos.leap.manager.ResourceManager;
 import org.chaostocosmos.leap.manager.SecurityManager;
 import org.chaostocosmos.leap.manager.ServiceManager;
 import org.chaostocosmos.leap.manager.SessionManager;
-import org.chaostocosmos.leap.resource.ClassUtils;
 import org.chaostocosmos.leap.resource.LeapURLClassLoader;
 import org.chaostocosmos.leap.resource.ResourcesModel;
 import org.chaostocosmos.leap.session.Session;
@@ -153,7 +154,7 @@ public class LeapServer extends Thread {
      * @throws IOException
      */
     public LeapServer(Path homePath, Host<?> host, LeapURLClassLoader classLoader) throws IOException, InterruptedException, URISyntaxException, NotSupportedException {
-        this(true, Context.get().getHome(), host.getDocroot(), PROTOCOL.valueOf(host.getProtocol()), new InetSocketAddress(InetAddress.getByName(host.getHost()), host.getPort()), Context.get().server().getBackLog(), host, classLoader);
+        this(true, Context.get().getHome(), host.getDocroot(), PROTOCOL.valueOf(host.getProtocol()), new InetSocketAddress(InetAddress.getByName(host.getHost()), host.getPort()), host.getBackLog(), host, classLoader);
     }
 
     /**
@@ -183,7 +184,7 @@ public class LeapServer extends Thread {
         this.inetSocketAddress = inetSocketAddress;
         this.ipAllowedFilters = host.getIpAllowedFiltering();
         this.ipForbiddenFilters = host.getIpForbiddenFiltering();
-        this.redirectHostSelection = new RedirectHostSelection(Context.get().server().getLoadBalanceRedirects());
+        this.redirectHostSelection = new RedirectHostSelection(this.host.getTrafficRedirects());
         this.sessionManager = new SessionManager(host);
         this.securityManager = new SecurityManager(host);
         this.serviceManager = new ServiceManager(host, this.securityManager, this.sessionManager, this.resourcesModel, classLoader);
@@ -247,9 +248,9 @@ public class LeapServer extends Thread {
                 this.server.bind(this.inetSocketAddress, this.backlog);
                 this.logger.info("[HTTP SERVER START] Address: " + this.inetSocketAddress.toString());
             } else {
-                File keyStore = new File(Context.get().server().<String> getKeyStore());
-                String passphrase = Context.get().server().getPassphrase();
-                String sslProtocol = Context.get().server().getEncryptionMethod();
+                File keyStore = new File(this.host.<String> getKeyStore());
+                String passphrase = this.host.getPassphrase();
+                String sslProtocol = this.host.getEncryptionMethod();
                 this.server = HttpsServerSocketFactory.getSSLServerSocket(keyStore, passphrase, sslProtocol, this.inetSocketAddress, this.backlog);
                 this.logger.info("[HTTPS SERVER START] Address: "+this.inetSocketAddress.toString()+"  Protocol: "+sslProtocol+"  KeyStore: "+keyStore.getName()+"  Supported Protocol: "+Arrays.toString(((SSLServerSocket)server).getSupportedProtocols())+"  KeyStore: "+keyStore.getName());
             }
@@ -260,15 +261,16 @@ public class LeapServer extends Thread {
                 HttpTransfer httpTransfer = null;
                 try {
                     client = this.server.accept();
+                    client.setSoTimeout(this.host.getConnectionTimeout());
                     this.logger.info("[CONNECTED] CLIENT CONNECTED: "+client.getInetAddress().toString());
                     //Create HttpTransfer object
                     httpTransfer = new HttpTransfer(this.host, client);
                     Map<REQUEST_LINE, Object> requestLine = httpTransfer.getRequestLine();                    
-                    Map<String, String> headers = httpTransfer.getRequestHeaders();
+                    Map<String, Object> headers = httpTransfer.getRequestHeaders();
                     Map<String, String> cookies = httpTransfer.getRequestCookies();
-                    client.setSoTimeout(Context.get().server().getConnectionTimeout());
+                    client.setSoTimeout(this.host.getConnectionTimeout());
                     //connection.setSoLinger(false, 1);
-                    String hostName = headers.get("Host").trim().substring(0, headers.get("Host").indexOf(":"));
+                    String hostName = headers.get("Host") != null ? headers.get("Host").toString() : "unknown";
                     String url = requestLine.get(REQUEST_LINE.PROTOCOL) +"://"+ hostName + requestLine.get(REQUEST_LINE.PATH);
                     if(!headers.containsKey("Range") && !this.securityManager.checkRequestAttack(client.getInetAddress().getHostAddress(), url)) {
                         this.host.getLogger().warn("[CLIENT BLOCKED] Too many requested client blocking: "+client.getInetAddress().getHostAddress());

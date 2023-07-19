@@ -18,7 +18,7 @@ import java.util.Map;
 import javax.transaction.NotSupportedException;
 
 import org.chaostocosmos.leap.common.LoggerFactory;
-import org.chaostocosmos.leap.enums.EVENT_TYPE;
+import org.chaostocosmos.leap.enums.SERVER_EVENT;
 import org.chaostocosmos.leap.enums.WEB_PATH;
 import org.chaostocosmos.leap.resource.ResourceHelper;
 
@@ -45,17 +45,14 @@ public class Context extends Thread {
      * Context listener list
      */
     private List<MetaListener> contextListeners = new ArrayList<>();
-
     /**
      * META mod Map
      */
     Map<META, Long> metaFileModMap;
-
     /**
      * Wether over thread
      */
     boolean isDone;
-
     /**
      * Constructor 
      * @param HOME_PATH
@@ -72,7 +69,6 @@ public class Context extends Thread {
         //dispatch context events
         start();
     }
-
     /**
      * Get Context object 
      * @return
@@ -82,7 +78,6 @@ public class Context extends Thread {
     public static Context get() {
         return get(Paths.get(System.getProperty("user.dir")));
     }
-
     /**
      * Get Context object by specified Path
      * @param HOME_PATH
@@ -90,7 +85,7 @@ public class Context extends Thread {
      * @throws URISyntaxException
      * @throws IOException
      */
-    public synchronized static Context get(Path HOME_PATH) {
+    public static Context get(Path HOME_PATH) {
         if(context == null) {
             try {
                 context = new Context(HOME_PATH);
@@ -99,8 +94,7 @@ public class Context extends Thread {
             }
         }        
         return context;
-    }    
-
+    }
     /**
      * Stop metadata watcher
      * @throws InterruptedException
@@ -161,7 +155,7 @@ public class Context extends Thread {
                         final Path metaPath = context.toAbsolutePath().normalize();
                         META meta = Arrays.asList(META.values()).stream().filter(m -> m.getMetaPath().toAbsolutePath().normalize().equals(metaPath)).findFirst().orElseThrow(() -> new FileNotFoundException("File not found in event path: "+metaPath.toAbsolutePath()));
                         meta.reload();
-                        dispatchContextEvent(new MetaEvent<Metadata<?>>(this, EVENT_TYPE.CHANGED, meta.getMeta(), null, null));
+                        dispatchContextEvent(new MetaEvent<Metadata<?>>(this, SERVER_EVENT.CHANGED, meta.getMeta(), null, null));
                     }
                     timestemp = eventMillis;
                 } catch(Exception e) {
@@ -260,11 +254,11 @@ public class Context extends Thread {
     }
 
     /**
-     * Get Messages context
+     * Get Message context
      * @return
      */
-    public Messages<?> messages() {
-        return (Messages<?>) META.MESSAGES.getMeta();
+    public Message<?> message() {
+        return (Message<?>) META.MESSAGE.getMeta();
     }    
 
     /**
@@ -279,8 +273,8 @@ public class Context extends Thread {
      * Get Chart context
      * @return
      */
-    public Chart<?> chart() {
-        return (Chart<?>) META.CHART.getMeta();
+    public Monitor<?> monitor() {
+        return (Monitor<?>) META.MONITOR.getMeta();
     }
 
     /**
@@ -315,12 +309,12 @@ public class Context extends Thread {
                 return server().getValue(expr);
             case HOSTS:
                 return hosts().getValue(expr);
-            case MESSAGES:
-                return messages().getValue(expr);
+            case MESSAGE:
+                return message().getValue(expr);
             case MIME:
                 return mime().getValue(expr);
-            case CHART:
-                return chart().getValue(expr);
+            case MONITOR:
+                return monitor().getValue(expr);
             default:
                 throw new IllegalArgumentException("Metadata type is not found: "+metaType.name());
         }
@@ -335,6 +329,6 @@ public class Context extends Thread {
      */
     public <T, V> void save(META meta) {
         meta.save(); 
-        context.dispatchContextEvent(new MetaEvent<Metadata<?>>(context, EVENT_TYPE.STORED, meta.getMeta(), null, null));
+        context.dispatchContextEvent(new MetaEvent<Metadata<?>>(context, SERVER_EVENT.STORED, meta.getMeta(), null, null));
     } 
 }
