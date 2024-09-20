@@ -6,6 +6,7 @@ import org.chaostocosmos.leap.exception.LeapException;
 import org.junit.jupiter.api.Test;
 
 public class LeapExceptionTest {
+    
     @Test
     public void testCode() throws InterruptedException {
         int code = new LeapException(HTTP.RES100).code();
@@ -15,7 +16,7 @@ public class LeapExceptionTest {
 
     @Test
     public void testGetResCode() throws InterruptedException {
-        HTTP http = new LeapException(HTTP.LEAP900).getResCode();        
+        HTTP http = new LeapException(HTTP.LEAP900).getRes();        
         System.out.println(http.name());
         Context.get().stopMetaWatcher();
     }

@@ -44,8 +44,6 @@ public class TemplateBuilder {
         String url = host.<String> getProtocol().toLowerCase()+"://"+host.getHost()+":"+host.getPort();
         String monitorPage = host.getResource().getTemplatePage(TEMPLATE.MONITOR.path(), Map.of("@url", url));                 
         String script = host.getResource().getTemplatePage("/script/refreshImage.js", Map.of("@interval", Context.get().server().getMonitoringInterval(), "@url", url));
-        System.out.println(script+"-----------------------------------------------");
-        System.out.println(monitorPage+"-----------------------------------------------");
         return host.getResource().getTemplatePage(TEMPLATE.DEFAULT.path(), Map.of("@serverName", host.getHost(), "@script", script, "@body", monitorPage));
     }
 
@@ -59,8 +57,8 @@ public class TemplateBuilder {
     public static String buildWelcomeResourceHtml(String contextPath, Host<?> host) throws Exception {
         String resourcePage = host.getResource().getResourcePage(Map.of("@resourceList", buildResourceJson(contextPath, host)));
         String welcomePage = host.getResource().getWelcomePage(Map.of("@serverName", host.getHost(), "@body", resourcePage));
-        String script = host.getResource().getTemplatePage("/script/genDir.js", null);        
-        return host.getResource().getTemplatePage(TEMPLATE.DEFAULT.path(), Map.of("@serverName", host.getHost(), "@script", script, "@body", welcomePage));
+        String script = host.getResource().getStaticPage("/script/genDir.js", null);
+        return host.getResource().getStaticPage(TEMPLATE.DEFAULT.path(), Map.of("@serverName", host.getHost(), "@script", script, "@body", welcomePage));
     }
 
     /**
@@ -72,7 +70,7 @@ public class TemplateBuilder {
      */
     public static String buildResourceHtml(String contextPath, Host<?> host) throws Exception {
         String resourcePage = host.getResource().getResourcePage(Map.of("@resourceList", buildResourceJson(contextPath, host)));
-        String script = host.getResource().getTemplatePage("/script/genDir.js", null);
+        String script = host.getResource().getStaticPage("/script/genDir.js", null);
         return host.getResource().getTemplatePage(TEMPLATE.DEFAULT.path(), Map.of("@serverName", host.getHost(), "@script", script, "@body", resourcePage));
     }
 
@@ -125,13 +123,13 @@ public class TemplateBuilder {
         params.put("parent", pathCnt > 1 ? path.substring(0, path.lastIndexOf("/")): "/");
         params.put("host", host.getHost()+":"+host.getPort()+"/");
         params.put("elements", resourceInfos.stream().map(f -> {
-                        String img = f.isFile() ? "/img/file.png" : "/img/dir.png";
+                        String img = f.isFile() ? "/image/file.png" : "/image/dir.png";
                         String file = f.isFile() ? f.getName() : f.getName()+"/";
                         String uri = path+"/"+file;
                         long lastModified = f.lastModified();
                         String size = f.isFile() ? SIZE.MB.get(f.length())+" "+SIZE.MB.name() : "-";
                         String inMemory = f.isDirectory() ? "-" : host.getResource().isInMemory(f.toPath()) ? "In-Memory resource" : "File resource";
-                        return Map.of("img", img, "file", file, "uri", uri, "lastModified", new Date(lastModified).toString(), "size", size, "desc", inMemory);
+                        return Map.of("image", img, "file", file, "uri", uri, "lastModified", new Date(lastModified).toString(), "size", size, "desc", inMemory);
         }).collect(Collectors.toList()));
         String json = new Gson().toJson(params);
         return json;

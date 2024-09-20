@@ -38,42 +38,52 @@ import ch.qos.logback.classic.Logger;
  * @author 9ins
  */
 public class HttpTransfer implements Http {
+
     /**
      * Hosts, Information configured in config.yml
      */
     private Host<?> host;
+
     /**
      * Client Socket
      */
     private Socket socket;
+
     /**
      * InputStream
      */
     private InputStream inputStream;
+
     /**
      * OutputStream
      */
     private OutputStream outStream;
+
     /**
      * Http parser
      */
     private HttpParser httpParser;
+
     /**
      * Request
      */
     private HttpRequest request;
+
     /**
      * Response
      */
     private HttpResponse response;
+
     /**
      * Http session
      */
     private Session session;
+
     /**
      * Whether closed
      */
     boolean isClosed = false;
+
     /**
      * Construct with request host and client socket
      * @param host
@@ -87,6 +97,7 @@ public class HttpTransfer implements Http {
         this.outStream = socket.getOutputStream();
         this.httpParser = new HttpParser(this.host, this.inputStream, this.outStream);
     }
+
     /**
      * Get requested host
      * @return
@@ -94,6 +105,7 @@ public class HttpTransfer implements Http {
     public Host<?> getHost() {
         return this.host;
     }
+
     /**
      * Get logger for this HttpTransfer
      * @return
@@ -101,6 +113,7 @@ public class HttpTransfer implements Http {
     public Logger getLogger() {
         return this.host.getLogger();
     }
+
     /**
      * Get Client socket object
      * @return
@@ -108,6 +121,7 @@ public class HttpTransfer implements Http {
     public Socket getSocket() {
         return this.socket;
     }
+
     /**
      * Get client InputStream
      * @return
@@ -115,6 +129,7 @@ public class HttpTransfer implements Http {
     public InputStream getClientInputStream() {
         return inputStream;
     }
+
     /**
      * Get client OutputStream
      * @return
@@ -122,6 +137,7 @@ public class HttpTransfer implements Http {
     public OutputStream getClientOutputStream() {
         return outStream;
     }
+
     /**
      * Get request first line
      * @return
@@ -130,6 +146,7 @@ public class HttpTransfer implements Http {
     public Map<REQUEST_LINE, Object> getRequestLine() throws IOException {
         return this.httpParser.parseRequestLine();
     }
+
     /**
      * Get request headers map
      * @return
@@ -138,6 +155,7 @@ public class HttpTransfer implements Http {
     public Map<String, Object> getRequestHeaders() throws IOException {        
         return this.httpParser.parseRequestHeaders();
     }
+
     /**
      * Get request cookies map
      * @return
@@ -146,6 +164,7 @@ public class HttpTransfer implements Http {
     public Map<String, String> getRequestCookies() throws IOException {
         return this.httpParser.parseRequestCookies();
     }
+
     /**
      * Get http request
      * @return
@@ -158,6 +177,7 @@ public class HttpTransfer implements Http {
         }
         return this.request;
     }
+
     /**
      * Get http response
      * @return
@@ -173,6 +193,7 @@ public class HttpTransfer implements Http {
         }
         return this.response;
     }    
+
     /**
      * Get session instance
      * @return
@@ -180,6 +201,7 @@ public class HttpTransfer implements Http {
     public Session getSession() {
         return this.session;
     }
+
     /**
      * Set session instance
      * @param session
@@ -187,6 +209,7 @@ public class HttpTransfer implements Http {
     public void setSession(Session session) {
         this.session = session;
     }
+
     /**
      * Get HttpParser
      * @return
@@ -194,6 +217,7 @@ public class HttpTransfer implements Http {
     public HttpParser getHttpParser() {
         return this.httpParser;
     }
+
     /**
      * Send respose to client
      * @throws IOException
@@ -201,6 +225,7 @@ public class HttpTransfer implements Http {
     public void sendResponse() {
         sendResponse(this.response);
     }
+
     /**
      * Send response to client by Response object
      * @param response
@@ -209,6 +234,7 @@ public class HttpTransfer implements Http {
     public void sendResponse(HttpResponse response) {
         sendResponse(this.host, response.getResponseCode(), response.getHeaders(), response.getBody());
     }
+
     /**
      * Send response to client by requested host, status code, reponse headers, body object
      * @param host
@@ -271,17 +297,16 @@ public class HttpTransfer implements Http {
             this.outStream.flush();
         } catch(Exception e) {
             this.host.getLogger().error(e.getMessage(), e);
-        } finally {
-            close();
-        }
+        } 
     }
+
     /**
      * Process error
      * @param err
      * @throws IOException
      */
     public void processError(LeapException err) throws IOException {        
-        //this.host.getLogger().error(err.getMessage(), err);
+        this.host.getLogger().error(err.getMessage(), err);
         if(this.response == null) {
             try {
                 this.response = getResponse();
@@ -299,7 +324,7 @@ public class HttpTransfer implements Http {
         int resCode = HTTP.RES500.code();
         if(err instanceof LeapException) {
             resCode = err.code();
-            if(err.code() == HTTP.RES401.code() && AUTH.valueOf(host.getAuthentication()) == AUTH.BASIC) {
+            if(err.code() == HTTP.RES401.code() && host.getAuthentication() == AUTH.BASIC) {
                 this.response.addHeader("WWW-Authenticate", "Basic");
             } else if(err.code() == HTTP.RES307.code()) {
                 RedirectException redirect = (RedirectException) throwable;
@@ -307,7 +332,7 @@ public class HttpTransfer implements Http {
                 Html.makeRedirectHeader(0, redirect.getURLString()).entrySet().stream().forEach(e -> this.response.addHeader(e.getKey(), e.getValue()));
                 this.response.addHeader("Location", redirect.getURLString());
             }
-            if(Context.get().host(hostId).<Boolean> getLogsDetails()) {
+            if(Context.get().host(hostId).getLogsDetails()) {
                 stackTrace = "<pre>" + err.getStackTraceMessage() + "<pre>";
             }
         } else {
@@ -322,6 +347,7 @@ public class HttpTransfer implements Http {
         this.response.setBody(body);
         sendResponse();
     }
+
     /**
      * Write resource to OutputStream for client
      * @param resource
@@ -337,7 +363,8 @@ public class HttpTransfer implements Http {
             out.write(buffer, 0, len);
         }
         in.close();
-    }    
+    }   
+
     /**
      * Add key-value to header Map
      * @param headers
@@ -357,6 +384,7 @@ public class HttpTransfer implements Http {
         headers.put(key, values);
         return headers;
     }
+
     /**
      * Close client connection
      */
@@ -376,6 +404,7 @@ public class HttpTransfer implements Http {
         }
         LoggerFactory.getLogger(this.host.getHost()).info("CLIENT SOCKET CLOSED: "+socket.getInetAddress().toString());
     }
+
     /**
      * Whether client socket is closed
      * @return

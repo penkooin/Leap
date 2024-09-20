@@ -1,3 +1,4 @@
+#binary & encoded & data
 APPLICATION_OCTET_STREAM: application/octet-stream
 APPLICATION_PKCS12: application/pkcs12
 APPLICATION_VND_MSPOWERPOINT: application/vnd.mspowerpoint
@@ -65,6 +66,7 @@ IMAGE_WEBP: image/webp
 IMAGE_SVG_XML: image/svg+xml
 IMAGE_TIFF: image/tiff
 APPLICATION_X_SHOCKWAVE_FLASH: application/x-shockwave-flash
+IMAGE_VND_MICROSOFT_ICON: image/x-icon
 
 #audio
 AUDIO_AAC: audio/aac

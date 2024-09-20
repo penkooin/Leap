@@ -34,15 +34,15 @@ hosts:
   - id: leap
     default: true
     host: localhost
-    port: 8080
+    port: 8888
     connection-timeout: 5000
     backlog: 300
     file-buffer-size: 1024
     request-blocking-interval: 10
     protocol: HTTP
     protocol-version: 1.1
-    docroot: ./home
-    welcome: /templates/welcome.html
+    home-path: ./home
+    welcome-page: welcome.html
     locale: Asia/Seoul 
     charset: utf-8
     security:
@@ -61,7 +61,7 @@ hosts:
       allowed : ['*']
       forbidden : []
     users:
-      - username: localhost
+      - username: admin
         password: '9393'
         role: ADMIN
       - username: guest
@@ -85,16 +85,16 @@ hosts:
 ############################## Virtual host configuration ##############################
   - id: leap1
     default: false
-    host: www.leap.org
-    port: 8081
+    host: www.leap.com
+    port: 8889
     connection-timeout: 5000
     backlog: 300
     file-buffer-size: 1024
     request-blocking-interval: 10
     protocol: HTTP
     protocol-version: 1.1
-    docroot: ./home1
-    welcome: /templates/welcome.html
+    home-path: ./home1
+    welcome-page: welcome.html
     locale: Asia/Seoul 
     charset: utf-8
     authentication: BASIC
@@ -109,7 +109,7 @@ hosts:
       allowed : ['*']
       forbidden : []
     users:
-      - username: localhost
+      - username: admin
         password: '9393'
         role: ADMIN
       - username: guest

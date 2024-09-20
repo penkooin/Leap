@@ -33,30 +33,37 @@ import org.chaostocosmos.leap.session.Session;
  * @since 2021.09.16
  */
 public class LeapHandler implements Runnable {
+
     /**
      * Leap server home path
      */
     Path LEAP_HOME;
+
     /**
      * Server
      */
     LeapServer httpServer;
+
     /**
      * Service manager object
      */
     ServiceManager serviceManager;
+
     /**
      * Session manager object
      */
     SessionManager sessionManager;
+
     /**
      * Security manager object
      */
     org.chaostocosmos.leap.manager.SecurityManager securityManager;
+
     /**
      * HttpTransfer instance
      */
     HttpTransfer httpTransfer;
+
     /**
      * Hosts
      */
@@ -162,22 +169,23 @@ public class LeapHandler implements Runnable {
                 }
             } 
             // Send response to client
-            this.httpTransfer.sendResponse();            
+            this.httpTransfer.sendResponse(); 
         } catch(LeapException e) {        
-            System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")   ;
-            if(e.getResCode() == HTTP.LEAP900) {
+            if(e.getRes() == HTTP.LEAP900) {
                 this.host.getLogger().info("[CONNECTION CLOSED BY CLIENT] Host: "+this.host.getHostId()+"  Client: "+this.httpTransfer.getSocket().getInetAddress().toString());
             } else {
                 try {                
                     if(this.httpTransfer != null) {
                         this.httpTransfer.processError(e);
-                    }                
+                    }
                 } catch (Exception ex) {                
                     this.host.getLogger().error(e.getMessage(), ex);
                 }
             }
         } catch(Exception e) {
             e.printStackTrace();
+        } finally {
+            this.httpTransfer.close();
         }
     }
 }

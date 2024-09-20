@@ -38,54 +38,67 @@ import ch.qos.logback.classic.Logger;
  * @author 9ins
  */
 public class ResourceMonitor {
+
     /**
      * Unit of data size
      */
     //private SIZE unit;
+
     /**
      * Fraction point of digit
      */
     private int fractionPoint;
+
     /**
      * Logger
      */
     private Logger logger;
+
     /**
      * Interval
      */
     private long interval;
+
     /**
      * Timer
      */
     private Timer timer;
+
     /**
      * Whether daemon thread
      */
     private boolean isDaemon;
+
     /**
      * Gson parser
      */
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
     /**
      * Jackson Json 
      */
     private final ObjectMapper mapper = new ObjectMapper();
+
     /**
      * Resource monitor instance
      */
     private static ResourceMonitor resourceMonitor = null;
+
     /**
      * X axis index count
      */
     private static int xIndexCnt = 100;
+
     /**
      * X axis indent count
      */
     private static int xIndexIndent = 10;
+
     /**
      * Chart metadata
      */
     Monitor<?> chart;
+
     /**
      * Get resource monitor
      * @return
@@ -169,6 +182,7 @@ public class ResourceMonitor {
             this.logger.info("[MONITOR OFF] Leap system monitoring interval is too low value: "+this.interval+" milliseconds. To turn on system monitoring, Please set monitoring interval value over 3000 milliseconds.");
         }
     }
+
     /**
      * Stop timer
      */
@@ -177,6 +191,7 @@ public class ResourceMonitor {
             this.timer.cancel();
         }
     }
+
     /**
      * Set probing values
      * @throws NotSupportedException
@@ -252,6 +267,7 @@ public class ResourceMonitor {
         this.chart.setValue("heap.y-index.2", processHeapCommitted);
         this.chart.setValue("heap.y-index.3", processHeapUsed);
     }
+
     /**
      * Request monitoring data to monitoring service
      * @throws IOException
@@ -264,6 +280,7 @@ public class ResourceMonitor {
                   .addHeader("body-in-stream", false)
                   .post("/monitor/chart/image", null, formDatas);
     }    
+
     /**
      * Get max memory bytes applied
      * @return
@@ -272,6 +289,7 @@ public class ResourceMonitor {
     public long getMaxMemory() throws NotSupportedException {
         return ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getMax();
     }
+
     /**
      * Get used memory size
      * @return
@@ -280,6 +298,7 @@ public class ResourceMonitor {
     public long getUsedMemory() throws NotSupportedException {
         return ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getUsed();
     }
+
     /**
      * Get free memory size
      * @return
@@ -288,6 +307,7 @@ public class ResourceMonitor {
     public long getFreeMemory() throws NotSupportedException {
         return ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getMax() - ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getUsed();
     }
+
     /**
      * Get total physical memory size
      * @return
@@ -296,6 +316,7 @@ public class ResourceMonitor {
     public long getPhysicalTotalMemory() throws NotSupportedException {
         return ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getTotalPhysicalMemorySize();
     }
+
     /**
      * Get total physical used memory
      * @return
@@ -303,6 +324,7 @@ public class ResourceMonitor {
     public long getPhysicalUsedMemory() {
         return ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getTotalPhysicalMemorySize() - ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getFreePhysicalMemorySize();
     }
+
     /**
      * Get free physical memory size
      * @return
@@ -311,6 +333,7 @@ public class ResourceMonitor {
     public long getPhysicalFreeMemory() throws NotSupportedException {
         return ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getFreePhysicalMemorySize();
     }
+
     /**
      * Get process CPU load
      * @return
@@ -319,6 +342,7 @@ public class ResourceMonitor {
         double load = ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getProcessCpuLoad();
         return (Math.round(load * 100d) * 100d) / 100d;
     }
+
     /**
      * Get process CPU time
      * @return
@@ -328,14 +352,16 @@ public class ResourceMonitor {
         long nano = ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getProcessCpuTime();
         return TimeUnit.SECONDS.convert(nano, TimeUnit.NANOSECONDS);
     }
-    /**
+
+    /** 
      * Get system CPU load
      * @return
      */
     public double getSystemCpuLoad() {
         double load = ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getSystemCpuLoad();
         return (Math.round(load * 100d) * 100d) / 100d;
-    }    
+    }   
+
     /**
      * Get system CPU load average
      * @return
@@ -343,6 +369,7 @@ public class ResourceMonitor {
     public double getSystemLoadAverage() {
         return ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getSystemLoadAverage();
     }
+
 	/**
      * Get heap memory init amout
 	 * @param unit
@@ -352,6 +379,7 @@ public class ResourceMonitor {
 		long value = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getInit();
 		return value;
 	}	
+
     /**
      * Get used heap memory amount
      * @return
@@ -360,6 +388,7 @@ public class ResourceMonitor {
         long value = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getUsed();
         return value;
     }
+
 	/**
      * Get commited heap memory amount
 	 * @param unit
@@ -369,6 +398,7 @@ public class ResourceMonitor {
 		long value = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getCommitted();
 		return value;
 	}	
+
 	/**
      * Get heap memory max amount
 	 * @param unit
@@ -378,6 +408,7 @@ public class ResourceMonitor {
 		long value = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getMax();
 		return value;
 	}
+    
     /**
      * Get available processors
      * @return

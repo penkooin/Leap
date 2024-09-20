@@ -11,15 +11,16 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import javax.imageio.ImageIO;
-import javax.media.jai.JAI;
-import javax.media.jai.PlanarImage;
-
+import org.apache.commons.imaging.ImageFormat;
+import org.apache.commons.imaging.ImageFormats;
+import org.apache.commons.imaging.Imaging;
 import org.chaostocosmos.chaosgraph.Graph;
+import org.chaostocosmos.chaosgraph.GraphUtility;
 import org.chaostocosmos.chaosgraph.GraphUtility.CODEC;
 import org.chaostocosmos.chaosgraph.NotSuppotedEncodingFormatException;
 import org.chaostocosmos.leap.annotation.MethodMapper;
 import org.chaostocosmos.leap.annotation.ServiceMapper;
+import org.chaostocosmos.leap.common.ImageUtils;
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.HTTP;
@@ -33,8 +34,6 @@ import org.chaostocosmos.leap.resource.TemplateBuilder;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.sun.media.jai.codec.ImageCodec;
-import com.sun.media.jai.codec.ImageEncoder;
 
 /**
  * Leap monitoring service
@@ -49,6 +48,12 @@ public class SystemMonitorService extends AbstractChartService {
      */
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
+    /**
+     * Get monitor page
+     * @param request
+     * @param response
+     * @throws Exception
+     */
     @MethodMapper(method = REQUEST.GET, mappingPath = "/monitor")
     public void getMonitorWebpage(HttpRequest request, HttpResponse response) throws Exception {
         if(Context.get().server().<Boolean> isSupportMonitoring()) {
@@ -61,6 +66,12 @@ public class SystemMonitorService extends AbstractChartService {
         }
     } 
 
+    /**
+     * Get refresh image script
+     * @param request
+     * @param response
+     * @throws IOException
+     */
     @MethodMapper(method = REQUEST.GET, mappingPath = "/script/refreshImage.js")
     public void getRefreshImageScript(HttpRequest request, HttpResponse response) throws IOException {
         Host<?> host = super.getHost();
@@ -71,6 +82,12 @@ public class SystemMonitorService extends AbstractChartService {
         response.setResponseCode(HTTP.RES200.code());
     }
 
+    /**
+     * Get resources
+     * @param request
+     * @param response
+     * @throws Exception
+     */
     @MethodMapper(method = REQUEST.POST, mappingPath = "/monitor/chart/image")
     @SuppressWarnings("unchecked")
     public void getResources(HttpRequest request, HttpResponse response) throws Exception {
@@ -89,7 +106,7 @@ public class SystemMonitorService extends AbstractChartService {
         }
         String chartJson = new String(body, charset);
         //super.logger.debug(chartJson);
-        Map<String, Object> jsonMap = gson.fromJson(chartJson, Map.class);        
+        Map<String, Object> jsonMap = gson.fromJson(chartJson, Map.class);
         List<Map<String, Object>> chartMap = jsonMap.values().stream().map(m -> (Map<String, Object>) m ).collect(Collectors.toList());
         for(Host<?> host : Context.get().hosts().getAllHost()) {
             for(Map<String, Object> map : chartMap) {
@@ -100,11 +117,11 @@ public class SystemMonitorService extends AbstractChartService {
                 chart.setLeftIndent(70);
                 chart.setRightIndent(30);
                 if(!inMemory) {
-                    saveBufferedImage(chart.getBufferedImage(), host.getWebInf().resolve(savePath).toFile(), CODEC.PNG);
+                    ImageUtils.saveBufferedImage(chart.getBufferedImage(), host.getWebInf().toFile(), ImageFormats.PNG, null);
                     //super.logger.debug("[MONITOR] Chart image save to file: "+host.getStatic().resolve(savePath).toString());
                 } else {
                     ByteArrayOutputStream out = new ByteArrayOutputStream();
-                    ImageIO.write(chart.getBufferedImage(), CODEC.PNG.name(), out);
+                    Imaging.writeImage(chart.getBufferedImage(), out, ImageFormats.PNG, null);
                     host.getResource().addResource(host.getWebInf().resolve(savePath), out.toByteArray(), true);
                     super.logger.debug("[MONITOR] Chart image add to In-Memory resource.");
                 }
@@ -113,27 +130,10 @@ public class SystemMonitorService extends AbstractChartService {
     }
 
     /**
-     * Save monitoring image to each host directory
-     * @param image
-     * @param saveFile
-     * @param codec
-     * @throws IOException
-     * @throws NotSuppotedEncodingFormatException
+     * Process error handling
+     * @param response
+     * @param throwable
      */
-    public void saveBufferedImage(BufferedImage image, File saveFile, CODEC codec) throws IOException, NotSuppotedEncodingFormatException {
-    	String ext = saveFile.getName().substring(saveFile.getName().lastIndexOf(".") + 1);
-    	if(!Stream.of(CODEC.values()).anyMatch(c -> c.name().equalsIgnoreCase(ext))) {
-    		throw new NotSuppotedEncodingFormatException("Given file extention isn't exist in supported codec list.");
-    	}
-        ParameterBlock pb = new ParameterBlock();
-        pb.add(image);
-        PlanarImage tPlanarImage = (PlanarImage)JAI.create("awtImage", pb );
-        try(FileOutputStream out = new FileOutputStream(saveFile)) {
-            ImageEncoder tEncoder = ImageCodec.createImageEncoder(codec.name(), out,  null); 
-            tEncoder.encode(tPlanarImage); 
-        }
-    }
-
     @Override
     public Exception errorHandling(HttpResponse response, Exception throwable) {
         throwable.printStackTrace();

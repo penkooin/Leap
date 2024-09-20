@@ -10,18 +10,20 @@ import org.chaostocosmos.leap.context.Context;
  * @9ins
  */
 public enum WEB_PATH {
-    DOCROOT("/"),
+    HOME("/"),
     CONFIG("/config"),
     LOGS("/logs"),
     WEBAPP("/webapp"),
-    WEBINF("/webapp/WEB-INF"),
-    CLASSES("/webapp/WEB-INF/classes"),
-    CSS("/webapp/WEB-INF/css"),
-    IMG("/webapp/WEB-INF/img"),
-    SCRIPT("/webapp/WEB-INF/script"),
-    TEMPLATES("/webapp/WEB-INF/templates"),
-    VIDEO("/webapp/WEB-INF/video"),
-    VIEWS("/webapp/WEB-INF/views");
+    WEBINF("/WEB-INF"),
+    CLASSES("/WEB-INF/classes"),
+    DOCROOT("/static"),
+    STATIC("/static"),
+    CSS("/static/css"),
+    IMG("/static/image"),
+    SCRIPT("/static/script"),
+    TEMPLATES("/templates"),
+    VIDEOS("/static/videos"),
+    VIEWS("/WEB-INF/views");
 
     String res;
 

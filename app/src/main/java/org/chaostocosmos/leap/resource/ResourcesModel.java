@@ -140,7 +140,7 @@ public interface ResourcesModel {
      * @return
      * @throws IOException
      */
-    public String getViewPage(String resourceName, Map<String, Object> params) throws IOException;
+    public String getStaticPage(String resourceName, Map<String, Object> params) throws IOException;
     /**
      * Resolve HTML page between comment replacement id and params
      * @param htmlPage

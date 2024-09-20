@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.apache.commons.imaging.ImageFormats;
+import org.apache.commons.imaging.Imaging;
 import org.chaostocosmos.chaosgraph.Graph;
 import org.chaostocosmos.chaosgraph.GraphConstants;
 import org.chaostocosmos.chaosgraph.GraphConstants.GRID;
@@ -22,6 +24,7 @@ import org.chaostocosmos.chaosgraph.awt2d.BarRatioGraph;
 import org.chaostocosmos.chaosgraph.awt2d.CircleGraph;
 import org.chaostocosmos.chaosgraph.awt2d.LineGraph;
 import org.chaostocosmos.leap.common.DataStructureOpr;
+import org.chaostocosmos.leap.common.ImageUtils;
 import org.chaostocosmos.leap.service.model.ChartModel;
 
 /**
@@ -163,7 +166,7 @@ public abstract class AbstractChartService extends AbstractService implements Ch
 
     @Override
     public void saveImage(BufferedImage image, Path savePath, CODEC codec) throws Exception {       
-        GraphUtility.saveBufferedImage(image, savePath.toFile(), CODEC.PNG);
+        ImageUtils.saveBufferedImage(image, savePath.toFile(), ImageFormats.valueOf(codec.name()) , null);
     }
 
     /**

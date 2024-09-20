@@ -53,66 +53,82 @@ import ch.qos.logback.classic.Logger;
  * @since 2021.09.15
  */
 public class LeapServer extends Thread {
+
     /**
      * logger
      */
     Logger logger = LoggerFactory.getLogger(Context.get().hosts().getDefaultHost().getHostId());
+
     /**
      * Whether default host
      */
     boolean isDefaultHost;
+
     /**
      * Protocol
      */
     PROTOCOL protocol;
+
     /**
      * InetSocketAddress
      */
     InetSocketAddress inetSocketAddress;
+
     /**
      * backlog
      */
     int backlog;
+
     /**
      * document root
      */
     Path docroot;
+
     /**
      * leap home path
      */
     Path homePath;
+
     /**
      * Hosts
      */
     Host<?> host;
+
     /**
      * Server socket
      */
     ServerSocket server;
+
     /**
      * Redirect host object
      */
     RedirectHostSelection redirectHostSelection;
+
     /**
      * IP filtering object
      */
     Filtering ipAllowedFilters, ipForbiddenFilters; 
+
     /**
      * Server started flag
      */
     boolean started;
+
     /**
      * SessionManager object
      */
     SessionManager sessionManager;
+
     /**
      * servlet loading & managing
      */
     ServiceManager serviceManager;
+
     /**
      * User manager object
      */
     SecurityManager securityManager;
+
     /**
      * ResourcesModel object
      */
@@ -245,6 +261,7 @@ public class LeapServer extends Thread {
             this.host.setHostStatus(STATUS.STARTING);
             if(!this.protocol.isSecured()) {
                 this.server = new ServerSocket();
+                System.out.println(this.inetSocketAddress.toString());
                 this.server.bind(this.inetSocketAddress, this.backlog);
                 this.logger.info("[HTTP SERVER START] Address: " + this.inetSocketAddress.toString());
             } else {
@@ -312,6 +329,9 @@ public class LeapServer extends Thread {
                     }
                 } catch(SocketTimeoutException | NegativeArraySizeException e) {
                     host.getLogger().error("[SOCKET TIME OUT] SOCKET TIMEOUT OCCURED.");
+                    if(client != null) {
+                        client.close();
+                    }
                 } catch(LeapException le) {
                     if(httpTransfer != null) {
                         httpTransfer.processError(le);

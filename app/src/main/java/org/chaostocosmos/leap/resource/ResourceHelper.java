@@ -193,9 +193,7 @@ public class ResourceHelper {
             try {
                 long modMillis = Files.getLastModifiedTime(p).toMillis();
                 String ps = p.toString().replace("\\", "/");
-                Path path = protocol.equals("jar") 
-                            ? targetPath.resolve(ps) 
-                            : Paths.get(targetPath.toAbsolutePath().toString(), ps.substring(ps.indexOf(res)-1).replace("\\", "/"));
+                Path path = protocol.equals("jar") ? targetPath.resolve(ps) : Paths.get(targetPath.toAbsolutePath().toString(), ps.substring(ps.indexOf(res)-1).replace("\\", "/").replace("/webapp", "/"));
                 if(Files.isDirectory(p)) {
                     path.toFile().mkdirs();
                 } else { 
@@ -224,8 +222,8 @@ public class ResourceHelper {
      * @return
      * @throws LeapException
      */
-    public static Path getDocroot(String hostId) throws LeapException {
-        return WEB_PATH.DOCROOT.getPath(hostId);
+    public static Path getHome(String hostId) throws LeapException {
+        return WEB_PATH.HOME.getPath(hostId);
     }
 
     /**
@@ -234,8 +232,8 @@ public class ResourceHelper {
      * @return
      * @throws LeapException
      */
-    public static Path getWebAppPath(String hostId) throws LeapException {
-        return WEB_PATH.WEBAPP.getPath(hostId);
+    public static Path getStatic(String hostId) throws LeapException {
+        return WEB_PATH.STATIC.getPath(hostId);
     }
 
     /**
@@ -244,7 +242,7 @@ public class ResourceHelper {
      * @return
      * @throws LeapException
      */
-    public static Path getWebInfPath(String hostId) throws LeapException {
+    public static Path getWEB_INF(String hostId) throws LeapException {
         return WEB_PATH.WEBINF.getPath(hostId);
     }
 
@@ -254,7 +252,7 @@ public class ResourceHelper {
      * @return
      * @throws LeapException
      */
-    public static Path getViewsPath(String hostId) throws LeapException {
+    public static Path getViews(String hostId) throws LeapException {
         return WEB_PATH.VIEWS.getPath(hostId);
     }
 

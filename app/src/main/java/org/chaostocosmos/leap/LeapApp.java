@@ -21,7 +21,6 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.chaostocosmos.leap.common.ClassUtils;
 import org.chaostocosmos.leap.common.LoggerFactory;
-import org.chaostocosmos.leap.common.NetworkInterfaces;
 import org.chaostocosmos.leap.common.ThreadPoolManager;
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.context.Host;
@@ -39,43 +38,52 @@ import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 
 /**
- * Leap main
+ * Leap Application Main
  * 
  * @author 9ins
  */
 public class LeapApp implements MetaListener {
+
     /**
      * Logger
      */
     public static Logger logger;
+
     /**
      * Standard IO
      */
     public static PrintStream systemOut;
+
     /**
      * Home path
      */
     public static Path HOME_PATH;
+
     /**
      * Context
      */
     public static Context context;
+
     /**
      * Static resource manager
      */
     public static ResourceManager resourceManager;
+
     /**
      * Resource Monitor
      */
     public static ResourceMonitor resourceMonitor;
+
     /**
      * SpringJPAManager object
      */
     public static SpringJPAManager jpaManager;
+
     /**
      * Server Map
      */
     public static Map<String, LeapServer> leapServerMap;
+
     /**
      * Constructor with arguments
      * @param args 
@@ -86,6 +94,7 @@ public class LeapApp implements MetaListener {
         leapServerMap = new HashMap<>();        
         setup(args);
     }
+
     /** 
      * Apply command line options
      * @param args
@@ -115,7 +124,7 @@ public class LeapApp implements MetaListener {
             Level level = Level.toLevel(optionL); 
             logger.setLevel(level);
         }
-        logger.info("Leap starting......"+new Date());
+        logger.info("Leap Server starting......"+new Date());
         //print trade mark
         trademark();
         logger.info("====================================================================================================");
@@ -132,6 +141,7 @@ public class LeapApp implements MetaListener {
             logger.info("verbose mode on");
         }
     }
+
     /**
      * Start environment
      * 
@@ -177,8 +187,9 @@ public class LeapApp implements MetaListener {
             resourceMonitor = ResourceMonitor.get();
         } else {
             logger.info("[MONITOR OFF] Leap system monitor turned off.");
-        }
+        }        
     }
+
     /**
      * Get home path
      * @return
@@ -186,6 +197,7 @@ public class LeapApp implements MetaListener {
     public static Path getHomePath() {
         return HOME_PATH;
     }
+
     /**
      * Shut down Leap WAS
      * @throws IOException
@@ -201,6 +213,7 @@ public class LeapApp implements MetaListener {
         }
         logger.info("Leap server terminated......");
     }
+
     /**
      * Get resource manager
      * @return
@@ -208,6 +221,7 @@ public class LeapApp implements MetaListener {
     public static ResourceManager getResourceManager() {
         return resourceManager;
     }
+
     /**
      * Get resource monitor
      * @return
@@ -215,6 +229,7 @@ public class LeapApp implements MetaListener {
     public static ResourceMonitor getResourceMonitor() {
         return resourceMonitor;
     }
+
     /**
      * Get execution parameter options
      * @return
@@ -226,6 +241,7 @@ public class LeapApp implements MetaListener {
         options.addOption(new Option("l", "logLevel", true, "log level setting"));
         return options;
     } 
+
     /**
      * Print trademark 
      * @throws LeapException
@@ -234,11 +250,13 @@ public class LeapApp implements MetaListener {
         System.out.println(ResourceHelper.getInstance().getTrademark());
         System.out.println();
     }
+
     @Override
     public void receiveContextEvent(MetaEvent<Metadata<?>> ce) throws Exception {
         System.out.println(ce.getPathExpression()+"  "+ce.getEventType()+"  ");
         
     }
+
     public static void main(String[] args) throws Exception {
         LeapApp leap = new LeapApp(args);
         leap.start();

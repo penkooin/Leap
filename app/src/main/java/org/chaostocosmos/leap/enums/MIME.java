@@ -77,6 +77,8 @@ public enum MIME {
     IMAGE_SVG_XML(Context.get().mime().getMime("IMAGE_SVG_XML")),
     IMAGE_TIFF(Context.get().mime().getMime("IMAGE_TIFF")),
     APPLICATION_X_SHOCKWAVE_FLASH(Context.get().mime().getMime("APPLICATION_X_SHOCKWAVE_FLASH")),
+    IMAGE_VND_MICROSOFT_ICON(Context.get().mime().getMime("IMAGE_VND_MICROSOFT_ICON")),
+
 
     //audio
     AUDIO_AAC(Context.get().mime().getMime("AUDIO_AAC")),
