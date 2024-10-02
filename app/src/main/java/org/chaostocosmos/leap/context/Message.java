@@ -1,6 +1,6 @@
 package org.chaostocosmos.leap.context;
 
-import org.chaostocosmos.leap.common.Constants;
+import org.chaostocosmos.leap.common.constant.Constants;
 
 /**
  * Messages 
@@ -10,6 +10,7 @@ import org.chaostocosmos.leap.common.Constants;
  * @author 9ins
  */
 public class Message <T> extends Metadata <T> {
+
     /**
      * Constructor
      * @param messageMap
@@ -17,6 +18,7 @@ public class Message <T> extends Metadata <T> {
     public Message(T messagesMap) {
         super(messagesMap);
     }
+
     /**
      * Get http message by specified code
      * @param code
@@ -25,6 +27,7 @@ public class Message <T> extends Metadata <T> {
     public String http(int code) {
         return message(code, new Object[0]);
     }
+
     /**
      * Get http message by specified code and parameters
      * @param code
@@ -34,6 +37,7 @@ public class Message <T> extends Metadata <T> {
     public String http(int code, Object... params) {
         return message(code, params);
     }
+
     /**
      * Get leap message by specified code
      * @param code
@@ -42,6 +46,7 @@ public class Message <T> extends Metadata <T> {
     public String leap(int code) {
         return message(code, new Object[0]);
     }
+
     /**
      * Get leap message by specified code and parameters
      * @param code
@@ -51,6 +56,7 @@ public class Message <T> extends Metadata <T> {
     public String leap(int code, Object... params) {
         return message(code, new Object[0]);
     }
+    
     /**
      * Get leap message by specified code and parameters
      * @param code

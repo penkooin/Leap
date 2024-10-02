@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.chaostocosmos.leap.common.DataStructureOpr;
+import org.chaostocosmos.leap.common.data.DataStructureOpr;
 import org.chaostocosmos.leap.enums.SERVER_EVENT;
 
 /**
@@ -15,14 +15,17 @@ import org.chaostocosmos.leap.enums.SERVER_EVENT;
  * @author 9ins
  */
 public class Metadata <T> {
+
     /**
      * List of metadata event classes
      */
     private List<MetaListener> metaListeners;
+
     /**
      * Metadata
      */
     T meta;
+
     /**
      * Constructs with metadata
      * @param meta
@@ -30,6 +33,7 @@ public class Metadata <T> {
     public Metadata(T meta) {
         this(meta, new ArrayList<>());
     }
+
     /**
      * Constructs with metadata, event classes
      * @param meta
@@ -39,6 +43,7 @@ public class Metadata <T> {
         this.meta = meta;
         this.metaListeners = metaListeners;
     }
+
     /**
      * Add target event class to be received from
      * @param metaListeners
@@ -50,6 +55,7 @@ public class Metadata <T> {
             throw new IllegalStateException("Specified event receiving class already exists in List: "+metaListeners.toString());
         }
     }
+
     /**
      * Remove target event receiving from
      * @param metaListeners
@@ -57,6 +63,7 @@ public class Metadata <T> {
     public void removeEventClass(MetaListener metaListeners) {
         this.metaListeners.remove(metaListeners);
     } 
+    
     /**
      * Get value by expression
      * @param expr
@@ -69,6 +76,7 @@ public class Metadata <T> {
             throw new IllegalArgumentException("There isn't exist value on specified expresstion: "+expr);
         }
     }
+
     /**
      * Set value on specified position
      * @param expr
@@ -79,6 +87,7 @@ public class Metadata <T> {
         //System.out.println(this.getClass().getCanonicalName()+"="+Chart.class.getCanonicalName());
         Context.get().dispatchContextEvent(new MetaEvent<Metadata<?>>(this, SERVER_EVENT.CHANGED, this, expr, value));
     }
+
     /**
      * Add metadata value
      * @param expr
@@ -98,6 +107,7 @@ public class Metadata <T> {
         }
         Context.get().dispatchContextEvent(new MetaEvent<Metadata<?>>(this, SERVER_EVENT.ADDED, this, expr, value));
     }
+
     /**
      * Remove metadata value
      * @param expr
@@ -118,6 +128,7 @@ public class Metadata <T> {
         }
         Context.get().dispatchContextEvent(new MetaEvent<Metadata<?>>(this, SERVER_EVENT.REMOVED, this, expr, value));
     }
+
     /**
      * Exists context value by specified expression
      * @param expr
@@ -130,12 +141,14 @@ public class Metadata <T> {
             return false;
         }
     }    
+
     /**
      * Get metadata
      */
     public T getMeta() {
         return this.meta;
     }
+    
     @Override
     public String toString() {
         return meta.toString();

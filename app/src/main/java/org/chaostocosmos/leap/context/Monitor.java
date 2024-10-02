@@ -6,6 +6,7 @@ package org.chaostocosmos.leap.context;
  * @author 9ins
  */
 public class Monitor<T> extends Metadata<T> {
+    
     /**
      * Constructor
      * @param meta

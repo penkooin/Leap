@@ -58,6 +58,7 @@ public class LeapClient {
             this.requestHeaders.put("Connection", "keep-alive");
         }
     }
+
     /**
      * Constructs with host, port
      * @param host
@@ -71,6 +72,7 @@ public class LeapClient {
         this.port = port;
         this.requestHeaders.put("Host", host+":"+port);
     }
+
     /**
      * Build client
      * @return
@@ -80,7 +82,8 @@ public class LeapClient {
             client = new LeapClient();
         }
         return client;
-    }    
+    }  
+
     /**
      * Build client with host, port
      * @param host
@@ -95,6 +98,7 @@ public class LeapClient {
         }
         return client;
     }
+
     /**
      * Add request header key / value
      * @param key
@@ -105,6 +109,7 @@ public class LeapClient {
         this.requestHeaders.put(key, value);
         return client;
     }
+
     /**
      * Set charset
      * @param charset
@@ -114,6 +119,7 @@ public class LeapClient {
         this.charset = charset;
         return client;
     }
+
     /**
      * Set keep alive
      * @param keepAlive
@@ -123,6 +129,7 @@ public class LeapClient {
         this.keepAlive = keepAlive;
         return client;
     }
+
     /**
      * Set connection timeout
      * @param timeout
@@ -132,6 +139,7 @@ public class LeapClient {
         this.timeout = timeout;
         return client;
     }
+
     /**
      * Set tcp no delay
      * @param tcpNoDelay
@@ -141,6 +149,7 @@ public class LeapClient {
         this.tcpNoDelay = tcpNoDelay;
         return client;
     }    
+
     /**
      * Set receive buffer size
      * @param receiveBufferSize
@@ -150,6 +159,7 @@ public class LeapClient {
         this.receiveBufferSize = receiveBufferSize;
         return client;
     }
+
     /**
      * Set send buffer size
      * @param sendBufferSize
@@ -159,6 +169,7 @@ public class LeapClient {
         this.sendBufferSize = sendBufferSize;
         return client;
     }
+
     /**
      * Set saving response File
      */
@@ -166,6 +177,7 @@ public class LeapClient {
         this.saveResponseFile = saveResponseFile;
         return client;
     }
+
     /**
      * Get response code
      * @return
@@ -173,6 +185,7 @@ public class LeapClient {
     public int getResponseCode() {
         return this.responseCode;
     }
+
     /**
      * Get response message
      * @return
@@ -180,6 +193,7 @@ public class LeapClient {
     public String getResponseMsg(){
         return this.responseMsg;
     }
+
     /**
      * Connection to server
      * @return
@@ -194,11 +208,12 @@ public class LeapClient {
         this.socket.setSoTimeout(this.timeout);
         this.socket.setTcpNoDelay(this.tcpNoDelay);
         this.socket.setReceiveBufferSize(this.receiveBufferSize);
-        this.socket.setSendBufferSize(this.sendBufferSize);                
+        this.socket.setSendBufferSize(this.sendBufferSize);
         this.outputStream = socket.getOutputStream(); 
         this.inputStream = socket.getInputStream();
         return this.socket;
     }
+
     /**
      * Write context with params
      * @param method
@@ -207,10 +222,11 @@ public class LeapClient {
      * @throws IOException
      */
     private void writeContextParams(REQUEST_METHOD method, String contextPath, Map<String, String> contextParams) throws IOException {
-        String requestLine = method.name()+" "+contextPath+""+(contextParams == null ? "" : "?"+contextParams.entrySet().stream().map(e -> URLEncoder.encode(e.getKey(), charset)+"="+URLEncoder.encode(e.getValue(), charset)).collect(Collectors.joining("&")))+" HTTP/1.1\r\n";        
+        String requestLine = method.name() + " "+contextPath + "" + (contextParams == null ? "" : "?"+contextParams.entrySet().stream().map(e -> URLEncoder.encode(e.getKey(), charset)+"="+URLEncoder.encode(e.getValue(), charset)).collect(Collectors.joining("&")))+" HTTP/1.1\r\n";        
         this.outputStream.write(requestLine.getBytes(StandardCharsets.ISO_8859_1));        
         this.outputStream.flush();
     }
+
     /**
      * Write request headers
      * @param requestHeaders
@@ -224,6 +240,7 @@ public class LeapClient {
         this.outputStream.write("\r\n".getBytes(StandardCharsets.ISO_8859_1));
         this.outputStream.flush();
     }
+
     /**
      * Write Multi part form data
      * @param formData
@@ -247,6 +264,7 @@ public class LeapClient {
         this.outputStream.write("----------------------------LeapClient--\r\n".getBytes(StandardCharsets.ISO_8859_1));
         this.outputStream.flush();
     }
+
     /**
      * Read line
      * @param is
@@ -268,6 +286,7 @@ public class LeapClient {
         byte[] bytes = out.toByteArray();
         return Arrays.copyOfRange(bytes, 0, bytes.length-1);
     }
+
     /**
      * Process response
      * @param inputStream
@@ -326,6 +345,7 @@ public class LeapClient {
         }
         return responseBody;    
     }
+
     /**
      * Request GET 
      * @param contextPath
@@ -345,6 +365,7 @@ public class LeapClient {
         this.socket.close();
         return client;
     }
+
     /**
      * Request POST
      * @param contextPath
@@ -372,8 +393,8 @@ public class LeapClient {
     }    
 
     public static void main(String[] args) throws UnknownHostException, IOException {
-        Map<String, FormData<?>> map = Map.of("code", new FormData<File>(MIME.APPLICATION_ZIP, Paths.get("./LICENSE").toFile()));
-        LeapClient client = LeapClient.build("localhost", 8080).addHeader("charset", "utf-8").post("/monitor/chart/image", null, map);       
+        Map<String, FormData<?>> map = Map.of("@code", new FormData<File>(MIME.APPLICATION_ZIP, Paths.get("./LICENSE").toFile()));
+        LeapClient client = LeapClient.build("www.leap-main.com", 8888).addHeader("charset", "utf-8").post("/monitor/chart/image", null, map);  
         //LeapClient client = LeapClient.build("localhost", 8080).addHeader("charset", "utf-8").get("/", null);
         System.out.println(new String(client.getResponseMsg()));        
     }

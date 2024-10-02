@@ -4,27 +4,30 @@ import java.nio.file.Path;
 
 import org.chaostocosmos.leap.context.Context;
 
+import java.io.IOException;
+import java.nio.file.Files;
+
 /**
  * TEMPLATE
  * 
  * @9ins
  */
 public enum TEMPLATE {
-    DEFAULT("/templates/default.html"),
-    ERROR("/templates/error.html"),
-    MONITOR("/templates/monitor.html"),
-    RESOURCE("/templates/resource.html"),
-    RESPONSE("/templates/response.html"),
-    WELCOME("/templates/welcome.html");
+    DEFAULT( WAR_PATH.TEMPLATES.path()+"/default.html"),
+    ERROR(WAR_PATH.TEMPLATES.path()+"/error.html"),
+    MONITOR(WAR_PATH.TEMPLATES.path()+"/monitor.html"),
+    DIRECTORY(WAR_PATH.TEMPLATES.path()+"/directory.html"),
+    RESPONSE(WAR_PATH.TEMPLATES.path()+"/response.html"),
+    INDEX(WAR_PATH.TEMPLATES.path()+"/index.html");
 
-    String res;
+    String resourceName;
     
     /**
      * Initialize
      * @param res
      */
     TEMPLATE(String res) {
-        this.res = res;
+        this.resourceName = res;
     }
 
     /**
@@ -32,7 +35,7 @@ public enum TEMPLATE {
      * @return
      */
     public String path() {
-        return this.res;
+        return this.resourceName;
     }
 
     /**
@@ -40,7 +43,17 @@ public enum TEMPLATE {
      * @param hostId
      * @return
      */
-    public Path getPath(String hostId) {
+    public Path getTemplatePath(String hostId) {
         return Context.get().host(hostId).getTemplates().resolve(this.name().toLowerCase()+".html");
     }    
+
+    /**
+     * Load template page
+     * @param hostId
+     * @return
+     * @throws IOException
+     */
+    public String loadTemplatePage(String hostId) throws IOException {
+        return Files.readString(getTemplatePath(hostId));
+    }
 }

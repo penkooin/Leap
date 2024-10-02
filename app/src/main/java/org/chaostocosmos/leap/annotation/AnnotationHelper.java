@@ -8,17 +8,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.common.ClassUtils;
-import org.chaostocosmos.leap.common.LoggerFactory;
+import org.chaostocosmos.leap.common.log.Logger;
+import org.chaostocosmos.leap.common.log.LoggerFactory;
+import org.chaostocosmos.leap.common.utils.ClassUtils;
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.REQUEST;
 import org.chaostocosmos.leap.exception.LeapException;
-import org.chaostocosmos.leap.service.filter.IFilter;
+import org.chaostocosmos.leap.filter.IFilter;
 import org.chaostocosmos.leap.service.model.ServiceModel;
 import org.hibernate.MappingException;
-
-import ch.qos.logback.classic.Logger;  
 
 /**
  * Annotation helper object
@@ -27,10 +26,11 @@ import ch.qos.logback.classic.Logger;
  * @since 2021.09.18
  */
 public class AnnotationHelper {
+    
     /**
      * logger
      */
-    public static final Logger logger = LoggerFactory.getLogger(Context.get().hosts().getDefaultHost().getHostId()); 
+    public static final Logger logger = LoggerFactory.getLogger(Context.get().server().getId()); 
 
     /**
      * Servlet context mapping Map

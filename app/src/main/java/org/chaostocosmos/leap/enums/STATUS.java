@@ -22,6 +22,7 @@ public enum STATUS {
     STATUS(int code) {
         this.code = code;
     }
+    
     /**
      * Get status code
      * @return

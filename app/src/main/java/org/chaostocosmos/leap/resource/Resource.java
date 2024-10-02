@@ -75,7 +75,7 @@ public class Resource extends HashMap<String, Resource> {
     int splitSize;
 
     /**
-     * Constructs with resource path & in-memory flag & file split size
+     * Constructs with node flag, resource path & in-memory flag & file split size
      * @param isNode
      * @param resourcePath
      * @param inMemoryFlag
@@ -351,5 +351,17 @@ public class Resource extends HashMap<String, Resource> {
      */
     public boolean isInMemory() {
         return this.inMemoryFlag;
+    }
+
+    /**
+     * get resource bytes to String
+     */
+    public String toString() {
+        try {
+            return new String(getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

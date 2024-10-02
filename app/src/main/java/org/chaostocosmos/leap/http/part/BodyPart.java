@@ -6,13 +6,13 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.chaostocosmos.leap.common.log.Logger;
+import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.MIME;
 import org.chaostocosmos.leap.exception.LeapException;
 import org.chaostocosmos.leap.http.HttpRequestStream;
-
-import ch.qos.logback.classic.Logger;
 
 /**
  * BodyPart
@@ -20,38 +20,47 @@ import ch.qos.logback.classic.Logger;
  * @author 9ins
  */
 public class BodyPart implements Part {
+
     /**
      * Logger
      */
     Logger logger;
+
     /**
      * Host
      */
     Host<?> host;
+
     /**
      * Content type
      */
     MIME contentType;
+
     /**
      * Content length
      */
     long contentLength;    
+
     /**
      * Request stream
      */
     HttpRequestStream requestStream;
+
     /**
      * Whether body loaded
      */
     boolean isLoadedBody = false; 
+
     /**
      * body data
      */
     Map<String, byte[]> body;
+
     /**
      * body charset
      */
     Charset charset;
+    
     /**
      * Constructor
      * @param host
@@ -80,7 +89,7 @@ public class BodyPart implements Part {
      * @return
      */
     public String getHostId() {
-        return this.host.getHostId();
+        return this.host.getId();
     }
 
     /**
@@ -141,9 +150,9 @@ public class BodyPart implements Part {
             throw new LeapException(HTTP.RES406, "Can not save content. Not supported on Multi Part Operation.");
         }        
         if(this.isLoadedBody) {
-            this.requestStream.saveBinary(this.body.get("BODY"), targetPath, this.host.getFileBufferSize());
+            this.requestStream.saveBinary(this.body.get("BODY"), targetPath);
         } else {
-            this.requestStream.saveBinary(getContentLength(), targetPath, this.host.getFileBufferSize());
+            this.requestStream.saveBinary(getContentLength(), targetPath);
         }        
         this.logger.debug("[BODY-PART] "+contentType.name()+" saved: "+targetPath.normalize().toString()+"  Path: "+targetPath.toString());
     }    

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
 
-import org.chaostocosmos.leap.common.FileUtils;
+import org.chaostocosmos.leap.common.file.FileUtils;
 import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.MIME;
 import org.chaostocosmos.leap.http.HttpRequestStream;
@@ -15,6 +15,7 @@ import org.chaostocosmos.leap.http.HttpRequestStream;
  * @authon 9ins
  */
 public class TextPart extends BodyPart {    
+
     /**
      * Constructor
      * @param host
@@ -32,7 +33,7 @@ public class TextPart extends BodyPart {
     @Override
     public void save(Path targetPath) throws IOException {
         if(super.isLoadedBody) {
-            FileUtils.saveText(new String(super.body.get("BODY"), super.charset), targetPath, this.host.getFileBufferSize());
+            FileUtils.saveText(new String(super.body.get("BODY"), super.charset), targetPath);
         } else {
             super.requestStream.saveStream(super.contentLength, targetPath);
         }

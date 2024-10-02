@@ -1,0 +1,18 @@
+resource-provider:
+  watch-roots: 
+    leap: ./leap/static
+    leap1: ./leap1/static
+  watch-kind: [
+    ENTRY_CREATE,
+    ENTRY_DELETE,
+    ENTRY_MODIFY,
+    OVERFLOW
+  ]
+  access-filters: ['*']
+  in-memory-filters: ['*']
+  total-memory-size-limit: 4G
+  split-unit-size: 1MB
+  file-size-limit: 500M
+  file-read-buffer-size: 1024kb
+  file-write-buffer-size: 1024kb
+

@@ -6,6 +6,7 @@ import java.net.ServerSocket;
 import java.net.URISyntaxException;
 
 import org.chaostocosmos.leap.LeapServer;
+import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.exception.LeapException;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +15,7 @@ public class LeapHttpServerTest {
     LeapServer server;
 
     public LeapHttpServerTest() throws Exception {
-        this.server = new LeapServer();
+        this.server = new LeapServer(Context.get().host("leap"));
         this.server.start();;
     }
 

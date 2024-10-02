@@ -2,10 +2,18 @@ package org.chaostocosmos.leap.http;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URISyntaxException;
-import java.nio.file.Paths;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import javax.transaction.NotSupportedException;
+
+import org.chaostocosmos.leap.common.constant.Constants;
+import org.chaostocosmos.leap.common.log.LEVEL;
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.exception.LeapException;
 import org.junit.jupiter.api.Test; 
@@ -14,19 +22,20 @@ import org.junit.jupiter.api.Test;
  * Context test
  */
 public class ContextTest {
-
-    public ContextTest() throws URISyntaxException, IOException, LeapException {    
-        Context context = Context.get(Paths.get("."));
+ 
+    @Test
+    public void init() {    
+        Context context = Context.get();
         String msg = context.message().leap(901, "aaa", "bbb", "ccc", "DDD");
-        msg = context.server().getMonitoringLogLevel();
-        System.out.println(msg);
-        msg = context.server().getMonitoringInterval();
-        System.out.println(msg);
+        LEVEL level = context.server().getLogsLevel();
+        System.out.println(level);
+        int interval = context.server().getMonitoringInterval();
+        System.out.println(interval);
     }
 
     @Test
     public void testGetServerPort() {
-        int port = Context.get().hosts().getDefaultPort();
+        int port = Context.get().hosts().getHosts().get(0).getPort();
         System.out.println("port: "+port);
         assertEquals(8080, port);
     }
@@ -59,8 +68,5 @@ public class ContextTest {
         // List<ServiceMethodBean> list = this.context.getServiceBeanList();
         // list.stream().forEach(System.out::println);
     }
-
-    public static void main(String[] args) throws Exception {
-        new ContextTest();
-    }
 }
+ 

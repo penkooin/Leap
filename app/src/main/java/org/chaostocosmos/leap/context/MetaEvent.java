@@ -10,22 +10,27 @@ import org.chaostocosmos.leap.enums.SERVER_EVENT;
  * @author 9ins
  */
 public class MetaEvent <T extends Metadata<?>> extends EventObject {
+
     /**
      * Metadata event type enum
      */
     SERVER_EVENT eventType;
+
     /**
      * Metadata 
      */
     T metadata;
+
     /**
      * Metadata path expression
      */
     String expr;
+
     /**
      * Event value
      */
     Object value;
+
     /**
      * Constructor
      * @param eventSource
@@ -41,6 +46,7 @@ public class MetaEvent <T extends Metadata<?>> extends EventObject {
         this.expr = expr;
         this.value = value;
     }
+
     /**
      * Get event type
      * @return
@@ -48,6 +54,7 @@ public class MetaEvent <T extends Metadata<?>> extends EventObject {
     public SERVER_EVENT getEventType() {
         return this.eventType;
     }
+
     /**
      * Get meta type
      * @return
@@ -55,6 +62,7 @@ public class MetaEvent <T extends Metadata<?>> extends EventObject {
     public T getMetadata() {
         return this.metadata;
     }
+
     /**
      * Get value of
      * @return
@@ -62,6 +70,7 @@ public class MetaEvent <T extends Metadata<?>> extends EventObject {
     public Object getValue() {
         return this.value;
     }
+
     /**
      * Get path expression
      * @return
@@ -69,6 +78,7 @@ public class MetaEvent <T extends Metadata<?>> extends EventObject {
     public String getPathExpression() {
         return this.expr;
     }
+    
     /**
      * Get context map
      * @return

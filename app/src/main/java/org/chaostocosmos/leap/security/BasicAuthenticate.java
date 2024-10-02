@@ -4,8 +4,7 @@ import org.chaostocosmos.leap.annotation.FieldMapper;
 import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.exception.LeapException;
-import org.chaostocosmos.leap.manager.SecurityManager;
-import org.chaostocosmos.leap.manager.SessionManager;
+import org.chaostocosmos.leap.session.SessionManager;
 
 /**
  * BasicAuthorization

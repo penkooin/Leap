@@ -103,7 +103,7 @@ public class MultiPart extends BodyPart {
                 }
             });
         } else {
-            this.filePaths = super.requestStream.saveMultiPart(targetPath.normalize(), this.host.getFileBufferSize(), this.boundary, super.charset);    
+            this.filePaths = super.requestStream.saveMultiPart(targetPath.normalize(), this.boundary, super.charset);    
         }
         super.logger.debug("[MULTI-PART] "+super.contentType.name()+" saved: "+targetPath.normalize().toString()+"  Size: "+filePaths.stream().map(p -> p.toFile()).map(f -> f.getName()+": "+f.length()).collect(Collectors.joining(", ")));
     }    

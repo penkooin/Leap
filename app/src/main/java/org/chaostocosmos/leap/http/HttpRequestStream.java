@@ -22,8 +22,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.common.Constants;
-import org.chaostocosmos.leap.common.LoggerFactory;
+import org.chaostocosmos.leap.common.constant.Constants;
+import org.chaostocosmos.leap.common.log.LoggerFactory;
+import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.exception.LeapException;
 
 /**
@@ -32,10 +33,17 @@ import org.chaostocosmos.leap.exception.LeapException;
  * @author 9ins
  */
 public class HttpRequestStream {
+
+    /**
+     * File buffer size
+     */
+    public final int BUFFER_SIZE = Context.get().server().getFileBufferSize();
+
     /**
      * InputStream
      */
     InputStream inputStream;
+
     /**
      * Constructs with InputStream
      * @param inputStream
@@ -43,30 +51,30 @@ public class HttpRequestStream {
     public HttpRequestStream(InputStream inputStream) {
         this.inputStream = inputStream;
     }
+
     /**
      * Save byte data 
      * @param data
      * @param savePath
-     * @param flushSize
      * @throws FileNotFoundException
      * @throws IOException
      */
-    public void saveBinary(byte[] data, Path savePath, int flushSize) throws FileNotFoundException, IOException {
+    public void saveBinary(byte[] data, Path savePath) throws FileNotFoundException, IOException {
         try(FileOutputStream target = new FileOutputStream(savePath.toFile())) {
             target.write(data);
         }
     }
+    
     /**
      * Save binary body
      * @param contentLength
      * @param savePath
-     * @param flushSize
      * @throws IOException
      */
-    public void saveBinary(long contentLength, Path savePath, int flushSize) throws IOException {
+    public void saveBinary(long contentLength, Path savePath) throws IOException {
         //String line = readLine(requestStream, StandardCharsets.ISO_8859_1);
         try(FileOutputStream target = new FileOutputStream(savePath.toFile())) {
-            byte[] buffer = new byte[flushSize];
+            byte[] buffer = new byte[BUFFER_SIZE];
             int len;
             long total = 0;
             while((len=inputStream.read(buffer)) > 0) {
@@ -164,7 +172,7 @@ public class HttpRequestStream {
      * @param charset
      * @throws IOException
      */
-    public List<Path> saveMultiPart(Path savePath, int flushSize, String boundary, Charset charset) throws IOException {
+    public List<Path> saveMultiPart(Path savePath, String boundary, Charset charset) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, charset));
         String line = reader.readLine();
         boolean isLast = false;
@@ -214,7 +222,7 @@ public class HttpRequestStream {
                             out.write(lineData);
                             baos.reset();
                         }
-                        if(baos.size() >= flushSize && flushSize > Constants.MULTIPART_FLUSH_MINIMAL_SIZE) {
+                        if(baos.size() >= BUFFER_SIZE && BUFFER_SIZE > Constants.MULTIPART_FLUSH_MINIMAL_SIZE) {
                             byte[] data = baos.toByteArray();
                             if(data[data.length-1] != 0x0A && data[data.length-2] != 0x0D) {
                                 out.write(data);
@@ -268,7 +276,7 @@ public class HttpRequestStream {
      * @throws IOException
      * @throws LeapException
      */
-    private void saveMultiPart1(Path savePath, int bufferSize, String boundary, Charset charset) throws IOException {            
+    private void saveMultiPart1(Path savePath, String boundary, Charset charset) throws IOException {            
         if(inputStream != null) {
             InputStreamReader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
             boundary = "--"+boundary;
@@ -287,8 +295,8 @@ public class HttpRequestStream {
                         filename = filename.substring(0, filename.indexOf("\""));
                     }
                     FileOutputStream fos = new FileOutputStream(savePath.resolve(filename).toFile());
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream(bufferSize);
-                    byte[] buffer = new byte[bufferSize];
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream(BUFFER_SIZE);
+                    byte[] buffer = new byte[BUFFER_SIZE];
                     int c, n = 0x00;
                     line = "";
                     do {

@@ -10,22 +10,27 @@ public enum REQUEST {
      * Get type for IGetServlet
      */
     GET("GET"),
+
     /**
      * Post type for IPostServlet
      */
     POST("POST"),
+
     /**
      * Put type for IPutServelt
      */
     PUT("PUT"),
+
     /**
      * Delete type for IDeleteServlet
      */
     DELETE("DELETE");
+
     /**
      * Request type mananging class
      */
     String requestType;
+
     /**
      * Request type initializer
      * @param requestType
@@ -34,6 +39,7 @@ public enum REQUEST {
     REQUEST(String requestType) {
         this.requestType = requestType;
     }
+
     /**
      * Get type
      * @param requestType
@@ -42,6 +48,7 @@ public enum REQUEST {
     public static REQUEST type(String requestType) {
         return REQUEST.valueOf(requestType);
     }
+    
     /**
      * Get request type
      * @return

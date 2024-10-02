@@ -178,7 +178,7 @@ public enum HTTP {
      * @param hostId
      * @return
      */
-    public String getProtocol(String hostId) {
+    public PROTOCOL getProtocol(String hostId) {
         return Context.get().host(hostId).getProtocol();
     }
     /**

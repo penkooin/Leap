@@ -8,15 +8,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.chaostocosmos.leap.common.LoggerFactory;
+import org.chaostocosmos.leap.common.log.Logger;
+import org.chaostocosmos.leap.common.log.LoggerFactory;
 import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.MIME;
 import org.chaostocosmos.leap.enums.PROTOCOL;
 import org.chaostocosmos.leap.enums.REQUEST;
 import org.chaostocosmos.leap.http.part.Part;
 import org.chaostocosmos.leap.session.Session;
-
-import ch.qos.logback.classic.Logger;
 
 /**
  * Http request descriptor
@@ -26,21 +25,84 @@ import ch.qos.logback.classic.Logger;
  */
 public class HttpRequest implements Http {
 
+    /**
+     * Host object
+     */
     final private Host<?> host; 
+
+    /**
+     * Request timestamp
+     */
     final private long requestTimstamp;
+
+    /**
+     * Request enum
+     */
     final private REQUEST requestType;    
+
+    /**
+     * Requested host
+     */
     final private String requestedHost;
+
+    /**
+     * Mime type
+     */
     final private MIME contentType;
+
+    /**
+     * Http version
+     */
     final private String httpVersion;
-    final private Map<String, Object> reqHeader;
+
+    /**
+     * Requested header
+     */
+    final private Map<String, List<?>> reqHeader;
+
+    /**
+     * Conetxt path
+     */
     final private String contextPath;
+
+    /**
+     * Query parameter Map
+     */
     final private Map<String, String> queryParam;
+
+    /**
+     * Request body part
+     */
     final private Part bodyPart;
+
+    /**
+     * Content length
+     */
     final private long contentLength;
+
+    /**
+     * Charset
+     */
     final private Charset charset;
+
+    /**
+     * URI
+     */
     final private URI requestURI;
+
+    /**
+     * Reuqested protocol
+     */
     final private PROTOCOL protocol;
+
+    /**
+     * Cookies
+     */
     private Map<String, String> cookies;
+
+    /**
+     * Session object
+     */
     private Session session;
 
     /**
@@ -71,7 +133,7 @@ public class HttpRequest implements Http {
             String requestHost,
             String httpVersion, 
             REQUEST requestType, 
-            Map<String, Object> reqHeader, 
+            Map<String, List<?>> reqHeader, 
             MIME contentType,
             String contextPath,
             URI requestURI, 
@@ -100,70 +162,140 @@ public class HttpRequest implements Http {
             this.session = session;
     }
 
+    /**
+     * Get timestamp
+     * @return
+     */
     public final long getTimestamp() {
         return this.requestTimstamp;
     }
 
+    /**
+     * Get protocol
+     * @return
+     */
     public final PROTOCOL getProtocol() {
         return this.protocol;
     }
 
+    /**
+     * Get requested host id
+     * @return
+     */
     public final String getHostId() {
-        return this.host.getHostId();
+        return this.host.getId();
     }
 
+    /**
+     * Get rquested host name
+     * @return
+     */
     public final String getRequestedHost() {
         return this.requestedHost;
     }
 
+    /**
+     * Get HTTP version
+     * @return
+     */
     public final String getHttpVersion() {
         return this.httpVersion;
     }
 
+    /**
+     * Get request type 
+     * @return
+     */
     public final REQUEST getRequestType() {
         return this.requestType;
     }
 
-    public final Map<String, Object> getReqHeader() {
+    /**
+     * Get request header Map
+     * @return
+     */
+    public final Map<String, List<?>> getReqHeader() {
         return this.reqHeader;
     }
 
+    /**
+     * Get content type
+     * @return
+     */
     public final MIME getContentType() {
         return this.contentType;
     }
 
+    /**
+     * Get context path
+     * @return
+     */
     public final String getContextPath() {
         return this.contextPath;
     }
 
+    /**
+     * Get request URI
+     * @return
+     */
     public final URI getRequestURI() {
         return this.requestURI;
     }
 
-    public final Map<String, String> getContextParam() {
+    /**
+     * Get context parameters
+     * @return
+     */
+    public final Map<String, String> getContextParameters() {
         return this.queryParam;
     }
 
-    public final Object getParameter(String name) {
+    /**
+     * Get query parameters
+     * @param name
+     * @return
+     */
+    public final Object getContextParameter(String name) {
         return this.queryParam.get(name);
     }
 
+    /**
+     * Get get body part object
+     * @return
+     */
     public final Part getBodyPart() {
         return this.bodyPart;
     }
 
+    /**
+     * Get content length
+     * @return
+     */
     public final long getContentLength() {
         return this.contentLength;
     }
 
+    /**
+     * Get charset
+     * @return
+     */
     public final Charset charset() {
         return this.charset;
     }
 
+    /**
+     * Get cookies
+     * @return
+     */
     public final Map<String, String> getCookies() {
         return this.cookies;
     }
 
+    /**
+     * Get cookies by attribute key
+     * @param attrKey
+     * @return
+     */
     public final String getCookie(String attrKey) {
         if(this.cookies == null) {
             return null;
@@ -171,6 +303,11 @@ public class HttpRequest implements Http {
         return this.cookies.get(attrKey);
     }
 
+    /**
+     * Set cookie with attribute key/value
+     * @param attrKey
+     * @param attrValue
+     */
     public final void setCookie(String attrKey, String attrValue) {
         if(this.cookies == null) {
             this.cookies = new HashMap<>();
@@ -178,14 +315,27 @@ public class HttpRequest implements Http {
         this.cookies.put(attrKey, attrValue);
     }
 
+    /**
+     * Get session object
+     * @return
+     */
     public final Session getSession() {
         return this.session;
     }
 
+    /**
+     * Set session object
+     * @param session
+     */
     public final void setSession(Session session) {
         this.session = session;
     }
 
+    /**
+     * Print URL infomation
+     * @throws URISyntaxException
+     * @throws MalformedURLException
+     */
     public void printURLInfo() throws URISyntaxException, MalformedURLException {
         Logger logger = (Logger)LoggerFactory.getLogger(this.requestedHost);
         logger.debug(this.toString());

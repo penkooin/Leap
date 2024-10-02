@@ -10,10 +10,12 @@ public enum PROTOCOL {
     HTTP(false, "HTTP"),
     HTTPS(true, "HTTPS"),
     WSS(true, "WSS");
+
     /**
      * SSL flag
      */
     boolean isSecured;
+
     /**
      * protocol
      */
@@ -28,6 +30,7 @@ public enum PROTOCOL {
         this.isSecured = isSSL;
         this.protocol = protocol;
     }
+
     /**
      * Whether SSL
      * @return
@@ -35,6 +38,7 @@ public enum PROTOCOL {
     public boolean isSecured() {
         return isSecured;
     }
+
     /**
      * Get protocol
      * @return
@@ -42,6 +46,7 @@ public enum PROTOCOL {
     public String protocol() {
         return protocol;
     }
+    
     /**
      * Get PROTOCOL by String
      * @param protocol

@@ -15,28 +15,41 @@ import javax.transaction.NotSupportedException;
 
 import org.chaostocosmos.leap.annotation.MethodMapper;
 import org.chaostocosmos.leap.annotation.ServiceMapper;
-import org.chaostocosmos.leap.common.ExceptionUtils;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.MIME;
 import org.chaostocosmos.leap.enums.REQUEST;
+import org.chaostocosmos.leap.exception.ExceptionUtils;
 import org.chaostocosmos.leap.exception.LeapException;
 import org.chaostocosmos.leap.http.HttpRequest;
 import org.chaostocosmos.leap.http.HttpResponse;
 import org.chaostocosmos.leap.http.part.MultiPart;
 import org.chaostocosmos.leap.http.part.Part;
+import org.chaostocosmos.leap.service.abstraction.AbstractService;
 import org.chaostocosmos.leap.service.model.DeployModel;
 import org.chaostocosmos.leap.service.model.ServiceModel;
 
+/**
+ * Hot deploy service 
+ * 
+ * @author 9ins
+ */
 @ServiceMapper(mappingPath="/deploy")
 public class DeployService extends AbstractService implements DeployModel {
     
+    /**
+     * Add service 
+     * @param request
+     * @param response
+     * @throws LeapException
+     * @throws IOException
+     */
     @MethodMapper(method = REQUEST.POST, mappingPath = "/service/add")
     public void add(HttpRequest request, HttpResponse response) throws LeapException, IOException {
-        final Map<String, Object> headers = request.getReqHeader();
+        final Map<String, List<?>> headers = request.getReqHeader();
         final Part bodyPart = request.getBodyPart();
         if(bodyPart == null) {
             throw new LeapException(HTTP.RES417, "Service class file data is missing in request.");
-        } else if(bodyPart.getContentType() == MIME.MULTIPART_FORM_DATA) {            
+        } else if(bodyPart.getContentType() == MIME.MULTIPART_FORM_DATA) {
             Object className = headers.get("serviceClassNames");
             if(className == null) {
                 throw new LeapException(HTTP.RES417, "Service class name is missiong in request.");
@@ -50,15 +63,15 @@ public class DeployService extends AbstractService implements DeployModel {
                 super.logger.debug("Deploying service... "+request.getReqHeader().toString());
                 Arrays.asList(qualifiedClassName.split(",")).stream().forEach(cls -> {
                     if(cls == null) {
-                        throw new LeapException(HTTP.RES412, "Service full qualifiedClassName is missing in header of request.");
+                        throw new LeapException(HTTP.RES412, "Service full qualifiedClassName is missing in the header of request.");
                     }
                     cls = cls.trim();
-                    Path serviceClassPath = super.serviceManager.getHost().getDynamicClasspaths();                
+                    Path serviceClassPath = super.serviceManager.getHost().getClasses();
                     Path qualifiedClassPath = Paths.get(cls.replace(".", File.separator));
-                    System.out.println("-----------------------------------------------------------------"+serviceClassPath.resolve(qualifiedClassPath).toAbsolutePath().toString());        
+                    //System.out.println("-----------------------------------------------------------------"+serviceClassPath.resolve(qualifiedClassPath).toAbsolutePath().toString());        
                     MultiPart multipart = (MultiPart) bodyPart;
                     try {
-                        //Save multi part service files
+                        //Save multi part service files  
                         multipart.save(serviceClassPath.resolve(qualifiedClassPath).toAbsolutePath());
                         super.logger.debug("[DEPLOY] Added service: "+serviceClassPath.resolve(qualifiedClassPath).toAbsolutePath().toString());
                         //Instantate the service
@@ -70,7 +83,7 @@ public class DeployService extends AbstractService implements DeployModel {
                     } catch(NoClassDefFoundError | Exception e) {
                         multipart.getFilePaths().stream().forEach(p -> deleteClean(serviceClassPath.getFileName().toString(), p));
                         super.logger.error(e.getMessage(), e);
-                        super.logger.debug("[DEPLOY] Exception in servie deploy process: "+serviceClassPath.resolve(qualifiedClassPath).toString());
+                        super.logger.debug("[DEPLOY] Exception in servie deploy process: " + serviceClassPath.resolve(qualifiedClassPath).toString());
                         throw new LeapException(HTTP.RES412, ExceptionUtils.getStackTraces(e));
                     }        
                 });
@@ -84,16 +97,16 @@ public class DeployService extends AbstractService implements DeployModel {
 
     @MethodMapper(method = REQUEST.GET, mappingPath = "/service/delete")
     public void delete(HttpRequest request, HttpResponse response) throws IOException, 
-                                                                  URISyntaxException, 
-                                                                  NotSupportedException, 
-                                                                  NoSuchMethodException, 
-                                                                  SecurityException, 
-                                                                  IllegalArgumentException, 
-                                                                  InvocationTargetException, 
-                                                                  ClassNotFoundException, 
-                                                                  InstantiationException, 
-                                                                  IllegalAccessException {
-        String qualifiedClassName = (String) request.getParameter("serviceClassNames");
+                                                                          URISyntaxException, 
+                                                                          NotSupportedException, 
+                                                                          NoSuchMethodException, 
+                                                                          SecurityException, 
+                                                                          IllegalArgumentException, 
+                                                                          InvocationTargetException, 
+                                                                          ClassNotFoundException, 
+                                                                          InstantiationException, 
+                                                                          IllegalAccessException {
+        String qualifiedClassName = (String) request.getContextParameter("serviceClassNames");
         if(qualifiedClassName.startsWith("[") && qualifiedClassName.endsWith("]")) {
             qualifiedClassName = qualifiedClassName.substring(qualifiedClassName.indexOf("[")+1, qualifiedClassName.lastIndexOf("]"));
             if(qualifiedClassName == null || qualifiedClassName.equals("")) {
@@ -102,7 +115,8 @@ public class DeployService extends AbstractService implements DeployModel {
             List<String> classNames = Arrays.asList(qualifiedClassName.split(",")).stream().map(c -> c.trim()).collect(Collectors.toList());
             for(String className : classNames) {
                 super.serviceManager.initialize();
-                Path serviceClassPath = super.serviceManager.getHost().getDynamicClassPaths().resolve(className);
+                Path serviceClassPath = super.serviceManager.getHost().getClasses();
+                serviceClassPath = serviceClassPath.resolve(className);
                 if(serviceClassPath.toFile().exists()) {
                     serviceClassPath.toFile().delete();
                     super.logger.info("[DEPLOY] Delete service -  class: "+className+"  path: "+serviceClassPath.toString());

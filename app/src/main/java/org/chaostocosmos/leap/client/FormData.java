@@ -15,18 +15,22 @@ public class FormData <T> {
      * MIME 
      */
     MIME contentType;
+
     /**
      * Content
      */
     T content;
+
     /**
      * content length
      */    
     int contentLength;
+
     /**
      * content bytes
      */
     byte[] contentBytes;
+
     /**
      * Creates with content type, content
      * @param contentType
@@ -49,6 +53,7 @@ public class FormData <T> {
         }
         this.contentLength = this.contentBytes.length;
     }    
+
     /**
      * Get content type
      * @return
@@ -56,12 +61,14 @@ public class FormData <T> {
     public MIME getContentType() {
         return contentType;
     }
+
     /**
      * Get content
      */
     public T getContent() {
         return content;
     }
+
     /**
      * Get content length
      * @return
@@ -69,6 +76,7 @@ public class FormData <T> {
     public int getContentLength() {
         return contentLength;
     }
+    
     /**
      * Get content bytes
      * @return

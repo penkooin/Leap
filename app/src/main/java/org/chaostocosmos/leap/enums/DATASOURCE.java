@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.context.Context;
-import org.chaostocosmos.leap.service.datasource.LeapDataSource;
+import org.chaostocosmos.leap.spring.datasource.LeapDataSource;
 
 /**
  * DATASOURCE enum
@@ -13,11 +13,13 @@ import org.chaostocosmos.leap.service.datasource.LeapDataSource;
  * @author 9ins
  */
 public enum DATASOURCE {
+
     MYSQL,
     ORACLE,
     MSSQL,
     POSTGRES,
     MONGODB;    
+
     /**
      * Get LeapDataSource object
      * @return
@@ -25,6 +27,7 @@ public enum DATASOURCE {
     public LeapDataSource getDataSource() {
         return getDataSource(this);
     }
+
     /**
      * Get LeapDataSource object
      * @param dataSourceId
@@ -35,6 +38,7 @@ public enum DATASOURCE {
         LeapDataSource dataSource = new LeapDataSource(map);
         return dataSource;
     }  
+    
     /**
      * Get Leap data source list
      * @return

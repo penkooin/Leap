@@ -2,6 +2,48 @@
     "configurations": [
         {
             "type": "java",
+            "name": "RegexTest",
+            "request": "launch",
+            "mainClass": "org.chaostocosmos.leap.common.utils.RegexTest",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "JsonTest",
+            "request": "launch",
+            "mainClass": "org.chaostocosmos.leap.http.JsonTest",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "ResourceMonitorTest",
+            "request": "launch",
+            "mainClass": "org.chaostocosmos.leap.http.resources.ResourceMonitorTest",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "MemoryEstimater",
+            "request": "launch",
+            "mainClass": "org.chaostocosmos.leap.common.utils.MemoryEstimater",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "LoggerUtilsTest",
+            "request": "launch",
+            "mainClass": "org.chaostocosmos.leap.http.LoggerUtilsTest",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "LeapClient",
+            "request": "launch",
+            "mainClass": "org.chaostocosmos.leap.client.LeapClient",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
             "name": "LeapExceptionTest",
             "request": "launch",
             "mainClass": "org.chaostocosmos.leap.LeapExceptionTest",

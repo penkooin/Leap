@@ -2,8 +2,8 @@ package org.chaostocosmos.leap.resource;
 
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
+import java.net.InetAddress;
 import java.net.SocketTimeoutException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Timer;
@@ -14,23 +14,22 @@ import java.util.stream.IntStream;
 
 import javax.transaction.NotSupportedException;
 
-import org.chaostocosmos.leap.LeapApp;
 import org.chaostocosmos.leap.client.FormData;
 import org.chaostocosmos.leap.client.LeapClient;
 import org.chaostocosmos.leap.client.MIME;
-import org.chaostocosmos.leap.common.Constants;
-import org.chaostocosmos.leap.common.LoggerFactory;
-import org.chaostocosmos.leap.common.SIZE;
-import org.chaostocosmos.leap.common.ThreadPoolManager;
-import org.chaostocosmos.leap.context.Monitor;
+import org.chaostocosmos.leap.common.NetworkInterfaceManager;
+import org.chaostocosmos.leap.common.constant.Constants;
+import org.chaostocosmos.leap.common.enums.SIZE;
+import org.chaostocosmos.leap.common.log.Logger;
+import org.chaostocosmos.leap.common.log.LoggerFactory;
+import org.chaostocosmos.leap.common.thread.ThreadPoolManager;
 import org.chaostocosmos.leap.context.Context;
+import org.chaostocosmos.leap.context.Host;
+import org.chaostocosmos.leap.context.Monitor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import ch.qos.logback.classic.Level;
-import ch.qos.logback.classic.Logger;
 
 /**
  * ResourceMonitor object
@@ -119,10 +118,8 @@ public class ResourceMonitor {
     private ResourceMonitor() throws NotSupportedException {
         this.chart = buildMonitorSchema();        
         this.fractionPoint = Constants.DEFAULT_FRACTION_POINT;
-        this.interval = Context.get().server().<Integer> getMonitoringInterval().longValue();
-        this.logger = LoggerFactory.createLoggerFor("monitoring", 
-                      LeapApp.getHomePath().resolve(Context.get().server().<String> getMonitoringLogs()).normalize().toString(), 
-                      Arrays.asList(Context.get().server().<String> getMonitoringLogLevel().split(",")).stream().map(s -> Level.valueOf(s)).collect(Collectors.toList()));        
+        this.interval = Context.get().server().getMonitoringInterval();
+        this.logger = LoggerFactory.createLoggerFor(Context.get().server().getLogs(), Context.get().server().getLogsLevel());
     }
 
     /**
@@ -160,14 +157,14 @@ public class ResourceMonitor {
                         );
                         logger.info(
                             "[MEMORY-MONITOR] "
-                            + "  Process Max: "+getMaxMemory()
-                            + "  Process Used: "+getUsedMemory()
-                            + "  Process Free: "+getFreeMemory()
-                            + "  Physical Total: "+getPhysicalTotalMemory()
-                            + "  Physical Free: "+getPhysicalFreeMemory()
-                            + "  Process CPU load: "+getProcessCpuLoad()
-                            + "  Process CPU time: "+getProcessCpuTime()
-                            + "  System CPU load: "+getSystemCpuLoad()
+                            + "  Process Max: " + getMaxMemory()
+                            + "  Process Used: " + getUsedMemory()
+                            + "  Process Free: " + getFreeMemory()
+                            + "  Physical Total: " + getPhysicalTotalMemory()
+                            + "  Physical Free: " + getPhysicalFreeMemory()
+                            + "  Process CPU load: " + getProcessCpuLoad()
+                            + "  Process CPU time: " + getProcessCpuTime()
+                            + "  System CPU load: " + getSystemCpuLoad()
                         );             
                         setProbingValues();           
                         requestMonitorings();
@@ -275,9 +272,12 @@ public class ResourceMonitor {
     private void requestMonitorings() throws IOException {
         String monitorJson = this.mapper.writerWithDefaultPrettyPrinter().writeValueAsString(this.chart.getMeta());
         Map<String, FormData<?>> formDatas = Map.of("chart", new FormData<byte[]>(MIME.TEXT_JSON, monitorJson.getBytes()));        
-        LeapClient.build(Context.get().hosts().getDefaultHost().getHost(), Context.get().hosts().getDefaultHost().getPort())
+        String mac = NetworkInterfaceManager.getMacAddressByIp(InetAddress.getLocalHost().getHostAddress());
+        Host<?> host = Context.get().hosts().getHosts().get(0);
+        LeapClient.build(host.getHost(), host.getPort())
                   .addHeader("charset", "utf-8")
                   .addHeader("body-in-stream", false)
+                  .addHeader("mac-address", mac)
                   .post("/monitor/chart/image", null, formDatas);
     }    
 

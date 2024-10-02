@@ -6,20 +6,19 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.common.Filtering;
-import org.chaostocosmos.leap.common.LoggerFactory;
+import org.chaostocosmos.leap.common.data.Filtering;
+import org.chaostocosmos.leap.common.log.LEVEL;
+import org.chaostocosmos.leap.common.log.Logger;
+import org.chaostocosmos.leap.common.log.LoggerFactory;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.PROTOCOL;
 import org.chaostocosmos.leap.exception.LeapException;
 import org.chaostocosmos.leap.security.UserCredentials;
-
-import ch.qos.logback.classic.Level;
-import ch.qos.logback.classic.Logger;
 
 /**
  * Virtual host manager object
@@ -35,14 +34,14 @@ public class Hosts <T> extends Metadata <T> {
      */
     public Hosts(T hostsMap) {
         super(hostsMap);
-    }      
+    }    
 
     /**
      * Get host object by name
      * @param hostId
      * @return
      */
-    public Host<T> getHost(String hostId) {
+    public Host<?> getHost(String hostId) {
         return new Host<T>(super.<List<T>>getValue("hosts")
                                 .stream()
                                 .filter(m -> ((Map<?, ?>)m).get("id").equals(hostId))
@@ -51,54 +50,60 @@ public class Hosts <T> extends Metadata <T> {
     }
 
     /**
-     * Get default Hosts
-     * @return
-     */
-    public Host<T> getDefaultHost() {
-        return new Host<T>(super.<List<T>>getValue("hosts")
-                                .stream()
-                                .filter(m -> ((Map<?, ?>)m).get("default").equals(true))
-                                .findFirst()
-                                .orElseThrow(() -> new IllegalArgumentException("Default host not found!!!")));
-    }
-
-    /**
      * Get all host list
      * @return
      */
-    public List<Host<?>> getAllHost() {
-        List<String> hostIds = super.<List<Map<String, Object>>> getValue("hosts")
-                                    .stream()
-                                    .map(m -> (String) m.get("id"))
-                                    .collect(Collectors.toList());
-        return hostIds.stream().map(s -> getHost(s)).collect(Collectors.toList());
-    }
-
-    /**
-     * Get default host
-     * @return
-     */
-    public <V> V getDefaultHostName() {
-        return getDefaultHost().getHost();
-    }
-
-    /**
-     * Get default port
-     * @return
-     */
-    public <V> V getDefaultPort() {
-        return getDefaultHost().getPort();
+    public List<Host<?>> getHosts() {
+        List<String> hostIds = super.<List<Map<String, Object>>> getValue("hosts").stream().map(m -> m.get("id").toString()).collect(Collectors.toList());
+        return hostIds.stream().map(h -> getHost(h)).collect(Collectors.toList());
     }
 
     /**
      * Get all of host id
      * @return
      */
-    public <V> List<V> getHostIds() {
-        return getAllHost()
-               .stream()
-               .map(h -> h.<V>getHostId())
-               .collect(Collectors.toList());
+    public List<String> getHostIds() {
+        return getHosts().stream().map(h -> h.getId()).collect(Collectors.toList());
+    }
+
+    /**
+     * Get server logs level
+     * @return
+     */
+    public Path getServerLogsPath() {
+        return Paths.get(super.<String> getValue("logs.path"));
+    }
+
+    /**
+     * Get server logs level
+     * @return
+     */
+    public LEVEL getServerLogsLevel() {
+        return LEVEL.valueOf(super.<String> getValue("logs.level"));
+    }
+
+    /**
+     * Get monitor image path
+     * @return
+     */
+    public Path getMonitorImagePath() {
+        return Paths.get(super.<String> getValue("monitor.image-path"));
+    }
+
+    /**
+     * Get monitor probing interval
+     * @return
+     */
+    public int getMonitorProbingInterval() {
+        return super.<Integer> getValue("monitor.probing-interval");        
+    }
+
+    /**
+     * Get flag whether monitor
+     * @return
+     */
+    public boolean getSupportMonitoring() {
+        return super.<Boolean> getValue("monitor.support-monitoring");
     }
 
     /**
@@ -106,8 +111,8 @@ public class Hosts <T> extends Metadata <T> {
      * @param hostId
      * @return
      */
-    public <V> V getDynamicClaspaths(String hostId) {        
-        return getHost(hostId).getDynamicClasspaths();
+    public List<Path> getDynamicClaspaths(String hostId) {        
+        return getHost(hostId).getDynamicClassPaths();
     }
 
     /**
@@ -115,34 +120,29 @@ public class Hosts <T> extends Metadata <T> {
      * @return
      */
     public List<Path> getAllDynamicClasspaths() {
-        return getAllHost().stream().flatMap(h -> h.<List<String>> getDynamicClasspaths().stream()).reduce(new ArrayList<Path>(), (accum, i) -> {
-            accum.add(Paths.get(i));
-            return accum;            
-        }, (e1, e2) -> {
-            e1.addAll(e2);
-            return e1;
-        });
+        return getHosts().stream().flatMap(h -> h.getDynamicClassPaths().stream()).collect(Collectors.toList());
     }
 
     /**
-     * Get all configured host names. It could be having same value.
+     * Get all configured host names. 
+     * It could be having same value.
      * @return
      */
-    public <V> List<V> getAllHostname() {
-        return getAllHost().stream().map(v -> v.<V>getHost()).collect(Collectors.toList()); 
-    }    
+    public List<String> getAllHostname() {
+        return getHosts().stream().map(v -> v.getHost()).collect(Collectors.toList()); 
+    }
 
     /**
      * Get host name matching with host 
-     * @param hostName
+     * @param host
      * @return
      */
-    public <V> V getHostId(V hostName) {
-        Host<?> host = getAllHost().stream().filter(h -> h.<V> getHost().equals(hostName)).findAny().orElse(null);        
+    public String getId(String hostname) {
+        Host<?> host = getHosts().stream().filter(h -> h.getHost().equals(hostname)).findAny().orElse(null);        
         if(host == null) {
             throw new LeapException(HTTP.RES500);
         }
-        return host.getHostId();
+        return host.getId();
     }
 
     /**
@@ -150,7 +150,7 @@ public class Hosts <T> extends Metadata <T> {
      * @param hostId
      * @return
      */
-    public <V> V getPort(String hostId) {
+    public int getPort(String hostId) {
         return getHost(hostId).getPort();
     }
 
@@ -161,7 +161,7 @@ public class Hosts <T> extends Metadata <T> {
      * @return
      */     
     public int[] getUsingPorts() {
-        return getAllHost().stream().mapToInt(h -> h.<Integer> getPort()).toArray();
+        return getHosts().stream().mapToInt(h -> h.getPort()).toArray();
     }
 
     /**
@@ -183,23 +183,6 @@ public class Hosts <T> extends Metadata <T> {
     }
 
     /**
-     * Whether virtual host
-     * @param hostId
-     * @return
-     */
-    public boolean isVirtualHost(String hostId) {
-        return !getHost(hostId).<Boolean> isDefaultHost();
-    }
-
-    /**
-     * Get virtual host list
-     * @return
-     */
-    public List<Host<?>> getVirtualHosts() {
-        return getAllHost().stream().filter(h -> !h.<Boolean> isDefaultHost()).collect(Collectors.toList());
-    }
-
-    /**
      * Get web protocol of Host or vHost
      * @param hostId
      * @return
@@ -214,7 +197,7 @@ public class Hosts <T> extends Metadata <T> {
      * @return
      */
     public File getWelcomeFile(String hostId) {
-        return getHost(hostId).getWelcomeFile();
+        return getHost(hostId).getIndexFile();
     }
 
     /**
@@ -240,7 +223,7 @@ public class Hosts <T> extends Metadata <T> {
      * @param hostId
      * @return
      */
-    public List<Level> getLogLevel(String hostId) {
+    public LEVEL getLogLevel(String hostId) {
         return getHost(hostId).getLogLevel();
     }
 
@@ -254,41 +237,12 @@ public class Hosts <T> extends Metadata <T> {
     }
 
     /**
-     * Get in-memory filters
-     * @param hostId
-     * @return
-     */
-    public Filtering getInMemoryFiltering(String hostId) {
-        return getHost(hostId).getInMemoryFiltering();
-    }
-
-    /**
      * Get allowed resource pattern
      * @param hostId
      * @return
      */
     public Filtering getAccessFiltering(String hostId) {
         return getHost(hostId).getAccessFiltering();
-    }
-
-    /**
-     * Filtering dynamic packages
-     * @param hostId
-     * @param resourceName
-     * @return
-     */
-    public boolean filteringDynamicPackages(String hostId, String resourceName) {
-        return getHost(hostId).getDynamicPackageFiltering().include(resourceName);
-    }
-
-    /**
-     * Filtering in-memory resources with specified resourceName
-     * @param hostId
-     * @param resourceName
-     * @return
-     */
-    public boolean filteringInMemory(String hostId, String resourceName) {
-        return getHost(hostId).getInMemoryFiltering().include(resourceName);
     }
 
     /**
@@ -307,7 +261,7 @@ public class Hosts <T> extends Metadata <T> {
      * @return
      */
     public List<String> getHostsByPort(int port) {
-        return getAllHost().stream().filter(h -> h.<Integer> getPort() == port).map(h -> h.<String> getHost()).collect(Collectors.toList());
+        return getHosts().stream().filter(h -> h.getPort() == port).map(h -> h.getHost()).collect(Collectors.toList());
     }
 
     /**
@@ -332,12 +286,12 @@ public class Hosts <T> extends Metadata <T> {
      * @return
      */
     public List<UserCredentials> getUsers(String hostId) {
-        return getHost(hostId).getUsers();
+        return getHost(hostId).getUsers().stream().map(u -> new UserCredentials(u)).collect(Collectors.toList());
     }
 
     /**
      * Whether the host is existing in this server
-     * @param hostId
+     * @param watcherId
      * @return
      */
     public boolean isExistHostname(String hostname) {
@@ -358,16 +312,21 @@ public class Hosts <T> extends Metadata <T> {
      */
     public URL[] getAllDynamicClasspathURLs() {
         List<Path> paths = getAllDynamicClasspaths();
-        List<URL> urls = new ArrayList<>();
-        for(Path path : paths) {
-            if(path != null) {
-                try {
-                    urls.add(path.toFile().toURI().toURL());
-                } catch (MalformedURLException e) {
-                    throw new RuntimeException(e);
-                }
-            }            
-        }
-        return urls.stream().toArray(URL[]::new);
+        return getPathsToURLs(paths);
+    }
+
+    /**
+     * Get URL list from Path list
+     * @param paths
+     * @return
+     */
+    public static URL[] getPathsToURLs(List<Path> paths) {
+        return paths.stream().map(p -> {
+            try {
+                return p.toFile().toURI().toURL();
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
+            }
+        }).toArray(URL[]::new);
     }
 }

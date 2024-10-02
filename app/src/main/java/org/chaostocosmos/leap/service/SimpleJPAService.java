@@ -8,9 +8,10 @@ import org.chaostocosmos.leap.enums.DATASOURCE;
 import org.chaostocosmos.leap.enums.REQUEST;
 import org.chaostocosmos.leap.http.HttpRequest;
 import org.chaostocosmos.leap.http.HttpResponse;
-import org.chaostocosmos.leap.service.configuration.RoutingDataSource;
-import org.chaostocosmos.leap.service.entity.Users;
-import org.chaostocosmos.leap.service.repository.IUsersRepository;
+import org.chaostocosmos.leap.service.abstraction.AbstractService;
+import org.chaostocosmos.leap.spring.configuration.RoutingDataSource;
+import org.chaostocosmos.leap.spring.entity.Users;
+import org.chaostocosmos.leap.spring.repository.IUsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @ServiceMapper(mappingPath = "/simple/jpa")

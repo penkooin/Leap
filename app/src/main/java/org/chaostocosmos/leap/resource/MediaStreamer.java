@@ -3,7 +3,7 @@ package org.chaostocosmos.leap.resource;
 import java.io.IOException;
 import java.nio.file.Path;
 
-import org.chaostocosmos.leap.common.FileUtils;
+import org.chaostocosmos.leap.common.file.FileUtils;
 
 /**
  * MediaStream

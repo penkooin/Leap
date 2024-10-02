@@ -3,9 +3,11 @@ package org.chaostocosmos.leap.http;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
+import java.util.Map;
 
-import org.chaostocosmos.leap.manager.ResourceManager;
-import org.chaostocosmos.leap.resource.ResourcesModel;
+import org.chaostocosmos.leap.common.constant.Constants;
+import org.chaostocosmos.leap.resource.ResourceProvider;
+import org.chaostocosmos.leap.resource.model.ResourcesWatcherModel;
 import org.junit.Before;
 import org.junit.Test;    
     
@@ -17,9 +19,12 @@ public class StaticResourceManagerTest {
         
     @Test
     public void test() throws Exception {
-        ResourcesModel manager = ResourceManager.get("localhost");
-        manager.addResource(Paths.get("D:\\0.github\\leap\\home\\webapp\\WEB-INF\\static"));
+        System.out.println(ClassLoader.getSystemClassLoader().getResource(""));
+        ResourceProvider provider = new ResourceProvider(Paths.get(ClassLoader.getSystemClassLoader().getResource("").toURI()).resolve("config/resource-provider.yml"));
+        ResourcesWatcherModel model = provider.get("leap");
+        
     }
+
 
     public static void main(String[] args) throws IOException, InterruptedException, URISyntaxException {
         //ResourcesModel manager = ResourceManager.get("localhost");

@@ -8,6 +8,7 @@ import java.util.EventListener;
  * @author 9ins
  */
 public interface MetaListener extends EventListener {
+    
     /**
      * receive Server context
      */

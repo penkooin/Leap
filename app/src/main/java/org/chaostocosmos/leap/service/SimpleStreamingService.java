@@ -6,6 +6,7 @@ import org.chaostocosmos.leap.enums.MIME;
 import org.chaostocosmos.leap.enums.REQUEST;
 import org.chaostocosmos.leap.http.HttpRequest;
 import org.chaostocosmos.leap.http.HttpResponse;
+import org.chaostocosmos.leap.service.abstraction.AbstractStreamingService;
 
 /**
  * SimpleStreamingService

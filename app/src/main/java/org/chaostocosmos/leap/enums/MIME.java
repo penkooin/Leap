@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.common.UtilBox;
+import org.chaostocosmos.leap.common.utils.UtilBox;
 import org.chaostocosmos.leap.context.Context;
 
 /**
@@ -79,7 +79,6 @@ public enum MIME {
     APPLICATION_X_SHOCKWAVE_FLASH(Context.get().mime().getMime("APPLICATION_X_SHOCKWAVE_FLASH")),
     IMAGE_VND_MICROSOFT_ICON(Context.get().mime().getMime("IMAGE_VND_MICROSOFT_ICON")),
 
-
     //audio
     AUDIO_AAC(Context.get().mime().getMime("AUDIO_AAC")),
     AUDIO_MIDI(Context.get().mime().getMime("AUDIO_MIDI")),
@@ -106,10 +105,12 @@ public enum MIME {
     APPLICATION_X_FONT_WOFF(Context.get().mime().getMime("APPLICATION_X_FONT_WOFF")),
     APPLICATION_X_FONT_TTF(Context.get().mime().getMime("APPLICATION_X_FONT_TTF"))
     ;
+
     /**
      * Mime type String
      */
     String mimeType;
+
     /**
      * Initializer
      * @param mimeType
@@ -117,6 +118,7 @@ public enum MIME {
     MIME(String mimeType) {
         this.mimeType = mimeType;
     }
+
     /**
      * Get mime type
      * @return
@@ -124,6 +126,7 @@ public enum MIME {
     public String mimeType() {
         return this.mimeType;
     }
+
     /**
      * Get mime type from content type string
      * @param mimeType
@@ -132,12 +135,13 @@ public enum MIME {
     public static MIME mimeType(String mimeType) {
         
         return mimeType == null ? null : MIME.valueOf(mimeType.toUpperCase()
-                                         .replace("/", "_")
-                                         .replace("-", "_")
-                                         .replace(".", "_")
-                                         .replace("+", "_")
-                                         );
+                                                    .replace("/", "_")
+                                                    .replace("-", "_")
+                                                    .replace(".", "_")
+                                                    .replace("+", "_")
+                                                    );
     }
+
     /**
      * Get mime type object by specified resource
      * @param resourcePath
@@ -146,6 +150,7 @@ public enum MIME {
     public static MIME mimeType(Path resourcePath) {
         return mimeType(UtilBox.probeContentType(resourcePath));
     }
+    
     /**
      * Get mime type list of specfied parameter
      * @param type

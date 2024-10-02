@@ -1,18 +1,20 @@
 package org.chaostocosmos.leap.service.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.chaostocosmos.leap.context.Host;
+import org.chaostocosmos.leap.filter.IFilter;
 import org.chaostocosmos.leap.http.HttpTransfer;
-import org.chaostocosmos.leap.manager.ServiceManager;
-import org.chaostocosmos.leap.manager.SessionManager;
+import org.chaostocosmos.leap.resource.model.ResourcesWatcherModel;
 import org.chaostocosmos.leap.http.HttpResponse;
-import org.chaostocosmos.leap.resource.ResourcesModel;
-import org.chaostocosmos.leap.service.filter.IFilter;
+import org.chaostocosmos.leap.service.ServiceManager;
+import org.chaostocosmos.leap.session.SessionManager;
 
 /**
  * Interface for servlet
- * @author Kooin-Shin
+ * 
+ * @author 9ins
  * @since 2021.09.15
  */
 public interface ServiceModel extends SpringJPAModel, Cloneable {
@@ -22,12 +24,6 @@ public interface ServiceModel extends SpringJPAModel, Cloneable {
      * @return
      */
     public Host<?> getHost();
-
-    /**
-     * Get Host object to the service
-     * @param host
-     */
-    public void setHost(Host<?> host);
 
     /**
      * First entry point of client requets
@@ -64,13 +60,21 @@ public interface ServiceModel extends SpringJPAModel, Cloneable {
      * Get Resource object
      * @return
      */
-    public ResourcesModel getResourcesModel();
+    public ResourcesWatcherModel getResourcesModel();
 
     /**
      * Set ResourcesModel
      * @param resourcesModel
      */
-    public void setResourcesModel(ResourcesModel resourcesModel);
+    public void setResourcesModel(ResourcesWatcherModel resourcesModel);
+
+    /**
+     * Resolving placeholder with parameter Map
+     * @param htmlPage
+     * @param placeHolderValueMap
+     * @return
+     */
+    public String resolvePlaceHolder(String htmlPage, Map<String, ?> placeHolderValueMap);
 
     /**
      * Get SessionManager

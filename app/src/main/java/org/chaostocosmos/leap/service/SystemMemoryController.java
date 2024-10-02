@@ -4,10 +4,12 @@ import java.util.Date;
 
 import org.chaostocosmos.leap.annotation.MethodMapper;
 import org.chaostocosmos.leap.annotation.ServiceMapper;
-import org.chaostocosmos.leap.common.SIZE;
+import org.chaostocosmos.leap.common.enums.SIZE;
 import org.chaostocosmos.leap.enums.REQUEST;
 import org.chaostocosmos.leap.http.HttpRequest;
 import org.chaostocosmos.leap.http.HttpResponse;
+import org.chaostocosmos.leap.service.abstraction.AbstractService;
+import org.chaostocosmos.leap.spring.entity.SystemMemoryData;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

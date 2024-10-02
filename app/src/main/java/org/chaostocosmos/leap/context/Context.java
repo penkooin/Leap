@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
@@ -17,10 +16,10 @@ import java.util.Map;
 
 import javax.transaction.NotSupportedException;
 
-import org.chaostocosmos.leap.common.LoggerFactory;
+import org.chaostocosmos.leap.LeapApp;
+import org.chaostocosmos.leap.common.log.LoggerFactory;
 import org.chaostocosmos.leap.enums.SERVER_EVENT;
-import org.chaostocosmos.leap.enums.WEB_PATH;
-import org.chaostocosmos.leap.resource.ResourceHelper;
+import org.chaostocosmos.leap.enums.WAR_PATH;
 
 /**
  * Context management object
@@ -29,72 +28,59 @@ import org.chaostocosmos.leap.resource.ResourceHelper;
  * @since 2021.09.15
  */
 public class Context extends Thread {
+
     /**
      * Context instance
      */
     private static Context context = null;
+
     /**
      * Home path
      */
     private static Path HOME_PATH;
+
     /**
      * Config path
      */
     private static Path CONFIG_PATH;
+
     /**
      * Context listener list
      */
     private List<MetaListener> contextListeners = new ArrayList<>();
+
     /**
      * META mod Map
      */
     Map<META, Long> metaFileModMap;
+
     /**
      * Wether over thread
      */
     boolean isDone;
+
     /**
      * Constructor 
      * @param HOME_PATH
-     * @throws URISyntaxException
-     * @throws IOException
-     * @throws InterruptedException
+     * @throws URISyntaxException 
+     * @throws IOException 
      */
-    private Context(Path HOME_PATH_) throws IOException, URISyntaxException, InterruptedException {
+    private Context(Path HOME_PATH_) {
         HOME_PATH = HOME_PATH_;
-        CONFIG_PATH = HOME_PATH.resolve(WEB_PATH.CONFIG.name().toLowerCase());        
-        //init metadata watcher
-        //build config environment
-        ResourceHelper.extractResource(WEB_PATH.CONFIG.name().toLowerCase(), HOME_PATH); 
-        //dispatch context events
-        start();
+        CONFIG_PATH = HOME_PATH.resolve(WAR_PATH.CONFIG.path());
     }
+
     /**
      * Get Context object 
      * @return
-     * @throws URISyntaxException
-     * @throws IOException
      */
     public static Context get() {
-        return get(Paths.get(System.getProperty("user.dir")));
-    }
-    /**
-     * Get Context object by specified Path
-     * @param HOME_PATH
-     * @return
-     * @throws URISyntaxException
-     * @throws IOException
-     */
-    public static Context get(Path HOME_PATH) {
         if(context == null) {
-            try {
-                context = new Context(HOME_PATH);
-            } catch (IOException | URISyntaxException | InterruptedException e) {
-                e.printStackTrace();
-            }
-        }        
+            context = new Context(LeapApp.HOME_PATH);
+        }
         return context;
     }
+
     /**
      * Stop metadata watcher
      * @throws InterruptedException
@@ -164,9 +150,9 @@ public class Context extends Thread {
             }
             watchService.close();
         } catch (IOException e) {
-            LoggerFactory.getLogger().error(e.getMessage(), e);
+            LoggerFactory.getLogger(Context.get().server().getId()).throwable(e);
         }
-        LoggerFactory.getLogger().info("Config data watcher is closed...");
+        LoggerFactory.getLogger(Context.get().server().getId()).info("Config data watcher is closed.");
     }
 
     /**
@@ -174,7 +160,7 @@ public class Context extends Thread {
      * @throws NotSupportedException
      * @throws IOException
      */
-    public void refresh() throws NotSupportedException, IOException {
+    public void refresh() throws IOException, NotSupportedException {
         for(META meta : META.values()) {
             meta.reload(); 
         }
@@ -225,7 +211,7 @@ public class Context extends Thread {
      * Get config path
      * @return
      */
-    public Path getConfig() {
+    public Path getConfigPath() {
         return CONFIG_PATH;
     }
 
@@ -233,7 +219,7 @@ public class Context extends Thread {
      * Get template path
      * @return
      */
-    public Path getTemplates(String hostId) {
+    public Path getTemplatePath(String hostId) {
         return hosts().getTemplates(hostId);
     }
 
@@ -293,7 +279,7 @@ public class Context extends Thread {
      */
     public List<Host<?>> allHost() {
         Hosts<?> hosts = hosts();
-        return hosts.getAllHost();
+        return hosts.getHosts();
     }
 
     /**
@@ -322,7 +308,6 @@ public class Context extends Thread {
 
     /**
      * Save config
-     * 
      * @param map
      * @param targetFile
      * @throws Exception

@@ -7,8 +7,7 @@ import java.net.Socket;
 
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.enums.HTTP;
-import org.chaostocosmos.leap.manager.SessionManager;
-import org.chaostocosmos.leap.service.entity.Message;
+import org.chaostocosmos.leap.spring.entity.Message;
 
 /**
  * WebSocketSession

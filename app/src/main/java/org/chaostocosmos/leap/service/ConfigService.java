@@ -4,10 +4,11 @@ import org.chaostocosmos.leap.annotation.MethodMapper;
 import org.chaostocosmos.leap.annotation.PreFilters;
 import org.chaostocosmos.leap.annotation.ServiceMapper;
 import org.chaostocosmos.leap.enums.REQUEST;
+import org.chaostocosmos.leap.filter.BasicAuthFilter;
+import org.chaostocosmos.leap.filter.ConfigRequestFilter;
 import org.chaostocosmos.leap.http.HttpRequest;
 import org.chaostocosmos.leap.http.HttpResponse;
-import org.chaostocosmos.leap.service.filter.BasicAuthFilter;
-import org.chaostocosmos.leap.service.filter.ConfigRequestFilter;
+import org.chaostocosmos.leap.service.abstraction.AbstractService;
 
 /**
  * ConfigurationService

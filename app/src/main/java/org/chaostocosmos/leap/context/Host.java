@@ -5,20 +5,32 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.common.Filtering;
-import org.chaostocosmos.leap.common.LoggerFactory;
+import org.chaostocosmos.leap.LeapApp;
+import org.chaostocosmos.leap.common.data.Filtering;
+import org.chaostocosmos.leap.common.enums.SIZE;
+import org.chaostocosmos.leap.common.log.LEVEL;
+import org.chaostocosmos.leap.common.log.Logger;
+import org.chaostocosmos.leap.common.log.LoggerFactory;
 import org.chaostocosmos.leap.enums.AUTH;
+import org.chaostocosmos.leap.enums.PROTOCOL;
 import org.chaostocosmos.leap.enums.STATUS;
-import org.chaostocosmos.leap.manager.ResourceManager;
-import org.chaostocosmos.leap.resource.ResourcesModel;
+import org.chaostocosmos.leap.resource.ResourceProvider;
+import org.chaostocosmos.leap.resource.model.ResourcesWatcherModel;
 
-import ch.qos.logback.classic.Level;
-import ch.qos.logback.classic.Logger;
+import com.google.gson.Gson;
 
 /**
  * Host object
@@ -38,19 +50,11 @@ public class Host <T> extends Metadata<T> {
     }
 
     /**
-     * Whether main host
-     * @return
-     */
-    public <V> V isDefaultHost() {
-        return super.getValue("default");
-    }
-
-    /**
      * Get server name
      * @return
      */
-    public <V> V getHostId() {
-        return super.getValue("id");
+    public String getId() {
+        return super.<String> getValue("id");
     }
 
     /**
@@ -58,32 +62,64 @@ public class Host <T> extends Metadata<T> {
      * @param <V>
      * @return
      */
-    public <V> V getLocale() {
-        return super.getValue("locale");
+    public Locale getLocale() {
+        return Locale.getDefault();
+    }
+
+    /**
+     * Get time zone String
+     * @return
+     */
+    public String getTimeZone() {
+        return super.<String> getValue("timezone");
+    }
+
+    /**
+     * Get ZoneId
+     * @return
+     */
+    public ZoneId getZoneId() {
+        return ZoneId.of(super.<String> getValue("timezone"));
+    }
+
+    /**
+     * Get ZoneDateTime
+     * @return
+     */
+    public ZonedDateTime getNowZoneDateTime() {
+        return ZonedDateTime.now(getZoneId());
+    }
+
+    /**
+     * Get current time formatted
+     * @param pattern
+     * @return
+     */
+    public String getCurrentDateTime(String pattern) {
+        return getNowZoneDateTime().format(DateTimeFormatter.ofPattern(pattern));
     }
 
     /**
      * Get specified web protocol
      * @return
      */
-    public <V> V getProtocol() {
-        return super.getValue("protocol");
+    public PROTOCOL getProtocol() {        
+        return PROTOCOL.valueOf(super.<String> getValue("protocol"));
     }
 
     /**
      * Get protocol version
-     * @param <V>
      * @return
      */
-    public <V> V getProtocolVersion() {
-        return super.getValue("protocol-version");
+    public String getProtocolVersion() {
+        return super.<String> getValue("protocol-version");
     }
 
     /**
      * Get charset of the host
      * @return
      */
-    public <V> V charset() {
+    public String charset() {
         return super.getValue("charset");
     }
 
@@ -91,7 +127,7 @@ public class Host <T> extends Metadata<T> {
      * Get host name
      * @return
      */
-    public <V> V getHost() {
+    public String getHost() {
         return super.getValue("host");
     }
 
@@ -99,7 +135,7 @@ public class Host <T> extends Metadata<T> {
      * Get port;
      * @return
      */
-    public <V> V getPort() {
+    public int getPort() {
         return super.getValue("port");
     }
 
@@ -107,7 +143,7 @@ public class Host <T> extends Metadata<T> {
      * Get connection timeout
      * @return
      */
-    public <V> V getConnectionTimeout() {
+    public int getConnectionTimeout() {
         return super.getValue("connection-timeout");
     }
 
@@ -115,7 +151,7 @@ public class Host <T> extends Metadata<T> {
      * Get server backlog
      * @return
      */
-    public <V> V getBackLog() {
+    public int getBackLog() {
         return super.getValue("backlog");
     }
 
@@ -123,48 +159,63 @@ public class Host <T> extends Metadata<T> {
      * Get client request interval for blocking client that be has malicuous.
      * @return
      */ 
-    public <V> V getRequestBlockingInterval() {
-        return super.getValue("request-blocking-interval");
+    public int getRequestBlockingInterval() {
+        return super.<Integer> getValue("request-blocking-interval");
     }
 
     /**
-     * Get upload file buffer flush size
+     * Get limitation of response body
      * @return
      */
-    public <V> V getFileBufferSize() {
-        return super.getValue("file-buffer-size");
-    }    
+    public int getResponseLimitBytes() {
+        return super.<Integer> getValue("reponse-limit-bytes");
+    }
 
     /**
      * Get users
      * @return
      */
-    public <V> V getUsers() {        
+    public List<Map<String, Object>> getUsers() {        
         return super.getValue("users");
     }
 
     /**
-     * Get streaming buffer size
-     * @param <V>
+     * Get access filters
      * @return
      */
-    public <V> V getStreamingBufferSize() {
-        return super.getValue("resources.streaming-buffer-size");
+    public List<String> getAccessFilters() {
+        return super.<List<String>>getValue("context-filters.access-filters");
     }
 
     /**
-     * Get In-Memory unit size
+     * Get allowed resource filters
      * @return
      */
-    public <V> V getInMemorySplitUnit() {
-        return super.getValue("resources.in-memory-split-unit");
+    public Filtering getAccessFiltering() {
+        return new Filtering(super.getValue("context-filters.access-filters"));
+    }
+
+    /**
+     * Get forbidden filters
+     * @return
+     */
+    public List<String> getForbiddenFilters() {
+        return super.getValue("context-filters.forbidden-filters");
+    }
+
+    /**
+     * Get forbidden Filtering object
+     * @return
+     */
+    public Filtering getForbiddenFiltering() {
+        return new Filtering(getForbiddenFilters());
     }
 
     /**
      * Get IP allowed filters 
      * @return
      */
-    public <V> V getIpAllowedFilters() {
+    public List<String> getIpAllowedFilters() {
         return super.getValue("ip-filters.allowed");
     }
 
@@ -180,7 +231,7 @@ public class Host <T> extends Metadata<T> {
      * Get IP forbbiden filters
      * @return
      */
-    public <V> V getIpForbbidenFilters() {
+    public List<String> getIpForbbidenFilters() {
         return super.getValue("ip-filters.forbidden");
     }    
 
@@ -193,79 +244,6 @@ public class Host <T> extends Metadata<T> {
     }
 
     /**
-     * Get dynamic class path
-     * @return
-     */
-    public <V> V getDynamicClasspaths() {
-        return !super.getValue("dynamic-classpath").equals("") ? super.getValue("dynamic-classpath") : null;
-    }
-
-    /**
-     * Get dynamic packages list
-     * @return
-     */
-    @SuppressWarnings("unchecked")
-    public <V> V getDynamicPackages() {
-        return super.getValue("dynamic-classpath") == null ? (V) new ArrayList<String>() : super.getValue("dynamic-classpath");
-    }
-
-    /**
-     * Get dynamic package Filtering object
-     * @return
-     */
-    public Filtering getDynamicPackageFiltering() {
-        return new Filtering(getDynamicPackages());
-    }
-
-    /**
-     * Get in-memory resource filters
-     * @return
-     */
-    public <V> V getInMemoryFilters() {
-        return super.getValue("resources.in-memory-filters");
-    }
-
-    /**
-     * Get Filtering for being loaded resources to memory
-     * @return
-     */
-    public Filtering getInMemoryFiltering() {
-        return new Filtering(getInMemoryFilters());
-    }
-
-    /**
-     * Get access filters
-     * @return
-     */
-    public <V> V getAccessFilters() {
-        return super.getValue("resources.access-filters");
-    }
-
-    /**
-     * Get allowed resource filters
-     * @return
-     */
-    public Filtering getAccessFiltering() {
-        return new Filtering(super.getValue("resources.access-filters"));
-    }
-
-    /**
-     * Get forbidden filters
-     * @return
-     */
-    public <V> V getForbiddenFilters() {
-        return super.getValue("resources.forbidden-filters");
-    }
-
-    /**
-     * Get forbidden Filtering object
-     * @return
-     */
-    public Filtering getForbiddenFiltering() {
-        return new Filtering(getForbiddenFilters());
-    }
-
-    /**
      * Get whether show error-details content to client ( true or false)
      * @return
      */
@@ -274,11 +252,19 @@ public class Host <T> extends Metadata<T> {
     }
 
     /**
-     * Get welcome file name
+     * Get index file name
      * @return
      */
-    public String getWelcomePageName() {
-        return super.getValue("welcome-page");
+    public String getIndexPage() {
+        return super.getValue("index-page");
+    }
+
+    /**
+     * Get error page
+     * @return
+     */
+    public String getErrorPage() {
+        return super.getValue("error-page");
     }
 
     /**
@@ -351,7 +337,7 @@ public class Host <T> extends Metadata<T> {
      * Get session path( including all subdirectories)
      * @return
      */
-    public <V> V getPath() {
+    public String getPath() {
         return super.getValue("path");
     }
 
@@ -360,7 +346,7 @@ public class Host <T> extends Metadata<T> {
      * @return
      */
     public STATUS getHostStatus() {        
-        return super.<STATUS> getValue("status");
+        return STATUS.valueOf(super. getValue("status"));
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////     
@@ -369,8 +355,24 @@ public class Host <T> extends Metadata<T> {
      * Get dynamic class Path
      * @return
      */
-    public Path getDynamicClassPaths() {
-        return Paths.get(this.<String> getDynamicClasspaths());
+    public List<Path> getDynamicClassPaths() {
+        return super.<List<String>> getValue("dynamic-classpath").stream().map(d -> Paths.get(d)).collect(Collectors.toList());
+    }
+
+    /**
+     * Get dynamic packages list
+     * @return
+     */
+    public List<String> getDynamicPackages() {
+        return super.getValue("dynamic-classpath") == null ? new ArrayList<String>() : super.<List<String>> getValue("dynamic-classpath");
+    }
+
+    /**
+     * Get dynamic package Filtering object
+     * @return
+     */
+    public Filtering getDynamicPackageFiltering() {
+        return new Filtering(getDynamicPackages());
     }
 
     /**
@@ -378,7 +380,7 @@ public class Host <T> extends Metadata<T> {
      * @return
      */
     public Path getHomePath() {
-        return Paths.get((String) super.getValue("home-path")).normalize().toAbsolutePath();
+        return Context.get().server().getHosts().get(getId()).normalize().toAbsolutePath();
     }
 
     /**
@@ -429,11 +431,11 @@ public class Host <T> extends Metadata<T> {
     }
 
     /**
-     * Get welcome file
+     * Get index file
      * @return
      */
-    public File getWelcomeFile() {
-        return getDocroot().resolve((String) super.getValue("welcome-page")).toFile();
+    public File getIndexFile() {
+        return getDocroot().resolve(super.<String> getValue("index-page")).toFile();
     }
 
     /** 
@@ -441,46 +443,37 @@ public class Host <T> extends Metadata<T> {
      * @return
      */
     public Path getLogPath() {
-        return getHomePath().resolve((String) super.getValue("logs.path"));
+        return getHomePath().resolve(super.<String> getValue("logs.path"));
     }
 
     /**
      * Get log level
      * @return
      */
-    public List<Level> getLogLevel() {
-        return Arrays.asList(super.getValue("logs.level").toString().split(",")).stream().map(l -> Level.toLevel(l.trim())).collect(Collectors.toList());
+    public LEVEL getLogLevel() {
+        return LEVEL.valueOf(super.getValue("logs.level"));
     }
 
     /**
      * Get resource for host object
      * @return
      */
-    public ResourcesModel getResource() {
-        ResourcesModel model = ResourceManager.get(getHostId());
-        return model;
+    public ResourcesWatcherModel getResource() {
+        return LeapApp.getResourceProvider().get(getId());
     }
 
     /**
      * Get InetSocketAddress
      */
     public InetSocketAddress getInetAddress() {
-        return new InetSocketAddress((String) getHost(), (int) getPort());
-    }
-
-    /**
-     * Get Load-Balance redirect Map
-     * @return
-     */
-    public <V> V getTrafficRedirects() {
-        return super.getValue("traffic-redirect");
+        return new InetSocketAddress(getHost(), (int) getPort());
     }
 
     /**
      * Get SSL protocol
      * @return
      */
-    public <V> V getEncryptionMethod() {
+    public String getEncryptionMethod() {
         return super.getValue("security.encryption");
     }
 
@@ -488,16 +481,16 @@ public class Host <T> extends Metadata<T> {
      * Get SSL key store Path
      * @return
      */
-    public <V> V getKeyStore() {
-        return super.getValue("security.keystore");
+    public String getKeyStore() {
+        return super.<String> getValue("security.keystore");
     }
 
     /**
      * Get SSL key store password
      * @return
      */
-    public <V> V getPassphrase() {
-        return super.getValue("security.passphrase");
+    public String getPassphrase() {
+        return super.<String> getValue("security.passphrase");
     }
 
     /**
@@ -505,15 +498,47 @@ public class Host <T> extends Metadata<T> {
      * @param status
      */
     public void setHostStatus(STATUS status) {
-        super.setValue("status", status);
+        super.setValue("status", status.name());
     }    
 
     /**
      * Get Logger
      * @return
      */
-    public Logger getLogger() {
-        return LoggerFactory.getLogger(getHostId());
+    public Logger getLogger() {        
+        return LoggerFactory.getLogger(getId());
+    }
+
+    /**
+     * Make resources Json
+     * @param dirRoot
+     * @return
+     */
+    public String buildDirectoryJson(String dirRoot) {
+        String path = dirRoot.charAt(dirRoot.length() - 1) == '/' ? dirRoot.substring(0, dirRoot.lastIndexOf('/')) : dirRoot;
+        final String path1 = path.equals("") ? "/" : path;
+        File[] fs = getStatic().resolve(path1.substring(1)).toFile().listFiles();
+        
+        List<File> resourceInfos = Arrays.asList(getStatic().resolve(path1.substring(1)).toFile().listFiles())
+                                         .stream()
+                                         .sorted(Comparator.comparing(f -> f.isDirectory() ? -1 : 1))
+                                         .filter(f -> getForbiddenFiltering().exclude(f.getName()))
+                                         .collect(Collectors.toList());
+        int pathCnt = path.length() - path.replace("/", "").length();
+        Map<String, Object> params = new HashMap<>();
+        params.put("path", path);
+        params.put("parent", pathCnt > 1 ? path.substring(0, path.lastIndexOf("/")): "/directory?reqPath=%2F");
+        params.put("host", getHost()+":"+getPort()+"/");
+        params.put("elements", resourceInfos.stream().map(f -> {
+                        String img = f.isFile() ? "/img/file.png" : "/img/dir.png";
+                        String file = f.isFile() ? f.getName() : f.getName()+"/";
+                        String uri = path+"/"+file;
+                        long lastModified = f.lastModified();
+                        String size = f.isFile() ? SIZE.MB.get(f.length())+" "+SIZE.MB.name() : "-";
+                        String inMemory = f.isDirectory() ? "-" : getResource().isInMemory(f.toPath()) ? "In-Memory resource" : "File resource";
+                        return Map.of("img", img, "file", file, "uri", uri, "lastModified", new Date(lastModified).toString(), "size", size, "desc", inMemory);
+        }).collect(Collectors.toList()));
+        return new Gson().toJson(params);
     }
     
     /**
