@@ -265,7 +265,7 @@ public class HttpResponse implements Http {
 
             //LoggerFactory.getLogger(response.getRequestedHost()).debug(response.toString());
             StringBuffer resStr = new StringBuffer();
-            resStr.append("////////////////////////////// [RESPONSE] : "+res.trim()+" - "+this.socket.getRemoteSocketAddress().toString()+System.lineSeparator());
+            resStr.append("////////////////////////////// [RESPONSE] : "+res.trim()+" - "+host.getInetAddress().getHostName()+System.lineSeparator());
             resStr.append("RES CODE: "+responseCode+System.lineSeparator());
             this.outputStream.write(res.getBytes());
             for(Map.Entry<String, List<String>> e : headers.entrySet()) {

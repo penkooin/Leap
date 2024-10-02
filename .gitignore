@@ -5,7 +5,8 @@
 build
 
 app/src/main/java/org/chaostocosmos/leap/service/
-home/
-home1/
-home2/
+server/*
+config/*
+leap1/*
+leap2/*
 logs/*

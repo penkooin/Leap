@@ -39,9 +39,9 @@ import com.google.gson.GsonBuilder;
 public class ResourceMonitor {
 
     /**
-     * Unit of data size
+     * Monitor request interval limit milliseconds
      */
-    //private SIZE unit;
+    public static final int INTERVAL_LIMIT_MILLIS = 3000;
 
     /**
      * Fraction point of digit
@@ -99,11 +99,21 @@ public class ResourceMonitor {
     Monitor<?> chart;
 
     /**
+     * Leap Client
+     */
+    LeapClient leapClient;
+
+    /**
+     * Monitor context path
+     */
+    String monitorContextPath;
+
+    /**
      * Get resource monitor
      * @return
-     * @throws NotSupportedException
+     * @throws IOException 
      */
-    public static ResourceMonitor get() throws NotSupportedException {
+    public static ResourceMonitor get() throws IOException {
         if(resourceMonitor == null) {
             resourceMonitor = new ResourceMonitor();
             resourceMonitor.start();
@@ -113,13 +123,20 @@ public class ResourceMonitor {
     
     /**
      * Default constructor
-     * @throws NotSupportedException
+     * @throws IOException 
      */
-    private ResourceMonitor() throws NotSupportedException {
+    private ResourceMonitor() throws IOException {
         this.chart = buildMonitorSchema();        
         this.fractionPoint = Constants.DEFAULT_FRACTION_POINT;
+        this.monitorContextPath = Context.get().server().getMonitorContext();
         this.interval = Context.get().server().getMonitoringInterval();
         this.logger = LoggerFactory.createLoggerFor(Context.get().server().getLogs(), Context.get().server().getLogsLevel());
+        String mac = NetworkInterfaceManager.getMacAddressByIp(InetAddress.getLocalHost().getHostAddress());
+        Host<?> host = Context.get().hosts().getHosts().get(0);
+        this.leapClient = LeapClient.build(host.getHost(), host.getPort())
+                                    .addHeader("charset", host.charset())
+                                    .addHeader("body-in-stream", false)
+                                    .addHeader("mac-address", mac);
     }
 
     /**
@@ -140,38 +157,36 @@ public class ResourceMonitor {
      * Start monitor timer
      */
     public void start() {        
-        if(this.interval >= 3000) {
+        if(this.interval >= INTERVAL_LIMIT_MILLIS) {
             this.timer = new Timer(this.getClass().getName(), this.isDaemon);
             this.timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
                     try {
-                        logger.info(
-                            "[THREAD-MONITOR] "
-                            + "  Core: " + ThreadPoolManager.get().getCorePoolSize()
-                            + "  Max: " + ThreadPoolManager.get().getMaximumPoolSize()
-                            + "  Active: "+ThreadPoolManager.get().getTaskCount()
-                            + "  Largest: "+ThreadPoolManager.get().getLargestPoolSize()
-                            + "  Queued size: "+ThreadPoolManager.get().getQueuedTaskCount()
-                            + "  Task completed: "+ThreadPoolManager.get().getCompletedTaskCount()
-                        );
-                        logger.info(
-                            "[MEMORY-MONITOR] "
-                            + "  Process Max: " + getMaxMemory()
-                            + "  Process Used: " + getUsedMemory()
-                            + "  Process Free: " + getFreeMemory()
-                            + "  Physical Total: " + getPhysicalTotalMemory()
-                            + "  Physical Free: " + getPhysicalFreeMemory()
-                            + "  Process CPU load: " + getProcessCpuLoad()
-                            + "  Process CPU time: " + getProcessCpuTime()
-                            + "  System CPU load: " + getSystemCpuLoad()
-                        );             
-                        setProbingValues();           
+                        logger.info("[THREAD-MONITOR] "
+                                    + "  Core: " + ThreadPoolManager.get().getCorePoolSize()
+                                    + "  Max: " + ThreadPoolManager.get().getMaximumPoolSize()
+                                    + "  Active: "+ThreadPoolManager.get().getTaskCount()
+                                    + "  Largest: "+ThreadPoolManager.get().getLargestPoolSize()
+                                    + "  Queued size: "+ThreadPoolManager.get().getQueuedTaskCount()
+                                    + "  Task completed: "+ThreadPoolManager.get().getCompletedTaskCount()
+                            );
+                        logger.info("[MEMORY-MONITOR] "
+                                    + "  Process Max: " + getMaxMemory()
+                                    + "  Process Used: " + getUsedMemory()
+                                    + "  Process Free: " + getFreeMemory()
+                                    + "  Physical Total: " + getPhysicalTotalMemory()
+                                    + "  Physical Free: " + getPhysicalFreeMemory()
+                                    + "  Process CPU load: " + getProcessCpuLoad()
+                                    + "  Process CPU time: " + getProcessCpuTime()
+                                    + "  System CPU load: " + getSystemCpuLoad()
+                                );             
+                        setProbingValues();
                         requestMonitorings();
                     } catch(SocketTimeoutException ste) {
-                        
+                        logger.throwable(ste);
                     } catch (Exception e) {
-                        logger.error(e.getMessage(), e);
+                        logger.throwable(e);
                     }
                 }
             }, 0, this.interval);    
@@ -182,8 +197,10 @@ public class ResourceMonitor {
 
     /**
      * Stop timer
+     * @throws IOException 
      */
-    public void stop() {
+    public void stop() throws IOException {        
+        if(this.leapClient != null) this.leapClient.close();
         if(this.timer != null) {
             this.timer.cancel();
         }
@@ -272,13 +289,7 @@ public class ResourceMonitor {
     private void requestMonitorings() throws IOException {
         String monitorJson = this.mapper.writerWithDefaultPrettyPrinter().writeValueAsString(this.chart.getMeta());
         Map<String, FormData<?>> formDatas = Map.of("chart", new FormData<byte[]>(MIME.TEXT_JSON, monitorJson.getBytes()));        
-        String mac = NetworkInterfaceManager.getMacAddressByIp(InetAddress.getLocalHost().getHostAddress());
-        Host<?> host = Context.get().hosts().getHosts().get(0);
-        LeapClient.build(host.getHost(), host.getPort())
-                  .addHeader("charset", "utf-8")
-                  .addHeader("body-in-stream", false)
-                  .addHeader("mac-address", mac)
-                  .post("/monitor/chart/image", null, formDatas);
+        this.leapClient.post(monitorContextPath, null, formDatas).close();
     }    
 
     /**

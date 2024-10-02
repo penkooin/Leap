@@ -16,6 +16,7 @@ server:
   file-buffer-size: 102400  	
     
   monitor:
+    monitor-context: /monitor/chart/image
     probing-interval: 5000
     support-monitoring: true
     image-path: server/img/    

@@ -276,7 +276,7 @@ public class HttpTransfer implements Http {
         }        
         this.response.setResponseCode(resCode);
         this.response.setContentLength(body.toString().getBytes().length);
-        this.response.addHeader("Refresh", "0; /error?"+paramMap.entrySet().stream().map(e -> e.getKey()+"="+e.getValue()).collect(Collectors.joining("&")));
+        //this.response.addHeader("Refresh", "0; /error?"+paramMap.entrySet().stream().map(e -> e.getKey()+"="+e.getValue()).collect(Collectors.joining("&")));
         this.response.setBody(body);
         sendResponse();
     }

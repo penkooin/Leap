@@ -169,7 +169,12 @@ public class ClassUtils {
         List<Class<? extends Object>> classes = new ArrayList<>();
         for(URL url : classLoader.getURLs()) {
             List<String> classNames = findClassNames(url, filters);
-            classes.addAll(classNames.stream().map(s -> getClass(classLoader, s)).filter(c -> c != null && clazz.isAssignableFrom(c)).collect(Collectors.toList()));
+            for(String cName : classNames) {
+                Class<?> cls = getClass(classLoader, cName);
+                if(cls != null && clazz.isAssignableFrom(cls) && !classes.stream().anyMatch(c -> c.getName().equals(cName))) {
+                    classes.add(cls);
+                }
+            }
         }
         return classes;
     }

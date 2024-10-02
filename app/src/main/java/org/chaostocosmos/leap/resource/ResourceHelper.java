@@ -16,10 +16,14 @@ import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+import java.util.OptionalInt;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
+import java.util.ArrayList;
 
 import org.chaostocosmos.leap.LeapApp;
+import org.chaostocosmos.leap.common.utils.ClassUtils;
 import org.chaostocosmos.leap.common.utils.UtilBox;
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.context.Host;
@@ -164,29 +168,91 @@ public class ResourceHelper {
      * @throws IOException
      * @throws URISyntaxException
      */
-    public static List<File> extractResource(String res, final Path targetPath) throws IOException, URISyntaxException {        
+    public static List<File> extractResource(final String res, final Path targetPath, List<String> excludeList) throws IOException, URISyntaxException {        
         System.out.println("Resource: "+res+"  Path: "+targetPath.toString());
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();        
+        ClassLoader classLoader = ClassUtils.getClassLoader();
         URL url = classLoader.getResource(res);
         String protocol = url.getProtocol();        
+        FileSystem fileSystem = null;
+        Stream<Path> pStream = null;
+        List<File> fileList = null;
+        System.out.println("[PROTOCOL] "+protocol);
+        try {
+            if(protocol.equals("jar")) {
+                fileSystem = FileSystems.newFileSystem(url.toURI(), new HashMap<>());
+                pStream = Files.walk(fileSystem.getPath(res));
+            } else if(protocol.equals("file")) {
+                pStream = Files.walk(Paths.get(url.toURI()));
+            } else {
+                throw new IllegalArgumentException("Resource protocol isn't supported!!! : "+url.getProtocol());
+            }
+            if(excludeList != null && excludeList.size() > 0) {
+                pStream = pStream.filter(p -> excludeList.stream().allMatch(e -> !p.startsWith(e)));
+            }
+            fileList = pStream.map(p -> {
+                try {
+                    int idx = p.toString().lastIndexOf(res);
+                    String relative = p.toString();
+                    if(idx != -1) {
+                        relative = relative.substring(idx);
+                    }
+                    relative = relative.indexOf("webapp") != -1 ? relative.replace("webapp", "") : relative;
+                    if(relative.equals("")) {
+                        return null;
+                    }
+                    relative = relative.charAt(0) == '/' ? relative.substring(1) : relative;
+                    Path path = targetPath.resolve(relative).toAbsolutePath().normalize();
+                    if(!Files.exists(path) || (Files.exists(path) && Files.getLastModifiedTime(path).compareTo(Files.getLastModifiedTime(p)) < 0)) {
+                        if(Files.isDirectory(p)) {
+                            Files.createDirectories(path);
+                        } else {
+                            if(Files.exists(path)) {
+                                Files.delete(path);
+                            }
+                            byte[] bytes = Files.readAllBytes(p);
+                            Path parent = path.getParent();
+                            if(!Files.exists(parent)) {
+                                Files.createDirectories(parent);
+                            }
+                            File file = Files.write(path, bytes, StandardOpenOption.CREATE).toFile();
+                            Files.setLastModifiedTime(path, Files.getLastModifiedTime(path));
+                            return file;    
+                        }
+                    }
+                    return null;
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }).filter(Objects::nonNull).collect(Collectors.toList());        
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            if(pStream != null) pStream.close();
+            if(fileSystem != null) fileSystem.close();
+        }     
+        return fileList;   
+        /*
         if(protocol.equals("jar")) {
             try (FileSystem fileSystem = FileSystems.newFileSystem(url.toURI(), new HashMap<>())) {
-                Stream<Path> pStream = Files.walk(fileSystem.getPath(res)); 
+                Stream<Path> pStream = Files.walk(fileSystem.getPath(res));
+                if(excludeList != null) {
+                    pStream = pStream.filter(p -> excludeList.stream().anyMatch(e -> !p.toString().startsWith(e))); 
+                } 
                 List<File> results = pStream.map(p -> {
                     try {
-                        long modMillis = Files.getLastModifiedTime(p).toMillis();
-                        String ps = p.toString().replace("\\", "/");
-                        Path path = protocol.equals("jar") ? targetPath.resolve(ps) : Paths.get(targetPath.toAbsolutePath().toString(), ps.substring(ps.indexOf(res)-1).replace("\\", "/").replace("/webapp", "/"));
+                        String relative = (p.toString().contains("webapp")) ? p.toString().replace("webapp/", "") : p.toString();
+                        System.out.println(relative.toString());
+                        Path path = targetPath.resolve(relative);
                         if(Files.isDirectory(p)) {
-                            path.toFile().mkdirs();
+                            Files.createDirectories(path);
                         } else { 
-                            if(path.toFile().lastModified() != modMillis || path.toFile().length() != p.toFile().length()) {
-                                path.toFile().delete(); 
-                            }
-                            if(!path.toFile().exists()) {
+                            if(!Files.exists(path) || (Files.exists(path) && Files.getLastModifiedTime(path).compareTo(Files.getLastModifiedTime(p)) < 0)) {
+                                if(Files.exists(path)) {
+                                    Files.delete(path);
+                                }
                                 byte[] bytes = Files.readAllBytes(p);
                                 File file = Files.write(path, bytes, StandardOpenOption.CREATE).toFile();
-                                file.setLastModified(modMillis);
+                                Files.setLastModifiedTime(path, Files.getLastModifiedTime(path));
                                 return file;
                             }
                         }
@@ -202,19 +268,18 @@ public class ResourceHelper {
             Stream<Path> pStream = Files.walk(Paths.get(url.toURI()));
             List<File> results = pStream.map(p -> {
                 try {
-                    long modMillis = Files.getLastModifiedTime(p).toMillis();
-                    String ps = p.toString().replace("\\", "/");
-                    Path path = protocol.equals("jar") ? targetPath.resolve(ps) : Paths.get(targetPath.toAbsolutePath().toString(), ps.substring(ps.indexOf(res)-1).replace("\\", "/").replace("/webapp", "/"));
+                    String relative = (p.toString().contains("webapp")) ? p.toString().replace("webapp/", "") : p.toString();                    
+                    Path path = targetPath.resolve(relative);
                     if(Files.isDirectory(p)) {
                         path.toFile().mkdirs();
                     } else { 
-                        if(path.toFile().lastModified() != modMillis || path.toFile().length() != p.toFile().length()) {
-                            path.toFile().delete(); 
-                        }
-                        if(!path.toFile().exists()) {
+                        if(!Files.exists(path) || (Files.exists(path) && Files.getLastModifiedTime(path).compareTo(Files.getLastModifiedTime(p)) < 0)) {
+                            if(Files.exists(path)) {
+                                Files.delete(path);
+                            }
                             byte[] bytes = Files.readAllBytes(p);
                             File file = Files.write(path, bytes, StandardOpenOption.CREATE).toFile();
-                            file.setLastModified(modMillis);
+                            Files.setLastModifiedTime(path, Files.getLastModifiedTime(path));
                             return file;
                         }
                     }
@@ -228,6 +293,62 @@ public class ResourceHelper {
         } else {
             throw new IllegalArgumentException("Resource protocol isn't supported!!! : "+url.getProtocol());
         }
+        */
+    }
+
+    /**
+     * Whether specific name is exists in Path
+     * @param path
+     * @param name
+     * @return
+     */
+    public static boolean isExist(Path path, String name) {
+        OptionalInt startIndex = IntStream.range(0, path.getNameCount())
+                .filter(i -> path.getName(i).toString().equals(name))
+                .findFirst();
+        if(startIndex.isPresent()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Get sub path object by name
+     * @param path
+     * @param name
+     * @return
+     */
+    public static Path getSubPathFromName(Path path, String name) {
+        OptionalInt startIndex = IntStream.range(0, path.getNameCount())
+                .filter(i -> path.getName(i).toString().equals(name))
+                .findFirst();
+        if(startIndex.isPresent()) {
+            return path.subpath(startIndex.getAsInt(), path.getNameCount());
+        }
+        return path;
+    }    
+          
+    /**
+     * Remove specific name in Path
+     * @param path
+     * @param nameToRemove
+     * @return
+     */
+    public static Path removeNameFromPath(Path path, String nameToRemove) {
+        OptionalInt nameIndex = IntStream.range(0, path.getNameCount())
+            .filter(i -> path.getName(i).toString().equals(nameToRemove))
+            .findFirst();
+        if (nameIndex.isPresent()) {
+            int index = nameIndex.getAsInt();
+            Path newPath = IntStream.range(0, path.getNameCount())
+                    .filter(i -> i != index)
+                    .mapToObj(path::getName)
+                    .reduce(Paths.get(""), Path::resolve);
+            
+            return newPath;
+        }
+        return path;
     }
 
     /**

@@ -10,7 +10,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
 
 import javax.transaction.NotSupportedException;
 
@@ -19,23 +21,24 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
-import org.chaostocosmos.leap.common.NetworkInterfaceManager;
 import org.chaostocosmos.leap.common.log.LEVEL;
 import org.chaostocosmos.leap.common.log.Logger;
 import org.chaostocosmos.leap.common.log.LoggerFactory;
 import org.chaostocosmos.leap.common.thread.ThreadPoolManager;
+import org.chaostocosmos.leap.common.utils.ClassUtils;
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.context.META;
 import org.chaostocosmos.leap.context.MetaEvent;
 import org.chaostocosmos.leap.context.MetaListener;
 import org.chaostocosmos.leap.context.Metadata;
+import org.chaostocosmos.leap.enums.SERVER_EVENT;
 import org.chaostocosmos.leap.enums.STATUS;
 import org.chaostocosmos.leap.enums.WAR_PATH;
 import org.chaostocosmos.leap.exception.LeapException;
 import org.chaostocosmos.leap.resource.ResourceHelper;
-import org.chaostocosmos.leap.resource.ResourceProvider;
 import org.chaostocosmos.leap.resource.ResourceMonitor;
+import org.chaostocosmos.leap.resource.ResourceProvider;
 import org.chaostocosmos.leap.spring.SpringJPAManager;
 import org.hibernate.internal.util.config.ConfigurationException;
 
@@ -107,10 +110,13 @@ public class LeapApp implements MetaListener {
             throw new FileNotFoundException("Resource path must be directory and exists in : "+HOME_PATH.toAbsolutePath().toString());
         }
         //initialize environment and context
-        ResourceHelper.extractResource(WAR_PATH.CONFIG.path(), HOME_PATH); 
+        ResourceHelper.extractResource(WAR_PATH.CONFIG.path(), HOME_PATH, null); 
         Map<String, Path> hostMap = Context.get().server().getHosts();
         for(Map.Entry<String, Path> e : hostMap.entrySet()) {
-            ResourceHelper.extractResource(WAR_PATH.WEBAPP.name().toLowerCase(), e.getValue());
+            ResourceHelper.extractResource(WAR_PATH.WEBAPP.path(), e.getValue(), null);
+            Path classes = Context.get().host(e.getKey()).getClasses();
+            ResourceHelper.extractResource("org/chaostocosmos/leap", e.getValue().resolve(classes), null);
+            ClassUtils.getClassLoader().addPath(classes);
         }
         Context.get().addContextListener(this);
 
@@ -147,13 +153,11 @@ public class LeapApp implements MetaListener {
         if(Context.get().server().getHosts().size() < 1) {
             throw new ConfigurationException("Leap server must have one or more host!!!");
         }
-
         //NetworkInterfaceManager.getAllNetworkAddresses().stream().forEach(i -> this.logger.info(i.getHostName())); 
         // Spring JPA 
         if(Context.get().server().isSupportSpringJPA()) {
             jpaManager = SpringJPAManager.get();
         }
-
         // initialize resource manager                
         resourceProvider = new ResourceProvider(META.RESOURCE.getMetaPath());
 
@@ -177,8 +181,9 @@ public class LeapApp implements MetaListener {
             server.start();
         }
         // Waiting for all host be started.
-        if(leapServerMap.values().stream().allMatch(s -> !s.isClosed())) {
-            Thread.sleep(100);
+        if(!Context.get().allHost().stream().allMatch(h -> h.getHostStatus() == STATUS.STARTED)) {
+            Thread.sleep(300);
+            //Context.get().allHost().stream().forEach(h -> System.out.println("HOST STATUS: "+h.getHostStatus().toString()));
         }
         //initialize resource monitor
         if(Context.get().server().isSupportMonitoring()) {
@@ -203,13 +208,14 @@ public class LeapApp implements MetaListener {
      * @throws NotSupportedException
      */
     public void shutdown() throws InterruptedException, IOException, NotSupportedException { 
+        resourceProvider.terminates();
         ThreadPoolManager.get().shutdown();
-        ResourceMonitor.get().stop();        
+        ResourceMonitor.get().stop();                
         for(LeapServer server : leapServerMap.values()) {
             server.stopServer();
-            server.join();
+            server.interrupt();
         }
-        LoggerFactory.getLogger().info("Leap server terminated......");
+        LoggerFactory.getLogger().info("[TERMINATED] Shutdown Leap !!!");
     }
 
     /**
@@ -255,7 +261,13 @@ public class LeapApp implements MetaListener {
      */
     @Override
     public void receiveContextEvent(MetaEvent<Metadata<?>> ce) throws Exception {
-        LoggerFactory.getLogger().debug(ce.getPathExpression()+"  "+ce.getEventType()+"  ");        
+        LoggerFactory.getLogger().debug(ce.getPathExpression()+"  "+ce.getEventType()+"  ");
+        if(ce.getEventType() == SERVER_EVENT.CHANGED) {
+            if(ce.getValue().equals(STATUS.TERMINATED.name())) {
+                shutdown();                
+            }
+        }
+
     }
 
     public static void main(String[] args) throws Exception {

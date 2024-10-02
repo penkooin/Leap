@@ -22,19 +22,14 @@ repositories {
 }
 
 dependencies {   
+    implementation fileTree(dir: '../libs', include: '*.jar')
+
     testImplementation 'org.openjdk.jmh:jmh-generator-annprocess:1.35'
     testImplementation 'junit:junit:4.4'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.1'
 
-    implementation fileTree(dir: '../libs', include: '*.jar')
-
-    // https://mvnrepository.com/artifact/com.google.guava/guava
     implementation 'com.github.jbellis:jamm:0.4.0'
-    implementation 'org.openjdk.jol:jol-core:0.17'
     implementation 'io.github.9ins:chaosgraph:2.1.2'
-    //implementation 'org.openjdk.jmh:jmh-core:1.35'
-    //implementation 'ch.qos.logback:logback-core:1.2.11'
-    //implementation 'ch.qos.logback:logback-classic:1.2.11'
     implementation 'com.google.code.gson:gson:2.8.8'
     implementation 'com.googlecode.mp4parser:isoparser:1.1.22' 
     implementation 'org.yaml:snakeyaml:1.29'
@@ -45,13 +40,7 @@ dependencies {
     implementation 'org.mariadb.jdbc:mariadb-java-client:3.0.3'
     implementation 'com.oracle.database.jdbc:ojdbc8:23.2.0.0'
     implementation 'org.hibernate:hibernate-entitymanager:5.6.6.Final' 
-    //implementation 'javax.persistence:javax.persistence-api:2.2'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa:3.3.0'
-
-
-    //implementation 'org.springframework.boot:spring-boot-starter-web:3.3.0'
-    //implementation 'org.springframework.boot:spring-boot-starter:3.3.0'
-    //implementation 'org.springframework.boot:spring-boot-starter-security:3.3.0'
 }
 
 application {
@@ -70,7 +59,7 @@ jar {
     from { 
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     } {
-        duplicatesStrategy = DuplicatesStrategy.EXCLUDE // or DuplicatesStrategy.INCLUDE to keep them
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE // or DuplicatesStrategy.INCLUDE to keep them
     }
 }
 

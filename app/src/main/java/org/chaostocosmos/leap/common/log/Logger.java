@@ -504,7 +504,7 @@ public class Logger {
                 if(isSysout) {
                 	stdOut(msgStr);
                 }
-            log.println(msgStr);
+                log.println(msgStr);
             }
     	}
     }    

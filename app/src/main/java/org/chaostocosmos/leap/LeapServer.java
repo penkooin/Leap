@@ -36,7 +36,6 @@ import org.chaostocosmos.leap.exception.LeapException;
 import org.chaostocosmos.leap.http.HttpTransfer;
 import org.chaostocosmos.leap.http.HttpsServerSocketFactory;
 import org.chaostocosmos.leap.http.RedirectException;
-import org.chaostocosmos.leap.resource.ResourceProvider;
 import org.chaostocosmos.leap.resource.model.ResourcesWatcherModel;
 import org.chaostocosmos.leap.security.SecurityManager;
 import org.chaostocosmos.leap.service.ServiceManager;
@@ -139,11 +138,10 @@ public class LeapServer extends Thread {
      * @throws URISyntaxException
      * @throws InterruptedException
      */
-    public LeapServer(Host<?> host) 
-                                throws  UnknownHostException, 
-                                        IOException, 
-                                        URISyntaxException, 
-                                        NotSupportedException {
+    public LeapServer(Host<?> host) throws  UnknownHostException, 
+                                            IOException, 
+                                            URISyntaxException, 
+                                            NotSupportedException {
         this(host.getHomePath(), host);
     }
 
@@ -156,11 +154,10 @@ public class LeapServer extends Thread {
      * @throws URISyntaxException
      * @throws InterruptedException
      */
-    public LeapServer(Path homePath, Host<?> host) 
-                                            throws UnknownHostException, 
-                                                   IOException, 
-                                                   URISyntaxException, 
-                                                   NotSupportedException {
+    public LeapServer(Path homePath, Host<?> host) throws UnknownHostException, 
+                                                            IOException, 
+                                                            URISyntaxException, 
+                                                            NotSupportedException {
         this(Context.get().getHome(), 
              host.getDocroot(), 
              host.getProtocol(), 
@@ -182,15 +179,9 @@ public class LeapServer extends Thread {
      * @throws URISyntaxException 
      * @throws IOException 
      */
-    public LeapServer(Path homePath, 
-                      Path docroot, 
-                      PROTOCOL protocol, 
-                      InetSocketAddress inetSocketAddress, 
-                      int backlog, 
-                      Host<?> host) 
-                            throws IOException, 
-                                   URISyntaxException, 
-                                   NotSupportedException {
+    public LeapServer(Path homePath, Path docroot, PROTOCOL protocol, InetSocketAddress inetSocketAddress, int backlog, Host<?> host) throws IOException, 
+                                                                                                                                                URISyntaxException, 
+                                                                                                                                                NotSupportedException {
         this.host = host;
         this.logger = this.host.getLogger();
         this.host.setHostStatus(STATUS.SETUP);
@@ -343,24 +334,23 @@ public class LeapServer extends Thread {
                 }                
             }
         } catch(Exception e) {
-            e.printStackTrace();
-            this.logger.error(e.getMessage(), e);
-        } finally {
-            stopServer();
+            this.host.setHostStatus(STATUS.TERMINATED);
+            this.logger.throwable(e);
         }
     }
 
     /**
      * Stop server 
+     * @throws IOException 
      */
     public void stopServer() {
+        this.interrupt();
+        this.host.getLogger().info("[SERVER TERMINATED] "+this.host.getHost()+" Server is terminated...");
         try {
             this.server.close();
         } catch (IOException e) {
-            this.host.getLogger().error(e.getMessage(), e);
+            this.host.getLogger().throwable(e);
         }
-        this.host.setHostStatus(STATUS.TERMINATED);
-        this.host.getLogger().info("[SERVER TERMINATED] "+this.host.getHost()+" Server is terminated...");
     }
 
     /**

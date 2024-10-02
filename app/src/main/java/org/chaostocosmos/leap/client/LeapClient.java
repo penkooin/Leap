@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
  * 
  * @author 9ins
  */
-public class LeapClient {
+public class LeapClient implements AutoCloseable {
 
     public static final String PROTOCOL = "HTTP/1.1";
     private Socket socket = null;
@@ -289,7 +289,7 @@ public class LeapClient {
 
     /**
      * Process response
-     * @param inputStream
+     * @param is
      * @return
      * @throws IOException
      */
@@ -360,9 +360,6 @@ public class LeapClient {
         writeContextParams(REQUEST_METHOD.GET, contextPath, contextParams);
         writeHeaders(this.requestHeaders);
         processResponse(this.inputStream);
-        this.outputStream.close();
-        this.inputStream.close();
-        this.socket.close();
         return client;
     }
 
@@ -378,19 +375,24 @@ public class LeapClient {
     public synchronized LeapClient post(String contextPath, Map<String, String> contextParams, Map<String, FormData<?>> formDataMap) throws IOException {
         connect();
         writeContextParams(REQUEST_METHOD.POST, contextPath, contextParams);
-
         long contentLength = formDataMap.values().stream().mapToInt(f -> f.getContentLength()).sum();
         this.requestHeaders.put("Content-Type", "multipart/form-data; boundary=--------------------------LeapClient");
         this.requestHeaders.put("Content-Length", contentLength);
-
         writeHeaders(this.requestHeaders);
         writeFormData(formDataMap);
         processResponse(this.inputStream);
-        this.outputStream.close();
-        this.inputStream.close();
-        this.socket.close();
         return client;
     }    
+
+    /**
+     * Close Leap client
+     * @throws IOException
+     */
+    public synchronized void close() throws IOException {        
+        if(this.outputStream != null) this.outputStream.close();
+        if(this.inputStream != null) this.inputStream.close();
+        if(this.socket != null) this.socket.close();
+    }
 
     public static void main(String[] args) throws UnknownHostException, IOException {
         Map<String, FormData<?>> map = Map.of("@code", new FormData<File>(MIME.APPLICATION_ZIP, Paths.get("./LICENSE").toFile()));

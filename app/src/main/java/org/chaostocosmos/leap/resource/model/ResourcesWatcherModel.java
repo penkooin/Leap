@@ -108,4 +108,8 @@ public interface ResourcesWatcherModel {
      */
     public boolean isInMemory(Path resourcePath);
 
+    /**
+     * Terminate resource watcher
+     */
+    public void terminate();
 }

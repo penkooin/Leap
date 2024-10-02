@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.common.data.Filtering;
 import org.chaostocosmos.leap.common.log.LEVEL;
 import org.chaostocosmos.leap.common.log.Logger;
 import org.chaostocosmos.leap.common.log.LoggerFactory;
@@ -86,6 +85,14 @@ public class Server <T> extends Metadata <T> {
      */
     public int getThreadQueueSize() {
         return super.<Integer> getValue("server.threadpool.queue-size");
+    }
+
+    /**
+     * Get monitor context
+     * @return
+     */
+    public String getMonitorContext() {
+        return super.<String> getValue("server.monitor.monitor-context");
     }
 
     /**

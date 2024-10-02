@@ -20,7 +20,7 @@ public class LeapURLClassLoader extends URLClassLoader {
      * Default constructor
      */
     public LeapURLClassLoader() { 
-        super(new URL[] {LeapURLClassLoader.class.getProtectionDomain().getCodeSource().getLocation()}, ClassLoader.getSystemClassLoader());
+        this(new URL[] {LeapURLClassLoader.class.getProtectionDomain().getCodeSource().getLocation()});
     }
 
     /**
@@ -28,16 +28,7 @@ public class LeapURLClassLoader extends URLClassLoader {
      * @param urls
      */
     public LeapURLClassLoader(URL[] urls) {
-        super(urls, ClassLoader.getSystemClassLoader());
-    }
-
-    /**
-     * Construct with URLs, parent class loader
-     * @param urls
-     * @param parent
-     */
-    public LeapURLClassLoader(URL[] urls, ClassLoader parent) {
-        super(urls, parent);
+        super(urls);
     }
 
     /**

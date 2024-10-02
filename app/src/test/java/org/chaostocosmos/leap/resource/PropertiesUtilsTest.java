@@ -9,6 +9,7 @@ import java.util.Properties;
 
 import javax.transaction.NotSupportedException;
 
+import org.chaostocosmos.leap.resource.config.ConfigUtils;
 import org.junit.Test;
 
 public class PropertiesUtilsTest {

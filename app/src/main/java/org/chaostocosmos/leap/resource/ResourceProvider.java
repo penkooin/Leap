@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 import javax.transaction.NotSupportedException;
 
+import org.chaostocosmos.leap.resource.config.ConfigUtils;
 import org.chaostocosmos.leap.resource.config.ResourceProviderConfig;
 import org.chaostocosmos.leap.resource.filter.ResourceFilter;
 import org.chaostocosmos.leap.resource.model.ResourcesWatcherModel;
@@ -123,4 +124,11 @@ public class ResourceProvider {
     public Map<String, ResourcesWatcherModel> getResourceWatcherMap() {
         return this.resourceWatcherMap;
     } 
+
+    /**
+     * Terminate all resource watcher
+     */
+    public void terminates() {
+        this.resourceWatcherMap.values().stream().forEach(w -> w.terminate());        
+    }
 }

@@ -14,19 +14,13 @@ import java.nio.file.WatchEvent.Kind;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Date;
 import java.util.Map;
-import java.util.List;
-import java.util.HashMap;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.common.constant.Constants;
 import org.chaostocosmos.leap.common.enums.SIZE;
 import org.chaostocosmos.leap.common.enums.TIME;
 import org.chaostocosmos.leap.common.log.LoggerFactory;
@@ -34,7 +28,6 @@ import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.MIME;
-import org.chaostocosmos.leap.enums.TEMPLATE;
 import org.chaostocosmos.leap.exception.LeapException;
 import org.chaostocosmos.leap.resource.filter.ResourceFilter;
 import org.chaostocosmos.leap.resource.model.ResourcesWatcherModel;
@@ -487,6 +480,17 @@ public class ResourceWatcher extends Thread implements ResourcesWatcherModel {
             return false;
         }
         return resInfo == null ? false : resInfo.isInMemory();
+    }
+
+    @Override
+    public void terminate() {
+        try {
+            this.watchService.close();
+            this.watchService = null;
+            this.interrupt();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
