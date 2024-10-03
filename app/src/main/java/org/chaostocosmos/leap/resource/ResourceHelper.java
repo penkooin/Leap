@@ -23,6 +23,7 @@ import java.util.stream.Stream;
 import java.util.ArrayList;
 
 import org.chaostocosmos.leap.LeapApp;
+import org.chaostocosmos.leap.common.file.FileTools;
 import org.chaostocosmos.leap.common.utils.ClassUtils;
 import org.chaostocosmos.leap.common.utils.UtilBox;
 import org.chaostocosmos.leap.context.Context;
@@ -156,7 +157,7 @@ public class ResourceHelper {
      * @throws IOException
      */
     public String getTrademark() throws FileNotFoundException, IOException {
-        File file = Context.get().getHome().resolve(WAR_PATH.CONFIG.name().toLowerCase()).resolve("trademark").toFile();
+        File file = Context.get().getHome().resolve(WAR_PATH.CONFIG.path()).resolve("trademark").toFile();
         return UtilBox.readAllString(new FileInputStream(file)); 
     }
 
@@ -168,7 +169,7 @@ public class ResourceHelper {
      * @throws IOException
      * @throws URISyntaxException
      */
-    public static List<File> extractResource(final String res, final Path targetPath, List<String> excludeList) throws IOException, URISyntaxException {        
+    public static List<File> extractResource(final String res, final Path targetPath, boolean removeDest) throws IOException, URISyntaxException {        
         ClassLoader classLoader = ClassUtils.getClassLoader();
         URL url = classLoader.getResource(res);
         String protocol = url.getProtocol();        
@@ -176,6 +177,9 @@ public class ResourceHelper {
         Stream<Path> pStream = null;
         List<File> fileList = null;
         try {
+            if(removeDest) {
+                FileTools.directoryDelete(targetPath.toFile(), targetPath.resolve("bak").toFile());
+            }
             if(protocol.equals("jar")) {
                 fileSystem = FileSystems.newFileSystem(url.toURI(), new HashMap<>());
                 pStream = Files.walk(fileSystem.getPath(res));
@@ -183,9 +187,6 @@ public class ResourceHelper {
                 pStream = Files.walk(Paths.get(url.toURI()));
             } else {
                 throw new IllegalArgumentException("Resource protocol isn't supported!!! : "+url.getProtocol());
-            }
-            if(excludeList != null && excludeList.size() > 0) {
-                pStream = pStream.filter(p -> excludeList.stream().allMatch(e -> !p.startsWith(e)));
             }
             fileList = pStream.map(p -> {
                 try {

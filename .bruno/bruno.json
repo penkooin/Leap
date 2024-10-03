@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "leap",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

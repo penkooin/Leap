@@ -27,7 +27,6 @@ import org.chaostocosmos.leap.common.log.LoggerFactory;
 import org.chaostocosmos.leap.enums.AUTH;
 import org.chaostocosmos.leap.enums.PROTOCOL;
 import org.chaostocosmos.leap.enums.STATUS;
-import org.chaostocosmos.leap.resource.ResourceProvider;
 import org.chaostocosmos.leap.resource.model.ResourcesWatcherModel;
 
 import com.google.gson.Gson;

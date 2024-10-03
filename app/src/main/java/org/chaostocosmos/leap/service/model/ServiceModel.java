@@ -7,8 +7,8 @@ import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.filter.IFilter;
 import org.chaostocosmos.leap.http.HttpTransfer;
 import org.chaostocosmos.leap.resource.model.ResourcesWatcherModel;
+import org.chaostocosmos.leap.service.mgmt.ServiceManager;
 import org.chaostocosmos.leap.http.HttpResponse;
-import org.chaostocosmos.leap.service.ServiceManager;
 import org.chaostocosmos.leap.session.SessionManager;
 
 /**

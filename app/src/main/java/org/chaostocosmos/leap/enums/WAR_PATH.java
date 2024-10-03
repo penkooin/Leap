@@ -11,7 +11,7 @@ import org.chaostocosmos.leap.context.Context;
  */
 public enum WAR_PATH {
     ROOT("/"),
-    CONFIG("config"),
+    CONFIG("server/config"),
     WEBAPP("webapp"),
     DOCROOT("webapp/static"),
     STATIC("webapp/static"),

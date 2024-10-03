@@ -237,6 +237,10 @@ public class HttpResponse implements Http {
      */
     public void sendResponse() {
         try {
+            if(isSent) {
+                this.host.getLogger().warn("RESPONSE IS ALREADY SENT TO CLIENT: "+toString());
+                return;
+            }
             Charset charset = Charset.forName(this.host.charset());
             PROTOCOL protocol = this.host.getProtocol();
             String resMsg = responseCode < 900 ? HTTP.valueOf("RES"+responseCode).status() : responseCode >= 900 && responseCode < 1000 ? HTTP.valueOf("LEAP"+responseCode).status() : "Error code not supported: "+responseCode;

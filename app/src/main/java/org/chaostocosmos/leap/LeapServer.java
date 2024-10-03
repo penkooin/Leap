@@ -38,7 +38,7 @@ import org.chaostocosmos.leap.http.HttpsServerSocketFactory;
 import org.chaostocosmos.leap.http.RedirectException;
 import org.chaostocosmos.leap.resource.model.ResourcesWatcherModel;
 import org.chaostocosmos.leap.security.SecurityManager;
-import org.chaostocosmos.leap.service.ServiceManager;
+import org.chaostocosmos.leap.service.mgmt.ServiceManager;
 import org.chaostocosmos.leap.session.Session;
 import org.chaostocosmos.leap.session.SessionManager;
 

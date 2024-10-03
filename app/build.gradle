@@ -61,6 +61,7 @@ jar {
     } {
         duplicatesStrategy = DuplicatesStrategy.INCLUDE // or DuplicatesStrategy.INCLUDE to keep them
     }
+    exclude 'org/chaostocosmos/leap/service/impl/**'
 }
 
 // war {

@@ -110,12 +110,12 @@ public class LeapApp implements MetaListener {
             throw new FileNotFoundException("Resource path must be directory and exists in : "+HOME_PATH.toAbsolutePath().toString());
         }
         //initialize environment and context
-        ResourceHelper.extractResource(WAR_PATH.CONFIG.path(), HOME_PATH, null); 
+        ResourceHelper.extractResource(WAR_PATH.CONFIG.path(), HOME_PATH, false); 
         Map<String, Path> hostMap = Context.get().server().getHosts();
         for(Map.Entry<String, Path> e : hostMap.entrySet()) {
-            ResourceHelper.extractResource(WAR_PATH.WEBAPP.path(), e.getValue(), null);
-            Path classes = Context.get().host(e.getKey()).getClasses();
-            ResourceHelper.extractResource("org/chaostocosmos/leap/service", e.getValue().resolve(classes), null);
+            ResourceHelper.extractResource(WAR_PATH.WEBAPP.path(), e.getValue(), false);
+            Path classes = Context.get().host(e.getKey()).getClasses();            
+            ResourceHelper.extractResource("org/chaostocosmos/leap/service", e.getValue().resolve(classes), true);
             ClassUtils.getClassLoader().addPath(classes);
         }
         Context.get().addContextListener(this);

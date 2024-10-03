@@ -14,6 +14,7 @@ import javax.transaction.NotSupportedException;
 
 import org.chaostocosmos.leap.common.data.DataStructureOpr;
 import org.chaostocosmos.leap.common.log.LoggerFactory;
+import org.chaostocosmos.leap.enums.WAR_PATH;
 import org.chaostocosmos.leap.resource.config.ResourceProviderConfig;
 import org.yaml.snakeyaml.Yaml;
 import com.google.gson.Gson;
@@ -24,12 +25,12 @@ import com.google.gson.Gson;
  * @author 9ins
  */
 public enum META {
-    SERVER(Context.get().getHome().resolve("config").resolve("server.yml")),
-    HOSTS(Context.get().getHome().resolve("config").resolve("hosts.yml")),
-    MESSAGE(Context.get().getHome().resolve("config").resolve("message.yml")),
-    MIME(Context.get().getHome().resolve("config").resolve("mime.yml")),
-    MONITOR(Context.get().getHome().resolve("config").resolve("monitor.yml")),
-    RESOURCE(Context.get().getHome().resolve("config").resolve("resource-provider.yml"));    
+    SERVER(Context.get().getHome().resolve(WAR_PATH.CONFIG.path()).resolve("server.yml")),
+    HOSTS(Context.get().getHome().resolve(WAR_PATH.CONFIG.path()).resolve("hosts.yml")),
+    MESSAGE(Context.get().getHome().resolve(WAR_PATH.CONFIG.path()).resolve("message.yml")),
+    MIME(Context.get().getHome().resolve(WAR_PATH.CONFIG.path()).resolve("mime.yml")),
+    MONITOR(Context.get().getHome().resolve(WAR_PATH.CONFIG.path()).resolve("monitor.yml")),
+    RESOURCE(Context.get().getHome().resolve(WAR_PATH.CONFIG.path()).resolve("resource-provider.yml"));    
 
     Path metaPath;
     Map<String, Object> metaMap;
