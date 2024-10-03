@@ -13,6 +13,8 @@ import java.util.stream.Collectors;
 
 import javax.transaction.NotSupportedException;
 
+import org.chaostocosmos.leap.context.Context;
+import org.chaostocosmos.leap.context.META;
 import org.chaostocosmos.leap.resource.config.ConfigUtils;
 import org.chaostocosmos.leap.resource.config.ResourceProviderConfig;
 import org.chaostocosmos.leap.resource.filter.ResourceFilter;
@@ -35,13 +37,28 @@ public class ResourceProvider {
      */
     ResourceProviderConfig<?> config;
 
+    private static ResourceProvider resourceProvider = null;
+
+    /**
+     * Get Resource Provider instance
+     * @return
+     * @throws IOException
+     * @throws NotSupportedException
+     */
+    public static ResourceProvider get() throws IOException, NotSupportedException {
+        if(resourceProvider == null) {
+            resourceProvider = new ResourceProvider(META.RESOURCE.getMetaPath());
+        }
+        return resourceProvider;
+    }
+
     /**
      * Constructs with config Path
      * @param configPath
      * @throws IOException
      * @throws NotSupportedException 
      */
-    public ResourceProvider(Path configPath) throws IOException, NotSupportedException {
+    private ResourceProvider(Path configPath) throws IOException, NotSupportedException {
         this(ConfigUtils.loadConfig(configPath));
     }
 
@@ -49,7 +66,7 @@ public class ResourceProvider {
      * Constructs with config Map
      * @param configMap
      */
-    public ResourceProvider(Map<String, Object> configMap) {
+    private ResourceProvider(Map<String, Object> configMap) {
         this(new ResourceProviderConfig<Map<String, Object>> (configMap));
     }
 
@@ -57,7 +74,7 @@ public class ResourceProvider {
      * Constructs with config object
      * @param config
      */
-    public ResourceProvider(ResourceProviderConfig<Map<String, Object>> config) {
+    private ResourceProvider(ResourceProviderConfig<Map<String, Object>> config) {
         this.config = config;
         this.resourceWatcherMap = this.config.getWatchRoots().entrySet().stream().map(e -> {
             String watchId = e.getKey();

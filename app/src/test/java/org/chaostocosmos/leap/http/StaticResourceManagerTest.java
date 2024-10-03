@@ -20,8 +20,6 @@ public class StaticResourceManagerTest {
     @Test
     public void test() throws Exception {
         System.out.println(ClassLoader.getSystemClassLoader().getResource(""));
-        ResourceProvider provider = new ResourceProvider(Paths.get(ClassLoader.getSystemClassLoader().getResource("").toURI()).resolve("config/resource-provider.yml"));
-        ResourcesWatcherModel model = provider.get("leap");
         
     }
 

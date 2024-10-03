@@ -409,3 +409,1338 @@ RES CODE: 200
 Charset: utf-8
 Content-Length: 5887
 Content-Type: image/png
+[INFO][LeapApp:275][2024-10-03 09:53:14] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:275][2024-10-03 09:53:14] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:275][2024-10-03 09:53:14] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:275][2024-10-03 09:53:14] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:275][2024-10-03 09:53:14] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:275][2024-10-03 09:53:14] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:275][2024-10-03 09:53:14] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:275][2024-10-03 09:53:14] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:275][2024-10-03 09:53:14] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:275][2024-10-03 09:53:14] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:275][2024-10-03 09:53:14] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:275][2024-10-03 09:53:14] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:275][2024-10-03 09:53:14] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:275][2024-10-03 09:53:14] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:275][2024-10-03 09:53:14] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:259][2024-10-03 09:53:14] [HTTP SERVER START] Address: www.leap-virtual.com/127.0.0.1:8889
+[INFO][LeapApp:275][2024-10-03 09:53:24] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:275][2024-10-03 09:53:24] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:275][2024-10-03 09:53:24] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:275][2024-10-03 09:53:24] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:275][2024-10-03 09:53:24] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:275][2024-10-03 09:53:24] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:275][2024-10-03 09:53:24] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:275][2024-10-03 09:53:24] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:275][2024-10-03 09:53:24] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:275][2024-10-03 09:53:24] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:275][2024-10-03 09:53:24] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:275][2024-10-03 09:53:24] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:275][2024-10-03 09:53:24] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:275][2024-10-03 09:53:24] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:275][2024-10-03 09:53:24] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:259][2024-10-03 09:53:24] [HTTP SERVER START] Address: www.leap-virtual.com/127.0.0.1:8889
+[INFO][LeapApp:275][2024-10-03 09:53:46] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:275][2024-10-03 09:53:46] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:275][2024-10-03 09:53:46] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:275][2024-10-03 09:53:46] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:275][2024-10-03 09:53:46] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:275][2024-10-03 09:53:46] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:275][2024-10-03 09:53:46] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:275][2024-10-03 09:53:46] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:275][2024-10-03 09:53:46] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:275][2024-10-03 09:53:46] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:275][2024-10-03 09:53:46] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:275][2024-10-03 09:53:46] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:275][2024-10-03 09:53:46] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:275][2024-10-03 09:53:46] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:275][2024-10-03 09:53:46] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:337][2024-10-03 09:53:46] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[INFO][LeapServer:337][2024-10-03 09:53:46] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:338][2024-10-03 09:53:46] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:275][2024-10-03 09:59:43] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:275][2024-10-03 09:59:43] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:275][2024-10-03 09:59:43] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:275][2024-10-03 09:59:43] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:275][2024-10-03 09:59:43] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:275][2024-10-03 09:59:43] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:275][2024-10-03 09:59:43] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:275][2024-10-03 09:59:43] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:275][2024-10-03 09:59:43] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:275][2024-10-03 09:59:43] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:275][2024-10-03 09:59:43] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:275][2024-10-03 09:59:43] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:275][2024-10-03 09:59:43] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:275][2024-10-03 09:59:43] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:275][2024-10-03 09:59:43] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:259][2024-10-03 09:59:43] [HTTP SERVER START] Address: www.leap-virtual.com/127.0.0.1:8889
+[INFO][LeapApp:275][2024-10-03 09:59:49] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:275][2024-10-03 09:59:49] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:275][2024-10-03 09:59:49] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:275][2024-10-03 09:59:49] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:275][2024-10-03 09:59:49] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:275][2024-10-03 09:59:49] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:275][2024-10-03 09:59:49] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:275][2024-10-03 09:59:49] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:275][2024-10-03 09:59:49] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:275][2024-10-03 09:59:49] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:275][2024-10-03 09:59:49] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:275][2024-10-03 09:59:49] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:275][2024-10-03 09:59:49] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:275][2024-10-03 09:59:49] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:275][2024-10-03 09:59:49] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:337][2024-10-03 10:00:05] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:338][2024-10-03 10:00:05] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapServer:337][2024-10-03 10:00:07] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[INFO][LeapApp:275][2024-10-03 10:01:09] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:275][2024-10-03 10:01:09] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:275][2024-10-03 10:01:09] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:275][2024-10-03 10:01:09] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:275][2024-10-03 10:01:09] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:275][2024-10-03 10:01:09] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:275][2024-10-03 10:01:09] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:275][2024-10-03 10:01:09] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:275][2024-10-03 10:01:09] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:275][2024-10-03 10:01:09] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:275][2024-10-03 10:01:09] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:275][2024-10-03 10:01:09] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:275][2024-10-03 10:01:09] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:275][2024-10-03 10:01:09] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:275][2024-10-03 10:01:09] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:259][2024-10-03 10:01:09] [HTTP SERVER START] Address: www.leap-virtual.com/127.0.0.1:8889
+[INFO][LeapApp:275][2024-10-03 10:01:15] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:275][2024-10-03 10:01:15] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:275][2024-10-03 10:01:15] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:275][2024-10-03 10:01:15] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:275][2024-10-03 10:01:15] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:275][2024-10-03 10:01:15] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:275][2024-10-03 10:01:15] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:275][2024-10-03 10:01:15] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:275][2024-10-03 10:01:15] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:275][2024-10-03 10:01:15] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:275][2024-10-03 10:01:15] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:275][2024-10-03 10:01:15] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:275][2024-10-03 10:01:15] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:275][2024-10-03 10:01:15] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:275][2024-10-03 10:01:15] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:337][2024-10-03 10:01:19] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:338][2024-10-03 10:01:19] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapServer:337][2024-10-03 10:01:28] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[INFO][LeapApp:276][2024-10-03 10:05:41] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:276][2024-10-03 10:05:41] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:276][2024-10-03 10:05:41] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:276][2024-10-03 10:05:41] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:276][2024-10-03 10:05:41] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:276][2024-10-03 10:05:41] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:276][2024-10-03 10:05:41] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:276][2024-10-03 10:05:41] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:276][2024-10-03 10:05:41] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:276][2024-10-03 10:05:41] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:276][2024-10-03 10:05:41] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:276][2024-10-03 10:05:41] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:276][2024-10-03 10:05:41] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:276][2024-10-03 10:05:41] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:276][2024-10-03 10:05:41] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:259][2024-10-03 10:05:41] [HTTP SERVER START] Address: www.leap-virtual.com/127.0.0.1:8889
+[INFO][LeapApp:276][2024-10-03 10:05:51] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:276][2024-10-03 10:05:51] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:276][2024-10-03 10:05:51] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:276][2024-10-03 10:05:51] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:276][2024-10-03 10:05:51] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:276][2024-10-03 10:05:51] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:276][2024-10-03 10:05:51] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:276][2024-10-03 10:05:51] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:276][2024-10-03 10:05:51] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:276][2024-10-03 10:05:51] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:276][2024-10-03 10:05:51] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:276][2024-10-03 10:05:51] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:276][2024-10-03 10:05:51] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:276][2024-10-03 10:05:51] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:276][2024-10-03 10:05:51] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:337][2024-10-03 10:05:51] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:338][2024-10-03 10:05:51] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:275][2024-10-03 10:06:51] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:275][2024-10-03 10:06:51] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:275][2024-10-03 10:06:51] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:275][2024-10-03 10:06:51] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:275][2024-10-03 10:06:51] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:275][2024-10-03 10:06:51] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:275][2024-10-03 10:06:51] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:275][2024-10-03 10:06:51] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:275][2024-10-03 10:06:51] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:275][2024-10-03 10:06:51] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:275][2024-10-03 10:06:51] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:275][2024-10-03 10:06:51] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:275][2024-10-03 10:06:51] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:275][2024-10-03 10:06:51] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:275][2024-10-03 10:06:51] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:337][2024-10-03 10:06:51] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[INFO][LeapServer:337][2024-10-03 10:06:51] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:338][2024-10-03 10:06:51] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:275][2024-10-03 10:13:30] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:275][2024-10-03 10:13:30] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:275][2024-10-03 10:13:30] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:275][2024-10-03 10:13:30] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:275][2024-10-03 10:13:30] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:275][2024-10-03 10:13:30] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:275][2024-10-03 10:13:30] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:275][2024-10-03 10:13:30] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:275][2024-10-03 10:13:30] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:275][2024-10-03 10:13:30] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:275][2024-10-03 10:13:30] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:275][2024-10-03 10:13:30] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:275][2024-10-03 10:13:30] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:275][2024-10-03 10:13:30] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:275][2024-10-03 10:13:30] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:337][2024-10-03 10:13:30] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:338][2024-10-03 10:13:30] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:275][2024-10-03 10:15:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:275][2024-10-03 10:15:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:275][2024-10-03 10:15:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:275][2024-10-03 10:15:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:275][2024-10-03 10:15:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:275][2024-10-03 10:15:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:275][2024-10-03 10:15:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:275][2024-10-03 10:15:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:275][2024-10-03 10:15:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:275][2024-10-03 10:15:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:275][2024-10-03 10:15:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:275][2024-10-03 10:15:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:275][2024-10-03 10:15:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:275][2024-10-03 10:15:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:275][2024-10-03 10:15:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:337][2024-10-03 10:15:03] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:338][2024-10-03 10:15:03] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:275][2024-10-03 10:16:53] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:275][2024-10-03 10:16:53] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:275][2024-10-03 10:16:53] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:275][2024-10-03 10:16:53] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:275][2024-10-03 10:16:53] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:275][2024-10-03 10:16:53] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:275][2024-10-03 10:16:53] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:275][2024-10-03 10:16:53] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:275][2024-10-03 10:16:53] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:275][2024-10-03 10:16:53] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:275][2024-10-03 10:16:53] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:275][2024-10-03 10:16:53] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:275][2024-10-03 10:16:53] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:275][2024-10-03 10:16:53] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:275][2024-10-03 10:16:53] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[THROWABLE][LeapServer:338][2024-10-03 10:16:53] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:275][2024-10-03 10:17:40] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:275][2024-10-03 10:17:40] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:275][2024-10-03 10:17:40] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:275][2024-10-03 10:17:40] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:275][2024-10-03 10:17:40] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:275][2024-10-03 10:17:40] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:275][2024-10-03 10:17:40] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:275][2024-10-03 10:17:40] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:275][2024-10-03 10:17:40] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:275][2024-10-03 10:17:40] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:275][2024-10-03 10:17:40] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:275][2024-10-03 10:17:40] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:275][2024-10-03 10:17:40] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:275][2024-10-03 10:17:40] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:275][2024-10-03 10:17:40] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:259][2024-10-03 10:17:40] [HTTP SERVER START] Address: www.leap-virtual.com/127.0.0.1:8889
+[INFO][LeapApp:277][2024-10-03 10:23:07] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:277][2024-10-03 10:23:07] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:277][2024-10-03 10:23:07] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:277][2024-10-03 10:23:07] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:277][2024-10-03 10:23:07] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:277][2024-10-03 10:23:07] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:277][2024-10-03 10:23:07] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:277][2024-10-03 10:23:07] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:277][2024-10-03 10:23:07] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:277][2024-10-03 10:23:07] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:277][2024-10-03 10:23:07] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:277][2024-10-03 10:23:07] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:277][2024-10-03 10:23:07] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:277][2024-10-03 10:23:07] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapApp:277][2024-10-03 10:23:07] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapServer:259][2024-10-03 10:23:07] [HTTP SERVER START] Address: www.leap-virtual.com/127.0.0.1:8889
+[INFO][LeapApp:277][2024-10-03 10:23:32] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:277][2024-10-03 10:23:32] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:277][2024-10-03 10:23:32] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:277][2024-10-03 10:23:32] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:277][2024-10-03 10:23:32] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:277][2024-10-03 10:23:32] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:277][2024-10-03 10:23:32] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:277][2024-10-03 10:23:32] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:277][2024-10-03 10:23:32] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:277][2024-10-03 10:23:32] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:277][2024-10-03 10:23:32] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:277][2024-10-03 10:23:32] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:277][2024-10-03 10:23:32] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:277][2024-10-03 10:23:32] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:277][2024-10-03 10:23:32] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:259][2024-10-03 10:23:32] [HTTP SERVER START] Address: www.leap-virtual.com/127.0.0.1:8889
+[INFO][LeapApp:277][2024-10-03 10:23:39] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:277][2024-10-03 10:23:39] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:277][2024-10-03 10:23:39] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:277][2024-10-03 10:23:39] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:277][2024-10-03 10:23:39] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:277][2024-10-03 10:23:39] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:277][2024-10-03 10:23:39] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:277][2024-10-03 10:23:39] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:277][2024-10-03 10:23:39] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:277][2024-10-03 10:23:39] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:277][2024-10-03 10:23:39] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:277][2024-10-03 10:23:39] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:277][2024-10-03 10:23:39] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:277][2024-10-03 10:23:39] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:277][2024-10-03 10:23:39] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:338][2024-10-03 10:23:40] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:339][2024-10-03 10:23:40] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:277][2024-10-03 10:26:13] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:277][2024-10-03 10:26:13] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:277][2024-10-03 10:26:13] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:277][2024-10-03 10:26:13] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:277][2024-10-03 10:26:13] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:277][2024-10-03 10:26:13] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:277][2024-10-03 10:26:13] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:277][2024-10-03 10:26:13] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:277][2024-10-03 10:26:13] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:277][2024-10-03 10:26:13] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:277][2024-10-03 10:26:13] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:277][2024-10-03 10:26:13] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:277][2024-10-03 10:26:13] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:277][2024-10-03 10:26:13] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:277][2024-10-03 10:26:13] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:259][2024-10-03 10:26:13] [HTTP SERVER START] Address: www.leap-virtual.com/127.0.0.1:8889
+[INFO][LeapApp:277][2024-10-03 10:26:21] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:277][2024-10-03 10:26:21] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:277][2024-10-03 10:26:21] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:277][2024-10-03 10:26:21] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:277][2024-10-03 10:26:21] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:277][2024-10-03 10:26:21] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:277][2024-10-03 10:26:21] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:277][2024-10-03 10:26:21] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:277][2024-10-03 10:26:21] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:277][2024-10-03 10:26:21] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:277][2024-10-03 10:26:21] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:277][2024-10-03 10:26:21] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:277][2024-10-03 10:26:21] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:277][2024-10-03 10:26:21] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:277][2024-10-03 10:26:21] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:338][2024-10-03 10:26:22] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:339][2024-10-03 10:26:22] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:277][2024-10-03 10:26:36] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:277][2024-10-03 10:26:36] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:277][2024-10-03 10:26:36] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:277][2024-10-03 10:26:36] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:277][2024-10-03 10:26:36] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:277][2024-10-03 10:26:36] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:277][2024-10-03 10:26:36] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:277][2024-10-03 10:26:36] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:277][2024-10-03 10:26:36] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:277][2024-10-03 10:26:36] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:277][2024-10-03 10:26:36] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:277][2024-10-03 10:26:36] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:277][2024-10-03 10:26:36] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:277][2024-10-03 10:26:36] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:277][2024-10-03 10:26:36] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:259][2024-10-03 10:26:36] [HTTP SERVER START] Address: www.leap-virtual.com/127.0.0.1:8889
+[INFO][LeapApp:278][2024-10-03 10:28:54] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:278][2024-10-03 10:28:54] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:278][2024-10-03 10:28:54] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:278][2024-10-03 10:28:54] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:278][2024-10-03 10:28:54] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:278][2024-10-03 10:28:54] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:278][2024-10-03 10:28:54] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:278][2024-10-03 10:28:54] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:278][2024-10-03 10:28:54] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:278][2024-10-03 10:28:54] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:278][2024-10-03 10:28:54] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:278][2024-10-03 10:28:54] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:278][2024-10-03 10:28:54] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:278][2024-10-03 10:28:54] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:278][2024-10-03 10:28:54] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:259][2024-10-03 10:28:54] [HTTP SERVER START] Address: www.leap-virtual.com/127.0.0.1:8889
+[INFO][LeapApp:278][2024-10-03 10:29:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:278][2024-10-03 10:29:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:278][2024-10-03 10:29:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:278][2024-10-03 10:29:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:278][2024-10-03 10:29:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:278][2024-10-03 10:29:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:278][2024-10-03 10:29:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:278][2024-10-03 10:29:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:278][2024-10-03 10:29:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:278][2024-10-03 10:29:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:278][2024-10-03 10:29:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:278][2024-10-03 10:29:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:278][2024-10-03 10:29:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:278][2024-10-03 10:29:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:278][2024-10-03 10:29:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:338][2024-10-03 10:29:03] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:339][2024-10-03 10:29:03] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:275][2024-10-03 10:29:46] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:275][2024-10-03 10:29:46] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:275][2024-10-03 10:29:46] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:275][2024-10-03 10:29:46] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:275][2024-10-03 10:29:46] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:275][2024-10-03 10:29:46] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:275][2024-10-03 10:29:46] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:275][2024-10-03 10:29:46] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:275][2024-10-03 10:29:46] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:275][2024-10-03 10:29:46] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:275][2024-10-03 10:29:46] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:275][2024-10-03 10:29:46] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:275][2024-10-03 10:29:46] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:275][2024-10-03 10:29:46] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:275][2024-10-03 10:29:46] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:259][2024-10-03 10:29:46] [HTTP SERVER START] Address: www.leap-virtual.com/127.0.0.1:8889
+[INFO][LeapApp:275][2024-10-03 10:30:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:275][2024-10-03 10:30:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:275][2024-10-03 10:30:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:275][2024-10-03 10:30:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:275][2024-10-03 10:30:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:275][2024-10-03 10:30:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:275][2024-10-03 10:30:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:275][2024-10-03 10:30:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:275][2024-10-03 10:30:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:275][2024-10-03 10:30:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:275][2024-10-03 10:30:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:275][2024-10-03 10:30:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:275][2024-10-03 10:30:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:275][2024-10-03 10:30:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:275][2024-10-03 10:30:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:338][2024-10-03 10:30:02] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:339][2024-10-03 10:30:02] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:271][2024-10-03 10:31:49] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:271][2024-10-03 10:31:49] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:271][2024-10-03 10:31:49] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:271][2024-10-03 10:31:49] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:271][2024-10-03 10:31:49] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:271][2024-10-03 10:31:49] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:271][2024-10-03 10:31:49] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:271][2024-10-03 10:31:49] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:271][2024-10-03 10:31:49] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:271][2024-10-03 10:31:49] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:271][2024-10-03 10:31:49] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:271][2024-10-03 10:31:49] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:271][2024-10-03 10:31:49] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:271][2024-10-03 10:31:49] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:271][2024-10-03 10:31:49] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:259][2024-10-03 10:31:49] [HTTP SERVER START] Address: www.leap-virtual.com/127.0.0.1:8889
+[INFO][LeapApp:271][2024-10-03 10:31:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:271][2024-10-03 10:31:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:271][2024-10-03 10:31:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:271][2024-10-03 10:31:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:271][2024-10-03 10:31:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:271][2024-10-03 10:31:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:271][2024-10-03 10:31:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:271][2024-10-03 10:31:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:271][2024-10-03 10:31:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:271][2024-10-03 10:31:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:271][2024-10-03 10:31:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:271][2024-10-03 10:31:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:271][2024-10-03 10:31:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:271][2024-10-03 10:31:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:271][2024-10-03 10:31:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:338][2024-10-03 10:31:59] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:339][2024-10-03 10:31:59] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:271][2024-10-03 10:33:23] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:271][2024-10-03 10:33:23] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:271][2024-10-03 10:33:23] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:271][2024-10-03 10:33:23] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:271][2024-10-03 10:33:23] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:271][2024-10-03 10:33:23] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:271][2024-10-03 10:33:23] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:271][2024-10-03 10:33:23] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:271][2024-10-03 10:33:23] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:271][2024-10-03 10:33:23] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:271][2024-10-03 10:33:23] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:271][2024-10-03 10:33:23] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:271][2024-10-03 10:33:23] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:271][2024-10-03 10:33:23] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:271][2024-10-03 10:33:23] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:259][2024-10-03 10:33:23] [HTTP SERVER START] Address: www.leap-virtual.com/127.0.0.1:8889
+[INFO][LeapApp:271][2024-10-03 10:33:27] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:271][2024-10-03 10:33:27] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:271][2024-10-03 10:33:27] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:271][2024-10-03 10:33:27] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:271][2024-10-03 10:33:27] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:271][2024-10-03 10:33:27] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:271][2024-10-03 10:33:27] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:271][2024-10-03 10:33:27] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:271][2024-10-03 10:33:27] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:271][2024-10-03 10:33:27] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:271][2024-10-03 10:33:27] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:271][2024-10-03 10:33:27] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:271][2024-10-03 10:33:27] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:271][2024-10-03 10:33:27] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:271][2024-10-03 10:33:27] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:338][2024-10-03 10:33:27] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:339][2024-10-03 10:33:27] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:271][2024-10-03 10:34:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:271][2024-10-03 10:34:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:271][2024-10-03 10:34:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:271][2024-10-03 10:34:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:271][2024-10-03 10:34:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:271][2024-10-03 10:34:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:271][2024-10-03 10:34:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:271][2024-10-03 10:34:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:271][2024-10-03 10:34:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:271][2024-10-03 10:34:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:271][2024-10-03 10:34:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:271][2024-10-03 10:34:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:271][2024-10-03 10:34:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:271][2024-10-03 10:34:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:271][2024-10-03 10:34:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:259][2024-10-03 10:34:50] [HTTP SERVER START] Address: www.leap-virtual.com/127.0.0.1:8889
+[INFO][LeapApp:271][2024-10-03 10:35:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:271][2024-10-03 10:35:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:271][2024-10-03 10:35:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:271][2024-10-03 10:35:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:271][2024-10-03 10:35:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:271][2024-10-03 10:35:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:271][2024-10-03 10:35:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:271][2024-10-03 10:35:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:271][2024-10-03 10:35:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:271][2024-10-03 10:35:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:271][2024-10-03 10:35:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:271][2024-10-03 10:35:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:271][2024-10-03 10:35:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:271][2024-10-03 10:35:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:271][2024-10-03 10:35:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:338][2024-10-03 10:35:20] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:339][2024-10-03 10:35:20] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:271][2024-10-03 10:36:54] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:271][2024-10-03 10:36:54] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:271][2024-10-03 10:36:54] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:271][2024-10-03 10:36:54] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:271][2024-10-03 10:36:54] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:271][2024-10-03 10:36:54] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:271][2024-10-03 10:36:54] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:271][2024-10-03 10:36:54] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:271][2024-10-03 10:36:54] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:271][2024-10-03 10:36:54] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:271][2024-10-03 10:36:54] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:271][2024-10-03 10:36:54] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:271][2024-10-03 10:36:54] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:271][2024-10-03 10:36:54] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:271][2024-10-03 10:36:54] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:259][2024-10-03 10:36:54] [HTTP SERVER START] Address: www.leap-virtual.com/127.0.0.1:8889
+[INFO][LeapApp:271][2024-10-03 10:37:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:271][2024-10-03 10:37:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:271][2024-10-03 10:37:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:271][2024-10-03 10:37:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:271][2024-10-03 10:37:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:271][2024-10-03 10:37:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:271][2024-10-03 10:37:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:271][2024-10-03 10:37:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:271][2024-10-03 10:37:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:271][2024-10-03 10:37:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:271][2024-10-03 10:37:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:271][2024-10-03 10:37:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:271][2024-10-03 10:37:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:271][2024-10-03 10:37:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:271][2024-10-03 10:37:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:338][2024-10-03 10:37:08] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:339][2024-10-03 10:37:08] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:271][2024-10-03 10:37:30] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:271][2024-10-03 10:37:30] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:271][2024-10-03 10:37:30] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:271][2024-10-03 10:37:30] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:271][2024-10-03 10:37:30] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:271][2024-10-03 10:37:30] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:271][2024-10-03 10:37:30] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:271][2024-10-03 10:37:30] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:271][2024-10-03 10:37:30] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:271][2024-10-03 10:37:30] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:271][2024-10-03 10:37:30] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:271][2024-10-03 10:37:30] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:271][2024-10-03 10:37:30] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:271][2024-10-03 10:37:30] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:271][2024-10-03 10:37:30] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:259][2024-10-03 10:37:30] [HTTP SERVER START] Address: www.leap-virtual.com/127.0.0.1:8889
+[INFO][LeapApp:271][2024-10-03 10:37:39] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:271][2024-10-03 10:37:39] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:271][2024-10-03 10:37:39] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:271][2024-10-03 10:37:39] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:271][2024-10-03 10:37:39] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:271][2024-10-03 10:37:39] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:271][2024-10-03 10:37:39] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:271][2024-10-03 10:37:39] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:271][2024-10-03 10:37:39] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:271][2024-10-03 10:37:39] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:271][2024-10-03 10:37:39] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:271][2024-10-03 10:37:39] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:271][2024-10-03 10:37:39] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:271][2024-10-03 10:37:39] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:271][2024-10-03 10:37:39] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[THROWABLE][LeapServer:339][2024-10-03 10:37:40] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapServer:338][2024-10-03 10:37:40] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[INFO][LeapApp:271][2024-10-03 10:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:271][2024-10-03 10:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:271][2024-10-03 10:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:271][2024-10-03 10:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:271][2024-10-03 10:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:271][2024-10-03 10:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:271][2024-10-03 10:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:271][2024-10-03 10:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:271][2024-10-03 10:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:271][2024-10-03 10:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:271][2024-10-03 10:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:271][2024-10-03 10:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:271][2024-10-03 10:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:271][2024-10-03 10:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:271][2024-10-03 10:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:259][2024-10-03 10:38:50] [HTTP SERVER START] Address: www.leap-virtual.com/127.0.0.1:8889
+[INFO][LeapApp:271][2024-10-03 10:38:57] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:271][2024-10-03 10:38:57] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:271][2024-10-03 10:38:57] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:271][2024-10-03 10:38:57] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:271][2024-10-03 10:38:57] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:271][2024-10-03 10:38:57] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:271][2024-10-03 10:38:57] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:271][2024-10-03 10:38:57] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:271][2024-10-03 10:38:57] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:271][2024-10-03 10:38:57] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:271][2024-10-03 10:38:57] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:271][2024-10-03 10:38:57] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:271][2024-10-03 10:38:57] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:271][2024-10-03 10:38:57] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:271][2024-10-03 10:38:57] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[THROWABLE][LeapServer:339][2024-10-03 10:38:58] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapServer:338][2024-10-03 10:38:58] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[INFO][LeapApp:271][2024-10-03 10:39:48] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:271][2024-10-03 10:39:48] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:271][2024-10-03 10:39:48] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:271][2024-10-03 10:39:48] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:271][2024-10-03 10:39:48] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:271][2024-10-03 10:39:48] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:271][2024-10-03 10:39:48] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:271][2024-10-03 10:39:48] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:271][2024-10-03 10:39:48] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:271][2024-10-03 10:39:48] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:271][2024-10-03 10:39:48] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:271][2024-10-03 10:39:48] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:271][2024-10-03 10:39:48] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:271][2024-10-03 10:39:48] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:271][2024-10-03 10:39:48] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[THROWABLE][LeapServer:339][2024-10-03 10:39:48] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:276][2024-10-03 10:44:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:276][2024-10-03 10:44:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:276][2024-10-03 10:44:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:276][2024-10-03 10:44:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:276][2024-10-03 10:44:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:276][2024-10-03 10:44:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:276][2024-10-03 10:44:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:276][2024-10-03 10:44:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:276][2024-10-03 10:44:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:276][2024-10-03 10:44:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:276][2024-10-03 10:44:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:276][2024-10-03 10:44:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:276][2024-10-03 10:44:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:276][2024-10-03 10:44:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:276][2024-10-03 10:44:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:338][2024-10-03 10:44:01] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:339][2024-10-03 10:44:01] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:274][2024-10-03 10:45:20] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:274][2024-10-03 10:45:20] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:274][2024-10-03 10:45:20] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:274][2024-10-03 10:45:20] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:274][2024-10-03 10:45:20] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:274][2024-10-03 10:45:20] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:274][2024-10-03 10:45:20] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:274][2024-10-03 10:45:20] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:274][2024-10-03 10:45:20] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:274][2024-10-03 10:45:20] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:274][2024-10-03 10:45:20] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:274][2024-10-03 10:45:20] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:274][2024-10-03 10:45:20] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:274][2024-10-03 10:45:20] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:274][2024-10-03 10:45:20] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:338][2024-10-03 10:45:20] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:339][2024-10-03 10:45:20] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:274][2024-10-03 10:45:34] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:274][2024-10-03 10:45:34] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:274][2024-10-03 10:45:34] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:274][2024-10-03 10:45:34] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:274][2024-10-03 10:45:34] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:274][2024-10-03 10:45:34] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:274][2024-10-03 10:45:34] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:274][2024-10-03 10:45:34] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:274][2024-10-03 10:45:34] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:274][2024-10-03 10:45:34] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:274][2024-10-03 10:45:34] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:274][2024-10-03 10:45:34] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:274][2024-10-03 10:45:34] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:274][2024-10-03 10:45:34] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:274][2024-10-03 10:45:34] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:259][2024-10-03 10:45:34] [HTTP SERVER START] Address: www.leap-virtual.com/127.0.0.1:8889
+[INFO][LeapApp:274][2024-10-03 10:46:08] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:274][2024-10-03 10:46:08] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:274][2024-10-03 10:46:08] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:274][2024-10-03 10:46:08] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:274][2024-10-03 10:46:08] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:274][2024-10-03 10:46:08] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:274][2024-10-03 10:46:08] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:274][2024-10-03 10:46:08] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:274][2024-10-03 10:46:08] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:274][2024-10-03 10:46:08] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:274][2024-10-03 10:46:08] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:274][2024-10-03 10:46:08] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:274][2024-10-03 10:46:08] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:274][2024-10-03 10:46:08] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:274][2024-10-03 10:46:08] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:259][2024-10-03 10:46:08] [HTTP SERVER START] Address: www.leap-virtual.com/127.0.0.1:8889
+[INFO][LeapApp:275][2024-10-03 10:47:22] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:275][2024-10-03 10:47:22] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:275][2024-10-03 10:47:22] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:275][2024-10-03 10:47:22] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:275][2024-10-03 10:47:22] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:275][2024-10-03 10:47:22] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:275][2024-10-03 10:47:22] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:275][2024-10-03 10:47:22] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:275][2024-10-03 10:47:22] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:275][2024-10-03 10:47:22] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:275][2024-10-03 10:47:22] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:275][2024-10-03 10:47:22] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:275][2024-10-03 10:47:22] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:275][2024-10-03 10:47:22] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:275][2024-10-03 10:47:22] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:259][2024-10-03 10:47:22] [HTTP SERVER START] Address: www.leap-virtual.com/127.0.0.1:8889
+[INFO][LeapApp:272][2024-10-03 10:49:41] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:272][2024-10-03 10:49:41] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:272][2024-10-03 10:49:41] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:272][2024-10-03 10:49:41] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:272][2024-10-03 10:49:41] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:272][2024-10-03 10:49:41] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:272][2024-10-03 10:49:41] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:272][2024-10-03 10:49:41] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:272][2024-10-03 10:49:41] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:272][2024-10-03 10:49:41] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:272][2024-10-03 10:49:41] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:272][2024-10-03 10:49:41] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:272][2024-10-03 10:49:41] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:272][2024-10-03 10:49:41] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:272][2024-10-03 10:49:41] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:259][2024-10-03 10:49:41] [HTTP SERVER START] Address: www.leap-virtual.com/127.0.0.1:8889
+[INFO][LeapApp:272][2024-10-03 10:50:06] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:272][2024-10-03 10:50:06] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:272][2024-10-03 10:50:06] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:272][2024-10-03 10:50:06] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:272][2024-10-03 10:50:06] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:272][2024-10-03 10:50:06] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:272][2024-10-03 10:50:06] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:272][2024-10-03 10:50:06] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:272][2024-10-03 10:50:06] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:272][2024-10-03 10:50:06] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:272][2024-10-03 10:50:06] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:272][2024-10-03 10:50:06] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:272][2024-10-03 10:50:06] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:272][2024-10-03 10:50:06] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:272][2024-10-03 10:50:06] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:259][2024-10-03 10:50:06] [HTTP SERVER START] Address: www.leap-virtual.com/127.0.0.1:8889
+[INFO][LeapApp:272][2024-10-03 10:50:53] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:272][2024-10-03 10:50:53] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:272][2024-10-03 10:50:53] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:272][2024-10-03 10:50:53] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:272][2024-10-03 10:50:53] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:272][2024-10-03 10:50:53] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:272][2024-10-03 10:50:53] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:272][2024-10-03 10:50:53] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:272][2024-10-03 10:50:53] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:272][2024-10-03 10:50:53] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:272][2024-10-03 10:50:53] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:272][2024-10-03 10:50:53] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:272][2024-10-03 10:50:53] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:272][2024-10-03 10:50:53] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:272][2024-10-03 10:50:53] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:338][2024-10-03 10:50:53] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:339][2024-10-03 10:50:53] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:272][2024-10-03 10:51:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:272][2024-10-03 10:51:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:272][2024-10-03 10:51:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:272][2024-10-03 10:51:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:272][2024-10-03 10:51:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:272][2024-10-03 10:51:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:272][2024-10-03 10:51:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:272][2024-10-03 10:51:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:272][2024-10-03 10:51:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:272][2024-10-03 10:51:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:272][2024-10-03 10:51:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:272][2024-10-03 10:51:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:272][2024-10-03 10:51:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:272][2024-10-03 10:51:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:272][2024-10-03 10:51:03] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:338][2024-10-03 10:51:03] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:339][2024-10-03 10:51:03] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:272][2024-10-03 10:51:44] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:272][2024-10-03 10:51:44] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:272][2024-10-03 10:51:44] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:272][2024-10-03 10:51:44] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:272][2024-10-03 10:51:44] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:272][2024-10-03 10:51:44] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:272][2024-10-03 10:51:44] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:272][2024-10-03 10:51:44] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:272][2024-10-03 10:51:44] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:272][2024-10-03 10:51:44] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:272][2024-10-03 10:51:44] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:272][2024-10-03 10:51:44] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:272][2024-10-03 10:51:44] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:272][2024-10-03 10:51:44] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:272][2024-10-03 10:51:44] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:338][2024-10-03 10:51:44] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:339][2024-10-03 10:51:44] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:272][2024-10-03 10:51:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:272][2024-10-03 10:51:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:272][2024-10-03 10:51:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:272][2024-10-03 10:51:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:272][2024-10-03 10:51:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:272][2024-10-03 10:51:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:272][2024-10-03 10:51:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:272][2024-10-03 10:51:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:272][2024-10-03 10:51:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:272][2024-10-03 10:51:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:272][2024-10-03 10:51:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:272][2024-10-03 10:51:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:272][2024-10-03 10:51:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:272][2024-10-03 10:51:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:272][2024-10-03 10:51:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:338][2024-10-03 10:51:51] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:339][2024-10-03 10:51:51] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:272][2024-10-03 10:51:55] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:272][2024-10-03 10:51:55] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:272][2024-10-03 10:51:55] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:272][2024-10-03 10:51:55] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:272][2024-10-03 10:51:55] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:272][2024-10-03 10:51:55] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:272][2024-10-03 10:51:55] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:272][2024-10-03 10:51:55] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:272][2024-10-03 10:51:55] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:272][2024-10-03 10:51:55] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:272][2024-10-03 10:51:55] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:272][2024-10-03 10:51:55] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:272][2024-10-03 10:51:55] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:272][2024-10-03 10:51:55] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:272][2024-10-03 10:51:55] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:338][2024-10-03 10:51:55] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:339][2024-10-03 10:51:55] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:272][2024-10-03 10:52:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:272][2024-10-03 10:52:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:272][2024-10-03 10:52:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:272][2024-10-03 10:52:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:272][2024-10-03 10:52:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:272][2024-10-03 10:52:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:272][2024-10-03 10:52:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:272][2024-10-03 10:52:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:272][2024-10-03 10:52:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:272][2024-10-03 10:52:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:272][2024-10-03 10:52:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:272][2024-10-03 10:52:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:272][2024-10-03 10:52:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:272][2024-10-03 10:52:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:272][2024-10-03 10:52:02] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:338][2024-10-03 10:52:02] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:339][2024-10-03 10:52:02] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:272][2024-10-03 10:52:28] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:272][2024-10-03 10:52:28] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:272][2024-10-03 10:52:28] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:272][2024-10-03 10:52:28] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:272][2024-10-03 10:52:28] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:272][2024-10-03 10:52:28] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:272][2024-10-03 10:52:28] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:272][2024-10-03 10:52:28] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:272][2024-10-03 10:52:28] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:272][2024-10-03 10:52:28] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:272][2024-10-03 10:52:28] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:272][2024-10-03 10:52:28] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:272][2024-10-03 10:52:28] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:272][2024-10-03 10:52:28] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:272][2024-10-03 10:52:28] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapApp:272][2024-10-03 10:52:44] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:272][2024-10-03 10:52:44] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:272][2024-10-03 10:52:44] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:272][2024-10-03 10:52:44] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:272][2024-10-03 10:52:44] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:272][2024-10-03 10:52:44] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:272][2024-10-03 10:52:44] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:272][2024-10-03 10:52:44] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:272][2024-10-03 10:52:44] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:272][2024-10-03 10:52:44] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:272][2024-10-03 10:52:44] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:272][2024-10-03 10:52:44] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:272][2024-10-03 10:52:44] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:272][2024-10-03 10:52:44] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:272][2024-10-03 10:52:44] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:338][2024-10-03 10:52:45] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:339][2024-10-03 10:52:45] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:272][2024-10-03 10:53:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:272][2024-10-03 10:53:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:272][2024-10-03 10:53:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:272][2024-10-03 10:53:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:272][2024-10-03 10:53:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:272][2024-10-03 10:53:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:272][2024-10-03 10:53:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:272][2024-10-03 10:53:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:272][2024-10-03 10:53:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:272][2024-10-03 10:53:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:272][2024-10-03 10:53:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:272][2024-10-03 10:53:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:272][2024-10-03 10:53:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:272][2024-10-03 10:53:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:272][2024-10-03 10:53:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:338][2024-10-03 10:53:00] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:339][2024-10-03 10:53:00] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:273][2024-10-03 10:53:20] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:273][2024-10-03 10:53:20] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:273][2024-10-03 10:53:20] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:273][2024-10-03 10:53:20] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:273][2024-10-03 10:53:20] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:273][2024-10-03 10:53:20] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:273][2024-10-03 10:53:20] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:273][2024-10-03 10:53:20] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:273][2024-10-03 10:53:20] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:273][2024-10-03 10:53:20] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:273][2024-10-03 10:53:20] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:273][2024-10-03 10:53:20] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:273][2024-10-03 10:53:20] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:273][2024-10-03 10:53:20] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:273][2024-10-03 10:53:20] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:338][2024-10-03 10:53:20] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:339][2024-10-03 10:53:20] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:272][2024-10-03 10:54:16] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:272][2024-10-03 10:54:16] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:272][2024-10-03 10:54:16] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:272][2024-10-03 10:54:16] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:272][2024-10-03 10:54:16] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:272][2024-10-03 10:54:16] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:272][2024-10-03 10:54:16] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:272][2024-10-03 10:54:16] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:272][2024-10-03 10:54:16] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:272][2024-10-03 10:54:16] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:272][2024-10-03 10:54:16] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:272][2024-10-03 10:54:16] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:272][2024-10-03 10:54:16] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:272][2024-10-03 10:54:16] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:272][2024-10-03 10:54:16] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapApp:272][2024-10-03 10:54:42] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:272][2024-10-03 10:54:42] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:272][2024-10-03 10:54:42] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:272][2024-10-03 10:54:42] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:272][2024-10-03 10:54:42] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:272][2024-10-03 10:54:42] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:272][2024-10-03 10:54:42] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:272][2024-10-03 10:54:42] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:272][2024-10-03 10:54:42] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:272][2024-10-03 10:54:42] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:272][2024-10-03 10:54:42] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:272][2024-10-03 10:54:42] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:272][2024-10-03 10:54:42] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:272][2024-10-03 10:54:42] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:272][2024-10-03 10:54:42] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapApp:273][2024-10-03 10:56:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:273][2024-10-03 10:56:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:273][2024-10-03 10:56:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:273][2024-10-03 10:56:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:273][2024-10-03 10:56:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:273][2024-10-03 10:56:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:273][2024-10-03 10:56:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:273][2024-10-03 10:56:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:273][2024-10-03 10:56:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:273][2024-10-03 10:56:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:273][2024-10-03 10:56:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:273][2024-10-03 10:56:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:273][2024-10-03 10:56:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:273][2024-10-03 10:56:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:273][2024-10-03 10:56:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:338][2024-10-03 10:56:00] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:339][2024-10-03 10:56:00] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:273][2024-10-03 10:56:09] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:273][2024-10-03 10:56:09] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:273][2024-10-03 10:56:09] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:273][2024-10-03 10:56:09] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:273][2024-10-03 10:56:09] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:273][2024-10-03 10:56:09] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:273][2024-10-03 10:56:09] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:273][2024-10-03 10:56:09] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:273][2024-10-03 10:56:09] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:273][2024-10-03 10:56:09] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:273][2024-10-03 10:56:09] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:273][2024-10-03 10:56:09] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:273][2024-10-03 10:56:09] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:273][2024-10-03 10:56:09] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:273][2024-10-03 10:56:09] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:338][2024-10-03 10:56:09] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:339][2024-10-03 10:56:09] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:277][2024-10-03 10:57:06] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:277][2024-10-03 10:57:06] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:277][2024-10-03 10:57:06] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:277][2024-10-03 10:57:06] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:277][2024-10-03 10:57:06] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:277][2024-10-03 10:57:06] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:277][2024-10-03 10:57:06] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:277][2024-10-03 10:57:06] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:277][2024-10-03 10:57:06] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:277][2024-10-03 10:57:06] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:277][2024-10-03 10:57:06] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:277][2024-10-03 10:57:06] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:277][2024-10-03 10:57:06] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:277][2024-10-03 10:57:06] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapApp:277][2024-10-03 10:57:06] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapServer:338][2024-10-03 10:57:06] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:339][2024-10-03 10:57:06] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:277][2024-10-03 10:57:13] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:277][2024-10-03 10:57:13] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:277][2024-10-03 10:57:13] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:277][2024-10-03 10:57:13] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:277][2024-10-03 10:57:13] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:277][2024-10-03 10:57:13] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:277][2024-10-03 10:57:13] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:277][2024-10-03 10:57:13] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:277][2024-10-03 10:57:13] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:277][2024-10-03 10:57:13] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:277][2024-10-03 10:57:13] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:277][2024-10-03 10:57:13] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:277][2024-10-03 10:57:13] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:277][2024-10-03 10:57:13] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapApp:277][2024-10-03 10:57:13] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapServer:338][2024-10-03 10:57:13] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:339][2024-10-03 10:57:13] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:277][2024-10-03 10:57:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:277][2024-10-03 10:57:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:277][2024-10-03 10:57:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:277][2024-10-03 10:57:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:277][2024-10-03 10:57:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:277][2024-10-03 10:57:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:277][2024-10-03 10:57:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:277][2024-10-03 10:57:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:277][2024-10-03 10:57:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:277][2024-10-03 10:57:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:277][2024-10-03 10:57:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:277][2024-10-03 10:57:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:277][2024-10-03 10:57:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:277][2024-10-03 10:57:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:277][2024-10-03 10:57:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:338][2024-10-03 10:57:19] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:339][2024-10-03 10:57:19] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:277][2024-10-03 10:57:23] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:277][2024-10-03 10:57:23] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:277][2024-10-03 10:57:23] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:277][2024-10-03 10:57:23] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:277][2024-10-03 10:57:23] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:277][2024-10-03 10:57:23] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:277][2024-10-03 10:57:23] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:277][2024-10-03 10:57:23] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:277][2024-10-03 10:57:23] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:277][2024-10-03 10:57:23] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:277][2024-10-03 10:57:23] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:277][2024-10-03 10:57:23] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:277][2024-10-03 10:57:23] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:277][2024-10-03 10:57:23] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:277][2024-10-03 10:57:23] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:338][2024-10-03 10:57:23] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:339][2024-10-03 10:57:23] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:277][2024-10-03 10:57:32] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:277][2024-10-03 10:57:32] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:277][2024-10-03 10:57:32] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:277][2024-10-03 10:57:32] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:277][2024-10-03 10:57:32] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:277][2024-10-03 10:57:32] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:277][2024-10-03 10:57:32] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:277][2024-10-03 10:57:32] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:277][2024-10-03 10:57:32] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:277][2024-10-03 10:57:32] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:277][2024-10-03 10:57:32] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:277][2024-10-03 10:57:32] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:277][2024-10-03 10:57:32] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:277][2024-10-03 10:57:32] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:277][2024-10-03 10:57:32] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:338][2024-10-03 10:57:32] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:339][2024-10-03 10:57:32] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:277][2024-10-03 10:57:37] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:277][2024-10-03 10:57:37] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:277][2024-10-03 10:57:37] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:277][2024-10-03 10:57:37] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:277][2024-10-03 10:57:37] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:277][2024-10-03 10:57:37] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:277][2024-10-03 10:57:37] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:277][2024-10-03 10:57:37] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:277][2024-10-03 10:57:37] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:277][2024-10-03 10:57:37] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:277][2024-10-03 10:57:37] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:277][2024-10-03 10:57:37] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:277][2024-10-03 10:57:37] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:277][2024-10-03 10:57:37] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:277][2024-10-03 10:57:37] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:338][2024-10-03 10:57:37] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:339][2024-10-03 10:57:37] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:277][2024-10-03 10:58:27] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:277][2024-10-03 10:58:27] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:277][2024-10-03 10:58:27] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:277][2024-10-03 10:58:27] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:277][2024-10-03 10:58:27] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:277][2024-10-03 10:58:27] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:277][2024-10-03 10:58:27] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:277][2024-10-03 10:58:27] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:277][2024-10-03 10:58:27] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:277][2024-10-03 10:58:27] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:277][2024-10-03 10:58:27] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:277][2024-10-03 10:58:27] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:277][2024-10-03 10:58:27] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:277][2024-10-03 10:58:27] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:277][2024-10-03 10:58:27] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:338][2024-10-03 10:58:27] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:339][2024-10-03 10:58:27] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)
+[INFO][LeapApp:277][2024-10-03 10:58:37] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DirectoryService ====== Mapping Context: /directory
+[INFO][LeapApp:277][2024-10-03 10:58:37] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleJPAService ====== Mapping Context: /simple/jpa/users/oracle
+[INFO][LeapApp:277][2024-10-03 10:58:37] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TimeServiceImpl ====== Mapping Context: /time/GetTime
+[INFO][LeapApp:277][2024-10-03 10:58:37] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMemoryController ====== Mapping Context: /chatgpt/memory
+[INFO][LeapApp:277][2024-10-03 10:58:37] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SimpleStreamingService ====== Mapping Context: /video
+[INFO][LeapApp:277][2024-10-03 10:58:37] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor/chart/image
+[INFO][LeapApp:277][2024-10-03 10:58:37] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.SystemMonitorService ====== Mapping Context: /monitor
+[INFO][LeapApp:277][2024-10-03 10:58:37] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/add
+[INFO][LeapApp:277][2024-10-03 10:58:37] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.DeployService ====== Mapping Context: /deploy/service/delete
+[INFO][LeapApp:277][2024-10-03 10:58:37] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/save
+[INFO][LeapApp:277][2024-10-03 10:58:37] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.ConfigService ====== Mapping Context: /config/set
+[INFO][LeapApp:277][2024-10-03 10:58:37] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.WebSocketService ====== Mapping Context: /wss/websocket
+[INFO][LeapApp:277][2024-10-03 10:58:37] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /error
+[INFO][LeapApp:277][2024-10-03 10:58:37] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /response
+[INFO][LeapApp:277][2024-10-03 10:58:37] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.TemplateService ====== Mapping Context: /
+[INFO][LeapServer:338][2024-10-03 10:58:37] [SERVER TERMINATED] www.leap-virtual.com Server is terminated...
+[THROWABLE][LeapServer:339][2024-10-03 10:58:37] java.net.BindException: Address already in use : Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:258)

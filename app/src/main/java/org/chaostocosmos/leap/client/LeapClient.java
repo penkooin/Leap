@@ -393,11 +393,4 @@ public class LeapClient implements AutoCloseable {
         if(this.inputStream != null) this.inputStream.close();
         if(this.socket != null) this.socket.close();
     }
-
-    public static void main(String[] args) throws UnknownHostException, IOException {
-        Map<String, FormData<?>> map = Map.of("@code", new FormData<File>(MIME.APPLICATION_ZIP, Paths.get("./LICENSE").toFile()));
-        LeapClient client = LeapClient.build("www.leap-main.com", 8888).addHeader("charset", "utf-8").post("/monitor/chart/image", null, map);  
-        //LeapClient client = LeapClient.build("localhost", 8080).addHeader("charset", "utf-8").get("/", null);
-        System.out.println(new String(client.getResponseMsg()));        
-    }
 }

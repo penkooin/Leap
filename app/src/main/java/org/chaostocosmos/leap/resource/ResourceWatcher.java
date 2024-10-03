@@ -487,7 +487,6 @@ public class ResourceWatcher extends Thread implements ResourcesWatcherModel {
         try {
             this.watchService.close();
             this.watchService = null;
-            this.interrupt();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

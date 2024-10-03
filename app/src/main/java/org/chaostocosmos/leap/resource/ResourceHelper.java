@@ -169,14 +169,12 @@ public class ResourceHelper {
      * @throws URISyntaxException
      */
     public static List<File> extractResource(final String res, final Path targetPath, List<String> excludeList) throws IOException, URISyntaxException {        
-        System.out.println("Resource: "+res+"  Path: "+targetPath.toString());
         ClassLoader classLoader = ClassUtils.getClassLoader();
         URL url = classLoader.getResource(res);
         String protocol = url.getProtocol();        
         FileSystem fileSystem = null;
         Stream<Path> pStream = null;
         List<File> fileList = null;
-        System.out.println("[PROTOCOL] "+protocol);
         try {
             if(protocol.equals("jar")) {
                 fileSystem = FileSystems.newFileSystem(url.toURI(), new HashMap<>());

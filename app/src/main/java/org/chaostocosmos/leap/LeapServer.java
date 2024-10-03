@@ -271,6 +271,7 @@ public class LeapServer extends Thread {
                 HttpTransfer httpTransfer = null;
                 try {
                     client = this.server.accept();
+                    this.host.setHostStatus(STATUS.RUNNING);                    
                     client.setSoTimeout(this.host.getConnectionTimeout());
                     this.logger.info("[CONNECTED] CLIENT CONNECTED: "+client.getInetAddress().toString());
 
@@ -342,15 +343,12 @@ public class LeapServer extends Thread {
     /**
      * Stop server 
      * @throws IOException 
+     * @throws InterruptedException 
      */
-    public void stopServer() {
-        this.interrupt();
+    public void stopServer() throws IOException, InterruptedException {
         this.host.getLogger().info("[SERVER TERMINATED] "+this.host.getHost()+" Server is terminated...");
-        try {
-            this.server.close();
-        } catch (IOException e) {
-            this.host.getLogger().throwable(e);
-        }
+        this.host.setHostStatus(STATUS.TERMINATED);
+        this.server.close();
     }
 
     /**

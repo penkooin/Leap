@@ -115,7 +115,7 @@ public class LeapApp implements MetaListener {
         for(Map.Entry<String, Path> e : hostMap.entrySet()) {
             ResourceHelper.extractResource(WAR_PATH.WEBAPP.path(), e.getValue(), null);
             Path classes = Context.get().host(e.getKey()).getClasses();
-            ResourceHelper.extractResource("org/chaostocosmos/leap", e.getValue().resolve(classes), null);
+            ResourceHelper.extractResource("org/chaostocosmos/leap/service", e.getValue().resolve(classes), null);
             ClassUtils.getClassLoader().addPath(classes);
         }
         Context.get().addContextListener(this);
@@ -159,7 +159,7 @@ public class LeapApp implements MetaListener {
             jpaManager = SpringJPAManager.get();
         }
         // initialize resource manager                
-        resourceProvider = new ResourceProvider(META.RESOURCE.getMetaPath());
+        resourceProvider = ResourceProvider.get();
 
         // initialize Leap hosts
         for(Host<?> host : Context.get().allHost()) {
@@ -180,17 +180,6 @@ public class LeapApp implements MetaListener {
             server.setDaemon(false);
             server.start();
         }
-        // Waiting for all host be started.
-        if(!Context.get().allHost().stream().allMatch(h -> h.getHostStatus() == STATUS.STARTED)) {
-            Thread.sleep(300);
-            //Context.get().allHost().stream().forEach(h -> System.out.println("HOST STATUS: "+h.getHostStatus().toString()));
-        }
-        //initialize resource monitor
-        if(Context.get().server().isSupportMonitoring()) {
-            resourceMonitor = ResourceMonitor.get();
-        } else {
-            LoggerFactory.getLogger().info("[MONITOR OFF] Leap system monitor turned off.");
-        }        
     }
 
     /**
@@ -207,15 +196,20 @@ public class LeapApp implements MetaListener {
      * @throws InterruptedException
      * @throws NotSupportedException
      */
-    public void shutdown() throws InterruptedException, IOException, NotSupportedException { 
-        resourceProvider.terminates();
-        ThreadPoolManager.get().shutdown();
-        ResourceMonitor.get().stop();                
-        for(LeapServer server : leapServerMap.values()) {
-            server.stopServer();
-            server.interrupt();
+    public void shutdown() { 
+        LoggerFactory.getLogger().info("[TERMINATED] Shutdown Leap !!!");        
+        try {
+            ThreadPoolManager.get().terminate();
+            ResourceProvider.get().terminates();
+            ResourceMonitor.get().terminate();                
+            for(LeapServer server : leapServerMap.values()) {
+                server.stopServer();
+                server.interrupt();
+                server.join();
+            }    
+        } catch(Exception e) {
+            e.printStackTrace();
         }
-        LoggerFactory.getLogger().info("[TERMINATED] Shutdown Leap !!!");
     }
 
     /**
@@ -261,13 +255,21 @@ public class LeapApp implements MetaListener {
      */
     @Override
     public void receiveContextEvent(MetaEvent<Metadata<?>> ce) throws Exception {
-        LoggerFactory.getLogger().debug(ce.getPathExpression()+"  "+ce.getEventType()+"  ");
         if(ce.getEventType() == SERVER_EVENT.CHANGED) {
+            LoggerFactory.getLogger().debug(ce.getPathExpression()+"  "+ce.getEventType());
             if(ce.getValue().equals(STATUS.TERMINATED.name())) {
                 shutdown();                
-            }
+            } else if(ce.getValue().equals(STATUS.STARTED.name())) {                
+                //initialize resource monitor
+                if(Context.get().server().isSupportMonitoring()) {
+                    LoggerFactory.getLogger().info("[MONITOR ON] Leap system monitor turned on.");
+                    resourceMonitor = ResourceMonitor.get();
+                    resourceMonitor.start();
+                } else {
+                    LoggerFactory.getLogger().info("[MONITOR OFF] Leap system monitor turned off.");
+                }        
+            }            
         }
-
     }
 
     public static void main(String[] args) throws Exception {

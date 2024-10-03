@@ -122,17 +122,4 @@ public class SessionIDGenerator {
     public void setAlgorithm(String algorithm)  {
         this.algorithm = algorithm;
     }
-
-    public static void main(String[] args) {
-        List<String> ids = new ArrayList<>();
-        for(int i=0; i<10; i++) {
-            String id = SessionIDGenerator.get("leap").generateSessionId(32, "sha-256");
-            if(ids.contains(id)) {
-                System.out.println("Same ID exists in ID List");
-            } else {
-                ids.add(id);
-            }
-            System.out.println(id);
-        }
-    }
 }

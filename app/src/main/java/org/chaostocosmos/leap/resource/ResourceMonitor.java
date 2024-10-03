@@ -116,7 +116,6 @@ public class ResourceMonitor {
     public static ResourceMonitor get() throws IOException {
         if(resourceMonitor == null) {
             resourceMonitor = new ResourceMonitor();
-            resourceMonitor.start();
         }
         return resourceMonitor;
     }
@@ -133,6 +132,7 @@ public class ResourceMonitor {
         this.logger = LoggerFactory.createLoggerFor(Context.get().server().getLogs(), Context.get().server().getLogsLevel());
         String mac = NetworkInterfaceManager.getMacAddressByIp(InetAddress.getLocalHost().getHostAddress());
         Host<?> host = Context.get().hosts().getHosts().get(0);
+        this.timer = new Timer(this.getClass().getName(), this.isDaemon);
         this.leapClient = LeapClient.build(host.getHost(), host.getPort())
                                     .addHeader("charset", host.charset())
                                     .addHeader("body-in-stream", false)
@@ -158,7 +158,6 @@ public class ResourceMonitor {
      */
     public void start() {        
         if(this.interval >= INTERVAL_LIMIT_MILLIS) {
-            this.timer = new Timer(this.getClass().getName(), this.isDaemon);
             this.timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
@@ -189,7 +188,7 @@ public class ResourceMonitor {
                         logger.throwable(e);
                     }
                 }
-            }, 0, this.interval);    
+            }, this.interval, this.interval);    
         } else {
             this.logger.info("[MONITOR OFF] Leap system monitoring interval is too low value: "+this.interval+" milliseconds. To turn on system monitoring, Please set monitoring interval value over 3000 milliseconds.");
         }
@@ -199,11 +198,9 @@ public class ResourceMonitor {
      * Stop timer
      * @throws IOException 
      */
-    public void stop() throws IOException {        
-        if(this.leapClient != null) this.leapClient.close();
-        if(this.timer != null) {
-            this.timer.cancel();
-        }
+    public void terminate() throws IOException {        
+        this.leapClient.close();
+        this.timer.cancel();
     }
 
     /**

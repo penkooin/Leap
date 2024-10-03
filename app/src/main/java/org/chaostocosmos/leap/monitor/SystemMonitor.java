@@ -99,7 +99,7 @@ public class SystemMonitor {
 	 * @param timeUnit
 	 * @param logger
 	 */
-	public void initialize(ThreadPoolExecutor threadpool, 
+	private void initialize(ThreadPoolExecutor threadpool, 
 						   long interval, 
 						   boolean isDaemon, 
 						   TIME sizeUnit, 
@@ -116,19 +116,16 @@ public class SystemMonitor {
 	}
 
 	/**
-	 * Constructs
+	 * Default Constructor
 	 */
-	public SystemMonitor() {
+	private SystemMonitor() {
+        this.timer = new Timer(this.getClass().getName(), this.isDaemon);
 	}
 
 	/**
 	 * Start monitoring
 	 */
 	public void start() {
-		if(this.timer != null) {
-			this.timer.cancel();
-		}
-        this.timer = new Timer(this.getClass().getName(), this.isDaemon);
         this.timer.schedule(new TimerTask() {
             @Override
             public void run() {
