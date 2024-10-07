@@ -3,8 +3,6 @@ package org.chaostocosmos.leap.security;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import org.chaostocosmos.leap.context.Context;
@@ -16,15 +14,30 @@ import org.chaostocosmos.leap.context.Host;
  * @author 9ins
  */
 public class SessionIDGenerator {
-    
+
+    /**
+     * Default Algorithm
+     */
     protected static final String DEFAULT_ALGORITHM = "MD5";
 
+    /**
+     * Algorithm in this object
+     */
     private String algorithm = DEFAULT_ALGORITHM;
 
+    /**
+     * Random object
+     */
     private Random random = new SecureRandom();
 
+    /**
+     * MessageDigest object
+     */
     private MessageDigest messageDigest;
 
+    /**
+     * Session ID generator
+     */
     private static SessionIDGenerator sessionIDGenerator;
 
     /**
@@ -32,14 +45,14 @@ public class SessionIDGenerator {
      * @param host
      */
     private SessionIDGenerator(Host<?> host) {        
-        char[] entropy = host.<String>getHost().toCharArray();
+        char[] entropy = host.getHost().toCharArray();
         long seed = System.currentTimeMillis();
         for(int i=0; i<entropy.length; i++) {
             long update = ((byte) entropy[i]) << ((i % 8) * 8);
             seed ^= update;
         }
         this.random.setSeed(seed);
-        this.algorithm = host.<String> getSessionIDEncryption();
+        this.algorithm = host.<String> getValue("global.session.encryption");
     }
 
     /**

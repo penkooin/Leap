@@ -3,8 +3,6 @@ package org.chaostocosmos.leap.datasource;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import javax.sql.DataSource;
-
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.enums.DATASOURCE;
 import org.chaostocosmos.leap.spring.datasource.LeapDataSource;
@@ -15,15 +13,18 @@ import org.chaostocosmos.leap.spring.datasource.LeapDataSource;
  * @author 9ins
  */
 public class DataSourceManager {
+
     /**
      * DataSourceManager static instance
      */
     private static DataSourceManager dataSourceManager = null;    
+
     /**
      * Constructor
      */
     private DataSourceManager() {        
     }
+
     /**
      * Get DataSourceManager instance
      * @return
@@ -34,6 +35,7 @@ public class DataSourceManager {
         }
         return dataSourceManager;
     }
+
     /**
      * Get data source object by host object
      * @param datasource
@@ -42,6 +44,7 @@ public class DataSourceManager {
     public LeapDataSource getDataSource(DATASOURCE datasource) {
         return getDataSources().get(datasource);
     }
+    
     /**
      * Get data source map by host object
      * @return

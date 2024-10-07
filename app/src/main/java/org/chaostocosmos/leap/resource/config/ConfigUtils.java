@@ -60,7 +60,7 @@ public class ConfigUtils {
     public static ResourceProviderConfig<?> loadConfigObject(Path path) throws IOException {
         String metaName = path.toFile().getName();
         String metaType = metaName.substring(metaName.lastIndexOf(".") + 1);
-        String metaString = Files.readString(path, StandardCharsets.UTF_8);
+        //String metaString = Files.readString(path, StandardCharsets.UTF_8);
         ResourceProviderConfig<?> configMap = null;
         if(metaType.equalsIgnoreCase("yml") || metaType.equalsIgnoreCase("yaml")) {
             FileInputStream fis = new FileInputStream(path.toFile());
@@ -80,6 +80,7 @@ public class ConfigUtils {
      * @param parentKey
      * @return
      */
+    @SuppressWarnings("unchecked")
     public static Map<String, Object> flattenMap (Map<String, Object> meta, String parentKey) {
         Map<String, Object> configMap = new HashMap<>();
         meta.forEach((key, value) -> {

@@ -1,5 +1,9 @@
 package org.chaostocosmos.leap.filter;
 
-public interface IPreFilter extends IFilter {
-    
+/**
+ * IPreFilter
+ * 
+ * @author 9ins
+ */
+public interface IPreFilter<F> extends IFilter {    
 }

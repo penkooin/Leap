@@ -7,24 +7,39 @@ package org.chaostocosmos.leap.enums;
  */
 public enum REQUEST {    
     /**
-     * Get type for IGetServlet
+     * Get type
      */
     GET("GET"),
 
     /**
-     * Post type for IPostServlet
+     * Post type
      */
     POST("POST"),
 
     /**
-     * Put type for IPutServelt
+     * Put type
      */
     PUT("PUT"),
 
     /**
-     * Delete type for IDeleteServlet
+     * Delete type
      */
-    DELETE("DELETE");
+    DELETE("DELETE"),
+
+    /**
+     * Patch type
+     */
+    PATCH("PATCH"),
+
+    /**
+     * Options type
+     */
+    OPTIONS("OPTIONS"),
+
+    /**
+     * Head type
+     */
+    HEAD("HEAD");
 
     /**
      * Request type mananging class
@@ -34,7 +49,6 @@ public enum REQUEST {
     /**
      * Request type initializer
      * @param requestType
-     * @param oprClass
      */
     REQUEST(String requestType) {
         this.requestType = requestType;

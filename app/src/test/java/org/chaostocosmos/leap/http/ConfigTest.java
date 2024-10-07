@@ -38,7 +38,11 @@ public class ConfigTest {
     }
 
     public static void main(String[] args) throws Exception {
-        Method m = ConfigTest.class.getMethod("convertJsonToYaml", new Class<?>[0]);
-        System.out.println(m.getDeclaringClass().getName());
+        //Method m = ConfigTest.class.getMethod("convertJsonToYaml", new Class<?>[0]);
+        //System.out.println(m.getDeclaringClass().getName());
+
+        String str = "aaa"+"\r\n\r\nbbb";
+        str = Files.readString(Paths.get("/home/kooin/Documents/request-sample.txt"));
+        System.out.println(str.substring(str.indexOf("\r\n\r\n")));
     }    
 }

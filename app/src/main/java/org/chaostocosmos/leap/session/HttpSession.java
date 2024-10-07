@@ -18,6 +18,7 @@ import org.chaostocosmos.leap.http.HttpResponse;
  * @author 9ins
  */
 public class HttpSession implements Session {
+
     /**
      * Host 
      */
@@ -85,8 +86,8 @@ public class HttpSession implements Session {
         this.lastAccessedTime = lastAccessedTime;
         this.maxInactiveIntervalSecond = maxInactiveIntervalSecond;
         this.isSecure = this.host.getProtocol() == PROTOCOL.HTTPS ? true : false;
-        this.isNew = true;
         this.isAuthenticated = false;
+        this.isNew = true;
     }
 
     @Override
@@ -180,14 +181,14 @@ public class HttpSession implements Session {
     }
 
     @Override
-    public HttpResponse setSessionToResponse(HttpResponse response) {
+    public <R> HttpResponse<R> setSessionToResponse(HttpResponse<R> response) {
         Object maxAge = getAttribute("Max-Age");
         Object expires = getAttribute("Expires");
         Object path = getAttribute("Path");
         response.addSetCookie(Constants.SESSION_ID_KEY, getId());
-        //if(maxAge != null)  response.addSetCookie("Max-Age", maxAge.toString());
-        //if(expires != null) response.addSetCookie("Expires", expires.toString());
-        //if(path != null)    response.addSetCookie("Path", path.toString());
+        // if(maxAge != null)  response.addSetCookie("Max-Age", maxAge.toString());
+        // if(expires != null) response.addSetCookie("Expires", expires.toString());
+        // if(path != null)    response.addSetCookie("Path", path.toString());
         return response;
     }
 

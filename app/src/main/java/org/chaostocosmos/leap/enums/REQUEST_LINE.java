@@ -8,7 +8,7 @@ package org.chaostocosmos.leap.enums;
 public enum REQUEST_LINE {
     LINE,
     METHOD,
-    PATH,
+    CONTEXT,    
     PARAMS,
     VERSION,
     PROTOCOL,

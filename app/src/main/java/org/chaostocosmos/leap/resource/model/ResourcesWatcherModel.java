@@ -1,7 +1,6 @@
 package org.chaostocosmos.leap.resource.model;
 
 import java.nio.file.Path;
-import java.util.Map;
 
 import org.chaostocosmos.leap.enums.MIME;
 import org.chaostocosmos.leap.resource.Resource;
@@ -10,7 +9,7 @@ import org.chaostocosmos.leap.resource.Resource;
  * Resource model
  * @author 9ins
  */
-public interface ResourcesWatcherModel {    
+public interface ResourcesWatcherModel extends Runnable {    
 
     /**
      * Filtering and get resource List by mime-type
@@ -111,5 +110,5 @@ public interface ResourcesWatcherModel {
     /**
      * Terminate resource watcher
      */
-    public void terminate();
+    public void terminate() throws Exception;
 }

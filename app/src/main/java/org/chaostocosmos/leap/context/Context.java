@@ -16,7 +16,7 @@ import java.util.Map;
 
 import javax.transaction.NotSupportedException;
 
-import org.chaostocosmos.leap.LeapApp;
+import org.chaostocosmos.leap.Leap;
 import org.chaostocosmos.leap.common.log.LoggerFactory;
 import org.chaostocosmos.leap.enums.SERVER_EVENT;
 import org.chaostocosmos.leap.enums.WAR_PATH;
@@ -76,7 +76,7 @@ public class Context extends Thread {
      */
     public static Context get() {
         if(context == null) {
-            context = new Context(LeapApp.HOME_PATH);
+            context = new Context(Leap.HOME_PATH);
         }
         return context;
     }
@@ -261,6 +261,14 @@ public class Context extends Thread {
      */
     public Monitor<?> monitor() {
         return (Monitor<?>) META.MONITOR.getMeta();
+    }
+
+    /**
+     * Get Trademark 
+     * @return
+     */
+    public Trademark<?> trademark() {
+        return (Trademark<?>) META.TRADEMARK.getMeta();
     }
 
     /**

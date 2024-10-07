@@ -14,7 +14,7 @@ public class ResourceHelperTest {
     @Test
     public void testExtractResource() throws IOException, URISyntaxException {
         Path tgt = Paths.get("/home/kooin/workspace/oss/Leap/tmp/");
-        List<File> files = ResourceHelper.extractResource("org/", tgt, null);
+        List<File> files = ResourceHelper.extractResource("org/", tgt, false);
         files.stream().forEach(f -> System.out.println(f.toString()));
     }
 }

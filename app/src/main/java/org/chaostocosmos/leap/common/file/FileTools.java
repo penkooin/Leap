@@ -13,6 +13,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.chaostocosmos.leap.common.utils.DateUtils;
+
 /**
  * 
  * FileTools
@@ -182,20 +184,18 @@ public class FileTools {
 	 * Copy file to target with target deleting option
 	 * @param src
 	 * @param tgt
-	 * @param deleteTarget
+	 * @param deleteTgt
 	 * @return
 	 * @throws IOException
 	 */
-	public static boolean copyFile(File src, File tgt, boolean deleteTarget) throws IOException {
-		Path srcPath = Paths.get(src.getAbsolutePath());
-		Path tgtPath = Paths.get(tgt.getAbsolutePath());
-		if(!tgt.getParentFile().exists()) {
-			tgt.getParentFile().mkdirs();
+	public static boolean copyFile(Path src, Path tgt, boolean deleteTgt) throws IOException {
+		if(!Files.exists(tgt)) {
+			Files.createDirectories(tgt.getParent());
 		}
-		if(deleteTarget) {
-			Files.deleteIfExists(tgtPath);
+		if(deleteTgt) {
+			Files.deleteIfExists(tgt);
 		}
-		Files.copy(srcPath, tgtPath, StandardCopyOption.REPLACE_EXISTING);
+		Files.copy(src, tgt, StandardCopyOption.REPLACE_EXISTING);
 		return true;
 	}
 	
@@ -208,37 +208,34 @@ public class FileTools {
 	 * @throws IOException
 	 */
 	public static boolean fileCopyBackup(String src, String tgt, String bak) throws IOException {
-		return fileCopyBackup(new File(src), new File(tgt), new File(bak), true);
+		return fileCopyBackup(Paths.get(src), Paths.get(tgt), Paths.get(bak), true);
 	}
 	
 	/**
 	 * Copy file to target and backup
-	 * @param srcFile
-	 * @param tgtFile
-	 * @param bakFile
+	 * @param srcPath
+	 * @param tgtPath
+	 * @param bakPath
 	 * @param deleteDest
 	 * @return
 	 * @throws IOException
 	 */
-	public static boolean fileCopyBackup(File srcFile, File tgtFile, File bakFile, boolean deleteSrc) throws IOException {
-		Path srcPath = Paths.get(srcFile.getAbsolutePath());
-		Path tgtPath = Paths.get(tgtFile.getAbsolutePath());
-		Path bakPath = Paths.get(bakFile.getAbsolutePath());
-		if(!tgtFile.exists()) {
-			tgtFile.getParentFile().mkdirs();
+	public static boolean fileCopyBackup(Path srcPath, Path tgtPath, Path bakPath, boolean deleteSrc) throws IOException {
+		if(!Files.exists(tgtPath.getParent())) {
+			Files.createDirectories(tgtPath.getParent());
 		}
-		if(!bakFile.exists()) {
-			bakFile.getParentFile().mkdirs();
-		}		
-		if(tgtFile.exists()) {
-			Files.delete(Paths.get(tgtFile.getCanonicalPath()));
+		if(!Files.exists(bakPath.getParent())) {
+			Files.createDirectories(bakPath.getParent());
 		}
-		Files.copy(Paths.get(srcFile.getCanonicalPath()), Paths.get(tgtFile.getCanonicalPath()), StandardCopyOption.REPLACE_EXISTING);
+		if(Files.exists(tgtPath)) {
+			Files.delete(tgtPath);
+		}
+		Files.copy(srcPath, tgtPath, StandardCopyOption.REPLACE_EXISTING);
 		if(bakPath != null) {
 			Files.copy(srcPath, bakPath, StandardCopyOption.REPLACE_EXISTING);		
 		}
 		if(deleteSrc) {
-			Files.delete(Paths.get(srcFile.getAbsolutePath()));
+			Files.delete(srcPath);
 		}
 		return true;
 	}
@@ -247,11 +244,12 @@ public class FileTools {
 	 * Copy directory with source path, target path
 	 * @param src
 	 * @param dest
+	 * @param deleteSrc
 	 * @return
 	 * @throws IOException
 	 */
-	public static List<File> directoryCopy(String src, String dest, boolean deleteSrc) throws IOException {
-		return directoryCopy(new File(src), new File(dest), deleteSrc);
+	public static List<Path> directoryCopy(String src, String dest, boolean deleteSrc) throws IOException {
+		return directoryCopy(Paths.get(src), Paths.get(dest), deleteSrc);
 	}
 	
 	/**
@@ -262,25 +260,36 @@ public class FileTools {
 	 * @return
 	 * @throws IOException
 	 */
-	public static List<File> directoryCopy(File srcDir, File tgtDir, boolean deleteSrc) throws IOException {
-		if(srcDir.isDirectory()) {
-			Files.walk(Paths.get(tgtDir.getAbsolutePath())).sorted(Comparator.reverseOrder()).map(Path::toFile).forEach(File::delete);
-			if(!tgtDir.exists()) {
-				tgtDir.mkdirs();
+	public static List<Path> directoryCopy(Path srcDir, Path tgtDir, boolean deleteSrc) throws IOException {
+		if(srcDir.equals(tgtDir)) {
+			throw new IOException("Source directory is the same with Target directory!!!");
+		}
+		if(tgtDir.getParent().equals(srcDir)) {
+			throw new IOException("Target directory is not right under the source directory!!!");
+		}
+		if(Files.isDirectory(srcDir)) {
+			if(Files.exists(tgtDir)) {
+				Files.walk(tgtDir).sorted(Comparator.reverseOrder()).map(Path::toFile).forEach(File::delete);
 			}
-			Path srcPath = Paths.get(srcDir.getAbsolutePath());
-			Path destPath = Paths.get(tgtDir.getAbsolutePath());
-			return Files.walk(srcPath).filter(f -> f.toFile().compareTo(srcDir) != 0 && !f.toFile().getAbsolutePath().startsWith(srcDir.getAbsolutePath()+File.separator+"patch")).map(p -> {
-				try {
-					Path d = destPath.resolve(srcPath.relativize(p));
+			return Files.walk(srcDir)
+						.filter(p -> !Files.isDirectory(p))
+						.filter(p -> !p.equals(srcDir))
+						.filter(p -> !p.startsWith(tgtDir.getParent()))
+						.map(p -> {
+				try {					
+					String relative = p.toString().substring(srcDir.toString().length()+1);
+					Path d = tgtDir.resolve(relative);
+					if(!Files.exists(d.getParent())) {
+						Files.createDirectories(d.getParent());
+					}
 					Files.copy(p, d, StandardCopyOption.REPLACE_EXISTING);
-					if(deleteSrc && !p.toFile().getAbsolutePath().equals(srcDir.getCanonicalPath())) {
+					if(deleteSrc && Files.exists(p)) {
 						Files.delete(p);
 					}
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				return p.toFile();
+				return p;
 			}).collect(Collectors.toList());
 		} else {
 			throw new IOException("Source must be to directory!!!");
@@ -420,47 +429,33 @@ public class FileTools {
 	}
 
 	/**
-	 * Delete directory
-	 * @param dest
-	 * @return
-	 * @throws IOException
-	 */
-	public static List<String> directoryDelete(File dest) throws IOException {
-		return directoryDelete(dest, true, false);
-	}
-	
-	/**
 	 * Delete directory with options
 	 * @param dest
-	 * @param deleteRoot
 	 * @param deleteOnExit
-	 * @return
 	 * @throws IOException
 	 */
-	public static List<String> directoryDelete(File dest, boolean deleteRoot, boolean deleteOnExit) throws IOException {
-		return directoryBackupDelete(dest, null, "*", deleteRoot, deleteOnExit);
+	public static void directoryDelete(Path dest) throws IOException {
+		directoryBackupDelete(dest, null, ".*");
 	}
 	
 	/**
 	 * Delete directory with options
 	 * @param dest
 	 * @param prefix
-	 * @return
 	 * @throws IOException
 	 */
-	public static List<String> directoryDelete(File dest, String prefix) throws IOException {
-		return directoryBackupDelete(dest, null, prefix+".*", false, false);
+	public static void directoryDelete(Path dest, String prefix) throws IOException {
+		directoryBackupDelete(dest, null, prefix+".*");
 	}
 
 	/**
 	 * Delete directory and backup with options
 	 * @param tgtDir
 	 * @param bakDir
-	 * @return
 	 * @throws IOException
 	 */
-	public static List<String> directoryDelete(File tgtDir, File bakDir) throws IOException {
-		return directoryBackupDelete(tgtDir, bakDir, "*", true, false);
+	public static void directoryDelete(Path tgtDir, Path bakDir) throws IOException {
+		directoryBackupDelete(tgtDir, bakDir, ".*");
 	}
 	
 	/**
@@ -468,57 +463,15 @@ public class FileTools {
 	 * @param tgtDir
 	 * @param bakDir
 	 * @param regex
-	 * @param deleteRoot
-	 * @param deleteOnExit
-	 * @return
 	 * @throws IOException
 	 */
-	public static List<String> directoryBackupDelete(File tgtDir, File bakDir, String regex, boolean deleteRoot, boolean deleteOnExit) throws IOException {
-		if(!tgtDir.isDirectory()) {
+	public static void directoryBackupDelete(Path tgtDir, Path bakDir, String regex) throws IOException {
+		if(!Files.isDirectory(tgtDir)) {
 			throw new IOException("Delete target must be directory!!!");
 		}
 		if(bakDir != null) {
 			directoryCopy(tgtDir, bakDir, true);
 		}
-		List<String> deletedFileList = new ArrayList<String>();
-		Path destPath = Paths.get(tgtDir.getAbsolutePath());
-		Files.walk(destPath)
-			.filter(p -> p.toFile().getName().matches(regex))
-			.sorted(Comparator.reverseOrder())
-			.map(Path::toFile)
-			.forEach(d -> {
-				if(deleteOnExit) {
-					try {
-						Files.walk(Paths.get(d.getAbsolutePath())).sorted(Comparator.reverseOrder()).map(p -> {
-							File f = p.toFile();
-							//System.out.println("@@@@ "+f.getAbsolutePath());
-							deletedFileList.add(f.getAbsolutePath());
-							return f;
-						}).forEach(File::deleteOnExit);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				} else {
-					try {
-						Files.walk(Paths.get(d.getAbsolutePath())).sorted(Comparator.reverseOrder()).map(p -> {
-							File f = p.toFile();
-							//System.out.println("@@@@ "+f.getAbsolutePath());
-							deletedFileList.add(f.getAbsolutePath());
-							return f;
-						}).forEach(File::delete);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-		});
-		if(deleteRoot) {
-			if(deleteOnExit) {
-				tgtDir.deleteOnExit();
-			} else {
-				tgtDir.delete();
-			}
-		}
-		return deletedFileList;
 	}
 	
 	/**
@@ -558,5 +511,21 @@ public class FileTools {
 		}
 		return false;
     }
+
+	/**
+	 * Add backup file suffix
+	 * @param path
+	 * @return
+	 */
+	public static Path backupSuffix(Path path) {
+		String suffix = DateUtils.getFormattedNow("yyyyMMdd-HHmmss");
+		String name = path.getFileName().toString();
+		if(name.indexOf(".") != -1) {
+			name = name.substring(0, name.indexOf(".")) + suffix + name.substring(name.indexOf("."));
+		} else {
+			name = name+"-"+suffix;
+		}
+		return path.getParent().resolve(name);
+	}
 }
 

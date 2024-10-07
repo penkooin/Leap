@@ -14,8 +14,6 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.context.Context;
-
 import com.coremedia.iso.IsoFile;
 
 /**
@@ -24,16 +22,6 @@ import com.coremedia.iso.IsoFile;
  * @author 9ins
  */
 public class FileUtils {
-
-    /**
-     * Save binary data
-     * @param data
-     * @param target
-     * @throws IOException
-     */
-    public static void saveBinary(byte[] data, Path target) throws IOException {
-        saveBinary(data, target, Context.get().server().getFileBufferSize());
-    }
 
     /**
      * Save binary data
@@ -94,11 +82,11 @@ public class FileUtils {
         byte[] data = new byte[len];
         try(RandomAccessFile raf = new RandomAccessFile(file, "r")) {
             raf.seek(idx);
-            int readLen = raf.read(data);
-            return data;            
+            raf.read(data);
         } catch(IOException e) {
             throw new RuntimeException(e);
         }
+        return data;            
     }
 
     /**
@@ -142,6 +130,8 @@ public class FileUtils {
      */
     public static double getMp4DurationSeconds(Path mp4Path) throws IOException {
         IsoFile isoFile = new IsoFile(mp4Path.toAbsolutePath().toString());
-        return (double)isoFile.getMovieBox().getMovieHeaderBox().getDuration() / isoFile.getMovieBox().getMovieHeaderBox().getTimescale();
+        double mp4DurationSec = (double)isoFile.getMovieBox().getMovieHeaderBox().getDuration() / isoFile.getMovieBox().getMovieHeaderBox().getTimescale();
+        isoFile.close();
+        return mp4DurationSec;
     }
 }

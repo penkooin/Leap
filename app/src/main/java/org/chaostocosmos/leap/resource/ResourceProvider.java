@@ -9,11 +9,11 @@ import java.nio.file.WatchEvent.Kind;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import javax.transaction.NotSupportedException;
 
-import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.context.META;
 import org.chaostocosmos.leap.resource.config.ConfigUtils;
 import org.chaostocosmos.leap.resource.config.ResourceProviderConfig;
@@ -76,20 +76,31 @@ public class ResourceProvider {
      */
     private ResourceProvider(ResourceProviderConfig<Map<String, Object>> config) {
         this.config = config;
-        this.resourceWatcherMap = this.config.getWatchRoots().entrySet().stream().map(e -> {
-            String watchId = e.getKey();
-            Path rootPath = Paths.get(e.getValue());
-            WatchEvent.Kind<?>[] kinds = getWatchEventKind(config.getWatchKind());
-            ResourceFilter accessFiltering = new ResourceFilter(config.getAccessFilters());
-            ResourceFilter inMemoryFiltering = new ResourceFilter(config.getInMemoryFilters());
-            int inMemorySplitUnit = config.getSplitUnitSize();
-            int fileSizeLimit = config.getFileSizeLimit();
-            int fileReadBufferSize = config.getFileReadBufferSize();
-            int fileWriteBufferSize = config.getFileWriteBufferSize();
-            long totalMemorySizeLimit = config.getTotalMemorySizeLimit();
-            return new Object[] {watchId, new ResourceWatcher(watchId, rootPath, kinds, accessFiltering, inMemoryFiltering, inMemorySplitUnit, fileSizeLimit, fileReadBufferSize, fileWriteBufferSize, totalMemorySizeLimit)};
+        this.resourceWatcherMap = this.config.getWatchRoots()
+                                             .entrySet()
+                                             .stream()
+                                             .map(e -> {
+                                                    String watchId = e.getKey();
+                                                    Path rootPath = Paths.get(e.getValue());
+                                                    WatchEvent.Kind<?>[] kinds = getWatchEventKind(config.getWatchKind());
+                                                    ResourceFilter accessFiltering = new ResourceFilter(config.getAccessFilters());
+                                                    ResourceFilter inMemoryFiltering = new ResourceFilter(config.getInMemoryFilters());
+                                                    int inMemorySplitUnit = config.getSplitUnitSize();
+                                                    int fileSizeLimit = config.getFileSizeLimit();
+                                                    int fileReadBufferSize = config.getFileReadBufferSize();
+                                                    int fileWriteBufferSize = config.getFileWriteBufferSize();
+                                                    long totalMemorySizeLimit = config.getTotalMemorySizeLimit();
+                                                    return new Object[] {watchId, new ResourceWatcher(watchId, 
+                                                                                                      rootPath, 
+                                                                                                      kinds, 
+                                                                                                      accessFiltering, 
+                                                                                                      inMemoryFiltering, 
+                                                                                                      inMemorySplitUnit, 
+                                                                                                      fileSizeLimit, 
+                                                                                                      fileReadBufferSize, 
+                                                                                                      fileWriteBufferSize, 
+                                                                                                      totalMemorySizeLimit)};
         }).collect(Collectors.toMap(k -> (String)k[0], v -> (ResourceWatcher)v[1]));
-                
     }
 
     /**
@@ -143,9 +154,22 @@ public class ResourceProvider {
     } 
 
     /**
-     * Terminate all resource watcher
+     * Start all resource watcher
      */
-    public void terminates() {
-        this.resourceWatcherMap.values().stream().forEach(w -> w.terminate());        
+    public void startWatchers() {
+        for(Entry<String, ResourcesWatcherModel> e : this.resourceWatcherMap.entrySet()) {
+            Thread thr = new Thread(e.getValue());
+            thr.start();
+        }
+    }
+
+    /**
+     * Terminate all resource watcher
+     * @throws Exception 
+     */
+    public void terminates() throws Exception {
+        for(ResourcesWatcherModel watcher : this.resourceWatcherMap.values()) {
+            watcher.terminate();
+        }
     }
 }

@@ -12,13 +12,11 @@ server:
     max: 1000
     keep-alive: 3000
     queue-size: 1000
-    
-  file-buffer-size: 102400  	
-    
+  
   monitor:
-    monitor-context: /monitor/chart/image
+    context-path: /monitor/chart/image
     probing-interval: 5000
-    support-monitoring: true
+    support-monitoring: false
     image-path: server/img/    
     
   logs:

@@ -7,6 +7,8 @@ import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.chaostocosmos.leap.common.log.Logger;
 import org.chaostocosmos.leap.common.log.LoggerFactory;
@@ -23,7 +25,7 @@ import org.chaostocosmos.leap.session.Session;
  * @author 9ins
  * @since 2021.09.18
  */
-public class HttpRequest implements Http {
+public class HttpRequest <T> implements Http {
 
     /**
      * Host object
@@ -58,7 +60,7 @@ public class HttpRequest implements Http {
     /**
      * Requested header
      */
-    final private Map<String, List<?>> reqHeader;
+    final private Map<String, String> reqHeader;
 
     /**
      * Conetxt path
@@ -73,7 +75,7 @@ public class HttpRequest implements Http {
     /**
      * Request body part
      */
-    final private Part bodyPart;
+    final private Part<T> body;
 
     /**
      * Content length
@@ -119,7 +121,7 @@ public class HttpRequest implements Http {
      * @param requestURI
      * @param url
      * @param queryParam
-     * @param bodyPart
+     * @param body
      * @param contentLength
      * @param charset
      * @param cookies
@@ -133,12 +135,12 @@ public class HttpRequest implements Http {
             String requestHost,
             String httpVersion, 
             REQUEST requestType, 
-            Map<String, List<?>> reqHeader, 
+            Map<String, String> reqHeader, 
             MIME contentType,
             String contextPath,
             URI requestURI, 
             Map<String, String> queryParam,
-            Part bodyPart,
+            Part<T> body,
             long contentLength,
             Charset charset,
             Map<String, String> cookies, 
@@ -155,7 +157,7 @@ public class HttpRequest implements Http {
             this.contextPath = contextPath;
             this.requestURI = requestURI;
             this.queryParam = queryParam;
-            this.bodyPart = bodyPart;
+            this.body = body;
             this.contentLength = contentLength;
             this.charset = charset;
             this.cookies = cookies;
@@ -214,8 +216,27 @@ public class HttpRequest implements Http {
      * Get request header Map
      * @return
      */
-    public final Map<String, List<?>> getReqHeader() {
+    public final Map<String, String> getHeaders() {
         return this.reqHeader;
+    }
+
+    /**
+     * Get header value 
+     * @param headerKey
+     * @return
+     */
+    public final String getHeader(String headerKey) {
+        return this.reqHeader.get(headerKey);
+    }
+
+    /**
+     * Get header value for the key
+     * @param headerKey
+     * @param valueIdx
+     * @return
+     */
+    public final List<String> getHeader(String headerKey, String spliter) {
+        return Stream.of(this.reqHeader.get(headerKey).split(spliter)).map(h -> h.trim()).collect(Collectors.toList());
     }
 
     /**
@@ -263,8 +284,8 @@ public class HttpRequest implements Http {
      * Get get body part object
      * @return
      */
-    public final Part getBodyPart() {
-        return this.bodyPart;
+    public Part<T> getBody() {
+        return this.body;
     }
 
     /**
@@ -352,7 +373,7 @@ public class HttpRequest implements Http {
             ", reqHeader='" + reqHeader + "'" +
             ", contextPath='" + contextPath + "'" +
             ", queryParam='" + queryParam + "'" +
-            ", bodyPart='" + bodyPart + "'" +
+            ", bodyPart='" + body + "'" +
             ", contentLength='" + contentLength + "'" +
             ", charset='" + charset + "'" +
             ", requestURI='" + requestURI + "'" +

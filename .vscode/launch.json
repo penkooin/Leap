@@ -2,6 +2,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "LocaleTest",
+            "request": "launch",
+            "mainClass": "org.chaostocosmos.leap.LocaleTest",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "ConfigTest",
+            "request": "launch",
+            "mainClass": "org.chaostocosmos.leap.http.ConfigTest",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "Leap",
+            "request": "launch",
+            "mainClass": "org.chaostocosmos.leap.Leap",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
             "name": "RegexTest",
             "request": "launch",
             "mainClass": "org.chaostocosmos.leap.common.utils.RegexTest",

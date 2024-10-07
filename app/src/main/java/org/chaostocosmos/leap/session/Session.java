@@ -12,6 +12,7 @@ import org.chaostocosmos.leap.http.HttpResponse;
  * @author 9ins
  */
 public interface Session {   
+
     /**
      * Get Host
      * @return
@@ -125,5 +126,5 @@ public interface Session {
      * @param response
      * @return
      */
-    public HttpResponse setSessionToResponse(HttpResponse response);
+    public <R> HttpResponse<R> setSessionToResponse(HttpResponse<R> response);
 }

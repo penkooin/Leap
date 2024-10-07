@@ -8,9 +8,11 @@ import org.chaostocosmos.leap.spring.SpringJPAManager;
 
 /**
  * Abstract ip filtering object
+ * 
  * @author 9ins
  */
-public class RequestIpFilter<R> extends AbstractRequestFilter implements IIpFilter<R> {
+public class RequestIpFilter<T> extends AbstractRequestFilter<HttpRequest<T>> implements IIpFilter<HttpRequest<T>> {
+
     /**
      * Allowed / forbidden hosts
      */
@@ -27,30 +29,30 @@ public class RequestIpFilter<R> extends AbstractRequestFilter implements IIpFilt
     }
     
     @Override
-    public boolean allowedHost(R r) {
-        if(this.allowedHosts != null && r.getClass().isAssignableFrom(HttpRequest.class)) {
-            return this.allowedHosts.stream().anyMatch(i -> i.getHostName().equals(((HttpRequest)r).getReqHeader().get("@Client")));
+    public boolean allowedHost(HttpRequest<T> request) {
+        if(this.allowedHosts != null && request.getClass().isAssignableFrom(HttpRequest.class)) {
+            return this.allowedHosts.stream().anyMatch(i -> i.getHostName().equals(((HttpRequest<?>)request).getHeaders().get("@Client")));
         } else {
             return false;
         }
     }
 
     @Override
-    public boolean forbiddenHost(R r) {
-        if(this.forbiddenHosts != null && r.getClass().isAssignableFrom(HttpRequest.class)) {
-            return !this.forbiddenHosts.stream().anyMatch(i -> i.getHostName().equals(((HttpRequest)r).getReqHeader().get("@Client")));
+    public boolean forbiddenHost(HttpRequest<T> request) {
+        if(this.forbiddenHosts != null && request.getClass().isAssignableFrom(HttpRequest.class)) {
+            return !this.forbiddenHosts.stream().anyMatch(i -> i.getHostName().equals(((HttpRequest<?>)request).getHeaders().get("@Client")));
         } else {
             return false;
         }
     }
 
     @Override
-    public <T> T getBean(String beanName, Object... args) throws Exception {
+    public <B> B getBean(String beanName, Object... args) throws Exception {
         return SpringJPAManager.get().getBean(beanName, args);
     }
 
     @Override
-    public <T> T getBean(Class<?> beanClass, Object... args) throws Exception {
+    public <B> B getBean(Class<?> beanClass, Object... args) throws Exception {
         return SpringJPAManager.get().getBean(beanClass, args);
     }
 }

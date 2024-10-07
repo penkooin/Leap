@@ -1,7 +1,6 @@
 package org.chaostocosmos.leap;
 
 import java.nio.file.Path;
-import java.util.List;
 import java.util.Map;
 
 import org.chaostocosmos.leap.common.NetworkInterfaceManager;
@@ -35,7 +34,7 @@ import org.chaostocosmos.leap.spring.SpringJPAManager;
  * @author 9ins
  * @since 2021.09.16
  */
-public class LeapHandler implements Runnable {
+public class LeapHandler<T, R> implements Runnable {
 
     /**
      * Leap server home path
@@ -65,7 +64,7 @@ public class LeapHandler implements Runnable {
     /**
      * HttpTransfer instance
      */
-    HttpTransfer httpTransfer;
+    HttpTransfer<T, R> httpTransfer;
 
     /**
      * Hosts
@@ -79,7 +78,7 @@ public class LeapHandler implements Runnable {
      * @param host
      * @param httpTransfer
      */
-    public LeapHandler(LeapServer httpServer, Path LEAP_HOME, Host<?> host, HttpTransfer httpTransfer) {
+    public LeapHandler(LeapServer httpServer, Path LEAP_HOME, Host<?> host, HttpTransfer<T, R> httpTransfer) {
         this.httpServer = httpServer;
         this.LEAP_HOME = LEAP_HOME;
         this.httpTransfer = httpTransfer;
@@ -90,21 +89,22 @@ public class LeapHandler implements Runnable {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void run() {
         try {
             //Create HttpRequest object
-            HttpRequest request = this.httpTransfer.getRequest();
+            HttpRequest<T> request = this.httpTransfer.getRequest();
             //Create HttpResponse object
-            HttpResponse response = this.httpTransfer.getResponse();
+            HttpResponse<R> response = this.httpTransfer.getResponse();
             //Get Host object from HttpTransfer object
             Host<?> host = this.httpTransfer.getHost();
             
             //Put requested host to request header Map for ip filter
-            request.getReqHeader().put("@Client", List.of(host.getHost()));
+            request.getHeaders().put("@Client", host.getHost());
             Session session = this.httpTransfer.getSession();
             boolean isLocalRequest = false;
-            if(request.getReqHeader().get("mac-address") != null) {
-                String mac = request.getReqHeader().get("mac-address").get(0).toString();
+            if(request.getHeader("mac-address") != null) {
+                String mac = request.getHeader("mac-address").toString();
                 if(NetworkInterfaceManager.isExistMacAddress(mac)) {
                     isLocalRequest = true;
                 }
@@ -113,7 +113,7 @@ public class LeapHandler implements Runnable {
                 try {
                     //if((session != null && !session.isAuthenticated()) && request.getCookie("__auth-trial") == null || !request.getCookie("__auth-trial").equals("1")) {
                     if((session != null && !session.isAuthenticated())) {
-                        List<?> authorization = request.getReqHeader().get("Authorization");
+                        String authorization = request.getHeaders().get("Authorization");
                         UserCredentials userCredentials = this.securityManager.authenticate(authorization);
                         if(userCredentials == null) {
                             response.addSetCookie("__auth-trial", "1");
@@ -150,7 +150,7 @@ public class LeapHandler implements Runnable {
                 if(request.getContextPath().equals("/")) {
                     String body = httpTransfer.resolvePlaceHolder(TEMPLATE.INDEX.loadTemplatePage(host.getId()), Map.of("serverName", host.getHost()));
                     response.addHeader("Content-Type", MIME.TEXT_HTML.mimeType()+"; charset="+host.charset());
-                    response.setBody(body.getBytes(host.charset()));
+                    response.setBody((R) body.getBytes());
                     response.setResponseCode(HTTP.RES200.code());
                 } else {
                     if(resourcePath.toFile().exists() && !host.getResource().exists(resourcePath)) {
@@ -160,12 +160,11 @@ public class LeapHandler implements Runnable {
                     Resource resource = host.getResource().getResource(resourcePath);
                     if(resource != null) {
                         if(resource.isNode()) {
-                            String body = httpTransfer.resolvePlaceHolder(TEMPLATE.DIRECTORY.loadTemplatePage(host.getId()), 
-                                            Map.of("@serverName", host.getHost(), "@directory", host.buildDirectoryJson(request.getContextPath())));
+                            String body = httpTransfer.resolvePlaceHolder(TEMPLATE.DIRECTORY.loadTemplatePage(host.getId()), Map.of("@serverName", host.getHost(), "@directory", host.buildDirectoryJson(request.getContextPath())));
                             String mimeType = MIME.TEXT_HTML.mimeType();
                             response.setResponseCode(HTTP.RES200.code());
                             response.addHeader("Content-Type", mimeType+"; Charset="+host.charset());
-                            response.setBody(body);
+                            response.setBody((R) body.getBytes());
                         } else {
                             String mimeType = UtilBox.probeContentType(resourcePath);
                             if(mimeType == null) {
@@ -173,7 +172,7 @@ public class LeapHandler implements Runnable {
                             }
                             response.setResponseCode(HTTP.RES200.code());
                             response.addHeader("Content-Type", mimeType);                            
-                            response.setBody(resource.getBytes());
+                            response.setBody((R) resource.getBytes());
                             this.host.getLogger().debug("DOWNLOAD RESOURCE MIME-TYPE: "+mimeType);
                         }
                     } else {
@@ -184,6 +183,7 @@ public class LeapHandler implements Runnable {
             // Send response to client
             this.httpTransfer.sendResponse(); 
         } catch(LeapException e) {        
+            this.host.getLogger().throwable(e);
             if(e.getRes() == HTTP.LEAP900) {
                 this.host.getLogger().info("[CONNECTION CLOSED BY CLIENT] Host: "+this.host.getId()+"  Client: "+this.httpTransfer.getSocket().getInetAddress().toString());
             } else {

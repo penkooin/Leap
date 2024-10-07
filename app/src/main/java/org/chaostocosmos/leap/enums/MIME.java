@@ -25,6 +25,7 @@ public enum MIME {
     APPLICATION_VND_APPLE_INSTALLER_XML(Context.get().mime().getMime("APPLICATION_VND_APPLE_INSTALLER_XML")),
     APPLICATION_OGG(Context.get().mime().getMime("APPLICATION_OGG")),
     APPLICATION_X_SHAR(Context.get().mime().getMime("APPLICATION_X_SHAR")),
+    APPLICATION_SPARQL_QUERY(Context.get().mime().getMime("APPLICATION_SPARQL_QUERY")),
     //compressed
     APPLICATION_ZIP(Context.get().mime().getMime("APPLICATION_ZIP")),
     APPLICATION_X_GZIP(Context.get().mime().getMime("APPLICATION_X_GZIP")),
@@ -61,6 +62,7 @@ public enum MIME {
     TEXT_HTML(Context.get().mime().getMime("TEXT_HTML")),
     TEXT_XML(Context.get().mime().getMime("TEXT_XML")),
     TEXT_JSON(Context.get().mime().getMime("TEXT_JSON")),
+    TEXT_YAML(Context.get().mime().getMime("TEXT_YAML")),
     TEXT_CSS(Context.get().mime().getMime("TEXT_CSS")),
     TEXT_CSV(Context.get().mime().getMime("TEXT_CSV")),
     TEXT_JAVASCRIPT(Context.get().mime().getMime("TEXT_JAVASCRIPT")),

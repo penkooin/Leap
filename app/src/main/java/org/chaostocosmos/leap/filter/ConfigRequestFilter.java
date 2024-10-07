@@ -1,6 +1,5 @@
 package org.chaostocosmos.leap.filter;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,8 +15,11 @@ import com.google.gson.GsonBuilder;
  * 
  * @author 9ins
  */
-public class ConfigRequestFilter extends AbstractRequestFilter {
+public class ConfigRequestFilter<T, R> extends AbstractRequestFilter<HttpRequest<T>> {
 
+    /**
+     * Config enum
+     */
     public enum CONFIG {
         CHART,
         HOSTS,
@@ -27,17 +29,20 @@ public class ConfigRequestFilter extends AbstractRequestFilter {
         CONFIG_PATH,
     }
 
+    /**
+     * Gson object
+     */
     Gson gson = new GsonBuilder().setPrettyPrinting().create(); 
 
     @Override 
-    public void filterRequest(HttpRequest request) throws Exception {
+    public void filterRequest(HttpRequest<T> request) throws Exception {
         super.filterRequest(request);
         //Map<CONFIG, Map<String, Object>> configMap = extractConfigMap(request);        
     }
 
     @SuppressWarnings("unchecked")
-    public Map<CONFIG, Map<String, Object>> extractConfigMap(HttpRequest request) throws IOException {
-        Map<String, byte[]> bodyMap = request.getBodyPart().getBody();
+    public Map<CONFIG, Map<String, Object>> extractConfigMap(HttpRequest<Map<String, byte[]>> request) throws Exception {
+        Map<String, byte[]> bodyMap = request.getBody().getBody();
         Map<CONFIG, Map<String, Object>> configMap = new HashMap<>();
         for(String key : bodyMap.keySet()) {
             try {

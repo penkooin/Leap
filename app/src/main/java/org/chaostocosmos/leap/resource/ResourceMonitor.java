@@ -6,8 +6,6 @@ import java.net.InetAddress;
 import java.net.SocketTimeoutException;
 import java.util.List;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -28,15 +26,13 @@ import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.context.Monitor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 /**
  * ResourceMonitor object
  * 
  * @author 9ins
  */
-public class ResourceMonitor {
+public class ResourceMonitor implements Runnable {
 
     /**
      * Monitor request interval limit milliseconds
@@ -57,21 +53,6 @@ public class ResourceMonitor {
      * Interval
      */
     private long interval;
-
-    /**
-     * Timer
-     */
-    private Timer timer;
-
-    /**
-     * Whether daemon thread
-     */
-    private boolean isDaemon;
-
-    /**
-     * Gson parser
-     */
-    private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     /**
      * Jackson Json 
@@ -109,6 +90,11 @@ public class ResourceMonitor {
     String monitorContextPath;
 
     /**
+     * Whether terminated
+     */
+    boolean isDone = false;
+
+    /**
      * Get resource monitor
      * @return
      * @throws IOException 
@@ -132,7 +118,6 @@ public class ResourceMonitor {
         this.logger = LoggerFactory.createLoggerFor(Context.get().server().getLogs(), Context.get().server().getLogsLevel());
         String mac = NetworkInterfaceManager.getMacAddressByIp(InetAddress.getLocalHost().getHostAddress());
         Host<?> host = Context.get().hosts().getHosts().get(0);
-        this.timer = new Timer(this.getClass().getName(), this.isDaemon);
         this.leapClient = LeapClient.build(host.getHost(), host.getPort())
                                     .addHeader("charset", host.charset())
                                     .addHeader("body-in-stream", false)
@@ -156,51 +141,63 @@ public class ResourceMonitor {
     /**
      * Start monitor timer
      */
-    public void start() {        
+    @Override
+    public void run() {                
         if(this.interval >= INTERVAL_LIMIT_MILLIS) {
-            this.timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    try {
-                        logger.info("[THREAD-MONITOR] "
-                                    + "  Core: " + ThreadPoolManager.get().getCorePoolSize()
-                                    + "  Max: " + ThreadPoolManager.get().getMaximumPoolSize()
-                                    + "  Active: "+ThreadPoolManager.get().getTaskCount()
-                                    + "  Largest: "+ThreadPoolManager.get().getLargestPoolSize()
-                                    + "  Queued size: "+ThreadPoolManager.get().getQueuedTaskCount()
-                                    + "  Task completed: "+ThreadPoolManager.get().getCompletedTaskCount()
-                            );
-                        logger.info("[MEMORY-MONITOR] "
-                                    + "  Process Max: " + getMaxMemory()
-                                    + "  Process Used: " + getUsedMemory()
-                                    + "  Process Free: " + getFreeMemory()
-                                    + "  Physical Total: " + getPhysicalTotalMemory()
-                                    + "  Physical Free: " + getPhysicalFreeMemory()
-                                    + "  Process CPU load: " + getProcessCpuLoad()
-                                    + "  Process CPU time: " + getProcessCpuTime()
-                                    + "  System CPU load: " + getSystemCpuLoad()
-                                );             
-                        setProbingValues();
-                        requestMonitorings();
-                    } catch(SocketTimeoutException ste) {
-                        logger.throwable(ste);
-                    } catch (Exception e) {
-                        logger.throwable(e);
-                    }
+            while(!isDone) {
+                try {
+                    Thread.sleep(interval);
+                } catch (InterruptedException e) {
+                    this.logger.throwable(e);
                 }
-            }, this.interval, this.interval);    
+                try {
+                    logger.info("[THREAD-MONITOR] "
+                              + "  Core: " + ThreadPoolManager.get().getCorePoolSize()
+                              + "  Max: " + ThreadPoolManager.get().getMaximumPoolSize()
+                              + "  Active: "+ThreadPoolManager.get().getTaskCount()
+                              + "  Largest: "+ThreadPoolManager.get().getLargestPoolSize()
+                              + "  Queued size: "+ThreadPoolManager.get().getQueuedTaskCount()
+                              + "  Task completed: "+ThreadPoolManager.get().getCompletedTaskCount()
+                        );
+                    logger.info("[MEMORY-MONITOR] "
+                              + "  Process Max: " + getMaxMemory()
+                              + "  Process Used: " + getUsedMemory()
+                              + "  Process Free: " + getFreeMemory()
+                              + "  Physical Total: " + getPhysicalTotalMemory()
+                              + "  Physical Free: " + getPhysicalFreeMemory()
+                              + "  Process CPU load: " + getProcessCpuLoad()
+                              + "  Process CPU time: " + getProcessCpuTime()
+                              + "  System CPU load: " + getSystemCpuLoad()
+                            );             
+                    setProbingValues();
+                    requestMonitorings();
+                } catch(SocketTimeoutException ste) {
+                    this.logger.throwable(ste);
+                } catch (Exception e) {
+                    this.logger.throwable(e);
+                }
+            }    
         } else {
             this.logger.info("[MONITOR OFF] Leap system monitoring interval is too low value: "+this.interval+" milliseconds. To turn on system monitoring, Please set monitoring interval value over 3000 milliseconds.");
         }
     }
 
     /**
+     * Start resource monitor
+     */
+    public void startMonitor() {
+        Thread thr = new Thread(this);
+        thr.start();
+    }
+
+    /**
      * Stop timer
      * @throws IOException 
+     * @throws InterruptedException 
      */
-    public void terminate() throws IOException {        
+    public void terminate() throws IOException, InterruptedException {        
         this.leapClient.close();
-        this.timer.cancel();
+        isDone = true;
     }
 
     /**
@@ -321,6 +318,7 @@ public class ResourceMonitor {
      * @return
      * @throws NotSupportedException
      */
+    @Deprecated
     public long getPhysicalTotalMemory() throws NotSupportedException {
         return ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getTotalPhysicalMemorySize();
     }
@@ -329,6 +327,7 @@ public class ResourceMonitor {
      * Get total physical used memory
      * @return
      */
+    @Deprecated
     public long getPhysicalUsedMemory() {
         return ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getTotalPhysicalMemorySize() - ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getFreePhysicalMemorySize();
     }
@@ -338,6 +337,7 @@ public class ResourceMonitor {
      * @return
      * @throws NotSupportedException
      */
+    @Deprecated
     public long getPhysicalFreeMemory() throws NotSupportedException {
         return ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getFreePhysicalMemorySize();
     }
@@ -365,6 +365,7 @@ public class ResourceMonitor {
      * Get system CPU load
      * @return
      */
+    @Deprecated
     public double getSystemCpuLoad() {
         double load = ((com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean()).getSystemCpuLoad();
         return (Math.round(load * 100d) * 100d) / 100d;

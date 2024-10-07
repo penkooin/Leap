@@ -11,7 +11,7 @@ import org.chaostocosmos.leap.session.SessionManager;
  * 
  * @author 9ins
  */
-public class BasicAuthenticate implements IAuthenticate {
+public class BasicAuthenticate<T, R> implements IAuthenticate {
 
     @FieldMapper(mappingClass = SecurityManager.class, parameters = {Host.class})
     SecurityManager securityManager;

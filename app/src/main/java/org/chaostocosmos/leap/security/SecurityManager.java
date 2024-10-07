@@ -51,7 +51,7 @@ public class SecurityManager {
      * @return
      */
     private Stream<UserCredentials> getUserCredentialStream() {
-        return this.host.getUsers().stream().map(m -> new UserCredentials(m));
+        return this.host.<List<Map<String, Object>>> getValue("global.users").stream().map(m -> new UserCredentials(m));
     }
 
     /**
@@ -102,10 +102,9 @@ public class SecurityManager {
      * @param authorization
      * @return
      */
-    public UserCredentials authenticate(List<?> authorization) {
-        if (authorization != null && authorization != null) {
-            //System.out.println(values[0]+" "+values[1]);
-            String[] values = getUserPassword(authorization.get(0));
+    public UserCredentials authenticate(String authorization) {
+        if (authorization != null) {
+            String[] values = getUserPassword(authorization);
             if(values != null) {
                 UserCredentials user = login(values[0], values[1]);
                 this.logger.debug("==================================================");  
@@ -176,7 +175,7 @@ public class SecurityManager {
             for(Map.Entry<String, Long> entry : map.entrySet()) {
                 String preContext = entry.getKey(); 
                 long preTimestemp = entry.getValue();
-                if(url.equals(preContext) && System.currentTimeMillis() - preTimestemp < this.host.getRequestBlockingInterval()) {
+                if(url.equals(preContext) && System.currentTimeMillis() - preTimestemp < this.host.<Integer> getValue("network.request-blocking-interval-milliseconds")) {
                     requestAttackBlockingMap.remove(ip);
                     return true;
                     //throw new LeapException(HTTP.RES429, new Exception("You requested too many on short period!!!  URI: "+url));

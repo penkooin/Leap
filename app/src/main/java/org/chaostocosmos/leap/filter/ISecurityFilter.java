@@ -6,15 +6,16 @@ package org.chaostocosmos.leap.filter;
  * @author 9ins
  */
 public interface ISecurityFilter {
+
     /**
      * Set security manager object
      * @param securityManager
      */
-    public void setSecurityManager(SecurityManager securityManager);    
+    //public void setSecurityManager(SecurityManager securityManager);    
 
     /**
      * Get security manager object
      * @return
      */
-    public SecurityManager getSecurityManager();
+    //public SecurityManager getSecurityManager();
 }

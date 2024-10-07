@@ -16,7 +16,6 @@ import javax.transaction.NotSupportedException;
 import org.chaostocosmos.leap.common.constant.Constants;
 import org.chaostocosmos.leap.common.enums.SIZE;
 import org.chaostocosmos.leap.common.file.FileUtils;
-import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.PROTOCOL;
@@ -28,7 +27,7 @@ import org.chaostocosmos.leap.exception.LeapException;
  * @author 9ins
  * @since 2021.09.18
  */
-public class HttpResponse implements Http {    
+public class HttpResponse<R> implements Http {    
 
     /**
      * Host
@@ -48,7 +47,7 @@ public class HttpResponse implements Http {
     /**
      * Response body
      */
-    private Object responseBody;    
+    private R responseBody;    
 
     /**
      * Body length
@@ -70,19 +69,39 @@ public class HttpResponse implements Http {
      * @param host
      * @param outputStream
      * @param statusCode
-     * @param request
      * @param responseBody
      * @param headers
      */ 
-    public HttpResponse(Host<?> host, OutputStream outputStream, int statusCode, Object responseBody, Map<String, List<String>> headers) {
+    public HttpResponse(Host<?> host, 
+                        OutputStream outputStream, 
+                        int statusCode, 
+                        R responseBody, 
+                        Map<String, List<String>> headers) {
         this.host = host;
         this.outputStream = outputStream;
         this.responseCode = statusCode;
         this.responseBody = responseBody;
         this.headers = headers;
-        if(responseBody != null) {
-            this.contentLength = responseBody instanceof byte[] ? ((byte[])responseBody).length : responseBody instanceof File ? ((File)responseBody).length() : -1;
-        }        
+        this.contentLength = getContentLength();
+    }
+
+    /**
+     * Get response body content length
+     * @param responseBody
+     * @return
+     */
+    public long getContentLength(R responseBody) {
+        if(responseBody instanceof CharSequence) {
+            return ((CharSequence) responseBody).length();
+        } else if(responseBody instanceof File) {
+            return ((File) responseBody).length();
+        } else if(responseBody instanceof Path) {
+            return ((Path) responseBody).toFile().length();
+        } else if(responseBody instanceof byte[]) {
+            return ((byte[]) responseBody).length;
+        } else {
+            return 0;
+        }
     }
 
     /**
@@ -113,7 +132,7 @@ public class HttpResponse implements Http {
      * Get body object
      * @return
      */
-    public Object getBody() {
+    public R getBody() {
         return this.responseBody;
     }
 
@@ -121,9 +140,9 @@ public class HttpResponse implements Http {
      * Set response body
      * @param responseBody
      */
-    public void setBody(Object responseBody) {
+    public void setBody(R responseBody) {
         this.responseBody = responseBody;
-        this.contentLength = responseBody instanceof byte[] ? ((byte[])responseBody).length : responseBody instanceof File ? ((File)responseBody).length() : -1;
+        this.contentLength = getContentLength();
     }
 
     /**
@@ -238,10 +257,10 @@ public class HttpResponse implements Http {
     public void sendResponse() {
         try {
             if(isSent) {
-                this.host.getLogger().warn("RESPONSE IS ALREADY SENT TO CLIENT: "+toString());
+                host.getLogger().warn("RESPONSE IS ALREADY SENT TO CLIENT: "+toString());
                 return;
             }
-            Charset charset = Charset.forName(this.host.charset());
+            Charset charset = this.host.charset();
             PROTOCOL protocol = this.host.getProtocol();
             String resMsg = responseCode < 900 ? HTTP.valueOf("RES"+responseCode).status() : responseCode >= 900 && responseCode < 1000 ? HTTP.valueOf("LEAP"+responseCode).status() : "Error code not supported: "+responseCode;
             String res = protocol.name()+"/"+Constants.HTTP_VERSION+" "+responseCode+" "+resMsg+"\r\n"; 
@@ -254,14 +273,14 @@ public class HttpResponse implements Http {
                 body = ((byte[])responseBody);                
             } else if(responseBody instanceof CharSequence) {
                 body = ((CharSequence)responseBody).toString().getBytes(charset);
-            } else if(responseBody instanceof File) {
-                body = FileUtils.readFile((File)responseBody, Context.get().server().getFileBufferSize());
+            } else if(responseBody instanceof File || responseBody instanceof Path) {
+                body = FileUtils.readFile(responseBody instanceof File ? (File)responseBody : ((Path)responseBody).toFile(), host.<Integer> getValue("file.read-buffer-size"));
             } else {
                 throw new LeapException(HTTP.RES501, new NotSupportedException("Not support response body type: " + responseBody.getClass().getName()));
             }            
             long contentLength = body.length;
-            if(contentLength > host.getResponseLimitBytes()) {
-                throw new LeapException(HTTP.RES501, new NotSupportedException("Respose body size is too big: "+contentLength+" Limit: " + SIZE.GB.get(host.getResponseLimitBytes(), 2)));
+            if(contentLength > host.<Integer> getValue("network.reponse-limit-byte-size")) {
+                throw new LeapException(HTTP.RES501, new NotSupportedException("Respose body size is too big: "+contentLength+" Limit: " + SIZE.GB.get(host.<Integer> getValue("network.response-limit-byte-size"), 2)));
             }
             List<String> values = new ArrayList<>();
             values.add(String.valueOf(contentLength));
@@ -295,7 +314,9 @@ public class HttpResponse implements Http {
             }
             this.outputStream.flush();
             this.isSent = true;
+            
         } catch(Exception e) {
+            e.printStackTrace();
             throw new LeapException(HTTP.RES500, e);
         } 
     }
@@ -308,7 +329,7 @@ public class HttpResponse implements Http {
      * @throws IOException
      */
     private void writeToStream(File resource, OutputStream out) throws IOException {
-        byte[] buffer = new byte[Constants.FILE_BUFFER_SIZE];
+        byte[] buffer = new byte[this.host.<Integer> getValue("file.write-buffer-size")];
         FileInputStream in = new FileInputStream(resource);
         int len;
         while((len=in.read(buffer)) != -1) {

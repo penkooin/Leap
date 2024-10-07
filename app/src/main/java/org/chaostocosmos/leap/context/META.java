@@ -7,9 +7,11 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import java.util.stream.Collectors;
+
 import javax.transaction.NotSupportedException;
 
 import org.chaostocosmos.leap.common.data.DataStructureOpr;
@@ -17,6 +19,7 @@ import org.chaostocosmos.leap.common.log.LoggerFactory;
 import org.chaostocosmos.leap.enums.WAR_PATH;
 import org.chaostocosmos.leap.resource.config.ResourceProviderConfig;
 import org.yaml.snakeyaml.Yaml;
+
 import com.google.gson.Gson;
 
 /**
@@ -30,7 +33,8 @@ public enum META {
     MESSAGE(Context.get().getHome().resolve(WAR_PATH.CONFIG.path()).resolve("message.yml")),
     MIME(Context.get().getHome().resolve(WAR_PATH.CONFIG.path()).resolve("mime.yml")),
     MONITOR(Context.get().getHome().resolve(WAR_PATH.CONFIG.path()).resolve("monitor.yml")),
-    RESOURCE(Context.get().getHome().resolve(WAR_PATH.CONFIG.path()).resolve("resource-provider.yml"));    
+    RESOURCE(Context.get().getHome().resolve(WAR_PATH.CONFIG.path()).resolve("resource-provider.yml")),
+    TRADEMARK(Context.get().getHome().resolve(WAR_PATH.CONFIG.path()).resolve("trademark"));
 
     Path metaPath;
     Map<String, Object> metaMap;
@@ -65,19 +69,22 @@ public enum META {
      */
     public void load(Path metaPath) throws IOException, NotSupportedException {
         String metaName = metaPath.toFile().getName();
-        String metaType = metaName.substring(metaName.lastIndexOf(".") + 1);
         String metaString = Files.readString(metaPath, StandardCharsets.UTF_8);
-        if(metaType.equalsIgnoreCase("yml") || metaType.equalsIgnoreCase("yaml")) {
+        if(metaName.endsWith(".yml") || metaName.endsWith(".yaml")) {
             this.metaMap = new Yaml().<Map<String, Object>> load(metaString);
-        } else if(metaType.equalsIgnoreCase("json")) {
+        } else if(metaName.endsWith(".json")) {
             this.metaMap = new Gson().<Map<String, Object>> fromJson(metaString, Map.class);
-        } else if(metaType.equalsIgnoreCase("properites")) {
+        } else if(metaName.endsWith(".properites")) {
             this.metaMap = Arrays.asList(metaString.split(System.lineSeparator()))
                                  .stream().map(l -> new Object[]{l.substring(0, l.indexOf("=")).trim(), l.substring(l.indexOf("=")+1).trim()})
                                  .collect(Collectors.toMap(k -> (String)k[0], v -> v[1]));
+        } else if(metaName.equals("trademark")) {
+            this.metaMap = new HashMap<>() {{
+                put("trademark", Files.readString(metaPath));
+            }};
         } else {
             throw new NotSupportedException("Meta file not supported: "+metaName);
-        }    
+        } 
     }
 
     /**
@@ -97,6 +104,8 @@ public enum META {
             return new Monitor<Map<String, Object>>(this.metaMap);
         } else if(super.name().equals("RESOURCE")) {
             return new ResourceProviderConfig<Map<String, Object>>(this.metaMap);
+        } else if(super.name().equals("TRADEMARK")) {
+            return new Trademark<Map<String, Object>>(this.metaMap);
         } else {
             return new Metadata<>(this.metaMap);
         }
@@ -131,15 +140,16 @@ public enum META {
      */
     public void save() {
         String metaName = this.metaPath.toFile().getName();
-        String metaType = metaName.substring(metaName.lastIndexOf(".")+1);
         try (OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(metaPath.toFile()), StandardCharsets.UTF_8)) {
-            if(metaType.equalsIgnoreCase("yml")) {
+            if(metaName.endsWith(".yml")) {
                 new Yaml().dump(this.metaMap, osw);
-            } else if(metaType.equalsIgnoreCase("json")) {
+            } else if(metaName.endsWith(".json")) {
                 new Gson().toJson(this.metaMap, osw);
-            } else if(metaType.equalsIgnoreCase("properites")) {
+            } else if(metaName.endsWith(".properites")) {
                 Properties prop = new Properties();
                 prop.store(osw, null);
+            } else if(metaName.equals("trademark")) {
+                osw.write(this.metaMap.get("trademark")+"");
             } else {
                 throw new NotSupportedException("Meta file not supported: "+metaName);
             }    

@@ -1,0 +1,16 @@
+meta {
+  name: serverConfigTrademark
+  type: http
+  seq: 3
+}
+
+get {
+  url: http://www.leap.org:9393/server/config/trademark
+  body: none
+  auth: basic
+}
+
+auth:basic {
+  username: admin
+  password: admin
+}

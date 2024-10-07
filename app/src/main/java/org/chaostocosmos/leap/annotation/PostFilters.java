@@ -10,6 +10,7 @@ import org.chaostocosmos.leap.filter.IFilter;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PostFilters {
+    
     /**
      * Array of mapping classes for filtering
      * @return

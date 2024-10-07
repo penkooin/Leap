@@ -39,7 +39,7 @@ import com.google.gson.Gson;
  * 
  * @author 9ins
  */
-public class ResourceWatcher extends Thread implements ResourcesWatcherModel {    
+public class ResourceWatcher implements ResourcesWatcherModel {    
 
     /**
      * Watcher Id
@@ -175,7 +175,7 @@ public class ResourceWatcher extends Thread implements ResourcesWatcherModel {
             throw new RuntimeException(e);
         } 
         //Start watch thread
-        start();
+        //start();
     }
 
     /**
@@ -483,13 +483,9 @@ public class ResourceWatcher extends Thread implements ResourcesWatcherModel {
     }
 
     @Override
-    public void terminate() {
-        try {
-            this.watchService.close();
-            this.watchService = null;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public void terminate() throws IOException, InterruptedException {
+        this.watchService.close();
+        this.watchService = null;
     }
 
     /**

@@ -12,7 +12,6 @@ import java.net.UnknownHostException;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -69,11 +68,6 @@ public class LeapServer extends Thread {
      * InetSocketAddress
      */
     InetSocketAddress inetSocketAddress;
-
-    /**
-     * backlog
-     */
-    int backlog;
 
     /**
      * document root
@@ -138,10 +132,7 @@ public class LeapServer extends Thread {
      * @throws URISyntaxException
      * @throws InterruptedException
      */
-    public LeapServer(Host<?> host) throws  UnknownHostException, 
-                                            IOException, 
-                                            URISyntaxException, 
-                                            NotSupportedException {
+    public LeapServer(Host<?> host) throws  UnknownHostException, IOException, URISyntaxException, NotSupportedException {
         this(host.getHomePath(), host);
     }
 
@@ -154,16 +145,12 @@ public class LeapServer extends Thread {
      * @throws URISyntaxException
      * @throws InterruptedException
      */
-    public LeapServer(Path homePath, Host<?> host) throws UnknownHostException, 
-                                                            IOException, 
-                                                            URISyntaxException, 
-                                                            NotSupportedException {
+    public LeapServer(Path homePath, Host<?> host) throws UnknownHostException, IOException, URISyntaxException, NotSupportedException {
         this(Context.get().getHome(), 
              host.getDocroot(), 
              host.getProtocol(), 
              new InetSocketAddress(InetAddress.getByName(host.getHost()), 
              host.getPort()), 
-             host.getBackLog(), 
              host);
     }
 
@@ -173,22 +160,18 @@ public class LeapServer extends Thread {
      * @param docroot
      * @param protocol
      * @param inetSocketAddress
-     * @param backlog
      * @param host
      * @throws NotSupportedException 
      * @throws URISyntaxException 
      * @throws IOException 
      */
-    public LeapServer(Path homePath, Path docroot, PROTOCOL protocol, InetSocketAddress inetSocketAddress, int backlog, Host<?> host) throws IOException, 
-                                                                                                                                                URISyntaxException, 
-                                                                                                                                                NotSupportedException {
+    public LeapServer(Path homePath, Path docroot, PROTOCOL protocol, InetSocketAddress inetSocketAddress, Host<?> host) throws IOException, URISyntaxException, NotSupportedException {
         this.host = host;
         this.logger = this.host.getLogger();
         this.host.setHostStatus(STATUS.SETUP);
         this.isDefaultHost = true;
         this.homePath = homePath;
         this.protocol = protocol;
-        this.backlog = backlog;
         this.docroot = docroot;
         this.inetSocketAddress = inetSocketAddress;
         this.ipAllowedFilters = host.getIpAllowedFiltering();
@@ -221,7 +204,7 @@ public class LeapServer extends Thread {
      * @return
      */
     protected ServiceManager getServiceManager() {
-        return this.serviceManager;
+        return (ServiceManager) this.serviceManager;
     }
 
     /**
@@ -252,53 +235,75 @@ public class LeapServer extends Thread {
     public void run() {        
         try {
             this.host.setHostStatus(STATUS.STARTING);
+            int backlog = this.host.<Integer> getValue("network.backlog");
             if(!this.protocol.isSecured()) {
                 this.server = new ServerSocket();
                 //System.out.println(this.inetSocketAddress.toString());
-                this.server.bind(this.inetSocketAddress, this.backlog);
-                this.logger.info("[HTTP SERVER START] Address: " + this.inetSocketAddress.toString());
+                this.logger.info("[HTTP SERVER START] Address: " + this.inetSocketAddress.toString()+" Backlog: "+backlog);
+                this.server.bind(this.inetSocketAddress, backlog);
             } else {
                 File keyStore = new File(this.host.getKeyStore());
                 String passphrase = this.host.getPassphrase();
                 String sslProtocol = this.host.getEncryptionMethod();
-                this.server = HttpsServerSocketFactory.getSSLServerSocket(keyStore, passphrase, sslProtocol, this.inetSocketAddress, this.backlog);
                 this.logger.info("[HTTPS SERVER START] Address: "+this.inetSocketAddress.toString()+"  Protocol: "+sslProtocol+"  KeyStore: "+keyStore.getName()+"  Supported Protocol: "+Arrays.toString(((SSLServerSocket)server).getSupportedProtocols())+"  KeyStore: "+keyStore.getName());
+                this.server = HttpsServerSocketFactory.getSSLServerSocket(keyStore, passphrase, sslProtocol, this.inetSocketAddress, backlog);
             }
             this.host.setHostStatus(STATUS.STARTED);
             while (this.host.getHostStatus() == STATUS.STARTED || this.host.getHostStatus() == STATUS.RUNNING) {
                 //Waiting for client connection
-                Socket client = null;
-                HttpTransfer httpTransfer = null;
+                Socket socket = null;
+                HttpTransfer<?, ?> httpTransfer = null;
                 try {
-                    client = this.server.accept();
+                    int soTimeout = this.host.<Integer> getValue("network.so-timeout");
+                    boolean keepAlive = this.host.<Boolean> getValue("network.keep-alive");
+                    boolean oobInline = this.host.<Boolean> getValue("network.OOB-inline");
+                    boolean soLinger = this.host.<Boolean> getValue("network.so-linger");
+                    int soLingerTimeout = this.host.<Integer> getValue("network.so-linger-timeout");
+                    boolean tcpNoDelay = this.host.<Boolean> getValue("network.tcp-no-delay");
+                    int receiveBufferSize = this.host.<Integer> getValue("network.receive-buffer-size");
+                    int sendBufferSize = this.host.<Integer> getValue("network.send-buffer-size");
+
+                    //Waiting for client
+                    socket = this.server.accept();
+                    this.server.setReuseAddress(isDefaultHost);
                     this.host.setHostStatus(STATUS.RUNNING);                    
-                    client.setSoTimeout(this.host.getConnectionTimeout());
-                    this.logger.info("[CONNECTED] CLIENT CONNECTED: "+client.getInetAddress().toString());
+
+                    this.logger.info("SOCKET BUFFER INFO - so-timeout:"+soTimeout+"  receive-buffer-size: "+receiveBufferSize+"  send-buffer-size: "+sendBufferSize);
+                    this.logger.info("SOCKET CONF INFO - keep-alive: "+socket.getKeepAlive()+"  OOB-inline: "+socket.getOOBInline()+"  so-linger: "+socket.getSoLinger()+"  tcp-nodelay: "+socket.getTcpNoDelay());
+                    socket.setSoTimeout(soTimeout);
+                    socket.setKeepAlive(keepAlive);
+                    socket.setOOBInline(oobInline);
+                    socket.setSoLinger(soLinger, soLingerTimeout);
+                    socket.setTcpNoDelay(tcpNoDelay);
+                    socket.setReceiveBufferSize(receiveBufferSize);
+                    socket.setSendBufferSize(sendBufferSize);
+                    this.logger.info("[CONNECTED] CLIENT CONNECTED: "+socket.getInetAddress().toString());
 
                     //Create HttpTransfer object
-                    httpTransfer = new HttpTransfer(this.host, client);
+                    httpTransfer = new HttpTransfer<> (this.host, socket);
                     Map<REQUEST_LINE, String> requestLine = httpTransfer.getRequestLine();
-                    Map<String, List<?>> headers = httpTransfer.getRequestHeaders();
+                    Map<String, String> headers = httpTransfer.getRequestHeaders();
                     Map<String, String> cookies = httpTransfer.getRequestCookies();
-                    client.setSoTimeout(this.host.getConnectionTimeout());
 
                     //connection.setSoLinger(false, 1);
                     String hostName = headers.get("Host") != null ? headers.get("Host").toString() : "unknown";
-                    String url = requestLine.get(REQUEST_LINE.PROTOCOL) +"://"+ hostName + requestLine.get(REQUEST_LINE.PATH);
-                    if(!headers.containsKey("Range") && !this.securityManager.checkRequestAttack(client.getInetAddress().getHostAddress(), url)) {
-                        this.host.getLogger().warn("[CLIENT BLOCKED] Too many requested client blocking: "+client.getInetAddress().getHostAddress());
+                    String url = requestLine.get(REQUEST_LINE.PROTOCOL) +"://"+ hostName + requestLine.get(REQUEST_LINE.CONTEXT);
+                    if(!headers.containsKey("Range") && !this.securityManager.checkRequestAttack(socket.getInetAddress().getHostAddress(), url)) {
+                        this.host.getLogger().warn("[CLIENT BLOCKED] Too many requested client blocking: "+socket.getInetAddress().getHostAddress());
                         throw new LeapException(HTTP.RES429, hostName+" requested too many on short period !!!");
                     }
-                    String ipAddress = client.getInetAddress().getHostAddress();
+
+                    String ipAddress = socket.getInetAddress().getHostAddress();
+                    //Check client IP address is valid
                     if(this.ipAllowedFilters.include(ipAddress) || this.ipForbiddenFilters.exclude(ipAddress)) {
                         int queueSize = ThreadPoolManager.get().getQueuedTaskCount();
                         if(queueSize < Context.get().server().getThreadQueueSize()) {
                             Session session = this.sessionManager.getSessionCreateIfNotExists(cookies.get(Constants.SESSION_ID_KEY));
-                            if(host.isSessionApply()) {
+                            if(host.<Boolean> getValue("global.session.apply")) {
                                 host.getLogger().debug("[SESSION] ID: "+session.getId()+"  LOGIN: "+session.isAuthenticated()+"  NEW SESSION: "+session.isNew()+"  CREATION TIME: "+new Date(session.getCreationTime())+"  LAST ACCESS: "+new Date(session.getLastAccessedTime()));
                                 try {
-                                    if(!session.isNew() && DateUtils.getMillis() > session.getLastAccessedTime() + TIME.SECOND.duration(this.host.getSessionTimeoutSeconds(), TimeUnit.MILLISECONDS)) {
-                                        host.getLogger().info("[SESSION] SESSION TIMEOUT: "+host.getSessionTimeoutSeconds()+" SEC.  DATE: "+new Date(DateUtils.getMillis())+"  TIMEOUT: "+new Date(session.getLastAccessedTime() + session.getMaxInactiveIntervalSecond() * 1000L));
+                                    if(!session.isNew() && DateUtils.getMillis() > session.getLastAccessedTime() + TIME.SECOND.duration(host.<Integer> getValue("global.session.timeout-seconds"), TimeUnit.MILLISECONDS)) {
+                                        host.getLogger().info("[SESSION] SESSION TIMEOUT: "+host.<Integer> getValue("global.session.timeout-seconds")+" SEC.  DATE: "+new Date(DateUtils.getMillis())+"  TIMEOUT: "+new Date(session.getLastAccessedTime() + session.getMaxInactiveIntervalSecond() * 1000L));
                                         throw new LeapException(HTTP.RES500, "Session timeout is occurred.");
                                     }
                                     session.setNew(false);
@@ -312,11 +317,12 @@ public class LeapServer extends Thread {
                                 }
                             }
                             httpTransfer.setSession(session);
-                            this.logger.info("[CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. "+ipAddress+":"+client.getPort()+"  QUEUE SIZE: "+queueSize);                        
-                            ThreadPoolManager.get().execute(new LeapHandler(this, this.docroot, this.host, httpTransfer));
+                            this.logger.info("[CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. "+ipAddress+":"+socket.getPort()+"  QUEUE SIZE: "+queueSize);                        
+                            LeapHandler<?, ?> handler = new LeapHandler<> (this, this.docroot, this.host, httpTransfer);
+                            ThreadPoolManager.get().execute(handler);
                         } else {
                             String redirectHost = redirectHostSelection.getSelectedHost();
-                            String redirectUrl = redirectHost + requestLine.get(REQUEST_LINE.PATH);
+                            String redirectUrl = redirectHost + requestLine.get(REQUEST_LINE.CONTEXT);
                             this.logger.info("[CLIENT DETECTED] THREADPOOL LIMIT REACHED: "+queueSize+".  REDIRECT TO URL: "+redirectUrl);
                             throw new RedirectException(redirectUrl);
                         }
@@ -325,18 +331,25 @@ public class LeapServer extends Thread {
                     }
                 } catch(SocketTimeoutException | NegativeArraySizeException e) {
                     host.getLogger().error("[SOCKET TIME OUT] SOCKET TIMEOUT OCCURED.");
-                    if(client != null) {
-                        client.close();
+                    if(socket != null) {
+                        socket.close();
                     }
-                } catch(LeapException le) {
+                } catch(LeapException e) {                    
                     if(httpTransfer != null) {
-                        httpTransfer.processError(le);
+                        httpTransfer.processError(e);
+                    } else {
+                        e.printStackTrace();
                     }
                 }                
             }
         } catch(Exception e) {
             this.host.setHostStatus(STATUS.TERMINATED);
             this.logger.throwable(e);
+            try {
+                stopServer();
+            } catch (IOException | InterruptedException e1) {
+                throw new RuntimeException(e1);
+            }
         }
     }
 
@@ -347,8 +360,9 @@ public class LeapServer extends Thread {
      */
     public void stopServer() throws IOException, InterruptedException {
         this.host.getLogger().info("[SERVER TERMINATED] "+this.host.getHost()+" Server is terminated...");
-        this.host.setHostStatus(STATUS.TERMINATED);
         this.server.close();
+        this.interrupt();
+        this.join();
     }
 
     /**

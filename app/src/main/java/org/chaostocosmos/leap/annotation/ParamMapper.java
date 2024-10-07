@@ -12,6 +12,7 @@ import org.chaostocosmos.leap.http.Http;
 public @interface ParamMapper {    
     /**
      * Request method parameter class definition
+     * 
      * @return
      */
     Class<? extends Http> paramClass() default Http.class;

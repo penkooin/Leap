@@ -29,7 +29,7 @@ public class LeapDataSource extends DriverManagerDataSource {
      * @param dataSourceId
      */
     public LeapDataSource(String dataSourceId) {
-        this(Context.get().server().<Map<String, String>> getDataSource(dataSourceId));
+        this(Context.get().server().getDataSource(dataSourceId));
     }
 
     /**

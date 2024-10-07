@@ -1,6 +1,5 @@
 package org.chaostocosmos.leap.filter;
 
-import org.chaostocosmos.leap.exception.LeapException;
 import org.chaostocosmos.leap.service.model.SpringJPAModel;
 
 /**
@@ -11,18 +10,19 @@ import org.chaostocosmos.leap.service.model.SpringJPAModel;
  * @author 9ins
  * @since 2021.09.18
  */
-public interface IIpFilter<R> extends IPreFilter, SpringJPAModel {    
-    /**
-     * Check allowed hosts when request be happening.
-     * @param request
-     * @return
-     */
-    public boolean allowedHost(R request) throws LeapException;
+public interface IIpFilter<F> extends IPreFilter<F>, SpringJPAModel {    
 
     /**
-     * Check forbidden hots when request be happening.
+     * Check allowed IP to request or response
      * @param request
      * @return
      */
-    public boolean forbiddenHost(R request) throws LeapException;
+    public boolean allowedHost(F request) throws Exception;
+
+    /**
+     * Check forbidden IP to request or response
+     * @param request
+     * @return
+     */
+    public boolean forbiddenHost(F request) throws Exception;
 }

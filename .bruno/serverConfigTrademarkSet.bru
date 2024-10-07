@@ -1,0 +1,51 @@
+meta {
+  name: serverConfigTrademarkSet
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://www.leap.org:9293/server/config/trademark
+  body: multipartForm
+  auth: basic
+}
+
+auth:basic {
+  username: admin
+  password: admin
+}
+
+body:json {
+  {
+    aaa: "aaa",
+    bbb: "bbb",
+    ccc: "ccc"
+  }
+  
+}
+
+body:text {
+  ________                                 .____                      _________ 
+  \______ \   ____    ___.__. ____  __ __  |    |    ____ _____  _____\_____   \
+   |    |  \ /  _ \  <   |  |/  _ \|  |  \ |    |  _/ __ \\__  \ \____ \ /   __/
+   |    `   (  <_> )  \___  (  <_> )  |  / |    |__\  ___/ / __ \|  |_> >   |   
+  /_______  /\____/   / ____|\____/|____/  |_______ \___  >____  /   __/|___|   
+          \/          \/                           \/   \/     \/|__|   <___>   
+}
+
+body:xml {
+  <aaa>
+    <bbb>
+    </bbb>
+  </aaa>
+  
+}
+
+body:form-urlencoded {
+  aaa: This is URL encoded.
+}
+
+body:multipart-form {
+  trademark: Leap!!! Best for you
+  resume.docx: @file(/home/kooin/Downloads/build-e2sprogs-manual.md)
+}

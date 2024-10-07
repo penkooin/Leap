@@ -36,14 +36,6 @@ public class Server <T> extends Metadata <T> {
     }
 
     /**
-     * Get leap version
-     * @return
-     */
-    public String getLeapVersion() {
-        return super.getValue("server.version");
-    }
-
-    /**
      * Get host name & path object
      * @return
      */
@@ -92,7 +84,7 @@ public class Server <T> extends Metadata <T> {
      * @return
      */
     public String getMonitorContext() {
-        return super.<String> getValue("server.monitor.monitor-context");
+        return super.<String> getValue("server.monitor.context-path");
     }
 
     /**
@@ -229,14 +221,6 @@ public class Server <T> extends Metadata <T> {
     public String getDataSourcePassword(String dataSourceId) {
         return getDataSource(dataSourceId).get("password");
     }
-
-    /**
-     * Get upload file buffer flush size
-     * @return
-     */
-    public int getFileBufferSize() {
-        return super.getValue("server.file-buffer-size");
-    }    
 
     /**
      * Get Load-Balance redirect Map

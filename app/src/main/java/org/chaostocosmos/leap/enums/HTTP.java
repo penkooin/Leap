@@ -173,6 +173,7 @@ public enum HTTP {
             throw new LeapException(LEAP901);
         }
     }
+
     /**
      * Get host protocol
      * @param hostId
@@ -181,22 +182,16 @@ public enum HTTP {
     public PROTOCOL getProtocol(String hostId) {
         return Context.get().host(hostId).getProtocol();
     }
-    /**
-     * Get Http version
-     * @param hostId
-     * @return
-     */
-    public String getVersion(String hostId) {
-        return Context.get().host(hostId).getProtocolVersion().toString();
-    }
+
     /**
      * Get Http protocol version string
      * @param hostId
      * @return
      */
-    public String getProtocolVersion(String hostId) {
-        return Context.get().host(hostId).getProtocol()+"/"+Context.get().host(hostId).getProtocolVersion();
+    public String getLeapVersion() {
+        return Context.get().server().getValue("server.version");
     }
+    
     /**
      * Extract PROTOCOL from String
      * @param protocol

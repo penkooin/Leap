@@ -8,7 +8,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.common.data.Filtering;
@@ -233,7 +232,7 @@ public class Hosts <T> extends Metadata <T> {
      * @return
      */
     public Charset charset(String hostId) {
-        return Charset.forName(getHost(hostId).charset());
+        return getHost(hostId).charset();
     }
 
     /**
@@ -286,7 +285,7 @@ public class Hosts <T> extends Metadata <T> {
      * @return
      */
     public List<UserCredentials> getUsers(String hostId) {
-        return getHost(hostId).getUsers().stream().map(u -> new UserCredentials(u)).collect(Collectors.toList());
+        return getHost(hostId).<List<Map<String, Object>>> getValue("global.users").stream().map(u -> new UserCredentials(u)).collect(Collectors.toList());
     }
 
     /**

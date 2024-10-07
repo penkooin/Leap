@@ -20,9 +20,8 @@ import java.util.OptionalInt;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
-import java.util.ArrayList;
 
-import org.chaostocosmos.leap.LeapApp;
+import org.chaostocosmos.leap.Leap;
 import org.chaostocosmos.leap.common.file.FileTools;
 import org.chaostocosmos.leap.common.utils.ClassUtils;
 import org.chaostocosmos.leap.common.utils.UtilBox;
@@ -40,6 +39,7 @@ import org.chaostocosmos.leap.http.HttpRequest;
  * @2021.09.19
  */
 public class ResourceHelper {    
+    
     /**
      * home path
      */
@@ -63,7 +63,7 @@ public class ResourceHelper {
      * @return
      */
     public static ResourceHelper getInstance() {
-        return getInstance(LeapApp.HOME_PATH);
+        return getInstance(Leap.HOME_PATH);
     }
 
     /**
@@ -82,7 +82,7 @@ public class ResourceHelper {
      * @param request
      * @return
      */
-    public static  String getMimeType(HttpRequest request) {
+    public static String getMimeType(HttpRequest<?> request) {
         return UtilBox.probeContentType(getResourcePath(request));
     }
 
@@ -91,7 +91,7 @@ public class ResourceHelper {
      * @param request
      * @return
      */
-    public static Path getResourcePath(HttpRequest request) {
+    public static Path getResourcePath(HttpRequest<?> request) {
         return getResourcePath(Context.get().host(request.getHostId()), request.getContextPath());
     }
 
@@ -169,7 +169,7 @@ public class ResourceHelper {
      * @throws IOException
      * @throws URISyntaxException
      */
-    public static List<File> extractResource(final String res, final Path targetPath, boolean removeDest) throws IOException, URISyntaxException {        
+    public static List<File> extractResource(final String res, final Path targetPath, boolean removeTarget) throws IOException, URISyntaxException {        
         ClassLoader classLoader = ClassUtils.getClassLoader();
         URL url = classLoader.getResource(res);
         String protocol = url.getProtocol();        
@@ -177,8 +177,9 @@ public class ResourceHelper {
         Stream<Path> pStream = null;
         List<File> fileList = null;
         try {
-            if(removeDest) {
-                FileTools.directoryDelete(targetPath.toFile(), targetPath.resolve("bak").toFile());
+            if(removeTarget) {
+                Path backupPath = FileTools.backupSuffix(targetPath.resolve("bak").resolve("backup"));
+                FileTools.directoryDelete(targetPath, backupPath);
             }
             if(protocol.equals("jar")) {
                 fileSystem = FileSystems.newFileSystem(url.toURI(), new HashMap<>());

@@ -52,7 +52,7 @@ public class Html {
     public static Map<String, String> makeRedirectHeader(int seconds, String url) {
         return Map.of(
             "Date", new Date().toString(), 
-            "Server", "Leap?/"+Context.get().server().getLeapVersion()+"("+System.getProperty("os.name")+") java/"+System.getProperty("java.version"),
+            "Server", "Leap?/"+Context.get().server().<String> getValue("server.version")+"("+System.getProperty("os.name")+") java/"+System.getProperty("java.version"),
             "Refresh", seconds+"; URL="+url,
             "Connection", "close",
             "Content-Type", "text/html; charset=iso-8859-1",

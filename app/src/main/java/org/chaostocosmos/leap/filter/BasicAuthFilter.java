@@ -17,20 +17,21 @@ import org.chaostocosmos.leap.session.Session;
  * 
  * @author 9ins
  */
-public class BasicAuthFilter extends AbstractRequestFilter { 
+public class BasicAuthFilter<T> extends AbstractRequestFilter<HttpRequest<T>> { 
+
     /**
      * Security manager object
      */
     SecurityManager securityManager;
 
     @Override
-    public void filterRequest(HttpRequest request) throws Exception { 
+    public void filterRequest(HttpRequest<T> request) throws Exception { 
         super.filterRequest(request);
         String sessionId = request.getCookie(Constants.SESSION_ID_KEY);
         Session session = super.sessionManager.getSessionCreateIfNotExists(sessionId);
 
         if(session == null && request.getClass().isAssignableFrom(HttpRequest.class)) {
-            final Object authorization = request.getReqHeader().get("Authorization");
+            final Object authorization = request.getHeaders().get("Authorization");
             if (authorization != null && authorization.toString().startsWith("Basic")) {
                 String base64Credentials = authorization.toString().substring("Basic".length()).trim();
                 byte[] credDecoded = Base64.getDecoder().decode(base64Credentials);
@@ -53,6 +54,13 @@ public class BasicAuthFilter extends AbstractRequestFilter {
         }
     }
 
+    /**
+     * Login
+     * @param username
+     * @param password
+     * @return
+     * @throws LeapException
+     */
     public UserCredentials login(String username, String password) throws LeapException {
         if(this.securityManager == null) {
             throw new IllegalStateException("Leap security manager not set. Can not sing in with "+username+"/"+password);
@@ -60,6 +68,11 @@ public class BasicAuthFilter extends AbstractRequestFilter {
         return this.securityManager.login(username, password);
     }
 
+    /**
+     * Register
+     * @param user
+     * @throws LeapException
+     */
     public void register(UserCredentials user) throws LeapException {
         if(this.securityManager == null) {
             throw new IllegalStateException("Leap security manager not set. Can not sing up with "+user.toString());
@@ -67,6 +80,12 @@ public class BasicAuthFilter extends AbstractRequestFilter {
         this.securityManager.register(user);
     }
 
+    /**
+     * Log out
+     * @param username
+     * @return
+     * @throws LeapException
+     */
     public UserCredentials logout(String username) throws LeapException {
         return this.securityManager.logout(username);
     }

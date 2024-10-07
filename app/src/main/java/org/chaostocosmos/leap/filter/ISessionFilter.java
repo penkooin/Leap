@@ -8,6 +8,7 @@ import org.chaostocosmos.leap.session.SessionManager;
  * @author 9ins
  */
 public interface ISessionFilter {   
+
     /**
      * Set session manager object
      * @param sessionManager

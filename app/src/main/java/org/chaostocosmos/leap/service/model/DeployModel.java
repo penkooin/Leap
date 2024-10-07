@@ -6,6 +6,7 @@ package org.chaostocosmos.leap.service.model;
  * @author 9ins
  */
 public interface DeployModel {
+    
     /**
      * Deploy service
      * @param service

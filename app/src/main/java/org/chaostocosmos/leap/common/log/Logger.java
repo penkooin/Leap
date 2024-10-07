@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.chaostocosmos.leap.common.constant.Constants;
+
 /**  
  * Logger : 
  * Description : 
@@ -592,20 +594,21 @@ public class Logger {
      * @return
      */
     public String replaceParams(String msg, Object[] params) {
-        if(params == null || params.length < 1) {
-            return msg;
-        }
-        String replacedMsg = "";
-        for(int i=0; i<params.length; i++) {
-            int start = msg.indexOf("{");
-            int end = msg.indexOf("}");
-            if(start != -1 && end != -1 && end > start) {
-                String part = msg.substring(0, start);
-                replacedMsg += part + params[i];
-                msg = msg.substring(end);
+        if(params == null || (params != null && params.length < 1)) {
+            return msg.replace("{", "").replace("}", "");
+        } else {
+            String applied = "";            
+            int i = 0;
+            //String[] ss = Constants.PARAM_PATTERN.split(msg, 5);
+            for(String s : Constants.PARAM_PATTERN.split(msg, 5)) {
+                if(s.trim().equals("") && i < params.length) {
+                    applied += params[i];
+                    i++;
+                }
+                applied += s;                    
             }
+            return applied;
         }
-        return replacedMsg;
     }
     
     /**
@@ -624,7 +627,7 @@ public class Logger {
     public void debugHexCode(byte[] bytes, boolean isSysOut) {
     	String hex = "";
         for(int i=0; i<bytes.length; i++) {
-            String str = Integer.toHexString((new Byte(bytes[i])).intValue());
+            String str = Integer.toHexString((Byte.valueOf(bytes[i])).intValue());
             hex += (str.length() > 2)?str.substring(str.length()-2)+" ":(str.length()==1)?"0"+str+" ":str+" ";
         }
         this.debug(hex, new Object[0]);

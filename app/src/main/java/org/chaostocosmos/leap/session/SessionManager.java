@@ -42,7 +42,7 @@ public class SessionManager {
      * @return
      */
     public boolean isApplySession() {
-        return this.host.isSessionApply();
+        return this.host.<Boolean> getValue("global.session.apply");
     }
 
     /**
@@ -50,7 +50,7 @@ public class SessionManager {
      * @param request
      * @return
      */
-    public boolean exists(HttpRequest request) {
+    public boolean exists(HttpRequest<?> request) {
         String sessionId = request.getCookie(Constants.SESSION_ID_KEY);
         if(this.sessionMap.containsKey(sessionId)) {
             return true;
@@ -81,16 +81,16 @@ public class SessionManager {
      * @return
      */
     public Session createSession(String sessionId) {
-        int idLength = Context.get().host(this.host.getId()).getSessionIDLength();
+        int idLength = Context.get().host(this.host.getId()).<Integer> getValue("global.session.length");
         long creationTime = System.currentTimeMillis();
         long lastAccessedTime = creationTime;
-        int maxInteractiveInteralSecond = Context.get().host(this.host.getId()).getSessionTimeoutSeconds();
+        int maxInteractiveInteralSecond = Context.get().host(this.host.getId()).<Integer> getValue("global.session.timeout-seconds");
         sessionId = sessionId != null && !sessionId.equals("") ? sessionId : SessionIDGenerator.get(this.host.getId()).generateSessionId(idLength);
         //System.out.println(sessionId+"================================");
         Session session = new HttpSession(this, sessionId, creationTime, lastAccessedTime, maxInteractiveInteralSecond);         
         //System.out.println(session.toString());
-        session.setAttribute("Expires", DateUtils.getDateAddedOffset(this.host.getExpireDays(), this.host.getTimeZone()));
-        session.setAttribute("Max-Age", TIME.HOUR.duration(this.host.getMaxAgeHours(), TimeUnit.SECONDS));
+        session.setAttribute("Expires", DateUtils.getDateAddedOffset(this.host.<Integer> getValue("global.session.expire-days"), this.host.<String> getValue("global.timezone")));
+        session.setAttribute("Max-Age", TIME.HOUR.duration(this.host.<Integer> getValue("global.session.max-age-hours"), TimeUnit.SECONDS));
         //session.setAttribute("Path", this.host.<String> getPath());
         return session;
     }

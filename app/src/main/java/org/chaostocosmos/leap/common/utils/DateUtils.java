@@ -1,8 +1,10 @@
 package org.chaostocosmos.leap.common.utils;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 /**
@@ -66,5 +68,16 @@ public class DateUtils {
      */
     public static String getDateAddedOffset(long offsetSeconds, String zoneId) {
         return getDateString(getMillis() + offsetSeconds * 1000, zoneId);
+    }
+
+    /**
+     * Get formatted current date string
+     * @param pattern
+     * @return
+     */
+    public static String getFormattedNow(String pattern) {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        return now.format(formatter);        
     }
 }

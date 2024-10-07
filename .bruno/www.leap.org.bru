@@ -1,0 +1,20 @@
+meta {
+  name: www.leap.org
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://www.leap.org:9393/meta/get?expr=context-filters.access-filters
+  body: none
+  auth: basic
+}
+
+params:query {
+  expr: context-filters.access-filters
+}
+
+auth:basic {
+  username: admin
+  password: admin
+}

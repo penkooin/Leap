@@ -3,6 +3,7 @@ package org.chaostocosmos.leap.context;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.ZoneId;
@@ -18,7 +19,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.LeapApp;
+import org.chaostocosmos.leap.Leap;
 import org.chaostocosmos.leap.common.data.Filtering;
 import org.chaostocosmos.leap.common.enums.SIZE;
 import org.chaostocosmos.leap.common.log.LEVEL;
@@ -49,11 +50,27 @@ public class Host <T> extends Metadata<T> {
     }
 
     /**
-     * Get server name
+     * Get host ID
      * @return
      */
     public String getId() {
         return super.<String> getValue("id");
+    }
+
+    /**
+     * Get host name
+     * @return
+     */
+    public String getHost() {
+        return super.<String> getValue("global.host");
+    }
+
+    /**
+     * Get host port
+     * @return
+     */
+    public int getPort() {
+        return super.<Integer> getValue("global.port");
     }
 
     /**
@@ -62,15 +79,7 @@ public class Host <T> extends Metadata<T> {
      * @return
      */
     public Locale getLocale() {
-        return Locale.getDefault();
-    }
-
-    /**
-     * Get time zone String
-     * @return
-     */
-    public String getTimeZone() {
-        return super.<String> getValue("timezone");
+        return Locale.forLanguageTag("global.locale");
     }
 
     /**
@@ -103,87 +112,15 @@ public class Host <T> extends Metadata<T> {
      * @return
      */
     public PROTOCOL getProtocol() {        
-        return PROTOCOL.valueOf(super.<String> getValue("protocol"));
-    }
-
-    /**
-     * Get protocol version
-     * @return
-     */
-    public String getProtocolVersion() {
-        return super.<String> getValue("protocol-version");
+        return PROTOCOL.valueOf(super.<String> getValue("global.protocol"));
     }
 
     /**
      * Get charset of the host
      * @return
      */
-    public String charset() {
-        return super.getValue("charset");
-    }
-
-    /**
-     * Get host name
-     * @return
-     */
-    public String getHost() {
-        return super.getValue("host");
-    }
-
-    /**
-     * Get port;
-     * @return
-     */
-    public int getPort() {
-        return super.getValue("port");
-    }
-
-    /**
-     * Get connection timeout
-     * @return
-     */
-    public int getConnectionTimeout() {
-        return super.getValue("connection-timeout");
-    }
-
-    /**
-     * Get server backlog
-     * @return
-     */
-    public int getBackLog() {
-        return super.getValue("backlog");
-    }
-
-    /**
-     * Get client request interval for blocking client that be has malicuous.
-     * @return
-     */ 
-    public int getRequestBlockingInterval() {
-        return super.<Integer> getValue("request-blocking-interval");
-    }
-
-    /**
-     * Get limitation of response body
-     * @return
-     */
-    public int getResponseLimitBytes() {
-        return super.<Integer> getValue("reponse-limit-bytes");
-    }
-
-    /**
-     * Get users
-     * @return
-     */
-    public List<Map<String, Object>> getUsers() {        
-        return super.getValue("users");
-    }
-
-    /**
-     * Get access filters
-     * @return
-     */
-    public List<String> getAccessFilters() {
-        return super.<List<String>>getValue("context-filters.access-filters");
+    public Charset charset() {
+        return Charset.forName(super.getValue("global.charset"));
     }
 
     /**
@@ -191,15 +128,7 @@ public class Host <T> extends Metadata<T> {
      * @return
      */
     public Filtering getAccessFiltering() {
-        return new Filtering(super.getValue("context-filters.access-filters"));
-    }
-
-    /**
-     * Get forbidden filters
-     * @return
-     */
-    public List<String> getForbiddenFilters() {
-        return super.getValue("context-filters.forbidden-filters");
+        return new Filtering(super.<List<String>> getValue("security.context-filters.allowed"));
     }
 
     /**
@@ -207,15 +136,7 @@ public class Host <T> extends Metadata<T> {
      * @return
      */
     public Filtering getForbiddenFiltering() {
-        return new Filtering(getForbiddenFilters());
-    }
-
-    /**
-     * Get IP allowed filters 
-     * @return
-     */
-    public List<String> getIpAllowedFilters() {
-        return super.getValue("ip-filters.allowed");
+        return new Filtering(super.<List<String>> getValue("security.context-filters.forbidden"));
     }
 
     /**
@@ -223,47 +144,15 @@ public class Host <T> extends Metadata<T> {
      * @return
      */
     public Filtering getIpAllowedFiltering() {
-        return new Filtering(this.getIpAllowedFilters());
+        return new Filtering(super.<List<String>> getValue("security.ip-filters.allowed"));
     }
-
-    /**
-     * Get IP forbbiden filters
-     * @return
-     */
-    public List<String> getIpForbbidenFilters() {
-        return super.getValue("ip-filters.forbidden");
-    }    
 
     /**
      * Get forbidden Filtering
      * @return
      */
     public Filtering getIpForbiddenFiltering() {
-        return new Filtering(getIpForbbidenFilters());
-    }
-
-    /**
-     * Get whether show error-details content to client ( true or false)
-     * @return
-     */
-    public boolean getLogsDetails() {
-        return super.getValue("logs.details");
-    }
-
-    /**
-     * Get index file name
-     * @return
-     */
-    public String getIndexPage() {
-        return super.getValue("index-page");
-    }
-
-    /**
-     * Get error page
-     * @return
-     */
-    public String getErrorPage() {
-        return super.getValue("error-page");
+        return new Filtering(super.<List<String>> getValue("security.ip-filters.forbidden"));
     }
 
     /**
@@ -271,7 +160,7 @@ public class Host <T> extends Metadata<T> {
      * @return
      */
     public AUTH getAuthentication() {
-        return AUTH.valueOf(super.getValue("authentication"));
+        return AUTH.valueOf(super.getValue("security.authentication"));
     }
 
     /**
@@ -280,54 +169,6 @@ public class Host <T> extends Metadata<T> {
      */
     public boolean isAuthentication() {
         return getAuthentication() == AUTH.NONE ? false : true;
-    }
-
-    /**
-     * Get session id encription algorithm
-     * @return
-     */
-    public String getSessionIDEncryption() {
-        return super.getValue("session.encryption");
-    }
-
-    /**
-     * Get session id length
-     * @return 
-     */
-    public int getSessionIDLength() {
-        return super.getValue("session.length");
-    }
-
-    /**
-     * Get session timeout
-     * @return
-     */
-    public int getSessionTimeoutSeconds() {
-        return super.getValue("session.timeout-seconds");
-    }
-
-    /**
-     * Get session filters
-     * @return
-     */
-    public boolean isSessionApply() {
-        return super.getValue("session.apply");
-    }
-
-    /**
-     * Get session expire days
-     * @return
-     */
-    public int getExpireDays() {
-        return super.getValue("session.expire-days");
-    }
-
-    /**
-     * Get max age hours in session
-     * @return
-     */
-    public int getMaxAgeHours() {
-        return super.getValue("session.max-age-hours");
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////     
@@ -345,7 +186,7 @@ public class Host <T> extends Metadata<T> {
      * @return
      */
     public STATUS getHostStatus() {        
-        return STATUS.valueOf(super. getValue("status"));
+        return STATUS.valueOf(super.getValue("status"));
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////     
@@ -434,7 +275,7 @@ public class Host <T> extends Metadata<T> {
      * @return
      */
     public File getIndexFile() {
-        return getDocroot().resolve(super.<String> getValue("index-page")).toFile();
+        return getDocroot().resolve(super.<String> getValue("global.index-page")).toFile();
     }
 
     /** 
@@ -458,7 +299,7 @@ public class Host <T> extends Metadata<T> {
      * @return
      */
     public ResourcesWatcherModel getResource() {
-        return LeapApp.getResourceProvider().get(getId());
+        return Leap.getResourceProvider().get(getId());
     }
 
     /**
@@ -516,7 +357,7 @@ public class Host <T> extends Metadata<T> {
     public String buildDirectoryJson(String dirRoot) {
         String path = dirRoot.charAt(dirRoot.length() - 1) == '/' ? dirRoot.substring(0, dirRoot.lastIndexOf('/')) : dirRoot;
         final String path1 = path.equals("") ? "/" : path;
-        File[] fs = getStatic().resolve(path1.substring(1)).toFile().listFiles();
+        //File[] fs = getStatic().resolve(path1.substring(1)).toFile().listFiles();
         
         List<File> resourceInfos = Arrays.asList(getStatic().resolve(path1.substring(1)).toFile().listFiles())
                                          .stream()

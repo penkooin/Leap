@@ -5,14 +5,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.regex.Pattern;
 
-import org.chaostocosmos.leap.context.Context;
-
 /**
  * Constants
  * 
  * @author 9ins
  */
 public class Constants {
+    
     /**
      * Http protocol version
      */
@@ -97,9 +96,4 @@ public class Constants {
      * Clear site data key
      */
     public static final String CLEAR_SITE_DATA = "Clear-Site-Data";
-
-    /**
-     * File buffer size
-     */
-    public static final int FILE_BUFFER_SIZE = Context.get().server().getFileBufferSize();
 }

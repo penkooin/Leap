@@ -1,16 +1,16 @@
 package org.chaostocosmos.leap.http.part;
 
-import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
-import java.util.Map;
 
 import org.chaostocosmos.leap.enums.MIME;
 
 /**
  * Request part model
+ * 
+ * @author 9ins
  */
-public interface Part {    
+public interface Part <T> {    
 
     /**
      * Get content type
@@ -25,27 +25,22 @@ public interface Part {
     public long getContentLength();
 
     /**
-     * Whether body content read when request be connected.
-     * @return
-     */
-    public boolean isContentRead();
-
-    /**
      * Get charset of Body content
      * @return
      */
     public Charset getCharset();
 
     /**
-     * Get body data Map<String,>
+     * Get body data 
      * @return
      */
-    public Map<String, byte[]> getBody() throws IOException;
+    public T getBody() throws Exception;
 
     /**
-     * Save binary data
+     * Save body to parameted directory
      * @param targetPath
-     * @throws IOException
+     * @param isDirect
+     * @throws Exception
      */
-    public abstract void save(Path targetPath) throws IOException;
+    public void saveTo(Path targetDir, boolean isDirect) throws Exception;
 }

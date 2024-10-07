@@ -8,10 +8,10 @@ import org.chaostocosmos.leap.http.HttpRequest;
  * 
  * @author 9ins
  */
-public class BasicHttpRequestFilter extends AbstractRequestFilter {
+public class BasicHttpRequestFilter<T, R> extends AbstractRequestFilter<HttpRequest<T>> {
 
     @Override
-    public void filterRequest(HttpRequest request) throws Exception { 
+    public void filterRequest(HttpRequest<T> request) throws Exception { 
         super.filterRequest(request);
         if(request.getClass().isAssignableFrom(HttpRequest.class)) {
             LoggerFactory.getLogger(request.getRequestedHost()).debug("Basic Http request filter processing......");

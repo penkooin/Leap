@@ -1,5 +1,9 @@
 package org.chaostocosmos.leap.filter;
 
-public interface IPostFilter extends IFilter {
-    
+/**
+ * IPostFilter
+ * 
+ * @author 9ins
+ */
+public interface IPostFilter<F> extends IFilter {    
 }

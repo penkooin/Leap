@@ -76,14 +76,14 @@ public class ClassUtils {
      * @throws NotSupportedException
      */
     @SuppressWarnings("unchecked")
-    public static List<Class<? extends ServiceModel>> findAllLeapServices(URLClassLoader classLoader, boolean reloadConfig, Filtering filters) throws IOException, URISyntaxException, NotSupportedException {
+    public static <T, R> List<Class<? extends ServiceModel<T, R>>> findAllLeapServices(URLClassLoader classLoader, boolean reloadConfig, Filtering filters) throws IOException, URISyntaxException, NotSupportedException {
         if(reloadConfig) {
             Context.get().refresh();
         }
-        List<Class<? extends ServiceModel>> services = findClasses(classLoader, ServiceModel.class, null)
+        List<Class<? extends ServiceModel<T, R>>> services = findClasses(classLoader, ServiceModel.class, null)
                                                        .stream()
                                                        .filter(f ->! Modifier.isAbstract(f.getModifiers()) && ! Modifier.isInterface(f.getModifiers()))
-                                                       .map(c -> (Class<? extends ServiceModel>) c)
+                                                       .map(c -> (Class<? extends ServiceModel<T, R>>) c)
                                                        .collect(Collectors.toList());
         return services;
     }
@@ -334,7 +334,7 @@ public class ClassUtils {
         map.put("welcome", host.getIndexFile().toPath().toString());
         map.put("logs", host.getLogPath().toString());
         map.put("log-level", host.getLogLevel());
-        map.put("details", host.getLogsDetails());
+        map.put("details", host.<Boolean> getValue("logs.details"));
         return map;
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.lang.NonNull;
 
 /**
  * Dynamic bean registration object
@@ -21,7 +22,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class DynamicBeanRegisterConfiguration implements BeanFactoryPostProcessor {
 
     @Override
-    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+    public void postProcessBeanFactory(@NonNull ConfigurableListableBeanFactory beanFactory) throws BeansException {
         AnnotationConfigApplicationContext applicationContext = SpringJPAManager.get().getApplicationContext();
         Map<String, GenericBeanDefinition> dynamicBeanDefinitions = createDynamicDataSourceBeanDefinitions();        
         for(Map.Entry<String, GenericBeanDefinition> entry : dynamicBeanDefinitions.entrySet()) {

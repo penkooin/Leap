@@ -33,6 +33,7 @@ import ch.qos.logback.classic.Logger;
  * @version 1.0
  */
 public class SystemMonitor {	
+
     /**
      * ThreadPool
      */
@@ -98,7 +99,7 @@ public class SystemMonitor {
 	 * @param fractionPoint
 	 * @param timeUnit
 	 * @param logger
-	 */
+	@SuppressWarnings("unchecked")
 	private void initialize(ThreadPoolExecutor threadpool, 
 						   long interval, 
 						   boolean isDaemon, 
@@ -114,6 +115,7 @@ public class SystemMonitor {
 		this.fractionPoint = fractionPoint;
 		this.logger = logger;		
 	}
+	 */
 
 	/**
 	 * Default Constructor

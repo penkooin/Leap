@@ -1,27 +1,18 @@
 package org.chaostocosmos.leap.http;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.net.URISyntaxException;
-import java.nio.charset.Charset;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-
-import javax.transaction.NotSupportedException;
 
 import org.chaostocosmos.leap.common.constant.Constants;
-import org.chaostocosmos.leap.common.enums.SIZE;
-import org.chaostocosmos.leap.common.file.FileUtils;
 import org.chaostocosmos.leap.common.log.Logger;
 import org.chaostocosmos.leap.common.log.LoggerFactory;
 import org.chaostocosmos.leap.context.Context;
@@ -29,7 +20,6 @@ import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.AUTH;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.MIME;
-import org.chaostocosmos.leap.enums.PROTOCOL;
 import org.chaostocosmos.leap.enums.REQUEST_LINE;
 import org.chaostocosmos.leap.enums.TEMPLATE;
 import org.chaostocosmos.leap.exception.LeapException;
@@ -37,9 +27,10 @@ import org.chaostocosmos.leap.session.Session;
 
 /**
  * HttpTransfer object
+ * 
  * @author 9ins
  */
-public class HttpTransfer implements Http {
+public class HttpTransfer<T, R> implements Http {
 
     /**
      * Hosts, Information configured in config.yml
@@ -64,17 +55,17 @@ public class HttpTransfer implements Http {
     /**
      * Http parser
      */
-    private HttpParser httpParser;
+    private HttpParser<T, R> httpParser;
 
     /**
      * Request
      */
-    private HttpRequest request;
+    private HttpRequest<T> request;
 
     /**
      * Response
      */
-    private HttpResponse response;
+    private HttpResponse<R> response;
 
     /**
      * Http session
@@ -97,7 +88,7 @@ public class HttpTransfer implements Http {
         this.socket = socket;
         this.inputStream = socket.getInputStream();
         this.outStream = socket.getOutputStream();
-        this.httpParser = new HttpParser(this.host, this.inputStream, this.outStream);
+        this.httpParser = new HttpParser<>(this.host, this.inputStream, this.outStream);
     }
 
     /**
@@ -146,7 +137,7 @@ public class HttpTransfer implements Http {
      * @throws IOException
      */
     public Map<REQUEST_LINE, String> getRequestLine() throws IOException {
-        return this.httpParser.parseRequestLine();
+        return this.httpParser.getFirstLines();
     }
 
     /**
@@ -154,8 +145,8 @@ public class HttpTransfer implements Http {
      * @return
      * @throws IOException
      */
-    public Map<String, List<?>> getRequestHeaders() throws IOException {        
-        return this.httpParser.parseRequestHeaders();
+    public Map<String, String> getRequestHeaders() throws IOException {        
+        return this.httpParser.getRequestHeaders();
     }
 
     /**
@@ -164,7 +155,7 @@ public class HttpTransfer implements Http {
      * @throws IOException
      */
     public Map<String, String> getRequestCookies() throws IOException {
-        return this.httpParser.parseRequestCookies();
+        return this.httpParser.getRequestCookies();
     }
 
     /**
@@ -173,7 +164,7 @@ public class HttpTransfer implements Http {
      * @throws URISyntaxException
      * @throws IOException
      */
-    public HttpRequest getRequest() throws IOException, URISyntaxException {
+    public HttpRequest<T> getRequest() throws IOException, URISyntaxException {
         if(this.request == null) {
             this.request = this.httpParser.parseRequest();
         }
@@ -183,15 +174,22 @@ public class HttpTransfer implements Http {
     /**
      * Get http response
      * @return
+     * @throws IOException 
      * @throws Exception 
      */
-    public HttpResponse getResponse() throws Exception {
+    @SuppressWarnings("unchecked")
+    public HttpResponse<R> getResponse() throws IOException {
         if(this.response == null) {
-            String msg = this.resolvePlaceHolder(TEMPLATE.RESPONSE.loadTemplatePage(this.host.getId()), Map.of("@serverName", this.host.getHost(), "@code", HTTP.RES200.code(), "@status", "OK", "@message", HTTP.RES200.status()));
+            String msg = this.resolvePlaceHolder(TEMPLATE.RESPONSE.loadTemplatePage(this.host.getId()), new HashMap<String, Object>() {{
+                put("@serverName", host.getHost());
+                put("@code", HTTP.RES200.code());
+                put("@status", "OK");
+                put("@message", HTTP.RES200.status());
+            }});
             Map<String, List<String>> headers = addHeader(new HashMap<>(), "Content-Type", MIME.TEXT_HTML.mimeType());
-            headers = addHeader(new HashMap<>(), "Content-Length", String.valueOf(msg.getBytes().length));
-            headers = addHeader(new HashMap<>(), "Charset", this.host.charset());
-            this.response = this.httpParser.buildResponse(HTTP.RES200.code(), msg, headers);
+            headers = addHeader(new HashMap<>(), "Content-Length", String.valueOf(msg.toString().getBytes().length));
+            headers = addHeader(new HashMap<>(), "Charset", this.host.charset().name());
+            this.response = this.httpParser.getResponse(HTTP.RES200.code(), (R) msg, headers);
         }
         return this.response;
     }    
@@ -216,7 +214,7 @@ public class HttpTransfer implements Http {
      * Get HttpParser
      * @return
      */
-    public HttpParser getHttpParser() {
+    public HttpParser<T, R> getHttpParser() {
         return this.httpParser;
     }
 
@@ -233,8 +231,8 @@ public class HttpTransfer implements Http {
      * @param err
      * @throws Exception 
      */
+    @SuppressWarnings("unchecked")
     public void processError(LeapException err) throws Exception {        
-        this.host.getLogger().error(err.getMessage(), err);
         if(this.response == null) {
             try {
                 this.response = getResponse();
@@ -251,12 +249,12 @@ public class HttpTransfer implements Http {
         String status = HTTP.valueOf("RES"+resCode).status();
         String message = throwable.getMessage()+"";
         String stacktrace = "";
-        Map<String, ?> paramMap = Map.of("@serverName", serverName, 
+        Map<String, Object> paramMap = Map.of("@serverName", serverName, 
                                          "@code", resCode, 
                                          "@status", status, 
                                          "@message", message, 
                                          "@stacktrace", stacktrace);
-        Object body = resolvePlaceHolder(TEMPLATE.ERROR.loadTemplatePage(this.host.getId()), paramMap);                                                                                    
+        R body = (R) resolvePlaceHolder(TEMPLATE.ERROR.loadTemplatePage(this.host.getId()), paramMap);                                                                                    
         String hostId = this.host.getId();
         if(err instanceof LeapException) {
             resCode = err.code();
@@ -268,7 +266,7 @@ public class HttpTransfer implements Http {
                 Html.makeRedirectHeader(0, redirect.getURLString()).entrySet().stream().forEach(e -> this.response.addHeader(e.getKey(), e.getValue()));
                 this.response.addHeader("Location", redirect.getURLString());
             }
-            if(Context.get().host(hostId).getLogsDetails()) {
+            if(Context.get().host(hostId).<Boolean> getValue("logs.details")) {
                 stacktrace = "<pre>" + err.getStackTraceMessage() + "<pre>";
             }
         } else {
@@ -276,7 +274,6 @@ public class HttpTransfer implements Http {
         }        
         this.response.setResponseCode(resCode);
         this.response.setContentLength(body.toString().getBytes().length);
-        //this.response.addHeader("Refresh", "0; /error?"+paramMap.entrySet().stream().map(e -> e.getKey()+"="+e.getValue()).collect(Collectors.joining("&")));
         this.response.setBody(body);
         sendResponse();
     }
@@ -307,17 +304,15 @@ public class HttpTransfer implements Http {
      * @param placeHolderValueMap
      * @return
      */
-    public String resolvePlaceHolder(String htmlPage, Map placeHolderValueMap) {
+    public String resolvePlaceHolder(String htmlPage, Map<String, Object> placeHolderValueMap) {
         String regex = Constants.PLACEHOLDER_REGEX;
         Pattern ptrn = Pattern.compile(regex);
         Matcher matcher = ptrn.matcher(htmlPage);
         while(matcher.find()) {
             String match = matcher.group(1).trim();
             String key = match.replace("<!--", "").replace("-->", "").trim();
-            System.out.println(match+"////////////////////"+key);
             if(placeHolderValueMap.containsKey(key)) {
-                Object obj = placeHolderValueMap.get(key);
-                System.out.println(obj);                
+                //Object obj = placeHolderValueMap.get(key);
                 htmlPage = htmlPage.substring(0, htmlPage.indexOf(match))
                            + placeHolderValueMap.get(key)
                            + htmlPage.substring(htmlPage.indexOf(match)+match.length());
@@ -331,16 +326,14 @@ public class HttpTransfer implements Http {
      */
     public void close() {
         try {
-            if(this.inputStream != null) this.inputStream.close();
-            if(this.outStream != null) this.outStream.close();
-            if(this.socket != null) this.socket.close();
+            this.inputStream.close();
+            this.outStream.close();
+            this.socket.close();
         } catch(Exception e) {
+            e.printStackTrace();
             LoggerFactory.getLogger(this.host.getHost()).throwable(e);
         }
-        this.inputStream = null;
-        this.outStream = null;
-        this.socket = null;
-        LoggerFactory.getLogger(this.host.getHost()).info("CLIENT SOCKET CLOSED: "+socket.getInetAddress().toString());
+        LoggerFactory.getLogger().info("CLIENT SOCKET CLOSED: "+socket.getInetAddress().toString());
     }
 
     /**

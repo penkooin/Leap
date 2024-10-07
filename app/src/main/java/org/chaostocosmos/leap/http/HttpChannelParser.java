@@ -72,7 +72,7 @@ public class HttpChannelParser {
          * Parse request
          * @throws IOException
          */
-        public HttpRequest parseRequest(Socket socket) throws IOException {
+        public HttpRequest<?> parseRequest(Socket socket) throws IOException {
             //SocketChannel channel = socket.getChannel();
             //Map<String, List<String>> lines = ChannelUtils.readHeaders(channel, ByteBuffer.allocate(1024));             
             return null;
@@ -92,8 +92,8 @@ public class HttpChannelParser {
          * @param headers
          * @return
          */
-        public HttpResponse buildResponse(final Host<?> host, final OutputStream outputStream, final int statusCode, final Object body, final Map<String, List<String>> headers) {
-            return new HttpResponse(host, outputStream, statusCode, body, headers);
+        public <R> HttpResponse<R> buildResponse(final Host<?> host, final OutputStream outputStream, final int statusCode, final R body, final Map<String, List<String>> headers) {
+            return new HttpResponse<R> (host, outputStream, statusCode, body, headers);
         }
     }       
 }

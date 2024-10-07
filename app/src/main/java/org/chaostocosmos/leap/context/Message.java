@@ -77,7 +77,7 @@ public class Message <T> extends Metadata <T> {
         } else {
             String applied = "";            
             int i = 0;
-            String[] ss = Constants.PARAM_PATTERN.split(msg, 5);
+            //String[] ss = Constants.PARAM_PATTERN.split(msg, 5);
             for(String s : Constants.PARAM_PATTERN.split(msg, 5)) {
                 if(s.trim().equals("") && i < params.length) {
                     applied += params[i];

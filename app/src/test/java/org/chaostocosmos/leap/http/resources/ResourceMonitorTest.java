@@ -30,7 +30,6 @@ public class ResourceMonitorTest {
         
     @Test
     public void test() {
-        this.resourceMonitor.start();
     }
 
     @Test
