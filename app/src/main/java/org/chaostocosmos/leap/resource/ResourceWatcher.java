@@ -7,6 +7,7 @@ import java.nio.file.FileSystemException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.WatchEvent;
@@ -24,11 +25,10 @@ import java.util.stream.Collectors;
 import org.chaostocosmos.leap.common.enums.SIZE;
 import org.chaostocosmos.leap.common.enums.TIME;
 import org.chaostocosmos.leap.common.log.LoggerFactory;
-import org.chaostocosmos.leap.context.Context;
-import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.MIME;
 import org.chaostocosmos.leap.exception.LeapException;
+import org.chaostocosmos.leap.resource.config.ResourceConfig;
 import org.chaostocosmos.leap.resource.filter.ResourceFilter;
 import org.chaostocosmos.leap.resource.model.ResourcesWatcherModel;
 
@@ -40,16 +40,6 @@ import com.google.gson.Gson;
  * @author 9ins
  */
 public class ResourceWatcher implements ResourcesWatcherModel {    
-
-    /**
-     * Watcher Id
-     */
-    String watcherId;
-
-    /**
-     * Host object
-     */
-    Host<?> host;
 
     /**
      * Watch path
@@ -110,6 +100,11 @@ public class ResourceWatcher implements ResourcesWatcherModel {
      * Watch service object
      */
     WatchService watchService;
+
+    /**
+     * Watch thread object
+     */
+    Thread watchThread;
     
     /**
      * Gson object
@@ -118,18 +113,17 @@ public class ResourceWatcher implements ResourcesWatcherModel {
 
     /**
      * Constructor
-     * @param watcherId
      * @param watchPath
      * @param watchKinds
      * @param accessFiltering
      * @param inMemoryFiltering
      * @param inMemorySplitUnit
+     * @param fileSizeLimit
+     * @param fileReadBufferSize
+     * @param fileWriteBufferSize
      * @param inMemoryLimitSize
-     * @throws InterruptedException
-     * @throws IOException
      */
     public ResourceWatcher(
-                            String watcherId,
                             Path watchPath, 
                             Kind<?>[] watchKinds, 
                             ResourceFilter accessFiltering,
@@ -140,7 +134,6 @@ public class ResourceWatcher implements ResourcesWatcherModel {
                             int fileWriteBufferSize,
                             long inMemoryLimitSize
                             ) {
-        this.watcherId = watcherId;
         this.watchPath = watchPath.toAbsolutePath().normalize();
         this.watchKind = watchKinds;
         this.accessFiltering = accessFiltering;
@@ -150,7 +143,6 @@ public class ResourceWatcher implements ResourcesWatcherModel {
         this.fileReadBufferSize = fileReadBufferSize;
         this.fileWriteBufferSize = fileWriteBufferSize;
         this.inMemoryLimitSize = inMemoryLimitSize;
-        this.host = Context.get().host(watcherId);
 
         LoggerFactory.getLogger().info("[WATCH PATH] Watch Path: "+this.watchPath.toAbsolutePath().normalize().toString());
         try {
@@ -167,15 +159,12 @@ public class ResourceWatcher implements ResourcesWatcherModel {
 
             // Load host resources
             long startMillis = System.currentTimeMillis();
-
             //this.resourceTree = loadResoureTree(this.watchPath, this.resourceTree);
             this.resourceTree = loadForkJoinResources(this.watchPath);
             LoggerFactory.getLogger().info("[RESOURCE-LOAD] Path: "+this.watchPath.toString()+" is complated: "+TIME.SECOND.duration(System.currentTimeMillis() - startMillis, TimeUnit.SECONDS));        
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         } 
-        //Start watch thread
-        //start();
     }
 
     /**
@@ -444,7 +433,7 @@ public class ResourceWatcher implements ResourcesWatcherModel {
     public Path resolveRealPath(String contextPath) throws Exception {
         contextPath = contextPath.charAt(0) == '/' ? contextPath.substring(0) : contextPath;
         contextPath = contextPath.charAt(contextPath.length() - 1) == '/' ? contextPath.substring(0, contextPath.lastIndexOf('/')) : contextPath;
-        return this.host.getDocroot().resolve(contextPath);
+        return this.watchPath.resolve(contextPath);
     }
 
     @Override
@@ -483,9 +472,17 @@ public class ResourceWatcher implements ResourcesWatcherModel {
     }
 
     @Override
-    public void terminate() throws IOException, InterruptedException {
+    public void terminate() throws IOException, InterruptedException {        
         this.watchService.close();
         this.watchService = null;
+        this.watchThread.interrupt();
+        this.watchThread.join();
+    }
+
+    @Override
+    public void start() {
+        this.watchThread = new Thread(this);
+        this.watchThread.start();
     }
 
     /**

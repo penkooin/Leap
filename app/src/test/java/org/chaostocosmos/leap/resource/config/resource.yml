@@ -1,0 +1,24 @@
+resource:
+  watch-paths: [
+    #./leap/static/,
+    #./leap1/static/,
+    #./leap2/static/,
+    #./leap2/static/,
+    #./leap2/static/
+  ]
+
+  watch-kind: [
+    ENTRY_CREATE,
+    ENTRY_DELETE,
+    ENTRY_MODIFY,
+    OVERFLOW
+  ]
+
+  access-filters: ['*']
+  in-memory-filters: ['*']
+  total-memory-size-limit: 4GB
+  split-unit-size: 1MB
+  file-size-limit: 500MB
+  file-read-buffer-size: 1024KB
+  file-write-buffer-size: 1024KB
+

@@ -1,0 +1,22 @@
+meta {
+  name: upload
+  type: http
+  seq: 5
+}
+
+post {
+  url: http://www.leap.org:9393/server/config/trademark
+  body: multipartForm
+  auth: basic
+}
+
+auth:basic {
+  username: admin
+  password: 9393
+}
+
+body:multipart-form {
+  : @file(/home/kooin/Downloads/Equine Walk 400fps.avi)
+  : @file(/home/kooin/Documents/Resume/시니어 풀스택 개발자 _ 엔지니어 - 신구인-20240919.odt)
+  : @file(/home/kooin/Documents/Resume/SENIOR FULLSTACK DEVELOPER _ ENGINEER - KooinShin.docx)
+}

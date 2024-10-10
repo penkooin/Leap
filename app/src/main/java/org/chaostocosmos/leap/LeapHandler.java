@@ -49,7 +49,7 @@ public class LeapHandler<T, R> implements Runnable {
     /**
      * Service manager object
      */
-    ServiceManager serviceManager;
+    ServiceManager<?, ?> serviceManager;
 
     /**
      * Session manager object
@@ -133,7 +133,7 @@ public class LeapHandler<T, R> implements Runnable {
                 }
             }
             //Create service holder
-            ServiceHolder serviceHolder = serviceManager.getServiceHolder(request.getContextPath());
+            ServiceHolder<?, ?> serviceHolder = serviceManager.getServiceHolder(request.getContextPath());
             //If client request context path in Services.
             if (serviceHolder != null) {
                 if(Context.get().server().isSupportSpringJPA()) {

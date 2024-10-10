@@ -12,8 +12,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
-import javax.transaction.NotSupportedException;
-
 import org.yaml.snakeyaml.Yaml;
 
 import com.google.gson.Gson;
@@ -29,13 +27,16 @@ public class ConfigUtils {
      * Load
      * @param path
      * @return
-     * @throws NotSupportedException
-     * @throws IOException
      */
-    public static Map<String, Object> loadConfig(Path path) throws NotSupportedException, IOException {
+    public static Map<String, Object> loadConfig(Path path) {
         String metaName = path.toFile().getName();
         String metaType = metaName.substring(metaName.lastIndexOf(".") + 1);
-        String metaString = Files.readString(path, StandardCharsets.UTF_8);
+        String metaString;
+        try {
+            metaString = Files.readString(path, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         Map<String, Object> configMap = null;
         if(metaType.equalsIgnoreCase("yml") || metaType.equalsIgnoreCase("yaml")) {
             configMap = new Yaml().<Map<String, Object>> load(metaString);
@@ -46,7 +47,7 @@ public class ConfigUtils {
                             .stream().map(l -> new Object[]{l.substring(0, l.indexOf("=")).trim(), l.substring(l.indexOf("=")+1).trim()})
                             .collect(Collectors.toMap(k -> (String)k[0], v -> v[1]));
         } else {
-            throw new NotSupportedException("Meta file not supported: "+metaName);
+            throw new RuntimeException("Meta file not supported: "+metaName);
         }
         return configMap;
     } 
@@ -57,19 +58,23 @@ public class ConfigUtils {
      * @return
      * @throws IOException
      */
-    public static ResourceProviderConfig<?> loadConfigObject(Path path) throws IOException {
+    public static ResourceConfig<?> loadConfigObject(Path path) {
         String metaName = path.toFile().getName();
         String metaType = metaName.substring(metaName.lastIndexOf(".") + 1);
         //String metaString = Files.readString(path, StandardCharsets.UTF_8);
-        ResourceProviderConfig<?> configMap = null;
-        if(metaType.equalsIgnoreCase("yml") || metaType.equalsIgnoreCase("yaml")) {
-            FileInputStream fis = new FileInputStream(path.toFile());
-            configMap = new Yaml().loadAs(fis, ResourceProviderConfig.class);
-        } else if(metaType.equalsIgnoreCase("json")) {
-            FileReader fr = new FileReader(path.toFile());
-            configMap = new Gson().fromJson(fr, ResourceProviderConfig.class);
-        } else {
-            throw new RuntimeException("Meta file not supported: "+metaName);
+        ResourceConfig<?> configMap = null;
+        try {
+            if(metaType.equalsIgnoreCase("yml") || metaType.equalsIgnoreCase("yaml")) {
+                FileInputStream fis = new FileInputStream(path.toFile());
+                configMap = new Yaml().loadAs(fis, ResourceConfig.class);
+            } else if(metaType.equalsIgnoreCase("json")) {
+                FileReader fr = new FileReader(path.toFile());
+                configMap = new Gson().fromJson(fr, ResourceConfig.class);
+            } else {
+                throw new IllegalArgumentException("Meta file not supported: "+metaName);
+            }    
+        } catch(IOException e) {
+            throw new RuntimeException(e);
         }
         return configMap;
     } 

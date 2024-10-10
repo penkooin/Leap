@@ -1,12 +1,17 @@
 package org.chaostocosmos.leap.http;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -17,12 +22,26 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.chaostocosmos.leap.common.file.FileUtils;
+import org.chaostocosmos.leap.enums.HTTP;
+import org.chaostocosmos.leap.exception.LeapException;
+
 /**
  * StreamUtils
  * 
  * @author 9ins
  */
 public class HttpRequestStream {
+
+    /**
+     * 2 * CRLF
+     */
+    private static final String CRLF2 = "\r\n\r\n";
+
+    /**
+     * CRLF
+     */
+    public static final String CRLF = "\r\n";    
 
     /**
      * InputStream
@@ -76,79 +95,6 @@ public class HttpRequestStream {
         }
     }
 
-    /**
-     * Read Multipart request
-     * @param boundary
-     * @param charset
-     * @return
-     * @throws IOException
-     */
-    public Map<String, byte[]> readPartData(String boundary, Charset charset, int bufferSize) throws IOException {
-        String boundaryStart = "--"+boundary;
-        String boundaryEnd = "--"+boundary+"--";
-        Map<String, byte[]> partMap = new HashMap<>();        
-        byte[] data;
-        try( ByteArrayOutputStream byteStream = new ByteArrayOutputStream() ) {
-            byte[] buffer = new byte[bufferSize];
-            int bytesRead;
-            while ((bytesRead = inputStream.read(buffer)) != -1) {            
-                byteStream.write(buffer, 0, bytesRead);
-                if(findSequenceIndex(byteStream.toByteArray(), boundaryEnd.getBytes()) != -1) {
-                    break;
-                }
-            }    
-            data = byteStream.toByteArray();
-        }
-        List<byte[]> parts = splitBySequence(data, boundaryStart.getBytes());
-        for(byte[] part : parts) {
-            int idx = findSequenceIndex(part, "\r\n\r\n".getBytes()) + "\r\n\r\n".getBytes().length;
-            String head = new String(Arrays.copyOf(part, idx));
-            byte[] partData = Arrays.copyOfRange(part, idx, part.length);
-            Map<String, String> fieldMap = extractFields(head, List.of("name", "filename"));
-            if(fieldMap.containsKey("name") && fieldMap.containsKey("filename")) {                
-                partMap.put(fieldMap.get("filename"), partData);
-            } else if(fieldMap.containsKey("name")) {
-                partMap.put(fieldMap.get("name"), partData);
-            }
-        }
-        return partMap;
-    }
-
-    /**
-     * Find index of bytes sequence
-     * @param fileBytes
-     * @param sequence
-     * @return
-     */
-    public List<byte[]> splitBySequence(byte[] fileBytes, byte[] sequence) {
-        List<byte[]> parts = new ArrayList<>();
-        for (int i = 0; i <= fileBytes.length; i++) {
-            if (Arrays.equals(Arrays.copyOfRange(fileBytes, i, i + sequence.length), sequence)) {
-                if(i != 0) {
-                    byte[] partData = Arrays.copyOfRange(fileBytes, 0, i);
-                    parts.add(partData);                
-                    fileBytes = Arrays.copyOfRange(fileBytes, i, fileBytes.length);    
-                }
-            }
-        }
-        return parts;
-    }
-
-    /**
-     * Find sequence index
-     * @param fileBytes
-     * @param sequence
-     * @return
-     */
-    public int findSequenceIndex(byte[] fileBytes, byte[] sequence) {
-        for (int i = 0; i <= fileBytes.length - sequence.length; i++) {
-            if (Arrays.equals(Arrays.copyOfRange(fileBytes, i, i + sequence.length), sequence)) {
-                return i;
-            }
-        }
-        return -1;
-    }
-    
     /**
      * Extract value matching with keys
      * @param header
@@ -276,128 +222,190 @@ public class HttpRequestStream {
     }
 
     /**
-     * Read length bytes
-     * @param length
+     * Convert numeric list to bytes
+     * @param numericList
      * @return
-     * @throws IOException
-    public byte[] readLength(int length) throws IOException {
-        if(length == 0) {
-            return new byte[0];
+     */
+    public byte[] convertToBytes(List<? extends Number> numericList) {
+       byte[] byteArray = new byte[numericList.size()];
+       for (int i = 0; i < numericList.size(); i++) {
+           byteArray[i] = numericList.get(i).byteValue();
+       }
+       return byteArray;        
+    }
+
+    /**
+     * Extract filename from part header
+     * @param headers
+     * @return
+     */
+    private String extractFileNameFromHeaders(String headers) {
+        Pattern pattern = Pattern.compile("filename=\"(.*?)\"");
+        Matcher matcher = pattern.matcher(headers);
+        if (matcher.find()) {
+            return matcher.group(1); // Return filename from Content-Disposition header
         }
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        int read;
-        while((read=inputStream.read()) != -1) {
-            buffer.write(read);
-            if(buffer.size() >= length) {
-                break;
-            }
-        }    
-        return buffer.toByteArray();
+        return null;
     }
-     */
 
     /**
-     * Read line from stream
+     * Read part data by sing content length
+     * @param boundary
+     * @param contentLengh
      * @param charset
      * @return
      * @throws IOException
-    public String readRequestLine(Charset charset) throws IOException {
-        StringBuilder sb = new StringBuilder();
-        int c =  -1;
-        while ((c = this.inputStream.read()) != -1 && c != '\r' && c != '\n') {
-            char character = (char) c;
-            sb.append(character);
-        };        
-        String line = sb.toString().trim();
-        return line;
-    }
      */
-
-    /**
-     * Read lines
-     * @param charset
-     * @return
-     * @throws IOException
-    public List<String> readLines(Charset charset) throws IOException {
-        List<String> lines = new ArrayList<>();
-        String line;
-        while((line=readLine(charset)) != null) {
-            lines.add(line);
+    public Map<String, byte[]> readPartData(String boundary, long contentLengh, Charset charset) throws IOException {
+        String boundaryStart = "--"+boundary;
+        String boundaryEnd = "--"+boundary+"--";
+        byte[] data;
+        if(bufferSize < boundaryEnd.getBytes().length) {
+            throw new LeapException(HTTP.RES500, "Socket buffer size cannot be less then: "+boundaryEnd.getBytes().length+" bytes");
         }
-        return lines;
+        try( ByteArrayOutputStream byteStream = new ByteArrayOutputStream() ) {
+            byte[] buffer = new byte[bufferSize];
+            int bytesRead;
+            while (byteStream.size() < contentLengh && (bytesRead = inputStream.read(buffer)) != -1) {
+                byteStream.write(buffer, 0, bytesRead);
+            }    
+            data = byteStream.toByteArray();
+        }
+        return makePartdata(data, boundaryStart);
     }
-     */
 
     /**
-     * Read line
+     * Read Multipart request
+     * @param boundary
      * @param charset
      * @return
      * @throws IOException
-    public String readLine(Charset charset) throws IOException {
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        int c = this.inputStream.read();
-        do {
-            out.write(c);
-        } while((c=this.inputStream.read()) != -1 && c != '\n');
-        byte[] data = out.toByteArray();
-        return data.length < 2 ? null : new String(Arrays.copyOf(data, data.length-1), charset);
-    }
      */
+    public Map<String, byte[]> readPartData(String boundary, int contentLength, Charset charset) throws IOException {        
+        String boundaryStart = "--"+boundary;        
+        String boundaryEnd = "--"+boundary+"--";
+        byte[] data;
+        if(bufferSize < boundaryEnd.getBytes().length) {
+            throw new LeapException(HTTP.RES500, "Socket buffer size cannot be less then: "+boundaryEnd.getBytes().length+" bytes");
+        }
+        //Read and load whole request data into byte stream object.
+        try( ByteArrayOutputStream byteStream = new ByteArrayOutputStream() ) {
+            byte[] buffer = new byte[bufferSize];
+            int bytesRead;
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                byteStream.write(buffer, 0, bytesRead);            
+                //Escape loop when it reaches to content length.    
+                if(byteStream.size() >= contentLength) {                    
+                    break;
+                }
+            }    
+            data = byteStream.toByteArray();
+        }
+        //Make the parts of Multipart reuqest.
+        return makePartdata(data, boundaryStart);
+    }
 
     /**
-     * Read line from stream
-     * @param is
-     * @param charset
+     * Make part data using boundary start string with bytes multipart data
+     * @param data
+     * @param boundaryStart
      * @return
-     * @throws IOException
-    public String readLine(Reader is, Charset charset) throws IOException {
-        int c, n = 0x00;
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        do {
-            c = is.read();
-            //CR
-            if(c == 0x0A && n == 0x0D && baos.size() != 0) {
-                break;
-            }
-            baos.write(c);
-            n = c;
-        } while(c != -1 || c == 0x1A);
-        return new String(baos.toByteArray(), charset).trim();
-    }
      */
-
-    /**
-     * Read request lines
-     * @param charset
-     * @return
-     * @throws IOException
-    public List<String> readHeaders(Charset charset) throws IOException {
-        StringBuffer allLines = new StringBuffer();
-        int c = -1;
-        while((c = this.inputStream.read()) != -1) {
-            allLines.append((char) c);
-            if(allLines.indexOf("\r\n\r\n") != -1) {
-                break;
+    private Map<String, byte[]> makePartdata(byte[] data, String boundaryStart) {
+        Map<String, byte[]> partMap = new HashMap<>();        
+        //Split the whole request data chunk to seprate parts. it's gonna be splited with boundary start string value.
+        List<byte[]> parts = splitBySequence(data, boundaryStart);        
+        for(byte[] part : parts) {
+            //Finding index of part data starting point in the byes of part header and part data.
+            int idx = findSequenceIndex(part, CRLF2.getBytes()) + CRLF2.getBytes().length;
+            String head = new String(Arrays.copyOf(part, idx));
+            byte[] partData = Arrays.copyOfRange(part, idx, part.length);
+            Map<String, String> fieldMap = extractFields(head, List.of("name", "filename"));
+            if(fieldMap.containsKey("filename")) {                
+                partMap.put(fieldMap.get("filename"), partData);
+            } else if (fieldMap.containsKey("name") && !fieldMap.containsKey("filename")) {
+                partMap.put(fieldMap.get("name"), partData);
             }
         }        
-        return Arrays.asList(allLines.toString().split("\n")).stream().filter(l -> !l.trim().equals("")).collect(Collectors.toList());
+        return partMap;
     }
-     */
 
     /**
+     * Splie bytes by bytes sequence
+     * @param fileBytes
+     * @param sequence
+     * @return
+     */
+    private List<byte[]> splitBySequence(byte[] fileBytes, String boundaryStart) {
+        byte[] boundaryStartBytes = boundaryStart.getBytes();
+        byte[] boundaryEndBytes = ("--"+boundaryStart+"--").getBytes();
+        List<byte[]> parts = new ArrayList<>();
+        int preIdx = 0;
+        for (int i = 0; i <= fileBytes.length; i++) {
+            final int idx = i;
+            //the condition of matching bytes of both of start and end boundary with 'or' condition.
+            if (Arrays.equals(Arrays.copyOfRange(fileBytes, idx, idx + boundaryStartBytes.length), boundaryStartBytes) 
+                || Arrays.equals(Arrays.copyOfRange(fileBytes, idx, idx + boundaryEndBytes.length), boundaryEndBytes)) {
+                if(i != 0) {                    
+                    //Copy part data into part bytes. though i is start of boundary, to make i index minus CRLF length.
+                    byte[] partData = Arrays.copyOfRange(fileBytes, preIdx, i - CRLF.getBytes().length);
+                    parts.add(partData);
+                    preIdx = i;                    
+                }
+            }
+        }
+        return parts;
+    }
+
+    /**
+     * Find sequence index
+     * @param fileBytes
+     * @param sequence
+     * @return
+     */
+    private int findSequenceIndex(byte[] fileBytes, byte[] sequence) {
+        for (int i = 0; i <= fileBytes.length - sequence.length; i++) {
+            if (Arrays.equals(Arrays.copyOfRange(fileBytes, i, i + sequence.length), sequence)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Save multipart files to directory
+     * @param saveDir
+     * @param boundary
+     * @param charset
+     * @return
+     * @throws IOException
+     */
+    public List<Path> saveMultiPart(Path saveDir, String boundary, int contentLengh, Charset charset) throws IOException {        
+        Map<String, byte[]> parts = readPartData(boundary, contentLengh, charset);
+        return parts.entrySet().stream().map(e -> {
+            try {
+                return Files.write(saveDir.resolve(e.getKey()), e.getValue());
+            } catch (IOException e1) {
+                throw new RuntimeException(e1);
+            }
+        }).collect(Collectors.toList());
+    }
+
+     /**
      * Get multipart contents
      * @param boundary
      * @param charset
      * @return
      * @throws IOException
     public Map<String, byte[]> getMultiPartContents(String boundary, Charset charset) throws IOException {                
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-        //HttpParser.printRequest(reader);
         Map<String, byte[]> multiPartMap = new HashMap<>();
         String boundaryStart = "--"+boundary;
         String boundaryEnd = "--"+boundaryStart+"--";
         String line;
-        while((line = reader.readLine()) != null) {
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        byte[] buffer = new byte[bufferSize];
+        int len;
+        while((len = inputStream.read(buffer)) != -1) {            
             System.out.println(line);
             if(line != null && line.trim().startsWith(boundaryStart)) {
                 String contentDisposition = readLine(reader, charset); 
@@ -444,6 +452,106 @@ public class HttpRequestStream {
         return multiPartMap;
     }
      */
+
+    /**
+     * Read line from stream
+     * @param is
+     * @param charset
+     * @return
+     * @throws IOException
+     */
+    public String readLine(Reader is, Charset charset) throws IOException {
+        int c, n = 0x00;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        do {
+            c = is.read();
+            //CR
+            if(c == 0x0A && n == 0x0D && baos.size() != 0) {
+                break;
+            }
+            baos.write(c);
+            n = c;
+        } while(c != -1 || c == 0x1A);
+        return new String(baos.toByteArray(), charset).trim();
+    }
+
+    /**
+     * Read line
+     * @param charset
+     * @return
+     * @throws IOException
+    public String readLine(Charset charset) throws IOException {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        int c = this.inputStream.read();
+        do {
+            out.write(c);
+        } while((c=this.inputStream.read()) != -1 && c != '\n');
+        byte[] data = out.toByteArray();
+        return data.length < 2 ? null : new String(Arrays.copyOf(data, data.length-1), charset);
+    }
+     */
+
+    /**
+     * Save multipart
+     * @param saveDir
+     * @param boundary
+     * @return
+     * @throws IOException
+     */
+    public List<Path> saveMultiPart1(Path saveDir, long contentLength, String boundary) throws IOException {
+        String boundaryStart = "--"+boundary;        
+        String boundaryEnd = boundary+"--";
+        List<Path> paths = new ArrayList<>();
+        BufferedReader br = new BufferedReader(new InputStreamReader(this.inputStream));
+        String line;
+        long total = 0;
+        while((line = br.readLine()) != null && total < contentLength) {
+            total += line.getBytes().length + 2;
+            if(line.equals(boundaryStart) || line.startsWith("Content-Disposition")) {
+                String header = line.equals(boundaryStart) ? "" : line;
+                while(!(line = br.readLine()).equals("")) {
+                    total += line.getBytes().length + 2;
+                    header += line + System.lineSeparator();
+                }
+                Map<String, String> fields = extractFields(header, List.of("name", "filename"));
+                String filename = fields.get("filename") != null ? fields.get("filename") : fields.get("name");
+                Path dest = saveDir.resolve(filename);                
+                FileOutputStream fos = new FileOutputStream(dest.toFile());
+                ArrayList<Integer> queue = new ArrayList<>();
+                int ch;
+                while((ch = br.read()) != -1) {
+                    queue.add(ch);
+                    total++;        
+                    if(queue.size() > 1) {
+                        if(queue.get(queue.size()-2) == '\r' && queue.get(queue.size()-1) == '\n') {
+                            if(queue.size() > boundaryStart.getBytes().length) {
+                                String end = new String(convertToBytes(queue.subList(queue.size() - boundaryStart.getBytes().length -2, queue.size()-2)));
+                                if(end.equals(boundaryStart) || end.equals(boundaryEnd)) {
+                                    //System.out.println(end);
+                                    int idx = end.equals(boundaryStart) ? boundaryStart.getBytes().length + 4 : boundaryEnd.getBytes().length + 8;
+                                    byte[] sourceData = Files.readAllBytes(Paths.get("/home/kooin/Documents/Resume/시니어 풀스택 개발자 _ 엔지니어 - 신구인-20240919.docx"));
+                                    byte[] partData = convertToBytes(queue.subList(0, queue.size() - idx)); 
+                                    //System.out.println(new String(partData));                                    
+                                    fos.write(partData);
+                                    if(end.equals(boundaryEnd)) {
+                                        line = boundaryEnd;
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                } 
+                queue.clear();
+                fos.close();                                                
+                paths.add(dest);
+            }
+            if(line.equals(boundaryEnd)) {
+                break;
+            }
+        }            
+        return paths;
+    }
 
     /**
      * Save multipart contents
@@ -503,7 +611,7 @@ public class HttpRequestStream {
                             out.write(lineData);
                             baos.reset();
                         }
-                        if(baos.size() >= BUFFER_SIZE && BUFFER_SIZE > Constants.MULTIPART_FLUSH_MINIMAL_SIZE) {
+                        if(baos.size() >= bufferSize && bufferSize > Constants.MULTIPART_FLUSH_MINIMAL_SIZE) {
                             byte[] data = baos.toByteArray();
                             if(data[data.length-1] != 0x0A && data[data.length-2] != 0x0D) {
                                 out.write(data);
@@ -530,67 +638,6 @@ public class HttpRequestStream {
         } while(!isLast);
         return savedFiles;
     }    
-     */
-
-    /**
-     * Save multipart to local path
-     * @param savePath
-     * @param bufferSize
-     * @param boundary
-     * @param charset
-     * @throws IOException
-     * @throws LeapException
-    private void saveMultiPart1(Path savePath, String boundary, Charset charset) throws IOException {            
-        if(inputStream != null) {
-            InputStreamReader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
-            boundary = "--"+boundary;
-            String endCondition = boundary+"--";
-            String line = readLine(reader, StandardCharsets.UTF_8);
-            do {
-                if((boundary).endsWith(line)) {
-                    String contentDesposition = readLine(reader, charset);
-                    String contentType =  readLine(reader, charset);
-                    String empty = readLine(reader, charset);
-                    int idx = contentDesposition.indexOf("filename");
-                    String filename = null;
-                    if(idx != -1) {
-                        filename = contentDesposition.substring(idx);
-                        filename = filename.substring(filename.indexOf("\"")+1);
-                        filename = filename.substring(0, filename.indexOf("\""));
-                    }
-                    FileOutputStream fos = new FileOutputStream(savePath.resolve(filename).toFile());
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream(BUFFER_SIZE);
-                    byte[] buffer = new byte[BUFFER_SIZE];
-                    int c, n = 0x00;
-                    line = "";
-                    do {
-                        c = inputStream.read();
-                        if(c == 0x0A && n == 0x0D) {
-                            if(boundary.equals(line.trim()) || line.trim().equals(endCondition)) {
-                                //System.out.println(line.equals(boundary));
-                                line = line.trim();
-                                break;
-                            }
-                            fos.write(baos.toByteArray());
-                            baos.reset();
-                            line = "";
-                        } else {
-                            line += (char)c;
-                        }
-                        baos.write(c);
-                        n = c;      
-                    } while(c != -1);
-                    fos.close();
-                    //System.out.println("############ saving to file");
-                    if(line.trim().equals(endCondition)) {
-                        //System.out.println(line+"     "+endCondition);
-                        break;
-                    }
-                }                        
-                //System.out.println("0."+line.trim());
-            } while(true);
-        }
-    }
      */
 }
 

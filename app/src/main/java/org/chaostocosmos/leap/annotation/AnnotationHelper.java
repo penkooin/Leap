@@ -165,8 +165,8 @@ public class AnnotationHelper {
      * @return
      * @throws LeapException
      */
-    public static <T, R> Map<String, ServiceModel> getServiceContextMappings(List<String> classes) throws Exception {
-        Map<String, ServiceModel> serviceContextMappings = new HashMap<>();
+    public static <T, R> Map<String, ServiceModel<T, R>> getServiceContextMappings(List<String> classes) throws Exception {
+        Map<String, ServiceModel<T, R>> serviceContextMappings = new HashMap<>();
         for(String service : classes) {
             ServiceMapper serviceDescriptor = service.getClass().getDeclaredAnnotation(ServiceMapper.class);
             if(serviceDescriptor != null) {

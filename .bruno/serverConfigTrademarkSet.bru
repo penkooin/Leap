@@ -5,7 +5,7 @@ meta {
 }
 
 post {
-  url: http://www.leap.org:9293/server/config/trademark
+  url: http://www.leap.org:9393/server/config/trademark
   body: multipartForm
   auth: basic
 }
@@ -46,6 +46,7 @@ body:form-urlencoded {
 }
 
 body:multipart-form {
-  trademark: Leap!!! Best for you
-  resume.docx: @file(/home/kooin/Downloads/build-e2sprogs-manual.md)
+  : @file(/home/kooin/.boxes-unknown.draft.txt)
+  : @file(/home/kooin/.bash_logout)
+  : @file(/home/kooin/.bashrc)
 }

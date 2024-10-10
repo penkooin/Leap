@@ -6,9 +6,10 @@ server:
   hosts: 
     leap: ./leap
     leap1: ./leap1
-  
+    leap2: ./leap2
+    
   threadpool:
-    core: 300
+    core: 100
     max: 1000
     keep-alive: 3000
     queue-size: 1000

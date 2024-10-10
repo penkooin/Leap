@@ -117,6 +117,20 @@ public class Leap implements MetaListener {
         }
         Context.get().addContextListener(this);
 
+        //Check between host in server.yml and hosts.yml
+        String[] hosts = Context.get().server().getHosts().keySet().toArray(String[]::new);
+        for(int i=0; i<hosts.length; i++) {
+            String h = hosts[i];
+            for(int j=0; j<hosts.length; j++) {
+                if(i != j && h.equals(hosts[j])) {
+                    throw new RuntimeException("The same host instance is configured in configuration. Host: "+h);
+                }
+            }
+            if(!Context.get().hosts().getHosts().stream().anyMatch(ho -> ho.getId().equals(h))) {
+                throw new RuntimeException("Server configured host: "+h+" is not exist in hosts configuration!!!");
+            }
+        }
+
         //set log level
         String optionL = cmdLine.getOptionValue("l");        
         Logger logger = LoggerFactory.getLogger(Context.get().server().getId());
@@ -155,24 +169,27 @@ public class Leap implements MetaListener {
         if(Context.get().server().isSupportSpringJPA()) {
             jpaManager = SpringJPAManager.get();
         }
-        // initialize resource manager                
-        resourceProvider = ResourceProvider.get();
-        resourceProvider.startWatchers();
 
         // initialize Leap hosts
-        for(Host<?> host : Context.get().allHost()) {
+        for(String hostName : Context.get().server().getHosts().keySet()) {            
+            Host<?> host = Context.get().host(hostName);
+
+            //Add static contents path for host to ResourceProvider
+            ResourceProvider.get().addPath(host.getDocroot());
+
             // set host server status to NONE
             host.setHostStatus(STATUS.NONE);
             InetAddress hostAddress = InetAddress.getByName(host.getHost());
-            String hostName = hostAddress.getHostAddress()+":"+host.getPort();
-            if(leapServerMap.containsKey(hostName)) {
-                String key = leapServerMap.keySet().stream().filter(k -> k.equals(hostName)).findAny().get();
-                throw new IllegalArgumentException("Mapping host address is collapse on network interace: "+hostAddress.toString()+":"+host.getPort()+" with "+key);
+            String hostPort = hostAddress.getHostAddress()+":"+host.getPort();
+            if(leapServerMap.containsKey(hostPort)) {
+                String key = leapServerMap.keySet().stream().filter(k -> k.equals(hostPort)).findAny().get();
+                throw new IllegalArgumentException("Mapping host address is collapsing on network interace: "+hostAddress.toString()+":"+host.getPort()+" with "+key);
             }
             LeapServer server = new LeapServer(Context.get().getHome(), host);
             leapServerMap.put(hostAddress.getHostAddress()+":"+host.getPort(), server);
             LoggerFactory.getLogger().info("[HOST:"+hostAddress.getHostAddress()+":"+host.getPort()+"] - Protocol: "+host.getProtocol()+"   Server: "+host.getId()+"   Host: "+host.getHost()+"   Port: "+host.getPort()+"   Home: "+host.getDocroot()+"   Logging path: "+host.getLogPath()+"   Level: "+host.getLogLevel().toString());                
         }
+
         LoggerFactory.getLogger().info("----------------------------------------------------------------------------------------------------");        
         for(LeapServer server : leapServerMap.values()) {
             server.setDaemon(false);

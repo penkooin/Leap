@@ -27,31 +27,40 @@ public enum SIZE {
 
     /**
      * Get amount by default fraction point
-     * @param amount
+     * @param byteSize
      * @return
      */
-    public double get(long amount) {
-        return get(amount, Constants.DEFAULT_FRACTION_POINT);
+    public double get(long byteSize) {
+        return get(byteSize, Constants.DEFAULT_FRACTION_POINT);
     }
 
     /**
      * Get amount with specified fraction point
-     * @param amount
+     * @param byteSize
      * @param decimalPoint
      * @return
      */
-    public double get(long amount, int decimalPoint) {
-        return get((double)amount, decimalPoint);
+    public double get(long byteSize, int decimalPoint) {
+        return get((double)byteSize, decimalPoint);
     }
 
     /**
      * Get amount with specified fraction point
-     * @param amount
+     * @param byteSize
      * @param decimalPoint
      * @return
      */
-    public double get(double amount, int decimalPoint) {
-        return Math.round((amount / (double)this.size) * Math.pow(10, decimalPoint)) / Math.pow(10, decimalPoint);
+    public double get(double byteSize, int decimalPoint) {
+        return Math.round((byteSize / (double)this.size) * Math.pow(10, decimalPoint)) / Math.pow(10, decimalPoint);
+    }
+
+    /**
+     * Get amount with unit string 
+     * @param byteSize
+     * @return
+     */
+    public String getWithUnit(long byteSize) {
+        return get(byteSize) + " " + this.name();
     }
 
     /**

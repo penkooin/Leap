@@ -31,11 +31,6 @@ public class SessionIDGenerator {
     private Random random = new SecureRandom();
 
     /**
-     * MessageDigest object
-     */
-    private MessageDigest messageDigest;
-
-    /**
      * Session ID generator
      */
     private static SessionIDGenerator sessionIDGenerator;
@@ -114,18 +109,19 @@ public class SessionIDGenerator {
      * @return
      */
     private MessageDigest getMessageDigest(String algorithm) {
-        if(this.messageDigest == null) {
+        MessageDigest messageDigest = null;
+        try {
+            messageDigest = MessageDigest.getInstance(algorithm);
+        } catch (NoSuchAlgorithmException e) {
             try {
-                this.messageDigest = MessageDigest.getInstance(algorithm);
-            } catch (NoSuchAlgorithmException e) {
-                try {
-                    this.messageDigest = MessageDigest.getInstance(DEFAULT_ALGORITHM);
-                } catch (NoSuchAlgorithmException e1) {
-                    throw new IllegalStateException("Cannot create MessageDigest for specified algorithm");
-                }
+                messageDigest = MessageDigest.getInstance(DEFAULT_ALGORITHM);
+            } catch (NoSuchAlgorithmException e1) {
+                throw new IllegalStateException("Cannot create MessageDigest for specified algorithm");
             }
+        } catch (Exception e) {
+            throw new RuntimeException("There is something wrong in getting MessageDigest", e);
         }
-        return this.messageDigest;
+        return messageDigest;
     }
 
     /**

@@ -111,4 +111,10 @@ public interface ResourcesWatcherModel extends Runnable {
      * Terminate resource watcher
      */
     public void terminate() throws Exception;
+
+    /**
+     * Start resource watcher 
+     * @throws Exception
+     */
+    public void start() throws Exception;
 }

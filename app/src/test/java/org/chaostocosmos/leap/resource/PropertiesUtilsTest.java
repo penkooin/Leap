@@ -22,7 +22,7 @@ public class PropertiesUtilsTest {
 
     @Test
     public void testLoadConfig() throws URISyntaxException, NotSupportedException, IOException {
-        Path configPath = Paths.get(getClass().getResource("resource-provider.yml").toURI());
+        Path configPath = Paths.get(getClass().getResource("resource.yml").toURI());
         Map<String, Object> prop = ConfigUtils.loadConfig(configPath);
         System.out.println(prop.toString());
     }

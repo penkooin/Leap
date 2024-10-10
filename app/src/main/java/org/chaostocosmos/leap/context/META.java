@@ -17,7 +17,7 @@ import javax.transaction.NotSupportedException;
 import org.chaostocosmos.leap.common.data.DataStructureOpr;
 import org.chaostocosmos.leap.common.log.LoggerFactory;
 import org.chaostocosmos.leap.enums.WAR_PATH;
-import org.chaostocosmos.leap.resource.config.ResourceProviderConfig;
+import org.chaostocosmos.leap.resource.config.ResourceConfig;
 import org.yaml.snakeyaml.Yaml;
 
 import com.google.gson.Gson;
@@ -33,7 +33,7 @@ public enum META {
     MESSAGE(Context.get().getHome().resolve(WAR_PATH.CONFIG.path()).resolve("message.yml")),
     MIME(Context.get().getHome().resolve(WAR_PATH.CONFIG.path()).resolve("mime.yml")),
     MONITOR(Context.get().getHome().resolve(WAR_PATH.CONFIG.path()).resolve("monitor.yml")),
-    RESOURCE(Context.get().getHome().resolve(WAR_PATH.CONFIG.path()).resolve("resource-provider.yml")),
+    RESOURCE(Context.get().getHome().resolve(WAR_PATH.CONFIG.path()).resolve("resource.yml")),
     TRADEMARK(Context.get().getHome().resolve(WAR_PATH.CONFIG.path()).resolve("trademark"));
 
     Path metaPath;
@@ -103,7 +103,7 @@ public enum META {
         } else if(super.name().equals("MONITOR")) {
             return new Monitor<Map<String, Object>>(this.metaMap);
         } else if(super.name().equals("RESOURCE")) {
-            return new ResourceProviderConfig<Map<String, Object>>(this.metaMap);
+            return new ResourceConfig<Map<String, Object>>(this.metaMap);
         } else if(super.name().equals("TRADEMARK")) {
             return new Trademark<Map<String, Object>>(this.metaMap);
         } else {

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.chaostocosmos.leap.common.enums.SIZE;
 import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.MIME;
@@ -78,14 +79,13 @@ public class MultiPart extends AbstractPart<Map<String, byte[]>> {
     @Override
     public Map<String, byte[]> getBody() throws IOException {
         if(super.body == null) {
-            super.body = super.requestStream.readPartData(this.boundary, super.host.charset(), this.host.<Integer> getValue("network.receive-buffer-size"));
+            super.body = super.requestStream.readPartData(this.boundary, (int) this.contentLength, super.host.charset());
         }
         return super.body;
     }
 
     @Override
     public void saveTo(Path targetDir, boolean isDirect) throws Exception {
-        System.out.println(contentType+" "+MIME.MULTIPART_FORM_DATA);
         if(contentType != MIME.MULTIPART_FORM_DATA && contentType != MIME.MULTIPART_BYTERANGES) {
             throw new LeapException(HTTP.RES406, "Can not save content. Not supported on Multi Part Operation.");
         }        
@@ -106,9 +106,9 @@ public class MultiPart extends AbstractPart<Map<String, byte[]>> {
                 }
             });
         } else {
-            //this.filePaths = super.requestStream.saveMultiPart(targetDir, this.boundary, Charset.forName(super.host.charset()));    
+            this.filePaths = super.requestStream.saveMultiPart(targetDir, this.boundary, (int) this.contentLength, this.charset);    
         }
-        super.logger.debug("[MULTI-PART] "+super.contentType.name()+" saved: "+targetDir.normalize().toString()+"  Size: "+filePaths.stream().map(p -> p.toFile()).map(f -> f.getName()+": "+f.length()).collect(Collectors.joining(", ")));
+        this.filePaths.stream().forEach(p -> super.logger.debug("[MULTI-PART] "+super.contentType.name()+" saved: "+p.toAbsolutePath().normalize().toString()+"  Size: "+ SIZE.MB.getWithUnit(p.toFile().length())));                
     }    
 
     @Override 

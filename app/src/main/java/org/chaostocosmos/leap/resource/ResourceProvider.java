@@ -1,24 +1,21 @@
 package org.chaostocosmos.leap.resource;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchEvent.Kind;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
-import javax.transaction.NotSupportedException;
-
+import org.chaostocosmos.leap.common.log.LoggerFactory;
 import org.chaostocosmos.leap.context.META;
-import org.chaostocosmos.leap.resource.config.ConfigUtils;
-import org.chaostocosmos.leap.resource.config.ResourceProviderConfig;
+import org.chaostocosmos.leap.resource.config.ResourceConfig;
 import org.chaostocosmos.leap.resource.filter.ResourceFilter;
 import org.chaostocosmos.leap.resource.model.ResourcesWatcherModel;
+import org.chaostocosmos.leap.resource.utils.ResourceUtils;
 
 /**
  * StaticResourceManager
@@ -28,60 +25,18 @@ import org.chaostocosmos.leap.resource.model.ResourcesWatcherModel;
 public class ResourceProvider {
 
     /**
-     * WatchResource object Map by Hosts
-     */
-    Map<String, ResourcesWatcherModel> resourceWatcherMap = new HashMap<>();
-
-    /**
      * Resource provider configuration Map
      */
-    ResourceProviderConfig<?> config;
-
-    private static ResourceProvider resourceProvider = null;
+    ResourceConfig<?> config = new ResourceConfig<>(ResourceUtils.loadConfig(META.RESOURCE.getMetaPath()));
 
     /**
-     * Get Resource Provider instance
-     * @return
-     * @throws IOException
-     * @throws NotSupportedException
+     * WatchResource object Map by Hosts
      */
-    public static ResourceProvider get() throws IOException, NotSupportedException {
-        if(resourceProvider == null) {
-            resourceProvider = new ResourceProvider(META.RESOURCE.getMetaPath());
-        }
-        return resourceProvider;
-    }
-
-    /**
-     * Constructs with config Path
-     * @param configPath
-     * @throws IOException
-     * @throws NotSupportedException 
-     */
-    private ResourceProvider(Path configPath) throws IOException, NotSupportedException {
-        this(ConfigUtils.loadConfig(configPath));
-    }
-
-    /**
-     * Constructs with config Map
-     * @param configMap
-     */
-    private ResourceProvider(Map<String, Object> configMap) {
-        this(new ResourceProviderConfig<Map<String, Object>> (configMap));
-    }
-
-    /**
-     * Constructs with config object
-     * @param config
-     */
-    private ResourceProvider(ResourceProviderConfig<Map<String, Object>> config) {
-        this.config = config;
-        this.resourceWatcherMap = this.config.getWatchRoots()
-                                             .entrySet()
-                                             .stream()
-                                             .map(e -> {
-                                                    String watchId = e.getKey();
-                                                    Path rootPath = Paths.get(e.getValue());
+    Map<Path, ResourcesWatcherModel> resourceWatcherMap = 
+                                     this.config.getWatchRoots()
+                                                .stream()
+                                                .map(p -> {                                                    
+                                                    Path rootPath = Paths.get(p);
                                                     WatchEvent.Kind<?>[] kinds = getWatchEventKind(config.getWatchKind());
                                                     ResourceFilter accessFiltering = new ResourceFilter(config.getAccessFilters());
                                                     ResourceFilter inMemoryFiltering = new ResourceFilter(config.getInMemoryFilters());
@@ -90,29 +45,113 @@ public class ResourceProvider {
                                                     int fileReadBufferSize = config.getFileReadBufferSize();
                                                     int fileWriteBufferSize = config.getFileWriteBufferSize();
                                                     long totalMemorySizeLimit = config.getTotalMemorySizeLimit();
-                                                    return new Object[] {watchId, new ResourceWatcher(watchId, 
-                                                                                                      rootPath, 
-                                                                                                      kinds, 
-                                                                                                      accessFiltering, 
-                                                                                                      inMemoryFiltering, 
-                                                                                                      inMemorySplitUnit, 
-                                                                                                      fileSizeLimit, 
-                                                                                                      fileReadBufferSize, 
-                                                                                                      fileWriteBufferSize, 
-                                                                                                      totalMemorySizeLimit)};
-        }).collect(Collectors.toMap(k -> (String)k[0], v -> (ResourceWatcher)v[1]));
+                                                    return new Object[]{rootPath, new ResourceWatcher(
+                                                                        rootPath, 
+                                                                        kinds, 
+                                                                        accessFiltering, 
+                                                                        inMemoryFiltering, 
+                                                                        inMemorySplitUnit, 
+                                                                        fileSizeLimit, 
+                                                                        fileReadBufferSize, 
+                                                                        fileWriteBufferSize, 
+                                                                        totalMemorySizeLimit)};
+                                                }).collect(Collectors.toMap(k -> (Path) k[0], v -> (ResourceWatcher) v[1]));
+
+    /**
+     * ResourceProvider object
+     */
+    private static ResourceProvider resourceProvider = null;
+
+    /**
+     * Get Resource Provider instance
+     * @return
+     */
+    public static ResourceProvider get() {
+        if(resourceProvider == null) {
+            resourceProvider = new ResourceProvider();
+        }
+        return resourceProvider;
+    }
+
+    /**
+     * Default constructur
+     */
+    private ResourceProvider() {        
+    }
+
+    /**
+     * Constructs with config Path
+     * @param watchConfigPath
+     */
+    private ResourceProvider(Path watchConfigPath) {
+        this(ResourceUtils.loadConfig(watchConfigPath));
+    }
+
+    /**
+     * Constructs with config Map
+     * @param configMap
+     */
+    private ResourceProvider(Map<String, Object> configMap) {
+        this(new ResourceConfig<Map<String, Object>> (configMap));
+    }
+
+    /**
+     * Constructs with config object
+     * @param config
+     */
+    private ResourceProvider(ResourceConfig<Map<String, Object>> config) {
+        this.config = config;
     }
 
     /**
      * Get static WatchResource object
-     * @param watcherId
+     * @param watchPath
      * @return
      */
-    public ResourcesWatcherModel get(String watcherId) {
-        if(!resourceWatcherMap.containsKey(watcherId)) {
-            throw new RuntimeException("There is no ResourceWatcher matching with specified watcher ID: "+watcherId);
+    public ResourcesWatcherModel get(Path watchPath) {
+        if(!resourceWatcherMap.containsKey(watchPath)) {
+            throw new RuntimeException("There is no ResourceWatcher matching with specified watcher ID: " + watchPath);
         }
-        return resourceWatcherMap.get(watcherId);
+        return resourceWatcherMap.get(watchPath);
+    }
+
+    /**
+     * Add Resource Watcher with specfic Path
+     * @param watchPath
+     * @return
+     */
+    private ResourcesWatcherModel createResourceWatcher(Path watchPath) {
+        if(!this.resourceWatcherMap.containsKey(watchPath) ) {
+            this.config.getWatchRoots().add(watchPath.toString());
+            WatchEvent.Kind<?>[] kinds = getWatchEventKind(config.getWatchKind());
+            ResourceFilter accessFiltering = new ResourceFilter(config.getAccessFilters());
+            ResourceFilter inMemoryFiltering = new ResourceFilter(config.getInMemoryFilters());
+            int inMemorySplitUnit = config.getSplitUnitSize();
+            int fileSizeLimit = config.getFileSizeLimit();
+            int fileReadBufferSize = config.getFileReadBufferSize();
+            int fileWriteBufferSize = config.getFileWriteBufferSize();
+            long totalMemorySizeLimit = config.getTotalMemorySizeLimit();
+            ResourceWatcher resourceWatcher = new ResourceWatcher(watchPath, kinds, accessFiltering, inMemoryFiltering, inMemorySplitUnit, fileSizeLimit, fileReadBufferSize, fileWriteBufferSize, totalMemorySizeLimit);
+            this.resourceWatcherMap.put(watchPath, resourceWatcher);            
+        }
+        return this.resourceWatcherMap.get(watchPath);
+    }
+
+    /**
+     * Add specific Path to watch resource if privous watcher is not exist, creating new one.
+     * @param watchPath
+     * @return
+     * @throws Exception
+     */
+    public boolean addPath(Path watchPath) throws Exception {
+        if(this.resourceWatcherMap.containsKey(watchPath)) {
+            return false;
+            //throw new IllegalArgumentException("Specified Path is already applied. Path: "+watchPath.toAbsolutePath());
+        }
+        ResourcesWatcherModel watcher = createResourceWatcher(watchPath);
+        watcher.start();
+        this.resourceWatcherMap.put(watchPath, watcher);
+        return true;        
     }
 
     /**
@@ -138,29 +177,41 @@ public class ResourceProvider {
 
     /**
      * Get Resource object for host
-     * @param hostId
+     * @param watchPath
      * @return
      */
-    public ResourcesWatcherModel getResource(String hostId) {
-        return this.resourceWatcherMap.get(hostId);
+    public ResourcesWatcherModel getResource(Path watchPath) {
+        return this.resourceWatcherMap.get(watchPath);
     }
 
     /**
      * Get Resources Map
      * @return
      */
-    public Map<String, ResourcesWatcherModel> getResourceWatcherMap() {
+    public Map<Path, ResourcesWatcherModel> getResourceWatcherMap() {
         return this.resourceWatcherMap;
     } 
 
     /**
      * Start all resource watcher
+     * @throws Exception 
      */
-    public void startWatchers() {
-        for(Entry<String, ResourcesWatcherModel> e : this.resourceWatcherMap.entrySet()) {
-            Thread thr = new Thread(e.getValue());
-            thr.start();
+    public void startWatchers() throws Exception {
+        for(Entry<Path, ResourcesWatcherModel> e : this.resourceWatcherMap.entrySet()) {
+            e.getValue().start();
+            LoggerFactory.getLogger().info("START RESOURCE WATCHER ---------- PATH: "+e.getKey().toAbsolutePath());
         }
+    }
+
+    public void restartWatch(Path watchPath) throws Exception {
+        ResourcesWatcherModel watcher = null;
+        if(this.resourceWatcherMap.containsKey(watchPath)) {
+            watcher = this.resourceWatcherMap.get(watchPath);
+            watcher.terminate();
+        } else {
+            watcher = createResourceWatcher(watchPath);
+        }
+        watcher.start();
     }
 
     /**

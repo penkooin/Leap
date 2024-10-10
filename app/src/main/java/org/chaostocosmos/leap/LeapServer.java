@@ -112,7 +112,7 @@ public class LeapServer extends Thread {
     /**
      * servlet loading & managing
      */
-    ServiceManager serviceManager;
+    ServiceManager<?, ?> serviceManager;
 
     /**
      * User manager object
@@ -146,12 +146,14 @@ public class LeapServer extends Thread {
      * @throws InterruptedException
      */
     public LeapServer(Path homePath, Host<?> host) throws UnknownHostException, IOException, URISyntaxException, NotSupportedException {
-        this(Context.get().getHome(), 
-             host.getDocroot(), 
-             host.getProtocol(), 
-             new InetSocketAddress(InetAddress.getByName(host.getHost()), 
-             host.getPort()), 
-             host);
+        this(
+            Context.get().getHome(), 
+            host.getDocroot(), 
+            host.getProtocol(), 
+            new InetSocketAddress(InetAddress.getByName(host.getHost()), 
+            host.getPort()), 
+            host
+            );
     }
 
     /**
@@ -179,7 +181,7 @@ public class LeapServer extends Thread {
         this.redirectHostSelection = new RedirectHostSelection(Context.get().server().getRedirectLBRatio());
         this.sessionManager = new SessionManager(host);
         this.securityManager = new SecurityManager(host);
-        this.serviceManager = new ServiceManager(host, this.securityManager, this.sessionManager, this.resourcesModel);
+        this.serviceManager = new ServiceManager<>(host, this.securityManager, this.sessionManager, this.resourcesModel);
         this.resourcesModel = this.host.getResource();
     }
 
@@ -203,8 +205,8 @@ public class LeapServer extends Thread {
      * Get servlet loader object
      * @return
      */
-    protected ServiceManager getServiceManager() {
-        return (ServiceManager) this.serviceManager;
+    protected ServiceManager<?, ?> getServiceManager() {
+        return this.serviceManager;
     }
 
     /**
@@ -266,15 +268,15 @@ public class LeapServer extends Thread {
                     //Waiting for client
                     socket = this.server.accept();
                     this.server.setReuseAddress(isDefaultHost);
-                    this.host.setHostStatus(STATUS.RUNNING);                    
+                    this.host.setHostStatus(STATUS.RUNNING);
 
                     this.logger.info("SOCKET BUFFER INFO - so-timeout:"+soTimeout+"  receive-buffer-size: "+receiveBufferSize+"  send-buffer-size: "+sendBufferSize);
                     this.logger.info("SOCKET CONF INFO - keep-alive: "+socket.getKeepAlive()+"  OOB-inline: "+socket.getOOBInline()+"  so-linger: "+socket.getSoLinger()+"  tcp-nodelay: "+socket.getTcpNoDelay());
-                    socket.setSoTimeout(soTimeout);
-                    socket.setKeepAlive(keepAlive);
-                    socket.setOOBInline(oobInline);
-                    socket.setSoLinger(soLinger, soLingerTimeout);
-                    socket.setTcpNoDelay(tcpNoDelay);
+                    // socket.setSoTimeout(10000);
+                    // socket.setKeepAlive(true);
+                    // socket.setOOBInline(oobInline);
+                    // socket.setSoLinger(soLinger, soLingerTimeout);
+                    // socket.setTcpNoDelay(tcpNoDelay);
                     socket.setReceiveBufferSize(receiveBufferSize);
                     socket.setSendBufferSize(sendBufferSize);
                     this.logger.info("[CONNECTED] CLIENT CONNECTED: "+socket.getInetAddress().toString());

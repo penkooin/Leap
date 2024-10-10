@@ -51,6 +51,7 @@ public class SecurityManager {
      * @return
      */
     private Stream<UserCredentials> getUserCredentialStream() {
+        System.out.println(this.host.<List<Map<String, Object>>> getValue("global.users").toString());
         return this.host.<List<Map<String, Object>>> getValue("global.users").stream().map(m -> new UserCredentials(m));
     }
 
