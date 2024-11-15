@@ -13,13 +13,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.transaction.NotSupportedException;
 
 import org.chaostocosmos.leap.Leap;
 import org.chaostocosmos.leap.common.log.LoggerFactory;
-import org.chaostocosmos.leap.enums.SERVER_EVENT;
+import org.chaostocosmos.leap.context.utils.Diff;
+import org.chaostocosmos.leap.context.utils.MetaUtils;
 import org.chaostocosmos.leap.enums.WAR_PATH;
+import org.chaostocosmos.leap.resource.config.ConfigUtils;
+
+import net.bytebuddy.utility.FileSystem;
 
 /**
  * Context management object
@@ -27,7 +32,7 @@ import org.chaostocosmos.leap.enums.WAR_PATH;
  * @author Kooin-Shin
  * @since 2021.09.15
  */
-public class Context extends Thread {
+public class Context implements Runnable {
 
     /**
      * Context instance
@@ -55,9 +60,14 @@ public class Context extends Thread {
     Map<META, Long> metaFileModMap;
 
     /**
-     * Wether over thread
+     * Config watch object
      */
-    boolean isDone;
+    WatchService watchService;
+
+    /**
+     * Context thread
+     */
+    Thread contextThread;
 
     /**
      * Constructor 
@@ -68,6 +78,7 @@ public class Context extends Thread {
     private Context(Path HOME_PATH_) {
         HOME_PATH = HOME_PATH_;
         CONFIG_PATH = HOME_PATH.resolve(WAR_PATH.CONFIG.path());
+        startWatch();
     }
 
     /**
@@ -82,78 +93,98 @@ public class Context extends Thread {
     }
 
     /**
+     * Start metadata watcher
+     */
+    public synchronized void startWatch() {
+        if(this.isRunning.get()) {
+            stopWatch();
+        }
+        this.contextThread = new Thread(this);
+        this.contextThread.setName(getClass().getName());
+        this.contextThread.setDaemon(true);
+        this.contextThread.start();
+        this.isRunning.set(true);
+    }
+
+    /**
      * Stop metadata watcher
      * @throws InterruptedException
      */
-    public void stopMetaWatcher() throws InterruptedException {
-        this.isDone = true;
-        interrupt();
+    public synchronized void stopWatch() {
+        this.isRunning.set(false);
+        try {
+            if(this.contextThread != null) this.contextThread.interrupt();
+            if(this.contextThread != null) this.contextThread.join();            
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    // @Override
-    // public void run() {                
-    //     this.metaFileModMap = Arrays.asList(META.values()).stream().map(m -> new Object[]{m, m.getMetaPath().toFile().lastModified()}).collect(Collectors.toMap(k -> (META)k[0], v -> (Long)v[1]));
-    //     System.out.println("Start thread..........................");
-    //     while(!isDone) {
-    //         try {
-    //             List<META> modMetas = Arrays.asList(META.values()).stream().filter(m -> m.getMetaPath().toFile().lastModified() > this.metaFileModMap.get(m)).collect(Collectors.toList());
-    //             System.out.println("Meta mod count: "+modMetas.size());
-    //             if(modMetas.size() > 0) {
-    //                 for(int i=0; i<modMetas.size(); i++) {
-    //                     META meta = modMetas.get(i);
-    //                     System.out.println("META reloading. "+meta.getMetaPath().toString()+"  "+meta.getMetaPath().toFile().lastModified()+"  "+this.metaFileModMap.get(meta));
-    //                     meta.reload();
-    //                     this.metaFileModMap.put(meta, meta.getMetaPath().toFile().lastModified());
-    //                 }
-    //             }
-    //             Thread.sleep(1000);
-    //         } catch(Exception e) {
-    //             e.printStackTrace();
-    //         }
-    //     }   
-    // }    
+    /**
+     * Running flag object
+     */
+    AtomicBoolean isRunning = new AtomicBoolean(false);
 
     @Override 
     public void run() {       
-        WatchService watchService;    
+        LoggerFactory.getLogger().info("[CONTEXT WATCH SERVICE START] Watch Path: "+CONFIG_PATH.toAbsolutePath().normalize().toString());
         try {
-            watchService = FileSystems.getDefault().newWatchService();
-            CONFIG_PATH.register(watchService, StandardWatchEventKinds.ENTRY_MODIFY);
-            long timestemp = System.currentTimeMillis();
-            while(!this.isDone) {
+            this.watchService = FileSystems.getDefault().newWatchService();
+            while(isRunning.get()) {
                 try {
-                    WatchKey key = watchService.take();
-                    Path context = null;
-                    long eventMillis = System.currentTimeMillis(); 
-                    for(WatchEvent<?> event : key.pollEvents()) {
-                        WatchEvent.Kind<?> kind = event.kind();
-                        if(kind == StandardWatchEventKinds.ENTRY_MODIFY && eventMillis - timestemp > 30) {
-                            context = CONFIG_PATH.resolve(event.context().toString());
-                            key.reset();
-                            break;
+                    CONFIG_PATH.register(watchService, StandardWatchEventKinds.ENTRY_MODIFY);
+                    try {
+                        long timestemp = System.currentTimeMillis();
+                        WatchKey key = watchService.take();
+                        long eventMillis = System.currentTimeMillis(); 
+                        for(WatchEvent<?> event : key.pollEvents()) {
+                            WatchEvent<Path> kind = (WatchEvent<Path>) event;
+                            Path path = kind.context();
+                            if(isTemporaryFile(path)) {
+                                LoggerFactory.getLogger().debug("Modified file :"+path);
+                                continue;
+                            }
+                            Path metaPath = CONFIG_PATH.resolve(path);
+                            System.out.println(metaPath);
+                            Map<String, Object> changedMap = ConfigUtils.loadConfig(metaPath);
+                            META meta = Arrays.asList(META.values()).stream().filter(m -> m.getMetaPath().toAbsolutePath().normalize().equals(metaPath)).findFirst().orElseThrow(() -> new FileNotFoundException("File not found in event path: "+metaPath.toAbsolutePath()));
+                            List<Diff> diffs = MetaUtils.compareDiffMaps(meta.metaMap, changedMap, "");
+                            diffs.stream().forEach(d -> System.out.println(d.getPath()+"  "+d.getOriginalValue()+"  "+d.getModifiedValue()));
+                            meta.reload();
+                            if(diffs.size() > 0) {
+                                for(Diff diff : diffs) {
+                                    dispatchContextEvent(new MetaEvent<Metadata<?>>(
+                                                                                    this, META_EVENT_TYPE.MODIFIED, 
+                                                                                    meta.getMeta(), 
+                                                                                    diff.getPath(), 
+                                                                                    diff.getOriginalValue(),  
+                                                                                    diff.getModifiedValue()));
+                                }
+                            }    
                         }
+                        boolean isValid = key.reset();
+                        if(!isValid) {
+                            break;
+                        }                        
+                        timestemp = eventMillis;
+                    } catch(Exception e) {
+                        LoggerFactory.getLogger().error(e.getMessage());
                     }
-                    boolean valid = key.reset(); 
-                    if (!valid) {
-                        break;
-                    }
-                    if(context != null) {
-                        final Path metaPath = context.toAbsolutePath().normalize();
-                        META meta = Arrays.asList(META.values()).stream().filter(m -> m.getMetaPath().toAbsolutePath().normalize().equals(metaPath)).findFirst().orElseThrow(() -> new FileNotFoundException("File not found in event path: "+metaPath.toAbsolutePath()));
-                        meta.reload();
-                        dispatchContextEvent(new MetaEvent<Metadata<?>>(this, SERVER_EVENT.CHANGED, meta.getMeta(), null, null));
-                    }
-                    timestemp = eventMillis;
-                } catch(Exception e) {
-                    //LoggerFactory.getLogger().error(e.getMessage(), e);
+                } catch (Exception e) {
+                    LoggerFactory.getLogger().throwable(e);
                 }
             }
-            watchService.close();
+            if(this.watchService != null) this.watchService.close();
         } catch (IOException e) {
-            LoggerFactory.getLogger(Context.get().server().getId()).throwable(e);
+            LoggerFactory.getLogger().throwable(e);
         }
-        LoggerFactory.getLogger(Context.get().server().getId()).info("Config data watcher is closed.");
+        LoggerFactory.getLogger().info("CONTEXT WATCH SERVICE IS CLOSED: "+CONFIG_PATH.toAbsolutePath().normalize().toString());
     }
+
+    private boolean isTemporaryFile(Path fileName) {
+        String name = fileName.toFile().getName();
+        return name.startsWith(".") || name.endsWith(".tmp") || name.endsWith(".swp") || name.endsWith("-swp");
+    }    
 
     /**
      * Refresh all metadata
@@ -322,6 +353,6 @@ public class Context extends Thread {
      */
     public <T, V> void save(META meta) {
         meta.save(); 
-        context.dispatchContextEvent(new MetaEvent<Metadata<?>>(context, SERVER_EVENT.STORED, meta.getMeta(), null, null));
+        context.dispatchContextEvent(new MetaEvent<Metadata<?>>(context, META_EVENT_TYPE.SAVED, meta.getMeta(), null, null, null));
     } 
 }

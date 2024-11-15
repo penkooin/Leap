@@ -16,12 +16,12 @@ public class LeapHttpServerTest {
 
     public LeapHttpServerTest() throws Exception {
         this.server = new LeapServer(Context.get().host("leap"));
-        this.server.start();;
+        this.server.startServer();
     }
 
     @Test
     public void testHttpServer() throws LeapException, URISyntaxException, IOException {
-        this.server.start();
+        this.server.startServer();
     }
 
     public void testServiceHost() throws IOException {

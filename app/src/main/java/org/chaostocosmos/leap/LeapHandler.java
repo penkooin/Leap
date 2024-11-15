@@ -1,9 +1,11 @@
 package org.chaostocosmos.leap;
 
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
 
 import org.chaostocosmos.leap.common.NetworkInterfaceManager;
+import org.chaostocosmos.leap.common.data.Filtering;
 import org.chaostocosmos.leap.common.utils.UtilBox;
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.context.Host;
@@ -72,6 +74,16 @@ public class LeapHandler<T, R> implements Runnable {
     Host<?> host;
 
     /**
+     * Allowed context filtering
+     */
+    Filtering allowedFiltering;
+
+    /**
+     * Forbidden context filtering
+     */
+    Filtering forbiddenFiltering;
+
+    /**
      * Constructor with HeapHttpServer, root direcotry, client socket and host object
      * @param httpServer
      * @param rootPath
@@ -83,6 +95,8 @@ public class LeapHandler<T, R> implements Runnable {
         this.LEAP_HOME = LEAP_HOME;
         this.httpTransfer = httpTransfer;
         this.host = host;
+        this.allowedFiltering = host.getAllowedPath();
+        this.forbiddenFiltering = host.getContextForbiddenFiltering();
         this.serviceManager = httpServer.getServiceManager(); 
         this.sessionManager = httpServer.getSessionManager(); 
         this.securityManager = httpServer.getSecurityManager();
@@ -109,15 +123,33 @@ public class LeapHandler<T, R> implements Runnable {
                     isLocalRequest = true;
                 }
             }
-            if(!host.isAuthentication() || !isLocalRequest) {
+            System.out.println(this.allowedFiltering.exclude(request.getContextPath()));
+            System.out.println(this.forbiddenFiltering.include(request.getContextPath()));
+            if(this.allowedFiltering.exclude(request.getContextPath()) || this.forbiddenFiltering.include(request.getContextPath())) {
+                throw new LeapException(HTTP.RES403, "Requested resource is restricted: "+request.getContextPath());
+            }
+            if(((host.isAuthentication() || !isLocalRequest)) && (this.allowedFiltering.exclude(request.getContextPath()) || this.forbiddenFiltering.include(request.getContextPath()))) {                
                 try {
                     //if((session != null && !session.isAuthenticated()) && request.getCookie("__auth-trial") == null || !request.getCookie("__auth-trial").equals("1")) {
                     if((session != null && !session.isAuthenticated())) {
-                        String authorization = request.getHeaders().get("Authorization");
-                        UserCredentials userCredentials = this.securityManager.authenticate(authorization);
+                        UserCredentials userCredentials = null;                        
+                        if(request.getParameter("username") != null && request.getParameter("password") != null) {
+                            String username = request.getParameter("username").toString();
+                            String password = request.getParameter("password").toString();
+                            userCredentials = this.securityManager.login(username, password);
+                            if(userCredentials == null) {
+                                response.addHeader("Location", "/login");                                
+                            }
+                        } else {
+                            String authorization = request.getHeaders().get("Authorization");
+                            userCredentials = this.securityManager.authenticate(authorization);
+                            if(userCredentials == null) {
+                                response.addSetCookie("__auth-trial", "1");                            
+                                response.addHeader("WWW-Authenticate", "Basic");                                
+                            }
+                        }
                         if(userCredentials == null) {
-                            response.addSetCookie("__auth-trial", "1");
-                            throw new LeapException(HTTP.RES401, "[AUTH] AUTHENTICATION FAIL "+authorization);
+                            throw new LeapException(HTTP.RES401, "[AUTH] AUTHENTICATION FAIL ");
                         }
                         if(session != null) {
                             session.setAuthenticated(true);
@@ -184,7 +216,7 @@ public class LeapHandler<T, R> implements Runnable {
             this.httpTransfer.sendResponse(); 
         } catch(LeapException e) {        
             this.host.getLogger().throwable(e);
-            if(e.getRes() == HTTP.LEAP900) {
+            if(e.getHTTP() == HTTP.LEAP900) {
                 this.host.getLogger().info("[CONNECTION CLOSED BY CLIENT] Host: "+this.host.getId()+"  Client: "+this.httpTransfer.getSocket().getInetAddress().toString());
             } else {
                 try {                

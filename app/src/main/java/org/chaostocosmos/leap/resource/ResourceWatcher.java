@@ -3,11 +3,11 @@ package org.chaostocosmos.leap.resource;
 import java.io.File;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
+import java.nio.file.ClosedWatchServiceException;
 import java.nio.file.FileSystemException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.WatchEvent;
@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -28,7 +29,6 @@ import org.chaostocosmos.leap.common.log.LoggerFactory;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.MIME;
 import org.chaostocosmos.leap.exception.LeapException;
-import org.chaostocosmos.leap.resource.config.ResourceConfig;
 import org.chaostocosmos.leap.resource.filter.ResourceFilter;
 import org.chaostocosmos.leap.resource.model.ResourcesWatcherModel;
 
@@ -143,28 +143,6 @@ public class ResourceWatcher implements ResourcesWatcherModel {
         this.fileReadBufferSize = fileReadBufferSize;
         this.fileWriteBufferSize = fileWriteBufferSize;
         this.inMemoryLimitSize = inMemoryLimitSize;
-
-        LoggerFactory.getLogger().info("[WATCH PATH] Watch Path: "+this.watchPath.toAbsolutePath().normalize().toString());
-        try {
-            this.resourceTree = new Resource(true, this.watchPath, false, this.inMemorySplitUnit);
-            this.watchService = FileSystems.getDefault().newWatchService();
-            this.watchMap = Files.walk(this.watchPath).sorted().filter(p -> p.toFile().isDirectory()).map(p -> {
-                try {
-                    return new Object[]{ p.register(this.watchService, this.watchKind), p };
-                } catch (IOException e) {
-                    LoggerFactory.getLogger().error(e.getMessage(), e);
-                    return null;
-                }
-            }).filter(arr -> arr != null).collect(Collectors.toMap(k -> (WatchKey)k[0], v -> (Path)v[1]));
-
-            // Load host resources
-            long startMillis = System.currentTimeMillis();
-            //this.resourceTree = loadResoureTree(this.watchPath, this.resourceTree);
-            this.resourceTree = loadForkJoinResources(this.watchPath);
-            LoggerFactory.getLogger().info("[RESOURCE-LOAD] Path: "+this.watchPath.toString()+" is complated: "+TIME.SECOND.duration(System.currentTimeMillis() - startMillis, TimeUnit.SECONDS));        
-        } catch (IOException | InterruptedException e) {
-            throw new RuntimeException(e);
-        } 
     }
 
     /**
@@ -219,14 +197,14 @@ public class ResourceWatcher implements ResourcesWatcherModel {
                         String fileSize = (float) SIZE.MB.get(file.length())+" MB";
                         if(accessFiltering.include(file.getName())) {
                             if(file.length() <= inMemoryLimitSize && inMemoryFiltering.include(file.getName())) {
-                                LoggerFactory.getLogger().debug("[LOAD] In-Memory resource loading: "+file.getName()+"  Size: "+fileSize+"  Bytes: "+file.length());
+                                LoggerFactory.getLogger().debug("[LOAD] In-Memory resource loading: "+file.getAbsolutePath()+"  Size: "+fileSize+"  Bytes: "+file.length());
                                 this.res.put(file.getName(), new Resource(false, file.toPath(), true, inMemorySplitUnit));
                             } else {
-                                LoggerFactory.getLogger().debug("[LOAD] File resource loading: "+file.getName()+"  Size: "+fileSize+"  Bytes: "+file.length());
+                                LoggerFactory.getLogger().debug("[LOAD] File resource loading: "+file.getAbsolutePath()+"  Size: "+fileSize+"  Bytes: "+file.length());
                                 this.res.put(file.getName(), new Resource(false, file.toPath(), false, inMemorySplitUnit));
                             }
                         } else {
-                            LoggerFactory.getLogger().debug("[NOT-INCLUDED] Not included in access resources: "+file.getName()+"  Size: "+fileSize+"  Bytes: "+file.length());
+                            LoggerFactory.getLogger().debug("[NOT-INCLUDED] Not included in access resources: "+file.getAbsolutePath()+"  Size: "+fileSize+"  Bytes: "+file.length());
                         }                    
                     }
                 }    
@@ -238,96 +216,152 @@ public class ResourceWatcher implements ResourcesWatcherModel {
     }    
 
     @Override
-    public void run() {
+    public synchronized void startWatch() {
+        if(this.isRunning.get()) {
+            stopWatch();
+        }
+        this.watchThread = new Thread(this);
+        this.watchThread.setName(getClass().getName());
+        this.watchThread.setDaemon(true);
+        this.watchThread.start();
+        this.isRunning.set(true);
+    }
+
+    @Override
+    public synchronized void stopWatch() {
         try {
-            while(this.watchService != null) {
-                final WatchKey key = this.watchService.take();
-                for(WatchEvent<?> event : key.pollEvents()) {
-                    final Path eventPath = this.watchMap.get(key);
-                    final long size = eventPath.toFile().length();
-                    //LoggerFactory.getLogger(this.hostId).debug("[WATCH EVENT] KIND: "+event.kind()+"   Context: "+event.context()+"   Path: "+this.watchMap.get(key)+"   CNT: "+event.count());
-                    if(event.kind() == StandardWatchEventKinds.OVERFLOW || eventPath == null) {
-                        continue;
-                    } 
-                    if(event.kind() == StandardWatchEventKinds.ENTRY_CREATE) {
-                        Path pathCreated = eventPath.resolve(event.context().toString());
-                        LoggerFactory.getLogger().debug("[RESOURCE EVENT] KIND: "+event.kind()+" EVENT RESOURCE SIZE: "+SIZE.MB.get(pathCreated.toFile().length())+"  TOTAL RESOURCE SIZE: "+getResourceTotalSize(SIZE.MB));
-                        Resource data = null;
-                        if(pathCreated.toFile().isDirectory()) {
-                            LoggerFactory.getLogger().debug("[RESOURCE CREATED] Directory resource created: "+pathCreated.toAbsolutePath());
-                            this.watchMap.put(pathCreated.register(this.watchService, this.watchKind), pathCreated);
-                            data = new Resource(true, pathCreated, false, this.inMemorySplitUnit);
-                        } else {
-                            if(this.accessFiltering.include(pathCreated.toFile().getName())) {                                
-                                try {
-                                    if(this.inMemoryFiltering.include(pathCreated.toFile().getName())) {
-                                        //When In-Memory resource
-                                        Files.move(pathCreated, pathCreated, StandardCopyOption.ATOMIC_MOVE);                                        
-                                        if(pathCreated.toFile().length() <= this.inMemoryLimitSize) {
-                                            LoggerFactory.getLogger().debug("[IN-MEMORY CREATED LOADING] Loading to memory: "+pathCreated.toAbsolutePath()+"  [SIZE: "+SIZE.MB.get(size)+"]");
-                                            data = new Resource(false, pathCreated, true, this.inMemorySplitUnit);
-                                        } else {
-                                            //When In-Memory limit and reject
-                                            LoggerFactory.getLogger().debug("[IN-MEMORY CREATED LOADING] In-Memory file size overflow. Limit: "+SIZE.MB.get(this.inMemoryLimitSize)+"  File size: "+SIZE.MB.get(pathCreated.toFile().length()));
+            this.isRunning.set(false);
+            if(this.watchThread != null) this.watchThread.interrupt();
+            if(this.watchThread != null) this.watchThread.join();
+        } catch (InterruptedException e) {
+            new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Running flag
+     */
+    AtomicBoolean isRunning = new AtomicBoolean();
+
+    @Override
+    public void run() {
+        LoggerFactory.getLogger().info("[RESOURCE WATCH SERVICE START] Watch Path: "+this.watchPath.toAbsolutePath().normalize().toString());
+        try {
+            this.resourceTree = new Resource(true, this.watchPath, false, this.inMemorySplitUnit);
+            this.watchService = FileSystems.getDefault().newWatchService();
+            this.watchMap = Files.walk(this.watchPath).sorted().filter(p -> p.toFile().isDirectory()).map(p -> {
+                try {
+                    return new Object[]{ p.register(this.watchService, this.watchKind), p };
+                } catch (IOException e) {
+                    LoggerFactory.getLogger().error(e.getMessage(), e);
+                    return null;
+                }
+            }).filter(arr -> arr != null).collect(Collectors.toMap(k -> (WatchKey)k[0], v -> (Path)v[1]));
+
+            // Load host resources
+            long startMillis = System.currentTimeMillis();
+            //this.resourceTree = loadResoureTree(this.watchPath, this.resourceTree);
+            this.resourceTree = loadForkJoinResources(this.watchPath);
+            LoggerFactory.getLogger().info("[RESOURCE-LOAD] Path: "+this.watchPath.toString()+" is complated: "+TIME.SECOND.duration(System.currentTimeMillis() - startMillis, TimeUnit.SECONDS));        
+
+            while(this.isRunning.get()) {
+                try {
+                    final WatchKey key = this.watchService.take();
+                    for(WatchEvent<?> event : key.pollEvents()) {
+                        final Path eventPath = this.watchMap.get(key);
+                        final long size = eventPath.toFile().length();
+                        //LoggerFactory.getLogger(this.hostId).debug("[WATCH EVENT] KIND: "+event.kind()+"   Context: "+event.context()+"   Path: "+this.watchMap.get(key)+"   CNT: "+event.count());
+                        if(event.kind() == StandardWatchEventKinds.OVERFLOW || eventPath == null) {
+                            continue;
+                        } 
+                        if(event.kind() == StandardWatchEventKinds.ENTRY_CREATE) {
+                            Path pathCreated = eventPath.resolve(event.context().toString());
+                            LoggerFactory.getLogger().debug("[RESOURCE EVENT] KIND: "+event.kind()+" EVENT RESOURCE SIZE: "+SIZE.MB.get(pathCreated.toFile().length())+"  TOTAL RESOURCE SIZE: "+getResourceTotalSize(SIZE.MB));
+                            Resource data = null;
+                            if(pathCreated.toFile().isDirectory()) {
+                                LoggerFactory.getLogger().debug("[RESOURCE CREATED] Directory resource created: "+pathCreated.toAbsolutePath());
+                                this.watchMap.put(pathCreated.register(this.watchService, this.watchKind), pathCreated);
+                                data = new Resource(true, pathCreated, false, this.inMemorySplitUnit);
+                            } else {
+                                if(this.accessFiltering.include(pathCreated.toFile().getName())) {                                
+                                    try {
+                                        if(this.inMemoryFiltering.include(pathCreated.toFile().getName())) {
+                                            //When In-Memory resource
+                                            Files.move(pathCreated, pathCreated, StandardCopyOption.ATOMIC_MOVE);                               
+                                            if(pathCreated.toFile().length() <= this.inMemoryLimitSize) {
+                                                LoggerFactory.getLogger().debug("[IN-MEMORY CREATED LOADING] Loading to memory: "+pathCreated.toAbsolutePath()+"  [SIZE: "+SIZE.MB.get(size)+"]");
+                                                data = new Resource(false, pathCreated, true, this.inMemorySplitUnit);
+                                            } else {
+                                                //When In-Memory limit and reject
+                                                LoggerFactory.getLogger().debug("[IN-MEMORY CREATED LOADING] In-Memory file size overflow. Limit: "+SIZE.MB.get(this.inMemoryLimitSize)+"  File size: "+SIZE.MB.get(pathCreated.toFile().length()));
+                                                data = new Resource(false, pathCreated, false, this.inMemorySplitUnit);
+                                            }
+                                        } else {                        
+                                            // When File resource
                                             data = new Resource(false, pathCreated, false, this.inMemorySplitUnit);
                                         }
-                                    } else {                        
-                                        // When File resource
-                                        data = new Resource(false, pathCreated, false, this.inMemorySplitUnit);
+                                    } catch(FileSystemException e) {
+                                        LoggerFactory.getLogger().warn("[FILE SYSTEM ALERT] "+e.getMessage());
+                                        continue;
                                     }
-                                } catch(FileSystemException e) {
-                                    LoggerFactory.getLogger().warn("[FILE SYSTEM ALERT] "+e.getMessage());
-                                    continue;
                                 }
                             }
-                        }
-                        String[] paths = pathCreated.subpath(this.watchPath.getNameCount(), pathCreated.getNameCount()).toString().split(Pattern.quote(File.separator));
-                        addResource(this.resourceTree, paths, data);
-                    } else if(event.kind() == StandardWatchEventKinds.ENTRY_MODIFY) {
-                        Path pathModified = eventPath.resolve(event.context().toString());
-                        if(pathModified.toFile().isFile() && this.accessFiltering.include(pathModified.toFile().getName())) {
-                            Resource data  = null;
-                            try {
-                                //When In-Memory resource
-                                if(this.inMemoryFiltering.include(pathModified.toFile().getName())) {
-                                    Files.move(pathModified, pathModified, StandardCopyOption.ATOMIC_MOVE);
-                                    if(pathModified.toFile().length() <= this.inMemoryLimitSize) {
-                                        data = new Resource(false, pathModified, true, this.inMemorySplitUnit);
-                                        LoggerFactory.getLogger().debug("[IN-MEMORY MODIFIED LOADING] Loading to memory: "+pathModified.toAbsolutePath()+"  [SIZE: "+SIZE.MB.get(pathModified.toFile().length())+"]");
+                            String[] paths = pathCreated.subpath(this.watchPath.getNameCount(), pathCreated.getNameCount()).toString().split(Pattern.quote(File.separator));
+                            addResource(this.resourceTree, paths, data);
+                        } else if(event.kind() == StandardWatchEventKinds.ENTRY_MODIFY) {
+                            Path pathModified = eventPath.resolve(event.context().toString());
+                            if(pathModified.toFile().isFile() && this.accessFiltering.include(pathModified.toFile().getName())) {
+                                Resource data  = null;
+                                try {
+                                    //When In-Memory resource
+                                    if(this.inMemoryFiltering.include(pathModified.toFile().getName())) {
+                                        Files.move(pathModified, pathModified, StandardCopyOption.ATOMIC_MOVE);
+                                        if(pathModified.toFile().length() <= this.inMemoryLimitSize) {
+                                            data = new Resource(false, pathModified, true, this.inMemorySplitUnit);
+                                            LoggerFactory.getLogger().debug("[IN-MEMORY MODIFIED LOADING] Loading to memory: "+pathModified.toAbsolutePath()+"  [SIZE: "+SIZE.MB.get(pathModified.toFile().length())+"]");
+                                        } else {
+                                            //When In-Memory limit and reject
+                                            LoggerFactory.getLogger().debug("[IN-MEMORY MODIFIED LOADING] In-Memory file size overflow. Limit: "+SIZE.MB.get(this.inMemoryLimitSize)+"  File size: "+SIZE.MB.get(pathModified.toFile().length()));
+                                            data = new Resource(false, pathModified, false, this.inMemorySplitUnit);
+                                        }
                                     } else {
-                                        //When In-Memory limit and reject
-                                        LoggerFactory.getLogger().debug("[IN-MEMORY MODIFIED LOADING] In-Memory file size overflow. Limit: "+SIZE.MB.get(this.inMemoryLimitSize)+"  File size: "+SIZE.MB.get(pathModified.toFile().length()));
+                                        // When File resource   
+                                        LoggerFactory.getLogger().debug("[EXCLUDE IN-MEMORY FILTER] Exclude on In-Memory resources: "+pathModified.toAbsolutePath());
                                         data = new Resource(false, pathModified, false, this.inMemorySplitUnit);
                                     }
-                                } else {
-                                    // When File resource   
-                                    LoggerFactory.getLogger().debug("[EXCLUDE IN-MEMORY FILTER] Exclude on In-Memory resources: "+pathModified.toAbsolutePath());
-                                    data = new Resource(false, pathModified, false, this.inMemorySplitUnit);
+                                } catch(FileSystemException e) {
+                                    //e.printStackTrace();
+                                    //LoggerFactory.getLogger(this.hostId).warn("[FILE SYSTEM ALERT] "+e.getMessage());
+                                    continue;
                                 }
-                            } catch(FileSystemException e) {
-                                //e.printStackTrace();
-                                //LoggerFactory.getLogger(this.hostId).warn("[FILE SYSTEM ALERT] "+e.getMessage());
-                                continue;
+                                String[] paths = pathModified.subpath(this.watchPath.getNameCount(), pathModified.getNameCount()).toString().split(Pattern.quote(File.separator));
+                                addResource(this.resourceTree, paths, data);
                             }
-                            String[] paths = pathModified.subpath(this.watchPath.getNameCount(), pathModified.getNameCount()).toString().split(Pattern.quote(File.separator));
-                            addResource(this.resourceTree, paths, data);
+                        } else if(event.kind() == StandardWatchEventKinds.ENTRY_DELETE) {
+                            final Path pathDelete = eventPath.resolve(event.context().toString());
+                            Map.Entry<WatchKey, Path> entry = this.watchMap.entrySet().stream().filter(e -> e.getValue().equals(pathDelete)).findAny().orElse(null);
+                            if(entry != null) {
+                                this.watchMap.remove(entry.getKey());
+                            }
+                            String[] paths = pathDelete.subpath(this.watchPath.getNameCount(), pathDelete.getNameCount()).toString().split(Pattern.quote(File.separator));
+                            removeResource(this.resourceTree, paths);
                         }
-                    } else if(event.kind() == StandardWatchEventKinds.ENTRY_DELETE) {
-                        final Path pathDelete = eventPath.resolve(event.context().toString());
-                        Map.Entry<WatchKey, Path> entry = this.watchMap.entrySet().stream().filter(e -> e.getValue().equals(pathDelete)).findAny().orElse(null);
-                        if(entry != null) {
-                            this.watchMap.remove(entry.getKey());
-                        }
-                        String[] paths = pathDelete.subpath(this.watchPath.getNameCount(), pathDelete.getNameCount()).toString().split(Pattern.quote(File.separator));
-                        removeResource(this.resourceTree, paths);
                     }
-                }
-                key.reset();
+                    if(!key.reset()) {
+                        break;
+                    }
+                } catch(ClosedWatchServiceException e) {
+                    LoggerFactory.getLogger().error(e.getMessage());
+                } catch (Exception e) {
+                    LoggerFactory.getLogger().throwable(e);
+                }    
             }
-            this.watchService.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            if(this.watchService != null) this.watchService.close();
+
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        } 
+        LoggerFactory.getLogger().info("RESOURCE WATCH SERVICE IS CLOSED: "+this.watchPath.toAbsolutePath().normalize().toString());
     }
 
     /**
@@ -469,20 +503,6 @@ public class ResourceWatcher implements ResourcesWatcherModel {
             return false;
         }
         return resInfo == null ? false : resInfo.isInMemory();
-    }
-
-    @Override
-    public void terminate() throws IOException, InterruptedException {        
-        this.watchService.close();
-        this.watchService = null;
-        this.watchThread.interrupt();
-        this.watchThread.join();
-    }
-
-    @Override
-    public void start() {
-        this.watchThread = new Thread(this);
-        this.watchThread.start();
     }
 
     /**

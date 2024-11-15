@@ -86,6 +86,11 @@ public abstract class AbstractPart <T> implements Part <T> {
         return this.contentLength;
     }
 
+    @Override
+    public boolean isBody() {
+        return getContentLength() > 0 ? true : false;
+    }
+
     /**
      * Get host ID
      * @return

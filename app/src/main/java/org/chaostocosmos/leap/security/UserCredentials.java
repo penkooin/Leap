@@ -38,7 +38,7 @@ public class UserCredentials {
      * @param userMap
      */
     public UserCredentials(Map<String, Object> userMap) {        
-        this((String) userMap.get("username"), (String) userMap.get("password"), (String) userMap.get("grant"));
+        this((String) userMap.get("username"), (String) userMap.get("password"), (String) userMap.get("role"));
     }
 
     /**

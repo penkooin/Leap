@@ -1,16 +1,18 @@
 <html>
     <head>
-        <!-- <link rel="icon" href="/img/favicon.ico" type="img/x-icon"> -->
-        <title>Welcome Leap - <!--@serverName--></title>
-        <meta charset="utf-8">
+        <title>Leap - <!--@serverName--> in Error!!!</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Leap?</title>
         <link rel="stylesheet" href="/css/styles.css">
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     </head>
-    <body class="content">        
-        <p><a href="/"><img style="vertical-align:bottom" src="/img/logo32.png"/></a><span class="font-x-large font-bold">Response code: <!--@code--></span></p>
-        <p class="font-large"><!--@status--></p>
-        <p class="font-medium">Message: </p>    
-        <p class="font-small"><!--@message--></p>  
+    <body class="body-center">        
+        <div class="response-container">
+            <p><a href="/"><img style="vertical-align:bottom" src="/img/logo32.png"/></a><span class="font-x-large font-bold"> Response code: <!--@code--></span></p>
+            <p class="font-large"><!--@status--></p>
+            <p class="font-large font-bold">Message: </p>    
+            <p class="font-medium"><!--@message--></p>  
+        </div>
     </body>
 </html>

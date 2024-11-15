@@ -20,6 +20,12 @@ public class LocaleTest {
         
         System.out.println("Locale: " + locale);
         System.out.println("Country: " + locale.getDisplayCountry());  // Korea
+
+        String str = "";
+
+        String[] arr = str.split("\\.");
+        System.out.println(arr[0])        ;
+
     }
     
 }

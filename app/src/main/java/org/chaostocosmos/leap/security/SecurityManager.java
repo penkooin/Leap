@@ -111,7 +111,7 @@ public class SecurityManager {
                 this.logger.debug("==================================================");  
                 this.logger.debug("User "+values[0]+" is login. "+values[1]);  
                 this.logger.debug("==================================================");  
-                return user;    
+                return user;
             }
         }
         return null;//new LeapException(HTTP.RES401, 28, authorization);

@@ -53,7 +53,8 @@ public class Hosts <T> extends Metadata <T> {
      * @return
      */
     public List<Host<?>> getHosts() {
-        List<String> hostIds = super.<List<Map<String, Object>>> getValue("hosts").stream().map(m -> m.get("id").toString()).collect(Collectors.toList());
+        //List<String> hostIds = super.<List<Map<String, Object>>> getValue("hosts").stream().map(m -> m.get("id").toString()).collect(Collectors.toList());        
+        List<String> hostIds = Context.get().server().getHosts().keySet().stream().collect(Collectors.toList());
         return hostIds.stream().map(h -> getHost(h)).collect(Collectors.toList());
     }
 
@@ -102,7 +103,7 @@ public class Hosts <T> extends Metadata <T> {
      * @return
      */
     public boolean getSupportMonitoring() {
-        return super.<Boolean> getValue("monitor.support-monitoring");
+        return Boolean.valueOf(super.getValue("monitor.support-monitoring"));
     }
 
     /**
@@ -241,7 +242,7 @@ public class Hosts <T> extends Metadata <T> {
      * @return
      */
     public Filtering getAccessFiltering(String hostId) {
-        return getHost(hostId).getAccessFiltering();
+        return getHost(hostId).getAllowedPathFiltering();
     }
 
     /**
@@ -251,7 +252,7 @@ public class Hosts <T> extends Metadata <T> {
      * @return
      */
     public boolean filteringInAccess(String hostId, String resourceName) {
-        return getHost(hostId).getAccessFiltering().include(resourceName);
+        return getHost(hostId).getAllowedPathFiltering().include(resourceName);
     }
 
     /**

@@ -1,5 +1,6 @@
 package org.chaostocosmos.leap.http.part;
 
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
 
@@ -34,7 +35,13 @@ public interface Part <T> {
      * Get body data 
      * @return
      */
-    public T getBody() throws Exception;
+    public T getBody() throws IOException;
+
+    /**
+     * Whether existing body content
+     * @return
+     */
+    public boolean isBody();
 
     /**
      * Save body to parameted directory

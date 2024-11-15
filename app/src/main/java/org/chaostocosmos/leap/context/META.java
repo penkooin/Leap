@@ -1,33 +1,19 @@
 package org.chaostocosmos.leap.context;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
-import java.util.stream.Collectors;
-
-import javax.transaction.NotSupportedException;
 
 import org.chaostocosmos.leap.common.data.DataStructureOpr;
-import org.chaostocosmos.leap.common.log.LoggerFactory;
 import org.chaostocosmos.leap.enums.WAR_PATH;
 import org.chaostocosmos.leap.resource.config.ResourceConfig;
-import org.yaml.snakeyaml.Yaml;
-
-import com.google.gson.Gson;
 
 /**
  * Metadata enum
  * 
  * @author 9ins
  */
-public enum META {
+public enum META implements Cloneable {
     SERVER(Context.get().getHome().resolve(WAR_PATH.CONFIG.path()).resolve("server.yml")),
     HOSTS(Context.get().getHome().resolve(WAR_PATH.CONFIG.path()).resolve("hosts.yml")),
     MESSAGE(Context.get().getHome().resolve(WAR_PATH.CONFIG.path()).resolve("message.yml")),
@@ -42,14 +28,13 @@ public enum META {
     /**
      * Initializer
      * @param metaPath
+     * @throws IOException 
      */
     META(Path metaPath) {
         this.metaPath = metaPath.toAbsolutePath().normalize();
-        try {
-            load(this.metaPath);
-        } catch (IOException | NotSupportedException e) { 
-            LoggerFactory.getLogger().throwable(e);
-        }        
+        if(this.metaMap == null) {
+            reload();
+        }
     }
 
     /**
@@ -57,34 +42,20 @@ public enum META {
      * @throws NotSupportedException
      * @throws IOException
      */
-    public void reload() throws IOException, NotSupportedException {
-        load(this.metaPath);
+    public void reload() {
+        try {
+            this.metaMap = ContextUtils.load(this.metaPath);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    /**
-     * Load metadata from file
-     * @param metaPath
-     * @throws NotSupportedException
-     * @throws IOException
-     */
-    public void load(Path metaPath) throws IOException, NotSupportedException {
-        String metaName = metaPath.toFile().getName();
-        String metaString = Files.readString(metaPath, StandardCharsets.UTF_8);
-        if(metaName.endsWith(".yml") || metaName.endsWith(".yaml")) {
-            this.metaMap = new Yaml().<Map<String, Object>> load(metaString);
-        } else if(metaName.endsWith(".json")) {
-            this.metaMap = new Gson().<Map<String, Object>> fromJson(metaString, Map.class);
-        } else if(metaName.endsWith(".properites")) {
-            this.metaMap = Arrays.asList(metaString.split(System.lineSeparator()))
-                                 .stream().map(l -> new Object[]{l.substring(0, l.indexOf("=")).trim(), l.substring(l.indexOf("=")+1).trim()})
-                                 .collect(Collectors.toMap(k -> (String)k[0], v -> v[1]));
-        } else if(metaName.equals("trademark")) {
-            this.metaMap = new HashMap<>() {{
-                put("trademark", Files.readString(metaPath));
-            }};
-        } else {
-            throw new NotSupportedException("Meta file not supported: "+metaName);
-        } 
+    public void save() {
+        try {
+            ContextUtils.save(this.metaPath, this.metaMap);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -133,28 +104,18 @@ public enum META {
      */
     public Path getMetaPath() {
         return this.metaPath;
-    }
-    
+    }    
+
     /**
-     * Save meta data
+     * Get cloned object
+     * @return
+     * @throws CloneNotSupportedException
      */
-    public void save() {
-        String metaName = this.metaPath.toFile().getName();
-        try (OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(metaPath.toFile()), StandardCharsets.UTF_8)) {
-            if(metaName.endsWith(".yml")) {
-                new Yaml().dump(this.metaMap, osw);
-            } else if(metaName.endsWith(".json")) {
-                new Gson().toJson(this.metaMap, osw);
-            } else if(metaName.endsWith(".properites")) {
-                Properties prop = new Properties();
-                prop.store(osw, null);
-            } else if(metaName.equals("trademark")) {
-                osw.write(this.metaMap.get("trademark")+"");
-            } else {
-                throw new NotSupportedException("Meta file not supported: "+metaName);
-            }    
-        } catch(Exception e) {
+    public Object getClone() {
+        try {
+            return super.clone();
+        } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
-        }        
+        }
     }
 }

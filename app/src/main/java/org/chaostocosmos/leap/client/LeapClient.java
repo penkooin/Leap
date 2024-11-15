@@ -385,11 +385,11 @@ public class LeapClient implements AutoCloseable {
 
     /**
      * Close Leap client
-     * @throws IOException
+     * @throws IOException 
      */
-    public synchronized void close() throws IOException {        
+    public synchronized void close() throws IOException {
         if(this.outputStream != null) this.outputStream.close();
         if(this.inputStream != null) this.inputStream.close();
-        if(this.socket != null) this.socket.close();
-    }
+        if(this.socket != null) this.socket.close();    
+}
 }

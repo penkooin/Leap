@@ -51,12 +51,12 @@ public class FileTools {
 						List<String> allLines = Files.readAllLines(p, Charset.forName("utf-8"));
 						for(String w : wordList) {
 							if(allLines.stream().anyMatch(l -> l.contains(w))) {
-								System.out.println(p.toFile().getName());
+								//System.out.println(p.toFile().getName());
 								return true;
 							}
 						}
 					} catch(Exception e) {
-						System.out.println("Error Path :"+p);
+						//System.out.println("Error Path :"+p);
 						e.printStackTrace();
 					}
 					return false;

@@ -63,7 +63,7 @@ public class SessionManager {
      * @param sessionId
      * @return
      */
-    public Session getSessionCreateIfNotExists(String sessionId) {        
+    public Session getSessionIfExist(Map<String, String> cookies) {        
         if(this.sessionMap.containsKey(sessionId)) {
             Session session = this.sessionMap.get(sessionId);
             session.setNew(false);            

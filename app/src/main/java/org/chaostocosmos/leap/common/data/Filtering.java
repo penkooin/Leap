@@ -43,7 +43,7 @@ public class Filtering {
             String regex = Arrays.asList(keyword.toString().split(Pattern.quote("*"))).stream().map(s -> s.equals("") ? "" : Pattern.quote(s)).collect(Collectors.joining(".*"))+".*";
             if(resourceName.matches(regex)) {
                 return true;
-            }   
+            }
         }
         return false;
     }

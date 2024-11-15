@@ -267,7 +267,7 @@ public class HttpRequest <T> implements Http {
      * Get context parameters
      * @return
      */
-    public final Map<String, String> getContextParameters() {
+    public final Map<String, String> getParameters() {
         return this.queryParam;
     }
 
@@ -276,7 +276,7 @@ public class HttpRequest <T> implements Http {
      * @param name
      * @return
      */
-    public final Object getContextParameter(String name) {
+    public final Object getParameter(String name) {
         return this.queryParam.get(name);
     }
 
@@ -286,6 +286,14 @@ public class HttpRequest <T> implements Http {
      */
     public Part<T> getBody() {
         return this.body;
+    }
+
+    /**
+     * Whether existing body content
+     * @return
+     */
+    public boolean isBody() {
+        return this.body.isBody();
     }
 
     /**

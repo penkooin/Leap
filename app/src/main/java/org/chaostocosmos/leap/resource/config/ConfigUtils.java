@@ -44,8 +44,8 @@ public class ConfigUtils {
             configMap = new Gson().<Map<String, Object>> fromJson(metaString, Map.class);
         } else if(metaType.equalsIgnoreCase("properites")) {
             configMap = Arrays.asList(metaString.split(System.lineSeparator()))
-                            .stream().map(l -> new Object[]{l.substring(0, l.indexOf("=")).trim(), l.substring(l.indexOf("=")+1).trim()})
-                            .collect(Collectors.toMap(k -> (String)k[0], v -> v[1]));
+                              .stream().map(l -> new Object[]{l.substring(0, l.indexOf("=")).trim(), l.substring(l.indexOf("=")+1).trim()})
+                              .collect(Collectors.toMap(k -> (String)k[0], v -> v[1]));
         } else {
             throw new RuntimeException("Meta file not supported: "+metaName);
         }

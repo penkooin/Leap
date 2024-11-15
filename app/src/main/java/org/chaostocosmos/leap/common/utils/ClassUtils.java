@@ -323,11 +323,9 @@ public class ClassUtils {
         map.put("users", host.getValue("users"));
         map.put("dynamic-classpath", host.getDynamicClassPaths().toString());
             Map<Object, Object> filterMap = new HashMap<>();
-            filterMap.put("access-filters", host.getAccessFiltering());
-            filterMap.put("forbidden-filters", host.getForbiddenFiltering());
+            filterMap.put("access-filters", host.getAllowedPath());
         map.put("resource", filterMap);
             Map<Object, Object> ipFilterMap = new HashMap<>();
-            ipFilterMap.put("allowed", host.getIpAllowedFiltering());
             ipFilterMap.put("forbidden", host.getIpForbiddenFiltering());
         map.put("ip-filter", ipFilterMap);
         map.put("home", host.getDocroot().toString());

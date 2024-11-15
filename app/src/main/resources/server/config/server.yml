@@ -3,7 +3,7 @@ server:
   id: leap-server
   version: 1.0
   
-  hosts: 
+  hosts:
     leap: ./leap
     leap1: ./leap1
     leap2: ./leap2
@@ -18,19 +18,19 @@ server:
     context-path: /monitor/chart/image
     probing-interval: 5000
     support-monitoring: false
-    image-path: server/img/    
+    image-path: server/img/
     
   logs:
     path: server/logs/server.log
     level: DEBUG
     
-  spring-jpa-support: true
+  spring-jpa-support: false
   spring-jpa-packages: [
       "org.chaostocosmos.leap.service.impl",
-    ]    
+    ]
     
-  data-source: 
-    - id: MYSQL        
+  data-source:
+    - id: MYSQL
       driver-class: org.mariadb.jdbc.Driver
       url: jdbc:mariadb://localhost:3306/leap
       schema: leap

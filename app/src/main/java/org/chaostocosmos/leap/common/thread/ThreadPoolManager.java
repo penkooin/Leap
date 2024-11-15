@@ -134,7 +134,7 @@ public class ThreadPoolManager {
      * Shutdown thread pool
      * @throws InterruptedException
      */
-    public synchronized void terminate() throws InterruptedException { 
+    public synchronized void stop() throws InterruptedException { 
         if(threadPoolExecutor != null && threadPoolExecutor.getActiveCount() < 1) {
             threadQueue.clear();
             threadPoolExecutor.shutdown();

@@ -10,6 +10,7 @@ import org.chaostocosmos.leap.http.HttpRequest;
 import org.chaostocosmos.leap.http.HttpResponse;
 import org.chaostocosmos.leap.http.HttpTransfer;
 import org.chaostocosmos.leap.resource.model.ResourcesWatcherModel;
+import org.chaostocosmos.leap.security.SecurityManager;
 import org.chaostocosmos.leap.service.mgmt.ServiceManager;
 import org.chaostocosmos.leap.session.SessionManager;
 
@@ -57,6 +58,18 @@ public interface ServiceModel<T, R> extends SpringJPAModel, Cloneable {
      * @param serviceManager
      */
     public void setServiceManager(final ServiceManager<T, R> serviceManager);
+
+    /**
+     * Get security manager
+     * @return
+     */
+    public SecurityManager getSecurityManager();
+
+    /**
+     * Set security manager
+     * @param securityManager
+     */
+    public void setSecurityManager(final SecurityManager securityManager);
 
     /**
      * Get Resource object

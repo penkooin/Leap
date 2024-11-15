@@ -1,5 +1,6 @@
 package org.chaostocosmos.leap.http.part;
 
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -35,7 +36,7 @@ public class KeyValuePart extends AbstractPart <Map<String, String>> {
     }
 
     @Override
-    public Map<String, String> getBody() throws Exception {
+    public Map<String, String> getBody() throws IOException {
         if(this.body == null) {
             byte[] body = super.requestStream.readStream((int)super.contentLength);
             String keyVal = new String(body, super.charset);

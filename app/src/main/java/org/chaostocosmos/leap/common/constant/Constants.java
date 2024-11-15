@@ -11,7 +11,17 @@ import java.util.regex.Pattern;
  * @author 9ins
  */
 public class Constants {
-    
+
+    /**
+     * 2 * CRLF
+     */
+    public static final String CRLF2 = "\r\n\r\n";
+
+    /**
+     * CRLF
+     */
+    public static final String CRLF = "\r\n";    
+
     /**
      * Http protocol version
      */

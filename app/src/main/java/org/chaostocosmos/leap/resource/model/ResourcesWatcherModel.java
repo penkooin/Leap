@@ -98,7 +98,7 @@ public interface ResourcesWatcherModel extends Runnable {
      * @return
      * @throws Exception
      */
-    public boolean exists(Path resourcePath) throws Exception;
+    public boolean exists(Path resourcePath);
 
     /**
      * Whether resource is In-Memory 
@@ -110,11 +110,11 @@ public interface ResourcesWatcherModel extends Runnable {
     /**
      * Terminate resource watcher
      */
-    public void terminate() throws Exception;
+    public void stopWatch();
 
     /**
      * Start resource watcher 
      * @throws Exception
      */
-    public void start() throws Exception;
+    public void startWatch();
 }

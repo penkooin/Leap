@@ -5,12 +5,13 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.chaostocosmos.leap.common.constant.Constants;
 import org.chaostocosmos.leap.common.log.Logger;
@@ -20,6 +21,7 @@ import org.chaostocosmos.leap.context.Host;
 import org.chaostocosmos.leap.enums.AUTH;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.enums.MIME;
+import org.chaostocosmos.leap.enums.PROTOCOL;
 import org.chaostocosmos.leap.enums.REQUEST_LINE;
 import org.chaostocosmos.leap.enums.TEMPLATE;
 import org.chaostocosmos.leap.exception.LeapException;
@@ -180,7 +182,7 @@ public class HttpTransfer<T, R> implements Http {
     @SuppressWarnings("unchecked")
     public HttpResponse<R> getResponse() throws IOException {
         if(this.response == null) {
-            String msg = this.resolvePlaceHolder(TEMPLATE.RESPONSE.loadTemplatePage(this.host.getId()), new HashMap<String, Object>() {{
+            String msg = Html.resolvePlaceHolder(TEMPLATE.RESPONSE.loadTemplatePage(this.host.getId()), new HashMap<String, Object>() {{
                 put("@serverName", host.getHost());
                 put("@code", HTTP.RES200.code());
                 put("@status", "OK");
@@ -192,6 +194,16 @@ public class HttpTransfer<T, R> implements Http {
             this.response = this.httpParser.getResponse(HTTP.RES200.code(), (R) msg, headers);
         }
         return this.response;
+    }
+    
+    /**
+     * Replace placeholder to html page
+     * @param htmlPage
+     * @param placeHolderParams
+     * @return
+     */
+    public String resolvePlaceHolder(String htmlPage, Map<String, Object> placeHolderParams) {
+        return Html.resolvePlaceHolder(htmlPage, placeHolderParams);
     }    
 
     /**
@@ -233,49 +245,48 @@ public class HttpTransfer<T, R> implements Http {
      */
     @SuppressWarnings("unchecked")
     public void processError(LeapException err) throws Exception {        
-        if(this.response == null) {
-            try {
-                this.response = getResponse();
-            } catch (IOException e) {
-                this.host.getLogger().throwable(e);
-            }
-        }
+
+        //Get caused source error
         Throwable throwable = err;
         while(throwable.getCause() != null) {
             throwable = throwable.getCause();
         }
-        String serverName = this.host.getHost();
-        int resCode = HTTP.RES500.code();
+
+        PROTOCOL protocol = this.host.getProtocol();
+        String hostName = this.host.getHost();
+        int resCode = err.getHTTP().code();
         String status = HTTP.valueOf("RES"+resCode).status();
-        String message = throwable.getMessage()+"";
-        String stacktrace = "";
-        Map<String, Object> paramMap = Map.of("@serverName", serverName, 
-                                         "@code", resCode, 
-                                         "@status", status, 
-                                         "@message", message, 
-                                         "@stacktrace", stacktrace);
-        R body = (R) resolvePlaceHolder(TEMPLATE.ERROR.loadTemplatePage(this.host.getId()), paramMap);                                                                                    
-        String hostId = this.host.getId();
-        if(err instanceof LeapException) {
-            resCode = err.code();
-            if(err.code() == HTTP.RES401.code() && host.getAuthentication() == AUTH.BASIC) {
-                this.response.addHeader("WWW-Authenticate", "Basic");
-            } else if(err.code() == HTTP.RES307.code()) {
-                RedirectException redirect = (RedirectException) throwable;
-                this.response.removeAllHeader();
-                Html.makeRedirectHeader(0, redirect.getURLString()).entrySet().stream().forEach(e -> this.response.addHeader(e.getKey(), e.getValue()));
-                this.response.addHeader("Location", redirect.getURLString());
+
+        StringBuffer resBuffer = new StringBuffer();
+        String errorPage = Html.makeDefaultErrorHtml(this.host, err);
+        resBuffer.append(protocol.name()+"/"+Constants.HTTP_VERSION+" "+resCode+" "+status+"\r\n"); 
+        resBuffer.append("Date: "+new Date().toString()+Constants.CRLF);
+        resBuffer.append("Server: "+hostName+Constants.CRLF);
+        resBuffer.append("Content-Type: "+MIME.TEXT_HTML.mimeType()+"; charset="+this.host.charset()+Constants.CRLF);
+        resBuffer.append("Content-Length: "+errorPage.getBytes().length+Constants.CRLF);
+        resBuffer.append("Connection: close"+Constants.CRLF);
+        if(err.code() == HTTP.RES401.code()) {
+            if(this.host.getValue("global.login-page") != null) {
+                String path = this.host.getValue("global.login-page").toString();
+                path = path.startsWith("/") ? path.substring(1) : path;
+                Path loginPage = this.host.getStatic().resolve(path);
+                if(Files.exists(loginPage)) {                    
+                    resBuffer.append("Set-Cookie: sessionid=deleted; Expires=Thu, 01 Jan 1970 00:00:00 GMT; Path=/; HttpOnly"+Constants.CRLF);
+                    resBuffer.append("Cache-Control: no-store"+Constants.CRLF);
+                    resBuffer.append("X-Custom-Header: SomeValue"+Constants.CRLF);
+                    resBuffer.append("Location: /"+path+Constants.CRLF);
+                }    
             }
-            if(Context.get().host(hostId).<Boolean> getValue("logs.details")) {
-                stacktrace = "<pre>" + err.getStackTraceMessage() + "<pre>";
-            }
-        } else {
-            resCode = HTTP.RES500.code();            
+        } else if(err.code() == HTTP.RES307.code()) {
+            RedirectException redirect = (RedirectException) throwable;
+            resBuffer.append("Location: "+redirect.getURLString()+Constants.CRLF);
         }        
-        this.response.setResponseCode(resCode);
-        this.response.setContentLength(body.toString().getBytes().length);
-        this.response.setBody(body);
-        sendResponse();
+        resBuffer.append(Constants.CRLF2);
+        resBuffer.append(errorPage);
+
+        //Write error page bytes to output stream
+        this.outStream.write(resBuffer.toString().getBytes());
+        this.outStream.flush();
     }
 
     /**
@@ -296,29 +307,6 @@ public class HttpTransfer<T, R> implements Http {
         values.add(value);
         headers.put(key, values);
         return headers;
-    }
-
-    /**
-     * Resolve placeholders in HTML page
-     * @param htmlPage
-     * @param placeHolderValueMap
-     * @return
-     */
-    public String resolvePlaceHolder(String htmlPage, Map<String, Object> placeHolderValueMap) {
-        String regex = Constants.PLACEHOLDER_REGEX;
-        Pattern ptrn = Pattern.compile(regex);
-        Matcher matcher = ptrn.matcher(htmlPage);
-        while(matcher.find()) {
-            String match = matcher.group(1).trim();
-            String key = match.replace("<!--", "").replace("-->", "").trim();
-            if(placeHolderValueMap.containsKey(key)) {
-                //Object obj = placeHolderValueMap.get(key);
-                htmlPage = htmlPage.substring(0, htmlPage.indexOf(match))
-                           + placeHolderValueMap.get(key)
-                           + htmlPage.substring(htmlPage.indexOf(match)+match.length());
-            }
-        }
-        return htmlPage;
     }
 
     /**

@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.chaostocosmos.leap.common.file.FileUtils;
+import org.chaostocosmos.leap.common.constant.Constants;
 import org.chaostocosmos.leap.enums.HTTP;
 import org.chaostocosmos.leap.exception.LeapException;
 
@@ -32,16 +32,6 @@ import org.chaostocosmos.leap.exception.LeapException;
  * @author 9ins
  */
 public class HttpRequestStream {
-
-    /**
-     * 2 * CRLF
-     */
-    private static final String CRLF2 = "\r\n\r\n";
-
-    /**
-     * CRLF
-     */
-    public static final String CRLF = "\r\n";    
 
     /**
      * InputStream
@@ -122,9 +112,12 @@ public class HttpRequestStream {
             byte[] buffer = new byte[this.bufferSize];
             int total = 0;
             int len;
-            while((len = this.inputStream.read(buffer)) != -1 || total < length) {
+            while((len = this.inputStream.read(buffer)) != -1) {
                 data.write(buffer, 0, len);
                 total += len;
+                if(total >= length) {
+                    break;
+                }
             }
             return data.toByteArray();
         }
@@ -317,7 +310,7 @@ public class HttpRequestStream {
         List<byte[]> parts = splitBySequence(data, boundaryStart);        
         for(byte[] part : parts) {
             //Finding index of part data starting point in the byes of part header and part data.
-            int idx = findSequenceIndex(part, CRLF2.getBytes()) + CRLF2.getBytes().length;
+            int idx = findSequenceIndex(part, Constants.CRLF2.getBytes()) + Constants.CRLF2.getBytes().length;
             String head = new String(Arrays.copyOf(part, idx));
             byte[] partData = Arrays.copyOfRange(part, idx, part.length);
             Map<String, String> fieldMap = extractFields(head, List.of("name", "filename"));
@@ -348,7 +341,7 @@ public class HttpRequestStream {
                 || Arrays.equals(Arrays.copyOfRange(fileBytes, idx, idx + boundaryEndBytes.length), boundaryEndBytes)) {
                 if(i != 0) {                    
                     //Copy part data into part bytes. though i is start of boundary, to make i index minus CRLF length.
-                    byte[] partData = Arrays.copyOfRange(fileBytes, preIdx, i - CRLF.getBytes().length);
+                    byte[] partData = Arrays.copyOfRange(fileBytes, preIdx, i - Constants.CRLF.getBytes().length);
                     parts.add(partData);
                     preIdx = i;                    
                 }

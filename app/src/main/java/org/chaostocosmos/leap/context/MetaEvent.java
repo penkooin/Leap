@@ -2,8 +2,6 @@ package org.chaostocosmos.leap.context;
 
 import java.util.EventObject;
 
-import org.chaostocosmos.leap.enums.SERVER_EVENT;
-
 /**
  * Context Event object
  * 
@@ -14,7 +12,7 @@ public class MetaEvent <T extends Metadata<?>> extends EventObject {
     /**
      * Metadata event type enum
      */
-    SERVER_EVENT eventType;
+    META_EVENT_TYPE eventType;
 
     /**
      * Metadata 
@@ -27,9 +25,14 @@ public class MetaEvent <T extends Metadata<?>> extends EventObject {
     String expr;
 
     /**
-     * Event value
+     * Original value
      */
-    Object value;
+    Object original;
+
+    /**
+     * Changed value
+     */
+    Object changed;
 
     /**
      * Constructor
@@ -37,21 +40,23 @@ public class MetaEvent <T extends Metadata<?>> extends EventObject {
      * @param eventType
      * @param metadata
      * @param expr
-     * @param value
+     * @param original
+     * @param changed
      */
-    public MetaEvent(Object eventSource, SERVER_EVENT eventType, T metadata, String expr, Object value) {
+    public MetaEvent(Object eventSource, META_EVENT_TYPE eventType, T metadata, String expr, Object original, Object changed) {
         super(eventSource);
         this.eventType = eventType;
         this.metadata = metadata;
         this.expr = expr;
-        this.value = value;
+        this.original = original;
+        this.changed = changed;
     }
 
     /**
      * Get event type
      * @return
      */
-    public SERVER_EVENT getEventType() {
+    public META_EVENT_TYPE getEventType() {
         return this.eventType;
     }
 
@@ -64,11 +69,19 @@ public class MetaEvent <T extends Metadata<?>> extends EventObject {
     }
 
     /**
-     * Get value of
+     * Get original value
      * @return
      */
-    public Object getValue() {
-        return this.value;
+    public Object getOriginal() {
+        return this.original;
+    }
+
+    /**
+     * Get changed value
+     * @return
+     */
+    public Object getChanged() {
+        return this.changed;
     }
 
     /**
@@ -85,5 +98,11 @@ public class MetaEvent <T extends Metadata<?>> extends EventObject {
      */
     public Object getValue(String pathExpr) {
         return this.metadata.getValue(pathExpr);
-    }    
+    }
+
+    @Override
+    public String toString() {
+        return "MetaEvent [eventType=" + eventType + ", metadata=" + metadata + ", expr=" + expr + ", original="
+                + original + ", changed=" + changed + "]";
+    }        
 }

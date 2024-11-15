@@ -212,7 +212,7 @@ public class HttpParser<T, R> {
                 //     bodyInStream = list.get(0);
                 // }
                 // boolean preLoadBody = bodyInStream == null ? false : !Boolean.valueOf(bodyInStream.toString());                
-                if(requestType == REQUEST.POST) {
+                if(requestType == REQUEST.POST || requestType == REQUEST.PUT || requestType == REQUEST.PATCH) {
                     bodyPart = (Part<T>) parseBodyParts(mimeType, contentLength, charset);
                 }
             }

@@ -138,7 +138,10 @@ public enum HTTP {
     // leap900: Received negative value from socket stream. {}
     LEAP900(900),
     // leap901: Not supported option. {}
-    LEAP901(901);
+    LEAP901(901),
+    // leap902: Session timeout. {}
+    LEAP902(902)
+    ;
     
     /**
      * Response code

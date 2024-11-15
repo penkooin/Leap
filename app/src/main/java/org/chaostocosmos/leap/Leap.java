@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.lang.Thread.State;
 import java.net.InetAddress;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -26,16 +27,17 @@ import org.chaostocosmos.leap.common.thread.ThreadPoolManager;
 import org.chaostocosmos.leap.common.utils.ClassUtils;
 import org.chaostocosmos.leap.context.Context;
 import org.chaostocosmos.leap.context.Host;
+import org.chaostocosmos.leap.context.META_EVENT_TYPE;
 import org.chaostocosmos.leap.context.MetaEvent;
 import org.chaostocosmos.leap.context.MetaListener;
 import org.chaostocosmos.leap.context.Metadata;
-import org.chaostocosmos.leap.enums.SERVER_EVENT;
-import org.chaostocosmos.leap.enums.STATUS;
+import org.chaostocosmos.leap.enums.LEAP_STATUS;
 import org.chaostocosmos.leap.enums.WAR_PATH;
 import org.chaostocosmos.leap.exception.LeapException;
 import org.chaostocosmos.leap.resource.ResourceHelper;
 import org.chaostocosmos.leap.resource.ResourceMonitor;
 import org.chaostocosmos.leap.resource.ResourceProvider;
+import org.chaostocosmos.leap.resource.model.ResourcesWatcherModel;
 import org.chaostocosmos.leap.spring.SpringJPAManager;
 import org.hibernate.internal.util.config.ConfigurationException;
 
@@ -47,14 +49,14 @@ import org.hibernate.internal.util.config.ConfigurationException;
 public class Leap implements MetaListener {
 
     /**
-     * Standard IO
-     */
-    public static PrintStream systemOut;
-
-    /**
      * Home path
      */
     public static Path HOME_PATH;
+
+    /**
+     * Standard IO
+     */
+    public static PrintStream systemOut;
 
     /**
      * Static resource manager
@@ -175,10 +177,9 @@ public class Leap implements MetaListener {
             Host<?> host = Context.get().host(hostName);
 
             //Add static contents path for host to ResourceProvider
-            ResourceProvider.get().addPath(host.getDocroot());
+            ResourcesWatcherModel watcher = ResourceProvider.get().addWatcherPath(host.getDocroot());
+            watcher.startWatch();
 
-            // set host server status to NONE
-            host.setHostStatus(STATUS.NONE);
             InetAddress hostAddress = InetAddress.getByName(host.getHost());
             String hostPort = hostAddress.getHostAddress()+":"+host.getPort();
             if(leapServerMap.containsKey(hostPort)) {
@@ -192,8 +193,7 @@ public class Leap implements MetaListener {
 
         LoggerFactory.getLogger().info("----------------------------------------------------------------------------------------------------");        
         for(LeapServer server : leapServerMap.values()) {
-            server.setDaemon(false);
-            server.start();
+            server.startServer();
         }
 
         //initialize resource monitor
@@ -204,14 +204,21 @@ public class Leap implements MetaListener {
         } else {
             LoggerFactory.getLogger().info("[MONITOR OFF] Leap system monitor turned off.");
         }        
-    }
 
-    /**
-     * Get home path
-     * @return
-     */
-    public static Path getHomePath() {
-        return HOME_PATH;
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            while(true) {
+                if(Thread.getAllStackTraces().keySet().stream().filter(t -> t.getName().startsWith("org.chaostocosmos.leap")).allMatch(t -> t.isInterrupted())) {
+                    break;
+                } else {
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+                        LoggerFactory.getLogger().throwable(e);
+                    }
+                }
+            }            
+            LoggerFactory.getLogger().info("[LEAP TERMINATED] All of Leap hosts and servies is terminiated...bye:)");
+        }));
     }
 
     /**
@@ -221,17 +228,26 @@ public class Leap implements MetaListener {
      * @throws NotSupportedException
      */
     public void shutdown() { 
-        LoggerFactory.getLogger().info("[TERMINATED] Shutdown Leap !!!");        
+        LoggerFactory.getLogger().info("[TERMINATED] Shutdown Leap !!!!!!");        
         try {
-            ThreadPoolManager.get().terminate();
-            ResourceProvider.get().terminates();
-            ResourceMonitor.get().terminate();                
+            ThreadPoolManager.get().stop();
+            ResourceProvider.get().stopAllWatchers();
+            ResourceMonitor.get().stopMonitor();
+            Context.get().stopWatch();            
             for(LeapServer server : leapServerMap.values()) {
                 server.stopServer();
             }    
         } catch(Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Get home path
+     * @return
+     */
+    public static Path getHomePath() {
+        return HOME_PATH;
     }
 
     /**
@@ -251,6 +267,15 @@ public class Leap implements MetaListener {
     }
 
     /**
+     * Print trademark 
+     * @throws LeapException
+     */
+    private void trademark() throws Exception {
+        System.out.println(ResourceHelper.getInstance().getTrademark());
+        System.out.println();
+    }
+
+    /**
      * Get execution parameter options
      * @return
      */
@@ -263,25 +288,21 @@ public class Leap implements MetaListener {
     } 
 
     /**
-     * Print trademark 
-     * @throws LeapException
-     */
-    private void trademark() throws Exception {
-        System.out.println(ResourceHelper.getInstance().getTrademark());
-        System.out.println();
-    }
-
-    /**
      * Receive context event
      * @param ce
      */
     @Override
     public void receiveContextEvent(MetaEvent<Metadata<?>> ce) throws Exception {
-        if(ce.getEventType() == SERVER_EVENT.CHANGED) {
-            LoggerFactory.getLogger().debug(ce.getPathExpression()+"  "+ce.getEventType());
-            if(ce.getValue().equals(STATUS.TERMINATED.name())) {
-                shutdown();                
-            }            
+        if(ce.getEventType() == META_EVENT_TYPE.MODIFIED) {
+            LoggerFactory.getLogger().debug("META MODIFIED EVENT RECEIVE: PATH: ["+ce.getPathExpression()+"]   OLD: "+ce.getOriginal()+"   NEW: "+ce.getChanged());
+            String expr = ce.getPathExpression();            
+            if(expr.startsWith("server.monitor")) {
+                if(expr.endsWith(".support-monitoring") && (ce.getChanged().equals(false) || ce.getChanged().equals("false"))) {
+                    ResourceMonitor.get().stopMonitor();
+                } else {
+                    ResourceMonitor.get().startMonitor();
+                }
+            }
         }
     }
 

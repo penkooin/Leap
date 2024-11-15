@@ -1,5 +1,6 @@
 package org.chaostocosmos.leap.http.part;
 
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
 
@@ -33,7 +34,7 @@ public class BinaryPart extends AbstractPart <byte[]> {
     }
 
     @Override
-    public byte[] getBody() throws Exception {
+    public byte[] getBody() throws IOException {
         if(this.body == null) {
             this.body = this.requestStream.readStream((int) getContentLength());
         }

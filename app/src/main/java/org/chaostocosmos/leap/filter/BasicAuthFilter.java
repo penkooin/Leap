@@ -28,7 +28,7 @@ public class BasicAuthFilter<T> extends AbstractRequestFilter<HttpRequest<T>> {
     public void filterRequest(HttpRequest<T> request) throws Exception { 
         super.filterRequest(request);
         String sessionId = request.getCookie(Constants.SESSION_ID_KEY);
-        Session session = super.sessionManager.getSessionCreateIfNotExists(sessionId);
+        Session session = super.sessionManager.getSessionIfExist(sessionId);
 
         if(session == null && request.getClass().isAssignableFrom(HttpRequest.class)) {
             final Object authorization = request.getHeaders().get("Authorization");

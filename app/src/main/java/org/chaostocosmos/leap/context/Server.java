@@ -92,7 +92,7 @@ public class Server <T> extends Metadata <T> {
      * @return
      */
     public boolean isSupportMonitoring() {
-        return super.getValue("server.monitor.support-monitoring");
+        return super.<Boolean> getValue("server.monitor.support-monitoring");
     }
 
     /**

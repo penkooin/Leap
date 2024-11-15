@@ -212,11 +212,4 @@ public class CertificateHandler {
         }
         return der;
     } 
-
-
-    public static void main(String[] args) throws FileNotFoundException, CertificateException, IOException, KeyStoreException, NoSuchAlgorithmException, InvalidAlgorithmParameterException {
-        Path ssl = Paths.get("D:\\0.github\\Leap\\app\\src\\main\\resources\\config\\ssl\\");
-        //addX509CertificateToTrustStore(ssl.resolve("leap.pem").toFile(), "leap", ssl.resolve("leap-keystore.jks").toFile(), "939393", "JKS");
-        listCertificates(ssl.resolve("leap-keystore.jks").toFile(), "939393", "JKS").stream().forEach(System.out::println);
-    }
 }

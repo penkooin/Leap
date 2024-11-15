@@ -138,23 +138,6 @@ public class ResourceProvider {
     }
 
     /**
-     * Add specific Path to watch resource if privous watcher is not exist, creating new one.
-     * @param watchPath
-     * @return
-     * @throws Exception
-     */
-    public boolean addPath(Path watchPath) throws Exception {
-        if(this.resourceWatcherMap.containsKey(watchPath)) {
-            return false;
-            //throw new IllegalArgumentException("Specified Path is already applied. Path: "+watchPath.toAbsolutePath());
-        }
-        ResourcesWatcherModel watcher = createResourceWatcher(watchPath);
-        watcher.start();
-        this.resourceWatcherMap.put(watchPath, watcher);
-        return true;        
-    }
-
-    /**
      * Get watch event kind
      * @param watchEventKindList
      * @return
@@ -196,31 +179,56 @@ public class ResourceProvider {
      * Start all resource watcher
      * @throws Exception 
      */
-    public void startWatchers() throws Exception {
-        for(Entry<Path, ResourcesWatcherModel> e : this.resourceWatcherMap.entrySet()) {
-            e.getValue().start();
-            LoggerFactory.getLogger().info("START RESOURCE WATCHER ---------- PATH: "+e.getKey().toAbsolutePath());
+    public synchronized void startWatchers() {
+        for(Path watchPath : this.resourceWatcherMap.keySet()) {
+            LoggerFactory.getLogger().info("START RESOURCE WATCHER ---------- PATH: "+watchPath.toAbsolutePath());
+            try {
+                ResourcesWatcherModel watcher = addWatcherPath(watchPath);
+                watcher.startWatch();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
-    public void restartWatch(Path watchPath) throws Exception {
+    /**
+     * Restart Resource Watcher
+     * @param watchPath
+     * @throws Exception
+     */
+    public synchronized ResourcesWatcherModel restartWatcher(Path watchPath) throws Exception {
         ResourcesWatcherModel watcher = null;
         if(this.resourceWatcherMap.containsKey(watchPath)) {
             watcher = this.resourceWatcherMap.get(watchPath);
-            watcher.terminate();
+            watcher.stopWatch();
         } else {
             watcher = createResourceWatcher(watchPath);
         }
-        watcher.start();
+        return watcher;
+    }
+
+    /**
+     * Add specific Path to watch resource if privous watcher is not exist, creating new one.
+     * @param watchPath
+     * @return
+     * @throws Exception
+     */
+    public synchronized ResourcesWatcherModel addWatcherPath(Path watchPath) throws Exception {
+        if(this.resourceWatcherMap.containsKey(watchPath)) {
+            throw new IllegalArgumentException("Specified Path is already applied. Path: "+watchPath.toAbsolutePath());
+        }
+        ResourcesWatcherModel watcher = createResourceWatcher(watchPath);
+        this.resourceWatcherMap.put(watchPath, watcher);
+        return watcher;
     }
 
     /**
      * Terminate all resource watcher
      * @throws Exception 
      */
-    public void terminates() throws Exception {
+    public synchronized void stopAllWatchers() {
         for(ResourcesWatcherModel watcher : this.resourceWatcherMap.values()) {
-            watcher.terminate();
+            watcher.stopWatch();
         }
     }
 }

@@ -7,6 +7,7 @@ import java.net.SocketTimeoutException;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -18,6 +19,7 @@ import org.chaostocosmos.leap.client.MIME;
 import org.chaostocosmos.leap.common.NetworkInterfaceManager;
 import org.chaostocosmos.leap.common.constant.Constants;
 import org.chaostocosmos.leap.common.enums.SIZE;
+import org.chaostocosmos.leap.common.enums.TIME;
 import org.chaostocosmos.leap.common.log.Logger;
 import org.chaostocosmos.leap.common.log.LoggerFactory;
 import org.chaostocosmos.leap.common.thread.ThreadPoolManager;
@@ -37,7 +39,7 @@ public class ResourceMonitor implements Runnable {
     /**
      * Monitor request interval limit milliseconds
      */
-    public static final int INTERVAL_LIMIT_MILLIS = 3000;
+    public static final int INTERVAL_LIMIT_MILLIS = 5000;
 
     /**
      * Fraction point of digit
@@ -90,9 +92,9 @@ public class ResourceMonitor implements Runnable {
     String monitorContextPath;
 
     /**
-     * Whether terminated
+     * Resource monitor thread
      */
-    boolean isDone = false;
+    Thread monitorThread = null;
 
     /**
      * Get resource monitor
@@ -113,8 +115,6 @@ public class ResourceMonitor implements Runnable {
     private ResourceMonitor() throws IOException {
         this.chart = buildMonitorSchema();        
         this.fractionPoint = Constants.DEFAULT_FRACTION_POINT;
-        this.monitorContextPath = Context.get().server().getMonitorContext();
-        this.interval = Context.get().server().getMonitoringInterval();
         this.logger = LoggerFactory.createLoggerFor(Context.get().server().getLogs(), Context.get().server().getLogsLevel());
         String mac = NetworkInterfaceManager.getMacAddressByIp(InetAddress.getLocalHost().getHostAddress());
         Host<?> host = Context.get().hosts().getHosts().get(0);
@@ -139,55 +139,16 @@ public class ResourceMonitor implements Runnable {
     }
 
     /**
-     * Start monitor timer
-     */
-    @Override
-    public void run() {                
-        if(this.interval >= INTERVAL_LIMIT_MILLIS) {
-            while(!isDone) {
-                try {
-                    Thread.sleep(interval);
-                } catch (InterruptedException e) {
-                    this.logger.throwable(e);
-                }
-                try {
-                    logger.info("[THREAD-MONITOR] "
-                              + "  Core: " + ThreadPoolManager.get().getCorePoolSize()
-                              + "  Max: " + ThreadPoolManager.get().getMaximumPoolSize()
-                              + "  Active: "+ThreadPoolManager.get().getTaskCount()
-                              + "  Largest: "+ThreadPoolManager.get().getLargestPoolSize()
-                              + "  Queued size: "+ThreadPoolManager.get().getQueuedTaskCount()
-                              + "  Task completed: "+ThreadPoolManager.get().getCompletedTaskCount()
-                        );
-                    logger.info("[MEMORY-MONITOR] "
-                              + "  Process Max: " + getMaxMemory()
-                              + "  Process Used: " + getUsedMemory()
-                              + "  Process Free: " + getFreeMemory()
-                              + "  Physical Total: " + getPhysicalTotalMemory()
-                              + "  Physical Free: " + getPhysicalFreeMemory()
-                              + "  Process CPU load: " + getProcessCpuLoad()
-                              + "  Process CPU time: " + getProcessCpuTime()
-                              + "  System CPU load: " + getSystemCpuLoad()
-                            );             
-                    setProbingValues();
-                    requestMonitorings();
-                } catch(SocketTimeoutException ste) {
-                    this.logger.throwable(ste);
-                } catch (Exception e) {
-                    this.logger.throwable(e);
-                }
-            }    
-        } else {
-            this.logger.info("[MONITOR OFF] Leap system monitoring interval is too low value: "+this.interval+" milliseconds. To turn on system monitoring, Please set monitoring interval value over 3000 milliseconds.");
-        }
-    }
-
-    /**
      * Start resource monitor
      */
-    public void startMonitor() {
-        Thread thr = new Thread(this);
-        thr.start();
+    public synchronized void startMonitor() {        
+        if(this.isRunning.get()) {
+            stopMonitor();
+        }
+        this.monitorThread = new Thread(this);
+        this.monitorThread.setName(getClass().getName());
+        this.monitorThread.start();
+        this.isRunning.set(true);
     }
 
     /**
@@ -195,9 +156,69 @@ public class ResourceMonitor implements Runnable {
      * @throws IOException 
      * @throws InterruptedException 
      */
-    public void terminate() throws IOException, InterruptedException {        
-        this.leapClient.close();
-        isDone = true;
+    public synchronized void stopMonitor() {       
+        try {            
+            this.isRunning.set(false);
+            if(this.monitorThread != null) this.monitorThread.interrupt();
+            if(this.monitorThread != null) this.monitorThread.join();                
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }        
+    }
+
+    AtomicBoolean isRunning = new AtomicBoolean();
+
+    /**
+     * Start monitor timer
+     */
+    @Override
+    public void run() {                
+        this.monitorContextPath = Context.get().server().getMonitorContext();
+        this.interval = Context.get().server().getMonitoringInterval();
+        this.logger.info("[MONITOR START] Leap system monitor is starting. Interval: "+TIME.MILLIS.duration(this.interval, TimeUnit.SECONDS));
+        while(this.isRunning.get()) {
+            if(this.interval < INTERVAL_LIMIT_MILLIS) {
+                this.logger.info("[MONITOR OFF] Leap system monitoring interval is too low value: "+this.interval+" milliseconds. To turn on system monitoring, Please set monitoring interval value over "+INTERVAL_LIMIT_MILLIS+" milliseconds.");
+                break;
+            } 
+            try {
+                Thread.sleep(interval);
+            } catch (InterruptedException e) {
+                break;
+            }
+            try {
+                logger.info("[THREAD-MONITOR] "
+                            + "  Core: " + ThreadPoolManager.get().getCorePoolSize()
+                            + "  Max: " + ThreadPoolManager.get().getMaximumPoolSize()
+                            + "  Active: "+ThreadPoolManager.get().getTaskCount()
+                            + "  Largest: "+ThreadPoolManager.get().getLargestPoolSize()
+                            + "  Queued size: "+ThreadPoolManager.get().getQueuedTaskCount()
+                            + "  Task completed: "+ThreadPoolManager.get().getCompletedTaskCount()
+                    );
+                logger.info("[MEMORY-MONITOR] "
+                            + "  Process Max: " + getMaxMemory()
+                            + "  Process Used: " + getUsedMemory()
+                            + "  Process Free: " + getFreeMemory()
+                            + "  Physical Total: " + getPhysicalTotalMemory()
+                            + "  Physical Free: " + getPhysicalFreeMemory()
+                            + "  Process CPU load: " + getProcessCpuLoad()
+                            + "  Process CPU time: " + getProcessCpuTime()
+                            + "  System CPU load: " + getSystemCpuLoad()
+                        );             
+                setProbingValues();
+                requestMonitorings();
+            } catch(SocketTimeoutException ste) {
+                this.logger.throwable(ste);
+            } catch (Exception e) {
+                this.logger.throwable(e);
+            }
+        }                
+        this.logger.info("[MONITOR TERMINATE] Leap system monitor is terminating...");
+        try {
+            if(this.leapClient != null) this.leapClient.close();
+        } catch (IOException e) {
+            this.logger.throwable(e);
+        }    
     }
 
     /**

@@ -70,7 +70,7 @@ public class LeapException extends RuntimeException {
      * Get RES_CODE
      * @return
      */
-    public HTTP getRes() {
+    public HTTP getHTTP() {
         return this.resObj;
     }
 

@@ -1,8 +1,10 @@
 package org.chaostocosmos.leap.enums;
 
 import java.nio.file.Path;
+import java.util.Map;
 
 import org.chaostocosmos.leap.context.Context;
+import org.chaostocosmos.leap.http.Html;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -55,5 +57,17 @@ public enum TEMPLATE {
      */
     public String loadTemplatePage(String hostId) throws IOException {
         return Files.readString(getTemplatePath(hostId));
+    }
+
+    /**
+     * Load template page with placehoder Map
+     * @param hostId
+     * @param placeHolderValueMap
+     * @return
+     * @throws IOException
+     */
+    public String loadTemplatePage(String hostId, Map<String, Object> placeHolderValueMap) throws IOException {
+        String html = loadTemplatePage(hostId);
+        return Html.resolvePlaceHolder(html, placeHolderValueMap);
     }
 }

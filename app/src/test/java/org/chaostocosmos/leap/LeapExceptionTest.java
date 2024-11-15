@@ -11,14 +11,14 @@ public class LeapExceptionTest {
     public void testCode() throws InterruptedException {
         int code = new LeapException(HTTP.RES100).code();
         System.out.println(code);
-        Context.get().stopMetaWatcher();
+        Context.get().stopWatch();
     }
 
     @Test
     public void testGetResCode() throws InterruptedException {
-        HTTP http = new LeapException(HTTP.LEAP900).getRes();        
+        HTTP http = new LeapException(HTTP.LEAP900).getHTTP();        
         System.out.println(http.name());
-        Context.get().stopMetaWatcher();
+        Context.get().stopWatch();
     }
 
     @Test
@@ -26,14 +26,14 @@ public class LeapExceptionTest {
         LeapException e = new LeapException(HTTP.LEAP900, "aaa", "bbb");
         String msg = e.getStackTraceMessage();
         System.out.println(msg);    
-        Context.get().stopMetaWatcher();
+        Context.get().stopWatch();
     }
 
     @Test
     public void testGetStatus() throws InterruptedException {
         String status = new LeapException(HTTP.RES428).getStatus();
         System.out.println(status);
-        Context.get().stopMetaWatcher();
+        Context.get().stopWatch();
     }
 
     public static void main(String[] args) throws InterruptedException {

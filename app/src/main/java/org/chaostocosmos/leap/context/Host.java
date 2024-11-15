@@ -19,7 +19,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.chaostocosmos.leap.Leap;
 import org.chaostocosmos.leap.common.data.Filtering;
 import org.chaostocosmos.leap.common.enums.SIZE;
 import org.chaostocosmos.leap.common.log.LEVEL;
@@ -27,7 +26,7 @@ import org.chaostocosmos.leap.common.log.Logger;
 import org.chaostocosmos.leap.common.log.LoggerFactory;
 import org.chaostocosmos.leap.enums.AUTH;
 import org.chaostocosmos.leap.enums.PROTOCOL;
-import org.chaostocosmos.leap.enums.STATUS;
+import org.chaostocosmos.leap.enums.LEAP_STATUS;
 import org.chaostocosmos.leap.resource.ResourceProvider;
 import org.chaostocosmos.leap.resource.model.ResourcesWatcherModel;
 
@@ -128,24 +127,8 @@ public class Host <T> extends Metadata<T> {
      * Get allowed resource filters
      * @return
      */
-    public Filtering getAccessFiltering() {
+    public Filtering getAllowedPathFiltering() {
         return new Filtering(super.<List<String>> getValue("security.context-filters.allowed"));
-    }
-
-    /**
-     * Get forbidden Filtering object
-     * @return
-     */
-    public Filtering getForbiddenFiltering() {
-        return new Filtering(super.<List<String>> getValue("security.context-filters.forbidden"));
-    }
-
-    /**
-     * Get IP allowed Filtering objects
-     * @return
-     */
-    public Filtering getIpAllowedFiltering() {
-        return new Filtering(super.<List<String>> getValue("security.ip-filters.allowed"));
     }
 
     /**
@@ -169,7 +152,7 @@ public class Host <T> extends Metadata<T> {
      * @return
      */
     public boolean isAuthentication() {
-        return getAuthentication() == AUTH.NONE ? false : true;
+        return getAuthentication() != AUTH.NONE ? true : false;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////     
@@ -180,14 +163,6 @@ public class Host <T> extends Metadata<T> {
      */
     public String getPath() {
         return super.getValue("path");
-    }
-
-    /**
-     * Get host server status
-     * @return
-     */
-    public STATUS getHostStatus() {        
-        return STATUS.valueOf(super.getValue("status"));
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////     
@@ -221,7 +196,8 @@ public class Host <T> extends Metadata<T> {
      * @return
      */
     public Path getHomePath() {
-        return Context.get().server().getHosts().get(getId()).normalize().toAbsolutePath();
+        String id = getId();
+        return Context.get().server().getHosts().get(id).normalize().toAbsolutePath();
     }
 
     /**
@@ -335,14 +311,6 @@ public class Host <T> extends Metadata<T> {
     }
 
     /**
-     * Set host status
-     * @param status
-     */
-    public void setHostStatus(STATUS status) {
-        super.setValue("status", status.name());
-    }    
-
-    /**
      * Get Logger
      * @return
      */
@@ -363,7 +331,7 @@ public class Host <T> extends Metadata<T> {
         List<File> resourceInfos = Arrays.asList(getStatic().resolve(path1.substring(1)).toFile().listFiles())
                                          .stream()
                                          .sorted(Comparator.comparing(f -> f.isDirectory() ? -1 : 1))
-                                         .filter(f -> getForbiddenFiltering().exclude(f.getName()))
+                                         .filter(f -> getAllowedPathFiltering().include(f.getName()))
                                          .collect(Collectors.toList());
         int pathCnt = path.length() - path.replace("/", "").length();
         Map<String, Object> params = new HashMap<>();

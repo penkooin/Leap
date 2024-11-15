@@ -11,8 +11,6 @@ import java.util.stream.Collectors;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
 
-import javax.transaction.NotSupportedException;
-
 import org.chaostocosmos.leap.common.constant.Constants;
 import org.chaostocosmos.leap.common.enums.SIZE;
 import org.chaostocosmos.leap.common.file.FileUtils;
@@ -248,7 +246,7 @@ public class HttpResponse<R> implements Http {
     }
 
     /**
-     * Send response to client by requested host, status code, reponse headers, body object
+     * Send response to client by requested host, status code, response headers, body object
      * @param host
      * @param responseCode
      * @param headers
@@ -263,7 +261,7 @@ public class HttpResponse<R> implements Http {
             Charset charset = this.host.charset();
             PROTOCOL protocol = this.host.getProtocol();
             String resMsg = responseCode < 900 ? HTTP.valueOf("RES"+responseCode).status() : responseCode >= 900 && responseCode < 1000 ? HTTP.valueOf("LEAP"+responseCode).status() : "Error code not supported: "+responseCode;
-            String res = protocol.name()+"/"+Constants.HTTP_VERSION+" "+responseCode+" "+resMsg+"\r\n"; 
+            String resFirstLine = protocol.name()+"/"+Constants.HTTP_VERSION+" "+responseCode+" "+resMsg+"\r\n"; 
             if(responseBody == null) {
                 this.host.getLogger().warn("Response body is Null: "+responseCode);
                 return ;
@@ -276,11 +274,14 @@ public class HttpResponse<R> implements Http {
             } else if(responseBody instanceof File || responseBody instanceof Path) {
                 body = FileUtils.readFile(responseBody instanceof File ? (File)responseBody : ((Path)responseBody).toFile(), host.<Integer> getValue("file.read-buffer-size"));
             } else {
-                throw new LeapException(HTTP.RES501, new NotSupportedException("Not support response body type: " + responseBody.getClass().getName()));
+                throw new LeapException(HTTP.RES501, "Not support response body type: " + responseBody.getClass().getName());
             }            
             long contentLength = body.length;
-            if(contentLength > host.<Integer> getValue("network.reponse-limit-byte-size")) {
-                throw new LeapException(HTTP.RES501, new NotSupportedException("Respose body size is too big: "+contentLength+" Limit: " + SIZE.GB.get(host.<Integer> getValue("network.response-limit-byte-size"), 2)));
+            if(contentLength > host.<Integer> getValue("network.response-limit-byte-size")) {
+                throw new LeapException(HTTP.RES501, "Respose body size is too big: "
+                                        + SIZE.MB.getWithUnit(contentLength)
+                                        +" Limit: " 
+                                        + SIZE.MB.getWithUnit( host.<Integer> getValue("network.response-limit-byte-size")));
             }
             List<String> values = new ArrayList<>();
             values.add(String.valueOf(contentLength));
@@ -288,9 +289,9 @@ public class HttpResponse<R> implements Http {
 
             //LoggerFactory.getLogger(response.getRequestedHost()).debug(response.toString());
             StringBuffer resStr = new StringBuffer();
-            resStr.append("////////////////////////////// [RESPONSE] : "+res.trim()+" - "+host.getInetAddress().getHostName()+System.lineSeparator());
+            resStr.append("////////////////////////////// [RESPONSE] : "+resFirstLine.trim()+" - "+host.getInetAddress().getHostName()+System.lineSeparator());
             resStr.append("RES CODE: "+responseCode+System.lineSeparator());
-            this.outputStream.write(res.getBytes());
+            this.outputStream.write(resFirstLine.getBytes());
             for(Map.Entry<String, List<String>> e : headers.entrySet()) {
                 String hv = e.getValue().stream().map(v -> v.toString()).collect(Collectors.joining("; "));
                 this.outputStream.write((e.getKey()+": "+hv+"\r\n").getBytes());
@@ -315,10 +316,11 @@ public class HttpResponse<R> implements Http {
             this.outputStream.flush();
             this.isSent = true;
             
-        } catch(Exception e) {
-            e.printStackTrace();
-            throw new LeapException(HTTP.RES500, e);
-        } 
+        } catch(LeapException le) {
+            throw le;
+        } catch (IOException e) {
+            this.host.getLogger().throwable(e);
+        }
     }
 
     /**
