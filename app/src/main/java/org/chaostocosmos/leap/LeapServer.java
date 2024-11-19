@@ -95,7 +95,7 @@ public class LeapServer implements Runnable {
     /**
      * IP filtering object
      */
-    private Filtering ipAllowedFilters, ipForbiddenFilters; 
+    private Filtering ipForbiddenFilters; 
 
     /**
      * SessionManager object
@@ -349,7 +349,7 @@ public class LeapServer implements Runnable {
                     }
                     String ipAddress = socket.getInetAddress().getHostAddress();
                     //Check client IP address is valid
-                    if(this.ipAllowedFilters.include(ipAddress) || this.ipForbiddenFilters.exclude(ipAddress)) {
+                    if(!this.ipForbiddenFilters.include(ipAddress)) {
                         int queueSize = ThreadPoolManager.get().getQueuedTaskCount();
                         if(queueSize < Context.get().server().getThreadQueueSize()) {
                             Session session = this.sessionManager.getSessionIfExist(cookies.get(Constants.SESSION_ID_KEY));

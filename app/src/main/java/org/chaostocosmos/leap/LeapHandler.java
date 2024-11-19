@@ -1,6 +1,5 @@
 package org.chaostocosmos.leap;
 
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
 
@@ -79,11 +78,6 @@ public class LeapHandler<T, R> implements Runnable {
     Filtering allowedFiltering;
 
     /**
-     * Forbidden context filtering
-     */
-    Filtering forbiddenFiltering;
-
-    /**
      * Constructor with HeapHttpServer, root direcotry, client socket and host object
      * @param httpServer
      * @param rootPath
@@ -95,8 +89,7 @@ public class LeapHandler<T, R> implements Runnable {
         this.LEAP_HOME = LEAP_HOME;
         this.httpTransfer = httpTransfer;
         this.host = host;
-        this.allowedFiltering = host.getAllowedPath();
-        this.forbiddenFiltering = host.getContextForbiddenFiltering();
+        this.allowedFiltering = host.getAllowedPathFiltering();
         this.serviceManager = httpServer.getServiceManager(); 
         this.sessionManager = httpServer.getSessionManager(); 
         this.securityManager = httpServer.getSecurityManager();
@@ -124,11 +117,10 @@ public class LeapHandler<T, R> implements Runnable {
                 }
             }
             System.out.println(this.allowedFiltering.exclude(request.getContextPath()));
-            System.out.println(this.forbiddenFiltering.include(request.getContextPath()));
-            if(this.allowedFiltering.exclude(request.getContextPath()) || this.forbiddenFiltering.include(request.getContextPath())) {
+            if(this.allowedFiltering.exclude(request.getContextPath())) {
                 throw new LeapException(HTTP.RES403, "Requested resource is restricted: "+request.getContextPath());
             }
-            if(((host.isAuthentication() || !isLocalRequest)) && (this.allowedFiltering.exclude(request.getContextPath()) || this.forbiddenFiltering.include(request.getContextPath()))) {                
+            if(((host.isAuthentication() || !isLocalRequest)) && (this.allowedFiltering.exclude(request.getContextPath()))) {                
                 try {
                     //if((session != null && !session.isAuthenticated()) && request.getCookie("__auth-trial") == null || !request.getCookie("__auth-trial").equals("1")) {
                     if((session != null && !session.isAuthenticated())) {
@@ -144,8 +136,8 @@ public class LeapHandler<T, R> implements Runnable {
                             String authorization = request.getHeaders().get("Authorization");
                             userCredentials = this.securityManager.authenticate(authorization);
                             if(userCredentials == null) {
-                                response.addSetCookie("__auth-trial", "1");                            
-                                response.addHeader("WWW-Authenticate", "Basic");                                
+                                response.addSetCookie("__auth-trial", "1");
+                                response.addHeader("WWW-Authenticate", "Basic");
                             }
                         }
                         if(userCredentials == null) {

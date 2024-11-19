@@ -4,6 +4,8 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.util.Collections;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -51,24 +53,33 @@ public class NetworkInterfaceManager {
      * @throws UnknownHostException
      */
     public static String getMacAddressByIp(String ip) throws SocketException, UnknownHostException {
-        NetworkInterface ni = NetworkInterface.getByInetAddress(InetAddress.getByName(ip));
-        if(ni != null) {
-            byte[] mac = ni.getHardwareAddress();   
-            if(mac != null) {
+        Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
+        String mainMacAddress = null;
+
+        while (interfaces.hasMoreElements()) {
+            NetworkInterface networkInterface = interfaces.nextElement();
+            // Skip loopback, virtual, or inactive interfaces
+            if (networkInterface.isLoopback() || networkInterface.isVirtual() || !networkInterface.isUp()) {
+                continue;
+            }
+            // Get the MAC address
+            byte[] mac = networkInterface.getHardwareAddress();
+            if (mac != null) {
+                // Format the MAC address
                 StringBuilder macAddress = new StringBuilder();
                 for (int i = 0; i < mac.length; i++) {
-                    macAddress.append(String.format("%02X", mac[i]));
-                    if (i < mac.length - 1) {
-                        macAddress.append("-");
-                    }
+                    macAddress.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
                 }
-                return macAddress.toString();
-            } else {
-                throw new RuntimeException("MAC address is not found!!!");
+                // Store the first found MAC address as main address
+                mainMacAddress = macAddress.toString();
+                System.out.println("Physical MAC address found: " + mainMacAddress);
+                break;  // Stop after finding the first physical MAC address
             }
-        } else {
-            throw new RuntimeException("Network interface is not found!!!");
         }
+        if(mainMacAddress == null) {
+            throw new RuntimeException("MAC address is not found!!!");
+        }
+        return mainMacAddress;
     }
 
     /**

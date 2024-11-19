@@ -2,7 +2,6 @@ package org.chaostocosmos.leap.security;
 
 import java.util.Map;
 
-import org.chaostocosmos.leap.enums.GRANT;
 import org.chaostocosmos.leap.session.Session;
 
 /**
@@ -60,8 +59,8 @@ public class UserCredentials {
      * Get grant of user
      * @return
      */
-    public GRANT getGrant() {
-        return GRANT.valueOf(this.grant);
+    public String getGrant() {
+        return this.grant;
     }
 
     /**
