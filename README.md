@@ -1,6 +1,7 @@
 
-## Welcome to Leap!
 ![Leap Logo](/images/leap.png)
+
+## Welcome to Leap!
 
 Leap? is an application server for building web services with an easy way to configure user goals and deliver great performance.
 
