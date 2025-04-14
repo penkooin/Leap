@@ -1,44 +1,79 @@
 
-<img src="./app/src/main/resources/webapp/WEB-INF/static/img/leap.png"/>
+## Welcome to Leap!
+![Leap Logo](/images/leap.png)
 
-<h2> <img src="./app/src/main/resources/webapp/WEB-INF/static/img/logo16.png"/> You wanna Leap? </h2>
- 
-<h3> Just being server for web services! </h3>  
+Leap? is an application server for building web services with an easy way to configure user goals and deliver great performance.
 
-* <h4>For alternatives of Web Server</h4>  
-* <h4>For alternatives of WAS</h4>  
-* <h4>For alternatives of RESTful Service</h4>
-* <h4>For alternatives of Video / Audio Streaming Service</h4>  
-* <h4>For versatile / multi-purpose / high-performance / rapid response services</h4>  
+### Key Features of Leap:
+- **Sustainable, durable, versatile, and performance-guaranteed functionalities for web services.**
+- Supports **heavy-duty services**, **rapid response services**, or **guaranteed Web/App back-end services** tailored to your needs.
+- Easily configurable for **API services**, **resource providers**, and even **Video/Audio streaming services (HTML5)**.
+- Built-in **security filters**, **parsing capabilities**, and **authentication** to enhance security and usability.
+- **Remote deployment functionality** allowing new service deployment without server downtime.
+- **Real-time configuration updates** during server runtime.
+- Offers **JPA integration** for efficient management of persistent objects with DBMS.
+- Supports **multi-part or binary streaming** for optimized upload performance and huge data processing.
+- **Enhanced resource manager** for faster, no-wait-time resource delivery.
 
-<h3> <img src="./app/src/main/resources/webapp/WEB-INF/static/img/logo16.png"/> What is Leap? </h3>
+**Ready to Leap up with Leap?**
 
----  
-Leap? is a application server for building web service with providing easy way to configurate user's goal and great performance.
-Leap provides sustainable, durable, veriaty, and performance guaranteed functionalities for Web Services.
-It just looks like web server but can be used to heavy-duty service, rapid response needed service or guaranteed Web/App back-end service accoding to what you need.
-In general, using by API service, resource provider and even Video/Audio(HTML 5) streaming service also.
+---
 
-Leap? provides a simple way to build your web-based service and easy to be set by well formatted method of configuration.
-You can easily build up your services not only HTML/Javascript based services but also developping user custom application by which user develop it for you purpose.
+## Resource Management of Leap
 
-Leap? can provide a various filters for security, parsing and authenticating, It will be enhancing your Web Service more powerful and Secured.
+Leap provides a **fully managed resource management architecture** consisting of:
+1. **Memory Resources**: For fast responses to high volumes of requests, ideal for real-time services like OTT or video streaming.
+2. **File System Resources**: Used for handling large data that doesn't require rapid response times.
 
-The remote deploy functionality is getting to achieve deploying variety of services on running time in server, don't need to shutdown and start-up, so that user do not need to down server for new service deployment. 
+### Key Highlights:
+- Splitting large resources into smaller parts using **disassemble-assemble mechanisms** ensures fast and stable delivery.
+- **Administrator filters** for securing and managing resources effectively.
+- **Dynamic resource request handling**: Users can access resources by requesting a URL.
 
-And real-time configuration apply can provide a easy way to configrate and apply configuration that user want to make up at even if Leap server's running time.
+Check out an example:
+**[Video Streaming Sample Page](/video/video.html)**
 
-JPA is most useful, powerful tool for managing persistant object related with DBMS in Java, at sense of this trandy perspective, Naturally, Leap provide that a efficent method of communicating with JPA components.
+---
 
-Also multi-part or binary streaming saving obviously get to reduce time of upload and can be processing huge size of data with capable performance.
+## Server Monitoring of Leap
 
-And enhanced resource manager will provides a resources of server to users more quickly and no wait-time using holding resources on memory if the system can afford to get capability of memory.
+Leap incorporates advanced features for:
+- **Multi-threading**
+- **Fully managed resource management**
+- **Real-time remote deployments**
 
-Especially supporting Video/Audio streaming service makes you build up excellent streaming server with complying Web standard regulation(HTML5).
+### Monitoring Capabilities:
+- Visualized charts for:
+  - **CPU utilization**
+  - **Memory usage**
+  - **Heap memory usage**
 
-So now, Ready to leap up with Leap?
+Administrators can customize visual attributes in configuration files.
+
+Explore more here:
+**[Server Monitor Sample Page](/monitor)**
+
+---
+
+## JPA Support of Leap
+
+Leap supports integration with **Spring Framework** and **JPA components**, enabling:
+- Full compatibility with Spring annotations like `@Service`, `@Entity`, `@Repository`.
+- Seamless integration without modification.
+- Annotation-based dependency injection using `@Autowired`.
+
+---
+
+## Additional Information
+
+- Includes an **embedded resource explorer** for directory browsing:
+
+- Licensed under **Apache 2.0**. Contributions and usage are open to all.
+
+Authored by **9ins**.
+
   
-<h3> <img src="./app/src/main/resources/webapp/WEB-INF/static/img/logo16.png"/> Features of Leap? </h3>
+<!-- <h3> <img src="./app/src/main/resources/webapp/WEB-INF/static/img/logo16.png"/> Features of Leap? </h3>
 ---
 
 <h3> <img src="./app/src/main/resources/webapp/WEB-INF/static/img/logo16.png"/> Preperation for using Leap? </h3>
@@ -60,5 +95,5 @@ So now, Ready to leap up with Leap?
 ---
 
 <h3> <img src="./app/src/main/resources/webapp/WEB-INF/static/img/logo16.png"/> How to communicate with Big-Data infrastructure. </h3>
----
+--- -->
 

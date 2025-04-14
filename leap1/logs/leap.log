@@ -3201,3 +3201,56 @@
 [INFO][LeapApp:309][2025-04-14 17:09:58] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.TemplateService [MAP CONTEXT]: /
 [INFO][LeapApp:309][2025-04-14 17:09:58] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SystemMemoryController [MAP CONTEXT]: /chatgpt/memory
 [INFO][Thread:1583][2025-04-14 17:09:59] [HTTP SERVER START] Address: www.leap1.org/192.168.0.144:9394 Backlog: 100
+[INFO][Thread:1583][2025-04-14 17:19:11] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:19:11] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:19:11] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 17:19:11] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:42376  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 17:19:11] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:19:11] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:19:11] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 17:19:11] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:42388  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 17:19:11] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:19:11] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:19:11] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[DEBUG][Thread:1583][2025-04-14 17:19:11] Service Holder not found. request path: /css/styles.css
+[INFO][Thread:1583][2025-04-14 17:19:11] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:42398  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 17:19:11] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:19:11] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:19:11] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[DEBUG][Thread:1583][2025-04-14 17:19:11] Service Holder not found. request path: /scripts/js/login.js
+[INFO][Thread:1583][2025-04-14 17:19:11] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:42400  QUEUE SIZE: -1
+[DEBUG][Thread:1583][2025-04-14 17:19:11] Service Holder not found. request path: /img/leap.png
+[INFO][Thread:1583][2025-04-14 17:19:11] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:19:11] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:19:11] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 17:19:11] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:42414  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 17:19:11] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:19:11] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:19:11] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 17:19:11] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:42424  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 17:19:11] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:19:11] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:19:11] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[DEBUG][Thread:1583][2025-04-14 17:19:11] Service Holder not found. request path: /css/styles.css
+[INFO][Thread:1583][2025-04-14 17:19:11] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:42440  QUEUE SIZE: -1
+[DEBUG][Thread:1583][2025-04-14 17:19:11] Service Holder not found. request path: /scripts/js/genDir.js
+[INFO][Thread:1583][2025-04-14 17:19:11] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:19:11] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:19:11] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 17:19:11] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:42442  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 17:19:11] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:19:11] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:19:11] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[DEBUG][Thread:1583][2025-04-14 17:19:11] Service Holder not found. request path: /img/logo32.png
+[INFO][Thread:1583][2025-04-14 17:19:11] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:42446  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 17:19:11] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:19:11] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:19:11] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[DEBUG][Thread:1583][2025-04-14 17:19:11] Service Holder not found. request path: /img/dir.png
+[INFO][Thread:1583][2025-04-14 17:19:11] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:42456  QUEUE SIZE: -1
+[DEBUG][Thread:1583][2025-04-14 17:19:11] Service Holder not found. request path: /img/file.png
+[INFO][Thread:1583][2025-04-14 17:19:11] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:19:11] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:19:11] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 17:19:11] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:42466  QUEUE SIZE: -1
+[DEBUG][Thread:1583][2025-04-14 17:19:11] Service Holder not found. request path: /favicon.ico
