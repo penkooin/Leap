@@ -14,7 +14,7 @@ public class ResourceConfig <T> extends Metadata <T> {
 
     private List<String> watchRoots = super.<List<String>>getValue("resource.watch-paths");
     private List<String> watchKind = super.<List<String>>getValue("resource.watch-kind");
-    private List<String> accessFilters = super.<List<String>>getValue("resource.access-filters");;
+    private List<String> accessFilters = super.<List<String>>getValue("resource.access-filters");
     private List<String> inMemoryFilters = super.<List<String>>getValue("resource.in-memory-filters");;
     private long totalMemorySizeLimit = ResourceUtils.fromString(super. getValue("resource.total-memory-size-limit"));
     private int splitUnitSize = (int) ResourceUtils.fromString(super. getValue("resource.split-unit-size"));

@@ -17,7 +17,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.transaction.NotSupportedException;
 
-import org.chaostocosmos.leap.Leap;
+import org.chaostocosmos.leap.LeapApp;
 import org.chaostocosmos.leap.common.log.LoggerFactory;
 import org.chaostocosmos.leap.context.utils.Diff;
 import org.chaostocosmos.leap.context.utils.MetaUtils;
@@ -87,7 +87,7 @@ public class Context implements Runnable {
      */
     public static Context get() {
         if(context == null) {
-            context = new Context(Leap.HOME_PATH);
+            context = new Context(LeapApp.HOME_PATH);
         }
         return context;
     }

@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import org.chaostocosmos.leap.Leap;
+import org.chaostocosmos.leap.LeapApp;
 import org.chaostocosmos.leap.common.file.FileTools;
 import org.chaostocosmos.leap.common.utils.ClassUtils;
 import org.chaostocosmos.leap.common.utils.UtilBox;
@@ -63,7 +63,7 @@ public class ResourceHelper {
      * @return
      */
     public static ResourceHelper getInstance() {
-        return getInstance(Leap.HOME_PATH);
+        return getInstance(LeapApp.HOME_PATH);
     }
 
     /**

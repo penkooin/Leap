@@ -6,7 +6,6 @@ package org.chaostocosmos.leap.service.model;
  * @author 9ins
  */
 public interface SpringJPAModel {
-
     /**
      * Get bean object by bean name
      * @param <T>

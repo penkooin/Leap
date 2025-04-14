@@ -3095,3 +3095,109 @@
 [INFO][Leap:311][2024-11-15 20:34:42] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SimpleStreamingService [MAP CONTEXT]: /video
 [INFO][Leap:311][2024-11-15 20:34:42] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SimpleJPAService [MAP CONTEXT]: /simple/jpa/users/oracle
 [INFO][Thread:-1][2024-11-15 20:34:43] [HTTP SERVER START] Address: www.leap1.org/127.0.0.1:9293 Backlog: 100
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.TimeServiceImpl [MAP CONTEXT]: /time/GetTime
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SystemMonitorService [MAP CONTEXT]: /monitor/chart/image
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SystemMonitorService [MAP CONTEXT]: /monitor
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/host/get
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/host/put
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/message/get
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/message/put
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/mime/get
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/mime/put
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/monitor/get
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/monitor/put
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/resource/get
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/resource/put
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/server/get
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/server/put
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/trademark/get
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/trademark/put
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.LoginService [MAP CONTEXT]: /login
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.LoginService [MAP CONTEXT]: /signin
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.DirectoryService [MAP CONTEXT]: /directory
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.WebSocketService [MAP CONTEXT]: /wss/websocket
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.DeployService [MAP CONTEXT]: /service/deploy
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.DeployService [MAP CONTEXT]: /service/service/undeploy
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SimpleJPAService [MAP CONTEXT]: /simple/jpa/users/oracle
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SimpleStreamingService [MAP CONTEXT]: /video
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.TemplateService [MAP CONTEXT]: /error
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.TemplateService [MAP CONTEXT]: /response
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.TemplateService [MAP CONTEXT]: /
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SystemMemoryController [MAP CONTEXT]: /chatgpt/memory
+[INFO][Thread:1583][2025-04-14 17:02:18] [HTTP SERVER START] Address: www.leap1.org/3.33.130.190:9293 Backlog: 100
+[THROWABLE][Thread:1583][2025-04-14 17:02:18] java.net.BindException: Cannot assign requested address : Cannot assign requested address
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Net.java:565)
+	at java.base/sun.nio.ch.Net.bind(Net.java:554)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(NioSocketImpl.java:636)
+	at java.base/java.net.ServerSocket.bind(ServerSocket.java:391)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:296)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+[INFO][LeapApp:309][2025-04-14 17:07:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.TimeServiceImpl [MAP CONTEXT]: /time/GetTime
+[INFO][LeapApp:309][2025-04-14 17:07:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SystemMonitorService [MAP CONTEXT]: /monitor/chart/image
+[INFO][LeapApp:309][2025-04-14 17:07:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SystemMonitorService [MAP CONTEXT]: /monitor
+[INFO][LeapApp:309][2025-04-14 17:07:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/host/get
+[INFO][LeapApp:309][2025-04-14 17:07:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/host/put
+[INFO][LeapApp:309][2025-04-14 17:07:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/message/get
+[INFO][LeapApp:309][2025-04-14 17:07:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/message/put
+[INFO][LeapApp:309][2025-04-14 17:07:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/mime/get
+[INFO][LeapApp:309][2025-04-14 17:07:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/mime/put
+[INFO][LeapApp:309][2025-04-14 17:07:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/monitor/get
+[INFO][LeapApp:309][2025-04-14 17:07:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/monitor/put
+[INFO][LeapApp:309][2025-04-14 17:07:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/resource/get
+[INFO][LeapApp:309][2025-04-14 17:07:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/resource/put
+[INFO][LeapApp:309][2025-04-14 17:07:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/server/get
+[INFO][LeapApp:309][2025-04-14 17:07:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/server/put
+[INFO][LeapApp:309][2025-04-14 17:07:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/trademark/get
+[INFO][LeapApp:309][2025-04-14 17:07:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/trademark/put
+[INFO][LeapApp:309][2025-04-14 17:07:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.LoginService [MAP CONTEXT]: /login
+[INFO][LeapApp:309][2025-04-14 17:07:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.LoginService [MAP CONTEXT]: /signin
+[INFO][LeapApp:309][2025-04-14 17:07:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.DirectoryService [MAP CONTEXT]: /directory
+[INFO][LeapApp:309][2025-04-14 17:07:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.WebSocketService [MAP CONTEXT]: /wss/websocket
+[INFO][LeapApp:309][2025-04-14 17:07:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.DeployService [MAP CONTEXT]: /service/deploy
+[INFO][LeapApp:309][2025-04-14 17:07:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.DeployService [MAP CONTEXT]: /service/service/undeploy
+[INFO][LeapApp:309][2025-04-14 17:07:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SimpleJPAService [MAP CONTEXT]: /simple/jpa/users/oracle
+[INFO][LeapApp:309][2025-04-14 17:07:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SimpleStreamingService [MAP CONTEXT]: /video
+[INFO][LeapApp:309][2025-04-14 17:07:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.TemplateService [MAP CONTEXT]: /error
+[INFO][LeapApp:309][2025-04-14 17:07:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.TemplateService [MAP CONTEXT]: /response
+[INFO][LeapApp:309][2025-04-14 17:07:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.TemplateService [MAP CONTEXT]: /
+[INFO][LeapApp:309][2025-04-14 17:07:00] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SystemMemoryController [MAP CONTEXT]: /chatgpt/memory
+[INFO][Thread:1583][2025-04-14 17:07:01] [HTTP SERVER START] Address: www.leap1.org/15.197.148.33:9394 Backlog: 100
+[THROWABLE][Thread:1583][2025-04-14 17:07:01] java.net.BindException: Cannot assign requested address : Cannot assign requested address
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Net.java:565)
+	at java.base/sun.nio.ch.Net.bind(Net.java:554)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(NioSocketImpl.java:636)
+	at java.base/java.net.ServerSocket.bind(ServerSocket.java:391)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:296)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+[INFO][LeapApp:309][2025-04-14 17:09:58] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.TimeServiceImpl [MAP CONTEXT]: /time/GetTime
+[INFO][LeapApp:309][2025-04-14 17:09:58] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SystemMonitorService [MAP CONTEXT]: /monitor/chart/image
+[INFO][LeapApp:309][2025-04-14 17:09:58] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SystemMonitorService [MAP CONTEXT]: /monitor
+[INFO][LeapApp:309][2025-04-14 17:09:58] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/host/get
+[INFO][LeapApp:309][2025-04-14 17:09:58] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/host/put
+[INFO][LeapApp:309][2025-04-14 17:09:58] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/message/get
+[INFO][LeapApp:309][2025-04-14 17:09:58] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/message/put
+[INFO][LeapApp:309][2025-04-14 17:09:58] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/mime/get
+[INFO][LeapApp:309][2025-04-14 17:09:58] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/mime/put
+[INFO][LeapApp:309][2025-04-14 17:09:58] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/monitor/get
+[INFO][LeapApp:309][2025-04-14 17:09:58] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/monitor/put
+[INFO][LeapApp:309][2025-04-14 17:09:58] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/resource/get
+[INFO][LeapApp:309][2025-04-14 17:09:58] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/resource/put
+[INFO][LeapApp:309][2025-04-14 17:09:58] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/server/get
+[INFO][LeapApp:309][2025-04-14 17:09:58] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/server/put
+[INFO][LeapApp:309][2025-04-14 17:09:58] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/trademark/get
+[INFO][LeapApp:309][2025-04-14 17:09:58] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/trademark/put
+[INFO][LeapApp:309][2025-04-14 17:09:58] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.LoginService [MAP CONTEXT]: /login
+[INFO][LeapApp:309][2025-04-14 17:09:58] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.LoginService [MAP CONTEXT]: /signin
+[INFO][LeapApp:309][2025-04-14 17:09:58] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.DirectoryService [MAP CONTEXT]: /directory
+[INFO][LeapApp:309][2025-04-14 17:09:58] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.WebSocketService [MAP CONTEXT]: /wss/websocket
+[INFO][LeapApp:309][2025-04-14 17:09:58] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.DeployService [MAP CONTEXT]: /service/deploy
+[INFO][LeapApp:309][2025-04-14 17:09:58] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.DeployService [MAP CONTEXT]: /service/service/undeploy
+[INFO][LeapApp:309][2025-04-14 17:09:58] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SimpleJPAService [MAP CONTEXT]: /simple/jpa/users/oracle
+[INFO][LeapApp:309][2025-04-14 17:09:58] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SimpleStreamingService [MAP CONTEXT]: /video
+[INFO][LeapApp:309][2025-04-14 17:09:58] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.TemplateService [MAP CONTEXT]: /error
+[INFO][LeapApp:309][2025-04-14 17:09:58] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.TemplateService [MAP CONTEXT]: /response
+[INFO][LeapApp:309][2025-04-14 17:09:58] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.TemplateService [MAP CONTEXT]: /
+[INFO][LeapApp:309][2025-04-14 17:09:58] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SystemMemoryController [MAP CONTEXT]: /chatgpt/memory
+[INFO][Thread:1583][2025-04-14 17:09:59] [HTTP SERVER START] Address: www.leap1.org/192.168.0.144:9394 Backlog: 100

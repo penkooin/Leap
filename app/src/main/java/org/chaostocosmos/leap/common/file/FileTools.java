@@ -466,6 +466,9 @@ public class FileTools {
 	 * @throws IOException
 	 */
 	public static void directoryBackupDelete(Path tgtDir, Path bakDir, String regex) throws IOException {
+		if(!Files.exists(tgtDir)) {
+			Files.createDirectories(tgtDir);
+		}
 		if(!Files.isDirectory(tgtDir)) {
 			throw new IOException("Delete target must be directory!!!");
 		}

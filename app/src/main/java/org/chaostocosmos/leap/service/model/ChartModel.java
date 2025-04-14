@@ -20,20 +20,24 @@ public interface ChartModel {
      * @return
      */
     public Graph<Double, String, Double> lineChart(Map<String, Object> graphAttributes) throws Exception;
+    
     /**
      * Create area chart
      * @return
      */
     public Graph<Double, String, Double> areaChart(Map<String, Object> graphAttributes) throws Exception;
+
     /**
      * Create bar chart
      * @return
      */
     public Graph<Double, String, Double> barChart(Map<String, Object> graphAttributes) throws Exception; 
+
     /**
      * Create PI chart
      */
     public Graph<Double, String, Double> circleChart(Map<String, Object> graphAttributes) throws Exception;
+
     /**
      * Create chart with chart attributes Map
      * @param graphAttributes
@@ -41,6 +45,7 @@ public interface ChartModel {
      * @throws Exception
      */
     public Graph<Double, String, Double> createGraph(Map<String, Object> graphAttributes) throws Exception;
+
     /**
      * Create Graph object
      * @param graphType
@@ -54,6 +59,7 @@ public interface ChartModel {
      * @throws Exception
      */
     public Map<Object, GraphElement<Double, String, Double>> createGraphElements(List<Object> elements) throws Exception;
+
     /**
      * Save image
      * @param image

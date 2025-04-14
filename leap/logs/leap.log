@@ -3059,3 +3059,230 @@
 [THROWABLE][Thread:-1][2024-11-15 20:35:04] java.lang.NullPointerException: Cannot invoke "org.chaostocosmos.leap.common.data.Filtering.include(String)" because "this.ipAllowedFilters" is null : Cannot invoke "org.chaostocosmos.leap.common.data.Filtering.include(String)" because "this.ipAllowedFilters" is null
 	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:352)
 	at java.base/java.lang.Thread.run(Unknown Source)
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.TimeServiceImpl [MAP CONTEXT]: /time/GetTime
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SystemMonitorService [MAP CONTEXT]: /monitor/chart/image
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SystemMonitorService [MAP CONTEXT]: /monitor
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/host/get
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/host/put
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/message/get
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/message/put
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/mime/get
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/mime/put
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/monitor/get
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/monitor/put
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/resource/get
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/resource/put
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/server/get
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/server/put
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/trademark/get
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/trademark/put
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.LoginService [MAP CONTEXT]: /login
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.LoginService [MAP CONTEXT]: /signin
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.DirectoryService [MAP CONTEXT]: /directory
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.WebSocketService [MAP CONTEXT]: /wss/websocket
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.DeployService [MAP CONTEXT]: /service/deploy
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.DeployService [MAP CONTEXT]: /service/service/undeploy
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SimpleJPAService [MAP CONTEXT]: /simple/jpa/users/oracle
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SimpleStreamingService [MAP CONTEXT]: /video
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.TemplateService [MAP CONTEXT]: /error
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.TemplateService [MAP CONTEXT]: /response
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.TemplateService [MAP CONTEXT]: /
+[INFO][Leap:311][2025-04-14 17:02:18] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SystemMemoryController [MAP CONTEXT]: /chatgpt/memory
+[INFO][Thread:1583][2025-04-14 17:02:18] [HTTP SERVER START] Address: www.leap.org/198.49.23.145:9292 Backlog: 100
+[THROWABLE][Thread:1583][2025-04-14 17:02:18] java.net.BindException: Cannot assign requested address : Cannot assign requested address
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Net.java:565)
+	at java.base/sun.nio.ch.Net.bind(Net.java:554)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(NioSocketImpl.java:636)
+	at java.base/java.net.ServerSocket.bind(ServerSocket.java:391)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:296)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+[INFO][LeapApp:309][2025-04-14 17:07:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.TimeServiceImpl [MAP CONTEXT]: /time/GetTime
+[INFO][LeapApp:309][2025-04-14 17:07:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SystemMonitorService [MAP CONTEXT]: /monitor/chart/image
+[INFO][LeapApp:309][2025-04-14 17:07:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SystemMonitorService [MAP CONTEXT]: /monitor
+[INFO][LeapApp:309][2025-04-14 17:07:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/host/get
+[INFO][LeapApp:309][2025-04-14 17:07:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/host/put
+[INFO][LeapApp:309][2025-04-14 17:07:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/message/get
+[INFO][LeapApp:309][2025-04-14 17:07:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/message/put
+[INFO][LeapApp:309][2025-04-14 17:07:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/mime/get
+[INFO][LeapApp:309][2025-04-14 17:07:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/mime/put
+[INFO][LeapApp:309][2025-04-14 17:07:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/monitor/get
+[INFO][LeapApp:309][2025-04-14 17:07:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/monitor/put
+[INFO][LeapApp:309][2025-04-14 17:07:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/resource/get
+[INFO][LeapApp:309][2025-04-14 17:07:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/resource/put
+[INFO][LeapApp:309][2025-04-14 17:07:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/server/get
+[INFO][LeapApp:309][2025-04-14 17:07:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/server/put
+[INFO][LeapApp:309][2025-04-14 17:07:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/trademark/get
+[INFO][LeapApp:309][2025-04-14 17:07:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/trademark/put
+[INFO][LeapApp:309][2025-04-14 17:07:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.LoginService [MAP CONTEXT]: /login
+[INFO][LeapApp:309][2025-04-14 17:07:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.LoginService [MAP CONTEXT]: /signin
+[INFO][LeapApp:309][2025-04-14 17:07:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.DirectoryService [MAP CONTEXT]: /directory
+[INFO][LeapApp:309][2025-04-14 17:07:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.WebSocketService [MAP CONTEXT]: /wss/websocket
+[INFO][LeapApp:309][2025-04-14 17:07:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.DeployService [MAP CONTEXT]: /service/deploy
+[INFO][LeapApp:309][2025-04-14 17:07:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.DeployService [MAP CONTEXT]: /service/service/undeploy
+[INFO][LeapApp:309][2025-04-14 17:07:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SimpleJPAService [MAP CONTEXT]: /simple/jpa/users/oracle
+[INFO][LeapApp:309][2025-04-14 17:07:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SimpleStreamingService [MAP CONTEXT]: /video
+[INFO][LeapApp:309][2025-04-14 17:07:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.TemplateService [MAP CONTEXT]: /error
+[INFO][LeapApp:309][2025-04-14 17:07:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.TemplateService [MAP CONTEXT]: /response
+[INFO][LeapApp:309][2025-04-14 17:07:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.TemplateService [MAP CONTEXT]: /
+[INFO][LeapApp:309][2025-04-14 17:07:01] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SystemMemoryController [MAP CONTEXT]: /chatgpt/memory
+[INFO][Thread:1583][2025-04-14 17:07:01] [HTTP SERVER START] Address: www.leap.org/198.185.159.145:9393 Backlog: 100
+[THROWABLE][Thread:1583][2025-04-14 17:07:01] java.net.BindException: Cannot assign requested address : Cannot assign requested address
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Net.java:565)
+	at java.base/sun.nio.ch.Net.bind(Net.java:554)
+	at java.base/sun.nio.ch.NioSocketImpl.bind(NioSocketImpl.java:636)
+	at java.base/java.net.ServerSocket.bind(ServerSocket.java:391)
+	at org.chaostocosmos.leap.LeapServer.run(LeapServer.java:296)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+[INFO][LeapApp:309][2025-04-14 17:09:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.TimeServiceImpl [MAP CONTEXT]: /time/GetTime
+[INFO][LeapApp:309][2025-04-14 17:09:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SystemMonitorService [MAP CONTEXT]: /monitor/chart/image
+[INFO][LeapApp:309][2025-04-14 17:09:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SystemMonitorService [MAP CONTEXT]: /monitor
+[INFO][LeapApp:309][2025-04-14 17:09:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/host/get
+[INFO][LeapApp:309][2025-04-14 17:09:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/host/put
+[INFO][LeapApp:309][2025-04-14 17:09:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/message/get
+[INFO][LeapApp:309][2025-04-14 17:09:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/message/put
+[INFO][LeapApp:309][2025-04-14 17:09:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/mime/get
+[INFO][LeapApp:309][2025-04-14 17:09:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/mime/put
+[INFO][LeapApp:309][2025-04-14 17:09:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/monitor/get
+[INFO][LeapApp:309][2025-04-14 17:09:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/monitor/put
+[INFO][LeapApp:309][2025-04-14 17:09:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/resource/get
+[INFO][LeapApp:309][2025-04-14 17:09:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/resource/put
+[INFO][LeapApp:309][2025-04-14 17:09:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/server/get
+[INFO][LeapApp:309][2025-04-14 17:09:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/server/put
+[INFO][LeapApp:309][2025-04-14 17:09:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/trademark/get
+[INFO][LeapApp:309][2025-04-14 17:09:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/trademark/put
+[INFO][LeapApp:309][2025-04-14 17:09:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.LoginService [MAP CONTEXT]: /login
+[INFO][LeapApp:309][2025-04-14 17:09:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.LoginService [MAP CONTEXT]: /signin
+[INFO][LeapApp:309][2025-04-14 17:09:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.DirectoryService [MAP CONTEXT]: /directory
+[INFO][LeapApp:309][2025-04-14 17:09:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.WebSocketService [MAP CONTEXT]: /wss/websocket
+[INFO][LeapApp:309][2025-04-14 17:09:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.DeployService [MAP CONTEXT]: /service/deploy
+[INFO][LeapApp:309][2025-04-14 17:09:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.DeployService [MAP CONTEXT]: /service/service/undeploy
+[INFO][LeapApp:309][2025-04-14 17:09:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SimpleJPAService [MAP CONTEXT]: /simple/jpa/users/oracle
+[INFO][LeapApp:309][2025-04-14 17:09:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SimpleStreamingService [MAP CONTEXT]: /video
+[INFO][LeapApp:309][2025-04-14 17:09:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.TemplateService [MAP CONTEXT]: /error
+[INFO][LeapApp:309][2025-04-14 17:09:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.TemplateService [MAP CONTEXT]: /response
+[INFO][LeapApp:309][2025-04-14 17:09:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.TemplateService [MAP CONTEXT]: /
+[INFO][LeapApp:309][2025-04-14 17:09:59] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SystemMemoryController [MAP CONTEXT]: /chatgpt/memory
+[INFO][Thread:1583][2025-04-14 17:09:59] [HTTP SERVER START] Address: www.leap.org/192.168.0.144:9393 Backlog: 100
+[INFO][Thread:1583][2025-04-14 17:10:32] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:10:32] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:10:32] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 17:10:32] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:40684  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 17:10:32] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:10:32] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:10:32] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 17:10:32] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:40700  QUEUE SIZE: -1
+[DEBUG][Thread:1583][2025-04-14 17:10:32] Service Holder not found. request path: /css/styles.css
+[INFO][Thread:1583][2025-04-14 17:10:32] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:10:32] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:10:32] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 17:10:32] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:40704  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 17:10:32] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:10:32] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:10:32] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[DEBUG][Thread:1583][2025-04-14 17:10:32] Service Holder not found. request path: /scripts/js/login.js
+[INFO][Thread:1583][2025-04-14 17:10:32] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:40718  QUEUE SIZE: -1
+[DEBUG][Thread:1583][2025-04-14 17:10:32] Service Holder not found. request path: /img/leap.png
+[INFO][Thread:1583][2025-04-14 17:10:32] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:10:32] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:10:32] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 17:10:32] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:40726  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 17:10:32] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:10:32] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:10:32] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 17:10:32] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:40734  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 17:10:32] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:10:32] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:10:32] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[DEBUG][Thread:1583][2025-04-14 17:10:32] Service Holder not found. request path: /css/styles.css
+[INFO][Thread:1583][2025-04-14 17:10:32] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:40740  QUEUE SIZE: -1
+[DEBUG][Thread:1583][2025-04-14 17:10:32] Service Holder not found. request path: /scripts/js/genDir.js
+[INFO][Thread:1583][2025-04-14 17:10:33] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:10:33] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:10:33] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 17:10:33] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:40752  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 17:10:33] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:10:33] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:10:33] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[DEBUG][Thread:1583][2025-04-14 17:10:33] Service Holder not found. request path: /img/logo32.png
+[INFO][Thread:1583][2025-04-14 17:10:33] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:40758  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 17:10:33] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:10:33] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:10:33] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[DEBUG][Thread:1583][2025-04-14 17:10:33] Service Holder not found. request path: /img/dir.png
+[INFO][Thread:1583][2025-04-14 17:10:33] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:40760  QUEUE SIZE: -1
+[DEBUG][Thread:1583][2025-04-14 17:10:33] Service Holder not found. request path: /img/file.png
+[INFO][Thread:1583][2025-04-14 17:10:33] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:10:33] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:10:33] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 17:10:33] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:40770  QUEUE SIZE: -1
+[DEBUG][Thread:1583][2025-04-14 17:10:33] Service Holder not found. request path: /favicon.ico
+[INFO][Thread:1583][2025-04-14 17:10:36] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:10:36] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:10:36] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 17:10:37] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:40780  QUEUE SIZE: -1
+[DEBUG][Thread:1583][2025-04-14 17:10:37] Service Holder not found. request path: /img/
+[INFO][Thread:1583][2025-04-14 17:10:37] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:10:37] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:10:37] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 17:10:37] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:40784  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 17:10:37] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:10:37] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:10:37] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[DEBUG][Thread:1583][2025-04-14 17:10:37] Service Holder not found. request path: /css/styles.css
+[INFO][Thread:1583][2025-04-14 17:10:37] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:40794  QUEUE SIZE: -1
+[DEBUG][Thread:1583][2025-04-14 17:10:37] Service Holder not found. request path: /scripts/js/genDir.js
+[INFO][Thread:1583][2025-04-14 17:10:37] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:10:37] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:10:37] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 17:10:37] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:40798  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 17:10:37] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:10:37] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:10:37] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[DEBUG][Thread:1583][2025-04-14 17:10:37] Service Holder not found. request path: /img/logo32.png
+[INFO][Thread:1583][2025-04-14 17:10:37] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:40814  QUEUE SIZE: -1
+[DEBUG][Thread:1583][2025-04-14 17:10:37] Service Holder not found. request path: /img/file.png
+[INFO][Thread:1583][2025-04-14 17:10:39] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:10:39] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:10:39] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 17:10:40] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:40816  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 17:10:40] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:10:40] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:10:40] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 17:10:40] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:40820  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 17:10:40] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:10:40] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:10:40] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[DEBUG][Thread:1583][2025-04-14 17:10:40] Service Holder not found. request path: /css/styles.css
+[INFO][Thread:1583][2025-04-14 17:10:40] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:40824  QUEUE SIZE: -1
+[DEBUG][Thread:1583][2025-04-14 17:10:40] Service Holder not found. request path: /scripts/js/genDir.js
+[INFO][Thread:1583][2025-04-14 17:10:40] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:10:40] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:10:40] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 17:10:40] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:40836  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 17:10:40] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:10:40] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:10:40] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[DEBUG][Thread:1583][2025-04-14 17:10:40] Service Holder not found. request path: /img/logo32.png
+[INFO][Thread:1583][2025-04-14 17:10:40] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:40840  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 17:10:40] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:10:40] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:10:40] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[DEBUG][Thread:1583][2025-04-14 17:10:40] Service Holder not found. request path: /img/dir.png
+[INFO][Thread:1583][2025-04-14 17:10:40] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:40844  QUEUE SIZE: -1
+[DEBUG][Thread:1583][2025-04-14 17:10:40] Service Holder not found. request path: /img/file.png
+[INFO][Thread:1583][2025-04-14 17:10:45] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:10:45] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:10:45] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 17:10:45] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:48828  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 17:10:45] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:10:45] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 17:10:45] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 17:10:45] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:48844  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 17:10:45] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 17:10:45] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[DEBUG][Thread:1583][2025-04-14 17:10:45] Service Holder not found. request path: /css/styles.css
+[INFO][Thread:1583][2025-04-14 17:10:45] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 17:10:45] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:48852  QUEUE SIZE: -1
+[DEBUG][Thread:1583][2025-04-14 17:10:45] Service Holder not found. request path: /img/logo32.png

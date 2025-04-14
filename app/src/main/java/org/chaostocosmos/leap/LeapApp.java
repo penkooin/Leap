@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.lang.Thread.State;
 import java.net.InetAddress;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -31,7 +30,6 @@ import org.chaostocosmos.leap.context.META_EVENT_TYPE;
 import org.chaostocosmos.leap.context.MetaEvent;
 import org.chaostocosmos.leap.context.MetaListener;
 import org.chaostocosmos.leap.context.Metadata;
-import org.chaostocosmos.leap.enums.LEAP_STATUS;
 import org.chaostocosmos.leap.enums.WAR_PATH;
 import org.chaostocosmos.leap.exception.LeapException;
 import org.chaostocosmos.leap.resource.ResourceHelper;
@@ -46,7 +44,7 @@ import org.hibernate.internal.util.config.ConfigurationException;
  * 
  * @author 9ins
  */
-public class Leap implements MetaListener {
+public class LeapApp implements MetaListener {
 
     /**
      * Home path
@@ -83,7 +81,7 @@ public class Leap implements MetaListener {
      * @param args 
      * @throws Exception
      */
-    public Leap(String[] args) throws Exception {
+    public LeapApp(String[] args) throws Exception {
         // set commend line options        
         leapServerMap = new HashMap<>();        
         setup(args);
@@ -307,7 +305,7 @@ public class Leap implements MetaListener {
     }
 
     public static void main(String[] args) throws Exception {
-        Leap leap = new Leap(args);
+        LeapApp leap = new LeapApp(args);
         leap.start();
     }
 }
