@@ -24,8 +24,6 @@ import org.chaostocosmos.leap.context.utils.MetaUtils;
 import org.chaostocosmos.leap.enums.WAR_PATH;
 import org.chaostocosmos.leap.resource.config.ConfigUtils;
 
-import net.bytebuddy.utility.FileSystem;
-
 /**
  * Context management object
  * 

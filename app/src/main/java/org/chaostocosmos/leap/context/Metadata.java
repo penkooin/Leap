@@ -67,6 +67,7 @@ public class Metadata <T> {
      * Get value by expression
      * @param expr
      */
+    @SuppressWarnings("unchecked")
     public <V> V getValue(String expr) {
         if(expr.equals("")) {
             return (V) meta;
@@ -88,7 +89,7 @@ public class Metadata <T> {
         Object original = getValue(expr);
         DataStructureOpr.<Object> setValue(meta, expr, value);
         //System.out.println(this.getClass().getCanonicalName()+"="+Chart.class.getCanonicalName());
-        Context.get().dispatchContextEvent(new MetaEvent<Metadata<?>>(this, META_EVENT_TYPE.MODIFIED, this, expr, original, value));
+        Context.get().dispatchContextEvent(new MetaEvent<>(this, META_EVENT_TYPE.MODIFIED, this, expr, original, value));
     }
 
     /**

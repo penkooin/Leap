@@ -111,7 +111,7 @@ public class LeapHandler<T, R> implements Runnable {
             Session session = this.httpTransfer.getSession();
             boolean isLocalRequest = false;
             if(request.getHeader("mac-address") != null) {
-                String mac = request.getHeader("mac-address").toString();
+                String mac = request.getHeader("mac-address");
                 if(NetworkInterfaceManager.isExistMacAddress(mac)) {
                     isLocalRequest = true;
                 }
@@ -143,10 +143,8 @@ public class LeapHandler<T, R> implements Runnable {
                         if(userCredentials == null) {
                             throw new LeapException(HTTP.RES401, "[AUTH] AUTHENTICATION FAIL ");
                         }
-                        if(session != null) {
-                            session.setAuthenticated(true);
-                            userCredentials.setSession(session);
-                        }
+                        session.setAuthenticated(true);
+                        userCredentials.setSession(session);
                     }
                 } catch(Exception e) {
                     if(session != null) {
@@ -164,46 +162,73 @@ public class LeapHandler<T, R> implements Runnable {
                     SpringJPAManager.get().injectToAutoWired(serviceHolder.getServiceModel());
                 }
                 // Do requested service to execute by cloned service of request
-                response = ServiceInvoker.invokeServiceMethod(serviceHolder, this.httpTransfer);
-            } else { 
-                // When client request static resources
-                if(request.getRequestType() != REQUEST.GET) {
-                    throw new LeapException(HTTP.RES405, "Static contents can't be provided by "+request.getRequestType().name());
-                }
-                Path resourcePath = ResourceHelper.getResourcePath(request);
-                if(request.getContextPath().equals("/")) {
-                    String body = httpTransfer.resolvePlaceHolder(TEMPLATE.INDEX.loadTemplatePage(host.getId()), Map.of("serverName", host.getHost()));
-                    response.addHeader("Content-Type", MIME.TEXT_HTML.mimeType()+"; charset="+host.charset());
+                ServiceInvoker.invokeServiceMethod(serviceHolder, this.httpTransfer);
+            } else {
+                // Handle static resource requests
+                if (request.getRequestType() != REQUEST.GET) {
+                    throw new LeapException(HTTP.RES405, "Static contents can't be provided by " + request.getRequestType().name());
+                }            
+                Path resourcePath = ResourceHelper.getResourcePath(request);            
+
+                if (request.getContextPath().equals("/")) {
+                    // Serve the index page
+                    String body = httpTransfer.resolvePlaceHolder(
+                        TEMPLATE.INDEX.loadTemplatePage(host.getId()),
+                        Map.of(
+                            "@serverName", host.getHost(),
+                            "@directory", host.directory(request.getContextPath())
+                        )
+                    );
+                    response.addHeader("Content-Type", MIME.TEXT_HTML.mimeType() + "; charset=" + host.charset());
                     response.setBody((R) body.getBytes());
                     response.setResponseCode(HTTP.RES200.code());
                 } else {
-                    if(resourcePath.toFile().exists() && !host.getResource().exists(resourcePath)) {
+                    // Serve other static resources
+                    if (resourcePath.toFile().exists() && !host.getResource().exists(resourcePath)) {
                         host.getResource().addResource(resourcePath);
-                    }
-                    // Get requested resource
+                    }            
                     Resource resource = host.getResource().getResource(resourcePath);
-                    if(resource != null) {
-                        if(resource.isNode()) {
-                            String body = httpTransfer.resolvePlaceHolder(TEMPLATE.DIRECTORY.loadTemplatePage(host.getId()), Map.of("@serverName", host.getHost(), "@directory", host.buildDirectoryJson(request.getContextPath())));
-                            String mimeType = MIME.TEXT_HTML.mimeType();
-                            response.setResponseCode(HTTP.RES200.code());
-                            response.addHeader("Content-Type", mimeType+"; Charset="+host.charset());
+            
+                    if (resource != null) {
+                        if (resource.isNode()) {
+                            // Serve directory listing
+                            String body = httpTransfer.resolvePlaceHolder(
+                                TEMPLATE.DIRECTORY.loadTemplatePage(host.getId()),
+                                Map.of(
+                                    "@serverName", host.getHost(),
+                                    "@directory", host.directory(request.getContextPath())
+                                )
+                            );
+                            response.addHeader("Content-Type", MIME.TEXT_HTML.mimeType() + "; Charset=" + host.charset());
                             response.setBody((R) body.getBytes());
+                            response.setResponseCode(HTTP.RES200.code());
                         } else {
                             String mimeType = UtilBox.probeContentType(resourcePath);
-                            if(mimeType == null) {
+                            if (mimeType == null) {
                                 mimeType = MIME.APPLICATION_OCTET_STREAM.mimeType();
                             }
+                            response.addHeader("Content-Type", mimeType);
+                            if (mimeType.startsWith("text/")) {
+                                response.addHeader("Content-Type", mimeType + "; charset=" + host.charset());
+                                String body = httpTransfer.resolvePlaceHolder(
+                                    new String(resource.getBytes()),
+                                    Map.of(
+                                        "@serverName", host.getHost()
+                                    )
+                                );
+                                response.setBody((R) body);
+                            } else {
+                                response.addHeader("Content-Disposition", "attachment; filename=\"" + resource.getResourceName() + "\"");
+                                response.setBody((R) resource.getBytes());
+                            }
                             response.setResponseCode(HTTP.RES200.code());
-                            response.addHeader("Content-Type", mimeType);                            
-                            response.setBody((R) resource.getBytes());
-                            this.host.getLogger().debug("DOWNLOAD RESOURCE MIME-TYPE: "+mimeType);
+                            host.getLogger().debug("DOWNLOAD RESOURCE MIME-TYPE: " + mimeType);
                         }
                     } else {
-                        throw new LeapException(HTTP.RES404, "Specified resource not found: "+request.getContextPath());
+                        throw new LeapException(HTTP.RES404, "Specified resource not found: " + request.getContextPath());
                     }
                 }
-            } 
+            }
             // Send response to client
             this.httpTransfer.sendResponse(); 
         } catch(LeapException e) {        

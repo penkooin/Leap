@@ -1,29 +1,39 @@
 <html>
-    <head>
-        <!-- <link rel="icon" href="/img/favicon.ico" type="img/x-icon"> -->
-        <title>Welcome Leap - <!--@serverName--></title>
-        <meta charset="utf-8">
-        <title>Leap?</title>
-        <link rel="stylesheet" href="/css/styles.css">
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script src="/scripts/js/genDir.js"></script>
-    </head>
-    <body class="body-center">        
-        <script>
-            const resJson = '<!--@directory-->';
-            window.onload = () => genDir(resJson);
-        </script>
 
-        <div class="content-dir">
-            <p class="font-xx-large"><span id="host" class="font-bold"></span></p>
-            <!-- <p id="path" class="font-large font-bold">/</p> -->
-            <p class="font-medium">The directories linked below contain current resources from Leap server</p>
-            <p class="font-large font-bold">List of resources.</p>
-            <span class="file-name" style="width:30%;display:inline-block;">Name</span><span class="last-modified" style="width:30%;display:inline-block;">Last modified</span><span class="file-size" style="width:20%;display:inline-block;">Size</span><span class="desc" style="width:20%;display:inline-block;">Desc</span>
-            <br>
-            <a id="parent" class="font-medium" href="">..</a>
-            <br>
-            <p id="resource-list"></p>
-        </div>
-    </body>
+<head>
+    <!-- <link rel="icon" href="/img/favicon.ico" type="img/x-icon"> -->
+    <title>Welcome Leap - <!--@serverName--></title>
+    <meta charset="utf-8">
+    <title>Leap?</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="/scripts/js/genDir.js"></script>
+</head>
+
+<body style="
+    background-color: #ffffff;">
+    <script>
+        const resJson = '<!--@directory-->';
+        window.onload = () => genDir(resJson);
+    </script>
+    <div style="justify-content: center; align-items: center; padding: 30px">
+        <p class="font-xx-large"><span id="host" class="font-bold"></span></p>
+        <!-- <p id="path" class="font-large font-bold">/</p> -->
+        <p class="font-medium">The directories linked below contain current resources from Leap server</p>
+        <p class="font-large font-bold">List of resources.</p>
+        <span class="file-name" style="display:inline-block;">Name</span><span class="last-modified"
+            style="width:30%;display:inline-block;">Last modified</span><span class="file-size"
+            style="width:20%;display:inline-block;">Size</span><span class="desc"
+            style="width:20%;display:inline-block;">Desc</span>
+        <br>
+        <a id="parent" class="font-medium" href="">..</a>
+        <br>
+        <p style="    
+        width: 80%;
+        text-align: left;
+        align-items: center;
+    " id="resource-list"></p>
+    </div>
+</body>
+
 </html>

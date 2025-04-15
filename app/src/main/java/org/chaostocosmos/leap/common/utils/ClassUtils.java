@@ -190,19 +190,22 @@ public class ClassUtils {
     public static List<String> findClassNames(URL url, Filtering filters) throws IOException, URISyntaxException {
         Stream<String> stream = null;
         String protocol = url.getProtocol();
-        if(protocol.equals("file")) {
-            stream = Files.walk(Paths.get(url.toURI().getPath()))
-                           .filter(p -> !Files.isDirectory(p) && p.toString().endsWith(".class"))
-                           .map(p -> p.toString().substring(new File(url.getFile()).getAbsolutePath().length()+1).replace(File.separator, "."));
-        } else if(protocol.equals("jar")) {
-            try(FileSystem filesystem = FileSystems.newFileSystem(url.toURI(), new HashMap<>())) {
-            stream = Files.walk(filesystem.getPath(""))
-                           .filter(p -> !Files.isDirectory(p) && p.toString().endsWith(".class"))
-                           .map(p -> p.toString().substring(new File(url.getFile()).getAbsolutePath().length()+1).replace(File.separator, "."));
+        switch (protocol) {
+            case "file" -> stream = Files.walk(Paths.get(url.toURI().getPath()))
+                               .filter(p -> !Files.isDirectory(p) && p.toString().endsWith(".class"))
+                               .map(p -> p.toString().substring(new File(url.getFile()).getAbsolutePath().length() + 1).replace(File.separator, "."));
+            case "jar" -> {
+                try (FileSystem filesystem = FileSystems.newFileSystem(url.toURI(), new HashMap<>())) {
+                    stream = Files.walk(filesystem.getPath(""))
+                            .filter(p -> !Files.isDirectory(p) && p.toString().endsWith(".class"))
+                            .map(p -> p.toString().substring(new File(url.getFile()).getAbsolutePath().length() + 1).replace(File.separator, "."));
+                }
             }
-        } else {
-            throw new IllegalArgumentException("Protocol not collect!!!");
-        }        
+            default -> throw new IllegalArgumentException("Protocol not collect!!!");
+        }
+        if (stream == null) {
+            throw new IllegalStateException("Stream is null. Unable to process class names.");
+        }
         return stream.filter(fqn -> filters == null || filters.include(fqn))
                      .map(c -> c.substring(0, c.lastIndexOf(".")))
                      .collect(Collectors.toList());
@@ -222,6 +225,24 @@ public class ClassUtils {
             //e.printStackTrace();
         }
         return clazz;
+    }
+
+    /**
+     * Invoke method
+     * @param instance
+     * @param methodName
+     * @param params
+     * @return
+     */
+    public static Object invokeMethod(Object instance, String methodName, Object... params) {
+        Class<?> clazz = instance.getClass();
+        Class<?>[] paramTypes = Arrays.stream(params).map(Object::getClass).toArray(Class<?>[]::new);
+        try {
+            return clazz.getMethod(methodName, paramTypes).invoke(instance, params);
+        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /**
@@ -305,7 +326,7 @@ public class ClassUtils {
      * @throws ImageProcessingException
      */
     public static Host<?> mappingToHost(Map<String, Object> map) throws IOException {
-        return new Host<Map<String, Object>>(map);
+        return new Host<>(map);
     }
 
     /**

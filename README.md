@@ -32,7 +32,7 @@ Leap provides a **fully managed resource management architecture** consisting of
 - **Dynamic resource request handling**: Users can access resources by requesting a URL.
 
 Check out an example:
-**[Video Streaming Sample Page](/video/video.html)**
+**[Video Streaming Sample Page](/docs/video/video.html)**
 
 ---
 
@@ -52,7 +52,7 @@ Leap incorporates advanced features for:
 Administrators can customize visual attributes in configuration files.
 
 Explore more here:
-**[Server Monitor Sample Page](/monitor)**
+**[Server Monitor Sample Page](/docs/monitor/monitor.html)**
 
 ---
 

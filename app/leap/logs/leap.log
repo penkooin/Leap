@@ -1,0 +1,918 @@
+[INFO][LeapApp:309][2025-04-14 18:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.TimeServiceImpl [MAP CONTEXT]: /time/GetTime
+[INFO][LeapApp:309][2025-04-14 18:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SystemMonitorService [MAP CONTEXT]: /monitor/chart/image
+[INFO][LeapApp:309][2025-04-14 18:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SystemMonitorService [MAP CONTEXT]: /monitor
+[INFO][LeapApp:309][2025-04-14 18:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/host/get
+[INFO][LeapApp:309][2025-04-14 18:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/host/put
+[INFO][LeapApp:309][2025-04-14 18:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/message/get
+[INFO][LeapApp:309][2025-04-14 18:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/message/put
+[INFO][LeapApp:309][2025-04-14 18:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/mime/get
+[INFO][LeapApp:309][2025-04-14 18:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/mime/put
+[INFO][LeapApp:309][2025-04-14 18:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/monitor/get
+[INFO][LeapApp:309][2025-04-14 18:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/monitor/put
+[INFO][LeapApp:309][2025-04-14 18:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/resource/get
+[INFO][LeapApp:309][2025-04-14 18:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/resource/put
+[INFO][LeapApp:309][2025-04-14 18:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/server/get
+[INFO][LeapApp:309][2025-04-14 18:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/server/put
+[INFO][LeapApp:309][2025-04-14 18:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/trademark/get
+[INFO][LeapApp:309][2025-04-14 18:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.ConfigService [MAP CONTEXT]: /config/trademark/put
+[INFO][LeapApp:309][2025-04-14 18:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.LoginService [MAP CONTEXT]: /login
+[INFO][LeapApp:309][2025-04-14 18:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.LoginService [MAP CONTEXT]: /signin
+[INFO][LeapApp:309][2025-04-14 18:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.DirectoryService [MAP CONTEXT]: /directory
+[INFO][LeapApp:309][2025-04-14 18:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.WebSocketService [MAP CONTEXT]: /wss/websocket
+[INFO][LeapApp:309][2025-04-14 18:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.DeployService [MAP CONTEXT]: /service/deploy
+[INFO][LeapApp:309][2025-04-14 18:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.DeployService [MAP CONTEXT]: /service/service/undeploy
+[INFO][LeapApp:309][2025-04-14 18:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SimpleJPAService [MAP CONTEXT]: /simple/jpa/users/oracle
+[INFO][LeapApp:309][2025-04-14 18:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SimpleStreamingService [MAP CONTEXT]: /video
+[INFO][LeapApp:309][2025-04-14 18:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.TemplateService [MAP CONTEXT]: /error
+[INFO][LeapApp:309][2025-04-14 18:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.TemplateService [MAP CONTEXT]: /response
+[INFO][LeapApp:309][2025-04-14 18:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.TemplateService [MAP CONTEXT]: /
+[INFO][LeapApp:309][2025-04-14 18:38:50] [CONTEXT MAPPING] Service name: org.chaostocosmos.leap.service.impl.SystemMemoryController [MAP CONTEXT]: /chatgpt/memory
+[INFO][Thread:1583][2025-04-14 18:38:50] [HTTP SERVER START] Address: www.leap.org/192.168.0.144:9393 Backlog: 100
+[INFO][Thread:1583][2025-04-14 18:39:08] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:08] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:08] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:08] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:37854  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:08] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:08] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:08] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:08] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:37862  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:08] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:08] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:08] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[DEBUG][Thread:1583][2025-04-14 18:39:08] Service Holder not found. request path: /css/styles.css
+[INFO][Thread:1583][2025-04-14 18:39:08] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:37864  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:08] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:08] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:08] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[DEBUG][Thread:1583][2025-04-14 18:39:08] Service Holder not found. request path: /scripts/js/login.js
+[INFO][Thread:1583][2025-04-14 18:39:08] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:37866  QUEUE SIZE: -1
+[DEBUG][Thread:1583][2025-04-14 18:39:08] Service Holder not found. request path: /img/leap.png
+[INFO][Thread:1583][2025-04-14 18:39:08] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:08] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:08] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:08] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:37874  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:08] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:08] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:08] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:08] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:37886  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:08] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:08] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:08] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[DEBUG][Thread:1583][2025-04-14 18:39:08] Service Holder not found. request path: /css/styles.css
+[INFO][Thread:1583][2025-04-14 18:39:08] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:37890  QUEUE SIZE: -1
+[DEBUG][Thread:1583][2025-04-14 18:39:08] Service Holder not found. request path: /scripts/js/genDir.js
+[INFO][Thread:1583][2025-04-14 18:39:08] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:08] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:08] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:08] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:37900  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:08] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:08] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:08] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[DEBUG][Thread:1583][2025-04-14 18:39:08] Service Holder not found. request path: /img/logo32.png
+[INFO][Thread:1583][2025-04-14 18:39:08] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:37904  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:08] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:08] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:08] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[DEBUG][Thread:1583][2025-04-14 18:39:08] Service Holder not found. request path: /img/dir.png
+[INFO][Thread:1583][2025-04-14 18:39:08] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:37914  QUEUE SIZE: -1
+[DEBUG][Thread:1583][2025-04-14 18:39:08] Service Holder not found. request path: /img/file.png
+[INFO][Thread:1583][2025-04-14 18:39:08] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:08] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:08] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:08] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:37930  QUEUE SIZE: -1
+[DEBUG][Thread:1583][2025-04-14 18:39:08] Service Holder not found. request path: /favicon.ico
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35944  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[DEBUG][Thread:1583][2025-04-14 18:39:19] Service Holder not found. request path: /video/video.html
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35948  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[DEBUG][Thread:1583][2025-04-14 18:39:19] Service Holder not found. request path: /css/styles.css
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35960  QUEUE SIZE: -1
+[DEBUG][Thread:1583][2025-04-14 18:39:19] Service Holder not found. request path: /img/logo32.png
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35966  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35972  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35978  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35992  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36004  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36020  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36030  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36044  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36056  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36064  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36066  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36068  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36074  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36084  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36086  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36096  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36108  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36120  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36134  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36150  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36158  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36172  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36186  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36192  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36208  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36216  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36218  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36224  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36236  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36244  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36256  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36264  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:19] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:19] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36280  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:20] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:20] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:20] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:20] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36284  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:20] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:20] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:20] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:20] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36300  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:21] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:21] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:21] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:21] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36036  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:23] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:23] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:23] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:23] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36038  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:23] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:23] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:23] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:23] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36046  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:24] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:24] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:24] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:24] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36054  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:24] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:24] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:24] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:24] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36068  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:25] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36074  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:25] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36078  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:25] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36086  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:25] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36102  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:25] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36116  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:25] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36118  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:25] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36122  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:25] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36134  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:25] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36146  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:25] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36156  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:25] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36160  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:25] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36176  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:25] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36182  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:25] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36192  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:25] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36194  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:25] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36200  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:25] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36212  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:25] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36222  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:25] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36230  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:25] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36244  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:25] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36252  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:25] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36262  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:25] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36274  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:25] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:25] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36282  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36294  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36300  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36304  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36318  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36326  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36342  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36348  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36358  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36360  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36370  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36384  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36392  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36396  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36398  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36404  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36410  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36416  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36424  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36428  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36438  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36452  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36462  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36464  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36466  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36472  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36480  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36492  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36502  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36512  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36520  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36524  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36530  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36536  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36550  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36558  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36572  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36584  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:26] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:26] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36600  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:27] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36608  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:27] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36620  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:27] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36628  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:27] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36642  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:27] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36644  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:27] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36660  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:27] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36664  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:27] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36668  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:27] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36672  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:27] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36674  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:27] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36684  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:27] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36694  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:27] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36702  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:27] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36704  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:27] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36710  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:27] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36712  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:27] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36724  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:27] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36732  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:27] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36734  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:27] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36746  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:27] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36752  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:27] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36766  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:27] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36782  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:27] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:27] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36796  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:28] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36812  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:28] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36814  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:28] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36826  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:28] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36832  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:28] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36838  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:28] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36850  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:28] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36864  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:28] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36878  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:28] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36892  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:28] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36900  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:28] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36902  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:28] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36910  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:28] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36920  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:28] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36922  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:28] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36926  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:28] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36928  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:28] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36942  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:28] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36946  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:28] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36950  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:28] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36962  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:28] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36968  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:28] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36982  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:28] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:36994  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:28] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:37008  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:28] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:37012  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:28] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:37022  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:28] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:37026  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:28] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:37032  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:28] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:37048  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:28] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:37060  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:28] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:37064  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:28] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:37078  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:28] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:28] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:37082  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:29] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:29] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:29] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:29] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:37084  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:29] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:29] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:29] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:29] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:37088  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:29] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:29] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:29] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:29] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:37098  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:29] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:29] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:29] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:29] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:37112  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:29] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:29] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:29] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:29] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:37116  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:29] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:29] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:29] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:29] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:37126  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:29] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:29] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:29] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:29] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:37140  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:29] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:29] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:29] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:29] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:37148  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:30] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:30] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:30] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:30] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:37156  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:32] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35616  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:32] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35626  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:32] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35630  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:32] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35632  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:32] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35640  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:32] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35648  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:32] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35664  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:32] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35676  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:32] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35682  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:32] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35686  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:32] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35688  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:32] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35694  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:32] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35698  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:32] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35710  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:32] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35716  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:32] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35718  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:32] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35720  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:32] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35722  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:32] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35738  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:32] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35754  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:32] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35766  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:32] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35780  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:32] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35792  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:32] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35808  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:32] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:32] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:33] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35818  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:33] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:33] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:33] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:33] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35824  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:33] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:33] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:33] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:33] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35828  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:33] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:33] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:33] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:33] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35838  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:33] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:33] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:33] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:33] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35852  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:33] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:33] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:33] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:33] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35858  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:33] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:33] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:33] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:33] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35868  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:33] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:33] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:33] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:33] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35870  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:33] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:33] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:33] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:33] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35886  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:35] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:35] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:35] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:35] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35896  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:35] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:35] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:35] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:35] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35908  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:35] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:35] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:35] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:35] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35924  QUEUE SIZE: -1
+[INFO][Thread:1583][2025-04-14 18:39:35] SOCKET BUFFER INFO - so-timeout:5000  receive-buffer-size: 32368  send-buffer-size: 128000
+[INFO][Thread:1583][2025-04-14 18:39:35] SOCKET CONF INFO - keep-alive: false  OOB-inline: false  so-linger: -1  tcp-nodelay: false
+[INFO][Thread:1583][2025-04-14 18:39:35] [CONNECTED] CLIENT CONNECTED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:35] [CLIENT DETECTED] REQUEST ACCEPTED. SUBMIT TO THREADPOOL. 192.168.0.144:35940  QUEUE SIZE: -1

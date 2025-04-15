@@ -60,7 +60,7 @@ jar {
     archiveFileName = 'leap.jar'
     manifest {
         attributes(
-            'Main-Class': 'org.chaostocosmos.leap.Leap' // Your main class
+            'Main-Class': 'org.chaostocosmos.leap.LeapApp' // Your main class
         )
     }
     // Include all dependencies and handle duplicates

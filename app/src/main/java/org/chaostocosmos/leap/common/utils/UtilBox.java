@@ -9,6 +9,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.chaostocosmos.leap.common.constant.Constants;
@@ -92,4 +94,42 @@ public class UtilBox {
             throw new LeapException(HTTP.RES500, e);
         }
     }        
+
+    /**
+     * Get arguments from function expression
+     * @param resourcePath
+     * @return
+     * @throws LeapException
+     */
+    public static List<String> extractArgument(String functionExpr) {
+        // Example function expression: "functionName(arg1, arg2, (arg3))"
+        // Regex pattern to match the function name and its arguments
+        String regex = "^[a-zA-Z_][a-zA-Z0-9_]*\\s*\\(([^)]+)\\)";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(functionExpr);
+        if (matcher.find()) {
+            String args = matcher.group(1);
+            // Split the arguments by comma, taking care of nested parentheses
+            return Arrays.stream(args.split(","))
+                    .map(String::trim)
+                    .filter(arg -> !arg.isEmpty())
+                    .collect(Collectors.toList());
+        } else {
+            throw new IllegalArgumentException("Invalid function expression: " + functionExpr);
+        }
+    }
+
+    /**
+     * Check if the string is a function expression
+     * @param functionExpr
+     * @return
+     */
+    public static boolean isFunctionExpression(String functionExpr) {
+        // Example function expression: "functionName(arg1, arg2, (arg3))"
+        // Regex pattern to match the function name and its arguments
+        String regex = "^[a-zA-Z_][a-zA-Z0-9_]*\\s*\\(([^)]+)\\)";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(functionExpr);
+        return matcher.find();
+    }
 }

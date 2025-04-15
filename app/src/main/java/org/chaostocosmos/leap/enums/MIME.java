@@ -159,6 +159,28 @@ public enum MIME {
      * @return
      */
     public List<MIME> mimeTypes(String type) {
-        return Arrays.asList(MIME.values()).stream().filter(m -> m.name().startsWith(type)).collect(Collectors.toList());
+        return Arrays.asList(MIME.values()).stream().filter(m -> m.name().startsWith(type)).collect(Collectors.toList());    
+    }
+
+    /**
+     * Get mime type list of specfied parameter
+     * @param type
+     * @return
+     */
+    public boolean isBinary() {
+        return this.mimeType.toUpperCase().startsWith("APPLICATION") 
+            || this.mimeType.toUpperCase().startsWith("MULTIPART") 
+            || this.mimeType.toUpperCase().startsWith("IMAGE") 
+            || this.mimeType.toUpperCase().startsWith("AUDIO") 
+            || this.mimeType.toUpperCase().startsWith("VIDEO");
+    }
+
+    /**
+     * Get mime type list of specfied parameter
+     * @param type
+     * @return
+     */
+    public boolean isText() {
+        return this.mimeType.toUpperCase().startsWith("TEXT");
     }
 }

@@ -192,6 +192,7 @@ public class LeapServer implements Runnable {
         this.sessionManager = new SessionManager(host);
         this.securityManager = new SecurityManager(host);
         this.serviceManager = new ServiceManager<>(host, this.securityManager, this.sessionManager, this.resourcesModel);
+        this.serviceManager.initialize();
         this.resourcesModel = host.getResource();
     }
 

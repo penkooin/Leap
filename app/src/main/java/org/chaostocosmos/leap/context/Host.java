@@ -151,7 +151,7 @@ public class Host <T> extends Metadata<T> {
      * @return
      */
     public boolean isAuthentication() {
-        return getAuthentication() != AUTH.NONE ? true : false;
+        return getAuthentication() != AUTH.NONE;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////     
@@ -179,7 +179,7 @@ public class Host <T> extends Metadata<T> {
      * @return
      */
     public List<String> getDynamicPackages() {
-        return super.getValue("dynamic-classpath") == null ? new ArrayList<String>() : super.<List<String>> getValue("dynamic-classpath");
+        return super.getValue("dynamic-classpath") == null ? new ArrayList<>() : super.<List<String>> getValue("dynamic-classpath");
     }
 
     /**
@@ -318,11 +318,31 @@ public class Host <T> extends Metadata<T> {
     }
 
     /**
+     * Get html place holder
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public Map<String, Object> getHtmlPlaceHolder() {
+        return ((Map<String, Object>) super.getValue("html.placeholders"))
+                    .entrySet()
+                    .stream()
+                    .map(e -> {
+                        // if(UtilBox.isFunctionExpression(e.getValue().toString())) {
+                        //     String methodName = e.getValue().toString();
+                        //     Object value = ClassUtils.invokeMethod(this, methodName.substring(0, methodName.indexOf("(")), UtilBox.extractArgument(methodName).toArray());
+                        //     return Map.entry("@" + e.getKey(), value);
+                        // }
+                        return Map.entry("@" + e.getKey(), e.getValue());
+                    })
+                    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));   
+    }
+
+    /**
      * Make resources Json
      * @param dirRoot
      * @return
      */
-    public String buildDirectoryJson(String dirRoot) {
+    public String directory(String dirRoot) {
         String path = dirRoot.charAt(dirRoot.length() - 1) == '/' ? dirRoot.substring(0, dirRoot.lastIndexOf('/')) : dirRoot;
         final String path1 = path.equals("") ? "/" : path;
         //File[] fs = getStatic().resolve(path1.substring(1)).toFile().listFiles();

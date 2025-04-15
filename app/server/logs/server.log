@@ -1,0 +1,290 @@
+[INFO][Thread:1583][2025-04-14 18:38:50] [CONTEXT WATCH SERVICE START] Watch Path: /home/kooin/workspace/oss/Leap/app/server/config
+[INFO][LeapApp:308][2025-04-14 18:38:50] Adding classpath URL: file:/home/kooin/workspace/oss/Leap/app/leap1/WEB-INF/classes/
+[INFO][LeapApp:308][2025-04-14 18:38:50] Adding classpath URL: file:/home/kooin/workspace/oss/Leap/app/leap/WEB-INF/classes/
+[INFO][LeapApp:308][2025-04-14 18:38:50] Adding classpath URL: file:/home/kooin/workspace/oss/Leap/app/leap2/WEB-INF/classes/
+[INFO][LeapApp:308][2025-04-14 18:38:50] Leap Server starting......Mon Apr 14 18:38:50 KST 2025
+[INFO][LeapApp:308][2025-04-14 18:38:50] ============================================================
+[INFO][LeapApp:308][2025-04-14 18:38:50] verbose mode on
+[INFO][Thread:1583][2025-04-14 18:38:50] [RESOURCE WATCH SERVICE START] Watch Path: /home/kooin/workspace/oss/Leap/app/leap1/static
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap1/static/img/leap.png  Size: 0.01 MB  Bytes: 10484
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap1/static/img/logo32.png  Size: 0.0 MB  Bytes: 1850
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap1/static/img/logo100.png  Size: 0.0 MB  Bytes: 4709
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap1/static/img/logo16.png  Size: 0.0 MB  Bytes: 706
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap1/static/img/file.png  Size: 0.01 MB  Bytes: 6667
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap1/static/img/dir.png  Size: 0.01 MB  Bytes: 7295
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap1/static/login.html  Size: 0.0 MB  Bytes: 1029
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap1/static/video/video.mp4  Size: 17.01 MB  Bytes: 17839845
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap1/static/video/video.html  Size: 0.01 MB  Bytes: 5329
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap1/static/video/video1.mp4  Size: 10.06 MB  Bytes: 10546620
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap1/static/welcome.html  Size: 0.0 MB  Bytes: 4942
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap1/static/scripts/js/genDir.js  Size: 0.0 MB  Bytes: 1791
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap1/static/scripts/js/login.js  Size: 0.0 MB  Bytes: 739
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap1/static/scripts/js/refreshImage.js  Size: 0.0 MB  Bytes: 488
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap1/static/scripts/js/dashboard.js  Size: 0.0 MB  Bytes: 2692
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap1/static/css/styles.css  Size: 0.0 MB  Bytes: 4076
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap1/static/favicon.ico  Size: 0.0 MB  Bytes: 1150
+[INFO][LeapApp:309][2025-04-14 18:38:50] [HOST:192.168.0.144:9394] - Protocol: HTTP   Server: leap1   Host: www.leap1.org   Port: 9394   Home: /home/kooin/workspace/oss/Leap/app/leap1/static   Logging path: /home/kooin/workspace/oss/Leap/app/leap1/logs/leap.log   Level: DEBUG
+[INFO][Thread:1583][2025-04-14 18:38:50] [RESOURCE WATCH SERVICE START] Watch Path: /home/kooin/workspace/oss/Leap/app/leap/static
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap/static/img/leap.png  Size: 0.01 MB  Bytes: 10484
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap/static/img/logo32.png  Size: 0.0 MB  Bytes: 1850
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap/static/img/logo100.png  Size: 0.0 MB  Bytes: 4709
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap/static/img/logo16.png  Size: 0.0 MB  Bytes: 706
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap/static/img/file.png  Size: 0.01 MB  Bytes: 6667
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap/static/img/dir.png  Size: 0.01 MB  Bytes: 7295
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap/static/login.html  Size: 0.0 MB  Bytes: 1029
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap/static/video/video.mp4  Size: 17.01 MB  Bytes: 17839845
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap/static/video/video.html  Size: 0.01 MB  Bytes: 5329
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap/static/video/video1.mp4  Size: 10.06 MB  Bytes: 10546620
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap/static/welcome.html  Size: 0.0 MB  Bytes: 4942
+[INFO][LeapApp:309][2025-04-14 18:38:50] [HOST:192.168.0.144:9393] - Protocol: HTTP   Server: leap   Host: www.leap.org   Port: 9393   Home: /home/kooin/workspace/oss/Leap/app/leap/static   Logging path: /home/kooin/workspace/oss/Leap/app/leap/logs/leap.log   Level: DEBUG
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap/static/scripts/js/genDir.js  Size: 0.0 MB  Bytes: 1791
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap/static/scripts/js/login.js  Size: 0.0 MB  Bytes: 739
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap/static/scripts/js/refreshImage.js  Size: 0.0 MB  Bytes: 488
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap/static/scripts/js/dashboard.js  Size: 0.0 MB  Bytes: 2692
+[INFO][Thread:1583][2025-04-14 18:38:50] [RESOURCE WATCH SERVICE START] Watch Path: /home/kooin/workspace/oss/Leap/app/leap2/static
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap/static/css/styles.css  Size: 0.0 MB  Bytes: 4076
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap/static/favicon.ico  Size: 0.0 MB  Bytes: 1150
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap2/static/img/leap.png  Size: 0.01 MB  Bytes: 10484
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap2/static/img/logo32.png  Size: 0.0 MB  Bytes: 1850
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap2/static/img/logo100.png  Size: 0.0 MB  Bytes: 4709
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap2/static/img/logo16.png  Size: 0.0 MB  Bytes: 706
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap2/static/img/file.png  Size: 0.01 MB  Bytes: 6667
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap2/static/img/dir.png  Size: 0.01 MB  Bytes: 7295
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap2/static/login.html  Size: 0.0 MB  Bytes: 1029
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap2/static/video/video.mp4  Size: 17.01 MB  Bytes: 17839845
+[INFO][LeapApp:309][2025-04-14 18:38:50] [HOST:192.168.0.144:9395] - Protocol: HTTP   Server: leap2   Host: www.leap2.org   Port: 9395   Home: /home/kooin/workspace/oss/Leap/app/leap2/static   Logging path: /home/kooin/workspace/oss/Leap/app/leap2/logs/leap.log   Level: DEBUG
+[INFO][LeapApp:309][2025-04-14 18:38:50] ----------------------------------------------------------------------------------------------------
+[INFO][LeapApp:309][2025-04-14 18:38:50] [MONITOR OFF] Leap system monitor turned off.
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap2/static/video/video.html  Size: 0.01 MB  Bytes: 5329
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap2/static/video/video1.mp4  Size: 10.06 MB  Bytes: 10546620
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap2/static/welcome.html  Size: 0.0 MB  Bytes: 4942
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap2/static/scripts/js/genDir.js  Size: 0.0 MB  Bytes: 1791
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap2/static/scripts/js/login.js  Size: 0.0 MB  Bytes: 739
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap2/static/scripts/js/refreshImage.js  Size: 0.0 MB  Bytes: 488
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap2/static/scripts/js/dashboard.js  Size: 0.0 MB  Bytes: 2692
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap2/static/css/styles.css  Size: 0.0 MB  Bytes: 4076
+[DEBUG][ForkJoinWorkerThread:188][2025-04-14 18:38:50] [LOAD] In-Memory resource loading: /home/kooin/workspace/oss/Leap/app/leap2/static/favicon.ico  Size: 0.0 MB  Bytes: 1150
+[INFO][Thread:1583][2025-04-14 18:38:51] [RESOURCE-LOAD] Path: /home/kooin/workspace/oss/Leap/app/leap1/static is complated: 1024
+[INFO][Thread:1583][2025-04-14 18:38:51] [RESOURCE-LOAD] Path: /home/kooin/workspace/oss/Leap/app/leap/static is complated: 1000
+[INFO][Thread:1583][2025-04-14 18:38:51] [RESOURCE-LOAD] Path: /home/kooin/workspace/oss/Leap/app/leap2/static is complated: 1001
+[INFO][Thread:1583][2025-04-14 18:39:08] ================================================================================
+[INFO][Thread:1583][2025-04-14 18:39:08] ThreadPool initialized - CORE: 100   MAX: 1000   KEEP-ALIVE WHEN IDLE(seconds): 3000
+[INFO][Thread:1583][2025-04-14 18:39:08] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:08] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:08] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:08] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:08] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:08] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:08] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:08] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:08] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:08] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:08] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:19] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:20] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:20] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:21] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:23] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:23] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:24] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:24] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:25] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:26] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:27] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:28] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:29] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:29] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:29] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:29] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:29] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:29] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:29] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:29] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:30] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:32] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:33] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:33] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:33] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:33] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:33] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:33] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:33] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:33] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:33] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:35] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:35] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:35] CLIENT SOCKET CLOSED: /192.168.0.144
+[INFO][Thread:1583][2025-04-14 18:39:35] CLIENT SOCKET CLOSED: /192.168.0.144
